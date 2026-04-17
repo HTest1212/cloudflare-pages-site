@@ -1515,7 +1515,179 @@ function buildGameNarrative(g) {
 }
 
 /* =========== DEEP GAME ANALYSIS (long-form writeup) =========== */
+const CLAUDE_DAILY_ANALYSIS = {
+  date: "2026-04-17",
+  lastUpdated: "2026-04-17T22:00:00.000Z",
+  games: {
+    "824454": {
+      paragraphs: [
+        {title:"Pitching Matchup", text:"Two starters heading in the wrong direction. Tanner Bibee (RHP, 6.38 ERA, 1.64 WHIP, 8.84 K/9) has been squeezed all season, giving up too much hard contact, while Chris Bassitt (RHP, 9.00 ERA, 2.36 WHIP, 4.09 K/9) looks fully cooked. Bassitt&#39;s 2.36 WHIP is flashing a massive five alarm fire for his command. Neither side projects to log a clean outing, and both bullpens should be warming early."},
+        {title:"Offense vs Handedness", text:"Both lineups face right handers, which is a neutral split context. Cleveland&#39;s contact heavy attack should have a field day against Bassitt&#39;s elevated traffic rate. Baltimore&#39;s bats stay on paper the better unit but have to chase a likely early deficit."},
+        {title:"Park & Weather", text:"Progressive Field plays slightly pitcher friendly in cool April air. Evening forecast is 65&deg;F with 6.6 mph winds from the northeast and a notable 43% precipitation probability. Watch the radar closely, a delay is a real possibility tonight."},
+        {title:"Strikeout Projection", text:"Bibee is the only K source in this matchup. Projecting roughly 7.4 Ks for Cleveland and 4.2 Ks for Baltimore. Bassitt Ks UNDER is the cleanest strikeout prop on the slate."},
+        {title:"Verdict", text:"My model projects 10.1 runs, well above the 8.8 baseline. This is an OVER leaning environment with Cleveland favored by a couple runs. Weather risk is the main reason I&#39;m not pushing harder."}
+      ],
+      verdict: {kind:"lean-over", text:"My model projects 10.1 runs with Cleveland favored by roughly 1.6 runs. Bassitt is the worst listed starter on the slate and the Guardians should feast. Weather delay risk caps my conviction.", winner:"Cleveland Guardians", projHome:5.8, projAway:4.3, bets:[{t:"Total OVER 9.5", cls:"good"},{t:"Guardians ML", cls:"good"},{t:"Bassitt Ks UNDER", cls:"good"}]},
+      grade: {letter:"B+", cls:"grade-bplus", score:78, blurb:"Clear edges on total and side, capped only by rain risk."}
+    },
+    "823476": {
+      paragraphs: [
+        {title:"Pitching Matchup", text:"Massive starting pitching mismatch favoring Atlanta. Taijuan Walker (RHP, 7.36 ERA, 1.91 WHIP, 7.36 K/9) has been miserable for Philadelphia, while Mart&iacute;n P&eacute;rez (LHP, 3.14 ERA, 0.91 WHIP, 3.77 K/9) is carrying a sparkling WHIP and pitching to soft contact. The lefty vs righty heavy Phillies lineup is a real wrinkle though."},
+        {title:"Offense vs Handedness", text:"Philadelphia&#39;s top of order is loaded with lefties who traditionally hammer left handed pitching much less than they mash righties, so P&eacute;rez&#39;s handedness edge is amplified. Atlanta sees a righty in Walker, which plays neutral for their balanced lineup, but Walker&#39;s 1.91 WHIP means constant traffic."},
+        {title:"Park & Weather", text:"Citizens Bank Park plays as a clear hitter&#39;s venue with strong HR factors both ways. Evening forecast is a warm 80&deg;F with 8.9 mph winds out of the northwest, pushing from left center toward right field. That tailwind for right handed pull hitters like the Braves heart of order is a meaningful OVER signal."},
+        {title:"Strikeout Projection", text:"P&eacute;rez is low K, Walker is middling. Projecting 6.1 Ks for Philadelphia and 4.8 Ks for Atlanta. No team K OVER plays here. Bryce Harper strikeout OVER against a softer throwing lefty is a spot to fade."},
+        {title:"Verdict", text:"Atlanta gets the clear nod on the mound and the park fits their power. My model projects 10.4 runs with Atlanta up 1.6. This is a strong OVER lean and the Braves side is live."}
+      ],
+      verdict: {kind:"lean-over", text:"Atlanta has a major pitching edge and the park plus wind favor their power bats. My model projects 10.4 runs with the Braves winning by nearly two.", winner:"Atlanta Braves", projHome:4.4, projAway:6.0, bets:[{t:"Total OVER 9.5", cls:"good"},{t:"Braves ML", cls:"good"},{t:"Braves Team Total OVER 5", cls:"good"}]},
+      grade: {letter:"A", cls:"grade-a", score:86, blurb:"Converging edges on total, side, and park environment. One of my top plays tonight."}
+    },
+    "822752": {
+      paragraphs: [
+        {title:"Pitching Matchup", text:"Zack Littell (RHP, 4.20 ERA, 1.40 WHIP, 6.00 K/9) faces Logan Webb (RHP, 5.25 ERA, 1.38 WHIP, 7.88 K/9). Webb is a sinker baller whose 5.25 ERA masks better underlying numbers, so I&#39;m discounting the ERA gap here. Call this essentially even on the mound when you trust the process."},
+        {title:"Offense vs Handedness", text:"Both offenses face right handers. Washington&#39;s young bats have flashed vs RHP but run into a ground ball specialist in Webb, which blunts their power. San Francisco&#39;s lineup is middling vs RHP and gets Littell, a contact guy they can square up."},
+        {title:"Park & Weather", text:"Nationals Park plays close to neutral with a slight HR boost to lefties. Evening forecast is 80&deg;F with 8.2 mph winds blowing out toward right center. That wind pattern gently favors OVER and boosts any lefty power on either side."},
+        {title:"Strikeout Projection", text:"Projecting 6.6 Ks for San Francisco and 5.0 Ks for Washington. Nothing prop worthy here."},
+        {title:"Verdict", text:"My model projects 9.0 runs, very close to baseline. Giants have a thin edge. No strong primary play, consider small unit on Giants run line or pass."}
+      ],
+      verdict: {kind:"lean-push", text:"Projection 9.0 runs, essentially baseline. Giants get a marginal side lean from Webb&#39;s underlying profile. Not a play I&#39;d push.", winner:"San Francisco Giants", projHome:4.3, projAway:4.7, bets:[{t:"Giants ML small", cls:"neu"}]},
+      grade: {letter:"C+", cls:"grade-cplus", score:62, blurb:"Marginal side edge and zero total conviction. Watch only material unless the line moves."}
+    },
+    "823397": {
+      paragraphs: [
+        {title:"Pitching Matchup", text:"Modest edge to the Rays. Bubba Chandler (RHP, 3.86 ERA, 1.57 WHIP, 9.00 K/9) shows strong bat missing but his WHIP says he works around traffic constantly. Nick Martinez (RHP, 2.16 ERA, 0.96 WHIP, 5.94 K/9) has been pitching to contact brilliantly, limiting baserunners at an elite clip."},
+        {title:"Offense vs Handedness", text:"Both offenses face right handers. Tampa Bay&#39;s patient top of order can still extract walks from Chandler&#39;s iffy command. Pittsburgh&#39;s lineup has been one of the worst vs RHP leaguewide and faces a pitcher limiting baserunners."},
+        {title:"Park & Weather", text:"PNC Park plays pitcher friendly with a suppressed HR factor. Evening forecast is 74&deg;F with very light 2.9 mph winds. Weather is a non factor, the park is the story."},
+        {title:"Strikeout Projection", text:"Projecting 8.0 Ks for Tampa Bay and 5.5 Ks for Pittsburgh. Nothing elite."},
+        {title:"Verdict", text:"My model projects 7.6 runs, well below baseline. This is a clean UNDER lean environment with Tampa Bay favored by a run."}
+      ],
+      verdict: {kind:"lean-under", text:"Projection 7.6 runs, well below baseline. Pitcher park plus a brilliant Martinez start plus a weak Pittsburgh lineup equals a clean UNDER.", winner:"Tampa Bay Rays", projHome:3.3, projAway:4.3, bets:[{t:"Total UNDER 8", cls:"fade"},{t:"Rays ML", cls:"good"}]},
+      grade: {letter:"B+", cls:"grade-bplus", score:77, blurb:"Clean total and side stack, park fits the lean perfectly."}
+    },
+    "823559": {
+      paragraphs: [
+        {title:"Pitching Matchup", text:"Heavyweight pitching duel at the Stadium and a huge night for Yankees fans. Cam Schlittler (RHP, 2.49 ERA, 0.74 WHIP, 12.46 K/9) has been absolutely dealing for the Bombers, his K/9 sits at elite ace territory. Michael Wacha (RHP, 0.43 ERA, 0.71 WHIP, 7.29 K/9) has been almost as good statistically for Kansas City, even if the peripherals scream regression. Bat missing and limiting traffic on both sides means base runners come at a premium."},
+        {title:"Offense vs Handedness", text:"Yankees face a right hander in Wacha, which is fine for a lineup built around Aaron Judge and Giancarlo Stanton. Kansas City&#39;s offense has been middling against RHP and now has to try to crack a Schlittler run that&#39;s been elite. Edge goes to the Yankees bats but both pitchers have been too good to assume a breakout."},
+        {title:"Park & Weather", text:"Yankee Stadium plays hitter friendly for lefties especially thanks to the short porch in right field. Evening forecast is a comfortable 75&deg;F with a 8.4 mph wind out of the north, meaning a slight cross wind with minor knock down effect for fly balls. Nothing that materially bends the game."},
+        {title:"Strikeout Projection", text:"Schlittler at 12.46 K/9 is the big K prop of the night. Projecting 9.6 Ks for the Yankees staff and 6.4 Ks for Kansas City. Schlittler Ks OVER 7.5 is a primary play."},
+        {title:"Verdict", text:"My model projects 7.2 runs, a firm UNDER lean environment. Yankees get a slight side edge at home against a pitcher whose 0.43 ERA is due for a correction. Primary play is the UNDER, secondary is Yankees moneyline, tertiary is Schlittler Ks OVER."}
+      ],
+      verdict: {kind:"lean-under", text:"Huge pitching duel at the Stadium with my model projecting 7.2 runs. Schlittler is elite, Wacha is riding a hot streak due for regression. Yankees slight favorites at home. UNDER is the primary play.", winner:"New York Yankees", projHome:3.8, projAway:3.4, bets:[{t:"Total UNDER 7.5", cls:"fade"},{t:"Yankees ML", cls:"good"},{t:"Schlittler Ks OVER 7.5", cls:"good"}]},
+      grade: {letter:"A-", cls:"grade-aminus", score:82, blurb:"Yankees game with layered edges. UNDER, Yankees side, and Schlittler K prop all live."}
+    },
+    "823883": {
+      paragraphs: [
+        {title:"Pitching Matchup", text:"Miami sends Janson Junk (RHP, 4.32 ERA, 1.26 WHIP, 6.48 K/9), a back end starter who&#39;s been league average at best. Milwaukee has not yet listed a probable, which is a red flag for game planning. Projecting a bullpen game for the Brewers cuts into any data driven edge."},
+        {title:"Offense vs Handedness", text:"Marlins face a right hander by default. Milwaukee faces Junk, a righty, and their lineup has been competent vs RHP this year. Without the other arm confirmed, splits analysis is incomplete."},
+        {title:"Park & Weather", text:"loanDepot park almost always runs with the roof closed, so weather is irrelevant. Park plays pitcher friendly with suppressed HR factors, especially for right handed bats. Expect a lower energy run environment."},
+        {title:"Strikeout Projection", text:"Junk is low K. Without the Brewers starter named, strikeout projections are heavily discounted."},
+        {title:"Verdict", text:"Too much uncertainty without Milwaukee&#39;s confirmed starter. Park environment lightly pushes UNDER, no side conviction. Grade reflects the data gap."}
+      ],
+      verdict: {kind:"lean-push", text:"Projection landing near 8.1 runs in a pitcher park with one unnamed starter. Watch only until Milwaukee&#39;s arm is confirmed.", winner:"toss-up", projHome:4.0, projAway:4.1, bets:[{t:"No strong edges, wait for lineups", cls:"neu"}]},
+      grade: {letter:"C-", cls:"grade-cminus", score:53, blurb:"Unconfirmed starter kills my conviction. Revisit when the Brewers name a pitcher."}
+    },
+    "824778": {
+      paragraphs: [
+        {title:"Pitching Matchup", text:"Modest edge to Detroit on the mound. Ranger Suarez (LHP, 5.02 ERA, 1.47 WHIP, 6.91 K/9) has been lit up in his Red Sox debut and takes the ball in a spot where his lefty delivery usually plays well. Casey Mize (RHP, 3.94 ERA, 1.44 WHIP, 10.13 K/9) is the far better strikeout artist even if his WHIP shows room to clean up."},
+        {title:"Offense vs Handedness", text:"Detroit faces a left hander in Suarez, which historically plays slightly better than the league average lefty profile. Boston faces a right hander in Mize, which matters because the righty bats in the middle of the lineup have been carrying the team. Platoon neutral overall."},
+        {title:"Park & Weather", text:"Fenway Park plays as a mild hitter&#39;s venue thanks to the Green Monster. Evening forecast is 57&deg;F with 6.0 mph winds from the east, blowing in from right field. Cold air suppresses carry on fly balls and the wind knocks down anything tagged for the short right field. Environment nudges UNDER."},
+        {title:"Strikeout Projection", text:"Mize at 10.13 K/9 is the K source here. Projecting 8.9 Ks for Detroit and 5.8 Ks for Boston. Mize Ks OVER 6.5 is a soft play."},
+        {title:"Verdict", text:"My model projects 8.5 runs, slightly below baseline. Detroit gets a thin side edge. Cold air keeps this one grinding. Primary action is Mize Ks OVER."}
+      ],
+      verdict: {kind:"lean-under", text:"Projection 8.5 runs with Detroit a thin favorite. Cold air and wind knocking down fly balls push UNDER. Mize strikeout prop is the cleanest angle.", winner:"Detroit Tigers", projHome:4.1, projAway:4.4, bets:[{t:"Total UNDER 9", cls:"fade"},{t:"Mize Ks OVER 6.5", cls:"good"}]},
+      grade: {letter:"B", cls:"grade-b", score:71, blurb:"Weather aligns with the UNDER and Mize K prop is a real edge."}
+    },
+    "824207": {
+      paragraphs: [
+        {title:"Pitching Matchup", text:"Houston gives the ball to Peter Lambert (RHP, stats unavailable for the early sample), which is a big data gap. St Louis counters with Kyle Leahy (RHP, 5.14 ERA, 1.71 WHIP, 4.50 K/9), a rough early season profile. When one side is missing data I lean on the other, and Leahy&#39;s 1.71 WHIP is a major red flag."},
+        {title:"Offense vs Handedness", text:"Both offenses face right handers. Houston&#39;s lineup has been elite vs RHP, and Leahy&#39;s command issues are an obvious attack point. St Louis faces an unknown in Lambert, which handicaps their side of the ledger."},
+        {title:"Park & Weather", text:"Daikin Park usually has the roof closed making weather moot. Park plays slightly hitter friendly with HR factors boosted for right handed power. Expect the Astros to take advantage."},
+        {title:"Strikeout Projection", text:"Leahy is low K, Lambert unknown. Projecting 6.5 Ks for Houston and 4.8 Ks for St Louis. Nothing actionable."},
+        {title:"Verdict", text:"Despite the Lambert data gap, the Leahy profile is so poor and the Astros lineup so dangerous that I&#39;m projecting 9.6 runs with Houston favored by two. Leaning OVER and Astros ML."}
+      ],
+      verdict: {kind:"lean-over", text:"Projection 9.6 runs with Houston favored by roughly 2. Leahy&#39;s command is broken and the Astros lineup feasts on that. Data gap on Lambert caps my conviction.", winner:"Houston Astros", projHome:5.8, projAway:3.8, bets:[{t:"Total OVER 9", cls:"good"},{t:"Astros ML", cls:"good"},{t:"Astros Team Total OVER 5", cls:"good"}]},
+      grade: {letter:"B", cls:"grade-b", score:72, blurb:"Astros side and total both live. Lambert data gap keeps this from an A."}
+    },
+    "823720": {
+      paragraphs: [
+        {title:"Pitching Matchup", text:"Clean edge to Minnesota. Joe Ryan (RHP, 3.80 ERA, 0.98 WHIP, 9.28 K/9) has been excellent, limiting traffic and missing bats at a quality clip. Brandon Williamson (LHP, 5.28 ERA, 1.37 WHIP, 5.87 K/9) is a softer contact specialist who&#39;s been vulnerable to hard contact in the early going."},
+        {title:"Offense vs Handedness", text:"Minnesota faces a left hander in Williamson and their righty heavy lineup will stack platoon advantage. Cincinnati faces a righty in Ryan, which is a tough matchup for their lefty bats. Handedness meaningfully tilts toward the Twins."},
+        {title:"Park & Weather", text:"Target Field plays as a slight pitcher&#39;s park in April. Evening forecast is a brisk 54&deg;F with 13.9 mph winds from the northwest blowing in. Cold air plus a wind knockdown is a strong UNDER stack. This environment quietly suppresses offense."},
+        {title:"Strikeout Projection", text:"Ryan the standout K source. Projecting 8.6 Ks for Minnesota and 5.4 Ks for Cincinnati. Ryan Ks OVER 6.5 is a live play."},
+        {title:"Verdict", text:"My model projects 8.0 runs, below baseline. Minnesota has a clear side edge. Cold and wind align for UNDER. Primary is UNDER, secondary Twins ML, tertiary Ryan Ks OVER."}
+      ],
+      verdict: {kind:"lean-under", text:"Projection 8.0 runs with Minnesota favored by roughly 1.3. Cold air, wind knockdown, and Ryan&#39;s K ability stack toward UNDER. Multiple edges.", winner:"Minnesota Twins", projHome:4.7, projAway:3.3, bets:[{t:"Total UNDER 9", cls:"fade"},{t:"Twins ML", cls:"good"},{t:"Ryan Ks OVER 6.5", cls:"good"}]},
+      grade: {letter:"A-", cls:"grade-aminus", score:81, blurb:"Three stacked edges: weather, pitching, and handedness all push the same way."}
+    },
+    "824373": {
+      paragraphs: [
+        {title:"Pitching Matchup", text:"Slight nod to the Dodgers on paper. Tomoyuki Sugano (RHP, 2.16 ERA, 0.78 WHIP, 6.48 K/9) has been sensational for Colorado, limiting traffic at an elite clip despite the park. Tyler Glasnow (RHP, 4.00 ERA, 0.94 WHIP, 11.00 K/9) brings swing and miss stuff and has been nearly as sharp. Two high quality starting efforts in play."},
+        {title:"Offense vs Handedness", text:"Both offenses face right handers. Los Angeles&#39; lineup has been elite vs RHP and should pressure Sugano&#39;s contact profile. Colorado vs RHP has been lifeless, and Glasnow&#39;s bat missing stuff is a tough assignment."},
+        {title:"Park & Weather", text:"Coors Field of course plays as the most hitter friendly park in the sport, but tonight is bizarre. Forecast is a wintry 38&deg;F with 11.2 mph winds out of the northeast and a 59% precipitation probability. Cold air and potential rain are major UNDER signals that fight against the normal altitude bonus. Delay risk is real."},
+        {title:"Strikeout Projection", text:"Glasnow the clear K source. Projecting 10.6 Ks for Los Angeles and 4.9 Ks for Colorado. Glasnow Ks OVER 7.5 is a strong play."},
+        {title:"Verdict", text:"This is the weirdest total on the slate. The park screams OVER but the weather screams UNDER. I land on 8.9 runs, near baseline. Dodgers have a clear side edge, Glasnow K prop is live. Pass on the total."}
+      ],
+      verdict: {kind:"lean-push", text:"Projection 8.9 runs, pulled apart by Coors altitude bonus clashing with frigid air and rain risk. Dodgers have a 2.1 run projected edge, take the side and pass on the total.", winner:"Los Angeles Dodgers", projHome:3.7, projAway:5.8, bets:[{t:"Dodgers ML", cls:"good"},{t:"Dodgers F5 ML", cls:"good"},{t:"Glasnow Ks OVER 7.5", cls:"good"}]},
+      grade: {letter:"B", cls:"grade-b", score:73, blurb:"Strong side and K prop edges. Total is noisy due to Coors versus cold rain conflict."}
+    },
+    "824048": {
+      paragraphs: [
+        {title:"Pitching Matchup", text:"Los Angeles sends Jos&eacute; Soriano (RHP, 0.33 ERA, 0.67 WHIP, 10.33 K/9) who&#39;s been otherworldly through his early starts. San Diego has Matt Waldron (RHP, stats unavailable for the early sample), which is a data gap that caps my conviction. On paper Soriano&#39;s edge is massive but regression is coming at some point."},
+        {title:"Offense vs Handedness", text:"Both offenses face right handers. San Diego has been ok vs RHP but faces a pitcher who has yet to give up much of anything. Angels vs Waldron is harder to forecast without a fresh sample."},
+        {title:"Park & Weather", text:"Angel Stadium plays slightly hitter friendly to right handed power. Evening forecast is 71&deg;F with a mild 8.4 mph wind from the southwest. Neutral weather environment overall."},
+        {title:"Strikeout Projection", text:"Soriano the K source. Projecting 9.5 Ks for the Angels and 4.8 Ks for San Diego. Soriano Ks OVER 6.5 is a live play."},
+        {title:"Verdict", text:"My model projects 7.8 runs assuming Soriano stays dominant. Angels have a real side edge. Primary play is Angels ML, secondary is Soriano Ks OVER."}
+      ],
+      verdict: {kind:"lean-under", text:"Projection 7.8 runs with Angels favored by roughly 1.2. Soriano&#39;s early dominance drives this. Waldron data gap caps my conviction.", winner:"Los Angeles Angels", projHome:4.5, projAway:3.3, bets:[{t:"Total UNDER 8.5", cls:"fade"},{t:"Angels ML", cls:"good"},{t:"Soriano Ks OVER 6.5", cls:"good"}]},
+      grade: {letter:"B", cls:"grade-b", score:73, blurb:"Soriano driving multiple edges, but data gap on Waldron keeps me cautious."}
+    },
+    "823152": {
+      paragraphs: [
+        {title:"Pitching Matchup", text:"Marquee pitching matchup. Logan Gilbert (RHP, 4.18 ERA, 1.10 WHIP, 9.51 K/9) brings quality but gets out shined here. Jacob deGrom (RHP, 2.87 ERA, 0.96 WHIP, 12.64 K/9) is carrying a vintage season and his K/9 is borderline absurd. Two bat missing righties means base runners are rare tonight."},
+        {title:"Offense vs Handedness", text:"Both offenses face right handers. Seattle has been middling vs RHP and now faces the best starter on the slate. Texas has their usual lefty leaning lineup facing Gilbert, which is a neutral matchup with some contact upside."},
+        {title:"Park & Weather", text:"T Mobile Park plays as one of the most pitcher friendly venues in baseball, especially in cold air. Evening forecast is 52&deg;F with calm 5.5 mph winds from the southwest. Cold coastal air plus a pitcher park equals a strong UNDER environment."},
+        {title:"Strikeout Projection", text:"Both sides project well above 8. Projecting 9.2 Ks for Seattle and 10.8 Ks for Texas. deGrom Ks OVER 8.5 is a primary play."},
+        {title:"Verdict", text:"My model projects 7.0 runs, one of the lowest projections on the slate. Texas has a small side edge via deGrom. UNDER is the primary play, deGrom K prop is live, Rangers run line is worth a look."}
+      ],
+      verdict: {kind:"lean-under", text:"Projection 7.0 runs with Texas slightly favored. deGrom vs Gilbert in the cold at T Mobile is the definition of an UNDER stack. Multiple strikeout props live.", winner:"Texas Rangers", projHome:3.4, projAway:3.6, bets:[{t:"Total UNDER 7.5", cls:"fade"},{t:"Rangers ML", cls:"good"},{t:"deGrom Ks OVER 8.5", cls:"good"},{t:"Gilbert Ks OVER 5.5", cls:"good"}]},
+      grade: {letter:"A", cls:"grade-a", score:86, blurb:"Premier pitching duel in a pitcher park in cold air. Total, side, and K props all align."}
+    },
+    "825101": {
+      paragraphs: [
+        {title:"Pitching Matchup", text:"Two high end strikeout arms square off. Michael Soroka (RHP, 2.87 ERA, 1.21 WHIP, 13.21 K/9) leads the slate in K/9 and has been a revelation for Arizona. Braydon Fisher (RHP, 0.93 ERA, 0.72 WHIP, 11.17 K/9) has been just as dominant in limited sample for Toronto. Both profiles scream strikeout party."},
+        {title:"Offense vs Handedness", text:"Both offenses face right handers. Toronto has a balanced vs RHP lineup that lives by contact. Arizona has been streaky vs RHP. Neither lineup projects to explode against these arms."},
+        {title:"Park & Weather", text:"Chase Field typically runs with the roof closed when outside temps climb, and today&#39;s 83&deg;F reading strongly suggests a closed roof. Park plays neutral to slight hitter friendly under those conditions."},
+        {title:"Strikeout Projection", text:"This is a K prop bonanza. Projecting 12.1 Ks for Arizona and 10.5 Ks for Toronto. Both Soroka and Fisher OVER their individual K lines are live plays."},
+        {title:"Verdict", text:"My model projects 7.4 runs, a firm UNDER. Essentially a toss up on the side. Primary play is UNDER and both starter K props OVER."}
+      ],
+      verdict: {kind:"lean-under", text:"Projection 7.4 runs with two elite K arms. Total and both K props are the real action, side is a coin flip.", winner:"Arizona Diamondbacks", projHome:3.8, projAway:3.6, bets:[{t:"Total UNDER 8", cls:"fade"},{t:"Soroka Ks OVER 7.5", cls:"good"},{t:"Fisher Ks OVER 6.5", cls:"good"}]},
+      grade: {letter:"B+", cls:"grade-bplus", score:78, blurb:"UNDER plus two K prop OVERs. Side is neutral but prop stack is clean."}
+    },
+    "825019": {
+      paragraphs: [
+        {title:"Pitching Matchup", text:"Two solid back end arms. Aaron Civale (RHP, 1.72 ERA, 0.96 WHIP, 6.89 K/9) has been quietly excellent for the Athletics. Davis Martin (RHP, 2.50 ERA, 1.11 WHIP, 7.50 K/9) has been dependable for the White Sox. Both limit traffic well. Essentially even on the mound."},
+        {title:"Offense vs Handedness", text:"Both offenses face right handers. Chicago&#39;s lineup remains one of the weakest in the league vs RHP. Oakland has middling splits. Edge goes slightly to the home team given the opponent profile."},
+        {title:"Park & Weather", text:"Sutter Health Park is a minor league profile park that plays slightly hitter friendly with warm dry air. No weather concerns tonight."},
+        {title:"Strikeout Projection", text:"Projecting 6.7 Ks for Oakland and 6.9 Ks for Chicago. No standout props."},
+        {title:"Verdict", text:"My model projects 7.8 runs, a light UNDER lean. Athletics have a modest side edge. Primary is UNDER, secondary is A&#39;s ML."}
+      ],
+      verdict: {kind:"lean-under", text:"Projection 7.8 runs with the Athletics slightly favored. Two contact suppressing righties keep runs down.", winner:"Athletics", projHome:4.2, projAway:3.6, bets:[{t:"Total UNDER 8.5", cls:"fade"},{t:"Athletics ML", cls:"good"}]},
+      grade: {letter:"B-", cls:"grade-bminus", score:68, blurb:"Clean UNDER with a mild side edge. No premium props."}
+    }
+  }
+};
+
 function buildDeepAnalysis(g) {
+  // Claude daily analysis pre built override
+  try {
+    if (typeof CLAUDE_DAILY_ANALYSIS !== "undefined" && CLAUDE_DAILY_ANALYSIS && g && g.gamePk) {
+      const todayLocal = (new Date(g.gameDate)).toISOString().slice(0,10);
+      const pre = CLAUDE_DAILY_ANALYSIS.games && CLAUDE_DAILY_ANALYSIS.games[String(g.gamePk)];
+      if (pre && (CLAUDE_DAILY_ANALYSIS.date === todayLocal || CLAUDE_DAILY_ANALYSIS.date === (new Date()).toISOString().slice(0,10))) {
+        return pre;
+      }
+    }
+  } catch(e) { /* fall through to dynamic build */ }
+
   const away = g.teams.away.team.name;
   const home = g.teams.home.team.name;
   const aSp = g.teams.away.probablePitcher;
