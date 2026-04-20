@@ -1922,8 +1922,454 @@ function buildGameNarrative(g) {
     '</ul>' + lean + '</div>';
 }
 
+/* =========== CLAUDE DAILY ANALYSIS (pre built afternoon refresh) =========== */
+const CLAUDE_DAILY_ANALYSIS = {
+  "date": "2026-04-20",
+  "lastUpdated": "2026-04-20T15:55:55Z",
+  "window": "afternoon",
+  "games": {
+    "824450": {
+      "paragraphs": [
+        {
+          "title": "Pitching Matchup",
+          "text": "Spencer Arrighetti (RHP, 1.50 ERA, 1.17 WHIP, 15.00 K per 9) against Slade Cecconi (RHP, 5.03 ERA, 1.37 WHIP, 8.24 K per 9). Tiny sample on Arrighetti, one outing with elite miss rates but shaky command. Cecconi has a 1.37 WHIP and is giving up damage contact, 3 homers in 19.2 innings. Big edge on paper for Houston despite the record gap."
+        },
+        {
+          "title": "Offense vs Handedness",
+          "text": "Both pitchers are right handed, so both lineups will run lefty heavy cards. Cleveland has been league average versus RHP, Houston has scuffled offensively at 8 and 15 but the peripherals are better than the record suggests. Cecconi is the weaker arm and Houston has enough lefty bats to target him."
+        },
+        {
+          "title": "Park and Weather",
+          "text": "Progressive Field plays slightly pitcher friendly, modest suppression on homers to all fields. Evening first pitch with April lake effect, expect temps in the mid 50s and a breeze off the water. Cool air dampens carry, another nudge toward the under."
+        },
+        {
+          "title": "Strikeout Projection",
+          "text": "Arrighetti could miss a ton of bats if he can stay in the zone, 6 to 8 K realistic in five or six innings. Cecconi projects for 5 to 6 K. Combined team K total around 18 to 20, decent NRFI and starter Ks prop territory on Arrighetti."
+        }
+      ],
+      "verdict": {
+        "kind": "lean",
+        "text": "Lean Astros on the run line plus Arrighetti strikeouts over. Total leans under with cool evening conditions.",
+        "winner": "Houston Astros",
+        "projHome": 4.0,
+        "projAway": 4.4,
+        "bets": [
+          {
+            "t": "Arrighetti K over 6.5",
+            "cls": "k"
+          },
+          {
+            "t": "Under 8.5 (cool air)",
+            "cls": "under"
+          },
+          {
+            "t": "Astros +1.5 run line",
+            "cls": "ml"
+          }
+        ]
+      },
+      "grade": {
+        "letter": "B",
+        "cls": "b",
+        "score": 82,
+        "blurb": "Clear pitching edge for Houston, lineups unannounced so confidence capped."
+      }
+    },
+    "822994": {
+      "paragraphs": [
+        {
+          "title": "Pitching Matchup",
+          "text": "Rhett Lowder (RHP, 3.52 ERA, 1.13 WHIP, 5.87 K per 9) versus a Tampa Bay starter still unannounced at this refresh. Lowder is a strike thrower with a changeup that neutralizes lefties, not a huge K guy but efficient through five or six. Without a confirmed Rays arm, take the dome environment and Tampa bullpen strength as the counterweight."
+        },
+        {
+          "title": "Offense vs Handedness",
+          "text": "Cincinnati is 14 and 8 and hitting the ball, their lefty bats travel well on the road. Tampa projects a righty starter which tilts slightly Reds. The Rays lineup has a balanced handedness split but the long ball has been scarce indoors this month."
+        },
+        {
+          "title": "Park and Weather",
+          "text": "Tropicana Field is a fully enclosed dome, no weather, no wind, consistent lighting. Park has played neutral to slightly pitcher friendly this young season. Catwalks and quirks always loom, otherwise a true run environment."
+        },
+        {
+          "title": "Strikeout Projection",
+          "text": "Lowder is closer to 4 to 5 K than a high end arm. Combined team total K projection sits around 14 to 16, this tilts toward unders on individual K props until the Rays name their starter."
+        }
+      ],
+      "verdict": {
+        "kind": "lean",
+        "text": "Cautious lean Reds given Lowder efficiency and the mystery opponent, total tilts under on a neutral dome night.",
+        "winner": "Cincinnati Reds",
+        "projHome": 3.6,
+        "projAway": 4.1,
+        "bets": [
+          {
+            "t": "Reds money line",
+            "cls": "ml"
+          },
+          {
+            "t": "Under 8 (dome, TBD arm)",
+            "cls": "under"
+          }
+        ]
+      },
+      "grade": {
+        "letter": "C+",
+        "cls": "c",
+        "score": 70,
+        "blurb": "Missing confirmed Rays starter caps confidence, revisit if announced before first pitch."
+      }
+    },
+    "823879": {
+      "paragraphs": [
+        {
+          "title": "Pitching Matchup",
+          "text": "Michael McGreevy (RHP, 2.49 ERA, 0.83 WHIP, 4.98 K per 9) versus Max Meyer (RHP, 4.12 ERA, 1.32 WHIP, 9.15 K per 9). Pitch to contact McGreevy has been dominant early with elite command. Meyer has the better raw stuff and the K upside, but he has been walking the park and his WHIP reflects traffic."
+        },
+        {
+          "title": "Offense vs Handedness",
+          "text": "Cardinals have played the Reds style of baseball, lefties in the middle and aggressive on the bases. Miami versus RHP has been bottom tier on OPS. McGreevy is a good matchup to shut down this lineup."
+        },
+        {
+          "title": "Park and Weather",
+          "text": "loanDepot park with retractable roof, typically closed for afternoon humidity in April. Park suppresses homers and carry, one of the most pitcher friendly environments in baseball this season."
+        },
+        {
+          "title": "Strikeout Projection",
+          "text": "McGreevy K projection 4 to 5, Meyer K projection 6 to 7 given Cardinals lefty bats willing to chase. Total team K landing near 15 to 17, unders are live on McGreevy props."
+        }
+      ],
+      "verdict": {
+        "kind": "lean",
+        "text": "Cardinals backed to win outright with the cleaner matchup, total trending under in a pitcher park.",
+        "winner": "St. Louis Cardinals",
+        "projHome": 3.1,
+        "projAway": 4.2,
+        "bets": [
+          {
+            "t": "Cardinals money line",
+            "cls": "ml"
+          },
+          {
+            "t": "Under 7.5 (pitcher park)",
+            "cls": "under"
+          },
+          {
+            "t": "Meyer K over 6.5",
+            "cls": "k"
+          }
+        ]
+      },
+      "grade": {
+        "letter": "B+",
+        "cls": "b",
+        "score": 86,
+        "blurb": "McGreevy edge plus Miami offense struggles, strong data pairing."
+      }
+    },
+    "822749": {
+      "paragraphs": [
+        {
+          "title": "Pitching Matchup",
+          "text": "Bryce Elder (RHP, 0.77 ERA, 1.03 WHIP, 8.87 K per 9) versus Jake Irvin (RHP, 6.16 ERA, 1.47 WHIP, 9.95 K per 9). Massive gap on run prevention. Elder has been the hottest version of himself with 23 and 1 inning 2 earned runs through four starts. Irvin misses bats but walks the park and has served up 3 homers already."
+        },
+        {
+          "title": "Offense vs Handedness",
+          "text": "Braves at 15 and 7 are mashing RHP, their lefty heavy core eats this matchup. Washington is middle of the pack versus RHP but Elder is a step up in class. Expect Atlanta to push the Irvin pitch count early."
+        },
+        {
+          "title": "Park and Weather",
+          "text": "Nationals Park neutral slightly hitter friendly to LF, DC April evening temps mid 60s with light southerly breeze. Ball travels modestly, not a wind aided bonanza."
+        },
+        {
+          "title": "Strikeout Projection",
+          "text": "Elder 6 to 7 K range, Irvin 5 to 7 K if he survives five. Team total K around 16 to 18, Elder K over is the cleanest prop on the card."
+        }
+      ],
+      "verdict": {
+        "kind": "strong",
+        "text": "Braves the clear side with Elder cruising and Irvin leaking runs. Total leans Braves team over.",
+        "winner": "Atlanta Braves",
+        "projHome": 3.3,
+        "projAway": 5.6,
+        "bets": [
+          {
+            "t": "Braves run line minus 1.5",
+            "cls": "rl"
+          },
+          {
+            "t": "Braves team total over 4.5",
+            "cls": "over"
+          },
+          {
+            "t": "Elder K over 6.5",
+            "cls": "k"
+          }
+        ]
+      },
+      "grade": {
+        "letter": "A-",
+        "cls": "a",
+        "score": 90,
+        "blurb": "Strong pitching gap, Braves form, and matchup nailed down."
+      }
+    },
+    "824125": {
+      "paragraphs": [
+        {
+          "title": "Pitching Matchup",
+          "text": "Kyle Bradish (RHP, 5.49 ERA, 1.63 WHIP, 9.61 K per 9) versus Seth Lugo (RHP, 1.48 ERA, 0.99 WHIP, 7.77 K per 9). Lugo has been surgical, Bradish is still working back to prior form with command issues and heavy contact. Royals land the clean edge at home."
+        },
+        {
+          "title": "Offense vs Handedness",
+          "text": "Baltimore has been disappointing versus RHP, struggling to string hits together. Kansas City offense is modest but Lugo gives them a lead to protect with regularity. Both teams lean right handed so no extreme split swing."
+        },
+        {
+          "title": "Park and Weather",
+          "text": "Kauffman Stadium is one of the most spacious parks in the league, suppresses homers while playing fair for gap doubles and triples. Evening in KC around 60 to 65 with a southerly breeze, light carry, neutral to slightly under."
+        },
+        {
+          "title": "Strikeout Projection",
+          "text": "Lugo K projection 6 to 7, Bradish 5 to 7 if his pitch count holds. Team total K around 14 to 17, mid line."
+        }
+      ],
+      "verdict": {
+        "kind": "lean",
+        "text": "Royals side backed by the arm gap, lean under in the spacious park.",
+        "winner": "Kansas City Royals",
+        "projHome": 4.2,
+        "projAway": 3.1,
+        "bets": [
+          {
+            "t": "Royals money line",
+            "cls": "ml"
+          },
+          {
+            "t": "Under 8 (pitcher park)",
+            "cls": "under"
+          },
+          {
+            "t": "Lugo K over 5.5",
+            "cls": "k"
+          }
+        ]
+      },
+      "grade": {
+        "letter": "B",
+        "cls": "b",
+        "score": 84,
+        "blurb": "Lugo form plus Bradish struggles align with home park edge."
+      }
+    },
+    "824692": {
+      "paragraphs": [
+        {
+          "title": "Pitching Matchup",
+          "text": "Aaron Nola (RHP, 4.03 ERA, 1.30 WHIP, 9.67 K per 9) versus Colin Rea (RHP, 3.63 ERA, 0.98 WHIP, 7.79 K per 9). Nola has more pedigree but an inflated ERA, peripherals suggest regression coming. Rea has been steady with excellent walk rate, low strikeout stuff but clean innings."
+        },
+        {
+          "title": "Offense vs Handedness",
+          "text": "Phillies have a loaded versus RHP lineup, Harper and Schwarber shorten the field. Cubs at 12 and 9 have balanced offense, their lefties give Nola targets. Lineup announcements pending for both clubs."
+        },
+        {
+          "title": "Park and Weather",
+          "text": "Wrigley Field wind is the whole story. At current forecast the wind looks manageable, 7 to 10 mph from the south southwest, meaning slight bonus carry to right. Temps around 55 to 60. Not a blowout wind, but a slight offense boost."
+        },
+        {
+          "title": "Strikeout Projection",
+          "text": "Nola K projection 7 to 9, Rea 4 to 6. Team total K around 15 to 17. Nola K over props look live."
+        }
+      ],
+      "verdict": {
+        "kind": "lean",
+        "text": "Phillies a narrow favorite on pitcher talent, but Wrigley wind nudges total to lean over.",
+        "winner": "Philadelphia Phillies",
+        "projHome": 4.2,
+        "projAway": 4.8,
+        "bets": [
+          {
+            "t": "Phillies money line",
+            "cls": "ml"
+          },
+          {
+            "t": "Over 8.5 if wind holds",
+            "cls": "over"
+          },
+          {
+            "t": "Nola K over 7.5",
+            "cls": "k"
+          }
+        ]
+      },
+      "grade": {
+        "letter": "B",
+        "cls": "b",
+        "score": 80,
+        "blurb": "Wind dependent game, monitor first pitch forecast for total direction."
+      }
+    },
+    "824370": {
+      "paragraphs": [
+        {
+          "title": "Pitching Matchup",
+          "text": "Justin Wrobleski (LHP, 2.12 ERA, 0.76 WHIP, 3.18 K per 9) versus Jose Quintana (LHP, 5.63 ERA, 1.88 WHIP, 3.38 K per 9). Both lefties, but very different seasons. Wrobleski has been efficient though he pitches to contact. Quintana has walked 8 in 8 innings, command is flat out broken and he is headed to Coors. Runs will score."
+        },
+        {
+          "title": "Offense vs Handedness",
+          "text": "Dodgers are 15 and 6 with the league's most flexible lineup, their righty bats feast on lefty pitching and Quintana has no way to hide. Rockies at home have a live offense versus LHP but they are facing the more stable Wrobleski."
+        },
+        {
+          "title": "Park and Weather",
+          "text": "Coors Field in mid 70s to upper 70s at first pitch, 5 to 8 mph wind, bone dry air at altitude. This is the peak Coors profile, baseballs will fly. Altitude plus warm air is the run environment ceiling in MLB."
+        },
+        {
+          "title": "Strikeout Projection",
+          "text": "Both starters are low K arms, under 4 per 9 combined. Team total K projection low, 11 to 14. Skip K props, attack the total."
+        }
+      ],
+      "verdict": {
+        "kind": "strong",
+        "text": "Hammer the total over, lean Dodgers side. Quintana in Coors is a runs printing press.",
+        "winner": "Los Angeles Dodgers",
+        "projHome": 5.8,
+        "projAway": 7.9,
+        "bets": [
+          {
+            "t": "Over 11.5 runs",
+            "cls": "over"
+          },
+          {
+            "t": "Dodgers team total over 6",
+            "cls": "over"
+          },
+          {
+            "t": "Dodgers minus 1.5 run line",
+            "cls": "rl"
+          },
+          {
+            "t": "Skip K unders, both arms low K",
+            "cls": "under"
+          }
+        ]
+      },
+      "grade": {
+        "letter": "A",
+        "cls": "a",
+        "score": 92,
+        "blurb": "Coors plus a struggling lefty equals the highest confidence total on the slate."
+      }
+    },
+    "824046": {
+      "paragraphs": [
+        {
+          "title": "Pitching Matchup",
+          "text": "Dylan Cease (RHP, 1.74 ERA, 1.26 WHIP, 13.94 K per 9) versus Reid Detmers (LHP, 3.57 ERA, 1.06 WHIP, 10.32 K per 9). Cease has been dominant this April and the K stuff is back to peak, Detmers is a quality lefty with better command than prior seasons. Huge strikeout matchup on paper."
+        },
+        {
+          "title": "Offense vs Handedness",
+          "text": "Toronto versus LHP has been mediocre, Detmers profiles to neutralize their lefty middle. Angels versus RHP struggle to sustain, Cease fires through this card quickly. Both lineups at below average versus quality stuff."
+        },
+        {
+          "title": "Park and Weather",
+          "text": "Angel Stadium plays neutral to slightly hitter friendly on homers. Warm dry California evening, 65 to 70 at first pitch, modest onshore breeze. Run environment neutral."
+        },
+        {
+          "title": "Strikeout Projection",
+          "text": "Cease K projection 8 to 10, Detmers 6 to 8. Team total K projection is the highest on the slate, 17 to 21. Unders on total Ks are dangerous, overs on individual K props are live."
+        }
+      ],
+      "verdict": {
+        "kind": "lean",
+        "text": "Lean Jays with Cease dealing, lean under on total, attack both starter K overs.",
+        "winner": "Toronto Blue Jays",
+        "projHome": 3.4,
+        "projAway": 4.0,
+        "bets": [
+          {
+            "t": "Cease K over 7.5",
+            "cls": "k"
+          },
+          {
+            "t": "Detmers K over 6.5",
+            "cls": "k"
+          },
+          {
+            "t": "Under 7.5 total",
+            "cls": "under"
+          }
+        ]
+      },
+      "grade": {
+        "letter": "A-",
+        "cls": "a",
+        "score": 88,
+        "blurb": "Cease form and high K matchup are the cleanest signal on the board."
+      }
+    },
+    "823149": {
+      "paragraphs": [
+        {
+          "title": "Pitching Matchup",
+          "text": "J.T. Ginn (RHP, 3.31 ERA, 0.98 WHIP, 6.06 K per 9) versus Emerson Hancock (RHP, 2.28 ERA, 0.76 WHIP, 9.51 K per 9). Hancock has been quietly dealing, elite 0.76 WHIP and excellent K to BB. Ginn pitches to contact with good sink and has been passable but the Mariners lineup is the tougher ask."
+        },
+        {
+          "title": "Offense vs Handedness",
+          "text": "Both pitchers right handed, both lineups slot in their lefty bats. Athletics offense has been quietly competent and sits at 500, Mariners a step below at 10 and 13 but with the matchup edge tonight."
+        },
+        {
+          "title": "Park and Weather",
+          "text": "T-Mobile Park is a heavy pitcher park, marine air suppresses flyballs to center and right. Evening in Seattle 55 to 60, low humidity, slight breeze off Puget Sound. Strong under environment."
+        },
+        {
+          "title": "Strikeout Projection",
+          "text": "Hancock K projection 7 to 9, Ginn 4 to 6. Team total K around 15 to 18, Hancock K over is the priority prop."
+        }
+      ],
+      "verdict": {
+        "kind": "lean",
+        "text": "Mariners backed at home with Hancock rolling, pitcher park plus arm edge drives total under.",
+        "winner": "Seattle Mariners",
+        "projHome": 3.8,
+        "projAway": 3.0,
+        "bets": [
+          {
+            "t": "Mariners money line",
+            "cls": "ml"
+          },
+          {
+            "t": "Under 7.5 total",
+            "cls": "under"
+          },
+          {
+            "t": "Hancock K over 6.5",
+            "cls": "k"
+          }
+        ]
+      },
+      "grade": {
+        "letter": "B+",
+        "cls": "b",
+        "score": 85,
+        "blurb": "Hancock form plus T Mobile Park is a clean stack, lineups still pending."
+      }
+    }
+  }
+};
+
 /* =========== DEEP GAME ANALYSIS (long-form writeup) =========== */
 function buildDeepAnalysis(g) {
+  /* claude daily analysis shortcut */
+  try {
+    if (typeof CLAUDE_DAILY_ANALYSIS !== "undefined" && CLAUDE_DAILY_ANALYSIS && CLAUDE_DAILY_ANALYSIS.games && g && g.gamePk != null) {
+      var __today = (function(){ try { var d = new Date(); var y=d.getFullYear(), m=String(d.getMonth()+1).padStart(2,"0"), dd=String(d.getDate()).padStart(2,"0"); return y+"-"+m+"-"+dd; } catch(e) { return null; } })();
+      if (CLAUDE_DAILY_ANALYSIS.date === __today) {
+        var __pre = CLAUDE_DAILY_ANALYSIS.games[String(g.gamePk)];
+        if (__pre) {
+          return { prebuilt: true, paragraphs: __pre.paragraphs, verdict: __pre.verdict, grade: __pre.grade, lastUpdated: CLAUDE_DAILY_ANALYSIS.lastUpdated, window: CLAUDE_DAILY_ANALYSIS.window };
+        }
+      }
+    }
+  } catch(e) { /* fall through to templated */ }
+  /* end claude daily analysis shortcut */
+  
   const away = g.teams.away.team.name;
   const home = g.teams.home.team.name;
   const aSp = g.teams.away.probablePitcher;
