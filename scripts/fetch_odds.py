@@ -273,15 +273,27 @@ def build_overlay() -> dict:
 
     overlay_games: dict = {}
     matched = 0
+    unmatched_games: list[str] = []
     for g in games:
         row = match_odds_to_game(g, odds_rows)
         if not row:
+            unmatched_games.append(f"{g['away']} @ {g['home']}")
             continue
         mkt = extract_market(row)
         if not mkt:
+            unmatched_games.append(f"NO_MARKET {g['away']} @ {g['home']}")
             continue
         matched += 1
         overlay_games[str(g["gamePk"])] = mkt
+
+    # Diagnostics so we can patch TEAM_ALIASES without guessing.
+    if unmatched_games:
+        log("UNMATCHED statsapi games:")
+        for line in unmatched_games:
+            log(f"  statsapi: {line}")
+        log("odds-api rows we saw:")
+        for r in odds_rows:
+            log(f"  odds: {r.get('away_team', '?')} @ {r.get('home_team', '?')}")
 
     return {
         "asOf": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
