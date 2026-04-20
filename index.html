@@ -246,6 +246,204 @@
   .pill-row .pill-sm.good { background:#0e3a2e; color: var(--good); border-color:#1b6f58; }
   .pill-row .pill-sm.bad { background:#3a1020; color: var(--bad); border-color:#6b1f33; }
 
+  /* ---------- AI Wizard cards ---------- */
+  .wiz-card {
+    background: linear-gradient(160deg, #141c40 0%, #0e1530 60%, #0a0f24 100%);
+    border: 1px solid #2a3670; border-radius: 18px;
+    padding: 24px 26px; margin-bottom: 22px;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.32), inset 0 1px 0 rgba(255,255,255,0.04);
+    position: relative; overflow: hidden;
+  }
+  .wiz-card::before {
+    content:""; position:absolute; top:0; left:0; right:0; height:3px;
+    background: linear-gradient(90deg, #6d28d9, #2563eb, #06b6d4);
+    border-radius: 18px 18px 0 0;
+  }
+  .wiz-card .wiz-header {
+    display:flex; justify-content:space-between; align-items:flex-start; gap:16px;
+    padding-bottom: 12px; border-bottom: 1px solid rgba(80,100,180,0.18);
+    margin-bottom: 14px;
+  }
+  .wiz-card h3 { margin:0 0 4px; font-size:22px; color:#fff; letter-spacing:.2px; font-weight:700; }
+  .wiz-card .wiz-meta { color: var(--muted); font-size: 12.5px; }
+  .wiz-card .wiz-pills { display:flex; gap:6px; flex-wrap:wrap; margin-top:10px; }
+  .wiz-pill {
+    font-size:10.5px; padding:4px 10px; border-radius:999px;
+    background:#1a2550; border:1px solid #2e3e7a; color:#c7cee8;
+    font-weight:600; letter-spacing:.3px;
+  }
+  .wiz-pill.good { background:#0e3a2e; color: var(--good); border-color:#1b6f58; }
+  .wiz-pill.bad  { background:#3a1020; color: var(--bad);  border-color:#6b1f33; }
+  .wiz-pill.warn { background:#3a2a10; color: var(--warn); border-color:#6f4c1b; }
+  .wiz-pill.info { background:#12224a; color:#7db5ff; border-color:#2d4a7a; }
+  .wiz-tier-badge {
+    flex-shrink:0; display:flex; flex-direction:column; align-items:center; gap:2px;
+    padding:10px 14px; border-radius:14px; border:2px solid;
+    background: radial-gradient(circle at top, rgba(109,40,217,0.25), rgba(37,99,235,0.12));
+    min-width: 110px;
+  }
+  .wiz-tier-badge .wiz-tier-label {
+    font-size:11px; font-weight:700; color:#a8b4dc; letter-spacing:.6px; text-transform:uppercase;
+  }
+  .wiz-tier-badge .wiz-tier-value {
+    font-size:22px; font-weight:900; letter-spacing:-.5px;
+  }
+  .wiz-tier-badge .wiz-tier-edge {
+    font-size:11px; font-weight:700; color:#c7cee8;
+  }
+  .wiz-tier-badge.lock   { border-color:#2ee6a2; color:#2ee6a2; }
+  .wiz-tier-badge.strong { border-color:#7dd97d; color:#7dd97d; }
+  .wiz-tier-badge.lean   { border-color:#ffcc66; color:#ffcc66; }
+  .wiz-tier-badge.pass   { border-color:#6b7aa1; color:#9aa6c8; }
+  .wiz-grid-two {
+    display:grid; grid-template-columns: 1fr 1fr; gap:14px; margin-top:14px;
+  }
+  @media (max-width: 880px) { .wiz-grid-two { grid-template-columns: 1fr; } }
+  .wiz-panel {
+    background: rgba(10,15,36,0.55); border:1px solid rgba(80,100,180,0.2);
+    border-radius: 10px; padding: 12px 14px;
+  }
+  .wiz-panel h5 {
+    margin:0 0 8px; font-size:11.5px; color:#8ea1d4; text-transform:uppercase; letter-spacing:.7px;
+    font-weight:700;
+  }
+  .wiz-panel p { margin:4px 0; font-size:13px; color:#d0d7f0; line-height:1.55; }
+  .wiz-panel .wiz-stat-row {
+    display:flex; justify-content:space-between; font-size:12.5px;
+    padding:4px 0; border-bottom:1px dashed rgba(80,100,180,0.12);
+  }
+  .wiz-panel .wiz-stat-row:last-child { border-bottom:0; }
+  .wiz-panel .wiz-stat-row .k { color:#8ea1d4; }
+  .wiz-panel .wiz-stat-row .v { color:#e8ecff; font-weight:600; font-variant-numeric: tabular-nums; }
+  .wiz-panel .wiz-stat-row .v.good { color:var(--good); }
+  .wiz-panel .wiz-stat-row .v.bad  { color:var(--bad); }
+
+  /* Factor waterfall */
+  .wiz-waterfall { margin-top:14px; }
+  .wiz-waterfall h5 {
+    margin:0 0 10px; font-size:11.5px; color:#8ea1d4; text-transform:uppercase;
+    letter-spacing:.7px; font-weight:700;
+  }
+  .wiz-factor-row {
+    display:grid; grid-template-columns: 140px 1fr 70px; gap:10px; align-items:center;
+    padding:5px 0; font-size:12.5px;
+  }
+  .wiz-factor-row .wf-label { color:#c7cee8; font-weight:600; }
+  .wiz-factor-row .wf-bar-wrap {
+    position:relative; height:10px; background:rgba(30,40,80,0.5);
+    border-radius:5px; overflow:hidden;
+  }
+  .wiz-factor-row .wf-bar-wrap::after {
+    content:""; position:absolute; left:50%; top:0; bottom:0; width:1px;
+    background:rgba(150,170,220,0.3);
+  }
+  .wiz-factor-row .wf-bar {
+    position:absolute; top:1px; bottom:1px; height:8px; border-radius:4px;
+  }
+  .wiz-factor-row .wf-bar.pos { background: linear-gradient(90deg, rgba(46,230,162,0.4), #2ee6a2); }
+  .wiz-factor-row .wf-bar.neg { background: linear-gradient(270deg, rgba(255,90,120,0.4), #ff5a78); }
+  .wiz-factor-row .wf-val {
+    text-align:right; font-variant-numeric: tabular-nums; font-weight:700;
+  }
+  .wiz-factor-row .wf-val.pos { color:var(--good); }
+  .wiz-factor-row .wf-val.neg { color:var(--bad); }
+
+  /* Lineup platoon table */
+  .wiz-lu-table { width:100%; border-collapse: collapse; font-size:12px; margin-top:4px; }
+  .wiz-lu-table th {
+    text-align:left; font-size:10.5px; color:#8ea1d4; font-weight:700;
+    padding:4px 6px; letter-spacing:.4px; text-transform:uppercase;
+    border-bottom:1px solid rgba(80,100,180,0.2);
+  }
+  .wiz-lu-table td {
+    padding:4px 6px; border-bottom:1px dashed rgba(80,100,180,0.08);
+    color:#d0d7f0;
+  }
+  .wiz-lu-table .plat { color:var(--good); font-weight:700; }
+  .wiz-lu-table .anti { color:var(--bad); }
+
+  /* Verdict */
+  .wiz-verdict {
+    margin-top:16px; padding:14px 18px; border-radius:12px;
+    background: linear-gradient(135deg, rgba(109,40,217,0.18), rgba(37,99,235,0.12));
+    border: 1px solid rgba(140,100,230,0.35);
+  }
+  .wiz-verdict h5 {
+    margin:0 0 6px; font-size:12px; color:#c9a8ff; text-transform:uppercase;
+    letter-spacing:.8px; font-weight:800;
+  }
+  .wiz-verdict p { margin:4px 0; font-size:13.5px; line-height:1.6; color:#eff2ff; }
+  .wiz-bets-row { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+  .wiz-bet-chip {
+    padding:6px 12px; border-radius:999px; font-size:11.5px; font-weight:700;
+    background:#0e3a2e; color:var(--good); border:1px solid #1b6f58;
+  }
+  .wiz-bet-chip.fade { background:#3a1020; color:var(--bad); border-color:#6b1f33; }
+  .wiz-bet-chip.neu  { background:#1d2652; color:var(--accent); border-color:var(--border); }
+  .wiz-bet-chip.primary { background:linear-gradient(135deg,#6d28d9,#2563eb); color:#fff; border-color:#8255ea; }
+
+  .wiz-data-badge {
+    display:inline-block; font-size:9.5px; font-weight:700; padding:2px 7px;
+    border-radius:999px; margin-left:6px; letter-spacing:.4px;
+    background:rgba(6,182,212,0.14); color:#67e8f9; border:1px solid rgba(6,182,212,0.35);
+  }
+
+  /* ---------- Value Bets tab ---------- */
+  .value-card {
+    background: linear-gradient(160deg, #0d2a26 0%, #0a1d28 60%, #081628 100%);
+    border: 1px solid #1c5d51; border-radius: 14px;
+    padding: 18px 22px; margin-bottom: 14px;
+    display: grid; grid-template-columns: 1fr 240px; gap: 18px; align-items: center;
+    position: relative; overflow: hidden;
+  }
+  @media (max-width: 760px) { .value-card { grid-template-columns: 1fr; } }
+  .value-card::before {
+    content:""; position:absolute; top:0; left:0; bottom:0; width:4px;
+    background: linear-gradient(180deg, #10b981, #06b6d4);
+  }
+  .value-card.strong::before { background: linear-gradient(180deg, #22d3ee, #0ea5e9, #10b981); width:6px; }
+  .value-card.pass { background: linear-gradient(160deg, #1a1f38 0%, #141934 100%); border-color: #2a3560; opacity: 0.55; }
+  .value-card.pass::before { background: #4a5580; }
+  .value-card h3 { margin:0 0 4px; font-size:17px; color:#fff; font-weight:700; }
+  .value-card .vc-meta { color:#8ea1d4; font-size:12px; margin-bottom:10px; }
+  .value-card .vc-row {
+    display:flex; gap:18px; flex-wrap:wrap; font-size:13px; margin-top:6px;
+  }
+  .value-card .vc-stat { display:flex; flex-direction:column; gap:2px; }
+  .value-card .vc-stat .k { font-size:10px; color:#7e90c0; text-transform:uppercase; letter-spacing:.5px; font-weight:700; }
+  .value-card .vc-stat .v { font-size:15px; font-weight:700; color:#e8ecff; font-variant-numeric: tabular-nums; }
+  .value-card .vc-stat .v.pos { color:#22d3ee; }
+  .value-card .vc-stat .v.big { font-size:18px; }
+  .value-card .vc-bet-block {
+    background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.25);
+    border-radius: 10px; padding: 12px 14px; text-align: center;
+  }
+  .value-card.pass .vc-bet-block { background: rgba(74,85,128,0.12); border-color: rgba(100,112,160,0.25); }
+  .value-card .vc-bet-label { font-size:10px; color:#22d3ee; font-weight:800; letter-spacing:.8px; text-transform:uppercase; margin-bottom:4px; }
+  .value-card.pass .vc-bet-label { color:#8ea1d4; }
+  .value-card .vc-bet-pick { font-size:15px; font-weight:800; color:#fff; margin-bottom:6px; }
+  .value-card .vc-bet-price { font-size:20px; font-weight:900; color:#22d3ee; font-variant-numeric: tabular-nums; }
+  .value-card.pass .vc-bet-price { color:#8ea1d4; font-size:16px; }
+  .value-card .vc-kelly-row { display:flex; justify-content:space-between; gap:8px; margin-top:10px; padding-top:8px; border-top: 1px solid rgba(80,120,140,0.18); font-size:11px; }
+  .vc-edge-pill {
+    display:inline-block; padding:3px 10px; border-radius:999px; font-size:10.5px;
+    font-weight:800; letter-spacing:.4px; margin-left:6px;
+  }
+  .vc-edge-pill.strong { background:#064e3b; color:#34d399; border:1px solid #065f46; }
+  .vc-edge-pill.value  { background:#0c3b4a; color:#22d3ee; border:1px solid #155e6e; }
+  .vc-edge-pill.thin   { background:#3a2a10; color:#ffcc66; border:1px solid #6f4c1b; }
+  .vc-edge-pill.pass   { background:#241d3a; color:#8ea1d4; border:1px solid #2a3560; }
+  .vc-edge-pill.neg    { background:#3a1020; color:#ff5a78; border:1px solid #6b1f33; }
+  .vc-header-summary {
+    display:flex; gap:14px; align-items:center; flex-wrap:wrap;
+    padding:14px 16px; background: linear-gradient(135deg, rgba(16,185,129,0.12), rgba(6,182,212,0.08));
+    border: 1px solid rgba(16,185,129,0.25); border-radius: 12px; margin-bottom: 16px;
+  }
+  .vc-header-summary .h-stat { display:flex; flex-direction:column; gap:2px; }
+  .vc-header-summary .h-stat .k { font-size:10.5px; color:#7e90c0; text-transform:uppercase; letter-spacing:.5px; font-weight:700; }
+  .vc-header-summary .h-stat .v { font-size:18px; font-weight:800; color:#fff; font-variant-numeric: tabular-nums; }
+  .vc-header-summary .h-stat .v.good { color:#22d3ee; }
+
   /* ---------- Hoverable stat tooltips ---------- */
   /* Tab group dropdowns */
   .tab-group { position: relative; display: inline-flex; align-items: center; }
@@ -345,6 +543,8 @@
 <nav class="tabs" id="tabs">
   <button data-tab="overview" class="active">Overview</button>
   <button data-tab="analysis">📝 Analysis</button>
+  <button data-tab="aiwizard" style="background:linear-gradient(135deg,#6d28d9,#2563eb);color:#fff;border-radius:6px 6px 0 0;font-weight:600;">🧙 AI Wizard</button>
+  <button data-tab="value" style="background:linear-gradient(135deg,#059669,#0891b2);color:#fff;border-radius:6px 6px 0 0;font-weight:600;">💎 Value Bets</button>
 
   <span class="tab-group">
     <button class="tab-group-label">💰 Picks ▾</button>
@@ -491,6 +691,26 @@
       </div>
     </div>
     <div id="analysisGrid"></div>
+  </section>
+
+  <section class="tab" id="tab-aiwizard">
+    <div class="section-head">
+      <div>
+        <h2>🧙 AI Wizard — Deep Per-Game Brief</h2>
+        <p>Expert-level writeup for every game on the slate. Blends the 11-factor Moneyline model, individual lineup splits vs the starter, BvP career history, bullpen leverage status, park + weather context, and Statcast xERA / xwOBA when the overlay is available. Every card ends with a clear verdict and a ranked bet list.</p>
+      </div>
+    </div>
+    <div id="aiWizardGrid"><div class="loader">Loading deep briefs…</div></div>
+  </section>
+
+  <section class="tab" id="tab-value">
+    <div class="section-head">
+      <div>
+        <h2>💎 Value Bets — Model vs Market</h2>
+        <p>This is where picking winners becomes picking bets that actually make money. Each row compares our 11 factor model's implied win probability against the vig free market probability. Only plays where we beat the market by 3 points or more are called value. Quarter Kelly sizing tells you how much of your bankroll to wager; it scales with the edge and is capped at 5% per bet.</p>
+      </div>
+    </div>
+    <div id="valueGrid"><div class="loader">Loading market lines…</div></div>
   </section>
 
   <section class="tab" id="tab-bets">
@@ -838,6 +1058,9 @@ const STATE = {
   injuries: {}, // { __loaded, byTeam: { teamId: [{name, id, position, status}] } }
   scheduleContext: {}, // { __loaded, byGame: { gamePk: {seriesGame, seriesNote, fatigue, etc} } }
   spotlight: [], // [{name, team, h, ab, hr, rbi, r, sb, ops, date}] — yesterday's top performers
+  mlPicks: {}, // gamePk -> {pick, edge, absEdge, tier, topDriver} — shared between ML tab and game analysis
+  statcast: {}, // populated from /statcast_overlay.json if present (xERA, xwOBA, barrel%, hard hit%)
+  odds: {},     // populated from /odds_overlay.json if present (moneyline, totals, runlines per game)
   loading: false
 };
 
@@ -1210,6 +1433,174 @@ async function fetchBullpenUsage(teamId) {
   } catch(e) { console.warn("bullpen fail", teamId, e); STATE.bullpen[teamId] = []; return []; }
 }
 
+/* =========== MARKET LINES & VALUE MATH =========== */
+// The whole point of this block: translate the internal 11-factor "edge" into an implied
+// win probability, compare it to the vig-free market price, and surface the DIFFERENCE.
+// That difference (in probability points) is where profit actually lives.
+
+// American odds → implied probability.  -150 → 0.600.  +140 → 0.417.
+function americanToProb(odds) {
+  const n = Number(odds);
+  if (!isFinite(n) || n === 0) return null;
+  if (n > 0) return 100 / (n + 100);
+  return (-n) / ((-n) + 100);
+}
+
+// Implied probability → American odds.  0.60 → -150.  0.40 → +150.
+function probToAmerican(p) {
+  if (!isFinite(p) || p <= 0 || p >= 1) return null;
+  if (p >= 0.5) return Math.round(-100 * p / (1 - p));
+  return Math.round(100 * (1 - p) / p);
+}
+
+// Nice-print American odds for a cell. +140 or -150.
+function fmtAmerican(odds) {
+  if (odds == null || !isFinite(odds)) return "—";
+  const n = Math.round(Number(odds));
+  return (n >= 0 ? "+" : "") + n;
+}
+
+// Two-way vig removal. Both sides' implied probs normalize to sum 1.
+// Example: away -130 (0.565) + home +110 (0.476) = 1.041. vig = 4.1%.
+// fairAway = 0.565 / 1.041 = 0.543.  fairHome = 0.476 / 1.041 = 0.457.
+function removeVigTwoWay(awayOdds, homeOdds) {
+  const ia = americanToProb(awayOdds);
+  const ih = americanToProb(homeOdds);
+  if (ia == null || ih == null) return null;
+  const sum = ia + ih;
+  return {
+    fairAway: ia / sum,
+    fairHome: ih / sum,
+    vigPct: (sum - 1) * 100,
+    rawAway: ia,
+    rawHome: ih
+  };
+}
+
+// Translate the 11-factor internal edge into a win probability for the picked side.
+// Calibration: edge 0 = 50%, edge 0.25 (LEAN) ≈ 53.7%, edge 0.55 (STRONG) ≈ 57.9%,
+// edge 1.0 (LOCK) ≈ 63.4%. Bounded at [0.50, 0.75] so we never claim absurd certainty.
+// Mapping is sigmoid-ish so marginal edges don't explode into big probability claims.
+function modelEdgeToProb(absEdge) {
+  const e = Math.max(0, Number(absEdge) || 0);
+  const t = Math.tanh(e * 0.6); // soft sigmoid
+  return Math.min(0.75, 0.50 + t * 0.25);
+}
+
+// Kelly criterion: what fraction of bankroll to bet.
+// f = (b*p - q) / b    where b = decimal odds - 1, p = true prob, q = 1-p.
+// We return QUARTER Kelly and cap at 5% for safety. Full Kelly is theoretically optimal
+// but in practice picks up too much variance and overbets model error.
+function kellyFraction(modelProb, americanOdds) {
+  if (modelProb == null || !isFinite(modelProb) || modelProb <= 0 || modelProb >= 1) return 0;
+  const n = Number(americanOdds);
+  if (!isFinite(n) || n === 0) return 0;
+  const decimal = n > 0 ? (n / 100) + 1 : (100 / -n) + 1;
+  const b = decimal - 1;
+  const p = modelProb;
+  const q = 1 - p;
+  const full = (b * p - q) / b;
+  if (full <= 0) return 0;
+  // Quarter Kelly, capped at 5% of bankroll.
+  return Math.min(0.05, full * 0.25);
+}
+
+// Build a market snapshot for a game. Returns nulls when odds are missing.
+// Input: { moneyline: { away, home }, total: { line, over, under }, runline: {...} }
+// Output: normalized fair probs + raw prices + metadata.
+function gameMarketSnapshot(g, mlPick) {
+  const od = (STATE.odds && STATE.odds.games && STATE.odds.games[g.gamePk]) || null;
+  if (!od || !od.moneyline) return null;
+  const awayOdds = od.moneyline.away;
+  const homeOdds = od.moneyline.home;
+  const fair = removeVigTwoWay(awayOdds, homeOdds);
+  if (!fair) return null;
+  // Which side did the model pick? Map fair prob + raw price to that side.
+  let pickSide = (mlPick && mlPick.pickSide) || null;
+  const pickFair = pickSide === "home" ? fair.fairHome : pickSide === "away" ? fair.fairAway : null;
+  const pickPrice = pickSide === "home" ? homeOdds : pickSide === "away" ? awayOdds : null;
+  // Also return the BOTH sides so we can display the market as a pair.
+  return {
+    awayOdds: awayOdds, homeOdds: homeOdds,
+    fairAway: fair.fairAway, fairHome: fair.fairHome,
+    vigPct: fair.vigPct,
+    pickSide: pickSide, pickFair: pickFair, pickPrice: pickPrice,
+    book: od.moneyline.book || "consensus",
+    total: od.total || null, runline: od.runline || null,
+    asOf: od.asOf || (STATE.odds && STATE.odds.asOf) || null
+  };
+}
+
+/* =========== ODDS OVERLAY LOADER =========== */
+// Reads odds_overlay.json from the site root. Same pattern as the Statcast overlay:
+// optional, bakes from a scheduled task, graceful fallback if absent.
+// Expected schema:
+//   { asOf, games: { <gamePk>: { moneyline:{away,home,book}, total:{line,over,under}, runline:{...} } } }
+async function fetchOddsOverlay() {
+  if (STATE.odds && STATE.odds.__loaded) return STATE.odds;
+  try {
+    const r = await fetch("odds_overlay.json", {cache:"no-store"});
+    if (!r.ok) throw new Error("no odds overlay (" + r.status + ")");
+    const j = await r.json();
+    STATE.odds = Object.assign({}, j, { __loaded: true });
+    return STATE.odds;
+  } catch(e) {
+    STATE.odds = { __loaded: true, __missing: true, games: {} };
+    return STATE.odds;
+  }
+}
+
+/* =========== STATCAST OVERLAY (pre-baked by scheduled refresh) =========== */
+// Scheduled task writes /statcast_overlay.json to the Cloudflare site root.
+// Format: { asOf, pitchers:{ id:{xera, xfip, barrelPct, hardHitPct, xwobaAgainst, k9, bb9, whiffPct, cswPct} },
+//           teams:   { id:{xwoba, barrelPct, hardHitPct, xSlgOverSlg, kPct} },
+//           batters: { id:{xwoba, barrelPct, hardHitPct} } }
+// whiffPct = swings-and-misses / swings. League avg ~.245. Stabilizes ~70 PAs (vs ~180 for K/9),
+//   so it's materially more predictive of the next start's strikeouts in April and small samples.
+// cswPct = (called + swinging strikes) / pitches. Adds the called-strike dimension; blends into team K projection.
+async function fetchStatcastOverlay() {
+  if (STATE.statcast && STATE.statcast.__loaded) return STATE.statcast;
+  try {
+    const r = await fetch("statcast_overlay.json", {cache:"no-store"});
+    if (!r.ok) throw new Error("no overlay (" + r.status + ")");
+    const j = await r.json();
+    STATE.statcast = Object.assign({}, j, { __loaded: true });
+    // Quick side-effect: blend xERA into pitcherStats so downstream code sees it
+    if (j.pitchers) {
+      Object.keys(j.pitchers).forEach(function(pid){
+        const ps = STATE.pitcherStats[pid];
+        const sc = j.pitchers[pid];
+        if (ps && ps.season && sc) {
+          if (sc.xera != null)     ps.season.xera     = Number(sc.xera);
+          if (sc.xfip != null)     ps.season.xfip     = Number(sc.xfip);
+          if (sc.barrelPct != null)   ps.season.barrelPct   = Number(sc.barrelPct);
+          if (sc.hardHitPct != null)  ps.season.hardHitPct  = Number(sc.hardHitPct);
+          if (sc.xwobaAgainst != null) ps.season.xwobaAgainst = Number(sc.xwobaAgainst);
+          if (sc.whiffPct != null) ps.season.whiffPct = Number(sc.whiffPct);
+          if (sc.cswPct != null)   ps.season.cswPct   = Number(sc.cswPct);
+        }
+      });
+    }
+    if (j.teams) {
+      Object.keys(j.teams).forEach(function(tid){
+        const ts = STATE.teamStats[tid];
+        const sc = j.teams[tid];
+        if (ts && ts.season && sc) {
+          if (sc.xwoba != null)       ts.season.xwoba       = Number(sc.xwoba);
+          if (sc.barrelPct != null)   ts.season.barrelPct   = Number(sc.barrelPct);
+          if (sc.hardHitPct != null)  ts.season.hardHitPct  = Number(sc.hardHitPct);
+          if (sc.kPct != null)        ts.season.kPct        = Number(sc.kPct);
+        }
+      });
+    }
+    return STATE.statcast;
+  } catch(e) {
+    // Silent: overlay is optional. Model falls back to standard stats.
+    STATE.statcast = { __loaded: true, __missing: true };
+    return STATE.statcast;
+  }
+}
+
 /* =========== INJURIES (IL + day-to-day) =========== */
 async function fetchInjuries() {
   if (STATE.injuries && STATE.injuries.__loaded) return;
@@ -1390,6 +1781,22 @@ function projectTotal(g) {
   return total;
 }
 
+// ── Whiff-blended effective K/9 ──
+// Whiff% stabilizes ~2.5x faster than K/9, so it's more predictive of the next start's K rate
+// in April and small samples. We translate whiff% to an implied K/9 (league anchor:
+// ~.245 whiff → ~8.6 K/9, slope ~25 K/9 per 1.00 of whiff%) and blend 60/40 with season K/9.
+// Returns { k9: effective K/9, whiffPct: raw value or null, blended: true/false }.
+function effectiveK9(pStats) {
+  const k9 = Number(pStats && pStats.season && pStats.season.strikeoutsPer9Inn) || 0;
+  const whiff = Number(pStats && pStats.season && pStats.season.whiffPct);
+  if (!isFinite(whiff) || whiff <= 0) return { k9: k9, whiffPct: null, blended: false };
+  // Convert whiff% to implied K/9. League avg ~.245 whiff maps to ~8.6 K/9.
+  // Slope calibrated from Baseball Savant research: each 1pp of whiff ≈ 0.25 K/9.
+  const impliedK9 = 8.6 + (whiff - 0.245) * 25;
+  const effective = k9 * 0.60 + impliedK9 * 0.40;
+  return { k9: effective, whiffPct: whiff, blended: true };
+}
+
 function projectTeamK(teamSide, g) {
   const sp = teamSide==="home" ? g.teams.home.probablePitcher : g.teams.away.probablePitcher;
   const oppSide = teamSide==="home" ? "away" : "home";
@@ -1397,8 +1804,9 @@ function projectTeamK(teamSide, g) {
   let proj = 8.4;
   const pStats = STATE.pitcherStats[sp && sp.id];
   if (pStats && pStats.season && pStats.season.strikeoutsPer9Inn) {
-    const kPer9 = Number(pStats.season.strikeoutsPer9Inn);
-    proj = (kPer9 * 5.5 / 9) + (9.0 * 3.5 / 9);
+    // Use whiff-blended K/9 when Statcast overlay supplies whiff%.
+    const ek = effectiveK9(pStats);
+    proj = (ek.k9 * 5.5 / 9) + (9.0 * 3.5 / 9);
   }
 
   // LINEUP-AWARE: if we have confirmed lineup + batter splits, compute the actual
@@ -1515,410 +1923,7 @@ function buildGameNarrative(g) {
 }
 
 /* =========== DEEP GAME ANALYSIS (long-form writeup) =========== */
-const CLAUDE_DAILY_ANALYSIS = {
-  "date": "2026-04-19",
-  "lastUpdated": "2026-04-19T22:13:17.909408Z",
-  "games": {
-    "823556": {
-      "paragraphs": [
-        {
-          "title": "Pitching Matchup",
-          "text": "Cole Ragans (LHP, 3.78 ERA, 1.38 WHIP) toes the rubber for Kansas City, opposite Ryan Weathers (LHP, 4.29 ERA, 1.38 WHIP) for the Yankees. This is a lefty on lefty matchup, both arms with similar volume profiles. Ragans is the higher upside arm, the changeup is a swing and miss weapon and he's been a strikeout machine when locked in. Weathers is more of an action lefty, lives off the cutter and curveball, but his command can drift. Slight pitching edge to Kansas City on stuff, but Yankee Stadium is a tough environment for any lefty starter."
-        },
-        {
-          "title": "Offense vs Handedness",
-          "text": "Both sides face LHP. Yankees posted Ben Rice leading off, then Judge, Bellinger, Goldschmidt, Grisham, Rosario, Wells, Caballero, McMahon. Notable shape: Bellinger and McMahon are both lefties hitting against a lefty in Ragans, that's a tougher day for them. Judge is the matchup that prints, he eats LHP for breakfast and the rain delay does not change that. Royals counter with Garcia leading off, then Witt Jr, Pasquantino, Perez, Thomas, Marte, Collins, Massey, Diaz. Pasquantino and Marte get the tougher day on the lefty, Witt and Salvy are the carry bats."
-        },
-        {
-          "title": "Park and Weather",
-          "text": "Yankee Stadium with active rain, 50 degrees, wind 16 mph blowing out to right field. The wind to right is a gift to Judge and Goldschmidt if the game does happen, that short porch in right turns warning track flies into souvenirs. The rain itself is the wild card, current status is Delayed Start. If they get this in, expect a soggy ball, slick mound, and lower velocity command for both starters, which usually inflates totals once the bullpens get involved."
-        },
-        {
-          "title": "Strikeout Projection",
-          "text": "Ragans projects 7.4 K against a Yankees lineup that has plenty of swing and miss in the bottom half. Weathers projects 4.6 K against a contact heavy Royals lineup. Ragans Ks OVER is the cleaner side here if he stays in long enough, but the rain delay creates a workload risk that pushes the under into play if KC pulls him early."
-        },
-        {
-          "title": "Verdict",
-          "text": "Lean to a slightly higher total than market once the rain factor is baked in. The 16 mph wind to right at Yankee Stadium plus likely soft middle relief gives the over some appeal. Yankees moneyline at home with Judge crushing LHP is the cleanest single side bet."
-        }
-      ],
-      "verdict": {
-        "kind": "Lean",
-        "text": "Yankees ML and lean over total",
-        "winner": "NYY",
-        "projHome": 5.2,
-        "projAway": 4.6,
-        "bets": [
-          {
-            "t": "Yankees ML",
-            "cls": "good"
-          },
-          {
-            "t": "Over Total",
-            "cls": "good"
-          },
-          {
-            "t": "Judge Over 1.5 Total Bases",
-            "cls": "good"
-          },
-          {
-            "t": "Ragans Ks Over",
-            "cls": "warn"
-          }
-        ]
-      },
-      "grade": {
-        "letter": "B",
-        "cls": "good",
-        "score": 82,
-        "blurb": "Solid lefty matchup take, rain delay caps confidence"
-      }
-    },
-    "825018": {
-      "paragraphs": [
-        {
-          "title": "Pitching Matchup",
-          "text": "Noah Schultz (LHP, 6.23 ERA, 1.62 WHIP) for the White Sox vs Jeffrey Springs (LHP, 1.46 ERA, 0.77 WHIP) for the Athletics. Massive edge to the home side. Springs has been one of the quietest aces of the early season, the changeup and command are both elite. Schultz is a tall projection arm but the early returns have been rough, command of the slider is the key. Big disparity here favoring the Athletics."
-        },
-        {
-          "title": "Offense vs Handedness",
-          "text": "Both teams face lefties. Athletics posted Wilson at the top, then Langeliers, Kurtz, Ibanez, Muncy, Soderstrom, Hernaiz, Clarke, Gelof. Soderstrom is a lefty bat against a lefty so that's a slight downgrade, but Kurtz, Muncy, and Langeliers are real damage versus LHP. White Sox lineup is Meidroth, Vargas, Murakami, Pereira, Quero, Montgomery, Murray, Hill, Acuna. Murakami is the bat to track, the rest of this lineup struggles to scratch out runs."
-        },
-        {
-          "title": "Park and Weather",
-          "text": "Sutter Health Park, 74 degrees, partly cloudy, wind 7 mph out to left field. A very neutral day, slight push to lefties pulling air toward right against the wind. Park overall plays slightly hitter friendly in spring afternoon games."
-        },
-        {
-          "title": "Strikeout Projection",
-          "text": "Springs projects 7.0 K against a punchless Chicago lineup. Schultz projects 5.5 K but his walk rate caps the upside. Springs Ks OVER is the clean play, total Ks lean over."
-        },
-        {
-          "title": "Verdict",
-          "text": "Athletics are the side. Springs at home against the worst projected lineup in the league is a get right spot. Run line lean as well."
-        }
-      ],
-      "verdict": {
-        "kind": "Lean",
-        "text": "Athletics moneyline and team total over",
-        "winner": "ATH",
-        "projHome": 5.0,
-        "projAway": 2.8,
-        "bets": [
-          {
-            "t": "Athletics ML",
-            "cls": "good"
-          },
-          {
-            "t": "Athletics RL -1.5",
-            "cls": "warn"
-          },
-          {
-            "t": "Springs Ks Over",
-            "cls": "good"
-          },
-          {
-            "t": "Under Total",
-            "cls": "warn"
-          }
-        ]
-      },
-      "grade": {
-        "letter": "A-",
-        "cls": "good",
-        "score": 89,
-        "blurb": "Strong pitching edge, lineup mismatch"
-      }
-    },
-    "824047": {
-      "paragraphs": [
-        {
-          "title": "Pitching Matchup",
-          "text": "Michael King (RHP, 2.78 ERA, 1.15 WHIP) for San Diego against Walbert Urena (RHP, 0.00 ERA, 4.80 WHIP) for the Angels. King is the established veteran, sinker changeup combo, has been excellent. Urena's line is a small sample mirage, the 4.80 WHIP tells you he is putting plenty of traffic on the bases even when not allowing runs, which catches up fast. Big edge to San Diego on starting pitching."
-        },
-        {
-          "title": "Offense vs Handedness",
-          "text": "Both teams face righties. Padres posted Laureano, Tatis Jr, Merrill, Machado, Bogaerts, Sheets, Andujar, Campusano, Johnson. Tatis, Machado, and Merrill are the carriers and all three eat right handed pitching. Angels go Neto, Trout, Schanuel, Soler, Moncada, Adell, Lowe, d'Arnaud, Frazier. Trout and Soler give them thump against righties but the lineup gets thin behind them."
-        },
-        {
-          "title": "Park and Weather",
-          "text": "Angel Stadium, 78 degrees, sunny, wind 8 mph right to left across the diamond. A very nice hitting day, the cross wind has minimal HR effect. Park is roughly neutral. Warm dry air helps the ball travel."
-        },
-        {
-          "title": "Strikeout Projection",
-          "text": "King projects 6.5 K against an Angels lineup with plenty of K profile. Urena projects 4.5 K, low whiff stuff. Total K lean over the number."
-        },
-        {
-          "title": "Verdict",
-          "text": "Padres are the play. King vs Urena is a clear edge and the road favorite is justified."
-        }
-      ],
-      "verdict": {
-        "kind": "Lean",
-        "text": "Padres ML and over team total",
-        "winner": "SD",
-        "projHome": 4.0,
-        "projAway": 5.4,
-        "bets": [
-          {
-            "t": "Padres ML",
-            "cls": "good"
-          },
-          {
-            "t": "Padres Team Total Over",
-            "cls": "good"
-          },
-          {
-            "t": "King Ks Over",
-            "cls": "warn"
-          },
-          {
-            "t": "Tatis Over 1.5 Total Bases",
-            "cls": "good"
-          }
-        ]
-      },
-      "grade": {
-        "letter": "A-",
-        "cls": "good",
-        "score": 88,
-        "blurb": "Pitching mismatch is real"
-      }
-    },
-    "823150": {
-      "paragraphs": [
-        {
-          "title": "Pitching Matchup",
-          "text": "MacKenzie Gore (LHP, 3.00 ERA, 1.10 WHIP) for Texas against Bryan Woo (RHP, 2.16 ERA, 0.92 WHIP) for Seattle. Two of the better young arms in the league. Gore is a true power lefty with a fastball that touches 97 and a wipeout slider. Woo has been elite, the sinker has been generating a ton of weak contact and the WHIP under 1.00 is no fluke. This shapes up as a low scoring game."
-        },
-        {
-          "title": "Offense vs Handedness",
-          "text": "Rangers face the right handed Woo. Lineup is Nimmo, Seager, Langford, Burger, Pederson, Jung, Carter, Smith, Jansen. Pederson is a lefty in a lefty crusher spot but Seager and Langford are the two bats most likely to do damage. Mariners face the lefty Gore. Lineup: Refsnyder, Raleigh, J Rodriguez, Arozarena, Garver, C Joe, Crawford, Young, Rivas. Refsnyder and Joe are the platoon plays vs lefties, Raleigh switch hits, J Rod handles velocity. Mariners bottom of the order is thin."
-        },
-        {
-          "title": "Park and Weather",
-          "text": "T-Mobile Park, 68 degrees, partly cloudy, wind 7 mph in from left field. Pitcher friendly conditions, the in wind to left kills lefty power and the marine air at T-Mobile already suppresses home runs. This is a low total spot."
-        },
-        {
-          "title": "Strikeout Projection",
-          "text": "Gore projects 7.5 K, Woo projects 6.3 K. Total K well over the number is the play, both are bat missing arms in a swing and miss park."
-        },
-        {
-          "title": "Verdict",
-          "text": "Under the total is the headline. First five innings under is the cleanest version. Mariners ML at home with Woo on the bump and a thin Rangers bottom of the order is a small lean."
-        }
-      ],
-      "verdict": {
-        "kind": "Lean",
-        "text": "Under total and Mariners ML",
-        "winner": "SEA",
-        "projHome": 3.4,
-        "projAway": 2.8,
-        "bets": [
-          {
-            "t": "Under Total",
-            "cls": "good"
-          },
-          {
-            "t": "F5 Under",
-            "cls": "good"
-          },
-          {
-            "t": "Mariners ML",
-            "cls": "warn"
-          },
-          {
-            "t": "Combined Ks Over",
-            "cls": "good"
-          }
-        ]
-      },
-      "grade": {
-        "letter": "A",
-        "cls": "good",
-        "score": 91,
-        "blurb": "Two top arms in pitcher friendly conditions"
-      }
-    },
-    "825100": {
-      "paragraphs": [
-        {
-          "title": "Pitching Matchup",
-          "text": "Kevin Gausman (RHP, 2.42 ERA, 0.85 WHIP) for Toronto against Ryne Nelson (RHP, 3.54 ERA, 1.03 WHIP) for Arizona. Gausman has been other worldly, the splitter is unhittable and the WHIP under 0.90 is among the best in baseball. Nelson is solid, fastball heavy, decent slider, but he is the clearly inferior arm in this matchup. Toronto has the pitching edge."
-        },
-        {
-          "title": "Offense vs Handedness",
-          "text": "Both teams face righties. Blue Jays posted Lukes, Clement, Guerrero Jr, J Sanchez, Jimenez, Gimenez, Okamoto, Straw, Valenzuela. Vladdy is the carry bat, Okamoto is the sneaky power source, but the rest of the lineup is missing top end firepower. Diamondbacks go Marte, Carroll, J Fernandez, Gurriel Jr, Del Castillo, Vargas, Arenado, McCann, A Thomas. Marte and Carroll are still the engine, Arenado in the seven hole tells you he might be banged up or cooled off. Carroll is a lefty so neutral matchup vs Gausman."
-        },
-        {
-          "title": "Park and Weather",
-          "text": "Chase Field with the roof closed, 72 degrees, no wind. Indoor environment, neutral conditions. Chase plays slightly hitter friendly even with the roof shut due to the dry desert ball."
-        },
-        {
-          "title": "Strikeout Projection",
-          "text": "Gausman projects 8.0 K, Nelson projects 5.0 K. Gausman Ks OVER is the strongest single bet on the slate."
-        },
-        {
-          "title": "Verdict",
-          "text": "Toronto is the side. Gausman is the matchup of the day and the Blue Jays are a sneaky live dog or moderate favorite depending on book."
-        }
-      ],
-      "verdict": {
-        "kind": "Lean",
-        "text": "Blue Jays ML and Gausman Ks over",
-        "winner": "TOR",
-        "projHome": 3.5,
-        "projAway": 4.6,
-        "bets": [
-          {
-            "t": "Blue Jays ML",
-            "cls": "good"
-          },
-          {
-            "t": "Gausman Ks Over",
-            "cls": "good"
-          },
-          {
-            "t": "Vladdy Over 1.5 TB",
-            "cls": "warn"
-          },
-          {
-            "t": "Under Total",
-            "cls": "warn"
-          }
-        ]
-      },
-      "grade": {
-        "letter": "A",
-        "cls": "good",
-        "score": 92,
-        "blurb": "Gausman edge is significant, indoor conditions clean"
-      }
-    },
-    "824777": {
-      "paragraphs": [
-        {
-          "title": "Pitching Matchup",
-          "text": "Framber Valdez (LHP, 3.75 ERA, 1.29 WHIP) for Detroit against Garrett Crochet (LHP, 7.58 ERA, 1.58 WHIP) for Boston. Lefty on lefty. Valdez is the proven veteran with the elite sinker and curveball, Crochet has electric stuff but the early ERA is ugly, command has been the issue. Edge to Detroit on the day, but Crochet is one start away from clicking and his K upside is real."
-        },
-        {
-          "title": "Offense vs Handedness",
-          "text": "Both teams face lefties. Tigers posted Jones, Torres, Vierling, Dingler, Greene, Perez, Torkelson, Lee, Baez. Greene and Perez are lefties facing the lefty so slight downgrade, Torkelson and Torres carry the platoon edge, Baez has been a tough bat to plan around. Red Sox go Anthony, Monasterio, W Contreras, Story, Abreu, Rafaela, Durbin, Narvaez, Kiner-Falefa. Story and W Contreras eat lefties, Abreu is a lefty platoon downgrade against Valdez."
-        },
-        {
-          "title": "Park and Weather",
-          "text": "Fenway Park, 49 degrees, overcast, wind 7 mph out to right field. Cold afternoon, the cold air kills HR distance. Wind out to right helps lefty pull side power but at 49 degrees it's marginal. Green Monster is always live."
-        },
-        {
-          "title": "Strikeout Projection",
-          "text": "Valdez projects 6.5 K, Crochet projects 8.0 K. Crochet Ks OVER is the upside play given his stuff plays even on bad days. Total Ks lean over."
-        },
-        {
-          "title": "Verdict",
-          "text": "Tigers are the small lean side, Valdez is the better current arm. Under the total is the side once the cold air is factored in. Crochet K prop is the prop side that prints."
-        }
-      ],
-      "verdict": {
-        "kind": "Lean",
-        "text": "Tigers ML and under total",
-        "winner": "DET",
-        "projHome": 4.0,
-        "projAway": 4.5,
-        "bets": [
-          {
-            "t": "Tigers ML",
-            "cls": "good"
-          },
-          {
-            "t": "Under Total",
-            "cls": "good"
-          },
-          {
-            "t": "Crochet Ks Over",
-            "cls": "good"
-          },
-          {
-            "t": "Greene NRFI",
-            "cls": "warn"
-          }
-        ]
-      },
-      "grade": {
-        "letter": "B+",
-        "cls": "good",
-        "score": 85,
-        "blurb": "Cold Fenway plus two strikeout lefties"
-      }
-    },
-    "823475": {
-      "paragraphs": [
-        {
-          "title": "Pitching Matchup",
-          "text": "Grant Holmes (RHP, 3.32 ERA, 1.11 WHIP, 7.06 K/9) for Atlanta against Andrew Painter (RHP, 3.77 ERA, 1.33 WHIP, 10.05 K/9) for Philadelphia. Holmes has been a quietly effective strike thrower for the Braves, heavy fastball slider mix and groundball tilt that keeps the ball in the yard at his own park. Painter is the 23 year old prospect delivering on the hype, fastball at 96, and the strikeout rate jumps off the page at better than ten per nine. Pure stuff edge goes to Painter, command and efficiency edge goes to Holmes. This is a true coin flip of matchups with different paths to winning."
-        },
-        {
-          "title": "Offense vs Handedness",
-          "text": "Both teams face right handed starters tonight. Braves posted Acuna Jr, Baldwin, Olson, Riley, Albies, Yastrzemski, D Smith, Dubon, Harris II. The top four is as dangerous as it gets against RHP, Acuna and Olson are the engine and Riley is the power middle. Phillies counter with Trea Turner leading off, then Schwarber, Harper, A Garcia, Marsh, Bohm, Stott, Marchan, J Crawford. Schwarber and Harper are the lefty thump that gets their best looks off a right hander, and Turner plus Garcia add speed and pull side power. Phillies lineup is a tick more dangerous top to bottom, but the Braves top of the order does more damage in fewer at bats."
-        },
-        {
-          "title": "Park and Weather",
-          "text": "Citizens Bank Park on a night game, 52 to 54 degrees around first pitch, partly cloudy, wind 9 to 12 mph blowing left to right across the diamond. CBP plays as a top five home run park every year and the short porches in right play even on a cool night. The cross wind is roughly neutral for homers, might give Schwarber and Harper a small push since they pull to right. No precipitation in the window, game should play on time."
-        },
-        {
-          "title": "Strikeout Projection",
-          "text": "Holmes projects 5.5 to 6.5 K against a Phillies lineup that takes walks and chases less than average. Painter projects 7.5 to 9 K, the strikeout volume has been the headline and the Braves lineup does have swing and miss in the bottom half. Painter Ks OVER is the cleanest prop side in the game, Holmes Ks is a lean under."
-        },
-        {
-          "title": "Verdict",
-          "text": "Updated at 6 PM refresh. Lineups are set and weather is clear. Phillies are home favorites for good reason, Schwarber and Harper get a righty in a HR park and Painter is the higher upside arm. Lean Phillies moneyline, lean over the total around 8.5, and Painter Ks over is the strongest side card. No late scratches reported."
-        }
-      ],
-      "verdict": {
-        "kind": "Lean",
-        "text": "Phillies ML and over total",
-        "winner": "PHI",
-        "projHome": 5.1,
-        "projAway": 4.3,
-        "bets": [
-          {
-            "t": "Phillies ML",
-            "cls": "good"
-          },
-          {
-            "t": "Over 8.5 Total",
-            "cls": "warn"
-          },
-          {
-            "t": "Schwarber Over 1.5 TB",
-            "cls": "good"
-          },
-          {
-            "t": "Painter Ks Over 7.5",
-            "cls": "good"
-          }
-        ]
-      },
-      "grade": {
-        "letter": "B+",
-        "cls": "good",
-        "score": 84,
-        "blurb": "Lineups posted, CBP and Phillies bats are the pivot. 6PM refresh."
-      }
-    }
-  }
-};
-
 function buildDeepAnalysis(g) {
-  // Claude daily analysis pre built override
-  try {
-    if (typeof CLAUDE_DAILY_ANALYSIS !== "undefined" && CLAUDE_DAILY_ANALYSIS && g && g.gamePk) {
-      const todayLocal = (new Date(g.gameDate)).toISOString().slice(0,10);
-      const pre = CLAUDE_DAILY_ANALYSIS.games && CLAUDE_DAILY_ANALYSIS.games[String(g.gamePk)];
-      if (pre && (CLAUDE_DAILY_ANALYSIS.date === todayLocal || CLAUDE_DAILY_ANALYSIS.date === (new Date()).toISOString().slice(0,10))) {
-        return pre;
-      }
-    }
-  } catch(e) { /* fall through to dynamic build */ }
-
   const away = g.teams.away.team.name;
   const home = g.teams.home.team.name;
   const aSp = g.teams.away.probablePitcher;
@@ -1939,8 +1944,18 @@ function buildDeepAnalysis(g) {
   const aEra = aStats && aStats.season && aStats.season.era != null ? Number(aStats.season.era) : 4.50;
   const hEra = hStats && hStats.season && hStats.season.era != null ? Number(hStats.season.era) : 4.50;
   // Baseline: higher opposing SP ERA → more runs. Home field +0.2.
-  const homeProjRuns = Math.max(2.0, (total/2) + (aEra - 4.0) * 0.35 + 0.20);
-  const awayProjRuns = Math.max(2.0, (total/2) + (hEra - 4.0) * 0.35 - 0.20);
+  let homeProjRuns = (total/2) + (aEra - 4.0) * 0.35 + 0.20;
+  let awayProjRuns = (total/2) + (hEra - 4.0) * 0.35 - 0.20;
+  // Tilt the run split toward the 9-factor model's edge (shared via STATE.mlPicks)
+  // so the score shown here agrees with the Moneyline Picks tab.
+  const __ml = STATE.mlPicks && STATE.mlPicks[g.gamePk];
+  if (__ml && typeof __ml.edge === "number") {
+    const tilt = __ml.edge * 0.55; // positive edge tilts home, negative tilts away
+    homeProjRuns += tilt;
+    awayProjRuns -= tilt;
+  }
+  homeProjRuns = Math.max(2.0, homeProjRuns);
+  awayProjRuns = Math.max(2.0, awayProjRuns);
   const projHome = Math.round(homeProjRuns * 10) / 10;
   const projAway = Math.round(awayProjRuns * 10) / 10;
   const winner = projHome > projAway ? home : projAway > projHome ? away : "toss-up";
@@ -2035,21 +2050,29 @@ function buildDeepAnalysis(g) {
   paragraphs.push({title:"Strikeout Projection", text: kPara});
 
   // ---- Verdict ----
+  // Side call defers to the 9-factor Moneyline model (STATE.mlPicks) so this card
+  // and the Moneyline Picks tab never contradict each other.
+  const mlPick      = __ml && __ml.pick && __ml.pick !== "no edge" ? __ml.pick : null;
+  const mlTierRaw   = __ml ? (__ml.tier || "") : "";
+  const mlTierBase  = mlTierRaw.replace(/[↑↓*]/g, "");
+  const mlAbsEdge   = __ml ? (__ml.absEdge || 0) : 0;
   const verdictKind = total >= 9.5 ? "lean-over" : total <= 8.0 ? "lean-under" : "lean-push";
   let verdictText = "";
   if (total >= 9.5) verdictText = "My model projects "+total.toFixed(1)+" runs — well above the ~8.8 league baseline. This is an OVER-lean environment and the primary play is the game total. ";
   else if (total <= 8.0) verdictText = "My model projects "+total.toFixed(1)+" runs — well below the ~8.8 league baseline. This is an UNDER-lean environment. ";
   else verdictText = "My model projects "+total.toFixed(1)+" runs, which is close enough to baseline that I'm not chasing the total. Focus on sides, props, or pass. ";
-  if (margin >= 1.0) verdictText += "On the side, I project "+esc(winner)+" to win by roughly "+margin.toFixed(1)+" runs — enough that the "+esc(winner)+" moneyline has real model value. ";
-  else if (margin >= 0.4) verdictText += "I give a slight edge to "+esc(winner)+", but it's thin enough that the run line is probably better than the moneyline. ";
-  else verdictText += "I don't see a meaningful side edge — both teams project within half a run of each other. ";
+  if (mlPick && mlTierBase === "LOCK") verdictText += "On the side, my 9-factor model rates "+esc(mlPick)+" a LOCK (edge "+mlAbsEdge.toFixed(2)+") — the moneyline is the primary play. ";
+  else if (mlPick && mlTierBase === "STRONG") verdictText += "On the side, my 9-factor model has a STRONG edge to "+esc(mlPick)+" (edge "+mlAbsEdge.toFixed(2)+") — moneyline has real value. ";
+  else if (mlPick && mlTierBase === "LEAN") verdictText += "On the side, my 9-factor model has a LEAN to "+esc(mlPick)+" (edge "+mlAbsEdge.toFixed(2)+") — small play, or take the run line if priced better. ";
+  else verdictText += "On the side, no meaningful edge either way — pass the moneyline. ";
 
   // ---- Suggested bets ----
   const bets = [];
   if (total >= 9.8) bets.push({t:"Total OVER", cls:"good"});
   else if (total <= 7.8) bets.push({t:"Total UNDER", cls:"fade"});
-  if (margin >= 1.0) bets.push({t:winner+" ML", cls:"good"});
-  else if (margin >= 0.5) bets.push({t:winner+" -1.5 if priced fair", cls:"neu"});
+  if (mlPick && (mlTierBase === "LOCK" || mlTierBase === "STRONG")) bets.push({t:mlPick+" ML", cls:"good"});
+  else if (mlPick && mlTierBase === "LEAN") bets.push({t:mlPick+" ML (small)", cls:"neu"});
+  if (mlPick && mlAbsEdge >= 0.8) bets.push({t:mlPick+" -1.5 if priced fair", cls:"neu"});
   if (aK >= 10) bets.push({t:away+" Team Ks OVER", cls:"good"});
   if (hK >= 10) bets.push({t:home+" Team Ks OVER", cls:"good"});
   if (awayOps != null && awayOps >= 0.790 && (hStats && hStats.season && Number(hStats.season.era) >= 4.2)) bets.push({t:away+" Team Total OVER", cls:"good"});
@@ -2440,15 +2463,64 @@ function renderKProps() {
     [g.teams.away.probablePitcher, g.teams.home.probablePitcher].forEach(function(p){
       if (!p) return;
       const ps = STATE.pitcherStats[p.id];
-      const k9 = Number(ps && ps.season && ps.season.strikeoutsPer9Inn)||0;
+      const k9raw = Number(ps && ps.season && ps.season.strikeoutsPer9Inn)||0;
+      // Whiff-blended effective K/9 (60/40 season K9 vs whiff-implied K9).
+      // Whiff% stabilizes ~70 PA vs ~180 PA for K/9, so it's more predictive in small samples.
+      const ek = effectiveK9(ps);
+      const k9eff = ek.k9;
       const projIP = 5.5;
-      const projK = k9 * projIP / 9;
-      rows.push({name:p.fullName, k9:k9, projK:projK});
+      const projK = k9eff * projIP / 9;
+      rows.push({
+        name: p.fullName, k9raw: k9raw, k9eff: k9eff, projK: projK,
+        whiffPct: ek.whiffPct, blended: ek.blended
+      });
     });
   });
   rows.sort(function(a,b){ return b.projK - a.projK; });
-  $("#kPropsGrid").innerHTML = '<table><thead><tr><th>Pitcher</th><th>K/9</th><th>Proj IP</th><th>Proj Ks</th><th>Suggested line</th></tr></thead><tbody>'+
-    rows.map(function(r){ return '<tr><td>'+esc(r.name)+'</td><td>'+fmt(r.k9,2)+'</td><td>5.5</td><td>'+fmt(r.projK,1)+'</td><td>'+fmt(Math.round(r.projK*2)/2,1)+'</td></tr>'; }).join("")+
+  const anyBlend = rows.some(function(r){return r.blended;});
+  const banner = anyBlend
+    ? '<div class="explain-banner"><span class="eb-title">Whiff-blended projection:</span> '+
+      'Effective K/9 is a 60/40 blend of season K/9 and whiff-rate implied K/9 (from the Statcast overlay). '+
+      'Whiff% stabilizes ~2.5x faster than K/9, so in small samples this catches pitchers whose true swing-and-miss stuff is under or over represented by their surface K rate. '+
+      'Rows with a <span class="wiz-data-badge">Statcast</span> badge are using the blended number; others fall back to season K/9 only.</div>'
+    : '<div class="explain-banner"><span class="eb-title">K/9 projection:</span> '+
+      'Statcast whiff% overlay not loaded yet — projections use season K/9 only. Blended numbers auto-apply when statcast_overlay.json is served with the deploy.</div>';
+  $("#kPropsGrid").innerHTML = banner +
+    '<table><thead><tr>'+
+      '<th>Pitcher</th>'+
+      '<th title="Season strikeouts per 9 innings">K/9</th>'+
+      '<th title="Swings-and-misses per swing from Statcast">Whiff%</th>'+
+      '<th title="Whiff-blended effective K/9 used for the projection">Eff K/9</th>'+
+      '<th>Proj IP</th>'+
+      '<th>Proj Ks</th>'+
+      '<th>Suggested line</th>'+
+      '<th>Lean</th>'+
+    '</tr></thead><tbody>'+
+    rows.map(function(r){
+      const line = Math.round(r.projK*2)/2;
+      const edgeRaw = r.projK - line;
+      const lean = edgeRaw >= 0.40 ? '<span class="edge-good">OVER</span>'
+                 : edgeRaw <= -0.40 ? '<span class="edge-bad">UNDER</span>'
+                 : '—';
+      const whiffDisp = r.whiffPct != null
+        ? (r.whiffPct*100).toFixed(1)+'%'
+        : '<span style="color:var(--muted);">—</span>';
+      const badge = r.blended ? ' <span class="wiz-data-badge">Statcast</span>' : '';
+      const deltaK9 = r.blended ? (r.k9eff - r.k9raw) : 0;
+      const deltaBadge = Math.abs(deltaK9) >= 0.7
+        ? ' <span style="font-size:10px;color:'+(deltaK9>0?'var(--good)':'var(--bad)')+';font-weight:700;">'+(deltaK9>0?"+":"")+deltaK9.toFixed(1)+'</span>'
+        : '';
+      return '<tr>'+
+        '<td><b>'+esc(r.name)+'</b></td>'+
+        '<td>'+fmt(r.k9raw,2)+'</td>'+
+        '<td>'+whiffDisp+'</td>'+
+        '<td>'+fmt(r.k9eff,2)+badge+deltaBadge+'</td>'+
+        '<td>5.5</td>'+
+        '<td><b>'+fmt(r.projK,1)+'</b></td>'+
+        '<td>'+fmt(line,1)+'</td>'+
+        '<td>'+lean+'</td>'+
+      '</tr>';
+    }).join("")+
     '</tbody></table>';
 }
 
@@ -2459,15 +2531,29 @@ function renderTeamK() {
       const team = g.teams[side].team.name;
       const opp = g.teams[side==="away"?"home":"away"].team.name;
       const proj = projectTeamK(side, g);
-      rows.push({team:team, opp:opp, proj:proj});
+      // Tag whether the SP on this side is whiff-blended
+      const sp = side==="home" ? g.teams.home.probablePitcher : g.teams.away.probablePitcher;
+      const ps = STATE.pitcherStats[sp && sp.id];
+      const ek = effectiveK9(ps);
+      rows.push({team:team, opp:opp, proj:proj, blended: ek.blended, whiffPct: ek.whiffPct});
     });
   });
   rows.sort(function(a,b){ return b.proj - a.proj; });
-  $("#teamKGrid").innerHTML = '<table><thead><tr><th>Pitching team</th><th>vs</th><th>Projected total Ks thrown</th><th>Typical line</th><th>Lean</th></tr></thead><tbody>'+
+  const anyBlend = rows.some(function(r){return r.blended;});
+  const banner = anyBlend
+    ? '<div class="explain-banner"><span class="eb-title">SP whiff-blended K/9:</span> '+
+      'The starter component of each team K projection now blends Statcast whiff% into season K/9 (60/40). '+
+      'Lineup batter K rates vs the SP hand still drive the offensive side. Rows with a <span class="wiz-data-badge">Statcast</span> badge are using the blended SP.</div>'
+    : '<div class="explain-banner"><span class="eb-title">Team K projection:</span> Lineup-aware (per-batter K rate vs SP hand when lineups are confirmed). Statcast whiff% overlay not loaded — will auto-blend once deployed.</div>';
+  $("#teamKGrid").innerHTML = banner +
+    '<table><thead><tr><th>Pitching team</th><th>vs</th><th>SP Whiff%</th><th>Projected total Ks thrown</th><th>Typical line</th><th>Lean</th></tr></thead><tbody>'+
     rows.map(function(r){
       const line = Math.round(r.proj*2)/2;
       const lean = r.proj >= line + 0.8 ? '<span class="edge-good">OVER</span>' : r.proj <= line - 0.8 ? '<span class="edge-bad">UNDER</span>' : '—';
-      return '<tr><td>'+esc(r.team)+'</td><td>'+esc(r.opp)+'</td><td>'+fmt(r.proj,1)+'</td><td>'+fmt(line,1)+'</td><td>'+lean+'</td></tr>';
+      const whiffDisp = r.whiffPct != null
+        ? (r.whiffPct*100).toFixed(1)+'%'+(r.blended?' <span class="wiz-data-badge">Statcast</span>':'')
+        : '<span style="color:var(--muted);">—</span>';
+      return '<tr><td>'+esc(r.team)+'</td><td>'+esc(r.opp)+'</td><td>'+whiffDisp+'</td><td><b>'+fmt(r.proj,1)+'</b></td><td>'+fmt(line,1)+'</td><td>'+lean+'</td></tr>';
     }).join("")+
     '</tbody></table>';
 }
@@ -2549,22 +2635,43 @@ function renderERProps() {
       if (pf) projER *= pf.r;
 
       const line25 = Math.round(projER * 2) / 2; // nearest 0.5
-      const lean = projER >= line25 + 0.4 ? "OVER" : projER <= line25 - 0.4 ? "UNDER" : "—";
+      // Multi-factor conviction: direction from season+recent+opponent+park
+      const recentEra_er = (pl && pl.d14 && pl.d14.era != null) ? pl.d14.era : null;
+      const gapER = projER - line25;
+      const dirER = gapER >= 0.05 ? "OVER" : gapER <= -0.05 ? "UNDER" : (era >= 4.0 ? "OVER" : "UNDER");
+      let scoreER = 0;
+      const whyER = [];
+      if (recentEra_er != null) {
+        if (dirER === "OVER" && recentEra_er > era + 0.3) { scoreER++; whyER.push("recent form trending worse ("+recentEra_er.toFixed(2)+" vs "+era.toFixed(2)+")"); }
+        if (dirER === "UNDER" && recentEra_er < era - 0.3) { scoreER++; whyER.push("recent form improving ("+recentEra_er.toFixed(2)+" vs "+era.toFixed(2)+")"); }
+      }
+      if (dirER === "OVER" && oppOps >= 0.740) { scoreER++; whyER.push("opponent OPS "+oppOps.toFixed(3)+" above avg"); }
+      if (dirER === "UNDER" && oppOps <= 0.700) { scoreER++; whyER.push("opponent OPS "+oppOps.toFixed(3)+" below avg"); }
+      if (dirER === "OVER" && era >= 4.5) { scoreER++; whyER.push("season ERA "+era.toFixed(2)+" above avg"); }
+      if (dirER === "UNDER" && era <= 3.3) { scoreER++; whyER.push("season ERA "+era.toFixed(2)+" elite"); }
+      if (pf && dirER === "OVER" && pf.r >= 1.04) { scoreER++; whyER.push("hitter friendly park (x"+pf.r.toFixed(2)+")"); }
+      if (pf && dirER === "UNDER" && pf.r <= 0.96) { scoreER++; whyER.push("pitcher friendly park (x"+pf.r.toFixed(2)+")"); }
+      const tierER = scoreER >= 3 ? "STRONG" : scoreER >= 1 ? "LEAN" : "PASS";
+      const lean = tierER === "PASS" ? "—" : (tierER + " " + dirER);
 
       rows.push({
         name: sp.fullName, team: g.teams[side].team.name, vs: oppTeam.name,
-        era: era, recentEra: (pl && pl.d14 && pl.d14.era != null) ? pl.d14.era : null,
-        projER: projER, line: line25, lean: lean, oppOps: oppOps
+        era: era, recentEra: recentEra_er,
+        projER: projER, line: line25, lean: lean, oppOps: oppOps,
+        why: whyER.join(" • "), tier: tierER, dir: dirER
       });
     });
   });
   rows.sort(function(a,b){ return b.projER - a.projER; });
   $("#erPropsGrid").innerHTML = rows.length ?
     '<div class="explain-banner"><span class="eb-title">SP ER projection:</span> '+
-    'Blends season ERA with recent form (60/40), adjusts for opponent OPS and park factor. OVER/UNDER when projection deviates 0.4+ from the line.</div>'+
+    'Blends season ERA with recent form (60/40), adjusts for opponent OPS and park factor. Lean conviction is scored by confirming signals (recent form, opponent OPS, season ERA, park). Hover a lean for the reasoning.</div>'+
     '<table><thead><tr><th>Pitcher</th><th>Team</th><th>vs</th><th>Season ERA</th><th>Recent ERA</th><th>Opp OPS</th><th>Proj ER</th><th>Line</th><th>Lean</th></tr></thead><tbody>'+
     rows.map(function(r){
-      const leanHtml = r.lean==="OVER"?'<span class="edge-bad">OVER '+fmt(r.line,1)+'</span>':r.lean==="UNDER"?'<span class="edge-good">UNDER '+fmt(r.line,1)+'</span>':'—';
+      const _leanCls = r.dir==="OVER" ? "edge-bad" : "edge-good";
+      const _leanStrong = r.tier === "STRONG";
+      const leanHtml = r.lean==="—" ? '<span style="color:var(--muted);">—</span>' :
+        '<span class="'+_leanCls+'" title="'+esc(r.why || "")+'" style="font-weight:'+(_leanStrong?'700':'600')+';'+(_leanStrong?'letter-spacing:0.4px;':'')+'">'+esc(r.lean)+' '+fmt(r.line,1)+'</span>';
       const eraCls = r.era >= 4.5 ? "edge-bad" : r.era <= 3.3 ? "edge-good" : "";
       return '<tr><td><b>'+esc(r.name)+'</b></td><td>'+esc(r.team)+'</td><td>'+esc(r.vs)+'</td>'+
         '<td class="'+eraCls+'">'+fmt(r.era,2)+'</td>'+
@@ -2609,22 +2716,39 @@ function renderBBProps() {
       }
 
       const line = Math.round(projBB * 2) / 2;
-      const lean = projBB >= line + 0.4 ? "OVER" : projBB <= line - 0.4 ? "UNDER" : "—";
+      // Multi-factor conviction for walks: direction from rates, strength from confirming signals
+      const gapBB = projBB - line;
+      const dirBB = gapBB >= 0.05 ? "OVER" : gapBB <= -0.05 ? "UNDER" : (bb9 >= 3.5 ? "OVER" : "UNDER");
+      let scoreBB = 0;
+      const whyBB = [];
+      if (recentBB9 != null) {
+        if (dirBB === "OVER" && recentBB9 > bb9 + 0.4) { scoreBB++; whyBB.push("control slipping ("+recentBB9.toFixed(1)+" vs "+bb9.toFixed(1)+" BB/9)"); }
+        if (dirBB === "UNDER" && recentBB9 < bb9 - 0.4) { scoreBB++; whyBB.push("control sharpening ("+recentBB9.toFixed(1)+" vs "+bb9.toFixed(1)+" BB/9)"); }
+      }
+      if (dirBB === "OVER" && oppBBPct >= 0.090) { scoreBB++; whyBB.push("patient lineup (BB% "+(oppBBPct*100).toFixed(1)+")"); }
+      if (dirBB === "UNDER" && oppBBPct <= 0.080) { scoreBB++; whyBB.push("aggressive lineup (BB% "+(oppBBPct*100).toFixed(1)+")"); }
+      if (dirBB === "OVER" && bb9 >= 4.0) { scoreBB++; whyBB.push("season BB/9 "+bb9.toFixed(1)+" poor"); }
+      if (dirBB === "UNDER" && bb9 <= 2.5) { scoreBB++; whyBB.push("season BB/9 "+bb9.toFixed(1)+" elite"); }
+      const tierBB = scoreBB >= 3 ? "STRONG" : scoreBB >= 1 ? "LEAN" : "PASS";
+      const lean = tierBB === "PASS" ? "—" : (tierBB + " " + dirBB);
 
       rows.push({
         name: sp.fullName, team: g.teams[side].team.name, vs: oppTeam.name,
         bb9: bb9, recentBB9: recentBB9, projBB: projBB, line: line, lean: lean,
-        oppBBPct: oppBBPct
+        oppBBPct: oppBBPct, why: whyBB.join(" • "), tier: tierBB, dir: dirBB
       });
     });
   });
   rows.sort(function(a,b){ return b.projBB - a.projBB; });
   $("#bbPropsGrid").innerHTML = rows.length ?
     '<div class="explain-banner"><span class="eb-title">SP walk projection:</span> '+
-    'Blends season BB/9 with recent form (60/40), adjusts for opponent walk rate. Pitchers with poor recent control + patient lineups = over plays.</div>'+
+    'Blends season BB/9 with recent form (60/40), adjusts for opponent walk rate. Lean conviction scored by confirming signals (recent control, opponent walk rate, season BB/9). Hover a lean for the reasoning.</div>'+
     '<table><thead><tr><th>Pitcher</th><th>Team</th><th>vs</th><th>BB/9</th><th>Recent BB/9</th><th>Opp BB%</th><th>Proj BB</th><th>Line</th><th>Lean</th></tr></thead><tbody>'+
     rows.map(function(r){
-      const leanHtml = r.lean==="OVER"?'<span class="edge-bad">OVER '+fmt(r.line,1)+'</span>':r.lean==="UNDER"?'<span class="edge-good">UNDER '+fmt(r.line,1)+'</span>':'—';
+      const _leanClsBB = r.dir==="OVER" ? "edge-bad" : "edge-good";
+      const _leanStrongBB = r.tier === "STRONG";
+      const leanHtml = r.lean==="—" ? '<span style="color:var(--muted);">—</span>' :
+        '<span class="'+_leanClsBB+'" title="'+esc(r.why || "")+'" style="font-weight:'+(_leanStrongBB?'700':'600')+';'+(_leanStrongBB?'letter-spacing:0.4px;':'')+'">'+esc(r.lean)+' '+fmt(r.line,1)+'</span>';
       const bbCls = r.bb9 >= 4.0 ? "edge-bad" : r.bb9 <= 2.5 ? "edge-good" : "";
       return '<tr><td><b>'+esc(r.name)+'</b></td><td>'+esc(r.team)+'</td><td>'+esc(r.vs)+'</td>'+
         '<td class="'+bbCls+'">'+fmt(r.bb9,1)+'</td>'+
@@ -3873,14 +3997,45 @@ function renderML() {
     const ap = STATE.pitcherStats[awaySpId];
     const hp = STATE.pitcherStats[homeSpId];
 
-    // ── Factor 1: SP Season Stats (ERA, WHIP, K/9) — 20% ──
-    const aEra = Number(ap && ap.season && ap.season.era)||4.50;
-    const hEra = Number(hp && hp.season && hp.season.era)||4.50;
+    // ── Early season regression to the mean ──
+    // Blend season stats toward league average when samples are small.
+    // W = 0.30 on Apr 1 → 1.00 on Jun 1. After Jun 1, no dampening.
+    const _now = new Date();
+    const _yr = _now.getFullYear();
+    const _apr1 = new Date(_yr, 3, 1).getTime();
+    const _jun1 = new Date(_yr, 5, 1).getTime();
+    const _t = _now.getTime();
+    const W = (_t >= _jun1) ? 1.0
+            : (_t <= _apr1) ? 0.30
+            : 0.30 + 0.70 * ((_t - _apr1) / (_jun1 - _apr1));
+    const blend = (stat, mean) => stat * W + mean * (1 - W);
+
+    // ── Factor 1: SP Season Stats (ERA, WHIP, K/9) — 16% ──
+    // Blend in Statcast xERA when overlay available. xERA is noise-adjusted and more predictive
+    // of future ERA than season ERA, especially in small samples.
+    const aEraRaw = Number(ap && ap.season && ap.season.era)||4.50;
+    const hEraRaw = Number(hp && hp.season && hp.season.era)||4.50;
+    const aXera = Number(ap && ap.season && ap.season.xera);
+    const hXera = Number(hp && hp.season && hp.season.xera);
+    // If Statcast overlay provided xERA, blend 55/45 season/xERA (Statcast stabilizes faster).
+    const aEra = isFinite(aXera) ? (aEraRaw * 0.55 + aXera * 0.45) : aEraRaw;
+    const hEra = isFinite(hXera) ? (hEraRaw * 0.55 + hXera * 0.45) : hEraRaw;
     const aWhip = Number(ap && ap.season && ap.season.whip)||1.30;
     const hWhip = Number(hp && hp.season && hp.season.whip)||1.30;
     const aK9 = Number(ap && ap.season && ap.season.strikeoutsPer9Inn)||8.0;
     const hK9 = Number(hp && hp.season && hp.season.strikeoutsPer9Inn)||8.0;
-    const spSeasonScore = ((aEra - hEra) * 0.18) + ((aWhip - hWhip) * 0.8) + ((hK9 - aK9) * 0.04);
+    // Add a quality-of-contact tilt when barrel% data is present (lower barrel% = better pitcher).
+    const aBarrel = Number(ap && ap.season && ap.season.barrelPct);
+    const hBarrel = Number(hp && hp.season && hp.season.barrelPct);
+    let barrelTilt = 0;
+    if (isFinite(aBarrel) && isFinite(hBarrel)) barrelTilt = (aBarrel - hBarrel) * 0.02;
+    const aEraD = blend(aEra, 4.50);
+    const hEraD = blend(hEra, 4.50);
+    const aWhipD = blend(aWhip, 1.30);
+    const hWhipD = blend(hWhip, 1.30);
+    const aK9D = blend(aK9, 8.0);
+    const hK9D = blend(hK9, 8.0);
+    const spSeasonScore = ((aEraD - hEraD) * 0.18) + ((aWhipD - hWhipD) * 0.8) + ((hK9D - aK9D) * 0.04) + barrelTilt;
 
     // ── Factor 2: SP Recent Form (last 2-3 starts) — 12% ──
     const apl = STATE.pitcherLogs[awaySpId];
@@ -3926,7 +4081,24 @@ function renderML() {
       const platDiff = homeLuVsH.platoonPct - awayLuVsH.platoonPct;
       platoonBonus = platDiff * 1.5; // positive = home has more platoon advantage
     }
-    const offSeasonScore = (homeOps - awayOps) * 8 + platoonBonus;
+    // Statcast quality-of-contact tilt: when team xwOBA (from overlay) disagrees with OPS,
+    // xwOBA is the more predictive underlying skill (no park/luck noise).
+    // xwOBA league avg ~.310; a .020 gap is meaningful.
+    let contactTilt = 0;
+    const aXwoba = Number(ats && ats.season && ats.season.xwoba);
+    const hXwoba = Number(hts && hts.season && hts.season.xwoba);
+    if (isFinite(aXwoba) && isFinite(hXwoba)) {
+      contactTilt += (hXwoba - aXwoba) * 6; // same scale as OPS diff contribution
+    }
+    // Barrel% (team offensive barrel rate): higher = more damage contact
+    const aTeamBarrel = Number(ats && ats.season && ats.season.barrelPct);
+    const hTeamBarrel = Number(hts && hts.season && hts.season.barrelPct);
+    if (isFinite(aTeamBarrel) && isFinite(hTeamBarrel)) {
+      contactTilt += (hTeamBarrel - aTeamBarrel) * 0.03;
+    }
+    const homeOpsD = blend(homeOps, 0.720);
+    const awayOpsD = blend(awayOps, 0.720);
+    const offSeasonScore = (homeOpsD - awayOpsD) * 8 + platoonBonus + contactTilt;
 
     // ── Factor 4: Lineup Hot/Cold (hitter 7-day OPS) — 12% ──
     // This naturally handles rest days: if a key player is OUT, they won't be in
@@ -3956,25 +4128,88 @@ function renderML() {
       teamFormScore = ((homeWinPct - awayWinPct) * 1.5) + ((homeDiffG - awayDiffG) * 0.15);
     }
 
-    // ── Factor 6: Bullpen Availability — 10% ──
+    // ── Factor 6: Bullpen Availability — LEVERAGE WEIGHTED — 10% ──
+    // "Red + high pitch count in last 2 days" = almost certainly closer/setup being unavailable
+    // These arms matter 2-3x more than a long reliever. Weight accordingly.
     let bpScore = 0;
     const awayBP = STATE.bullpen[awayTeam.id];
     const homeBP = STATE.bullpen[homeTeam.id];
     if (awayBP && homeBP) {
+      // High-leverage heuristic: red status + 35+ pitches over last 2 days = leveraged arm gassed
+      const awayLevRed = awayBP.filter(function(p){return p.avail==="red" && ((p.pY||0)+(p.p2||0)) >= 35;}).length;
+      const homeLevRed = homeBP.filter(function(p){return p.avail==="red" && ((p.pY||0)+(p.p2||0)) >= 35;}).length;
       const awayRed = awayBP.filter(function(p){return p.avail==="red";}).length;
       const homeRed = homeBP.filter(function(p){return p.avail==="red";}).length;
       const awayGreen = awayBP.filter(function(p){return p.avail==="green";}).length;
       const homeGreen = homeBP.filter(function(p){return p.avail==="green";}).length;
-      bpScore = ((awayRed - homeRed) * 0.15) + ((homeGreen - awayGreen) * 0.05);
+      bpScore = ((awayLevRed - homeLevRed) * 0.30)       // leveraged unavailable: big
+              + ((awayRed - homeRed) * 0.10)              // any red: moderate
+              + ((homeGreen - awayGreen) * 0.04);         // fresh arms: small
     }
 
-    // ── Factor 7: Park + Home Field — 10% ──
+    // ── Factor 7: Park — 9% ──
+    // Home field baseline + park archetype tilt
     const pf = parkForGame(g);
     let parkScore = 0.15; // home field baseline
-    if (pf && pf.r > 1.05 && homeOps > awayOps) parkScore += 0.08;
-    if (pf && pf.r > 1.05 && awayOps > homeOps) parkScore -= 0.05;
+    if (pf) {
+      if (pf.r >= 1.05) {
+        // Hitter park: boosts the offensively better team
+        parkScore += (homeOps - awayOps) * 3;
+      } else if (pf.r <= 0.95) {
+        // Pitcher park: boosts whichever team has the better pitcher (lower ERA = positive for home)
+        parkScore += (aEra - hEra) * 0.06;
+      }
+    }
 
-    // ── Factor 8: Injuries / IL impact — 5% ──
+    // ── Factor 8: Weather — 6% ──
+    // Wind direction, speed, temperature shift the environment toward pitcher or hitter sides
+    let weatherScore = 0;
+    const w = STATE.weather[g.gamePk];
+    if (pf && !pf.roof && w && typeof w.windDeg === "number") {
+      const wind = projectWind(w.windDeg, w.windMph || 0, pf.orient);
+      if (wind.indexOf("IN from") >= 0 && (w.windMph||0) >= 8) {
+        // Wind in: suppresses offense, helps the better pitcher
+        weatherScore += (aEra - hEra) * 0.08;
+      }
+      if (wind.indexOf("OUT to") >= 0 && (w.windMph||0) >= 8) {
+        // Wind out: boosts offense, helps the better offensive team
+        weatherScore += (homeOps - awayOps) * 2.5;
+      }
+      if (w.tempF != null && w.tempF <= 50) weatherScore += (aEra - hEra) * 0.04;
+      if (w.tempF != null && w.tempF >= 85) weatherScore += (homeOps - awayOps) * 1.2;
+    }
+
+    // ── Factor 9: BvP Career (picked lineup vs opposing SP) — 4% ──
+    // Scan each lineup vs the opposing starter. Batters with career OPS 0.900+ = edge for their team.
+    // Batters with career OPS sub-0.500 in 10+ AB = edge for opposing pitcher.
+    let bvpScore = 0;
+    if (awaySpId && homeSpId) {
+      let homeLineupAdv = 0, homeLineupCnt = 0;
+      let awayLineupAdv = 0, awayLineupCnt = 0;
+      homeLU.forEach(function(b){
+        const c = STATE.bvp[b.id + "-" + awaySpId];
+        if (c && (c.atBats||0) >= 10) {
+          const ops = Number(c.ops) || 0;
+          if (ops >= 0.900) homeLineupAdv++;
+          else if (ops <= 0.500) homeLineupAdv--;
+          homeLineupCnt++;
+        }
+      });
+      awayLU.forEach(function(b){
+        const c = STATE.bvp[b.id + "-" + homeSpId];
+        if (c && (c.atBats||0) >= 10) {
+          const ops = Number(c.ops) || 0;
+          if (ops >= 0.900) awayLineupAdv++;
+          else if (ops <= 0.500) awayLineupAdv--;
+          awayLineupCnt++;
+        }
+      });
+      if (homeLineupCnt >= 2 || awayLineupCnt >= 2) {
+        bvpScore = (homeLineupAdv - awayLineupAdv) * 0.18;
+      }
+    }
+
+    // ── Factor 10: Injuries / IL impact — 5% ──
     let injuryScore = 0;
     const awayInjuries = (STATE.injuries.byTeam && STATE.injuries.byTeam[awayTeam.id]) || [];
     const homeInjuries = (STATE.injuries.byTeam && STATE.injuries.byTeam[homeTeam.id]) || [];
@@ -3983,7 +4218,7 @@ function renderML() {
     const homeIL = homeInjuries.filter(function(p){ return p.position!=="P" || /closer|setup/i.test(p.status); }).length;
     injuryScore = (awayIL - homeIL) * 0.08;
 
-    // ── Factor 9: Schedule Fatigue (day-after-night, travel) — 5% ──
+    // ── Factor 11: Schedule Fatigue (day-after-night, travel) — 5% ──
     let fatigueScore = 0;
     const ctx = (STATE.scheduleContext.byGame && STATE.scheduleContext.byGame[g.gamePk]) || {};
     const awayFatigue = ctx.awayFatigue || 0;
@@ -3991,16 +4226,18 @@ function renderML() {
     fatigueScore = (awayFatigue - homeFatigue); // positive = home favored (away more tired)
 
     // ── COMPOSITE EDGE ──
-    // 9 factors: SP season 18% + SP recent 10% + Offense vs hand 13% + Hitter hot/cold 11%
-    //   + Team form 14% + BP 9% + Park/Home 10% + Injuries 5% + Fatigue 5% (+ 5% misc = 100%)
+    // 11 factors: SP season 16% + SP recent 10% + Offense vs hand 13% + Hitter hot/cold 10%
+    //   + Team form 12% + BP leverage 10% + Park 9% + Weather 6% + BvP 4% + Injuries 5% + Fatigue 5%
     const edge =
-      spSeasonScore       * 0.18 +
+      spSeasonScore       * 0.16 +
       spRecentScore       * 0.10 +
       offSeasonScore      * 0.13 +
-      hitterHotColdScore  * 0.11 * lineupPenalty +
-      teamFormScore       * 0.14 +
-      bpScore             * 0.09 +
-      parkScore           * 0.10 +
+      hitterHotColdScore  * 0.10 * lineupPenalty +
+      teamFormScore       * 0.12 +
+      bpScore             * 0.10 +
+      parkScore           * 0.09 +
+      weatherScore        * 0.06 +
+      bvpScore            * 0.04 +
       injuryScore         * 0.05 +
       fatigueScore        * 0.05;
 
@@ -4079,16 +4316,19 @@ function renderML() {
     }
 
     const pick = edge > 0.12 ? homeTeam.name : edge < -0.12 ? awayTeam.name : "no edge";
+    const pickSide = edge > 0.12 ? "home" : edge < -0.12 ? "away" : null;
 
     // Factor breakdown labels
     const bd = [
-      {k:"SP Season", v:spSeasonScore*0.18},
+      {k:"SP Season", v:spSeasonScore*0.16},
       {k:"SP Recent", v:spRecentScore*0.10},
       {k:(awayLuVsH||homeLuVsH?"LU Splits vs Hand":"Team OPS vs Hand"), v:offSeasonScore*0.13},
-      {k:"Hitters Hot/Cold", v:hitterHotColdScore*0.11*lineupPenalty},
-      {k:"Team Form", v:teamFormScore*0.14},
-      {k:"Bullpen", v:bpScore*0.09},
-      {k:"Park/Home", v:parkScore*0.10},
+      {k:"Hitters Hot/Cold", v:hitterHotColdScore*0.10*lineupPenalty},
+      {k:"Team Form", v:teamFormScore*0.12},
+      {k:"BP Leverage", v:bpScore*0.10},
+      {k:"Park", v:parkScore*0.09},
+      {k:"Weather", v:weatherScore*0.06},
+      {k:"BvP Career", v:bvpScore*0.04},
       {k:"Injuries", v:injuryScore*0.05},
       {k:"Fatigue", v:fatigueScore*0.05}
     ];
@@ -4100,7 +4340,15 @@ function renderML() {
     if (luSplitsNote && lineupNote) lineupNote += " · " + luSplitsNote.trim();
     else if (luSplitsNote) lineupNote = luSplitsNote.trim();
 
+    // Share with other views (game analysis card) so they stay consistent
+    STATE.mlPicks[g.gamePk] = {
+      pick: pick, pickSide: pickSide, edge: edge, absEdge: absEdge,
+      tier: tier, tierIcon: tierIcon, topDriver: topDriver,
+      lineupQuality: lineupQuality, breakdown: breakdown
+    };
+
     return {
+      gamePk: g.gamePk,
       game: awayTeam.name + " @ " + homeTeam.name,
       pick: pick, edge: edge, absEdge: absEdge, tier: tier, tierIcon: tierIcon,
       breakdown: breakdown, topDriver: topDriver, lineupNote: lineupNote,
@@ -4110,17 +4358,21 @@ function renderML() {
                    (ctx.homeDayAfterNight ? homeTeam.name.split(" ").pop()+" day-after-night " : "") +
                    (ctx.awayTraveled ? awayTeam.name.split(" ").pop()+" traveled " : "") +
                    (ctx.homeTraveled ? homeTeam.name.split(" ").pop()+" traveled" : ""),
-      awayIL: awayIL, homeIL: homeIL
+      awayIL: awayIL, homeIL: homeIL,
+      _game: g
     };
   });
 
   rows.sort(function(a,b){ return b.absEdge - a.absEdge; });
 
+  const __scOn = STATE.statcast && STATE.statcast.__loaded && !STATE.statcast.__missing;
   $("#mlGrid").innerHTML =
-    '<div class="explain-banner"><span class="eb-title">9-Factor Model:</span> '+
-    'SP Season (18%) · SP Recent Form (10%) · <b>LU Splits vs Hand (13%)</b> · <b>Lineup Hot/Cold 7d (11%)</b> · <b>Team 7d Form (14%)</b> · Bullpen (9%) · Park/Home (10%) · <b>Injuries (5%)</b> · <b>Fatigue (5%)</b>. '+
-    'Factor 3 now uses individual batter splits vs the SP hand + platoon advantage. Tiers: 🔒 LOCK · 💪 STRONG · 👍 LEAN · ⏸️ PASS. Tiers shift when lineups drop.</div>'+
-    '<table><thead><tr><th>Game</th><th>Pick</th><th>Tier</th><th>Edge</th><th>Top Driver</th><th>Lineup</th><th>Factor Breakdown</th></tr></thead><tbody>'+
+    '<div class="explain-banner"><span class="eb-title">11-Factor Model:</span> '+
+    'SP Season (16%) · SP Recent (10%) · <b>LU Splits vs Hand (13%)</b> · <b>Lineup Hot/Cold 7d (10%)</b> · <b>Team 7d Form (12%)</b> · <b>BP Leverage (10%)</b> · Park (9%) · <b>Weather (6%)</b> · <b>BvP Career (4%)</b> · Injuries (5%) · Fatigue (5%). '+
+    'Bullpen factor weights high-leverage red arms (gassed closer/setup) 3x more than mop-up. Weather tilts via wind direction and temperature vs park orientation. BvP adds career matchup signal when the sample is 10+ AB. '+
+    (__scOn ? '<b style="color:#67e8f9;">Statcast overlay live:</b> xERA blends 55/45 with season ERA, team xwOBA and barrel% tilt the offensive factor, quality of contact overrides noisy ERA. ' : '<span style="color:var(--muted);">Statcast overlay not loaded — scheduled refresh will bake statcast_overlay.json next cycle.</span> ')+
+    'Tiers: 🔒 LOCK · 💪 STRONG · 👍 LEAN · ⏸️ PASS. Tiers shift when lineups drop.</div>'+
+    '<table><thead><tr><th>Game</th><th>Pick</th><th>Tier</th><th>Edge</th><th>Market</th><th>Value</th><th>Top Driver</th><th>Lineup</th><th>Factor Breakdown</th></tr></thead><tbody>'+
     rows.map(function(r){
       const tierBase = r.tier.replace(/[↑↓*]/g,"");
       const tierCls = (tierBase==="LOCK"?"pill good":tierBase==="STRONG"?"pill good":tierBase==="LEAN"?"pill warn":"pill bad");
@@ -4128,17 +4380,503 @@ function renderML() {
       const luCls = r.lineupQuality==="tbd"?"pill warn":r.lineupQuality==="weak"?"pill bad":r.lineupQuality==="strong"?"pill good":"pill good";
       const luText = r.lineupNote || "Confirmed";
       const luStatus = '<span class="'+luCls+'" style="font-size:10px;">'+esc(luText)+'</span>';
+
+      // Market + value edge cells (fall back gracefully if odds overlay not loaded)
+      let mktCell = '<span class="pill" style="font-size:10px;color:var(--muted);">No odds</span>';
+      let valCell = '<span class="pill" style="font-size:10px;color:var(--muted);">—</span>';
+      try {
+        const mlPickObj = STATE.mlPicks && STATE.mlPicks[r.gamePk];
+        const snap = (typeof gameMarketSnapshot === "function" && r._game && mlPickObj)
+          ? gameMarketSnapshot(r._game, mlPickObj)
+          : null;
+        if (snap && snap.pickPrice != null && isFinite(snap.pickPrice) && snap.pickFair != null && isFinite(snap.pickFair)) {
+          const priceStr = fmtAmerican(snap.pickPrice);
+          const fairPriceStr = fmtAmerican(probToAmerican(snap.pickFair));
+          mktCell = '<div style="line-height:1.2;"><b>'+esc(priceStr)+'</b><div style="font-size:10px;color:var(--muted);">fair '+esc(fairPriceStr)+'</div></div>';
+          const modelProb = modelEdgeToProb(r.absEdge);
+          const ep = (modelProb - snap.pickFair) * 100; // percentage points
+          if (isFinite(ep)) {
+            // FADE cap: suppress FADE when market implied prob >= 0.88 (extreme favorite noise zone).
+            const extremeFav = snap.pickFair >= 0.88;
+            const fadeOk = ep <= -2 && !extremeFav;
+            const pillCls = ep >= 5 ? "pill good" : ep >= 3 ? "pill good" : ep >= 1 ? "pill warn" : fadeOk ? "pill bad" : "pill";
+            const label = ep >= 5 ? "STRONG" : ep >= 3 ? "VALUE" : ep >= 1 ? "THIN" : fadeOk ? "FADE" : "PASS";
+            const sign = ep >= 0 ? "+" : "";
+            valCell = '<span class="'+pillCls+'" style="font-size:10px;">'+label+' '+sign+ep.toFixed(1)+'pp</span>';
+          }
+        }
+      } catch(e) { /* keep fallback */ }
+
       return '<tr>'+
         '<td>'+esc(r.game)+'</td>'+
         '<td><b>'+esc(r.pick)+'</b></td>'+
         '<td><span class="'+tierCls+'">'+r.tierIcon+' '+r.tier+'</span></td>'+
         '<td class="'+edgeCls+'">'+(r.edge>=0?"+":"")+r.edge.toFixed(2)+'</td>'+
+        '<td>'+mktCell+'</td>'+
+        '<td>'+valCell+'</td>'+
         '<td><b>'+esc(r.topDriver)+'</b></td>'+
         '<td>'+luStatus+'</td>'+
         '<td class="small" style="color:var(--muted);max-width:380px;">'+esc(r.breakdown)+'</td>'+
       '</tr>';
     }).join("")+
     '</tbody></table>';
+}
+
+/* =========== AI WIZARD — deep per-game brief =========== */
+function renderAIWizard() {
+  const el = document.getElementById("aiWizardGrid");
+  if (!el) return;
+  if (!STATE.games || !STATE.games.length) {
+    el.innerHTML = '<div class="loader">Waiting on slate…</div>';
+    return;
+  }
+
+  // Sort games by absolute edge from STATE.mlPicks (most confident first)
+  const ordered = STATE.games.slice().sort(function(a,b){
+    const ea = (STATE.mlPicks[a.gamePk] && STATE.mlPicks[a.gamePk].absEdge) || 0;
+    const eb = (STATE.mlPicks[b.gamePk] && STATE.mlPicks[b.gamePk].absEdge) || 0;
+    return eb - ea;
+  });
+
+  const hasStatcast = STATE.statcast && STATE.statcast.__loaded && !STATE.statcast.__missing;
+
+  el.innerHTML =
+    '<div class="explain-banner" style="background:linear-gradient(135deg,rgba(109,40,217,0.12),rgba(37,99,235,0.08));border:1px solid rgba(140,100,230,0.3);">'+
+      '<span class="eb-title" style="color:#c9a8ff;">🧙 AI Wizard Brief:</span> '+
+      'Each card fuses the 11 factor Moneyline model, Statcast overlay'+(hasStatcast?' ✓':' (not loaded)')+', lineup platoon splits vs the opposing starter, bullpen leverage status, park + weather, and BvP career samples into a single expert read. Cards are ranked by absolute edge so the strongest plays appear first. Picks and verdicts match the Moneyline Picks tab exactly.'+
+    '</div>'+
+    ordered.map(function(g){ return buildWizardCard(g); }).join("");
+}
+
+function buildWizardCard(g) {
+  const awayTeam = g.teams.away.team;
+  const homeTeam = g.teams.home.team;
+  const awayName = awayTeam.name;
+  const homeName = homeTeam.name;
+  const aSp = g.teams.away.probablePitcher || {};
+  const hSp = g.teams.home.probablePitcher || {};
+  const ap = STATE.pitcherStats[aSp.id];
+  const hp = STATE.pitcherStats[hSp.id];
+  const aHand = getPitcherHand(g.teams.away) || "R";
+  const hHand = getPitcherHand(g.teams.home) || "R";
+  const pf = parkForGame(g);
+  const w  = STATE.weather[g.gamePk];
+  const ml = STATE.mlPicks[g.gamePk];
+  const time = new Date(g.gameDate).toLocaleTimeString([],{hour:"numeric",minute:"2-digit"});
+  const isYankees = /Yankees/.test(awayName) || /Yankees/.test(homeName);
+
+  /* ---------- Header pills ---------- */
+  const pills = [];
+  if (pf) {
+    if (pf.r >= 1.06) pills.push('<span class="wiz-pill good">Hitter park '+pf.r.toFixed(2)+'</span>');
+    else if (pf.r <= 0.94) pills.push('<span class="wiz-pill bad">Pitcher park '+pf.r.toFixed(2)+'</span>');
+    else pills.push('<span class="wiz-pill">Neutral park '+pf.r.toFixed(2)+'</span>');
+    if (pf.roof) pills.push('<span class="wiz-pill info">Roof</span>');
+  }
+  if (w && pf && !pf.roof) {
+    const wind = projectWind(w.windDeg, w.windMph, pf.orient);
+    const tempTxt = Math.round(w.tempF)+"°F";
+    if (wind.indexOf("OUT to") >= 0) pills.push('<span class="wiz-pill good">'+esc(tempTxt+' · '+wind)+'</span>');
+    else if (wind.indexOf("IN from") >= 0) pills.push('<span class="wiz-pill bad">'+esc(tempTxt+' · '+wind)+'</span>');
+    else pills.push('<span class="wiz-pill">'+esc(tempTxt+' · '+wind)+'</span>');
+  }
+  if (isYankees) pills.push('<span class="wiz-pill warn">⭐ Yankees</span>');
+
+  /* ---------- Tier badge ---------- */
+  let tierCls = "pass", tierLabel = "PASS", tierEdge = "—", tierIcon = "⏸️";
+  if (ml && ml.pick && ml.pick !== "no edge") {
+    const tb = (ml.tier||"").replace(/[↑↓*]/g, "");
+    tierLabel = ml.tier || "PASS";
+    tierIcon = ml.tierIcon || "👍";
+    tierEdge = (ml.edge>=0?"+":"")+Number(ml.edge||0).toFixed(2);
+    if (tb === "LOCK") tierCls = "lock";
+    else if (tb === "STRONG") tierCls = "strong";
+    else if (tb === "LEAN") tierCls = "lean";
+    else tierCls = "pass";
+  }
+  const pickLine = (ml && ml.pick && ml.pick !== "no edge")
+    ? ('<div style="font-size:12px;color:#a8b4dc;margin-top:2px;">Pick: <b style="color:#fff;">'+esc(ml.pick)+'</b></div>')
+    : '<div style="font-size:12px;color:#a8b4dc;margin-top:2px;">No edge</div>';
+
+  /* ---------- Pitching matchup panel ---------- */
+  const aEra = ap && ap.season && ap.season.era != null ? Number(ap.season.era) : null;
+  const hEra = hp && hp.season && hp.season.era != null ? Number(hp.season.era) : null;
+  const aXera = ap && ap.season && isFinite(Number(ap.season.xera)) ? Number(ap.season.xera) : null;
+  const hXera = hp && hp.season && isFinite(Number(hp.season.xera)) ? Number(hp.season.xera) : null;
+  const aWhip = ap && ap.season ? Number(ap.season.whip) : null;
+  const hWhip = hp && hp.season ? Number(hp.season.whip) : null;
+  const aK9 = ap && ap.season ? Number(ap.season.strikeoutsPer9Inn) : null;
+  const hK9 = hp && hp.season ? Number(hp.season.strikeoutsPer9Inn) : null;
+  const aBarrel = ap && ap.season && isFinite(Number(ap.season.barrelPct)) ? Number(ap.season.barrelPct) : null;
+  const hBarrel = hp && hp.season && isFinite(Number(hp.season.barrelPct)) ? Number(hp.season.barrelPct) : null;
+  const apl = STATE.pitcherLogs[aSp.id];
+  const hpl = STATE.pitcherLogs[hSp.id];
+  const aRecentEra = apl && apl.d14 && apl.d14.g ? apl.d14.era : (apl && apl.d7 ? apl.d7.era : null);
+  const hRecentEra = hpl && hpl.d14 && hpl.d14.g ? hpl.d14.era : (hpl && hpl.d7 ? hpl.d7.era : null);
+
+  function pitcherRows(side, name, hand, era, xera, whip, k9, barrel, recentEra, sc) {
+    const rows = [];
+    rows.push('<div class="wiz-stat-row"><span class="k">'+esc(side)+' SP</span><span class="v">'+esc(name||"TBD")+' ('+esc(hand)+'HP)</span></div>');
+    if (era != null) rows.push('<div class="wiz-stat-row"><span class="k">Season ERA</span><span class="v '+(era<=3.50?'good':era>=4.50?'bad':'')+'">'+era.toFixed(2)+'</span></div>');
+    if (xera != null) rows.push('<div class="wiz-stat-row"><span class="k">xERA'+sc+'</span><span class="v '+(xera<=3.50?'good':xera>=4.50?'bad':'')+'">'+xera.toFixed(2)+'</span></div>');
+    if (whip != null) rows.push('<div class="wiz-stat-row"><span class="k">WHIP</span><span class="v '+(whip<=1.15?'good':whip>=1.35?'bad':'')+'">'+whip.toFixed(2)+'</span></div>');
+    if (k9 != null) rows.push('<div class="wiz-stat-row"><span class="k">K/9</span><span class="v '+(k9>=10?'good':k9<=7?'bad':'')+'">'+k9.toFixed(1)+'</span></div>');
+    if (barrel != null) rows.push('<div class="wiz-stat-row"><span class="k">Barrel%'+sc+'</span><span class="v '+(barrel<=6?'good':barrel>=9?'bad':'')+'">'+barrel.toFixed(1)+'%</span></div>');
+    if (recentEra != null && isFinite(recentEra)) rows.push('<div class="wiz-stat-row"><span class="k">Recent ERA (14d)</span><span class="v '+(recentEra<=3.50?'good':recentEra>=5.0?'bad':'')+'">'+recentEra.toFixed(2)+'</span></div>');
+    return rows.join("");
+  }
+  const scBadge = (STATE.statcast && STATE.statcast.__loaded && !STATE.statcast.__missing)
+    ? ' <span class="wiz-data-badge">Statcast</span>' : '';
+  const pitchPanel =
+    '<div class="wiz-panel"><h5>Pitching Matchup'+scBadge+'</h5>'+
+      pitcherRows("Away", aSp.fullName, aHand, aEra, aXera, aWhip, aK9, aBarrel, aRecentEra, "")+
+      '<div style="height:6px;"></div>'+
+      pitcherRows("Home", hSp.fullName, hHand, hEra, hXera, hWhip, hK9, hBarrel, hRecentEra, "")+
+    '</div>';
+
+  /* ---------- Lineup vs hand panel ---------- */
+  const awayLuVsH = getLineupVsHand(g, "away");
+  const homeLuVsH = getLineupVsHand(g, "home");
+  const luPanel = (function(){
+    if (!awayLuVsH && !homeLuVsH) {
+      return '<div class="wiz-panel"><h5>Lineup Splits vs SP Hand</h5>'+
+        '<p style="color:var(--muted);">Lineups not posted — splits update automatically when they drop.</p></div>';
+    }
+    function luRows(side, lvh, teamName, oppHand) {
+      if (!lvh) return '<p style="color:var(--muted);font-size:12px;">'+esc(teamName)+': lineup TBD</p>';
+      const avg = lvh.avgOps;
+      const quality = avg>=0.780?'good':avg<=0.680?'bad':'';
+      let topHitter = null;
+      lvh.detail.forEach(function(d){ if (!topHitter || d.ops > topHitter.ops) topHitter = d; });
+      const cls = lvh.platoonPct >= 0.55 ? "plat" : lvh.platoonPct <= 0.35 ? "anti" : "";
+      const header = '<div class="wiz-stat-row"><span class="k">'+esc(teamName)+' vs '+esc(oppHand)+'HP</span>'+
+        '<span class="v '+quality+'">.'+Math.round(avg*1000)+' OPS · '+Math.round(lvh.platoonPct*100)+'% plat</span></div>';
+      const topLine = topHitter ? '<div style="font-size:11.5px;color:#8ea1d4;margin:3px 0 6px;">Top matchup: <b style="color:#fff;">'+esc(topHitter.name)+'</b> ('+esc(topHitter.batHand||"?")+') .'+Math.round(topHitter.ops*1000)+' in '+topHitter.ab+' AB'+(topHitter.platoon?' · platoon':'')+'</div>' : '';
+      return header + topLine;
+    }
+    return '<div class="wiz-panel"><h5>Lineup Splits vs SP Hand</h5>'+
+      luRows("away", awayLuVsH, awayName.split(" ").pop(), hHand)+
+      luRows("home", homeLuVsH, homeName.split(" ").pop(), aHand)+
+    '</div>';
+  })();
+
+  /* ---------- Bullpen leverage panel ---------- */
+  const awayBP = STATE.bullpen[awayTeam.id] || [];
+  const homeBP = STATE.bullpen[homeTeam.id] || [];
+  function bpSummary(bp) {
+    const red = bp.filter(function(p){return p.avail==="red";});
+    const leveredRed = red.filter(function(p){return ((p.pY||0)+(p.p2||0)) >= 35;});
+    const yellow = bp.filter(function(p){return p.avail==="yellow";});
+    const green = bp.filter(function(p){return p.avail==="green";});
+    return { red: red.length, leveredRed: leveredRed.length, yellow: yellow.length, green: green.length,
+             names: leveredRed.map(function(p){return p.name;}).slice(0,3) };
+  }
+  const ab = bpSummary(awayBP);
+  const hb = bpSummary(homeBP);
+  const bpPanel =
+    '<div class="wiz-panel"><h5>Bullpen Leverage</h5>'+
+      (awayBP.length || homeBP.length ?
+        ('<div class="wiz-stat-row"><span class="k">'+esc(awayName.split(" ").pop())+' gassed leverage</span><span class="v '+(ab.leveredRed>=2?'bad':ab.leveredRed===0?'good':'')+'">'+ab.leveredRed+' key red · '+ab.green+' fresh</span></div>'+
+         '<div class="wiz-stat-row"><span class="k">'+esc(homeName.split(" ").pop())+' gassed leverage</span><span class="v '+(hb.leveredRed>=2?'bad':hb.leveredRed===0?'good':'')+'">'+hb.leveredRed+' key red · '+hb.green+' fresh</span></div>'+
+         (ab.names.length ? '<div style="font-size:11px;color:var(--muted);margin-top:6px;">Away red arms: '+esc(ab.names.join(", "))+'</div>' : '')+
+         (hb.names.length ? '<div style="font-size:11px;color:var(--muted);margin-top:3px;">Home red arms: '+esc(hb.names.join(", "))+'</div>' : ''))
+        : '<p style="color:var(--muted);font-size:12px;">Bullpen usage loading…</p>')+
+    '</div>';
+
+  /* ---------- Context panel (team form + park + weather + BvP) ---------- */
+  const awayRec = STATE.teamRecent[awayTeam.id];
+  const homeRec = STATE.teamRecent[homeTeam.id];
+  function formStr(r) {
+    if (!r || !r.d7 || !r.d7.g) return "—";
+    const wl = r.d7.w+"-"+r.d7.l;
+    const diff = (r.d7.diff>=0?"+":"")+r.d7.diff;
+    return wl+" ("+diff+")";
+  }
+  let bvpHits = [];
+  if (aSp.id && hSp.id) {
+    const homeLU = (g.lineups && g.lineups.homePlayers) || [];
+    const awayLU = (g.lineups && g.lineups.awayPlayers) || [];
+    homeLU.forEach(function(b){
+      const c = STATE.bvp[b.id+"-"+aSp.id];
+      if (c && (c.atBats||0) >= 10 && (Number(c.ops)||0) >= 0.900) {
+        bvpHits.push({name: b.fullName, side: "home", ops: Number(c.ops), ab: c.atBats});
+      }
+    });
+    awayLU.forEach(function(b){
+      const c = STATE.bvp[b.id+"-"+hSp.id];
+      if (c && (c.atBats||0) >= 10 && (Number(c.ops)||0) >= 0.900) {
+        bvpHits.push({name: b.fullName, side: "away", ops: Number(c.ops), ab: c.atBats});
+      }
+    });
+  }
+  const ctxPanel =
+    '<div class="wiz-panel"><h5>Team Form & Context</h5>'+
+      '<div class="wiz-stat-row"><span class="k">'+esc(awayName.split(" ").pop())+' (last 7d)</span><span class="v">'+formStr(awayRec)+'</span></div>'+
+      '<div class="wiz-stat-row"><span class="k">'+esc(homeName.split(" ").pop())+' (last 7d)</span><span class="v">'+formStr(homeRec)+'</span></div>'+
+      (pf ? '<div class="wiz-stat-row"><span class="k">Venue</span><span class="v">'+esc(pf.name)+'</span></div>' : '')+
+      (bvpHits.length ?
+        ('<div style="margin-top:8px;font-size:11.5px;color:#8ea1d4;">BvP hot spots (10+ AB, .900+ OPS):</div>'+
+         bvpHits.slice(0,4).map(function(b){return '<div style="font-size:12px;color:#e8ecff;">• '+esc(b.name)+' ('+(b.side==="home"?"H":"A")+'): .'+Math.round(b.ops*1000)+' in '+b.ab+' AB</div>';}).join(""))
+        : '<div style="margin-top:8px;font-size:11.5px;color:var(--muted);">No significant BvP edges (10+ AB threshold).</div>')+
+    '</div>';
+
+  /* ---------- Factor waterfall ---------- */
+  let waterfallHtml = '';
+  if (ml && ml.breakdown) {
+    const parts = ml.breakdown.split(" | ");
+    const factors = parts.map(function(s){
+      const m = s.match(/^(.+?):\s*([+-]?\d+(\.\d+)?)$/);
+      if (!m) return null;
+      return { k: m[1], v: parseFloat(m[2]) };
+    }).filter(Boolean);
+    factors.sort(function(a,b){ return Math.abs(b.v) - Math.abs(a.v); });
+    const maxAbs = Math.max.apply(null, factors.map(function(f){return Math.abs(f.v);})) || 1;
+    waterfallHtml =
+      '<div class="wiz-waterfall"><h5>Factor Waterfall (sorted by impact)</h5>'+
+      factors.map(function(f){
+        const pct = Math.min(50, (Math.abs(f.v)/maxAbs)*48);
+        const isPos = f.v >= 0;
+        const barStyle = isPos
+          ? 'left:50%; width:'+pct+'%;'
+          : 'right:50%; width:'+pct+'%;';
+        const barCls = isPos ? 'pos' : 'neg';
+        const valCls = isPos ? 'pos' : 'neg';
+        return '<div class="wiz-factor-row">'+
+          '<div class="wf-label">'+esc(f.k)+'</div>'+
+          '<div class="wf-bar-wrap"><div class="wf-bar '+barCls+'" style="'+barStyle+'"></div></div>'+
+          '<div class="wf-val '+valCls+'">'+(f.v>=0?"+":"")+f.v.toFixed(2)+'</div>'+
+        '</div>';
+      }).join("")+
+      '<div style="font-size:10.5px;color:var(--muted);margin-top:6px;text-align:center;">Right = favors '+esc(homeName.split(" ").pop())+' · Left = favors '+esc(awayName.split(" ").pop())+'</div>'+
+      '</div>';
+  }
+
+  /* ---------- Narrative paragraph (context + conviction) ---------- */
+  let narrative = "";
+  if (ml && ml.pick && ml.pick !== "no edge") {
+    const driver = ml.topDriver;
+    narrative = "The 11 factor model lands on <b>"+esc(ml.pick)+"</b> at tier <b>"+esc(ml.tier)+"</b> (edge "+(ml.edge>=0?"+":"")+Number(ml.edge||0).toFixed(2)+"). The biggest single driver is <b>"+esc(driver)+"</b>. ";
+  } else {
+    narrative = "No side edge — the factors cancel out here. Focus on props or the total if signal exists there. ";
+  }
+  if (aEra != null && hEra != null) {
+    const gap = aEra - hEra;
+    if (Math.abs(gap) >= 0.8) {
+      narrative += "Starting pitching tilts to "+(gap>0?esc(homeName.split(" ").pop()):esc(awayName.split(" ").pop()))+" by "+Math.abs(gap).toFixed(2)+" ERA. ";
+    } else {
+      narrative += "Starters are close enough on paper that this likely comes down to lineup depth and bullpens. ";
+    }
+    if (aXera != null && hXera != null) {
+      const xGap = aXera - hXera;
+      if (Math.abs(xGap - gap) >= 0.4) {
+        narrative += "Statcast xERA disagrees with season ERA by "+Math.abs(xGap-gap).toFixed(2)+" runs — underlying contact quality says the true gap is different. ";
+      }
+    }
+  }
+  if (ab.leveredRed >= 2 || hb.leveredRed >= 2) {
+    const weak = ab.leveredRed > hb.leveredRed ? awayName.split(" ").pop() : homeName.split(" ").pop();
+    narrative += "<b>Bullpen flag:</b> "+esc(weak)+" is down multiple high leverage arms — late inning edge flips if this becomes a close game. ";
+  }
+  if (pf && w && !pf.roof) {
+    const wind = projectWind(w.windDeg, w.windMph, pf.orient);
+    if (wind.indexOf("OUT to") >= 0 && w.windMph >= 10) narrative += "Wind blowing out hard is a legit OVER signal here. ";
+    else if (wind.indexOf("IN from") >= 0 && w.windMph >= 10) narrative += "Wind cutting in is a legit UNDER signal. ";
+  }
+
+  /* ---------- Verdict + bets (aligned with 11-factor model) ---------- */
+  const a2 = buildDeepAnalysis(g); // reuse analysis for total + bet suggestions
+  const verdictBets = a2.verdict.bets.slice();
+  // Re-style the primary bet
+  const betsHtml = verdictBets.map(function(b, i){
+    const cls = (i===0 && /ML/.test(b.t)) ? "primary" : (b.cls || "neu");
+    return '<span class="wiz-bet-chip '+cls+'">'+esc(b.t)+'</span>';
+  }).join("");
+
+  /* ---------- Market comparison line (shows when odds overlay is loaded) ---------- */
+  let marketLine = "";
+  try {
+    const mlPickObjW = STATE.mlPicks && STATE.mlPicks[g.gamePk];
+    const snapW = (typeof gameMarketSnapshot === "function" && mlPickObjW)
+      ? gameMarketSnapshot(g, mlPickObjW)
+      : null;
+    if (snapW && snapW.pickPrice != null && isFinite(snapW.pickPrice) && snapW.pickFair != null && isFinite(snapW.pickFair)) {
+      const priceStr = fmtAmerican(snapW.pickPrice);
+      const fairPriceStr = fmtAmerican(probToAmerican(snapW.pickFair));
+      const modelProbW = modelEdgeToProb(mlPickObjW.absEdge || 0);
+      const epW = (modelProbW - snapW.pickFair) * 100;
+      const modelPriceStr = fmtAmerican(probToAmerican(modelProbW));
+      const extremeFavW = snapW.pickFair >= 0.88;
+      const fadeOkW = epW <= -2 && !extremeFavW;
+      const verdictLabel = epW >= 5 ? "🔥 STRONG VALUE"
+                         : epW >= 3 ? "✅ VALUE"
+                         : epW >= 1 ? "⚠️ THIN EDGE"
+                         : fadeOkW ? "⛔ FADE LINE"
+                         : "⏸️ PASS";
+      const signW = epW >= 0 ? "+" : "";
+      const colorW = epW >= 3 ? "#10b981" : epW >= 1 ? "#eab308" : epW <= -2 ? "#ef4444" : "#94a3b8";
+      const kellyW = (typeof kellyFraction === "function") ? kellyFraction(modelProbW, snapW.pickPrice) : 0;
+      const kellyPctW = (kellyW * 100).toFixed(2);
+      marketLine =
+        '<div style="margin-top:10px;padding:10px 12px;background:rgba(10,15,36,0.55);border:1px solid rgba(100,130,255,0.25);border-radius:8px;">'+
+          '<div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;">'+
+            '<div style="font-size:11px;letter-spacing:0.08em;color:#94a3b8;text-transform:uppercase;">Market vs Model</div>'+
+            '<div style="font-weight:700;color:'+colorW+';font-size:12px;">'+verdictLabel+' '+signW+epW.toFixed(1)+' pp</div>'+
+          '</div>'+
+          '<p style="margin:6px 0 0;font-size:13px;line-height:1.55;color:#e8ecff;">'+
+            'Book is showing <b>'+esc(priceStr)+'</b> on the pick. Vig free market fair price is <b>'+esc(fairPriceStr)+'</b>. '+
+            'Our 11 factor model price is <b>'+esc(modelPriceStr)+'</b>. '+
+            (epW >= 3 ? 'That is a real number beat. Quarter Kelly recommends <b>'+kellyPctW+'%</b> of bankroll. '
+             : epW >= 1 ? 'Small edge. Kelly recommends <b>'+kellyPctW+'%</b> of bankroll, thin. '
+             : epW <= -2 ? 'Market is pricing in more than our model sees. Pass or consider the other side. '
+             : 'Market and model are roughly aligned. No real edge at this price. ')+
+          '</p>'+
+        '</div>';
+    }
+  } catch(e) { /* silent */ }
+
+  /* ---------- Final card HTML ---------- */
+  return '<div class="wiz-card">'+
+    '<div class="wiz-header">'+
+      '<div>'+
+        '<h3>'+esc(awayName)+' @ '+esc(homeName)+'</h3>'+
+        '<div class="wiz-meta">'+esc(time)+' · '+esc((pf&&pf.name)||(g.venue&&g.venue.name)||"")+' · '+esc(aSp.fullName||"TBD")+' ('+esc(aHand)+'HP) vs '+esc(hSp.fullName||"TBD")+' ('+esc(hHand)+'HP)</div>'+
+        '<div class="wiz-pills">'+pills.join("")+'</div>'+
+      '</div>'+
+      '<div class="wiz-tier-badge '+tierCls+'">'+
+        '<div class="wiz-tier-label">Model Tier</div>'+
+        '<div class="wiz-tier-value">'+tierIcon+' '+esc(tierLabel)+'</div>'+
+        '<div class="wiz-tier-edge">edge '+esc(tierEdge)+'</div>'+
+        pickLine+
+      '</div>'+
+    '</div>'+
+    '<div class="wiz-panel" style="background:rgba(10,15,36,0.35);">'+
+      '<p style="color:#e8ecff;margin:0;line-height:1.65;font-size:13.5px;">'+narrative+'</p>'+
+    '</div>'+
+    '<div class="wiz-grid-two">'+
+      pitchPanel+
+      luPanel+
+      bpPanel+
+      ctxPanel+
+    '</div>'+
+    waterfallHtml+
+    '<div class="wiz-verdict">'+
+      '<h5>🧙 Verdict</h5>'+
+      '<p>'+a2.verdict.text+'</p>'+
+      marketLine+
+      '<div class="wiz-bets-row">'+betsHtml+'</div>'+
+    '</div>'+
+  '</div>';
+}
+
+/* =========== VALUE BETS — model probability vs vig-free market =========== */
+function renderValue() {
+  const el = document.getElementById("valueGrid");
+  if (!el) return;
+  if (!STATE.games || !STATE.games.length) { el.innerHTML = '<div class="loader">Waiting on slate…</div>'; return; }
+
+  // Odds overlay missing: give a clean explainer and defer
+  const oddsMissing = !STATE.odds || !STATE.odds.__loaded || STATE.odds.__missing ||
+                      !STATE.odds.games || Object.keys(STATE.odds.games).length === 0;
+
+  if (oddsMissing) {
+    el.innerHTML =
+      '<div class="explain-banner" style="background:linear-gradient(135deg,rgba(239,68,68,0.1),rgba(250,200,100,0.06));border:1px solid rgba(239,68,68,0.25);">'+
+      '<span class="eb-title" style="color:#ff9b9b;">Market odds not loaded.</span> '+
+      'This tab needs an odds_overlay.json file at the site root (same pattern as statcast_overlay.json). Once the scheduled task bakes fresh moneyline, total, and runline prices, every pick on the slate will be re ranked by market edge and Kelly size here.'+
+      '</div>'+
+      buildValuePreview();
+    return;
+  }
+
+  // Score every game
+  const rows = STATE.games.map(function(g){
+    const ml = STATE.mlPicks[g.gamePk];
+    if (!ml || !ml.pickSide) return null;
+    const snap = gameMarketSnapshot(g, ml);
+    if (!snap || snap.pickFair == null) return null;
+    const modelProb = modelEdgeToProb(ml.absEdge);
+    const edgePts = (modelProb - snap.pickFair) * 100; // in percentage points
+    const kelly = kellyFraction(modelProb, snap.pickPrice);
+    return {
+      g: g, ml: ml, snap: snap,
+      modelProb: modelProb, marketProb: snap.pickFair,
+      edgePts: edgePts, kelly: kelly
+    };
+  }).filter(Boolean);
+
+  rows.sort(function(a,b){ return b.edgePts - a.edgePts; });
+
+  // Summary header: how many value bets, strongest edge, total Kelly exposure
+  const valuePlays = rows.filter(function(r){ return r.edgePts >= 3; });
+  const strongPlays = rows.filter(function(r){ return r.edgePts >= 5; });
+  const totalKelly = valuePlays.reduce(function(s,r){ return s + r.kelly; }, 0);
+  const bestEdge = rows.length ? rows[0].edgePts : 0;
+
+  const header =
+    '<div class="vc-header-summary">'+
+      '<div class="h-stat"><div class="k">Slate size</div><div class="v">'+rows.length+' games</div></div>'+
+      '<div class="h-stat"><div class="k">Value plays (3+ pts)</div><div class="v '+(valuePlays.length?'good':'')+'">'+valuePlays.length+'</div></div>'+
+      '<div class="h-stat"><div class="k">Strong value (5+ pts)</div><div class="v '+(strongPlays.length?'good':'')+'">'+strongPlays.length+'</div></div>'+
+      '<div class="h-stat"><div class="k">Best edge</div><div class="v '+(bestEdge>=3?'good':'')+'">'+(bestEdge>=0?"+":"")+bestEdge.toFixed(1)+' pts</div></div>'+
+      '<div class="h-stat"><div class="k">Total Kelly exposure</div><div class="v '+(totalKelly>0?'good':'')+'">'+(totalKelly*100).toFixed(1)+'% of bankroll</div></div>'+
+      '<div class="h-stat" style="margin-left:auto;"><div class="k">Odds as of</div><div class="v" style="font-size:12px;">'+esc(STATE.odds.asOf || "—")+'</div></div>'+
+    '</div>';
+
+  const cardsHtml = rows.map(function(r){
+    const away = r.g.teams.away.team.name;
+    const home = r.g.teams.home.team.name;
+    const time = new Date(r.g.gameDate).toLocaleTimeString([],{hour:"numeric",minute:"2-digit"});
+    const edge = r.edgePts;
+    let edgeCls, edgeLabel, cardCls;
+    const extremeFavV = r.marketProb >= 0.88;
+    if (edge >= 5)                         { edgeCls = "strong"; edgeLabel = "STRONG VALUE"; cardCls = "strong"; }
+    else if (edge >= 3)                    { edgeCls = "value";  edgeLabel = "VALUE";        cardCls = ""; }
+    else if (edge >= 1)                    { edgeCls = "thin";   edgeLabel = "THIN";         cardCls = "pass"; }
+    else if (edge > -2 || extremeFavV)     { edgeCls = "pass";   edgeLabel = "PASS";         cardCls = "pass"; }
+    else                                   { edgeCls = "neg";    edgeLabel = "FADE LINE";    cardCls = "pass"; }
+
+    const marketFair = probToAmerican(r.marketProb);
+    const modelFair = probToAmerican(r.modelProb);
+    const kellyDollarsPer1k = (r.kelly * 1000).toFixed(0);
+
+    return '<div class="value-card '+cardCls+'">'+
+      '<div>'+
+        '<h3>'+esc(away)+' @ '+esc(home)+' <span class="vc-edge-pill '+edgeCls+'">'+edgeLabel+'</span></h3>'+
+        '<div class="vc-meta">'+esc(time)+' · Book: '+esc(r.snap.book)+' · Vig '+r.snap.vigPct.toFixed(1)+'%</div>'+
+        '<div class="vc-row">'+
+          '<div class="vc-stat"><div class="k">Model says</div><div class="v big pos">'+(r.modelProb*100).toFixed(1)+'%</div><div style="font-size:10.5px;color:#7e90c0;">fair price '+fmtAmerican(modelFair)+'</div></div>'+
+          '<div class="vc-stat"><div class="k">Market says (no vig)</div><div class="v big">'+(r.marketProb*100).toFixed(1)+'%</div><div style="font-size:10.5px;color:#7e90c0;">fair price '+fmtAmerican(marketFair)+'</div></div>'+
+          '<div class="vc-stat"><div class="k">Edge</div><div class="v big '+(edge>=3?"pos":"")+'">'+(edge>=0?"+":"")+edge.toFixed(1)+' pts</div></div>'+
+          '<div class="vc-stat"><div class="k">Model tier</div><div class="v">'+esc(r.ml.tierIcon||"")+' '+esc(r.ml.tier||"")+'</div></div>'+
+        '</div>'+
+      '</div>'+
+      '<div class="vc-bet-block">'+
+        '<div class="vc-bet-label">'+(edge>=3?"Play":"No Play")+'</div>'+
+        '<div class="vc-bet-pick">'+esc(r.ml.pick)+'</div>'+
+        '<div class="vc-bet-price">'+fmtAmerican(r.snap.pickPrice)+'</div>'+
+        '<div class="vc-kelly-row">'+
+          '<span>Kelly (1/4)</span><span style="color:'+(r.kelly>0?'#22d3ee':'#8ea1d4')+';font-weight:700;">'+(r.kelly*100).toFixed(2)+'%</span>'+
+        '</div>'+
+        (r.kelly > 0 ? '<div style="font-size:10.5px;color:#8ea1d4;margin-top:4px;">≈ $'+kellyDollarsPer1k+' per $1k bankroll</div>' : '')+
+      '</div>'+
+    '</div>';
+  }).join("");
+
+  el.innerHTML = header + cardsHtml;
+}
+
+// Short explainer shown before odds overlay arrives so the tab isn't empty.
+function buildValuePreview() {
+  return '<div style="padding:20px; color:#c7cee8; line-height:1.7; font-size:14px;">'+
+    '<h3 style="color:#fff; margin:0 0 10px;">What this tab does once live</h3>'+
+    '<p>For every game on the slate, we take the 11 factor model pick, translate the internal edge into a win probability, compare it to the vig free price the sportsbook is offering, and show you the gap in percentage points.</p>'+
+    '<p>A 3 point edge is a real value bet. A 5 point edge is a strong value bet. Everything below 3 points is a pass because the model is not confident enough to beat the house rake.</p>'+
+    '<p>Kelly sizing then tells you how much of your bankroll to wager. We use quarter Kelly (25 percent of full Kelly) and cap every bet at 5 percent of bankroll, which is the industry standard for avoiding ruin from model error.</p>'+
+    '<h3 style="color:#fff; margin:18px 0 10px;">To activate</h3>'+
+    '<p>Bake an odds_overlay.json file at the site root with this structure, then the tab lights up automatically:</p>'+
+    '<pre style="background:#0a0f24; border:1px solid #2a3670; border-radius:8px; padding:14px; font-size:12px; color:#a8b4dc; overflow-x:auto;">{\n  "asOf": "2026-04-19T16:00:00Z",\n  "games": {\n    "776543": {\n      "moneyline": { "away": -135, "home": 115, "book": "consensus" },\n      "total":     { "line": 8.5, "over": -110, "under": -110 },\n      "runline":   { "spread": -1.5, "favSide": "home", "favPrice": 150, "dogPrice": -175 }\n    },\n    "_comment": "Key is the gamePk from the MLB schedule. One entry per game on the slate."\n  }\n}</pre>'+
+    '<p style="color:#8ea1d4; font-size:12.5px; margin-top:10px;">Source suggestions: The Odds API (paid, ~$30/mo, 500 req/day tier is plenty), or a Python script scraping a consensus feed on a 15 minute cron.</p>'+
+  '</div>';
 }
 
 function renderAll() {
@@ -4149,7 +4887,7 @@ function renderAll() {
   renderKPIs(); renderTotalsChart(); renderTeamKChart();
   renderSplitsChart(); renderSplitsTable();
   renderMatchups(); renderBullpen(); renderYankees();
-  renderAnalysis(); renderHotHitters(); renderSpotlight();
+  renderAnalysis(); renderAIWizard(); renderValue(); renderHotHitters(); renderSpotlight();
 }
 
 /* =========== MAIN LOAD =========== */
@@ -4189,10 +4927,23 @@ async function refreshAllData() {
       if (g.teams.home.team.id) teamIds.add(g.teams.home.team.id);
     });
     await Promise.all(Array.from(teamIds).map(fetchTeamHittingSplits));
+
+    // Statcast overlay: optional, baked by the scheduled refresh.
+    // Must fire after pitcherStats + teamStats so it can blend xERA / xwOBA in place.
+    setStatus("Loading Statcast overlay (xERA, xwOBA, barrel%)…");
+    await fetchStatcastOverlay();
+
+    // Odds overlay: moneyline + totals + runline prices per game from the book aggregator.
+    // Drives the Value Bets tab and the market-vs-model edge column on Moneyline Picks.
+    setStatus("Loading market odds overlay…");
+    await fetchOddsOverlay();
+
     renderHotCold(); renderTeamK(); renderHitProps();
+    renderERProps(); renderBBProps();
     renderTotals(); renderBets(); renderML(); renderRL(); renderF5();
     renderSplitsChart(); renderSplitsTable(); renderTeamKChart(); renderKPIs();
     renderMatchups(); renderYankees(); renderAnalysis();
+    renderAIWizard(); renderValue();
 
     setStatus("Fetching bullpen usage (last 3 days)…");
     await Promise.all(Array.from(teamIds).map(fetchBullpenUsage));
@@ -4203,14 +4954,14 @@ async function refreshAllData() {
 
     setStatus("Fetching recent team records (3d/7d)…");
     await Promise.all(Array.from(teamIds).map(fetchTeamRecent));
-    renderHotCold(); renderML();
+    renderHotCold(); renderML(); renderAIWizard(); renderValue();
 
     setStatus("Fetching SP recent game logs…");
     await Promise.all(Array.from(pitcherIds).map(function(pid){
       const ps = STATE.pitcherStats[pid];
       return fetchPitcherLogs(pid, ps && ps.name || "SP");
     }));
-    renderML(); // re-render with pitcher recent form
+    renderML(); renderERProps(); renderBBProps(); renderAIWizard(); renderValue(); // re-render with pitcher recent form
 
     setStatus("Fetching yesterday's spotlight…");
     await fetchYesterdaySpotlight();
@@ -4229,7 +4980,7 @@ async function refreshAllData() {
       });
     });
     await Promise.all(hitterPromises);
-    renderHotHitters();
+    renderHotHitters(); renderAIWizard(); renderValue();
 
     setStatus("Fetching batter vs-hand splits (lineup matchups)…");
     const splitsPromises = [];
@@ -4243,10 +4994,10 @@ async function refreshAllData() {
     });
     await Promise.all(splitsPromises);
     // Re-render everything that uses lineup-level splits
-    renderMatchups(); renderML(); renderRL(); renderBets();
+    renderMatchups(); renderML(); renderRL(); renderBets(); renderAIWizard(); renderValue();
 
     setStatus("Loading BvP history (background)…");
-    renderBvP().then(function(){ setStatus("✓ All data loaded — live", "ok"); });
+    renderBvP().then(function(){ renderAIWizard(); renderValue(); setStatus("✓ All data loaded — live", "ok"); });
 
   } catch(e) {
     console.error(e);
@@ -4269,6 +5020,8 @@ document.getElementById("refreshBtn").addEventListener("click", function(){
   STATE.injuries = {};
   STATE.scheduleContext = {};
   STATE.spotlight = [];
+  STATE.statcast = {};
+  STATE.odds = {};
   refreshAllData();
 });
 
@@ -4287,6 +5040,8 @@ setInterval(function(){
   STATE.injuries = {};
   STATE.scheduleContext = {};
   STATE.spotlight = [];
+  STATE.statcast = {};
+  STATE.odds = {};
   refreshAllData();
 }, 30*60*1000);
 
