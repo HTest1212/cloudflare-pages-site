@@ -39,10 +39,14 @@ jobs:
         run: |
           git config user.name  "odds-bot"
           git config user.email "odds-bot@users.noreply.github.com"
-          if git diff --quiet odds_overlay.json 2>/dev/null; then
-            echo "odds_overlay.json unchanged, skipping commit"
+          if [ ! -f odds_overlay.json ]; then
+            echo "odds_overlay.json not produced by the script, nothing to commit"
             exit 0
           fi
           git add odds_overlay.json
+          if git diff --cached --quiet; then
+            echo "odds_overlay.json unchanged, skipping commit"
+            exit 0
+          fi
           git commit -m "chore(odds): refresh overlay $(date -u +'%Y-%m-%dT%H:%MZ')"
           git push
