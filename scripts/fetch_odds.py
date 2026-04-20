@@ -101,12 +101,15 @@ def canonical_team(name: str) -> str:
 
 
 def today_iso_eastern() -> str:
-    """statsapi uses US date keys. We use Eastern noon so cron in UTC still
-    matches the day the games are played in the US."""
-    now_utc = dt.datetime.now(dt.timezone.utc)
-    # Eastern is UTC-5 standard, UTC-4 DST. Approximation good enough for date picking.
-    eastern = now_utc - dt.timedelta(hours=5)
-    return eastern.strftime("%Y-%m-%d")
+    """statsapi uses US date keys. Use proper America/New_York zone so the
+    script picks the slate day correctly regardless of EDT vs EST."""
+    try:
+        from zoneinfo import ZoneInfo
+        now_eastern = dt.datetime.now(ZoneInfo("America/New_York"))
+    except Exception:
+        # Fallback: EDT is UTC-4. Good enough for April through early November.
+        now_eastern = dt.datetime.now(dt.timezone.utc) - dt.timedelta(hours=4)
+    return now_eastern.strftime("%Y-%m-%d")
 
 
 def fetch_schedule(date_str: str) -> list[dict]:
