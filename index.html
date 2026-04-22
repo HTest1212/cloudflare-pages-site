@@ -112,6 +112,8 @@
   }
   .edge-good { color: var(--good); font-weight:700; }
   .edge-bad { color: var(--bad); font-weight:700; }
+  .edge-neu  { color: #ffd166; font-weight:700; }
+  .edge-soft { color: #94a3b8; font-weight:700; }
   .small { font-size:11px; color: var(--muted); }
   .loader { color: var(--muted); padding: 20px; text-align:center; }
   .badge-live { background:#0e3a2e; color:var(--good); border:1px solid #1b6f58; border-radius:999px; padding:3px 10px; font-size:11px; font-weight:700; }
@@ -2676,6 +2678,68 @@ function teamAbbrFromName(name) {
   const last = String(name).split(' ').pop();
   return last.slice(0, 3).toUpperCase();
 }
+// Map standard MLB 2 and 3 letter team codes to the club's common nickname. Used
+// to expand abbreviated chips like "KC ML" into "Royals ML" at render time so
+// we never surface raw codes to the user even when older pre built analysis
+// strings still reference them.
+const TEAM_CODE_TO_NICK = {
+  'ARI':'Diamondbacks','AZ':'Diamondbacks',
+  'ATL':'Braves',
+  'BAL':'Orioles',
+  'BOS':'Red Sox',
+  'CHC':'Cubs','CHN':'Cubs',
+  'CHW':'White Sox','CWS':'White Sox','CHA':'White Sox',
+  'CIN':'Reds',
+  'CLE':'Guardians',
+  'COL':'Rockies',
+  'DET':'Tigers',
+  'HOU':'Astros',
+  'KC':'Royals','KCR':'Royals',
+  'LAA':'Angels','ANA':'Angels',
+  'LAD':'Dodgers','LA':'Dodgers',
+  'MIA':'Marlins','FLA':'Marlins',
+  'MIL':'Brewers',
+  'MIN':'Twins',
+  'NYM':'Mets',
+  'NYY':'Yankees',
+  'OAK':'Athletics','ATH':'Athletics',
+  'PHI':'Phillies',
+  'PIT':'Pirates',
+  'SD':'Padres','SDP':'Padres',
+  'SF':'Giants','SFG':'Giants',
+  'SEA':'Mariners',
+  'STL':'Cardinals',
+  'TB':'Rays','TBR':'Rays','TBD':'Rays',
+  'TEX':'Rangers',
+  'TOR':'Blue Jays',
+  'WSH':'Nationals','WAS':'Nationals','WSN':'Nationals'
+};
+// Replace any whole word team code inside a display string with the club nickname.
+// Matches common 2 and 3 letter codes only when they appear as standalone tokens
+// (bounded by non letter characters), so "KC ML" becomes "Royals ML" while
+// substrings inside real words are left alone.
+function normalizeTeamCodesInText(str) {
+  if (!str) return '';
+  let out = String(str);
+  // Sort keys longest first so "SFG" is matched before "SF".
+  const keys = Object.keys(TEAM_CODE_TO_NICK).sort(function(a,b){ return b.length - a.length; });
+  keys.forEach(function(code){
+    const re = new RegExp('(^|[^A-Za-z])' + code + '(?=$|[^A-Za-z])', 'g');
+    out = out.replace(re, function(_, lead){ return lead + TEAM_CODE_TO_NICK[code]; });
+  });
+  return out;
+}
+// Convert a signed edge (distance past the betting line, in market units) into a
+// cash probability. We use a soft sigmoid so a projection that sits right on the
+// line resolves near 50 percent and moves up as the edge grows. The `scale`
+// argument lets each market tune how aggressive the curve is, because a 1 unit
+// edge on strikeouts is not the same shape as a 1 unit edge on runs or ERs.
+function cashPctFromDelta(delta, scale) {
+  const s = scale || 1;
+  const x = Math.max(-6, Math.min(6, Number(delta) * s));
+  const p = 1 / (1 + Math.exp(-x));
+  return Math.max(0.05, Math.min(0.95, p));
+}
 // Short display nickname. Uses the common two word nicknames (Red Sox, Blue Jays,
 // White Sox) where applicable, otherwise falls back to the last word
 // (Yankees, Dodgers, Braves). This keeps the Best Bets ribbon readable without
@@ -3329,13 +3393,17 @@ function buildDeepAnalysis(g) {
   const bets = [];
   if (total >= 9.8) bets.push({t:"Total OVER", cls:"good"});
   else if (total <= 7.8) bets.push({t:"Total UNDER", cls:"fade"});
-  if (mlPick && (mlTierBase === "LOCK" || mlTierBase === "STRONG")) bets.push({t:mlPick+" ML", cls:"good"});
-  else if (mlPick && mlTierBase === "LEAN") bets.push({t:mlPick+" ML (small)", cls:"neu"});
-  if (mlPick && mlAbsEdge >= 0.8) bets.push({t:mlPick+" -1.5 if priced fair", cls:"neu"});
-  if (aK >= 10) bets.push({t:away+" Team Ks OVER", cls:"good"});
-  if (hK >= 10) bets.push({t:home+" Team Ks OVER", cls:"good"});
-  if (awayOps != null && awayOps >= 0.790 && (hStats && hStats.season && Number(hStats.season.era) >= 4.2)) bets.push({t:away+" Team Total OVER", cls:"good"});
-  if (homeOps != null && homeOps >= 0.790 && (aStats && aStats.season && Number(aStats.season.era) >= 4.2)) bets.push({t:home+" Team Total OVER", cls:"good"});
+  // Use short nicknames instead of full city + club names to keep chips readable
+  const __pickNick = mlPick ? ((typeof teamNicknameFromName === 'function') ? teamNicknameFromName(mlPick) : mlPick) : null;
+  const __awayNick = (typeof teamNicknameFromName === 'function') ? teamNicknameFromName(away) : away;
+  const __homeNick = (typeof teamNicknameFromName === 'function') ? teamNicknameFromName(home) : home;
+  if (mlPick && (mlTierBase === "LOCK" || mlTierBase === "STRONG")) bets.push({t:__pickNick+" ML", cls:"good"});
+  else if (mlPick && mlTierBase === "LEAN") bets.push({t:__pickNick+" ML (small)", cls:"neu"});
+  if (mlPick && mlAbsEdge >= 0.8) bets.push({t:__pickNick+" -1.5 if priced fair", cls:"neu"});
+  if (aK >= 10) bets.push({t:__awayNick+" Team Ks OVER", cls:"good"});
+  if (hK >= 10) bets.push({t:__homeNick+" Team Ks OVER", cls:"good"});
+  if (awayOps != null && awayOps >= 0.790 && (hStats && hStats.season && Number(hStats.season.era) >= 4.2)) bets.push({t:__awayNick+" Team Total OVER", cls:"good"});
+  if (homeOps != null && homeOps >= 0.790 && (aStats && aStats.season && Number(aStats.season.era) >= 4.2)) bets.push({t:__homeNick+" Team Total OVER", cls:"good"});
   if (!bets.length) bets.push({t:"No strong edges — pass or small", cls:"neu"});
 
   // ---- CLAUDE'S CONFIDENCE GRADE ----
@@ -3443,8 +3511,8 @@ function renderAnalysis() {
       a.paragraphs.map(function(p){ return '<h4>'+esc(p.title || p.h || "")+'</h4><p>'+(p.text || p.b || "")+'</p>'; }).join("")+
       '<div class="verdict '+a.verdict.kind+'">'+
         '<h4>Verdict</h4>'+
-        '<p>'+a.verdict.text+'</p>'+
-        '<div class="bets-row">'+a.verdict.bets.map(function(b){ return '<span class="bet-chip '+b.cls+'">'+esc(b.t)+'</span>'; }).join("")+'</div>'+
+        '<p>'+normalizeTeamCodesInText(a.verdict.text||'')+'</p>'+
+        '<div class="bets-row">'+a.verdict.bets.map(function(b){ return '<span class="bet-chip '+b.cls+'">'+esc(normalizeTeamCodesInText(b.t||''))+'</span>'; }).join("")+'</div>'+
       '</div>'+
       renderBestBetsBlock(g, a)+
       '</div>';
@@ -4101,12 +4169,33 @@ function renderBets() {
     const pf = parkForGame(g); let pkS = 0.15;
     if(pf&&pf.r>1.05&&homeOps>awayOps) pkS+=0.08;
     if(pf&&pf.r>1.05&&awayOps>homeOps) pkS-=0.05;
+
+    // ── NEW FACTOR LAYER: park runs delta, wind, home plate umpire, rolling 15d form ──
+    // These are the same overlays the Best Bets ribbon consumes, pulled in here so the
+    // Props and Picks engine shares the exact same reality as the Best Bets ribbon.
+    const __venueName = (g.venue && g.venue.name) || '';
+    const __park = (typeof parkFactorsFor === 'function') ? parkFactorsFor(__venueName) : null;
+    const __parkRunsDelta = __park ? ((__park.runs - 100) / 100) * 8.8 : 0; // runs vs neutral 8.8 baseline
+    const __weather = (g.weather) || null;
+    const __windRule = (typeof windRulesFor === 'function') ? windRulesFor(__venueName, __weather) : null;
+    const __windRunsDelta = __windRule ? (Number(__windRule.runsDelta) || 0) : 0;
+    const __umpName = (g.officials && g.officials.plate) || null;
+    const __ump = (typeof umpireFactorsFor === 'function') ? umpireFactorsFor(__umpName) : {kFactor:100, runFactor:100};
+    const __umpRunMult = (Number(__ump.runFactor) || 100) / 100;
+    const __umpKMult   = (Number(__ump.kFactor) || 100) / 100;
+    const __awayForm = (typeof rollingRunAdjFor === 'function') ? rollingRunAdjFor(awayTeam.name) : 0;
+    const __homeForm = (typeof rollingRunAdjFor === 'function') ? rollingRunAdjFor(homeTeam.name) : 0;
+    const __formTotalDelta = __awayForm + __homeForm;
+    // ML side tilt from rolling form. Hotter team gets a small probability bump.
+    const __formSideTilt = (__homeForm - __awayForm); // positive favors home
     const aInj=((STATE.injuries.byTeam&&STATE.injuries.byTeam[awayTeam.id])||[]).filter(function(p){return p.position!=="P"||/closer|setup/i.test(p.status)}).length;
     const hInj=((STATE.injuries.byTeam&&STATE.injuries.byTeam[homeTeam.id])||[]).filter(function(p){return p.position!=="P"||/closer|setup/i.test(p.status)}).length;
     const injS=(aInj-hInj)*0.08;
     const ctx=(STATE.scheduleContext.byGame&&STATE.scheduleContext.byGame[g.gamePk])||{};
     const fatS=(ctx.awayFatigue||0)-(ctx.homeFatigue||0);
-    const edge=spSS*0.18+spRS*0.10+offSS*0.13+hhcS*0.11*luPen+tfS*0.14+bpS*0.09+pkS*0.10+injS*0.05+fatS*0.05;
+    // Base nine factor edge plus a rolling form tilt so the picked side reflects
+    // short term offensive trend (capped inside rollingRunAdjFor so no runaway bias).
+    const edge=spSS*0.18+spRS*0.10+offSS*0.13+hhcS*0.11*luPen+tfS*0.14+bpS*0.09+pkS*0.10+injS*0.05+fatS*0.05 + __formSideTilt*0.35;
     const absEdge=Math.abs(edge);
     let luQ="ok";
     if(!aLC&&!hLC) luQ="tbd"; else if(!aLC||!hLC) luQ="tbd";
@@ -4126,8 +4215,11 @@ function renderBets() {
     const pick = edge>0.12?homeTeam.name:edge<-0.12?awayTeam.name:"no edge";
     const tierBase = tier.replace(/[↑↓*]/g,"");
     if(tierBase==="LOCK"||tierBase==="STRONG"){
-      bets.push({cat:"💰 ML", type:"Moneyline", pick:pick, game:label, tier:tier,
-        score: absEdge*10, note:"9-factor edge "+(edge>=0?"+":"")+edge.toFixed(2)+(luQ!=="ok"?" ("+luQ+")":"")});
+      const __pickNick2 = (typeof teamNicknameFromName === 'function') ? teamNicknameFromName(pick) : pick;
+      bets.push({cat:"💰 ML", type:"Moneyline", pick:__pickNick2, game:label, tier:tier,
+        score: absEdge*10,
+        cashProb: cashPctFromDelta(absEdge, 0.85),
+        note:"9-factor edge "+(edge>=0?"+":"")+edge.toFixed(2)+(luQ!=="ok"?" ("+luQ+")":"")+(Math.abs(__formSideTilt)>=0.05?" · form tilt "+(__formSideTilt>=0?"+":"")+__formSideTilt.toFixed(2):"")});
     }
 
     // ── 2. RUN LINE — from same game loop ──
@@ -4145,17 +4237,37 @@ function renderBets() {
     const rlAbs = Math.abs(rlComp);
     const rlFav = rlComp>0?homeTeam.name:awayTeam.name;
     const rlDog = rlComp>0?awayTeam.name:homeTeam.name;
-    if(rlAbs>1.5){bets.push({cat:"💰 RL",type:"Run Line",pick:rlFav+" -1.5",game:label,tier:"STRONG",score:rlAbs*5,note:"ERA gap "+rlDiff.toFixed(2)+(rlHitAdj?" · Hitters "+(rlHitAdj>=0?"+":"")+rlHitAdj.toFixed(2):"")+(rlLuSplitAdj?" · LU splits "+(rlLuSplitAdj>=0?"+":"")+rlLuSplitAdj.toFixed(2):"")});}
+    if(rlAbs>1.5){
+      const __rlNick = (typeof teamNicknameFromName === 'function') ? teamNicknameFromName(rlFav) : rlFav;
+      bets.push({cat:"💰 RL",type:"Run Line",pick:__rlNick+" -1.5",game:label,tier:"STRONG",score:rlAbs*5,
+        cashProb: cashPctFromDelta(rlAbs-1.5, 0.55),
+        note:"ERA gap "+rlDiff.toFixed(2)+(rlHitAdj?" · Hitters "+(rlHitAdj>=0?"+":"")+rlHitAdj.toFixed(2):"")+(rlLuSplitAdj?" · LU splits "+(rlLuSplitAdj>=0?"+":"")+rlLuSplitAdj.toFixed(2):"")});
+    }
 
     // ── 3. TOTALS ──
-    const proj = projectTotal(g);
-    if(proj>=9.8) bets.push({cat:"📊 Total",type:"Total OVER",pick:"OVER "+Math.round(proj-0.5)+".5",game:label,tier:proj>=10.5?"STRONG":"LEAN",score:(proj-8.8)*4,note:"Proj "+fmt(proj,1)+" runs"});
-    if(proj<=7.8) bets.push({cat:"📊 Total",type:"Total UNDER",pick:"UNDER "+Math.round(proj+0.5)+".5",game:label,tier:proj<=7.0?"STRONG":"LEAN",score:(8.8-proj)*4,note:"Proj "+fmt(proj,1)+" runs"});
+    // Raw projection, then blend park runs delta, wind runs delta, home plate umpire
+    // run multiplier, and rolling team form so the totals call reflects the full stack.
+    const projRaw = projectTotal(g);
+    const proj = (projRaw + __parkRunsDelta + __windRunsDelta + __formTotalDelta) * __umpRunMult;
+    const __factorNote = (Math.abs(__parkRunsDelta)>=0.2?" · park "+(__parkRunsDelta>=0?"+":"")+__parkRunsDelta.toFixed(1):"")
+      + (Math.abs(__windRunsDelta)>=0.2?" · wind "+(__windRunsDelta>=0?"+":"")+__windRunsDelta.toFixed(1):"")
+      + (Math.abs(__umpRunMult-1)>=0.02?" · ump "+(__umpRunMult>=1?"+":"")+Math.round((__umpRunMult-1)*100)+"%":"")
+      + (Math.abs(__formTotalDelta)>=0.1?" · form "+(__formTotalDelta>=0?"+":"")+__formTotalDelta.toFixed(1):"");
+    if(proj>=9.8) bets.push({cat:"📊 Total",type:"Total OVER",pick:"OVER "+Math.round(proj-0.5)+".5",game:label,tier:proj>=10.5?"STRONG":"LEAN",score:(proj-8.8)*4,
+      cashProb: cashPctFromDelta(proj-8.8, 0.55),
+      note:"Proj "+fmt(proj,1)+" runs"+__factorNote});
+    if(proj<=7.8) bets.push({cat:"📊 Total",type:"Total UNDER",pick:"UNDER "+Math.round(proj+0.5)+".5",game:label,tier:proj<=7.0?"STRONG":"LEAN",score:(8.8-proj)*4,
+      cashProb: cashPctFromDelta(8.8-proj, 0.55),
+      note:"Proj "+fmt(proj,1)+" runs"+__factorNote});
 
     // ── 4. F5 TOTALS ──
     const f5proj = proj*0.52;
-    if(f5proj>=5.2) bets.push({cat:"📊 F5",type:"F5 OVER",pick:"F5 OVER 4.5",game:label,tier:f5proj>=5.8?"STRONG":"LEAN",score:(f5proj-4.5)*5,note:"F5 proj "+fmt(f5proj,1)});
-    if(f5proj<=4.0) bets.push({cat:"📊 F5",type:"F5 UNDER",pick:"F5 UNDER 4.5",game:label,tier:f5proj<=3.5?"STRONG":"LEAN",score:(4.5-f5proj)*5,note:"F5 proj "+fmt(f5proj,1)});
+    if(f5proj>=5.2) bets.push({cat:"📊 F5",type:"F5 OVER",pick:"F5 OVER 4.5",game:label,tier:f5proj>=5.8?"STRONG":"LEAN",score:(f5proj-4.5)*5,
+      cashProb: cashPctFromDelta(f5proj-4.5, 0.7),
+      note:"F5 proj "+fmt(f5proj,1)+__factorNote});
+    if(f5proj<=4.0) bets.push({cat:"📊 F5",type:"F5 UNDER",pick:"F5 UNDER 4.5",game:label,tier:f5proj<=3.5?"STRONG":"LEAN",score:(4.5-f5proj)*5,
+      cashProb: cashPctFromDelta(4.5-f5proj, 0.7),
+      note:"F5 proj "+fmt(f5proj,1)+__factorNote});
 
     // ── 5. SP K PROPS ──
     [g.teams.away.probablePitcher, g.teams.home.probablePitcher].forEach(function(p){
@@ -4164,14 +4276,24 @@ function renderBets() {
       const k9 = Number(ps2&&ps2.season&&ps2.season.strikeoutsPer9Inn)||0;
       const projK = k9*5.5/9;
       const kLine = Math.round(projK*2)/2;
-      if(projK>=kLine+1.2) bets.push({cat:"📊 K",type:"SP Ks OVER",pick:p.fullName+" O"+fmt(kLine,1)+" Ks",game:label,tier:projK>=kLine+1.8?"STRONG":"LEAN",score:(projK-kLine)*3,note:"K/9 "+fmt(k9,1)+" · Proj "+fmt(projK,1)});
+      // Ump K factor: umpires with a tight zone suppress Ks. Apply multiplier.
+      const projKAdj = projK * __umpKMult;
+      const umpKNote = Math.abs(__umpKMult-1)>=0.02 ? " · ump K "+(__umpKMult>=1?"+":"")+Math.round((__umpKMult-1)*100)+"%" : "";
+      if(projKAdj>=kLine+1.2) bets.push({cat:"📊 K",type:"SP Ks OVER",pick:p.fullName+" O"+fmt(kLine,1)+" Ks",game:label,tier:projKAdj>=kLine+1.8?"STRONG":"LEAN",score:(projKAdj-kLine)*3,
+        cashProb: cashPctFromDelta(projKAdj-kLine, 0.75),
+        note:"K/9 "+fmt(k9,1)+" · Proj "+fmt(projKAdj,1)+umpKNote});
     });
 
     // ── 6. TEAM K PROPS ──
     ["away","home"].forEach(function(side){
       const tk = projectTeamK(side, g);
       const tkLine = Math.round(tk*2)/2;
-      if(tk>=tkLine+0.8) bets.push({cat:"📊 Team K",type:"Team Ks OVER",pick:g.teams[side].team.name+" O"+fmt(tkLine,1)+" Ks",game:label,tier:tk>=tkLine+1.5?"STRONG":"LEAN",score:(tk-tkLine)*3,note:"Proj "+fmt(tk,1)+" Ks"});
+      const tkAdj = tk * __umpKMult;
+      const umpTKNote = Math.abs(__umpKMult-1)>=0.02 ? " · ump K "+(__umpKMult>=1?"+":"")+Math.round((__umpKMult-1)*100)+"%" : "";
+      const __teamNick = (typeof teamNicknameFromName === 'function') ? teamNicknameFromName(g.teams[side].team.name) : g.teams[side].team.name;
+      if(tkAdj>=tkLine+0.8) bets.push({cat:"📊 Team K",type:"Team Ks OVER",pick:__teamNick+" O"+fmt(tkLine,1)+" Ks",game:label,tier:tkAdj>=tkLine+1.5?"STRONG":"LEAN",score:(tkAdj-tkLine)*3,
+        cashProb: cashPctFromDelta(tkAdj-tkLine, 0.65),
+        note:"Proj "+fmt(tkAdj,1)+" Ks"+umpTKNote});
     });
 
     // ── 7. SP EARNED RUNS PROPS ──
@@ -4192,9 +4314,16 @@ function renderBets() {
       if(pf) projER*=pf.r;
       const erLine=Math.round(projER*2)/2;
       const erDiff=Math.abs(projER-erLine);
-      if(erDiff>=0.4){
-        const erDir=projER>=erLine+0.4?"OVER":"UNDER";
-        bets.push({cat:"📊 ER",type:"SP ER "+erDir,pick:sp.fullName+" "+erDir+" "+fmt(erLine,1)+" ER",game:label,tier:erDiff>=0.8?"STRONG":"LEAN",score:erDiff*4,note:"Proj "+fmt(projER,1)+" ER · ERA "+fmt(spEra,2)+(pl&&pl.d14&&pl.d14.era!=null?" (recent "+fmt(pl.d14.era,2)+")":"")});
+      // Umpire run factor squeezes or inflates run environment, which flows through to ER.
+      projER = projER * __umpRunMult;
+      const erLine2 = Math.round(projER*2)/2;
+      const erDiff2 = Math.abs(projER - erLine2);
+      if(erDiff2>=0.4){
+        const erDir=projER>=erLine2+0.4?"OVER":"UNDER";
+        const umpERNote = Math.abs(__umpRunMult-1)>=0.02 ? " · ump "+(__umpRunMult>=1?"+":"")+Math.round((__umpRunMult-1)*100)+"%" : "";
+        bets.push({cat:"📊 ER",type:"SP ER "+erDir,pick:sp.fullName+" "+erDir+" "+fmt(erLine2,1)+" ER",game:label,tier:erDiff2>=0.8?"STRONG":"LEAN",score:erDiff2*4,
+          cashProb: cashPctFromDelta(erDiff2, 1.0),
+          note:"Proj "+fmt(projER,1)+" ER · ERA "+fmt(spEra,2)+(pl&&pl.d14&&pl.d14.era!=null?" (recent "+fmt(pl.d14.era,2)+")":"")+umpERNote});
       }
     });
 
@@ -4218,7 +4347,9 @@ function renderBets() {
       const bbDiff=Math.abs(projBB-bbLine);
       if(bbDiff>=0.4){
         const bbDir=projBB>=bbLine+0.4?"OVER":"UNDER";
-        bets.push({cat:"📊 BB",type:"SP BB "+bbDir,pick:sp.fullName+" "+bbDir+" "+fmt(bbLine,1)+" BB",game:label,tier:bbDiff>=0.8?"STRONG":"LEAN",score:bbDiff*4,note:"Proj "+fmt(projBB,1)+" BB · BB/9 "+fmt(bb9,1)});
+        bets.push({cat:"📊 BB",type:"SP BB "+bbDir,pick:sp.fullName+" "+bbDir+" "+fmt(bbLine,1)+" BB",game:label,tier:bbDiff>=0.8?"STRONG":"LEAN",score:bbDiff*4,
+          cashProb: cashPctFromDelta(bbDiff, 1.0),
+          note:"Proj "+fmt(projBB,1)+" BB · BB/9 "+fmt(bb9,1)});
       }
     });
 
@@ -4240,7 +4371,9 @@ function renderBets() {
         }
         hitProj = Math.max(hitProj,0.3);
         if(hitProj>=1.20&&(status==="ON FIRE"||status==="HOT")){
-          bets.push({cat:"📊 Hits",type:"Hit OVER 0.5",pick:p.fullName+" O0.5 Hits",game:label,tier:hitProj>=1.40&&status==="ON FIRE"?"STRONG":"LEAN",score:(hitProj-0.5)*5,note:"Proj "+fmt(hitProj,2)+" hits · 7d AVG "+(hc7avg!=null?hc7avg.toFixed(3):"—")+" "+status});
+          bets.push({cat:"📊 Hits",type:"Hit OVER 0.5",pick:p.fullName+" O0.5 Hits",game:label,tier:hitProj>=1.40&&status==="ON FIRE"?"STRONG":"LEAN",score:(hitProj-0.5)*5,
+            cashProb: cashPctFromDelta(hitProj-0.95, 1.4),
+            note:"Proj "+fmt(hitProj,2)+" hits · 7d AVG "+(hc7avg!=null?hc7avg.toFixed(3):"—")+" "+status});
         }
       });
     });
@@ -4273,17 +4406,24 @@ function renderBets() {
     });
     html += '</div>';
 
-    html += '<table><thead><tr><th>Category</th><th>Type</th><th>Pick</th><th>Game</th><th>Tier</th><th>Score</th><th>Notes</th></tr></thead><tbody>';
+    html += '<table><thead><tr><th>Category</th><th>Type</th><th>Pick</th><th>Game</th><th>Tier</th><th>Cash %</th><th>Score</th><th>Notes</th></tr></thead><tbody>';
     bets.slice(0,40).forEach(function(b){
       const tb = b.tier.replace(/[↑↓*]/g,"");
       const tierCls = tb==="LOCK"?"pill good":tb==="STRONG"?"pill good":"pill warn";
       const tierIcon = tb==="LOCK"?"🔒":tb==="STRONG"?"💪":"👍";
+      const cashN = (typeof b.cashProb === 'number') ? Math.round(b.cashProb * 100) : null;
+      const cashCls = cashN == null ? '' : (cashN >= 70 ? 'edge-good' : cashN >= 55 ? 'edge-neu' : 'edge-soft');
+      const cashTxt = cashN == null ? '—' : (cashN + '%');
+      // Normalize any 2 or 3 letter team code that may still live inside pick or game labels.
+      const pickDisplay = (typeof normalizeTeamCodesInText === 'function') ? normalizeTeamCodesInText(b.pick||'') : (b.pick||'');
+      const gameDisplay = (typeof normalizeTeamCodesInText === 'function') ? normalizeTeamCodesInText(b.game||'') : (b.game||'');
       html += '<tr>'+
         '<td><b>'+esc(b.cat)+'</b></td>'+
         '<td>'+esc(b.type)+'</td>'+
-        '<td><b>'+esc(b.pick)+'</b></td>'+
-        '<td>'+esc(b.game)+'</td>'+
+        '<td><b>'+esc(pickDisplay)+'</b></td>'+
+        '<td>'+esc(gameDisplay)+'</td>'+
         '<td><span class="'+tierCls+'">'+tierIcon+' '+esc(b.tier)+'</span></td>'+
+        '<td class="'+cashCls+'"><b>'+cashTxt+'</b></td>'+
         '<td class="edge-good">'+fmt(b.score,1)+'</td>'+
         '<td class="small" style="color:var(--muted);max-width:350px;">'+esc(b.note)+'</td></tr>';
     });
