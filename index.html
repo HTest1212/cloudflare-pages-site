@@ -5148,7 +5148,10 @@ function renderBets() {
         // Base RBI projection from team run share and SLG quality.
         let projRbi = teamRunProj * slotShare * (seasonSlg / 0.400);
         if (recentAvg != null) projRbi *= (1 + (recentAvg - 0.260) * 0.7);
-        if (parkRunsMult) projRbi *= parkRunsMult;
+        // Park runs adjustment. Use parkForGame result if available, otherwise neutral 1.0.
+        const __pfLocal = (typeof parkForGame === 'function') ? parkForGame(g) : null;
+        const __parkRunsLocal = (__pfLocal && __pfLocal.r) ? Number(__pfLocal.r) : 1.0;
+        projRbi *= __parkRunsLocal;
         if (projRbi >= 0.85) {
           const rbiProb = Math.min(0.80, 1 - Math.exp(-projRbi * 0.95));
           const lineLbl = projRbi >= 1.25 ? "O0.5" : "O0.5";
