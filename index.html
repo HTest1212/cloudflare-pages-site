@@ -2676,6 +2676,58 @@ function teamAbbrFromName(name) {
   const last = String(name).split(' ').pop();
   return last.slice(0, 3).toUpperCase();
 }
+// Short display nickname. Uses the common two word nicknames (Red Sox, Blue Jays,
+// White Sox) where applicable, otherwise falls back to the last word
+// (Yankees, Dodgers, Braves). This keeps the Best Bets ribbon readable without
+// leaning on three letter abbreviations.
+function teamNicknameFromName(name) {
+  if (!name) return '';
+  const nameStr = String(name).trim();
+  // Explicit mapping for known clubs so we always render the canonical nickname
+  // regardless of what the upstream feed sends (e.g., "Athletics" vs "Oakland Athletics").
+  const MAP = {
+    'Arizona Diamondbacks': 'Diamondbacks',
+    'Atlanta Braves': 'Braves',
+    'Baltimore Orioles': 'Orioles',
+    'Boston Red Sox': 'Red Sox',
+    'Chicago Cubs': 'Cubs',
+    'Chicago White Sox': 'White Sox',
+    'Cincinnati Reds': 'Reds',
+    'Cleveland Guardians': 'Guardians',
+    'Colorado Rockies': 'Rockies',
+    'Detroit Tigers': 'Tigers',
+    'Houston Astros': 'Astros',
+    'Kansas City Royals': 'Royals',
+    'Los Angeles Angels': 'Angels',
+    'Los Angeles Dodgers': 'Dodgers',
+    'Miami Marlins': 'Marlins',
+    'Milwaukee Brewers': 'Brewers',
+    'Minnesota Twins': 'Twins',
+    'New York Mets': 'Mets',
+    'New York Yankees': 'Yankees',
+    'Athletics': 'Athletics',
+    'Oakland Athletics': 'Athletics',
+    'Philadelphia Phillies': 'Phillies',
+    'Pittsburgh Pirates': 'Pirates',
+    'San Diego Padres': 'Padres',
+    'San Francisco Giants': 'Giants',
+    'Seattle Mariners': 'Mariners',
+    'St. Louis Cardinals': 'Cardinals',
+    'Tampa Bay Rays': 'Rays',
+    'Texas Rangers': 'Rangers',
+    'Toronto Blue Jays': 'Blue Jays',
+    'Washington Nationals': 'Nationals'
+  };
+  if (MAP[nameStr]) return MAP[nameStr];
+  // Fallback: pull trailing one or two word nickname. If the last two words are
+  // a known compound (Red Sox, Blue Jays, White Sox), join them; otherwise use the last word.
+  const parts = nameStr.split(/\s+/);
+  if (parts.length >= 2) {
+    const tail2 = parts.slice(-2).join(' ');
+    if (/^(Red Sox|Blue Jays|White Sox)$/i.test(tail2)) return tail2;
+  }
+  return parts[parts.length - 1];
+}
 function scoreBestBets(g, a) {
   const out = [];
   const odds = (STATE.odds && STATE.odds.games && STATE.odds.games[g.gamePk]) || null;
@@ -2689,6 +2741,10 @@ function scoreBestBets(g, a) {
   const homeName = g.teams && g.teams.home && g.teams.home.team && g.teams.home.team.name || '';
   const awayAbbr = teamAbbrFromName(awayName);
   const homeAbbr = teamAbbrFromName(homeName);
+  // Display nicknames for the Best Bets ribbon. We prefer full nicknames
+  // (Yankees, Red Sox, Blue Jays) over three letter abbreviations so labels read naturally.
+  const awayNick = (typeof teamNicknameFromName === 'function') ? teamNicknameFromName(awayName) : awayAbbr;
+  const homeNick = (typeof teamNicknameFromName === 'function') ? teamNicknameFromName(homeName) : homeAbbr;
   const venueName = (g.venue && g.venue.name) || '';
 
   // Bullpen availability penalties. A team with an unavailable closer or setup man
@@ -2762,7 +2818,7 @@ function scoreBestBets(g, a) {
       }
       out.push({
         market: 'ML',
-        label: (pickAway ? awayAbbr : homeAbbr) + ' moneyline',
+        label: (pickAway ? awayNick : homeNick) + ' moneyline',
         sub: subParts.join(' • '),
         price: priceRaw,
         cashProb: p,
@@ -2867,7 +2923,7 @@ function scoreBestBets(g, a) {
     if (Math.abs(awayRollingRunAdj) > 0.12) subParts.push('form ' + (awayRollingRunAdj>=0?'+':'') + awayRollingRunAdj.toFixed(1));
     out.push({
       market: 'TT_AWAY',
-      label: awayAbbr + ' team total ' + (pickOver ? 'Over ' : 'Under ') + '4.5',
+      label: awayNick + ' team total ' + (pickOver ? 'Over ' : 'Under ') + '4.5',
       sub: subParts.join(' • '),
       price: -110,
       cashProb: pickOver ? p : (1 - p),
@@ -2884,7 +2940,7 @@ function scoreBestBets(g, a) {
     if (Math.abs(homeRollingRunAdj) > 0.12) subParts.push('form ' + (homeRollingRunAdj>=0?'+':'') + homeRollingRunAdj.toFixed(1));
     out.push({
       market: 'TT_HOME',
-      label: homeAbbr + ' team total ' + (pickOver ? 'Over ' : 'Under ') + '4.5',
+      label: homeNick + ' team total ' + (pickOver ? 'Over ' : 'Under ') + '4.5',
       sub: subParts.join(' • '),
       price: -110,
       cashProb: pickOver ? p : (1 - p),
@@ -3058,7 +3114,8 @@ function renderBestBetsBlock(g, a) {
     const arrow = form.deltaOps > 0 ? '▲' : '▼';
     const pts = Math.round(form.deltaOps * 1000); // thousandths of OPS
     const sign = pts > 0 ? '+' : '';
-    return '<span class="bb-ctx-item"><span class="bb-ctx-icon '+cls+'">F</span><span class="bb-ctx-label">'+esc(teamAbbrFromName(teamName))+' form:</span><span class="bb-ctx-val">'+arrow+' '+sign+pts+' OPS (last '+form.games15+' g)</span></span>';
+    const label = (typeof teamNicknameFromName === 'function') ? teamNicknameFromName(teamName) : teamAbbrFromName(teamName);
+    return '<span class="bb-ctx-item"><span class="bb-ctx-icon '+cls+'">F</span><span class="bb-ctx-label">'+esc(label)+' form:</span><span class="bb-ctx-val">'+arrow+' '+sign+pts+' OPS (last '+form.games15+' g)</span></span>';
   }
   const af = formBadge(awayName, awayForm); if (af) ctxItems.push(af);
   const hf = formBadge(homeName, homeForm); if (hf) ctxItems.push(hf);
