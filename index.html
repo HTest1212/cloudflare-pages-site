@@ -675,6 +675,7 @@
       <button data-tab="hitprops">Hit Props</button>
       <button data-tab="erprops">SP Earned Runs</button>
       <button data-tab="bbprops">SP Walk Props</button>
+      <button data-tab="hrprops" style="background:linear-gradient(135deg,#b91c1c,#ea580c);color:#fff;border-radius:6px 6px 0 0;font-weight:600;">💣 HR Props</button>
     </span>
   </span>
 
@@ -895,6 +896,16 @@
       </div>
     </div>
     <div id="bbPropsGrid"></div>
+  </section>
+
+  <section class="tab" id="tab-hrprops">
+    <div class="section-head">
+      <div>
+        <h2>💣 Anytime Home Run Props</h2>
+        <p>Only hitters with a per game HR probability of 28% or higher. Model blends Statcast Barrel%, HardHit%, xSLG and ISO with starter HR/9, park HR factor, wind HR carry, temperature, platoon and recent form, layered with career BvP when available. Sort by any column by clicking its header.</p>
+      </div>
+    </div>
+    <div id="hrPropsGrid"></div>
   </section>
 
   <section class="tab" id="tab-pitchers">
@@ -1179,6 +1190,8 @@ const STATE = {
   pitchMatchup: {},        // populated from /pitch_matchup_overlay.json (per pitcher arsenal + lineup xSLG by pitch)
   betsTable: [],           // filtered unified Best Bets rows, cached so sort clicks can re-render instantly
   betsSort: { key: 'score', dir: 'desc' }, // active sort key and direction for the Best Bets table headers
+  hrPropsTable: [],        // filtered HR Props rows (>= 28% per game), cached for instant sorting
+  hrPropsSort: { key: 'prob', dir: 'desc' }, // active sort key and direction for the HR Props table headers
   loading: false
 };
 
@@ -4710,6 +4723,148 @@ function renderBBProps() {
     '<div class="loader">Loading pitcher stats…</div>';
 }
 
+/* =========== HR PROPS (top anytime HR picks, 28% floor, sortable) =========== */
+// Pulls the HR engine output per game, keeps only hitters at or above 28% per game,
+// then caps to the top 2 candidates per game so the board is never crowded with
+// back to back teammates from the same lineup. Results are cached on
+// STATE.hrPropsTable so sort clicks redraw instantly without reprocessing the model.
+function renderHRProps() {
+  const el = document.getElementById('hrPropsGrid');
+  if (!el) return;
+  if (typeof hrCandidatesForGame !== 'function') {
+    el.innerHTML = '<div class="loader">HR engine not ready…</div>';
+    return;
+  }
+  const rows = [];
+  (STATE.games || []).forEach(function(g){
+    const pool = hrCandidatesForGame(g) || [];
+    // Floor the board at 28 percent model cash.
+    const qualified = pool.filter(function(c){ return c && typeof c.probPerGame === 'number' && c.probPerGame >= 0.28; });
+    // Keep only the two best per game so one lineup cannot dominate the board.
+    qualified.slice(0, 2).forEach(function(c){
+      const teamObj = g.teams[c.teamSide] && g.teams[c.teamSide].team;
+      const oppSide = c.teamSide === 'away' ? 'home' : 'away';
+      const oppTeamObj = g.teams[oppSide] && g.teams[oppSide].team;
+      const awayName = g.teams.away.team.name;
+      const homeName = g.teams.home.team.name;
+      rows.push({
+        batter:    (c.batter && c.batter.name) || 'Hitter',
+        team:      teamObj ? teamObj.name : '',
+        oppTeam:   oppTeamObj ? oppTeamObj.name : '',
+        opp:       c.oppName || '',
+        order:     c.battingOrder || null,
+        tier:      c.tier || 'DART',
+        prob:      c.probPerGame,
+        probPA:    c.probPerPA,
+        price:     c.price,
+        reason:    c.reason || '',
+        game:      awayName + ' @ ' + homeName
+      });
+    });
+  });
+  STATE.hrPropsTable = rows;
+  if (!STATE.hrPropsSort) STATE.hrPropsSort = { key: 'prob', dir: 'desc' };
+  drawHRPropsTable();
+}
+
+// Renders the HR Props table with click to sort column headers. Sort state lives
+// on STATE.hrPropsSort so the user's selection survives across re renders.
+function drawHRPropsTable() {
+  const el = document.getElementById('hrPropsGrid');
+  if (!el) return;
+  const rows = (STATE.hrPropsTable || []).slice();
+  const sort = STATE.hrPropsSort || { key: 'prob', dir: 'desc' };
+  const keyFns = {
+    batter: function(r){ return (r.batter || '').toLowerCase(); },
+    team:   function(r){ return (r.team || '').toLowerCase(); },
+    game:   function(r){ return (r.game || '').toLowerCase(); },
+    order:  function(r){ return typeof r.order === 'number' ? r.order : 99; },
+    tier:   function(r){
+      const t = (r.tier || '').toUpperCase();
+      return t === 'ELITE' ? 4 : t === 'STRONG' ? 3 : t === 'LEAN' ? 2 : t === 'DART' ? 1 : 0;
+    },
+    prob:   function(r){ return typeof r.prob === 'number' ? r.prob : -1; },
+    probPA: function(r){ return typeof r.probPA === 'number' ? r.probPA : -1; },
+    price:  function(r){ return typeof r.price === 'number' ? r.price : 99999; }
+  };
+  const keyFn = keyFns[sort.key] || keyFns.prob;
+  rows.sort(function(a,b){
+    const av = keyFn(a), bv = keyFn(b);
+    if (av < bv) return sort.dir === 'asc' ? -1 : 1;
+    if (av > bv) return sort.dir === 'asc' ? 1 : -1;
+    return 0;
+  });
+
+  var html = '<div class="explain-banner"><span class="eb-title">💣 Anytime HR leaderboard:</span> '+
+    'Only hitters with a model per game HR probability of 28% or higher. Up to two picks per game. Columns are click sortable.</div>';
+
+  if (!rows.length) {
+    html += '<div class="loader">No HR candidates model above 28% right now. Lineups or Statcast overlays may still be loading.</div>';
+    el.innerHTML = html;
+    return;
+  }
+
+  // Sortable header builder: arrow on active column, toggles direction on repeat click.
+  function th(key, label, align){
+    const active = sort.key === key;
+    const arrow = active ? (sort.dir === 'asc' ? ' ▲' : ' ▼') : '';
+    const style = 'cursor:pointer;user-select:none;'+(align === 'right' ? 'text-align:right;' : '');
+    return '<th data-hrprops-sort="'+key+'" style="'+style+'">'+esc(label)+arrow+'</th>';
+  }
+
+  html += '<table><thead><tr>'+
+    th('batter','Batter')+
+    th('team','Team')+
+    th('game','Game')+
+    th('order','Order')+
+    th('tier','Tier')+
+    th('prob','Model %','right')+
+    th('probPA','Per PA %','right')+
+    th('price','Price','right')+
+    '<th>Drivers</th>'+
+    '</tr></thead><tbody>';
+
+  rows.forEach(function(r){
+    const t = (r.tier || '').toUpperCase();
+    const tierCls = t === 'ELITE' ? 'pill good' : t === 'STRONG' ? 'pill good' : t === 'LEAN' ? 'pill warn' : 'pill';
+    const tierIcon = t === 'ELITE' ? '🔥' : t === 'STRONG' ? '💪' : t === 'LEAN' ? '👀' : '🎯';
+    const pct = Math.round(r.prob * 100);
+    const paPct = (r.probPA * 100).toFixed(1);
+    const price = (typeof r.price === 'number') ? ((r.price > 0 ? '+' : '') + r.price) : '—';
+    const probCls = pct >= 36 ? 'edge-good' : pct >= 30 ? 'edge-good' : pct >= 28 ? 'edge-neu' : 'edge-soft';
+    html += '<tr>'+
+      '<td><b>'+esc(r.batter)+'</b></td>'+
+      '<td>'+esc(r.team)+'</td>'+
+      '<td class="small" style="color:var(--muted);">'+esc(r.game)+'</td>'+
+      '<td style="text-align:center;">'+(r.order != null ? r.order : '—')+'</td>'+
+      '<td><span class="'+tierCls+'">'+tierIcon+' '+esc(t)+'</span></td>'+
+      '<td class="'+probCls+'" style="text-align:right;"><b>'+pct+'%</b></td>'+
+      '<td style="text-align:right;">'+paPct+'%</td>'+
+      '<td style="text-align:right;">'+esc(price)+'</td>'+
+      '<td class="small" style="color:var(--muted);max-width:360px;line-height:1.45;">'+esc(r.reason)+'</td>'+
+    '</tr>';
+  });
+  html += '</tbody></table>';
+
+  el.innerHTML = html;
+
+  // Attach click handlers to sortable headers. Toggle direction on repeat click.
+  const headers = document.querySelectorAll('#hrPropsGrid th[data-hrprops-sort]');
+  headers.forEach(function(h){
+    h.addEventListener('click', function(){
+      const k = h.getAttribute('data-hrprops-sort');
+      if (STATE.hrPropsSort && STATE.hrPropsSort.key === k) {
+        STATE.hrPropsSort.dir = STATE.hrPropsSort.dir === 'asc' ? 'desc' : 'asc';
+      } else {
+        // Numeric columns default to descending, text columns to ascending.
+        const defaultDir = (k === 'prob' || k === 'probPA' || k === 'tier') ? 'desc' : (k === 'price' || k === 'order') ? 'asc' : 'asc';
+        STATE.hrPropsSort = { key: k, dir: defaultDir };
+      }
+      drawHRPropsTable();
+    });
+  });
+}
+
 async function renderBvP() {
   const el = $("#bvpGrid");
   el.innerHTML = '<div class="loader">Loading BvP history…</div>';
@@ -5024,29 +5179,8 @@ function renderBets() {
       });
     });
 
-    // ── 10. HR PROPS — dedicated probability engine (Statcast + BvP + park/wind/temp + platoon) ──
-    // Strict 28% model probability floor and capped at the single strongest candidate per
-    // game so home run props never crowd out the rest of the board.
-    try {
-      if (typeof hrCandidatesForGame === 'function') {
-        const hrPool = hrCandidatesForGame(g) || [];
-        const topHr = hrPool.filter(function(c){ return c && c.tier && c.tier !== 'SKIP' && c.probPerGame >= 0.28; })[0];
-        if (topHr) {
-          const c = topHr;
-          const tierLabel = c.tier === 'ELITE' ? 'LOCK' : c.tier === 'STRONG' ? 'STRONG' : 'LEAN';
-          bets.push({
-            cat: '💣 HR',
-            type: 'Anytime HR',
-            pick: (c.batter && c.batter.name ? c.batter.name : 'Hitter') + ' anytime HR',
-            game: label,
-            tier: tierLabel,
-            score: c.probPerGame * 60,
-            cashProb: c.probPerGame,
-            note: (c.reason || '') + ' · Model HR ' + Math.round(c.probPerGame * 100) + '% · ' + (c.price > 0 ? '+' : '') + c.price
-          });
-        }
-      }
-    } catch (errHrBets) { /* never block other props */ }
+    // HR props are rendered in the dedicated HR Props tab (see renderHRProps), not here,
+    // so anytime HR does not crowd the unified Top Bets board.
 
     // ── 11. NRFI / YRFI — first-inning scoring probability ──
     // We model the first inning as roughly 12% of total runs for a typical game and
@@ -5129,6 +5263,149 @@ function renderBets() {
         });
       }
     });
+
+    // ── 13a. TEAM TOTAL OVER/UNDER — per side scoring projection ──
+    // We split the game total based on the side's lineup OPS strength and SP run-prevention quality.
+    // Sharper than the game total because one side can pop while the other stays quiet.
+    ["away","home"].forEach(function(side){
+      const lu = (g.lineups && g.lineups[side+"Players"]) || [];
+      const oppSP = g.teams[side === 'away' ? 'home' : 'away'].probablePitcher;
+      const oppPS = STATE.pitcherStats[oppSP && oppSP.id];
+      const oppEra = Number(oppPS && oppPS.season && oppPS.season.era) || 4.50;
+      // Side OPS baseline. If lineup not posted, use team season OPS.
+      let sideOps = 0.720;
+      if (lu.length >= 8) {
+        let n = 0, s = 0;
+        lu.slice(0, 9).forEach(function(p){
+          const bs = STATE.batterSplits && STATE.batterSplits[p.id];
+          const ops = bs && bs.season && Number(bs.season.ops);
+          if (ops) { s += ops; n++; }
+        });
+        if (n) sideOps = s / n;
+      } else {
+        const ts = STATE.teamStats[g.teams[side].team.id];
+        const to = Number(ts && ts.season && ts.season.ops);
+        if (to) sideOps = to;
+      }
+      // Project side runs: half of total game runs, then tilt by OPS vs opposing SP ERA.
+      const sideProj = (proj * 0.50) * (sideOps / 0.720) * (oppEra / 4.50);
+      const ttLine = Math.round(sideProj - 0.5) + 0.5;
+      const ttDiff = sideProj - ttLine;
+      const teamNick = (typeof teamNicknameFromName === 'function') ? teamNicknameFromName(g.teams[side].team.name) : g.teams[side].team.name;
+      if (ttDiff >= 0.6) {
+        bets.push({ cat:"📊 Team Total", type:"Team Total OVER", pick:teamNick+" O"+fmt(ttLine,1)+" Runs", game:label,
+          tier: ttDiff >= 1.1 ? "STRONG" : "LEAN",
+          score: ttDiff * 5,
+          cashProb: cashPctFromDelta(ttDiff, 0.85),
+          note:"Proj "+fmt(sideProj,2)+" R · OPS "+fmt(sideOps,3)+" vs "+fmt(oppEra,2)+" ERA"
+        });
+      } else if (ttDiff <= -0.6) {
+        bets.push({ cat:"📊 Team Total", type:"Team Total UNDER", pick:teamNick+" U"+fmt(ttLine+1,1)+" Runs", game:label,
+          tier: ttDiff <= -1.1 ? "STRONG" : "LEAN",
+          score: Math.abs(ttDiff) * 5,
+          cashProb: cashPctFromDelta(-ttDiff, 0.85),
+          note:"Proj "+fmt(sideProj,2)+" R · OPS "+fmt(sideOps,3)+" vs "+fmt(oppEra,2)+" ERA"
+        });
+      }
+    });
+
+    // ── 13b. ALTERNATE RUN LINE +1.5 — plus money dog covers ──
+    // When the underdog keeps it within a run, +1.5 cashes. This market is often
+    // overlooked. We trigger it when the dog's projected loss margin is under 1.25 runs.
+    const altRlMargin = Math.abs(rlComp); // positive toward favorite
+    if (altRlMargin > 0 && altRlMargin < 1.25) {
+      const altDog = rlComp > 0 ? awayTeam.name : homeTeam.name;
+      const altNick = (typeof teamNicknameFromName === 'function') ? teamNicknameFromName(altDog) : altDog;
+      // Probability the dog keeps it within 1.5. Baseline ~55%, compressed margin boosts.
+      const coverProb = Math.min(0.82, 0.52 + (1.25 - altRlMargin) * 0.22);
+      if (coverProb >= 0.55) {
+        bets.push({ cat:"💰 Alt RL", type:"Run Line +1.5", pick:altNick+" +1.5", game:label,
+          tier: coverProb >= 0.70 ? "STRONG" : "LEAN",
+          score: (coverProb - 0.50) * 22,
+          cashProb: coverProb,
+          note:"Proj margin "+fmt(altRlMargin,2)+" R · dog stays in reach"
+        });
+      }
+    }
+
+    // ── 13c. SP WIN PROPS — pitcher to record the win ──
+    // Requires: SP goes 5+ IP (outs >= 15), team wins, SP leaves with lead. We approximate
+    // with: (edge toward SP's team * IP-per-start likelihood * base 0.45 win rate when ahead).
+    ["away","home"].forEach(function(side){
+      const sp = g.teams[side].probablePitcher;
+      if (!sp) return;
+      const psW = STATE.pitcherStats[sp.id];
+      const ipW = Number(psW && psW.season && psW.season.inningsPitched) || null;
+      const gsW = Number(psW && psW.season && psW.season.gamesStarted) || null;
+      if (!ipW || !gsW || gsW < 1) return;
+      const ipPerStartW = ipW / gsW;
+      // Probability SP goes 5+ IP given this average: use 0.75 if 5.3+ avg, scale down.
+      const fiveIpProb = Math.max(0.35, Math.min(0.92, 0.25 + (ipPerStartW - 4.5) * 0.55));
+      // Team win probability from ML edge. Positive edge means home team favored.
+      const mlBase = 0.50 + (side === 'home' ? edge * 0.08 : -edge * 0.08);
+      const teamWinProb = Math.max(0.25, Math.min(0.75, mlBase));
+      // P(SP gets W) ~= P(5IP) * P(team wins AND SP leaves with lead, approx 0.55)
+      const winProb = fiveIpProb * teamWinProb * 0.60;
+      if (winProb >= 0.30) {
+        bets.push({ cat:"🏆 SP Win", type:"Pitcher Win", pick:sp.fullName+" to record W", game:label,
+          tier: winProb >= 0.40 ? "STRONG" : "LEAN",
+          score: (winProb - 0.25) * 25,
+          cashProb: winProb,
+          note:"IP/GS "+fmt(ipPerStartW,2)+" · team win ~"+Math.round(teamWinProb*100)+"%"
+        });
+      }
+    });
+
+    // ── 13d. TOTAL BASES 1+ — power hitters with launch quality ──
+    // TB >= 1 means any hit counts (1 for single, 2 for double, etc). Strong power
+    // hitters with SLG 0.450+ clear this regularly vs middling pitchers.
+    ["away","home"].forEach(function(side){
+      const lu = (g.lineups && g.lineups[side+"Players"]) || [];
+      if (lu.length < 8) return;
+      const oppSP = g.teams[side === 'away' ? 'home' : 'away'].probablePitcher;
+      const oppPS = STATE.pitcherStats[oppSP && oppSP.id];
+      const oppWhip = Number(oppPS && oppPS.season && oppPS.season.whip) || 1.30;
+      lu.slice(0, 6).forEach(function(p, idx){
+        const basePA = idx < 3 ? 4.3 : 4.0;
+        const bs = STATE.batterSplits && STATE.batterSplits[p.id];
+        const slg = Number(bs && bs.season && bs.season.slg) || 0.400;
+        const avg = Number(bs && bs.season && bs.season.avg) || 0.250;
+        if (slg < 0.420) return; // only surface meaningful power
+        // Approximate TB per PA from SLG rate and WHIP adjustment.
+        const tbPerPA = slg * (oppWhip / 1.30) * 0.55;
+        const tbProb = 1 - Math.pow(1 - tbPerPA, basePA);
+        const hProb = 1 - Math.pow(1 - avg * (oppWhip / 1.30), basePA);
+        const tbAtLeastOne = Math.min(0.86, Math.max(hProb, tbProb));
+        if (tbAtLeastOne >= 0.60) {
+          bets.push({ cat:"📊 TB", type:"1+ Total Bases", pick:p.fullName+" O0.5 TB", game:label,
+            tier: tbAtLeastOne >= 0.72 ? "STRONG" : "LEAN",
+            score: (tbAtLeastOne - 0.50) * 22,
+            cashProb: tbAtLeastOne,
+            note:"SLG "+fmt(slg,3)+" · AVG "+fmt(avg,3)+" vs WHIP "+fmt(oppWhip,2)
+          });
+        }
+      });
+    });
+
+    // ── 13e. FIRST 3 INNINGS TOTAL — early script indicator ──
+    // First 3 innings ~= 35% of game runs. Same park/wind/form adjustments apply but
+    // lineup quality matters more because both teams face only the starter's first pass.
+    const f3proj = proj * 0.35;
+    if (f3proj >= 3.5) {
+      bets.push({ cat:"📊 F3", type:"F3 OVER", pick:"F3 OVER "+fmt(Math.round(f3proj-0.5)+0.5,1), game:label,
+        tier: f3proj >= 4.0 ? "STRONG" : "LEAN",
+        score: (f3proj - 2.8) * 4,
+        cashProb: cashPctFromDelta(f3proj - 2.8, 0.75),
+        note:"Proj "+fmt(f3proj,2)+" R thru 3"+__factorNote
+      });
+    } else if (f3proj <= 2.3) {
+      bets.push({ cat:"📊 F3", type:"F3 UNDER", pick:"F3 UNDER "+fmt(Math.round(f3proj+0.5)+0.5,1), game:label,
+        tier: f3proj <= 2.0 ? "STRONG" : "LEAN",
+        score: (2.8 - f3proj) * 4,
+        cashProb: cashPctFromDelta(2.8 - f3proj, 0.75),
+        note:"Proj "+fmt(f3proj,2)+" R thru 3"+__factorNote
+      });
+    }
 
     // ── 13. RBI PROPS — middle-of-order hitter with hot bats behind RISP opportunities ──
     // We project RBI per batter from team run projection * slot RBI share, then adjust
@@ -7156,7 +7433,7 @@ function buildValuePreview() {
 function renderAll() {
   renderOverview(); renderGames(); renderPitchers(); renderWeather();
   renderLineups(); renderTotals(); renderKProps(); renderTeamK();
-  renderHitProps(); renderERProps(); renderBBProps(); renderHotCold(); renderBets(); renderML();
+  renderHitProps(); renderERProps(); renderBBProps(); renderHRProps(); renderHotCold(); renderBets(); renderML();
   renderRL(); renderF5();
   renderKPIs(); renderTotalsChart(); renderTeamKChart();
   renderSplitsChart(); renderSplitsTable();
@@ -7224,7 +7501,7 @@ async function refreshAllData() {
     await Promise.all([fetchParkFactors(), fetchParkWindRules(), fetchUmpireFactors(), fetchRollingForm(), fetchCatcherFraming(), fetchPitchMatchup()]);
 
     renderHotCold(); renderTeamK(); renderHitProps();
-    renderERProps(); renderBBProps();
+    renderERProps(); renderBBProps(); renderHRProps();
     renderTotals(); renderBets(); renderML(); renderRL(); renderF5();
     renderSplitsChart(); renderSplitsTable(); renderTeamKChart(); renderKPIs();
     renderMatchups(); renderYankees(); renderAnalysis();
@@ -7246,7 +7523,7 @@ async function refreshAllData() {
       const ps = STATE.pitcherStats[pid];
       return fetchPitcherLogs(pid, ps && ps.name || "SP");
     }));
-    renderML(); renderERProps(); renderBBProps(); renderAIWizard(); renderValue(); // re-render with pitcher recent form
+    renderML(); renderERProps(); renderBBProps(); renderHRProps(); renderAIWizard(); renderValue(); // re-render with pitcher recent form
 
     setStatus("Fetching yesterday's spotlight…");
     await fetchYesterdaySpotlight();
@@ -7282,6 +7559,8 @@ async function refreshAllData() {
     renderMatchups(); renderML(); renderRL(); renderBets(); renderAIWizard(); renderValue();
     // Analysis cards pick up Statcast + pitch matchup overlays, so refresh them too.
     if (typeof renderAnalysis === 'function') renderAnalysis();
+    // HR Props table depends on batter splits for season ISO/HR rate, so refresh it.
+    if (typeof renderHRProps === 'function') renderHRProps();
 
     // Prefetch BvP for every lineup batter vs the opposing SP so the HR engine has a
     // proper career-vs-pitcher signal instead of silently defaulting to neutral.
@@ -7302,6 +7581,7 @@ async function refreshAllData() {
     Promise.all(hrBvpPromises).then(function(){
       if (typeof renderAnalysis === 'function') renderAnalysis();
       if (typeof renderBets === 'function') renderBets();
+      if (typeof renderHRProps === 'function') renderHRProps();
     }).catch(function(){});
 
     setStatus("Loading BvP history (background)…");
