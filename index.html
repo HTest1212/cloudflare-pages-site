@@ -3591,14 +3591,14 @@ function scoreBestBets(g, a) {
   // --- HR props from the dedicated probability engine ---
   // The engine blends Statcast batter quality, pitcher vulnerability, park HR factor,
   // wind HR multiplier, temperature carry, platoon hand, recent form, and BvP career.
-  // We push every candidate at or above the LEAN tier so the broader Props / Picks
-  // tab gets strong coverage; the Analysis "Top HR Pick" uses a stricter 30% floor.
+  // Hard floor at 28 percent model probability per user spec: nothing under that shows
+  // anywhere (Best Bets, Props tab, or Analysis Top HR Pick).
   try {
     if (typeof hrCandidatesForGame === 'function') {
       const hrPool = hrCandidatesForGame(g) || [];
       // Cap the Best Bets bucket at the top 3 qualifying HR picks per game so a
-      // single matchup does not crowd out other markets.
-      const qualifying = hrPool.filter(function(c){ return c && c.tier && c.tier !== 'SKIP' && c.probPerGame >= 0.18; });
+      // single matchup does not crowd out other markets. Strict 28% floor.
+      const qualifying = hrPool.filter(function(c){ return c && c.tier && c.tier !== 'SKIP' && c.probPerGame >= 0.28; });
       qualifying.slice(0, 3).forEach(function(c){
         const parts = [];
         if (c.reason) parts.push(c.reason);
@@ -4107,14 +4107,14 @@ function renderAnalysis() {
 }
 
 /* ───────────────────────────── TOP HR PICK (Analysis tab) ───────────────────────────── */
-// Shows at most one home run prop per game, gated at 30% model probability so only the
+// Shows at most one home run prop per game, gated at 28% model probability so only the
 // strongest power matchups surface. Returns an empty string when nothing clears the bar.
 function renderTopHRPickBlock(g) {
   try {
     if (typeof hrCandidatesForGame !== 'function') return '';
     const pool = hrCandidatesForGame(g) || [];
-    // Only promote a pick when the model probability clears 30 percent for the game.
-    const best = pool.find(function(c){ return c && c.probPerGame >= 0.30; });
+    // Only promote a pick when the model probability clears 28 percent for the game.
+    const best = pool.find(function(c){ return c && c.probPerGame >= 0.28; });
     if (!best) return '';
     const pct = Math.round(best.probPerGame * 100);
     const paPct = (best.probPerPA * 100).toFixed(1);
@@ -5024,14 +5024,14 @@ function renderBets() {
 
     // ── 10. HR PROPS — dedicated probability engine (Statcast + BvP + park/wind/temp + platoon) ──
     // The hrCandidatesForGame helper returns every lineup batter with a tier, probability
-    // per game, price, and reason string. We surface STRONG and LEAN tiers in the Props and
-    // Picks table; the stricter ELITE and 30% floor live in the Analysis tab's Top HR Pick.
+    // per game, price, and reason string. Hard 28% model probability floor per user spec:
+    // nothing under that threshold surfaces anywhere on the dashboard.
     try {
       if (typeof hrCandidatesForGame === 'function') {
         const hrPool = hrCandidatesForGame(g) || [];
         // Show up to 3 qualifying HR picks per game so a huge park or wind day can surface
-        // the whole stack, but one matchup never drowns the table.
-        hrPool.filter(function(c){ return c && c.tier && c.tier !== 'SKIP' && c.probPerGame >= 0.22; })
+        // the whole stack, but one matchup never drowns the table. Strict 28% floor.
+        hrPool.filter(function(c){ return c && c.tier && c.tier !== 'SKIP' && c.probPerGame >= 0.28; })
               .slice(0, 3)
               .forEach(function(c){
           // Tier labels translate to the bets table lexicon (LOCK/STRONG/LEAN).
