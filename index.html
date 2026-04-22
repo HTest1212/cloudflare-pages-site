@@ -2027,6 +2027,284 @@ function pitchMatchupTotalRunDelta(game) {
   return aRun + hRun;
 }
 
+/* =========== HR PROBABILITY ENGINE (Phase 3) =========== */
+// Single source of truth for anytime HR probability. Blends Statcast batter quality,
+// pitcher HR vulnerability, park HR factor, wind HR multiplier, temperature, platoon,
+// and career batter vs pitcher history into a probability per game.
+//
+// Design philosophy:
+//   HRs are a low-probability, high-variance event driven primarily by raw batter
+//   exit velocity quality (barrel rate, hard hit rate) interacting with a pitcher's
+//   HR-prone profile. Environmental factors (park, wind, heat) can shift the rate
+//   by 15 to 30 percent. Platoon edge is real (opposite-handed matchup boosts HR
+//   rate by ~5 to 8 percent). BvP history adds a small weighted signal once the
+//   sample clears ~15 ABs.
+//
+// Returns null when we do not have enough signal to make a call.
+function computeHRProb(batter, opts) {
+  if (!batter || !batter.name) return null;
+  const sCast = (batter.statcast || {});
+  const sSeason = (batter.season || {});
+  // --- Batter raw power ---
+  // Barrel% is the single best HR predictor. Above 10% is elite, below 5% is poor.
+  // We bail early if there's no Statcast signal at all (small-sample callups).
+  const barrel = Number(sCast.barrelPct || 0);
+  const hardHit = Number(sCast.hardHitPct || 0);
+  const xslg = Number(sCast.xslg || sSeason.slg || 0.400);
+  const xba = Number(sCast.xba || sSeason.avg || 0.240);
+  const seasonSlg = Number(sSeason.slg) || 0.400;
+  const seasonAvg = Number(sSeason.avg) || 0.240;
+  const iso = Math.max(0, seasonSlg - seasonAvg);
+  // Guardrail: if we have no power signal at all, skip.
+  if (barrel <= 0 && xslg <= 0.380 && iso <= 0.120) return null;
+
+  // Base HR rate per PA. League average ~3.0% for qualified batters; we anchor at 2.8%
+  // and let the components pull up from there for elite power hitters.
+  let probPerPA = 0.028;
+  // Barrel bump: each 1% above 7% adds 1.3 points of HR probability per PA (capped).
+  probPerPA += Math.max(-0.012, Math.min(0.060, (barrel - 0.070) * 1.30));
+  // Hard hit bump: secondary, each 1% above 40% adds 0.12 points.
+  probPerPA += Math.max(-0.008, Math.min(0.020, (hardHit - 0.400) * 0.12));
+  // xSLG bump: strong tertiary signal.
+  probPerPA += Math.max(-0.012, Math.min(0.030, (xslg - 0.420) * 0.45));
+  // ISO bump: season ISO captures stabilized power when Statcast is thin.
+  probPerPA += Math.max(-0.008, Math.min(0.025, (iso - 0.170) * 0.35));
+
+  // --- Pitcher HR vulnerability ---
+  const opp = opts.opposingPitcherSavant || {};
+  const pSab = (opp.sabermetrics || {});
+  const pCast = (opp.statcast || {});
+  const pSeason = (opp.season || {});
+  const pHR9 = Number(pSab.hr9 != null ? pSab.hr9 : (pSeason.hrPer9 != null ? pSeason.hrPer9 : 1.20));
+  const pBarrelAgainst = Number(pCast.barrelPct != null ? pCast.barrelPct : 0.075);
+  const pHardHitAgainst = Number(pCast.hardHitPct != null ? pCast.hardHitPct : 0.38);
+  const pxSLGAgainst = Number(pCast.xslg != null ? pCast.xslg : 0.410);
+  // HR/9 is the most direct pitcher signal. League avg ~1.20.
+  probPerPA += Math.max(-0.010, Math.min(0.020, (pHR9 - 1.20) * 0.011));
+  // Barrel rate allowed: softer secondary signal but grounds HR/9 in quality of contact.
+  probPerPA += Math.max(-0.006, Math.min(0.015, (pBarrelAgainst - 0.075) * 0.55));
+  // xSLG against: picks up overall contact quality + ball in play luck correction.
+  probPerPA += Math.max(-0.006, Math.min(0.015, (pxSLGAgainst - 0.410) * 0.40));
+
+  // --- Environment: park, wind, temperature ---
+  const parkHr = Number(opts.parkHrMult || 1.0);
+  const windHr = Number(opts.windHrMult || 1.0);
+  let tempMult = 1.0;
+  if (opts.tempF != null) {
+    // Ball carry curve. Above 80 adds ~0.6% carry per degree; below 55 subtracts similarly.
+    if (opts.tempF >= 80) tempMult = 1 + (opts.tempF - 80) * 0.006;
+    else if (opts.tempF <= 55) tempMult = 1 - (55 - opts.tempF) * 0.006;
+    tempMult = Math.max(0.86, Math.min(1.14, tempMult));
+  }
+
+  // --- Platoon: batter hand vs pitcher throw hand ---
+  // Opposite-hand matchup is a meaningful HR boost (~+7%). Same-hand suppresses.
+  // Switch hitters (code 'S') are treated as neutral since they flip sides.
+  let platoonMult = 1.0;
+  const bHand = opts.batterHand;
+  const pHand = opts.pitcherHand;
+  if (bHand && pHand && bHand !== 'S' && pHand !== 'S') {
+    if (bHand !== pHand) platoonMult = 1.07;
+    else platoonMult = 0.93;
+  }
+
+  // --- Recent form (14 day rolling HR/PA) ---
+  // If we have recent log data on the batter, tilt the base rate 10% toward recent.
+  let formMult = 1.0;
+  if (opts.recentHRPerPA != null && opts.recentPA != null && opts.recentPA >= 30) {
+    const recentRate = opts.recentHRPerPA;
+    const recentRatio = recentRate / Math.max(0.005, probPerPA);
+    // Clamp so a 2 HR week doesn't 3x the projection.
+    formMult = Math.max(0.85, Math.min(1.18, 0.90 + 0.10 * recentRatio));
+  }
+
+  // --- BvP career adjustment ---
+  // Only applied when sample is 15+ ABs. Each HR above expected shifts the rate.
+  let bvpMult = 1.0;
+  const bvp = opts.bvp;
+  if (bvp && bvp.atBats != null && bvp.atBats >= 15) {
+    const bvpPA = bvp.plateAppearances || bvp.atBats;
+    const bvpHRPerPA = (Number(bvp.homeRuns) || 0) / Math.max(1, bvpPA);
+    const expectedHRPerPA = probPerPA;
+    const diff = bvpHRPerPA - expectedHRPerPA;
+    // Confidence scales with sample. 15 ABs ~ 20% weight, 50 ABs ~ 40% weight.
+    const weight = Math.min(0.40, bvpPA / 125);
+    bvpMult = 1 + (diff / Math.max(0.01, expectedHRPerPA)) * weight;
+    bvpMult = Math.max(0.75, Math.min(1.35, bvpMult));
+  }
+
+  // Combine multiplicative factors.
+  probPerPA = probPerPA * parkHr * windHr * tempMult * platoonMult * formMult * bvpMult;
+  probPerPA = Math.max(0.005, Math.min(0.22, probPerPA));
+
+  // Projected PAs: ~4.2 for a middle-of-order starter; down to 3.4 for a #9 bench bat.
+  const pa = opts.projPA || 4.1;
+  const probPerGame = 1 - Math.pow(1 - probPerPA, pa);
+
+  // Tier + implied price from our probability (for display only; book prices vary).
+  let tier;
+  if (probPerGame >= 0.36) tier = 'ELITE';
+  else if (probPerGame >= 0.30) tier = 'STRONG';
+  else if (probPerGame >= 0.24) tier = 'LEAN';
+  else if (probPerGame >= 0.18) tier = 'DART';
+  else tier = 'SKIP';
+  const price = probPerGame >= 0.36 ? +140 : probPerGame >= 0.30 ? +180 : probPerGame >= 0.24 ? +250 : probPerGame >= 0.18 ? +320 : +450;
+
+  return {
+    probPerGame: probPerGame,
+    probPerPA: probPerPA,
+    tier: tier,
+    price: price,
+    factors: {
+      barrel: barrel,
+      hardHit: hardHit,
+      xslg: xslg,
+      iso: iso,
+      pHR9: pHR9,
+      pBarrelAgainst: pBarrelAgainst,
+      parkHr: parkHr,
+      windHr: windHr,
+      tempMult: tempMult,
+      platoonMult: platoonMult,
+      formMult: formMult,
+      bvpMult: bvpMult,
+      bvpSample: bvp && bvp.atBats ? bvp.atBats : 0,
+      bvpHR: bvp && bvp.homeRuns ? Number(bvp.homeRuns) : 0
+    }
+  };
+}
+
+// Builds a short, human-readable reason string explaining why a HR pick scores well.
+// Surfaces at most three drivers so the UI stays readable.
+function hrReasonSummary(hrCalc) {
+  if (!hrCalc || !hrCalc.factors) return '';
+  const f = hrCalc.factors;
+  const bits = [];
+  if (f.barrel >= 0.10) bits.push('Barrel ' + (f.barrel*100).toFixed(1) + '%');
+  else if (f.barrel >= 0.08) bits.push('Barrel ' + (f.barrel*100).toFixed(1) + '%');
+  if (f.pHR9 >= 1.40) bits.push('SP HR/9 ' + f.pHR9.toFixed(2));
+  if (f.parkHr >= 1.06) bits.push('Hitter park ' + ((f.parkHr-1)*100>=0?'+':'') + Math.round((f.parkHr-1)*100) + '%');
+  else if (f.parkHr <= 0.94) bits.push('Pitcher park ' + Math.round((f.parkHr-1)*100) + '%');
+  if (f.windHr >= 1.08) bits.push('Wind out +' + Math.round((f.windHr-1)*100) + '%');
+  else if (f.windHr <= 0.92) bits.push('Wind in ' + Math.round((f.windHr-1)*100) + '%');
+  if (f.tempMult >= 1.05) bits.push('Heat +' + Math.round((f.tempMult-1)*100) + '%');
+  else if (f.tempMult <= 0.94) bits.push('Cold ' + Math.round((f.tempMult-1)*100) + '%');
+  if (f.platoonMult >= 1.05) bits.push('Opp hand');
+  if (f.bvpSample >= 15 && f.bvpHR >= 1) bits.push(f.bvpHR + ' HR in ' + f.bvpSample + ' BvP ABs');
+  if (f.xslg >= 0.500) bits.push('xSLG ' + f.xslg.toFixed(3));
+  return bits.slice(0, 4).join(' · ');
+}
+
+// Helper: gather the relevant context (park HR mult, wind HR mult, temperature,
+// pitcher hand) for a game, so the HR model can be called cleanly in many places.
+function hrContextForGame(g) {
+  const pf = parkForGame(g);
+  const w = STATE.weather && STATE.weather[g.gamePk];
+  let parkHrMult = pf && pf.hr != null ? pf.hr / 100 : 1.0;
+  let windHrMult = 1.0;
+  let tempF = null;
+  if (w) {
+    tempF = w.tempF != null ? Number(w.tempF) : null;
+    if (pf && !pf.roof && w.windDeg != null && w.windMph != null) {
+      const windTxt = (typeof projectWind === 'function') ? projectWind(w.windDeg, w.windMph, pf.orient) : '';
+      // Convert wind projection into an HR multiplier.
+      if (/OUT to/i.test(windTxt)) {
+        const mph = Number(w.windMph) || 0;
+        windHrMult = 1 + Math.min(0.25, mph * 0.018);
+      } else if (/IN from/i.test(windTxt)) {
+        const mph = Number(w.windMph) || 0;
+        windHrMult = 1 - Math.min(0.22, mph * 0.016);
+      }
+    }
+  }
+  return { parkHrMult: parkHrMult, windHrMult: windHrMult, tempF: tempF, venue: pf };
+}
+
+// Returns an array of HR candidate objects for a given game, one per batter in the
+// lineup (or projected lineup when lineups are not yet posted). Sorted by probPerGame
+// desc. Each item: { batter, probPerGame, probPerPA, tier, price, factors, reason }.
+function hrCandidatesForGame(g) {
+  const out = [];
+  if (!g || !g.teams) return out;
+  const ctx = hrContextForGame(g);
+  const awaySP = g.teams.away && g.teams.away.probablePitcher;
+  const homeSP = g.teams.home && g.teams.home.probablePitcher;
+  const sides = [
+    { side: 'away', opp: homeSP, oppHand: (typeof getPitcherHand === 'function') ? getPitcherHand(g.teams.home) : null },
+    { side: 'home', opp: awaySP, oppHand: (typeof getPitcherHand === 'function') ? getPitcherHand(g.teams.away) : null }
+  ];
+  sides.forEach(function(ctxSide){
+    if (!ctxSide.opp) return;
+    // Build a savant-style opposing pitcher object from STATE.
+    const oppPs = STATE.pitcherStats && STATE.pitcherStats[ctxSide.opp.id] ? STATE.pitcherStats[ctxSide.opp.id] : {};
+    const oppSc = STATE.statcast && STATE.statcast.pitchers && STATE.statcast.pitchers[ctxSide.opp.id] ? STATE.statcast.pitchers[ctxSide.opp.id] : {};
+    const oppObj = { sabermetrics: oppPs.sabermetrics || oppPs, statcast: oppSc, season: oppPs.season };
+    // Prefer posted lineup; fall back to projected from teamStats.topHitters when lineup is pending.
+    const lu = (g.lineups && g.lineups[ctxSide.side + 'Players']) || [];
+    // Pull Statcast batter block from the per-game statcast side array if available.
+    const sc = STATE.statcast && STATE.statcast.games && STATE.statcast.games[g.gamePk];
+    const scBatters = sc && sc.batters && sc.batters[ctxSide.side] || [];
+    // Map posted lineup players into the HR model inputs.
+    const seen = {};
+    function addCandidate(person, position) {
+      if (!person || !person.id) return;
+      if (seen[person.id]) return;
+      seen[person.id] = true;
+      // Build a batter-shaped object the model expects.
+      const scEntry = scBatters.find(function(b){ return b && (b.id === person.id || b.personId === person.id || b.name === person.fullName); }) || {};
+      // Season stats live in STATE.batterSplits keyed by player id (populated by fetchBatterSplits).
+      const splitBlob = STATE.batterSplits && STATE.batterSplits[person.id];
+      const b = {
+        id: person.id,
+        name: person.fullName || (scEntry && scEntry.name),
+        statcast: scEntry.statcast || scEntry,  // scEntry already has {xslg, barrelPct, hardHitPct, xba}
+        season: (splitBlob && splitBlob.season) || (scEntry && scEntry.season) || {}
+      };
+      // Batter hand: prefer schedule-provided batSide, fall back to the cached split side.
+      const batHand = (person.batSide && person.batSide.code) || (splitBlob && splitBlob.batSide) || null;
+      // BvP lookup via the cache. fetchBvP uses "_" separator.
+      const bvpKey = person.id + '_' + ctxSide.opp.id;
+      const bvp = STATE.bvp && STATE.bvp[bvpKey];
+      // Projected PA slot: top of order (1-3) = 4.4, middle (4-6) = 4.1, bottom (7-9) = 3.7.
+      let projPA = 4.1;
+      if (position != null) {
+        if (position <= 3) projPA = 4.4;
+        else if (position <= 6) projPA = 4.1;
+        else projPA = 3.7;
+      }
+      const calc = computeHRProb(b, {
+        opposingPitcherSavant: oppObj,
+        parkHrMult: ctx.parkHrMult,
+        windHrMult: ctx.windHrMult,
+        tempF: ctx.tempF,
+        batterHand: batHand,
+        pitcherHand: ctxSide.oppHand,
+        bvp: bvp,
+        projPA: projPA
+      });
+      if (!calc) return;
+      calc.batter = b;
+      calc.teamSide = ctxSide.side;
+      calc.oppName = ctxSide.opp.fullName;
+      calc.battingOrder = position;
+      calc.reason = hrReasonSummary(calc);
+      out.push(calc);
+    }
+    if (lu.length >= 8) {
+      lu.forEach(function(p, idx){ addCandidate(p, idx + 1); });
+    } else {
+      // Pending lineup path: pull top statcast-rated batters from the team's Statcast block.
+      scBatters.slice(0, 5).forEach(function(sb, idx){
+        if (!sb) return;
+        const person = { id: sb.id || sb.personId, fullName: sb.name, batSide: sb.batSide };
+        addCandidate(person, idx + 1);
+      });
+    }
+  });
+  out.sort(function(a,b){ return b.probPerGame - a.probPerGame; });
+  return out;
+}
+
 /* =========== STATCAST OVERLAY (pre-baked by scheduled refresh) =========== */
 // Scheduled task writes /statcast_overlay.json to the Cloudflare site root.
 // Format: { asOf, pitchers:{ id:{xera, xfip, barrelPct, hardHitPct, xwobaAgainst, k9, bb9, whiffPct, cswPct} },
@@ -3278,24 +3556,8 @@ function scoreBestBets(g, a) {
         const barrel = Number(sCast.barrelPct || 0);
         const xslg = Number(sCast.xslg || sSeason.slg || 0.400);
         const xba = Number(sCast.xba || sSeason.avg || 0.240);
-        // Anytime HR. Apply park HR factor and wind HR multiplier.
-        const hrParkWindMult = parkHrMult * windHrMult;
-        const hrProbBase = 0.07 + barrel * 1.25 + Math.max(0, oppHr9 - 1.15) * 0.06 + Math.max(0, xslg - 0.400) * 0.35;
-        const hrProb = clampProb(hrProbBase * hrParkWindMult);
-        if (hrProb >= 0.20 && barrel >= 0.06) {
-          const hrSubParts = ['Barrel ' + (barrel*100).toFixed(1) + '% vs HR/9 ' + oppHr9.toFixed(2)];
-          if (Math.abs(hrParkWindMult - 1) > 0.03) {
-            hrSubParts.push((hrParkWindMult > 1 ? 'park/wind +' : 'park/wind ') + Math.round((hrParkWindMult - 1) * 100) + '%');
-          }
-          out.push({
-            market: 'HR',
-            label: b.name + ' anytime HR',
-            sub: hrSubParts.join(' • '),
-            price: hrProb >= 0.32 ? +180 : hrProb >= 0.26 ? +240 : +310,
-            cashProb: hrProb,
-            edgeScore: hrProb - (hrProb >= 0.32 ? 0.357 : hrProb >= 0.26 ? 0.294 : 0.244)
-          });
-        }
+        // Anytime HR handled by the dedicated HR engine below (hrCandidatesForGame).
+        // The legacy inline formula is intentionally skipped so we do not double score.
         // 1+ Total Bases. Park runs factor affects TB indirectly through XBH rate.
         const tbParkMult = 1 + (parkRunsMult - 1) * 0.4;
         const tbProbBase = 0.42 + (xslg - 0.400) * 1.5 + (oppXslg - 0.400) * 0.8 + barrel * 0.5;
@@ -3325,6 +3587,34 @@ function scoreBestBets(g, a) {
       });
     });
   }
+
+  // --- HR props from the dedicated probability engine ---
+  // The engine blends Statcast batter quality, pitcher vulnerability, park HR factor,
+  // wind HR multiplier, temperature carry, platoon hand, recent form, and BvP career.
+  // We push every candidate at or above the LEAN tier so the broader Props / Picks
+  // tab gets strong coverage; the Analysis "Top HR Pick" uses a stricter 30% floor.
+  try {
+    if (typeof hrCandidatesForGame === 'function') {
+      const hrPool = hrCandidatesForGame(g) || [];
+      // Cap the Best Bets bucket at the top 3 qualifying HR picks per game so a
+      // single matchup does not crowd out other markets.
+      const qualifying = hrPool.filter(function(c){ return c && c.tier && c.tier !== 'SKIP' && c.probPerGame >= 0.18; });
+      qualifying.slice(0, 3).forEach(function(c){
+        const parts = [];
+        if (c.reason) parts.push(c.reason);
+        parts.push('Model HR ' + Math.round(c.probPerGame * 100) + '%');
+        out.push({
+          market: 'HR',
+          label: (c.batter && c.batter.name ? c.batter.name : 'Hitter') + ' anytime HR',
+          sub: parts.join(' · '),
+          price: c.price,
+          cashProb: c.probPerGame,
+          edgeScore: c.probPerGame - (c.tier === 'ELITE' ? 0.36 : c.tier === 'STRONG' ? 0.30 : c.tier === 'LEAN' ? 0.24 : 0.18),
+          hrCalc: c
+        });
+      });
+    }
+  } catch (errHr) { /* HR engine failure never blocks other markets */ }
 
   // Rank by blended score (cash probability + edge vs market)
   out.sort(function(x, y) {
@@ -3810,9 +4100,42 @@ function renderAnalysis() {
         '<p>'+normalizeTeamCodesInText(a.verdict.text||'')+'</p>'+
         '<div class="bets-row">'+a.verdict.bets.map(function(b){ return '<span class="bet-chip '+b.cls+'">'+esc(normalizeTeamCodesInText(b.t||''))+'</span>'; }).join("")+'</div>'+
       '</div>'+
+      renderTopHRPickBlock(g)+
       renderBestBetsBlock(g, a)+
       '</div>';
   }).join("");
+}
+
+/* ───────────────────────────── TOP HR PICK (Analysis tab) ───────────────────────────── */
+// Shows at most one home run prop per game, gated at 30% model probability so only the
+// strongest power matchups surface. Returns an empty string when nothing clears the bar.
+function renderTopHRPickBlock(g) {
+  try {
+    if (typeof hrCandidatesForGame !== 'function') return '';
+    const pool = hrCandidatesForGame(g) || [];
+    // Only promote a pick when the model probability clears 30 percent for the game.
+    const best = pool.find(function(c){ return c && c.probPerGame >= 0.30; });
+    if (!best) return '';
+    const pct = Math.round(best.probPerGame * 100);
+    const paPct = (best.probPerPA * 100).toFixed(1);
+    const price = (best.price > 0 ? '+' : '') + best.price;
+    const teamObj = g.teams[best.teamSide] && g.teams[best.teamSide].team;
+    const teamName = teamObj ? teamObj.name : '';
+    const reason = best.reason || '';
+    // Tier chip colour mirrors Best Bets ribbon.
+    const tierCls = best.tier === 'ELITE' ? 'good' : best.tier === 'STRONG' ? 'good' : 'warn';
+    const tierIcon = best.tier === 'ELITE' ? '🔥' : best.tier === 'STRONG' ? '💪' : '👀';
+    return ''+
+      '<div class="verdict" style="margin-top:12px;background:linear-gradient(135deg, rgba(244, 63, 94, 0.08), rgba(251, 146, 60, 0.06));border-left:3px solid #f97316;">'+
+        '<h4 style="display:flex;align-items:center;gap:8px;">💣 Top HR Pick <span class="pill-sm '+tierCls+'">'+tierIcon+' '+esc(best.tier)+'</span></h4>'+
+        '<p style="margin:4px 0 6px 0;"><b>'+esc((best.batter && best.batter.name) || 'Hitter')+'</b> anytime HR · <b>'+pct+'%</b> model probability · '+esc(price)+' odds</p>'+
+        '<div class="small" style="color:var(--muted);line-height:1.5;">'+
+          (teamName ? esc(teamName) + ' · ' : '')+
+          'Per PA ' + paPct + '% · Order ' + (best.battingOrder || '—') + ' · vs ' + esc(best.oppName || '')+
+        '</div>'+
+        (reason ? '<div class="small" style="margin-top:6px;line-height:1.55;">' + esc(reason) + '</div>' : '')+
+      '</div>';
+  } catch(e) { return ''; }
 }
 
 /* =========== HEAT MAP =========== */
@@ -4698,6 +5021,35 @@ function renderBets() {
         }
       });
     });
+
+    // ── 10. HR PROPS — dedicated probability engine (Statcast + BvP + park/wind/temp + platoon) ──
+    // The hrCandidatesForGame helper returns every lineup batter with a tier, probability
+    // per game, price, and reason string. We surface STRONG and LEAN tiers in the Props and
+    // Picks table; the stricter ELITE and 30% floor live in the Analysis tab's Top HR Pick.
+    try {
+      if (typeof hrCandidatesForGame === 'function') {
+        const hrPool = hrCandidatesForGame(g) || [];
+        // Show up to 3 qualifying HR picks per game so a huge park or wind day can surface
+        // the whole stack, but one matchup never drowns the table.
+        hrPool.filter(function(c){ return c && c.tier && c.tier !== 'SKIP' && c.probPerGame >= 0.22; })
+              .slice(0, 3)
+              .forEach(function(c){
+          // Tier labels translate to the bets table lexicon (LOCK/STRONG/LEAN).
+          const tierLabel = c.tier === 'ELITE' ? 'LOCK' : c.tier === 'STRONG' ? 'STRONG' : 'LEAN';
+          const scoreBump = c.probPerGame * 60; // 36% HR prob == 21.6 raw, floats toward the top
+          bets.push({
+            cat: '💣 HR',
+            type: 'Anytime HR',
+            pick: (c.batter && c.batter.name ? c.batter.name : 'Hitter') + ' anytime HR',
+            game: label,
+            tier: tierLabel,
+            score: scoreBump,
+            cashProb: c.probPerGame,
+            note: (c.reason || '') + ' · Model HR ' + Math.round(c.probPerGame * 100) + '% · ' + (c.price > 0 ? '+' : '') + c.price
+          });
+        });
+      }
+    } catch (errHrBets) { /* never block other props */ }
   });
 
   // ── SCORE & SORT: higher score = stronger play ──
@@ -6741,6 +7093,29 @@ async function refreshAllData() {
     await Promise.all(splitsPromises);
     // Re-render everything that uses lineup-level splits
     renderMatchups(); renderML(); renderRL(); renderBets(); renderAIWizard(); renderValue();
+    // Analysis cards pick up Statcast + pitch matchup overlays, so refresh them too.
+    if (typeof renderAnalysis === 'function') renderAnalysis();
+
+    // Prefetch BvP for every lineup batter vs the opposing SP so the HR engine has a
+    // proper career-vs-pitcher signal instead of silently defaulting to neutral.
+    setStatus("Prefetching BvP for lineup vs SP matchups (HR signal)…");
+    const hrBvpPromises = [];
+    games.forEach(function(g){
+      ['away','home'].forEach(function(side){
+        const lu = (g.lineups && g.lineups[side+'Players']) || [];
+        const oppSP = g.teams[side === 'away' ? 'home' : 'away'].probablePitcher;
+        if (!oppSP || !oppSP.id) return;
+        lu.slice(0, 9).forEach(function(p){
+          if (p && p.id) hrBvpPromises.push(fetchBvP(p.id, oppSP.id));
+        });
+      });
+    });
+    // Fire and forget the full lineup BvP prefetch; re-render Analysis + Bets when it settles
+    // so the HR picks, Top HR Pick cards, and Props table all reflect BvP context.
+    Promise.all(hrBvpPromises).then(function(){
+      if (typeof renderAnalysis === 'function') renderAnalysis();
+      if (typeof renderBets === 'function') renderBets();
+    }).catch(function(){});
 
     setStatus("Loading BvP history (background)…");
     renderBvP().then(function(){ renderAIWizard(); renderValue(); setStatus("✓ All data loaded — live", "ok"); });
