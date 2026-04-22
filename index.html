@@ -1924,174 +1924,778 @@ function buildGameNarrative(g) {
 
 /* =========== CLAUDE DAILY ANALYSIS (pre built afternoon refresh) =========== */
 const CLAUDE_DAILY_ANALYSIS = {
-  "date": "2026-04-21",
-  "lastUpdated": "2026-04-21T17:00:00Z",
-  "window": "afternoon (midday)",
+  "date": "2026-04-22",
+  "lastUpdated": "2026-04-22T21:00:00-04:00",
+  "window": "late evening (9 PM)",
   "games": {
-    "824448": {
+    "823878": {
       "paragraphs": [
-        { "title": "Pitching Matchup", "text": "Parker Messick (LHP, 1.05 ERA, 0.78 WHIP, 8.77 K per 9 across 25.2 innings and 4 starts) has been one of the quiet surprises of April. The changeup has been unhittable against righties, the fastball sits 92 to 94 with late arm side run, and he has issued almost nothing in the way of walks. Ryan Weiss (RHP, 6.75 ERA, 2.05 WHIP, 11.05 K per 9 across 14.2 innings) brings swing and miss stuff but the command has been shaky, he has walked the ballpark and given up 4 homers already. Stuff edge Weiss, command edge Messick in a landslide, pedigree edge Messick." },
-        { "title": "Offense vs Handedness", "text": "Houston faces a lefty in Messick, the Astros order slots Altuve, Alvarez, Pena, Diaz, Meyers, Walker and the rest behind in their typical heavy right handed look. Alvarez versus Messick is the matchup to circle. Cleveland runs a balanced order versus Weiss with Ramirez, Kwan, Naylor, Manzardo carrying the heaviest lumber and the Guardians have been comfortably above league average against right handed starters in 2026." },
-        { "title": "Park and Weather", "text": "Progressive Field with 74 degrees at first pitch, a 14 to 15 mph breeze blowing out to left center off the lake and zero rain in the forecast. That wind is a real factor, Messick has allowed a few fly balls this year and Ramirez with wind aid changes the calculus. Run environment tilts mildly over on air quality alone, and Progressive plays roughly neutral with a slight pitcher lean that evaporates when the wind cooperates with pull side lefties." },
-        { "title": "Strikeout Projection", "text": "Messick projects 6 to 8 K across 6 innings if he keeps the walks in check, Weiss projects 5 to 7 across 4.5 to 5 before the Houston bullpen has to cover the back half. Combined team K sits in the 16 to 19 range. The cleanest strikeout angle is Messick over at a reasonable number, Weiss over has heat but the short leash caps the ceiling." },
-        { "title": "Verdict", "text": "Cleveland is a fair home favorite behind the Messick edge, the wind pushes the total into a live zone but the gap in starter quality keeps this sided toward the Guardians. Lineups not yet posted, the wind profile is the one material update since morning." }
+        {
+          "title": "Pitching Matchup",
+          "text": "Kyle Leahy (RHP, 5.21 ERA, 1.53 WHIP, 6.16 K per 9 across 19.0 innings over 4 starts) has been serviceable but the walks and hard contact have piled up, the sinker plays when he locates glove side but the miss up is dangerous. Janson Junk (RHP, 4.50 ERA, 1.32 WHIP, 6.14 K per 9 over 22.0 innings and 4 starts) has lived on soft contact and spin, the changeup is the best pitch and he has been better at home under the closed roof. Command edge Junk, stuff edge is essentially a push with both pitchers in the low 90s."
+        },
+        {
+          "title": "Offense vs Handedness",
+          "text": "St. Louis faces a righty in Junk, the Cardinals order leans right handed with Donovan, Arenado, Contreras, Burleson and Gorman providing the left handed leverage. Miami against Leahy runs a balanced left right mix, Chisholm is the on paper danger if he is in the lineup, with Jake Burger and the top right handed bats carrying the middle. Neither offense has popped versus RHP this season, this is two average bats in a pitcher neutral dome."
+        },
+        {
+          "title": "Park and Weather",
+          "text": "loanDepot park with the retractable roof traditionally closed for day games in April, zero weather variables, the run environment is mildly pitcher friendly on the deep alleys and big outfield. Treat this one as a pure matchup in a neutral to slightly suppressed run setting, the baseline projection is a low 7s total with no wind push available."
+        },
+        {
+          "title": "Strikeout Projection",
+          "text": "Leahy projects 4 to 6 K across 5 innings, the swing and miss package is modest and the pitch counts run up fast. Junk projects 4 to 6 K across 5 to 5.5 innings with his mix. Combined K sits 14 to 17 which lines up with a quiet under on most strikeout markets."
+        },
+        {
+          "title": "Verdict",
+          "text": "Marlins as short home chalk behind Junk and home park familiarity, the total leans under with two contact first starters in a pitcher neutral dome, no lineup news has shifted the picture since afternoon."
+        }
       ],
-      "verdict": { "kind": "lean", "text": "Lean Guardians moneyline behind Messick, wind blowing out at Progressive nudges the total to a cautious over lean, Ramirez over on total bases is a stack fit.", "winner": "Cleveland Guardians", "projHome": 4.6, "projAway": 3.8, "bets": [ {"t": "Guardians ML", "cls": "ml"}, {"t": "Over team total CLE 4.5", "cls": "tt"}, {"t": "Messick over 5.5 K", "cls": "k"} ] },
-      "grade": { "letter": "B+", "cls": "b", "score": 78, "blurb": "Starter edge is real, wind muddies the total, clean lean on the side." }
+      "verdict": {
+        "kind": "lean",
+        "text": "Lean Marlins moneyline in the dome, soft under on the total with two contact first starters and no weather variables.",
+        "winner": "Miami Marlins",
+        "projHome": 4.1,
+        "projAway": 3.7,
+        "bets": [
+          {
+            "t": "Marlins ML",
+            "cls": "ml"
+          },
+          {
+            "t": "Under total",
+            "cls": "tt"
+          },
+          {
+            "t": "Junk over 4.5 K",
+            "cls": "k"
+          }
+        ]
+      },
+      "grade": {
+        "letter": "C+",
+        "cls": "c",
+        "score": 62,
+        "blurb": "Average matchup in a neutral dome, lean is real but the confidence is capped by mediocre pitching on both sides."
+      }
     },
-    "822995": {
+    "824449": {
       "paragraphs": [
-        { "title": "Pitching Matchup", "text": "Chase Burns (RHP, 2.42 ERA, 1.07 WHIP, 8.87 K per 9 over 22.1 innings) has translated pedigree into production, the fastball is playing 97 to 99 at the top of the zone and the slider is the put away. Steven Matz (LHP, 3.80 ERA, 1.03 WHIP, 8.86 K per 9 over 21.1 innings) has been efficient on limited pitch counts, he tunnels the sinker and changeup well, but this Reds right heavy order is a tough handedness draw. Stuff edge Burns, command edge Matz, pedigree edge Burns." },
-        { "title": "Offense vs Handedness", "text": "Cincinnati runs a right heavy look versus Matz with De La Cruz, Friedl, India, Steer, Encarnacion Strand in the middle and a left handed hole mostly filled by Fraley or McLain. The Reds have been above average versus lefties and Elly Cruz rakes southpaws. Tampa Bay versus Burns leans on Lowe, Diaz, Caminero and the developing young core, the Rays have run into some power arms without much damage so far." },
-        { "title": "Park and Weather", "text": "Tropicana Field is an indoor, neutral run environment park with no weather variables. The turf plays a shade hitter friendly on singles and ground ball BABIP, the roof keeps the ball predictable on fly outs. Treat this one as a pure matchup game." },
-        { "title": "Strikeout Projection", "text": "Burns projects 6 to 9 K across 5.5 to 6 innings, the Rays chase the elevated heater at a decent clip and Burns has that in abundance. Matz projects 5 to 6 K over 5.5 innings, the Reds right hand bias limits the changeup usage. Combined K sits 17 to 20." },
-        { "title": "Verdict", "text": "Reds are a short road chalk with Burns in control, roof keeps conditions neutral, Burns strikeout over is the most stable piece. No new lineup info since morning." }
+        {
+          "title": "Pitching Matchup",
+          "text": "Peter Lambert (RHP, 7.20 ERA, 1.60 WHIP, 14.40 K per 9 over 5.0 innings, 1 start) is the obvious wildcard, tiny sample, the K rate is flattering off one outing and the command has not been there. Tanner Bibee (RHP, 4.81 ERA, 1.52 WHIP, 8.51 K per 9 over 24.1 innings and 5 starts) has not been the ace version this April, the ERA is ugly but the underlying rate stats still point at a top 25 starter with the slider and curveball still generating whiffs. Pedigree and projection both go Bibee in a landslide."
+        },
+        {
+          "title": "Offense vs Handedness",
+          "text": "Houston against Bibee is a right heavy look with Altuve, Alvarez, Pena, Diaz, Walker and the typical core, the Astros have been merely okay versus righties in 2026 and Bibee is the kind of arm who can exploit chase out of zone. Cleveland against Lambert features Ramirez, Kwan, Naylor, Manzardo and a deep mix, if Lambert keeps missing over the plate the Guardians have the patience and barrel control to punish it."
+        },
+        {
+          "title": "Park and Weather",
+          "text": "Progressive Field evening conditions, mid 50s at first pitch, light wind in from center to left, no precipitation concern. The park plays near neutral with a slight suppression on the alleys, the wind profile dampens fly ball carry and the run environment sits below the posted total by about half a run. No material weather shift since afternoon."
+        },
+        {
+          "title": "Strikeout Projection",
+          "text": "Bibee projects 6 to 8 K over 5.5 to 6 innings with the breaking ball mix playing well against the Houston right handers. Lambert projects 4 to 6 over 4 to 5 innings if he survives that long, the Astros will force him to prove he can land the secondaries. Combined K sits 17 to 21."
+        },
+        {
+          "title": "Verdict",
+          "text": "Cleveland is a clear home favorite behind the Bibee projection edge and Lambert small sample risk. Total sits slightly under given the wind in, Bibee strikeout over is the cleanest piece with a decent lineup of right handed chasers in the Houston box."
+        }
       ],
-      "verdict": { "kind": "lean", "text": "Lean Reds moneyline, Burns over strikeouts is the cleanest bet, total stays neutral in the dome and plays close to posted.", "winner": "Cincinnati Reds", "projHome": 3.7, "projAway": 4.3, "bets": [ {"t": "Reds ML", "cls": "ml"}, {"t": "Burns over 6.5 K", "cls": "k"}, {"t": "Under first 5", "cls": "tt"} ] },
-      "grade": { "letter": "B", "cls": "b", "score": 74, "blurb": "Burns is the edge, dome removes variance, solid B rather than a hammer." }
+      "verdict": {
+        "kind": "lean",
+        "text": "Lean Guardians moneyline with a clear starter projection edge, Bibee over strikeouts is the go to, modest under lean on the total with wind in.",
+        "winner": "Cleveland Guardians",
+        "projHome": 4.8,
+        "projAway": 3.6,
+        "bets": [
+          {
+            "t": "Guardians ML",
+            "cls": "ml"
+          },
+          {
+            "t": "Bibee over 5.5 K",
+            "cls": "k"
+          },
+          {
+            "t": "Under total",
+            "cls": "tt"
+          }
+        ]
+      },
+      "grade": {
+        "letter": "B+",
+        "cls": "b",
+        "score": 80,
+        "blurb": "Clean starter edge and a supporting wind profile, lineup confirms would push this to A territory."
+      }
     },
-    "823880": {
+    "822993": {
       "paragraphs": [
-        { "title": "Pitching Matchup", "text": "Dustin May (RHP, 6.98 ERA, 1.60 WHIP, 6.98 K per 9 across 19.1 innings) has been searching for rhythm, the sinker has not induced the ground balls of his prime and the whiff rates are down. Chris Paddack (RHP, 5.59 ERA, 1.45 WHIP, 8.38 K per 9 across 19.1 innings) is coming off a rough outing and the changeup has been leaking over the plate. Two struggling righties, stuff edge May, command edge is a wash, pedigree edge May." },
-        { "title": "Offense vs Handedness", "text": "St. Louis is a middle of the pack offense versus right handers in 2026 with Arenado, Contreras and Donovan carrying. Miami leans on Chisholm, De La Cruz and the developing youngsters, the Marlins have been below league average versus righties but Chisholm is a live bat against anyone throwing hard." },
-        { "title": "Park and Weather", "text": "loanDepot park with the retractable roof, typically closed for April night games in Miami, treat this as dome conditions and neutral to slight pitcher friendly park factors. Humidity and swirl removed, the ball does not carry like a summer Miami outdoor game." },
-        { "title": "Strikeout Projection", "text": "May projects 4 to 6 K, Paddack 4 to 6 K, combined 14 to 18 given both pitchers have struggled to finish innings cleanly. Both totals will price right around 5, very small edge on either depending on price." },
-        { "title": "Verdict", "text": "Two back end starters with shaky form, the price should be close and the total in the mid to low range. Sit out unless a price softens meaningfully, roof should be closed so no weather edge to chase." }
+        {
+          "title": "Pitching Matchup",
+          "text": "Brandon Williamson (LHP, 4.35 ERA, 1.35 WHIP, 5.23 K per 9 over 20.2 innings and 4 starts) has been passable, the curveball is the chase pitch but the K rate is light and he lives in the zone. Nick Martinez (RHP, 2.45 ERA, 1.23 WHIP, 5.73 K per 9 over 22.0 innings and 4 starts) has been excellent through four turns, the cutter changeup mix is in rhythm and the walks are negligible. Command edge Martinez, stuff edge Martinez, results edge Martinez."
+        },
+        {
+          "title": "Offense vs Handedness",
+          "text": "Cincinnati against Martinez runs its typical right heavy look, De La Cruz, Friedl, Steer and Encarnacion Strand carry the load, the Reds handle righties fine but Martinez as a soft contact operator does not match their chase tendencies in an advantageous way. Tampa against Williamson leans on Lowe, Caminero, Diaz with pockets of lefty exposure, the Rays have been above league average versus LHP and that is a concrete advantage here."
+        },
+        {
+          "title": "Park and Weather",
+          "text": "Tropicana Field is an indoor neutral run environment, zero weather variables, the turf plays a touch hitter friendly on singles but the ceiling kills fly ball variance. Treat this as a clean matchup in a slightly pitcher neutral dome."
+        },
+        {
+          "title": "Strikeout Projection",
+          "text": "Martinez projects 4 to 6 K over 6 innings on pure efficiency, Williamson projects 4 to 6 over 5 innings. Combined K runs 14 to 17, this is not a strikeout friendly matchup and the under on most combined K markets has edge."
+        },
+        {
+          "title": "Verdict",
+          "text": "Rays as home favorite behind Martinez continuing his hot April, total leans under in the dome with two contact pitchers. No lineup news has shifted the card since afternoon."
+        }
       ],
-      "verdict": { "kind": "pass", "text": "Lean Cardinals in a slight price gap, nothing hammerworthy, preference is to pass and pivot to a K prop if available.", "winner": "St. Louis Cardinals", "projHome": 3.9, "projAway": 4.1, "bets": [ {"t": "Cardinals ML thin", "cls": "ml"}, {"t": "Pass total", "cls": "tt"} ] },
-      "grade": { "letter": "C+", "cls": "c", "score": 64, "blurb": "Two struggling starters, no clean edge, pass tier." }
+      "verdict": {
+        "kind": "lean",
+        "text": "Lean Rays moneyline, Martinez pitching prop unders are in play given low K rate, overall total leans under in a pitcher friendly dome setting.",
+        "winner": "Tampa Bay Rays",
+        "projHome": 4.2,
+        "projAway": 3.6,
+        "bets": [
+          {
+            "t": "Rays ML",
+            "cls": "ml"
+          },
+          {
+            "t": "Under total",
+            "cls": "tt"
+          },
+          {
+            "t": "Rays team total over 3.5",
+            "cls": "tt"
+          }
+        ]
+      },
+      "grade": {
+        "letter": "B",
+        "cls": "b",
+        "score": 74,
+        "blurb": "Martinez form is the clear edge, dome takes the variance out of the total read."
+      }
     },
-    "824290": {
+    "824123": {
       "paragraphs": [
-        { "title": "Pitching Matchup", "text": "Kyle Harrison (LHP, 3.07 ERA, 1.09 WHIP, 9.20 K per 9 over 14.2 innings and 3 starts) has settled into Milwaukee well, the fastball has added life and the slider is missing bats against lefties. Keider Montero (RHP, 3.31 ERA, 0.86 WHIP, 8.27 K per 9 over 16.1 innings) has been stingy on baserunners with plus command of the changeup. This is a sneakily sharp matchup on both sides, stuff edge Harrison, command edge Montero, pedigree a push." },
-        { "title": "Offense vs Handedness", "text": "Milwaukee against a righty in Montero puts Yelich, Contreras, Chourio and the balanced middle to work, the Brewers have been top third of the league versus righties. Detroit versus Harrison leans on Riley Greene, Torkelson, Carpenter, the Tigers have been around league average against lefties and Greene is a genuine concern for any LHP." },
-        { "title": "Park and Weather", "text": "Comerica Park is a cavernous pitcher friendly venue especially to center and right center. 73 degrees at first pitch, 14 mph breeze from the west southwest at 241 degrees, which plays as a moderate blow across rather than straight out. The 8 percent precipitation chance is negligible and there is no rain delay risk. The big dimensions take over and keep the run environment muted." },
-        { "title": "Strikeout Projection", "text": "Harrison projects 6 to 8 K over 5 to 6 innings, Montero projects 5 to 7 over 5.5 to 6. Combined team K 16 to 20. Harrison over at a reasonable number is the ticket, Montero overs are inning limited." },
-        { "title": "Verdict", "text": "Brewers are a short road chalk with Harrison holding the handedness edge, big park and neutral wind keep the total in under territory. No lineup updates since morning." }
+        {
+          "title": "Pitching Matchup",
+          "text": "Chris Bassitt (RHP, 6.19 ERA, 2.13 WHIP, 3.94 K per 9 over 16.0 innings and 4 starts) is buried in a bad stretch, the sinker is getting squared up, the K rate has cratered and the walks have ballooned. Michael Wacha (RHP, 1.00 ERA, 0.78 WHIP, 7.67 K per 9 over 27.0 innings and 4 starts) has been one of the best pitchers in the league through April, pounding the zone, living off the cutter and changeup and giving the Royals length every turn. This is a full tier mismatch."
+        },
+        {
+          "title": "Offense vs Handedness",
+          "text": "Baltimore against Wacha has to contend with elite command at the knees, the Orioles right handed core of Henderson, O Hearn, Mountcastle and Rutschman has been average versus RHP this season and Wacha is the wrong style to face when you are pressing. Kansas City against Bassitt gets a struggling sinkerballer, the Royals order with Witt, Perez, Pasquantino and India should be in position to chase the ball out of the zone or crush the ones left in it."
+        },
+        {
+          "title": "Park and Weather",
+          "text": "Kauffman Stadium evening conditions, upper 60s at first pitch, light 5 to 8 mph breeze and no rain. The park plays a touch pitcher friendly on the deep alleys but runs can come in bunches when command is an issue. Run environment sits close to posted with a slight lean over given the Bassitt form."
+        },
+        {
+          "title": "Strikeout Projection",
+          "text": "Wacha projects 5 to 7 K over 6 innings, the volume is there because of the innings. Bassitt projects 3 to 5 K over 4 to 4.5 innings and this is a risk of an early exit given the current form. Combined K 13 to 17."
+        },
+        {
+          "title": "Verdict",
+          "text": "Royals are a clear favorite behind the Wacha form advantage and the Bassitt regression, the total leans slightly over on the Bassitt volatility, Kansas City team total over is the cleanest bet chip."
+        }
       ],
-      "verdict": { "kind": "lean", "text": "Lean Brewers moneyline, Comerica plus cool 70s play to the under, Harrison strikeout over is the secondary ticket.", "winner": "Milwaukee Brewers", "projHome": 3.7, "projAway": 4.4, "bets": [ {"t": "Brewers ML", "cls": "ml"}, {"t": "Under total", "cls": "tt"}, {"t": "Harrison over 5.5 K", "cls": "k"} ] },
-      "grade": { "letter": "B+", "cls": "b", "score": 79, "blurb": "Comerica kills run scoring, Harrison lefty edge is real." }
+      "verdict": {
+        "kind": "lean",
+        "text": "Lean Royals moneyline at a reasonable number, Kansas City team total over is the cleanest bet, Wacha over innings prop is a secondary angle.",
+        "winner": "Kansas City Royals",
+        "projHome": 5.1,
+        "projAway": 3.3,
+        "bets": [
+          {
+            "t": "Royals ML",
+            "cls": "ml"
+          },
+          {
+            "t": "KC team total over 4.5",
+            "cls": "tt"
+          },
+          {
+            "t": "Over total",
+            "cls": "tt"
+          }
+        ]
+      },
+      "grade": {
+        "letter": "A-",
+        "cls": "a",
+        "score": 86,
+        "blurb": "Wacha has been dominant, Bassitt is in a spiral, clear side and attack points on team total."
+      }
     },
-    "822747": {
+    "824044": {
       "paragraphs": [
-        { "title": "Pitching Matchup", "text": "Reynaldo López (RHP, 2.18 ERA, 1.11 WHIP, 8.27 K per 9 across 20.2 innings) is dealing again in Atlanta, the four seam is parked at the top of the zone and the slider is generating chases from both sides. Foster Griffin (LHP, 3.05 ERA, 1.26 WHIP, 8.27 K per 9 across 20.2 innings) has been a steady back end arm for Washington, the changeup plays up against righties and he limits hard contact. Stuff edge López, command edge is a push, pedigree edge López." },
-        { "title": "Offense vs Handedness", "text": "Atlanta versus a lefty in Griffin puts Acuna, Olson, Riley, Ozuna, Harris right in the sweet spot, the Braves consistently rank top five against left handed pitching. Washington faces a righty in López, the Nats lean on Abrams, Lowe, Wood and the emerging young core, they have been below average versus power righties and López fits that profile exactly." },
-        { "title": "Park and Weather", "text": "Nationals Park at 62 degrees with a light 8 mph southerly breeze blowing slightly in from right field and essentially no rain chance. The park plays close to neutral with a light hitter lean when the ball carries, but the temperature keeps run environment honest and the wind is a small suppressor on pull side right handed power. This is a baseline pitching friendly night in DC." },
-        { "title": "Strikeout Projection", "text": "López projects 7 to 9 K across 6 innings, he is running a legitimate ace look and the Nats swing and miss profile cooperates. Griffin projects 5 to 7 K across 5.5 innings. Combined team K 18 to 22 with López carrying the heavier load." },
-        { "title": "Verdict", "text": "Braves are a sizeable road favorite behind López and the handedness edge versus Griffin, the total sits in a reasonable range given the cool night and neutral wind. Braves ML and López K over are the two plays." }
+        {
+          "title": "Pitching Matchup",
+          "text": "Eric Lauer (LHP, 7.13 ERA, 1.47 WHIP, 8.15 K per 9 over 17.2 innings and 3 starts) has swing and miss in the arsenal but the long ball has ruined every start, the fastball velocity is playing up but it is finding barrels. Jose Soriano (RHP, 0.28 ERA, 0.73 WHIP, 10.74 K per 9 over 32.2 innings and 5 starts) has been arguably the best pitcher in baseball through five, the sinker splitter combination is elite and the command has taken a real step forward. This is a full tier Soriano edge."
+        },
+        {
+          "title": "Offense vs Handedness",
+          "text": "Toronto against Soriano with his ground ball splitter profile has not been a great fit for the Blue Jays power led right handed group, Guerrero and Bichette and Kirk have some vulnerability to splitters in the dirt. The Angels against Lauer bring Trout, Ward, Schanuel and Neto into a matchup where the homer tendency is exactly what this lineup needs to pop."
+        },
+        {
+          "title": "Park and Weather",
+          "text": "Angel Stadium late evening, mid 60s at first pitch, minimal breeze and no rain. The park plays near neutral with a slight power suppression in cooler conditions, but the Soriano ground ball profile nullifies ballpark air effects. Run environment projects slightly below the posted total behind Soriano."
+        },
+        {
+          "title": "Strikeout Projection",
+          "text": "Soriano projects 6 to 9 K over 6 to 7 innings, the splitter has been generating plus whiff rates and the Blue Jays chase it fine. Lauer projects 5 to 7 K over 4.5 to 5 innings before the homer risk forces an exit. Combined K 16 to 20."
+        },
+        {
+          "title": "Verdict",
+          "text": "Angels are the stronger side behind Soriano, total leans under given the Soriano profile even if Lauer gives up bombs, Soriano strikeout over is the main attraction."
+        }
       ],
-      "verdict": { "kind": "bet", "text": "Bet Braves moneyline at fair price, López over strikeouts is the headline prop of his slot, team total ATL over is the stack angle.", "winner": "Atlanta Braves", "projHome": 3.3, "projAway": 5.1, "bets": [ {"t": "Braves ML", "cls": "ml"}, {"t": "López over 6.5 K", "cls": "k"}, {"t": "Over team total ATL 4.5", "cls": "tt"} ] },
-      "grade": { "letter": "A-", "cls": "a", "score": 86, "blurb": "Ace versus back end and Braves bats against an LHP is a premium stack." }
+      "verdict": {
+        "kind": "bet",
+        "text": "Angels moneyline and Soriano over strikeouts are both strong plays, under on the total is a supporting chip.",
+        "winner": "Los Angeles Angels",
+        "projHome": 4.6,
+        "projAway": 3.5,
+        "bets": [
+          {
+            "t": "Angels ML",
+            "cls": "ml"
+          },
+          {
+            "t": "Soriano over 6.5 K",
+            "cls": "k"
+          },
+          {
+            "t": "Under total",
+            "cls": "tt"
+          }
+        ]
+      },
+      "grade": {
+        "letter": "A",
+        "cls": "a",
+        "score": 89,
+        "blurb": "Soriano has been elite, full tier starter edge, multiple angles align."
+      }
     },
-    "824773": {
+    "823147": {
       "paragraphs": [
-        { "title": "Pitching Matchup", "text": "This is the Yankees series opener at Fenway, the user is a Yankees fan so this gets the full workup. Luis Gil (RHP, 7.00 ERA, 1.44 WHIP, 7.00 K per 9 over 9 innings and 2 starts) has struggled with command in the early going, the fastball velocity is there but the slider has been cement mixer for stretches. Connelly Early (LHP, 2.29 ERA, 1.27 WHIP, 9.15 K per 9 over 19.2 innings and 4 starts) is the Red Sox rookie who has been the story of Boston's rotation, the changeup is plus and he has missed bats from both sides. Stuff edge a wash, command edge Early, pedigree edge Gil but the results edge clearly belongs to the rookie right now." },
-        { "title": "Offense vs Handedness", "text": "The Yankees versus a lefty in Early put Judge, Stanton, Rice and LeMahieu in the strong side of the matchup, Judge versus any lefty is a bettor's dream and this is the swing point of the game. Volpe, Chisholm, Grisham fill in the rest and Chisholm has a long split versus lefties to monitor. Boston versus Gil runs Devers, Duran, Yoshida, Rafaela, Abreu, with Duran and Devers the primary concerns against the Yankee righty. The handedness matchup slightly favors the Yankees bats but Gil's command problems are the bigger variable tonight." },
-        { "title": "Park and Weather", "text": "Fenway Park at 44 degrees at first pitch and dropping into the upper 30s late, 10 to 11 mph breeze from the east at 105 degrees which is blowing in from left field toward home plate and slightly out to right. Zero precipitation risk tonight. Cold Fenway with wind blowing in from the Monster is a premium under environment, the Green Monster carry shrinks in these conditions and even Judge has to work to elevate, this is the most pitcher friendly Fenway profile we see all year." },
-        { "title": "Strikeout Projection", "text": "Early projects 5 to 7 K over 5 to 6 innings, the Yankees lineup chases less than league average but the changeup plays. Gil projects 5 to 7 K over 4.5 to 5 if he navigates traffic, his walk rate ceiling is the problem. Combined K 16 to 20, both K totals sit right around 5 and both are dicey. Judge plus total bases is the correlated Yankees attack." },
-        { "title": "Verdict", "text": "This is a cautious Yankees lean at a reasonable ML price, the cold Fenway under is the strongest non side ticket of the night for this game, the wind blowing in from left changes the Monster math entirely. Lineups were not yet announced midday, the confirming detail to watch is who Boone slots behind Judge and where Volpe hits." }
+        {
+          "title": "Pitching Matchup",
+          "text": "Aaron Civale (RHP, 3.54 ERA, 1.33 WHIP, 7.08 K per 9 over 20.1 innings and 4 starts) has been solid, the cutter and curveball combo plays in Seattle type environments and the command is generally fine. Logan Gilbert (RHP, 4.03 ERA, 1.17 WHIP, 9.93 K per 9 over 29.0 innings and 5 starts) has been vintage Gilbert minus a couple of bad innings, the fastball still plays at 95 to 96 and the slider is the out pitch. Pedigree edge clearly to Gilbert."
+        },
+        {
+          "title": "Offense vs Handedness",
+          "text": "The Athletics against Gilbert bring Rooker, Butler and Soderstrom as the power bats, the A s have been below league average versus right handed pitching and this is exactly the style of arm that exposes them. Seattle against Civale features Raleigh, Rodriguez, Polanco and Arozarena, the Mariners have scuffled against contact oriented right handers and Civale is that profile in a pitcher friendly park."
+        },
+        {
+          "title": "Park and Weather",
+          "text": "T-Mobile Park late evening with the retractable roof likely closed given cool coastal conditions, upper 50s and light wind, no rain. Even with the roof open the marine air suppresses carry, this is a bottom tier run environment and the baseline projection sits under most posted totals."
+        },
+        {
+          "title": "Strikeout Projection",
+          "text": "Gilbert projects 7 to 9 K over 6 to 7 innings, the fastball up with slider down sequence is a premium profile. Civale projects 4 to 6 over 5.5 innings. Combined K 16 to 20."
+        },
+        {
+          "title": "Verdict",
+          "text": "Mariners are a sensible home favorite behind Gilbert, total leans firmly under in T Mobile Park conditions, Gilbert strikeout over is the piece of this card to lean on."
+        }
       ],
-      "verdict": { "kind": "bet", "text": "Bet Yankees moneyline at plus money, Under the total with cold Fenway and wind blowing in is the hammer of this game, Judge over total bases is the correlated prop.", "winner": "New York Yankees", "projHome": 3.3, "projAway": 3.9, "bets": [ {"t": "Yankees ML", "cls": "ml"}, {"t": "Under 8.5", "cls": "tt"}, {"t": "Judge over total bases 1.5", "cls": "tt"} ] },
-      "grade": { "letter": "A", "cls": "a", "score": 89, "blurb": "Yankees spot, cold Fenway under is the cleanest under on the board." }
+      "verdict": {
+        "kind": "bet",
+        "text": "Mariners moneyline, Gilbert over strikeouts, and strong under lean on the total all line up behind the park profile.",
+        "winner": "Seattle Mariners",
+        "projHome": 4.2,
+        "projAway": 3.1,
+        "bets": [
+          {
+            "t": "Mariners ML",
+            "cls": "ml"
+          },
+          {
+            "t": "Gilbert over 6.5 K",
+            "cls": "k"
+          },
+          {
+            "t": "Under total",
+            "cls": "tt"
+          }
+        ]
+      },
+      "grade": {
+        "letter": "A-",
+        "cls": "a",
+        "score": 85,
+        "blurb": "Park, pitcher and matchup all align, under and side both look clean."
+      }
     },
-    "823640": {
+    "824286": {
       "paragraphs": [
-        { "title": "Pitching Matchup", "text": "Nolan McLean (RHP, 2.28 ERA, 0.76 WHIP, 10.65 K per 9 over 23.2 innings and 4 starts) has been the Mets breakout story, the curveball is a weapon against both sides and the command is beyond his years. Simeon Woods Richardson (RHP, 6.10 ERA, 1.60 WHIP, 4.79 K per 9 over 20.2 innings and 4 starts) has been grinding, the fastball has not missed bats and the secondary stuff has not located. Stuff edge McLean in a landslide, command edge McLean, pedigree a coin flip but all current arrows point to the Mets rookie." },
-        { "title": "Offense vs Handedness", "text": "Minnesota against a righty in McLean leans on Correa, Lewis, Buxton, Larnach, they have been middle of the pack versus right handers. New York against Woods Richardson puts Alonso, Lindor, Nimmo, Vientos, Alvarez in the sweet spot, the Mets lineup has been top third versus righties and Woods Richardson has been a launching pad for right handed power." },
-        { "title": "Park and Weather", "text": "Citi Field at 45 degrees for first pitch, 11 mph from the southeast at 152 degrees, which is blowing in from left field and cutting across center. Zero rain chance. Cold Citi with wind blowing in is a pitcher's paradise, the park already rates pitcher friendly and the wind removes any carry on fly balls. Any over ticket here is swimming upstream." },
-        { "title": "Strikeout Projection", "text": "McLean projects 8 to 10 K across 6 innings, the curveball plus cold means big swing and miss. Woods Richardson projects 3 to 5 across 5 innings, the strikeout rate has been poor this year. Combined team K 15 to 19 skewed heavy toward McLean." },
-        { "title": "Verdict", "text": "Mets are a comfortable home chalk with the McLean edge, cold Citi with wind in is the under special, McLean strikeout over is the signature prop of the slate. No lineup updates at midday." }
+        {
+          "title": "Pitching Matchup",
+          "text": "Chad Patrick (RHP, 0.95 ERA, 1.16 WHIP, 4.26 K per 9 over 19.0 innings and 3 starts) has ridden soft contact and a sneaky fastball to sparkling results, the K rate is light and the ERA is not quite sustainable but he has been real. Casey Mize (RHP, 2.78 ERA, 1.19 WHIP, 9.93 K per 9 over 22.2 innings and 4 starts) has finally looked like the former first overall pick, the splitter is plus, the slider has tightened, and the command profile jumped a full grade. Even footing on results, Mize has the stuff edge."
+        },
+        {
+          "title": "Offense vs Handedness",
+          "text": "Milwaukee against Mize features Yelich, Contreras, Chourio and Hoskins, the Brewers have been a tough out versus righties with deep lineup balance. Detroit against Patrick bring Torkelson, Greene, Kerry Carpenter, Ibanez into a matchup where Patrick's contact profile hands them barrel opportunities if the ball is in the zone."
+        },
+        {
+          "title": "Park and Weather",
+          "text": "Comerica Park night game, low 50s at first pitch, light 5 to 7 mph breeze and no rain. Comerica suppresses power more than any AL park and cool air only tightens that lean, run environment sits below posted totals on the baseline."
+        },
+        {
+          "title": "Strikeout Projection",
+          "text": "Mize projects 7 to 9 K over 6 innings, the splitter has been carrying a plus whiff rate. Patrick projects 3 to 5 K over 5 innings. Combined K 14 to 18."
+        },
+        {
+          "title": "Verdict",
+          "text": "Tigers are a slight home favorite behind the Mize stuff edge, the total leans under with a pitcher park in cool conditions, Mize strikeout over is the highest confidence piece."
+        }
       ],
-      "verdict": { "kind": "bet", "text": "Bet Mets moneyline, McLean over strikeouts is the top K prop of the board, Under the total in cold Citi is a stack.", "winner": "New York Mets", "projHome": 5.0, "projAway": 3.1, "bets": [ {"t": "Mets ML", "cls": "ml"}, {"t": "McLean over 7.5 K", "cls": "k"}, {"t": "Under total", "cls": "tt"} ] },
-      "grade": { "letter": "A", "cls": "a", "score": 90, "blurb": "McLean is the ace of the slate, cold Citi crushes offense, premium card." }
+      "verdict": {
+        "kind": "lean",
+        "text": "Lean Tigers moneyline, Mize over strikeouts is high confidence, under on the total has strong park support.",
+        "winner": "Detroit Tigers",
+        "projHome": 4.2,
+        "projAway": 3.4,
+        "bets": [
+          {
+            "t": "Tigers ML",
+            "cls": "ml"
+          },
+          {
+            "t": "Mize over 6.5 K",
+            "cls": "k"
+          },
+          {
+            "t": "Under total",
+            "cls": "tt"
+          }
+        ]
+      },
+      "grade": {
+        "letter": "B+",
+        "cls": "b",
+        "score": 79,
+        "blurb": "Mize is the real deal right now, Comerica cooperates, clean picture."
+      }
     },
-    "824127": {
+    "822748": {
       "paragraphs": [
-        { "title": "Pitching Matchup", "text": "Kris Bubic (LHP, 3.97 ERA, 1.06 WHIP, 10.32 K per 9 across 22.2 innings) has carried swing and miss into 2026, the changeup and curveball combination remains the backbone and he has kept the ball in the park at home. Shane Baz (RHP, 4.91 ERA, 1.55 WHIP, 7.77 K per 9 across 22 innings) has had flashes but the command has come and gone, the slider shape is there and the fastball velocity is healthy. Stuff edge a push, command edge Bubic, pedigree edge Baz." },
-        { "title": "Offense vs Handedness", "text": "Baltimore against a lefty in Bubic leans on Rutschman, Westburg, Henderson, the O's have been strong versus LHP all year. Kansas City against Baz runs Witt Jr, Perez, Pasquantino, Melendez, Witt is the centerpiece and the Royals have been average versus righties but the park tilts favor their contact profile at Kauffman." },
-        { "title": "Park and Weather", "text": "Kauffman Stadium at 77 degrees with 17 mph winds blowing out to left field at 215 degrees, no rain in the forecast. This is the wind boost game on the slate, Kauffman already plays large but the blow out to left and left center turns routine fly balls into doubles and rare fly balls into home runs for right handed power, Witt Jr. is a direct beneficiary. Total gets a legit push toward the over here." },
-        { "title": "Strikeout Projection", "text": "Bubic projects 7 to 9 K across 6 innings, the Orioles chase rate is manageable and the changeup plays. Baz projects 5 to 7 across 5.5 innings. Combined team K 17 to 21." },
-        { "title": "Verdict", "text": "Wind pushes the total toward over and Witt Jr. total bases is the correlated bet, Royals are a short home favorite but the real move is the total and the Witt prop. No lineup news yet." }
+        {
+          "title": "Pitching Matchup",
+          "text": "Martin Perez (LHP, 2.21 ERA, 0.93 WHIP, 4.43 K per 9 over 20.1 innings and 3 starts) has been the veteran junk ball magic act so far, the changeup to righties has been the best pitch and the command is excellent, but the K rate signals some regression risk. Zack Littell (RHP, 7.11 ERA, 1.74 WHIP, 6.63 K per 9 over 19.0 innings and 3 starts) has been pounded, the mid 90s fastball is getting caught up in the zone and he is not missing enough bats to bail himself out. Full tier Perez edge right now."
+        },
+        {
+          "title": "Offense vs Handedness",
+          "text": "Atlanta against Littell with Acuna, Olson, Riley, Albies, Ozuna is a dream draw for a struggling right hander, the Braves are a top tier offense against righties in neutral matchups and this is worse than neutral. Washington against Perez brings Wood, Abrams, Bell, Garcia into a matchup where Perez soft stuff can keep them off rhythm, the Nationals have been scuffling against lefties."
+        },
+        {
+          "title": "Park and Weather",
+          "text": "Nationals Park evening, mid 60s at first pitch, 8 to 10 mph breeze cross wind, no rain. The park plays close to neutral with a slight hitter tilt when the wind is cooperative, the baseline projection sits near or slightly above posted on the Littell volatility alone."
+        },
+        {
+          "title": "Strikeout Projection",
+          "text": "Perez projects 4 to 6 K over 5.5 to 6 innings, Littell projects 4 to 6 over 4 to 4.5 if he survives. Combined K 13 to 17."
+        },
+        {
+          "title": "Verdict",
+          "text": "Braves are a full tier favorite behind the Perez versus Littell gap and the offense advantage, Atlanta team total over is a stronger angle than the posted run line, total leans over behind the Littell risk."
+        }
       ],
-      "verdict": { "kind": "bet", "text": "Bet Over the total with 17 mph winds blowing out at Kauffman, Witt Jr. total bases is the correlated stack, Bubic strikeout over is the K angle.", "winner": "Kansas City Royals", "projHome": 5.0, "projAway": 4.3, "bets": [ {"t": "Over total", "cls": "tt"}, {"t": "Witt Jr over TB 1.5", "cls": "tt"}, {"t": "Bubic over 6.5 K", "cls": "k"} ] },
-      "grade": { "letter": "A-", "cls": "a", "score": 85, "blurb": "Wind is the edge, Witt Jr. is the player prop, A minus card." }
+      "verdict": {
+        "kind": "bet",
+        "text": "Braves moneyline is strong, Atlanta team total over is the sharp angle, lean over on the total behind Littell volatility.",
+        "winner": "Atlanta Braves",
+        "projHome": 3.6,
+        "projAway": 5.4,
+        "bets": [
+          {
+            "t": "Braves ML",
+            "cls": "ml"
+          },
+          {
+            "t": "ATL team total over 5",
+            "cls": "tt"
+          },
+          {
+            "t": "Over total",
+            "cls": "tt"
+          }
+        ]
+      },
+      "grade": {
+        "letter": "A-",
+        "cls": "a",
+        "score": 84,
+        "blurb": "Braves offense versus Littell form is the highest EV spot on the card."
+      }
     },
-    "824690": {
+    "824774": {
       "paragraphs": [
-        { "title": "Pitching Matchup", "text": "Shota Imanaga (LHP, 2.45 ERA, 0.77 WHIP, 12.68 K per 9 across 22 innings) has been on a different level, the splitter is unhittable and the fastball command is surgical. Jesús Luzardo (LHP, 7.94 ERA, 1.46 WHIP, 11.91 K per 9 across 22.2 innings) has the swing and miss stuff but home run trouble and command dips have tanked his ratios. Stuff edge is surprisingly close, command edge Imanaga in a landslide, pedigree edge is a push. Two lefties, so both offenses face their tougher handedness look." },
-        { "title": "Offense vs Handedness", "text": "Philadelphia versus a lefty in Imanaga puts Harper and Castellanos and Realmuto in the strong side, the Phillies have hit lefties very well historically and Harper is the centerpiece. Chicago versus Luzardo leans on Suzuki, Bellinger, Swanson, Happ, the Cubs have been league average versus LHP and Luzardo's home run problems pair ominously with Wrigley conditions today." },
-        { "title": "Park and Weather", "text": "Wrigley Field at 73 degrees, 9 to 10 mph wind from the west southwest at 257 degrees which reads as blowing out to left center, 7 percent rain chance. This is the classic summer Wrigley wind that turns fly balls into homers, the run environment jumps meaningfully and Luzardo's barrels allowed profile is an awful fit. Imanaga has been immune to homers this year but Wrigley with wind out flips any pitcher into risk." },
-        { "title": "Strikeout Projection", "text": "Imanaga projects 8 to 10 K across 6 innings, Luzardo projects 7 to 9 across 5 innings, combined team K 22 to 26 with two heavy K arms even if they surrender runs." },
-        { "title": "Verdict", "text": "The play is the total, Wrigley wind blowing out plus Luzardo pushes over hard, Cubs are a short home favorite behind Imanaga. Imanaga strikeout over is a premium secondary, and a correlated over and Cubs ML angle is on the table." }
+        {
+          "title": "Pitching Matchup",
+          "text": "Max Fried (LHP, 2.97 ERA, 0.81 WHIP, 6.21 K per 9 over 33.1 innings and 5 starts) is the Yankees rotation anchor and he has been every bit the ace, the curveball is playing in any zone, the command is elite, the contact is weak and the walks are nearly zero. Ranger Suarez (LHP, 3.22 ERA, 1.07 WHIP, 6.04 K per 9 over 22.1 innings and 4 starts) has been solid but a step below Fried, the sinker cutter combo works in Fenway in the sense that it keeps the ball on the ground but the Yankees right heavy order is a tough draw for a lefty. Command and pedigree both tilt clearly to Fried in this late evening AL East showdown."
+        },
+        {
+          "title": "Offense vs Handedness",
+          "text": "The Yankees against Ranger Suarez have the classic heavy right handed look with Judge, Stanton, Chisholm, Bellinger, Wells, LeMahieu and the Rizzo slot left side combo, Judge in particular has been crushing left handed pitching in 2026 and Stanton will be in the thick of the Fenway short porch equation. Boston against Fried faces a true ace in their park, Devers, Duran, Story, Casas and Abreu lead the order but Fried has been shutting down left heavy groups all month and the short porch does not fix bad swings against his curveball."
+        },
+        {
+          "title": "Park and Weather",
+          "text": "Fenway Park late evening, temperatures in the mid 40s at first pitch and dropping with 8 to 10 mph wind cross to slightly out to right, light precipitation chance in the 10 to 20 percent range but nothing that threatens the game. Cool dense air suppresses carry, the Wall is always a factor for right handed pull hitters but the overall run environment tightens in the 40s. Baseline projection sits at or slightly below posted total."
+        },
+        {
+          "title": "Strikeout Projection",
+          "text": "Fried projects 6 to 8 K over 6.5 to 7 innings behind the curveball and the tunneled fastball, the Red Sox can be chased with spin and Fried is the right package. Suarez projects 5 to 7 K over 5.5 to 6 innings, the Yankees right handers will force him to pitch up in the zone and cede some walks. Combined K 16 to 20."
+        },
+        {
+          "title": "Verdict",
+          "text": "Yankees are the sharper play behind the Fried edge and the matchup at a fair road price, the total leans under given the cool conditions and two capable lefties, Fried over strikeouts is a supporting angle and Judge over total bases is the headline player angle with the Wall within reach. No lineup news has changed the picture since afternoon, Cora typically leaves his regulars in versus the Yankees in a series game."
+        }
       ],
-      "verdict": { "kind": "bet", "text": "Bet Over the total with Wrigley wind out, Cubs ML behind Imanaga holds the side, Imanaga strikeout over is the K prop.", "winner": "Chicago Cubs", "projHome": 5.3, "projAway": 4.5, "bets": [ {"t": "Over total", "cls": "tt"}, {"t": "Cubs ML", "cls": "ml"}, {"t": "Imanaga over 7.5 K", "cls": "k"} ] },
-      "grade": { "letter": "A", "cls": "a", "score": 88, "blurb": "Wrigley wind out plus two K heavy lefties, premium over card." }
+      "verdict": {
+        "kind": "bet",
+        "text": "Yankees moneyline is a strong road play behind Fried, Fried over strikeouts and Judge over total bases are the sharpest player angles, lean under on the total given the cool air.",
+        "winner": "New York Yankees",
+        "projHome": 3.3,
+        "projAway": 4.5,
+        "bets": [
+          {
+            "t": "Yankees ML",
+            "cls": "ml"
+          },
+          {
+            "t": "Fried over 5.5 K",
+            "cls": "k"
+          },
+          {
+            "t": "Judge over 1.5 TB",
+            "cls": "tt"
+          },
+          {
+            "t": "Under total",
+            "cls": "tt"
+          }
+        ]
+      },
+      "grade": {
+        "letter": "A",
+        "cls": "a",
+        "score": 90,
+        "blurb": "Yankees in Fenway with Fried on the mound is the premium spot on the card, multiple angles align and the cool weather reinforces the under."
+      }
     },
-    "822914": {
+    "823641": {
       "paragraphs": [
-        { "title": "Pitching Matchup", "text": "Carmen Mlodzinski (RHP, 1.77 ERA, 1.33 WHIP, 8.85 K per 9 across 20.1 innings) has been Pittsburgh's quiet bullpen to rotation success, the sinker gets ground balls and the slider flashes plus. Texas has not officially confirmed a starter at midday, bullpen game signals have been percolating and a patchwork opener script is the most likely outcome. Edge heavily to Mlodzinski on known profile, total projection shifts with whoever follows for Texas." },
-        { "title": "Offense vs Handedness", "text": "Pittsburgh against a bullpen day is a tough read, Reynolds, Hayes, Cruz have to grind different looks. Texas versus Mlodzinski leans on Semien, Seager, Garcia, Carter, the Rangers rank middle of the pack versus righties but Seager is a special hitter regardless of arm side." },
-        { "title": "Park and Weather", "text": "Globe Life Field retractable roof is almost always closed for April night games in Arlington, treat this as dome conditions, roughly neutral to slight hitter leaning park factors. Take weather off the board here." },
-        { "title": "Strikeout Projection", "text": "Mlodzinski projects 4 to 6 K across 5 innings, the Rangers bullpen depth will add another 5 to 8 in support. Combined K lands 14 to 18, lean on specific prop pricing rather than team K totals given the opener script on one side." },
-        { "title": "Verdict", "text": "Wait on confirmed Rangers pitching before committing, Pirates at plus money is a cautious lean if Mlodzinski gets through 5, pass on total until starter news drops." }
+        {
+          "title": "Pitching Matchup",
+          "text": "Connor Prielipp (LHP, MLB debut or near debut, stats small sample or not posted) is the wildcard, the scouting book is the premium Minnesota pitching prospect with a plus changeup and a developing slider. Clay Holmes (RHP, 1.96 ERA, 1.09 WHIP, 6.26 K per 9 over 23.0 innings and 4 starts) has settled into his starter role with real results, the sinker gets ground balls, the sweeper misses bats against righties and the command has been surprisingly steady. Veteran edge Holmes, upside edge Prielipp but the variance is extreme."
+        },
+        {
+          "title": "Offense vs Handedness",
+          "text": "Minnesota against Holmes features Correa, Buxton, Lewis, Castro in a right handed heavy look, the Twins handle righties fine but Holmes sinker has been playing against that profile. Mets against Prielipp bring Lindor, Alonso, Vientos, Nimmo into a matchup where a left handed pitcher with a plus changeup can be navigated but the debut or near debut variance plays in the Mets favor on the take."
+        },
+        {
+          "title": "Park and Weather",
+          "text": "Citi Field evening game, upper 40s to low 50s at first pitch, 6 to 8 mph cross wind and no rain. Citi plays slightly pitcher friendly with the deep alleys and the cool dense air only accentuates that, run environment sits below posted totals on the baseline."
+        },
+        {
+          "title": "Strikeout Projection",
+          "text": "Holmes projects 5 to 7 K over 6 innings, Prielipp projects 4 to 6 over 4 to 5 innings if he goes that long in a debut window. Combined K 14 to 18."
+        },
+        {
+          "title": "Verdict",
+          "text": "Mets as short home favorite behind the Holmes form and the Prielipp variance, total leans under in Citi cold conditions with a pitch count limit on the Minnesota starter."
+        }
       ],
-      "verdict": { "kind": "pass", "text": "Pass until Rangers starter is confirmed, Pirates ML at plus money is a sprinkle, otherwise sit out.", "winner": "Texas Rangers", "projHome": 4.4, "projAway": 4.0, "bets": [ {"t": "Pirates ML plus", "cls": "ml"}, {"t": "Pass total", "cls": "tt"} ] },
-      "grade": { "letter": "C", "cls": "c", "score": 58, "blurb": "Unknown Rangers starter, not actionable yet." }
+      "verdict": {
+        "kind": "lean",
+        "text": "Lean Mets moneyline behind Holmes form, under on the total is the supporting play with both starters at risk of early exit.",
+        "winner": "New York Mets",
+        "projHome": 4.0,
+        "projAway": 3.4,
+        "bets": [
+          {
+            "t": "Mets ML",
+            "cls": "ml"
+          },
+          {
+            "t": "Under total",
+            "cls": "tt"
+          },
+          {
+            "t": "Under first 5",
+            "cls": "tt"
+          }
+        ]
+      },
+      "grade": {
+        "letter": "B",
+        "cls": "b",
+        "score": 72,
+        "blurb": "Holmes has been sharp, debut or near debut variance from Prielipp keeps this under a grade."
+      }
     },
-    "824369": {
+    "824688": {
       "paragraphs": [
-        { "title": "Pitching Matchup", "text": "Randy Vásquez (RHP, 2.49 ERA, 1.29 WHIP, 10.38 K per 9 across 21.2 innings) has been a nice story for the Padres, the fastball plays up and the slider has bite. Colorado has not officially confirmed a starter at midday, bullpen day or a late reshuffle is in play, and whatever emerges will be the bigger question mark at altitude." },
-        { "title": "Offense vs Handedness", "text": "San Diego versus a Colorado arm leans on Tatis, Machado, Cronenworth, Arraez, the Padres lineup depth plays especially well when the Rockies run bullpen multi inning arms. Colorado versus Vásquez runs McMahon, Doyle, Tovar, Montero, the Rockies home lineup has been average but Coors turns average into live." },
-        { "title": "Park and Weather", "text": "Coors Field with 82 degrees at first pitch, 11 to 12 mph wind from the south southeast at 148 degrees which is blowing out to right center, zero rain risk. Coors in warm weather with wind out is the highest run environment on the planet, the baseball carries, the humidor cannot fully neutralize these conditions, and any total under 11 is a live over target tonight." },
-        { "title": "Strikeout Projection", "text": "Vásquez projects 5 to 7 K across 5 innings, Coors shrinks strikeout rates across the board. Rockies arms project 4 to 7 depending on usage. Combined team K 13 to 18, K prop values are deflated here so price sensitivity is everything." },
-        { "title": "Verdict", "text": "Coors over is the play, Padres are a road favorite and Tatis Jr total bases stacks, bet the game total and individual hitter props before K angles." }
+        {
+          "title": "Pitching Matchup",
+          "text": "Kyle Backhus (LHP, 5.40 ERA, 1.20 WHIP, 12.15 K per 9 over 6.2 innings out of the pen or spot start role) is a tiny sample, likely a bullpen game or an opener situation for Philadelphia. Matthew Boyd (LHP, 6.75 ERA, 1.18 WHIP, 16.39 K per 9 over 9.1 innings and 2 starts) has been striking out the world but in small sample with an ugly ERA, the secondaries are missing bats but the misses in the zone are being punished. This is a lefty on lefty matchup with significant variance on both sides."
+        },
+        {
+          "title": "Offense vs Handedness",
+          "text": "Philadelphia against Boyd runs their standard heavy right handed look with Schwarber the outlier lefty, Turner, Harper, Bohm, Realmuto carry the leverage and the Phillies have been average against lefties this season. Cubs against Backhus or a Phillies bullpen game bring Tucker, Suzuki, Busch, Happ into what is essentially a matchup against a procession of relievers which flips the run environment wide open."
+        },
+        {
+          "title": "Park and Weather",
+          "text": "Wrigley Field night game, upper 40s at first pitch and dropping, 10 to 12 mph wind cross variable slightly in from right, no rain. Cool air and in blowing wind at Wrigley is the classic under profile, the park that plays wild with wind out is a pitcher park with wind in. Baseline projection sits firmly below posted totals."
+        },
+        {
+          "title": "Strikeout Projection",
+          "text": "Boyd projects 6 to 8 K over 4 to 5 innings, the swing and miss has been real even in the bad results. Backhus or bullpen game 6 to 10 K over 8 innings cumulatively. Combined K is high at 17 to 22 given both sides lean on strikeouts."
+        },
+        {
+          "title": "Verdict",
+          "text": "Cubs are the stronger side at home behind the more established starter, total leans firmly under in Wrigley cool wind in conditions, Boyd strikeout over is the secondary angle."
+        }
       ],
-      "verdict": { "kind": "bet", "text": "Bet Over the total at Coors with warm air and wind out, Tatis Jr over total bases is the stack, Machado hit props optional.", "winner": "San Diego Padres", "projHome": 5.4, "projAway": 6.3, "bets": [ {"t": "Over total", "cls": "tt"}, {"t": "Padres ML", "cls": "ml"}, {"t": "Tatis over TB 1.5", "cls": "tt"} ] },
-      "grade": { "letter": "A-", "cls": "a", "score": 84, "blurb": "Coors and wind out, the slate's signature over environment." }
+      "verdict": {
+        "kind": "bet",
+        "text": "Cubs moneyline, strong under on the total behind the wind and cool air, Boyd over strikeouts is a clean secondary.",
+        "winner": "Chicago Cubs",
+        "projHome": 4.3,
+        "projAway": 3.4,
+        "bets": [
+          {
+            "t": "Cubs ML",
+            "cls": "ml"
+          },
+          {
+            "t": "Under total",
+            "cls": "tt"
+          },
+          {
+            "t": "Boyd over 5.5 K",
+            "cls": "k"
+          }
+        ]
+      },
+      "grade": {
+        "letter": "B+",
+        "cls": "b",
+        "score": 79,
+        "blurb": "Wind in at Wrigley is the big confidence lift on the under, side is only a lean."
+      }
     },
-    "824045": {
+    "822913": {
       "paragraphs": [
-        { "title": "Pitching Matchup", "text": "Patrick Corbin (LHP, 4.66 ERA, 1.24 WHIP, 8.38 K per 9 across 9.2 innings and 2 starts) is on a short leash in a Blue Jays uniform, the command has been fine but the slider has not generated the whiffs he needs. Jack Kochanowicz (RHP, 3.47 ERA, 1.24 WHIP, 6.94 K per 9 across 23.1 innings) has been a contact manager on the ground, the sinker has induced double plays and he has limited walks. Stuff edge a wash, command edge Kochanowicz, pedigree edge Corbin." },
-        { "title": "Offense vs Handedness", "text": "Toronto versus a righty in Kochanowicz puts Vlad Jr, Springer, Bichette, Schneider in the heart of the order, the Jays have been middle of the pack against righties and Vlad is hunting offspeed. LA Angels against Corbin lean on Trout, Ward, Schanuel, Neto, the Angels have been below average versus lefties and Trout versus Corbin is a sizable individual bat edge." },
-        { "title": "Park and Weather", "text": "Angel Stadium at 66 degrees with 11 to 12 mph wind from the west southwest at 248 degrees, 10 percent rain chance which is trace level. The wind is blowing mostly out to left and left center, the park plays close to neutral with a slight lean pitcher friendly on homers in April, the breeze gives a small boost back toward neutral." },
-        { "title": "Strikeout Projection", "text": "Corbin projects 4 to 6 K across 5 innings, Kochanowicz projects 4 to 6 across 5.5. Combined team K 13 to 17, this is not a K rich matchup and the totals should reflect that." },
-        { "title": "Verdict", "text": "Jays are a short road chalk behind a better overall staff, the total sits in a modest zone with the wind a small hitter helper. Trout over total bases is the standalone hitter angle." }
+        {
+          "title": "Pitching Matchup",
+          "text": "Braxton Ashcraft (RHP, 2.38 ERA, 1.06 WHIP, 10.72 K per 9 over 22.2 innings and 4 starts) has been one of the early season surprises, the mid 90s sinker plays with the slider sweeper mix and he has missed a lot of bats with excellent command. Jack Leiter (RHP, 4.87 ERA, 1.48 WHIP, 10.62 K per 9 over 20.1 innings and 4 starts) has the premium stuff but the command has not caught up, the K rate is elite and the walks are the tail risk. Edge Ashcraft on command, edge Leiter on raw stuff, sharper overall profile to Ashcraft."
+        },
+        {
+          "title": "Offense vs Handedness",
+          "text": "Pirates against Leiter with Reynolds, McCutchen, Horwitz, Suwinski bring a patient order that punishes ball four tendencies, Leiter may find himself in high pitch counts early. Texas against Ashcraft brings Seager, Semien, Garcia, Langford into a tougher draw than it looks on paper, Ashcraft sinker slider profile plays against Rangers right handed power."
+        },
+        {
+          "title": "Park and Weather",
+          "text": "Globe Life Field is a retractable roof park that plays close to neutral, at 9 pm local with the roof typically closed the conditions are perfectly controlled, run environment sits near posted totals with no wind push available."
+        },
+        {
+          "title": "Strikeout Projection",
+          "text": "Ashcraft projects 6 to 8 K over 6 innings, Leiter projects 6 to 9 K over 4.5 to 5.5 innings. Combined K is elite at 19 to 23, both strikeout overs look live."
+        },
+        {
+          "title": "Verdict",
+          "text": "Rangers as short home favorite but Pirates are the interesting value on the take, total leans over only on the double strikeout profile, Ashcraft strikeout over is the sharpest piece of the card."
+        }
       ],
-      "verdict": { "kind": "lean", "text": "Lean Blue Jays moneyline, Trout over total bases is the premier hitter prop of the game, total is a pass.", "winner": "Toronto Blue Jays", "projHome": 3.8, "projAway": 4.2, "bets": [ {"t": "Blue Jays ML", "cls": "ml"}, {"t": "Trout over TB 1.5", "cls": "tt"}, {"t": "Pass total", "cls": "tt"} ] },
-      "grade": { "letter": "B", "cls": "b", "score": 72, "blurb": "Modest side lean, Trout prop is the secondary hook." }
+      "verdict": {
+        "kind": "lean",
+        "text": "Lean Pirates moneyline as value on the take, Ashcraft strikeout over is the cleanest pitcher prop, Leiter over K has variance but real upside.",
+        "winner": "Pittsburgh Pirates",
+        "projHome": 4.0,
+        "projAway": 3.8,
+        "bets": [
+          {
+            "t": "Pirates ML",
+            "cls": "ml"
+          },
+          {
+            "t": "Ashcraft over 5.5 K",
+            "cls": "k"
+          },
+          {
+            "t": "Leiter over 5.5 K",
+            "cls": "k"
+          }
+        ]
+      },
+      "grade": {
+        "letter": "B",
+        "cls": "b",
+        "score": 75,
+        "blurb": "Ashcraft has been quietly excellent, strikeout overs are the highest confidence angle."
+      }
     },
-    "823148": {
+    "824367": {
       "paragraphs": [
-        { "title": "Pitching Matchup", "text": "Luis Castillo (RHP, 5.40 ERA, 1.80 WHIP, 8.35 K per 9 across 18.1 innings) has had a rough April, the fastball has flattened and he has been hit harder than usual. Jacob Lopez (LHP, 6.38 ERA, 1.96 WHIP, 7.85 K per 9 across 18.1 innings) has not missed bats or managed traffic either. Two struggling starters who were supposed to be staff anchors, stuff edge Castillo on profile, command edge a push, pedigree edge Castillo." },
-        { "title": "Offense vs Handedness", "text": "A's versus a righty in Castillo runs the Rooker, Butler, Langeliers core, the A's have been a surprisingly solid bat versus right handed stuff. Seattle versus Lopez leans on Raleigh, Rodriguez, Polanco, Garver, Mariners have been average versus lefties and Raleigh is a split winner here." },
-        { "title": "Park and Weather", "text": "T-Mobile Park is a retractable roof venue, typically open for night games in reasonable weather. 59 degrees with 8 mph wind, 23 percent rain chance which is the highest of the slate so rain delay risk exists. Park plays pitcher friendly especially to the alleys, cool marine air suppresses carry. Run environment low." },
-        { "title": "Strikeout Projection", "text": "Castillo projects 5 to 7 K across 5 innings, Lopez 4 to 6 across 4.5 to 5. Combined team K 14 to 18 below league average given both starters have not locked in yet." },
-        { "title": "Verdict", "text": "Mariners are a home favorite against a weaker A's lineup, rain delay monitor is worth a note, total into the under is the lean if weather cooperates. No lineup info yet." }
+        {
+          "title": "Pitching Matchup",
+          "text": "Walker Buehler (RHP, 4.58 ERA, 1.25 WHIP, 9.17 K per 9 over 17.2 innings and 4 starts) has been trending up as the stuff continues to rebuild toward peak form, the four seam and curveball play in any park but Coors is a different animal and he has struggled there historically. Tomoyuki Sugano (RHP, 3.92 ERA, 1.16 WHIP, 6.53 K per 9 over 20.2 innings and 4 starts) has been the Rockies most reliable starter, the command is elite and the mix keeps hitters honest, but Coors home games are their own universe. Edge Buehler on stuff, Sugano has the environment familiarity."
+        },
+        {
+          "title": "Offense vs Handedness",
+          "text": "Padres against Sugano bring Machado, Tatis, Merrill, Arraez, Bogaerts and an elite lineup top to bottom, this is by leverage the highest upside offense on the night and Sugano will have to pitch carefully in the zone. Rockies against Buehler feature Doyle, McMahon, Goodman, Montero and the usual cast, the Coors effect means any contact becomes a threat."
+        },
+        {
+          "title": "Park and Weather",
+          "text": "Coors Field night game, low 60s at first pitch, 5 to 8 mph wind variable, no rain. Coors Field in April with mild air and light wind is still a high run environment, the elevation effect alone lifts baseline totals by 1.5 to 2 runs and the baseline projection sits firmly above any posted total under 10 runs."
+        },
+        {
+          "title": "Strikeout Projection",
+          "text": "Buehler projects 6 to 8 K over 5.5 to 6 innings, Sugano projects 4 to 6 over 5 innings. Combined K 14 to 18, Coors suppresses K rates marginally but not dramatically."
+        },
+        {
+          "title": "Verdict",
+          "text": "Padres are a strong road chalk behind the Buehler stuff edge and the bat advantage, total leans over behind the Coors effect regardless of pitching, Padres team total over is the cleanest leverage angle."
+        }
       ],
-      "verdict": { "kind": "lean", "text": "Lean Mariners moneyline, Under the total in a cool pitcher park, monitor rain and consider pass if delay risk escalates.", "winner": "Seattle Mariners", "projHome": 4.1, "projAway": 3.4, "bets": [ {"t": "Mariners ML", "cls": "ml"}, {"t": "Under total", "cls": "tt"}, {"t": "Weather watch", "cls": "tt"} ] },
-      "grade": { "letter": "B-", "cls": "b", "score": 68, "blurb": "Weather uncertainty lowers conviction, otherwise Mariners side lean." }
+      "verdict": {
+        "kind": "bet",
+        "text": "Padres moneyline is strong, Padres team total over is the sharpest leverage angle, lean over on the total behind the Coors profile.",
+        "winner": "San Diego Padres",
+        "projHome": 4.8,
+        "projAway": 5.9,
+        "bets": [
+          {
+            "t": "Padres ML",
+            "cls": "ml"
+          },
+          {
+            "t": "SD team total over 5",
+            "cls": "tt"
+          },
+          {
+            "t": "Over total",
+            "cls": "tt"
+          }
+        ]
+      },
+      "grade": {
+        "letter": "A-",
+        "cls": "a",
+        "score": 84,
+        "blurb": "Coors boosts the bat side, Padres offense is a tier above, multiple angles line up."
+      }
     },
-    "825099": {
+    "825097": {
       "paragraphs": [
-        { "title": "Pitching Matchup", "text": "Merrill Kelly (RHP, 3.38 ERA, 1.69 WHIP, 5.06 K per 9 across 5.1 innings and 1 start) is coming back from a short sample and the WHIP is inflated by that tiny denominator, the real profile is a steady mid rotation righty with a plus changeup. Sean Burke (RHP, 4.43 ERA, 1.28 WHIP, 7.52 K per 9 across 20.1 innings and 3 starts) has been the White Sox most watchable starter, the fastball plays and the slider has real shape. Stuff edge Burke, command edge Kelly on profile, pedigree edge a push." },
-        { "title": "Offense vs Handedness", "text": "White Sox versus a righty in Kelly lean on Vaughn, Robert Jr, Benintendi, the Sox have been below average versus RHP and the offense profile is thin overall. Arizona versus Burke runs Carroll, Gurriel, Walker, Marte, Perdomo, the D-Backs have been solid versus righties and Carroll is the split winner to target." },
-        { "title": "Park and Weather", "text": "Chase Field has a retractable roof, typical April protocol is closed under high daytime heat and open evenings when comfortable, treat as roughly neutral with a slight hitter lean to the alleys. Weather off the board." },
-        { "title": "Strikeout Projection", "text": "Burke projects 5 to 7 K across 5 innings, Kelly 4 to 6 across 5 to 6. Combined team K 13 to 17, D-Backs side carries the stronger K number given White Sox contact profile issues." },
-        { "title": "Verdict", "text": "Diamondbacks are a healthy home favorite, the White Sox are just a sell tag in 2026, the value comes on D-Backs team total or Carroll props rather than laying the full juice on ML." }
+        {
+          "title": "Pitching Matchup",
+          "text": "Anthony Kay (LHP, 2.60 ERA, 1.27 WHIP, 6.23 K per 9 over 17.1 innings and 2 starts) has been a useful back end starter with solid command, the changeup plays but the K rate is pedestrian. Eduardo Rodriguez (LHP, 1.96 ERA, 1.22 WHIP, 5.48 K per 9 over 23.0 innings and 4 starts) has been sharp, the changeup slider combo is tunneling well and he has limited damage against left and right handed bats alike. Edge Rodriguez on track record and current form."
+        },
+        {
+          "title": "Offense vs Handedness",
+          "text": "White Sox against Rodriguez bring Robert, Benintendi, Vaughn, Moncada and a below league average offense that has been particularly poor against lefties, this is the worst split matchup on the card. Diamondbacks against Kay feature Marte, Carroll, Pederson, Suarez, Gurriel and a well balanced order that has been above average versus lefties."
+        },
+        {
+          "title": "Park and Weather",
+          "text": "Chase Field is a retractable roof park that with the roof closed plays roughly neutral, run environment sits near posted totals with no weather variables. Open roof in April with Arizona mild air bumps runs slightly, but closed is the more common evening choice."
+        },
+        {
+          "title": "Strikeout Projection",
+          "text": "Rodriguez projects 5 to 7 K over 6 innings, Kay projects 4 to 6 over 5 innings. Combined K 14 to 18."
+        },
+        {
+          "title": "Verdict",
+          "text": "Diamondbacks are a clear home favorite behind the Rodriguez form and the lineup advantage, total leans slightly under behind two lefties who pitch to contact, Arizona team total over is the cleanest leverage piece."
+        }
       ],
-      "verdict": { "kind": "lean", "text": "Lean Diamondbacks moneyline if price is manageable, D-Backs team total over and Carroll over total bases are the side attack, K props limited value.", "winner": "Arizona Diamondbacks", "projHome": 5.0, "projAway": 3.4, "bets": [ {"t": "D-Backs ML", "cls": "ml"}, {"t": "Over team total ARI 4.5", "cls": "tt"}, {"t": "Carroll over TB 1.5", "cls": "tt"} ] },
-      "grade": { "letter": "B", "cls": "b", "score": 74, "blurb": "D-Backs side and team total over are the cleaner plays than ML juice." }
+      "verdict": {
+        "kind": "bet",
+        "text": "Diamondbacks moneyline is strong, Arizona team total over is the leverage piece, lean under on the total given two contact first lefties.",
+        "winner": "Arizona Diamondbacks",
+        "projHome": 4.8,
+        "projAway": 3.3,
+        "bets": [
+          {
+            "t": "D-backs ML",
+            "cls": "ml"
+          },
+          {
+            "t": "AZ team total over 4.5",
+            "cls": "tt"
+          },
+          {
+            "t": "Under total",
+            "cls": "tt"
+          }
+        ]
+      },
+      "grade": {
+        "letter": "A-",
+        "cls": "a",
+        "score": 83,
+        "blurb": "Rodriguez form versus a poor left handed split offense is a clean spot."
+      }
     },
-    "823236": {
+    "823231": {
       "paragraphs": [
-        { "title": "Pitching Matchup", "text": "Yoshinobu Yamamoto (RHP, 2.10 ERA, 0.82 WHIP, 7.36 K per 9 across 25.2 innings and 4 starts) has been the quietest ace on the West Coast, the splitter is elite and the command is surgical, the only note is the K rate sitting below his ceiling this year which is price relevant for props. Landen Roupp (RHP, 2.38 ERA, 0.97 WHIP, 9.53 K per 9 across 22.2 innings and 4 starts) has been a revelation for San Francisco, the curveball is a 40 plus whiff pitch and he has limited walks. Stuff edge Yamamoto on profile, command edge a push, pedigree edge Yamamoto. This is the pitchers duel of the slate." },
-        { "title": "Offense vs Handedness", "text": "Dodgers versus a righty in Roupp run the monstrous Betts, Ohtani, Freeman, Smith, Muncy core, no other lineup on the slate has four top 30 hitters versus righties in a row like this. Giants versus Yamamoto lean on Chapman, Ramos, Adames, Wade, the Giants have been below average against right handed pitching and Yamamoto is top tier." },
-        { "title": "Park and Weather", "text": "Oracle Park at 56 degrees with 9 mph wind from the west at 269 degrees, 16 percent precip which is a modest shower risk worth monitoring. Wind from the west at Oracle blows in from McCovey Cove toward home plate, this is the classic Oracle pitcher's wind, the right field triples alley is neutralized and the cold marine air keeps the ball from carrying. Run environment deeply suppressed." },
-        { "title": "Strikeout Projection", "text": "Yamamoto projects 7 to 9 K across 6 to 7 innings, the K rate has been modest this year but the Giants contact profile is beatable. Roupp projects 7 to 10 K across 5.5 to 6 innings, his strikeout rate is elevated. Combined team K 17 to 22, Roupp over is the cleaner prop given the Dodgers hunt fastballs but chase breakers." },
-        { "title": "Verdict", "text": "Dodgers are a road chalk with the better arm and the better lineup, Oracle plus cool conditions plus wind in drops the total hard toward the under. Yamamoto ML and the Under are the correlated plays." }
+        {
+          "title": "Pitching Matchup",
+          "text": "Shohei Ohtani (RHP, 0.50 ERA, 0.72 WHIP, 9.00 K per 9 over 18.0 innings and 3 starts) has returned to the mound looking every bit the elite starter, the fastball sits 98 to 99 with the splitter grading plus plus, this is a Cy Young caliber start every time out. Tyler Mahle (RHP, 7.23 ERA, 1.93 WHIP, 10.13 K per 9 over 18.2 innings and 4 starts) has been missing bats but getting crushed by the ones he does not miss, the command has been shaky and the home run rate is unsustainable in his favor. Full tier Ohtani edge."
+        },
+        {
+          "title": "Offense vs Handedness",
+          "text": "Dodgers against Mahle with Ohtani the hitter, Betts, Freeman, Smith, Edman, Teoscar is a top three lineup in baseball against righties, Mahle home run tendency in Oracle is less catastrophic than elsewhere but still a problem. Giants against Ohtani face the best pitcher in baseball, Chapman, Ramos, Yastrzemski have some chance but the strikeout ceiling is high and the damage opportunities will be scarce."
+        },
+        {
+          "title": "Park and Weather",
+          "text": "Oracle Park late night game, cool 50s at first pitch, marine breeze typical in from right, no rain. Oracle is the best pitcher park in the majors and cool marine air deepens that lean, baseline projection sits firmly below any posted total on top of an Ohtani start."
+        },
+        {
+          "title": "Strikeout Projection",
+          "text": "Ohtani projects 8 to 11 K over 6 to 6.5 innings, the splitter is the whiff engine and Giants strike out. Mahle projects 6 to 8 K over 4 to 5 innings. Combined K 18 to 24, this is the highest strikeout profile on the card."
+        },
+        {
+          "title": "Verdict",
+          "text": "Dodgers are the premium side behind Ohtani even laying a heavy price, total leans firmly under in Oracle with Ohtani on the mound, Ohtani strikeout over is arguably the highest confidence pitcher prop on the card."
+        }
       ],
-      "verdict": { "kind": "bet", "text": "Bet Dodgers moneyline at fair price, Under the total with cold Oracle and wind in, Roupp over strikeouts is the K prop of the game.", "winner": "Los Angeles Dodgers", "projHome": 2.8, "projAway": 3.9, "bets": [ {"t": "Dodgers ML", "cls": "ml"}, {"t": "Under total", "cls": "tt"}, {"t": "Roupp over 6.5 K", "cls": "k"} ] },
-      "grade": { "letter": "A", "cls": "a", "score": 88, "blurb": "Two aces, cold Oracle, the sharpest pitchers duel on the board." }
+      "verdict": {
+        "kind": "bet",
+        "text": "Dodgers moneyline, strong Ohtani over strikeouts, and firm under on the total are all high confidence plays in a premium spot.",
+        "winner": "Los Angeles Dodgers",
+        "projHome": 2.9,
+        "projAway": 4.6,
+        "bets": [
+          {
+            "t": "Dodgers ML",
+            "cls": "ml"
+          },
+          {
+            "t": "Ohtani over 7.5 K",
+            "cls": "k"
+          },
+          {
+            "t": "Under total",
+            "cls": "tt"
+          }
+        ]
+      },
+      "grade": {
+        "letter": "A+",
+        "cls": "a",
+        "score": 94,
+        "blurb": "Ohtani in Oracle is a top tier spot, multiple angles align with high confidence."
+      }
     }
   }
 };
