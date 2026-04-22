@@ -1,0 +1,221 @@
+{
+  "_comment": "Per park wind behavior rules. Each park defines how wind direction and speed at first pitch translates into a projected total runs adjustment (runsDelta) and an HR multiplier (hrMult). Direction is the compass direction the wind is blowing TO (so 'N' means wind blowing to north). Each park has a 'layout' field that describes which directions are 'out' (helping HRs), 'in' (suppressing HRs), or 'cross'. Dome parks have roofOften=true and the rules collapse to neutral when the roof is closed.",
+  "version": "2026.1",
+  "updated_iso": "2026-04-22T19:30:00Z",
+  "parks": {
+    "Wrigley Field": {
+      "outwardDirections": ["NE", "ENE", "E", "ESE"],
+      "inwardDirections":  ["SW", "WSW", "W", "WNW"],
+      "thresholdMph": 8,
+      "rules": [
+        {"condition": "outward >= 12 mph", "runsDelta": 0.9, "hrMult": 1.28},
+        {"condition": "outward 8 to 12 mph", "runsDelta": 0.5, "hrMult": 1.15},
+        {"condition": "inward >= 12 mph", "runsDelta": -0.7, "hrMult": 0.78},
+        {"condition": "inward 8 to 12 mph", "runsDelta": -0.4, "hrMult": 0.88}
+      ]
+    },
+    "Fenway Park": {
+      "outwardDirections": ["NE", "ENE", "E"],
+      "inwardDirections":  ["WSW", "W", "WNW"],
+      "thresholdMph": 10,
+      "rules": [
+        {"condition": "outward >= 12 mph (RF favored)", "runsDelta": 0.4, "hrMult": 1.12},
+        {"condition": "inward >= 12 mph", "runsDelta": -0.3, "hrMult": 0.92}
+      ]
+    },
+    "Yankee Stadium": {
+      "outwardDirections": ["S", "SSW", "SW"],
+      "inwardDirections":  ["N", "NNE", "NE"],
+      "thresholdMph": 8,
+      "rules": [
+        {"condition": "outward >= 10 mph (RF jet stream)", "runsDelta": 0.5, "hrMult": 1.18},
+        {"condition": "inward >= 10 mph", "runsDelta": -0.3, "hrMult": 0.9}
+      ]
+    },
+    "Oracle Park": {
+      "outwardDirections": ["E", "ENE"],
+      "inwardDirections":  ["W", "WSW", "SW"],
+      "thresholdMph": 8,
+      "coldTempRule":    {"belowF": 58, "runsDelta": -0.4, "hrMult": 0.85},
+      "rules": [
+        {"condition": "inward >= 12 mph (bay wind)", "runsDelta": -0.5, "hrMult": 0.78},
+        {"condition": "outward >= 10 mph", "runsDelta": 0.3, "hrMult": 1.12}
+      ]
+    },
+    "Citi Field": {
+      "outwardDirections": ["E", "ENE"],
+      "inwardDirections":  ["W", "WSW"],
+      "thresholdMph": 10,
+      "rules": [
+        {"condition": "inward >= 12 mph", "runsDelta": -0.3, "hrMult": 0.9}
+      ]
+    },
+    "Coors Field": {
+      "note": "altitude effect dominates; wind secondary. Hot day 85F+ with low humidity amplifies.",
+      "outwardDirections": ["N", "NNE", "NNW"],
+      "inwardDirections":  ["S", "SSW", "SSE"],
+      "thresholdMph": 10,
+      "hotDayRule":      {"aboveF": 85, "runsDelta": 0.5, "hrMult": 1.1},
+      "rules": [
+        {"condition": "outward >= 12 mph", "runsDelta": 0.5, "hrMult": 1.12}
+      ]
+    },
+    "Dodger Stadium": {
+      "outwardDirections": ["SE", "SSE"],
+      "inwardDirections":  ["NW", "NNW"],
+      "thresholdMph": 8,
+      "rules": [
+        {"condition": "outward >= 10 mph (Santa Ana)", "runsDelta": 0.4, "hrMult": 1.15}
+      ]
+    },
+    "Camden Yards": {
+      "outwardDirections": ["N", "NNE", "NE"],
+      "inwardDirections":  ["S", "SSW", "SW"],
+      "thresholdMph": 10,
+      "rules": [
+        {"condition": "outward >= 12 mph", "runsDelta": 0.3, "hrMult": 1.08}
+      ]
+    },
+    "Oriole Park at Camden Yards": {
+      "aliasOf": "Camden Yards"
+    },
+    "Great American Ball Park": {
+      "outwardDirections": ["SW", "S", "SSW"],
+      "inwardDirections":  ["NE", "NNE", "N"],
+      "thresholdMph": 10,
+      "rules": [
+        {"condition": "outward >= 12 mph", "runsDelta": 0.5, "hrMult": 1.15}
+      ]
+    },
+    "Citizens Bank Park": {
+      "outwardDirections": ["N", "NNE"],
+      "inwardDirections":  ["S", "SSW"],
+      "thresholdMph": 10,
+      "rules": [
+        {"condition": "outward >= 12 mph", "runsDelta": 0.4, "hrMult": 1.1}
+      ]
+    },
+    "PNC Park": {
+      "outwardDirections": ["SE", "E"],
+      "inwardDirections":  ["NW", "W"],
+      "thresholdMph": 10,
+      "rules": []
+    },
+    "Busch Stadium": {
+      "outwardDirections": ["S", "SSW"],
+      "inwardDirections":  ["N", "NNE"],
+      "thresholdMph": 10,
+      "rules": []
+    },
+    "Nationals Park": {
+      "outwardDirections": ["N", "NNE"],
+      "inwardDirections":  ["S", "SSW"],
+      "thresholdMph": 10,
+      "rules": []
+    },
+    "Progressive Field": {
+      "outwardDirections": ["S", "SSW"],
+      "inwardDirections":  ["N", "NNE"],
+      "thresholdMph": 10,
+      "rules": []
+    },
+    "Truist Park": {
+      "outwardDirections": ["N", "NNE"],
+      "inwardDirections":  ["S", "SSW"],
+      "thresholdMph": 10,
+      "rules": []
+    },
+    "Target Field": {
+      "outwardDirections": ["S", "SSW"],
+      "inwardDirections":  ["N", "NNE"],
+      "thresholdMph": 10,
+      "coldTempRule":    {"belowF": 50, "runsDelta": -0.4, "hrMult": 0.88}
+    },
+    "Comerica Park": {
+      "outwardDirections": ["SW"],
+      "inwardDirections":  ["NE"],
+      "thresholdMph": 10,
+      "coldTempRule":    {"belowF": 50, "runsDelta": -0.4, "hrMult": 0.88}
+    },
+    "Tropicana Field": {
+      "roofOften": true,
+      "note": "dome, no wind impact",
+      "rules": []
+    },
+    "Rogers Centre": {
+      "roofOften": true,
+      "note": "retractable roof; defaults to closed in cool or wet weather",
+      "rules": []
+    },
+    "Minute Maid Park": {
+      "roofOften": true,
+      "note": "roof usually closed in Houston summer heat",
+      "rules": []
+    },
+    "Daikin Park": {
+      "aliasOf": "Minute Maid Park"
+    },
+    "Chase Field": {
+      "roofOften": true,
+      "note": "roof usually closed in Arizona heat",
+      "rules": []
+    },
+    "American Family Field": {
+      "roofOften": true,
+      "note": "retractable roof commonly closed in cool weather",
+      "rules": []
+    },
+    "loanDepot park": {
+      "roofOften": true,
+      "note": "retractable roof commonly closed for climate control",
+      "rules": []
+    },
+    "loanDepot Park": {
+      "aliasOf": "loanDepot park"
+    },
+    "T-Mobile Park": {
+      "outwardDirections": ["E"],
+      "inwardDirections":  ["W", "WSW"],
+      "thresholdMph": 10,
+      "coldTempRule":    {"belowF": 55, "runsDelta": -0.3, "hrMult": 0.9}
+    },
+    "Angel Stadium": {
+      "outwardDirections": ["E"],
+      "inwardDirections":  ["W"],
+      "thresholdMph": 10,
+      "rules": []
+    },
+    "Petco Park": {
+      "outwardDirections": ["E"],
+      "inwardDirections":  ["W", "WSW"],
+      "thresholdMph": 10,
+      "rules": []
+    },
+    "Kauffman Stadium": {
+      "outwardDirections": ["SE"],
+      "inwardDirections":  ["NW"],
+      "thresholdMph": 10,
+      "rules": []
+    },
+    "Globe Life Field": {
+      "roofOften": true,
+      "note": "retractable roof closed in Texas summer heat",
+      "rules": []
+    },
+    "Guaranteed Rate Field": {
+      "outwardDirections": ["SW"],
+      "inwardDirections":  ["NE"],
+      "thresholdMph": 10,
+      "rules": []
+    },
+    "Rate Field": {
+      "aliasOf": "Guaranteed Rate Field"
+    },
+    "Sutter Health Park": {
+      "outwardDirections": ["SW"],
+      "inwardDirections":  ["NE"],
+      "thresholdMph": 10,
+      "rules": []
+    }
+  }
+}
