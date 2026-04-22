@@ -1177,6 +1177,8 @@ const STATE = {
   rollingForm: {},         // populated from /rolling_form_overlay.json (15 day team OPS vs baseline)
   catcherFraming: {},      // populated from /catcher_framing_overlay.json (per catcher CSAA and K nudge)
   pitchMatchup: {},        // populated from /pitch_matchup_overlay.json (per pitcher arsenal + lineup xSLG by pitch)
+  betsTable: [],           // filtered unified Best Bets rows, cached so sort clicks can re-render instantly
+  betsSort: { key: 'score', dir: 'desc' }, // active sort key and direction for the Best Bets table headers
   loading: false
 };
 
@@ -5023,33 +5025,144 @@ function renderBets() {
     });
 
     // ── 10. HR PROPS — dedicated probability engine (Statcast + BvP + park/wind/temp + platoon) ──
-    // The hrCandidatesForGame helper returns every lineup batter with a tier, probability
-    // per game, price, and reason string. Hard 28% model probability floor per user spec:
-    // nothing under that threshold surfaces anywhere on the dashboard.
+    // Strict 28% model probability floor and capped at the single strongest candidate per
+    // game so home run props never crowd out the rest of the board.
     try {
       if (typeof hrCandidatesForGame === 'function') {
         const hrPool = hrCandidatesForGame(g) || [];
-        // Show up to 3 qualifying HR picks per game so a huge park or wind day can surface
-        // the whole stack, but one matchup never drowns the table. Strict 28% floor.
-        hrPool.filter(function(c){ return c && c.tier && c.tier !== 'SKIP' && c.probPerGame >= 0.28; })
-              .slice(0, 3)
-              .forEach(function(c){
-          // Tier labels translate to the bets table lexicon (LOCK/STRONG/LEAN).
+        const topHr = hrPool.filter(function(c){ return c && c.tier && c.tier !== 'SKIP' && c.probPerGame >= 0.28; })[0];
+        if (topHr) {
+          const c = topHr;
           const tierLabel = c.tier === 'ELITE' ? 'LOCK' : c.tier === 'STRONG' ? 'STRONG' : 'LEAN';
-          const scoreBump = c.probPerGame * 60; // 36% HR prob == 21.6 raw, floats toward the top
           bets.push({
             cat: '💣 HR',
             type: 'Anytime HR',
             pick: (c.batter && c.batter.name ? c.batter.name : 'Hitter') + ' anytime HR',
             game: label,
             tier: tierLabel,
-            score: scoreBump,
+            score: c.probPerGame * 60,
             cashProb: c.probPerGame,
             note: (c.reason || '') + ' · Model HR ' + Math.round(c.probPerGame * 100) + '% · ' + (c.price > 0 ? '+' : '') + c.price
           });
-        });
+        }
       }
     } catch (errHrBets) { /* never block other props */ }
+
+    // ── 11. NRFI / YRFI — first-inning scoring probability ──
+    // We model the first inning as roughly 12% of total runs for a typical game and
+    // derive a first-frame run rate from the two starters' recent WHIP plus the top
+    // of each lineup. A projected 0.65 first-inning runs = NRFI-friendly; 1.2+ leans YRFI.
+    try {
+      const aWhipEff = Number(ap && ap.season && ap.season.whip) || 1.30;
+      const hWhipEff = Number(hp && hp.season && hp.season.whip) || 1.30;
+      const awayTop3 = (g.lineups && g.lineups.awayPlayers ? g.lineups.awayPlayers.slice(0,3) : []);
+      const homeTop3 = (g.lineups && g.lineups.homePlayers ? g.lineups.homePlayers.slice(0,3) : []);
+      function topOps(lu){
+        if (!lu || !lu.length) return 0.720;
+        let n = 0, s = 0;
+        lu.forEach(function(p){
+          const bs = STATE.batterSplits && STATE.batterSplits[p.id];
+          const ops = bs && bs.season && Number(bs.season.ops);
+          if (ops) { s += ops; n++; }
+        });
+        return n ? s/n : 0.720;
+      }
+      const awayTopOps = topOps(awayTop3);
+      const homeTopOps = topOps(homeTop3);
+      // Away hitters face home starter in T1, home hitters face away starter in B1.
+      const t1Away = 0.52 * (hWhipEff/1.30) * (awayTopOps/0.720);
+      const t1Home = 0.52 * (aWhipEff/1.30) * (homeTopOps/0.720);
+      const firstInningRuns = t1Away + t1Home;
+      const nrfiProb = Math.max(0.05, Math.min(0.92, 1 - firstInningRuns * 0.60));
+      if (nrfiProb >= 0.62) {
+        bets.push({ cat:"🥜 NRFI", type:"NRFI", pick:"NRFI", game:label,
+          tier: nrfiProb >= 0.70 ? "STRONG" : "LEAN",
+          score: (nrfiProb - 0.50) * 25,
+          cashProb: nrfiProb,
+          note:"1st inning proj "+fmt(firstInningRuns,2)+" R · WHIPs "+fmt(aWhipEff,2)+"/"+fmt(hWhipEff,2)+" · top OPS "+fmt(awayTopOps,3)+"/"+fmt(homeTopOps,3)
+        });
+      } else if ((1 - nrfiProb) >= 0.58) {
+        const yrfiProb = 1 - nrfiProb;
+        bets.push({ cat:"🥜 YRFI", type:"YRFI", pick:"YRFI", game:label,
+          tier: yrfiProb >= 0.65 ? "STRONG" : "LEAN",
+          score: (yrfiProb - 0.50) * 25,
+          cashProb: yrfiProb,
+          note:"1st inning proj "+fmt(firstInningRuns,2)+" R · WHIPs "+fmt(aWhipEff,2)+"/"+fmt(hWhipEff,2)+" · top OPS "+fmt(awayTopOps,3)+"/"+fmt(homeTopOps,3)
+        });
+      }
+    } catch(errNrfi) {}
+
+    // ── 12. SP TOTAL OUTS RECORDED — starter length bet ──
+    // Projected outs = IP_per_start * 3. IP_per_start from season innings / games started,
+    // then nudged by recent-14 IP trend. Short outing on bullpen day, long start on fresh rest.
+    ["away","home"].forEach(function(side){
+      const sp = g.teams[side].probablePitcher;
+      if(!sp) return;
+      const psOuts = STATE.pitcherStats[sp.id];
+      const ip = Number(psOuts && psOuts.season && psOuts.season.inningsPitched) || null;
+      const gs = Number(psOuts && psOuts.season && psOuts.season.gamesStarted) || null;
+      if (!ip || !gs || gs < 1) return;
+      let ipPerStart = ip / gs;
+      const plOuts = STATE.pitcherLogs[sp.id];
+      if (plOuts && plOuts.d14 && plOuts.d14.g >= 1 && plOuts.d14.ip) {
+        ipPerStart = ipPerStart * 0.6 + (plOuts.d14.ip / plOuts.d14.g) * 0.4;
+      }
+      // Catcher framing helps SP go deeper (steals strikes, shorter ABs).
+      const sideFramerO = side === 'away' ? __awayFramer : __homeFramer;
+      if (sideFramerO) ipPerStart += Math.max(-0.2, Math.min(0.2, (sideFramerO.kNudgePerGame || 0) * 0.15));
+      const projOuts = ipPerStart * 3;
+      const outsLine = Math.round(projOuts - 0.5) + 0.5; // typical line is X.5 outs, one tick below projection
+      const outsDiff = projOuts - outsLine;
+      if (outsDiff >= 1.0) {
+        bets.push({ cat:"🎯 Outs", type:"SP Outs OVER", pick:sp.fullName+" O"+fmt(outsLine,1)+" Outs", game:label,
+          tier: outsDiff >= 1.8 ? "STRONG" : "LEAN",
+          score: outsDiff * 3,
+          cashProb: cashPctFromDelta(outsDiff, 1.6),
+          note:"Proj "+fmt(projOuts,1)+" outs · IP/GS "+fmt(ipPerStart,2)
+        });
+      } else if (outsDiff <= -1.0) {
+        bets.push({ cat:"🎯 Outs", type:"SP Outs UNDER", pick:sp.fullName+" U"+fmt(outsLine+1,1)+" Outs", game:label,
+          tier: outsDiff <= -1.8 ? "STRONG" : "LEAN",
+          score: Math.abs(outsDiff) * 3,
+          cashProb: cashPctFromDelta(-outsDiff, 1.6),
+          note:"Proj "+fmt(projOuts,1)+" outs · IP/GS "+fmt(ipPerStart,2)
+        });
+      }
+    });
+
+    // ── 13. RBI PROPS — middle-of-order hitter with hot bats behind RISP opportunities ──
+    // We project RBI per batter from team run projection * slot RBI share, then adjust
+    // by the hitter's season SLG and recent-7 AVG. Slots 3-5 carry ~42% of RBI share.
+    ["away","home"].forEach(function(side){
+      const lu = (g.lineups && g.lineups[side+"Players"]) || [];
+      if (lu.length < 5) return;
+      // Team run projection share: half of total * team-total adjustment
+      const teamRunProj = side === 'away' ? (proj * 0.50) : (proj * 0.50);
+      lu.slice(2, 6).forEach(function(p, i){
+        const slot = i + 3; // slot 3..6
+        const slotShare = slot === 3 ? 0.13 : slot === 4 ? 0.16 : slot === 5 ? 0.13 : 0.10;
+        const bs = STATE.batterSplits && STATE.batterSplits[p.id];
+        const seasonSlg = Number(bs && bs.season && bs.season.slg) || 0.400;
+        const hLog = STATE.hitterLogs[p.id];
+        const recentAvg = hLog && hLog.d7 && hLog.d7.ab >= 5 ? hLog.d7.avg : null;
+        // Base RBI projection from team run share and SLG quality.
+        let projRbi = teamRunProj * slotShare * (seasonSlg / 0.400);
+        if (recentAvg != null) projRbi *= (1 + (recentAvg - 0.260) * 0.7);
+        if (parkRunsMult) projRbi *= parkRunsMult;
+        if (projRbi >= 0.85) {
+          const rbiProb = Math.min(0.80, 1 - Math.exp(-projRbi * 0.95));
+          const lineLbl = projRbi >= 1.25 ? "O0.5" : "O0.5";
+          if (rbiProb >= 0.56) {
+            bets.push({ cat:"💰 RBI", type:"1+ RBI", pick:p.fullName+" "+lineLbl+" RBI", game:label,
+              tier: rbiProb >= 0.68 ? "STRONG" : "LEAN",
+              score: (rbiProb - 0.50) * 22,
+              cashProb: rbiProb,
+              note:"Proj "+fmt(projRbi,2)+" RBI · slot "+slot+" · SLG "+fmt(seasonSlg,3)+(recentAvg!=null?" · 7d AVG "+recentAvg.toFixed(3):"")
+            });
+          }
+        }
+      });
+    });
   });
 
   // ── SCORE & SORT: higher score = stronger play ──
@@ -5060,50 +5173,121 @@ function renderBets() {
     else if(tb==="STRONG") b.score+=10;
     else if(tb==="LEAN") b.score+=2;
   });
-  bets.sort(function(a,b){ return b.score - a.score; });
 
-  // ── RENDER ──
+  // ── GLOBAL 28% CASH FLOOR ──
+  // Per user spec: only surface plays that model at 28 percent or higher cash probability.
+  // This floor replaces the old tier-only gate so every category earns its spot on merit.
+  const filtered = bets.filter(function(b){ return (typeof b.cashProb === 'number') && b.cashProb >= 0.28; });
+
+  // Stash a stable copy on the window so the sort UI can re-render without recomputing.
+  STATE.betsTable = filtered.slice();
+  if (!STATE.betsSort) STATE.betsSort = { key: 'score', dir: 'desc' };
+
+  drawBetsTable();
+}
+
+/* =========== BETS TABLE RENDERER (sortable) =========== */
+// Renders the unified Best Bets table with click-to-sort column headers. Sort state
+// lives on STATE.betsSort so the user's selection survives across re-renders and
+// background data refreshes. Default sort is Score descending.
+function drawBetsTable() {
+  const filtered = (STATE.betsTable || []).slice();
+  const sort = STATE.betsSort || { key: 'score', dir: 'desc' };
+  const keyFns = {
+    cat:  function(b){ return (b.cat||'').toLowerCase(); },
+    type: function(b){ return (b.type||'').toLowerCase(); },
+    pick: function(b){ return (b.pick||'').toLowerCase(); },
+    game: function(b){ return (b.game||'').toLowerCase(); },
+    tier: function(b){
+      const t = (b.tier||'').replace(/[↑↓*]/g,'');
+      return t==='LOCK'?3:t==='STRONG'?2:t==='LEAN'?1:0;
+    },
+    cash: function(b){ return typeof b.cashProb==='number'?b.cashProb:-1; },
+    score:function(b){ return typeof b.score==='number'?b.score:-1; }
+  };
+  const keyFn = keyFns[sort.key] || keyFns.score;
+  filtered.sort(function(a,b){
+    const av = keyFn(a), bv = keyFn(b);
+    if (av < bv) return sort.dir === 'asc' ? -1 : 1;
+    if (av > bv) return sort.dir === 'asc' ? 1 : -1;
+    return 0;
+  });
+
   var html = '<div class="explain-banner"><span class="eb-title">🏆 Unified Best Bets:</span> '+
-    'Aggregates top picks across ALL categories — moneyline, run line, totals, F5, K props, ER props, BB props, and hit props. '+
-    'Only LOCK, STRONG, and strong LEAN plays appear here. Sorted by composite confidence score.</div>';
+    'Every market with a model cash probability of 28% or higher: moneyline, run line, totals, F5, NRFI/YRFI, '+
+    'SP strikeouts, team strikeouts, earned runs, walks, total outs, hits, HR, and RBI. Click any column header to sort.</div>';
 
-  if(!bets.length){
-    html += '<div class="loader">No strong bets found in today\'s slate. Check individual tabs for full projections.</div>';
-  } else {
-    // Category summary counts
-    var cats = {};
-    bets.forEach(function(b){ cats[b.cat]=(cats[b.cat]||0)+1; });
-    html += '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;">';
-    Object.keys(cats).forEach(function(c){
-      html += '<span class="pill" style="font-size:11px;">'+c+': '+cats[c]+'</span>';
-    });
-    html += '</div>';
-
-    html += '<table><thead><tr><th>Category</th><th>Type</th><th>Pick</th><th>Game</th><th>Tier</th><th>Cash %</th><th>Score</th><th>Notes</th></tr></thead><tbody>';
-    bets.slice(0,40).forEach(function(b){
-      const tb = b.tier.replace(/[↑↓*]/g,"");
-      const tierCls = tb==="LOCK"?"pill good":tb==="STRONG"?"pill good":"pill warn";
-      const tierIcon = tb==="LOCK"?"🔒":tb==="STRONG"?"💪":"👍";
-      const cashN = (typeof b.cashProb === 'number') ? Math.round(b.cashProb * 100) : null;
-      const cashCls = cashN == null ? '' : (cashN >= 70 ? 'edge-good' : cashN >= 55 ? 'edge-neu' : 'edge-soft');
-      const cashTxt = cashN == null ? '—' : (cashN + '%');
-      // Normalize any 2 or 3 letter team code that may still live inside pick or game labels.
-      const pickDisplay = (typeof normalizeTeamCodesInText === 'function') ? normalizeTeamCodesInText(b.pick||'') : (b.pick||'');
-      const gameDisplay = (typeof normalizeTeamCodesInText === 'function') ? normalizeTeamCodesInText(b.game||'') : (b.game||'');
-      html += '<tr>'+
-        '<td><b>'+esc(b.cat)+'</b></td>'+
-        '<td>'+esc(b.type)+'</td>'+
-        '<td><b>'+esc(pickDisplay)+'</b></td>'+
-        '<td>'+esc(gameDisplay)+'</td>'+
-        '<td><span class="'+tierCls+'">'+tierIcon+' '+esc(b.tier)+'</span></td>'+
-        '<td class="'+cashCls+'"><b>'+cashTxt+'</b></td>'+
-        '<td class="edge-good">'+fmt(b.score,1)+'</td>'+
-        '<td class="small" style="color:var(--muted);max-width:350px;">'+esc(b.note)+'</td></tr>';
-    });
-    html += '</tbody></table>';
+  if(!filtered.length){
+    html += '<div class="loader">No plays model above 28% cash right now. Lineups or overlays may still be loading.</div>';
+    $("#betsGrid").innerHTML = html;
+    return;
   }
 
+  // Category summary counts with clickable filter pills.
+  var cats = {};
+  filtered.forEach(function(b){ cats[b.cat]=(cats[b.cat]||0)+1; });
+  html += '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;">';
+  Object.keys(cats).forEach(function(c){
+    html += '<span class="pill" style="font-size:11px;">'+c+': '+cats[c]+'</span>';
+  });
+  html += '</div>';
+
+  // Sortable header builder: shows an arrow for the active column and toggles dir on click.
+  function th(key, label, align){
+    const active = sort.key === key;
+    const arrow = active ? (sort.dir === 'asc' ? ' ▲' : ' ▼') : '';
+    const style = 'cursor:pointer;user-select:none;'+(align==='right'?'text-align:right;':'');
+    return '<th data-bets-sort="'+key+'" style="'+style+'">'+esc(label)+arrow+'</th>';
+  }
+
+  html += '<table><thead><tr>'+
+    th('cat','Category')+
+    th('type','Type')+
+    th('pick','Pick')+
+    th('game','Game')+
+    th('tier','Tier')+
+    th('cash','Cash %')+
+    th('score','Score')+
+    '<th>Notes</th>'+
+  '</tr></thead><tbody>';
+  filtered.forEach(function(b){
+    const tb = b.tier.replace(/[↑↓*]/g,"");
+    const tierCls = tb==="LOCK"?"pill good":tb==="STRONG"?"pill good":"pill warn";
+    const tierIcon = tb==="LOCK"?"🔒":tb==="STRONG"?"💪":"👍";
+    const cashN = (typeof b.cashProb === 'number') ? Math.round(b.cashProb * 100) : null;
+    const cashCls = cashN == null ? '' : (cashN >= 70 ? 'edge-good' : cashN >= 55 ? 'edge-neu' : 'edge-soft');
+    const cashTxt = cashN == null ? '—' : (cashN + '%');
+    const pickDisplay = (typeof normalizeTeamCodesInText === 'function') ? normalizeTeamCodesInText(b.pick||'') : (b.pick||'');
+    const gameDisplay = (typeof normalizeTeamCodesInText === 'function') ? normalizeTeamCodesInText(b.game||'') : (b.game||'');
+    html += '<tr>'+
+      '<td><b>'+esc(b.cat)+'</b></td>'+
+      '<td>'+esc(b.type)+'</td>'+
+      '<td><b>'+esc(pickDisplay)+'</b></td>'+
+      '<td>'+esc(gameDisplay)+'</td>'+
+      '<td><span class="'+tierCls+'">'+tierIcon+' '+esc(b.tier)+'</span></td>'+
+      '<td class="'+cashCls+'"><b>'+cashTxt+'</b></td>'+
+      '<td class="edge-good">'+fmt(b.score,1)+'</td>'+
+      '<td class="small" style="color:var(--muted);max-width:350px;">'+esc(b.note)+'</td></tr>';
+  });
+  html += '</tbody></table>';
+
   $("#betsGrid").innerHTML = html;
+
+  // Attach click handlers to sortable headers. Toggle direction on repeat click.
+  const headers = document.querySelectorAll('#betsGrid th[data-bets-sort]');
+  headers.forEach(function(h){
+    h.addEventListener('click', function(){
+      const k = h.getAttribute('data-bets-sort');
+      if (STATE.betsSort && STATE.betsSort.key === k) {
+        STATE.betsSort.dir = STATE.betsSort.dir === 'asc' ? 'desc' : 'asc';
+      } else {
+        // Default to descending for numeric columns, ascending for text.
+        const defaultDir = (k === 'cash' || k === 'score' || k === 'tier') ? 'desc' : 'asc';
+        STATE.betsSort = { key: k, dir: defaultDir };
+      }
+      drawBetsTable();
+    });
+  });
 }
 
 function renderRL() {
