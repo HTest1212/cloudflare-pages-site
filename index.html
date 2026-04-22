@@ -1175,6 +1175,8 @@ const STATE = {
   parkWindRules: {},       // populated from /park_wind_rules_overlay.json (wind behavior per venue)
   umpireFactors: {},       // populated from /umpire_factors_overlay.json (K, run factors per HP ump)
   rollingForm: {},         // populated from /rolling_form_overlay.json (15 day team OPS vs baseline)
+  catcherFraming: {},      // populated from /catcher_framing_overlay.json (per catcher CSAA and K nudge)
+  pitchMatchup: {},        // populated from /pitch_matchup_overlay.json (per pitcher arsenal + lineup xSLG by pitch)
   loading: false
 };
 
@@ -1868,6 +1870,161 @@ function rollingRunAdjFor(teamName) {
   const raw = rf.deltaOps * 11;
   const capped = Math.max(-0.45, Math.min(0.45, raw));
   return capped * conf;
+}
+
+/* =========== CATCHER FRAMING OVERLAY =========== */
+// Written by scripts/update_catcher_framing.py. Expected shape:
+// { asOf, teams: { "Team Name": { starter: {name, csaa, kNudgePerGame, runNudgePerGame}, backup: {...} } },
+//   catchers: { "Catcher Name": {csaa, kNudgePerGame, runNudgePerGame, team, note} } }
+// csaa = called strikes above average, rolled up per game. Positive csaa steals strikes,
+// which converts to extra Ks for the pitching staff and a small run suppression.
+async function fetchCatcherFraming() {
+  if (STATE.catcherFraming && STATE.catcherFraming.__loaded) return STATE.catcherFraming;
+  try {
+    const r = await fetch("catcher_framing_overlay.json", {cache:"no-store"});
+    if (!r.ok) throw new Error("no catcher framing overlay (" + r.status + ")");
+    const j = await r.json();
+    STATE.catcherFraming = Object.assign({}, j, { __loaded: true });
+    return STATE.catcherFraming;
+  } catch(e) {
+    STATE.catcherFraming = { __loaded: true, __missing: true, teams: {}, catchers: {} };
+    return STATE.catcherFraming;
+  }
+}
+// Returns {csaa, kNudgePerGame, runNudgePerGame, name} for the team's projected starting catcher.
+// We first try to match the catcher listed in today's lineup (if posted), then fall back to the
+// overlay's "starter" slot. Returns null when we have nothing.
+function catcherFramingForGame(game, side) {
+  const cf = STATE.catcherFraming || {};
+  if (cf.__missing) return null;
+  const team = game && game.teams && game.teams[side] && game.teams[side].team;
+  if (!team) return null;
+  const lu = (game.lineups && game.lineups[side + 'Players']) || [];
+  // Lineup position codes: "C" is catcher. The MLB API usually surfaces it as `position.abbreviation`.
+  const luCatcher = lu.find(function(p){
+    const pos = (p.position && (p.position.abbreviation || p.position.code)) || p.primaryPosition && p.primaryPosition.abbreviation;
+    return pos === 'C' || pos === '2';
+  });
+  if (luCatcher && cf.catchers && cf.catchers[luCatcher.fullName]) {
+    const c = cf.catchers[luCatcher.fullName];
+    return {
+      name: luCatcher.fullName,
+      csaa: Number(c.csaa) || 0,
+      kNudgePerGame: Number(c.kNudgePerGame) || 0,
+      runNudgePerGame: Number(c.runNudgePerGame) || 0,
+      source: 'lineup'
+    };
+  }
+  const teamEntry = cf.teams && cf.teams[team.name];
+  if (teamEntry && teamEntry.starter) {
+    const c = teamEntry.starter;
+    return {
+      name: c.name || 'projected',
+      csaa: Number(c.csaa) || 0,
+      kNudgePerGame: Number(c.kNudgePerGame) || 0,
+      runNudgePerGame: Number(c.runNudgePerGame) || 0,
+      source: 'projected'
+    };
+  }
+  return null;
+}
+// Shorthand: combined catcher run suppression for both sides of a matchup.
+// Positive number = pitcher staff steals strikes, runs go down.
+function catcherTotalRunDelta(game) {
+  const a = catcherFramingForGame(game, 'away');
+  const h = catcherFramingForGame(game, 'home');
+  const aRun = a ? -Math.max(-0.35, Math.min(0.35, a.runNudgePerGame)) : 0;
+  const hRun = h ? -Math.max(-0.35, Math.min(0.35, h.runNudgePerGame)) : 0;
+  return aRun + hRun;
+}
+
+/* =========== PITCH TYPE MATCHUP OVERLAY =========== */
+// Written by scripts/update_pitch_matchups.py. Expected shape:
+// { asOf, pitchers: { id: { arsenal: { "FF": 0.48, "SL": 0.22, ... } } },
+//   hitters:  { id: { xSlgByPitch: { "FF": 0.470, "SL": 0.320, ... }, paByPitch: {...} } },
+//   teams:    { id: { xSlgByPitch: {...} } },
+//   baseline: { xSlgByPitch: {...} } }
+// The dashboard multiplies each pitch type's usage by the opposing hitter's xSLG
+// against that type, minus the league baseline xSLG for that type, to produce a
+// signed matchup delta. Positive = hitters have a good matchup, add runs.
+async function fetchPitchMatchup() {
+  if (STATE.pitchMatchup && STATE.pitchMatchup.__loaded) return STATE.pitchMatchup;
+  try {
+    const r = await fetch("pitch_matchup_overlay.json", {cache:"no-store"});
+    if (!r.ok) throw new Error("no pitch matchup overlay (" + r.status + ")");
+    const j = await r.json();
+    STATE.pitchMatchup = Object.assign({}, j, { __loaded: true });
+    return STATE.pitchMatchup;
+  } catch(e) {
+    STATE.pitchMatchup = { __loaded: true, __missing: true, pitchers: {}, hitters: {}, teams: {}, baseline: {xSlgByPitch:{}} };
+    return STATE.pitchMatchup;
+  }
+}
+// Returns { delta, sample, dominant } where delta is xSLG delta vs league baseline.
+// sample is the number of pitch types we were able to match (higher = more reliable).
+// dominant is the pitch type that moved the needle most.
+function pitchMatchupFor(pitcher, lineupSide, game) {
+  const pm = STATE.pitchMatchup || {};
+  if (pm.__missing) return null;
+  if (!pitcher || !pitcher.id) return null;
+  const arsenal = pm.pitchers && pm.pitchers[pitcher.id] && pm.pitchers[pitcher.id].arsenal;
+  if (!arsenal) return null;
+  const baseline = (pm.baseline && pm.baseline.xSlgByPitch) || {};
+  const lu = (game && game.lineups && game.lineups[lineupSide + 'Players']) || [];
+  const teamId = game && game.teams && game.teams[lineupSide] && game.teams[lineupSide].team && game.teams[lineupSide].team.id;
+  const teamData = pm.teams && teamId && pm.teams[teamId] && pm.teams[teamId].xSlgByPitch;
+  // Build a per-pitch xSLG for the opposing offense. Prefer lineup, fall back to team.
+  const xSlg = {};
+  const keys = Object.keys(arsenal);
+  let matched = 0;
+  keys.forEach(function(code){
+    const usage = Number(arsenal[code]) || 0;
+    if (usage <= 0) return;
+    // Lineup average first
+    let sum = 0, n = 0;
+    if (lu.length) {
+      for (let i = 0; i < lu.length; i++) {
+        const pid = lu[i].id || lu[i].person && lu[i].person.id;
+        if (!pid) continue;
+        const h = pm.hitters && pm.hitters[pid] && pm.hitters[pid].xSlgByPitch;
+        if (h && typeof h[code] === 'number') { sum += h[code]; n += 1; }
+      }
+    }
+    if (n >= 3) {
+      xSlg[code] = sum / n;
+      matched += 1;
+      return;
+    }
+    if (teamData && typeof teamData[code] === 'number') {
+      xSlg[code] = teamData[code];
+      matched += 1;
+    }
+  });
+  if (!matched) return null;
+  let delta = 0;
+  let dominant = null;
+  let dominantAbs = 0;
+  keys.forEach(function(code){
+    if (typeof xSlg[code] !== 'number') return;
+    const usage = Number(arsenal[code]) || 0;
+    const base = Number(baseline[code]) || 0.390;
+    const d = (xSlg[code] - base) * usage;
+    delta += d;
+    if (Math.abs(d) > dominantAbs) { dominantAbs = Math.abs(d); dominant = code; }
+  });
+  return { delta: delta, sample: matched, dominant: dominant };
+}
+// Shorthand: combined pitch-matchup run delta for both sides.
+// Positive = offense has a good matchup vs the opposing SP, runs go up.
+function pitchMatchupTotalRunDelta(game) {
+  if (!game || !game.teams) return 0;
+  const aMatch = pitchMatchupFor(game.teams.home && game.teams.home.probablePitcher, 'away', game);
+  const hMatch = pitchMatchupFor(game.teams.away && game.teams.away.probablePitcher, 'home', game);
+  // Each xSLG point of delta is worth about 8 runs of run value over ~4 PAs per hitter per game
+  // averaged across a full lineup. Empirically we calibrate this at 3.2 runs per unit xSLG delta.
+  const aRun = aMatch ? Math.max(-0.45, Math.min(0.45, aMatch.delta * 3.2)) : 0;
+  const hRun = hMatch ? Math.max(-0.45, Math.min(0.45, hMatch.delta * 3.2)) : 0;
+  return aRun + hRun;
 }
 
 /* =========== STATCAST OVERLAY (pre-baked by scheduled refresh) =========== */
@@ -2841,6 +2998,29 @@ function scoreBestBets(g, a) {
   const awayRollingForm = (typeof rollingFormFor === 'function') ? rollingFormFor(awayName) : null;
   const homeRollingForm = (typeof rollingFormFor === 'function') ? rollingFormFor(homeName) : null;
 
+  // --- Phase 2A: Lineup aware run adjustment ---
+  // When lineups are posted, translate their OPS vs opposing SP hand into a small
+  // run nudge on top of team totals and the total. We cap the adjustment to keep
+  // the signal honest: one hot projected lineup should not move a total by a full run.
+  const awayLuVH = (typeof getLineupVsHand === 'function') ? getLineupVsHand(g, 'away') : null;
+  const homeLuVH = (typeof getLineupVsHand === 'function') ? getLineupVsHand(g, 'home') : null;
+  function luRunAdj(luVH) {
+    if (!luVH || typeof luVH.avgOps !== 'number') return 0;
+    const raw = (luVH.avgOps - 0.720) * 3.2; // runs vs 0.720 baseline
+    return Math.max(-0.35, Math.min(0.35, raw));
+  }
+  const awayLuRunAdj = luRunAdj(awayLuVH);
+  const homeLuRunAdj = luRunAdj(homeLuVH);
+  const luTotalDelta = awayLuRunAdj + homeLuRunAdj;
+  // ML side tilt: which lineup is set up better vs the opposing pitcher's hand. Positive
+  // favors the home side, negative favors the away side.
+  const luSideTilt = (awayLuVH && homeLuVH) ? (homeLuVH.avgOps - awayLuVH.avgOps) : 0;
+  // Lineup posted status helps downstream logic decide whether to trust lineup based signals.
+  const awayLuCount = ((g.lineups && g.lineups.awayPlayers) || []).length;
+  const homeLuCount = ((g.lineups && g.lineups.homePlayers) || []).length;
+  const luStatus = (awayLuCount >= 8 && homeLuCount >= 8) ? 'posted'
+                 : (awayLuCount >= 8 || homeLuCount >= 8) ? 'partial' : 'pending';
+
   // --- Moneyline ---
   if (odds && odds.moneyline) {
     const awayImp = impliedProbFromAmerican(odds.moneyline.away);
@@ -2906,7 +3086,18 @@ function scoreBestBets(g, a) {
     const windAdj = windRunsDelta;
     // Rolling 15 day form: blend both teams' hot/cold offense shifts at full weight.
     const formAdj = awayRollingRunAdj + homeRollingRunAdj;
-    const adjProjTotal = projTotal + totalBullpenBump + parkAdj + umpAdj + windAdj + formAdj;
+    // Lineup vs SP hand: posted lineups carry real signal; partial or pending lineups
+    // get half weight because at least one side is still an estimate.
+    const luWeight = luStatus === 'posted' ? 1.0 : luStatus === 'partial' ? 0.5 : 0.0;
+    const luAdj = luTotalDelta * luWeight;
+    // Catcher framing: elite framers (positive csaa) steal strikes for their staff, which
+    // modestly suppresses total runs. catcherTotalRunDelta already sums both sides and is
+    // signed so that positive framing lowers total runs.
+    const cframeAdj = (typeof catcherTotalRunDelta === 'function') ? catcherTotalRunDelta(g) : 0;
+    // Pitch type matchup: uses pitcher arsenal vs opposing lineup xSLG by pitch type.
+    // Positive means the offense has a strong matchup against the opposing SP's pitch mix.
+    const pmAdj = (typeof pitchMatchupTotalRunDelta === 'function') ? pitchMatchupTotalRunDelta(g) : 0;
+    const adjProjTotal = projTotal + totalBullpenBump + parkAdj + umpAdj + windAdj + formAdj + luAdj + cframeAdj + pmAdj;
     const diff = adjProjTotal - line;
     const z = diff / 2.6;
     const overProb = clampProb(normCdf(z));
@@ -2920,6 +3111,9 @@ function scoreBestBets(g, a) {
     if (Math.abs(windAdj) > 0.1)           subParts.push('wind ' + (windAdj>=0?'+':'') + windAdj.toFixed(1));
     if (Math.abs(umpAdj) > 0.08)           subParts.push('ump ' + (umpAdj>=0?'+':'') + umpAdj.toFixed(1));
     if (Math.abs(formAdj) > 0.15)          subParts.push('form ' + (formAdj>=0?'+':'') + formAdj.toFixed(1));
+    if (Math.abs(luAdj) > 0.1)             subParts.push('lineup ' + (luAdj>=0?'+':'') + luAdj.toFixed(1));
+    if (Math.abs(cframeAdj) > 0.08)        subParts.push('framing ' + (cframeAdj>=0?'+':'') + cframeAdj.toFixed(2));
+    if (Math.abs(pmAdj) > 0.1)             subParts.push('matchup ' + (pmAdj>=0?'+':'') + pmAdj.toFixed(2));
     out.push({
       market: 'TOTAL',
       label: (pickOver ? 'Over ' : 'Under ') + line.toFixed(1) + ' total',
@@ -2977,14 +3171,26 @@ function scoreBestBets(g, a) {
   }
 
   // --- Team Totals ---
+  // Weight the lineup vs hand nudge by lineup posting status, because a pending
+  // lineup is still a projection while a posted lineup is the actual batting order.
+  const ttLuWeight = luStatus === 'posted' ? 1.0 : luStatus === 'partial' ? 0.5 : 0.0;
+  // Per-side pitch matchup: each side's offense vs the opposing SP's arsenal.
+  const ttAwayMatch = (typeof pitchMatchupFor === 'function') ? pitchMatchupFor(g.teams && g.teams.home && g.teams.home.probablePitcher, 'away', g) : null;
+  const ttHomeMatch = (typeof pitchMatchupFor === 'function') ? pitchMatchupFor(g.teams && g.teams.away && g.teams.away.probablePitcher, 'home', g) : null;
+  const ttAwayMatchRuns = ttAwayMatch ? Math.max(-0.45, Math.min(0.45, ttAwayMatch.delta * 3.2)) : 0;
+  const ttHomeMatchRuns = ttHomeMatch ? Math.max(-0.45, Math.min(0.45, ttHomeMatch.delta * 3.2)) : 0;
   if (projAway > 0) {
-    const adjAway = projAway + awayRollingRunAdj;
+    const luNudge = awayLuRunAdj * ttLuWeight;
+    const mNudge = ttAwayMatchRuns;
+    const adjAway = projAway + awayRollingRunAdj + luNudge + mNudge;
     const diff = adjAway - 4.5;
     const z = diff / 1.7;
     const p = clampProb(normCdf(z));
     const pickOver = diff >= 0;
     const subParts = ['Proj ' + adjAway.toFixed(1) + ' runs'];
     if (Math.abs(awayRollingRunAdj) > 0.12) subParts.push('form ' + (awayRollingRunAdj>=0?'+':'') + awayRollingRunAdj.toFixed(1));
+    if (Math.abs(luNudge) > 0.1)            subParts.push('lineup ' + (luNudge>=0?'+':'') + luNudge.toFixed(1));
+    if (Math.abs(mNudge) > 0.1)             subParts.push('matchup ' + (mNudge>=0?'+':'') + mNudge.toFixed(2));
     out.push({
       market: 'TT_AWAY',
       label: awayNick + ' team total ' + (pickOver ? 'Over ' : 'Under ') + '4.5',
@@ -2995,13 +3201,17 @@ function scoreBestBets(g, a) {
     });
   }
   if (projHome > 0) {
-    const adjHome = projHome + homeRollingRunAdj;
+    const luNudge = homeLuRunAdj * ttLuWeight;
+    const mNudge = ttHomeMatchRuns;
+    const adjHome = projHome + homeRollingRunAdj + luNudge + mNudge;
     const diff = adjHome - 4.5;
     const z = diff / 1.7;
     const p = clampProb(normCdf(z));
     const pickOver = diff >= 0;
     const subParts = ['Proj ' + adjHome.toFixed(1) + ' runs'];
     if (Math.abs(homeRollingRunAdj) > 0.12) subParts.push('form ' + (homeRollingRunAdj>=0?'+':'') + homeRollingRunAdj.toFixed(1));
+    if (Math.abs(luNudge) > 0.1)            subParts.push('lineup ' + (luNudge>=0?'+':'') + luNudge.toFixed(1));
+    if (Math.abs(mNudge) > 0.1)             subParts.push('matchup ' + (mNudge>=0?'+':'') + mNudge.toFixed(2));
     out.push({
       market: 'TT_HOME',
       label: homeNick + ' team total ' + (pickOver ? 'Over ' : 'Under ') + '4.5',
@@ -3023,7 +3233,11 @@ function scoreBestBets(g, a) {
       const ip = 5.5;
       const projKBase = (k9 * ip / 9) * (whiff / 0.24);
       // Apply umpire K factor at full weight; it is the most direct K modifier.
-      const projK = projKBase * umpKMult;
+      let projK = projKBase * umpKMult;
+      // Catcher framing: pitcher's own catcher (same side) adds/subtracts Ks for the staff.
+      const sideFramer = (typeof catcherFramingForGame === 'function') ? catcherFramingForGame(g, side) : null;
+      const frameK = sideFramer ? Math.max(-0.6, Math.min(0.6, sideFramer.kNudgePerGame || 0)) : 0;
+      projK = projK + frameK;
       const line = Math.max(3.5, Math.round(projK * 2) / 2 - 0.5);
       const diff = projK - line;
       const z = diff / 1.3;
@@ -3033,6 +3247,9 @@ function scoreBestBets(g, a) {
       const kSubParts = ['K/9 ' + k9.toFixed(1) + ' • whiff ' + (whiff*100).toFixed(0) + '% • proj ' + projK.toFixed(1)];
       if (Math.abs(umpKMult - 1) > 0.02 && ump.name) {
         kSubParts.push('ump ' + (umpKMult > 1 ? '+' : '') + Math.round((umpKMult - 1) * 100) + '%');
+      }
+      if (Math.abs(frameK) >= 0.15) {
+        kSubParts.push('framing ' + (frameK > 0 ? '+' : '') + frameK.toFixed(2));
       }
       out.push({
         market: 'K',
@@ -3150,6 +3367,13 @@ function renderBestBetsBlock(g, a) {
   const ump = (typeof umpireFactorsFor === 'function' && umpName) ? umpireFactorsFor(umpName) : null;
   const awayForm = (typeof rollingFormFor === 'function') ? rollingFormFor(awayName) : null;
   const homeForm = (typeof rollingFormFor === 'function') ? rollingFormFor(homeName) : null;
+  // Phase 2A: Lineup posting status + vs hand OPS for each side.
+  const bbAwayLuVH = (typeof getLineupVsHand === 'function') ? getLineupVsHand(g, 'away') : null;
+  const bbHomeLuVH = (typeof getLineupVsHand === 'function') ? getLineupVsHand(g, 'home') : null;
+  const bbAwayLuCount = (g && g.lineups && g.lineups.awayPlayers) ? g.lineups.awayPlayers.length : 0;
+  const bbHomeLuCount = (g && g.lineups && g.lineups.homePlayers) ? g.lineups.homePlayers.length : 0;
+  const bbLuStatus = (bbAwayLuCount >= 8 && bbHomeLuCount >= 8) ? 'posted'
+                   : (bbAwayLuCount >= 8 || bbHomeLuCount >= 8) ? 'partial' : 'pending';
   const ctxItems = [];
   if (park) {
     const runsDelta = park.runs - 100;
@@ -3170,6 +3394,78 @@ function renderBestBetsBlock(g, a) {
     if (Math.abs(kD) >= 2) parts.push('Ks ' + (kD>0?'+':'') + kD + '%');
     ctxItems.push('<span class="bb-ctx-item"><span class="bb-ctx-icon '+cls+'">U</span><span class="bb-ctx-label">Ump '+esc(ump.name)+':</span><span class="bb-ctx-val">'+parts.join(', ')+'</span></span>');
   }
+  // Phase 2A: Lineup badge. Always informative: posted is the baseline, pending caps confidence.
+  (function(){
+    if (bbLuStatus === 'posted') {
+      // Only show a vs hand OPS value when the sides diverge enough to matter.
+      const aOps = bbAwayLuVH && bbAwayLuVH.avgOps;
+      const hOps = bbHomeLuVH && bbHomeLuVH.avgOps;
+      const detailParts = [];
+      if (typeof aOps === 'number') detailParts.push((teamNicknameFromName ? teamNicknameFromName(awayName) : awayName) + ' ' + aOps.toFixed(3));
+      if (typeof hOps === 'number') detailParts.push((teamNicknameFromName ? teamNicknameFromName(homeName) : homeName) + ' ' + hOps.toFixed(3));
+      const cls = '';
+      const rightTxt = detailParts.length ? detailParts.join(' vs ') : 'both posted';
+      ctxItems.push('<span class="bb-ctx-item"><span class="bb-ctx-icon '+cls+'">L</span><span class="bb-ctx-label">Lineups posted:</span><span class="bb-ctx-val">'+esc(rightTxt)+'</span></span>');
+    } else if (bbLuStatus === 'partial') {
+      const postedSide = bbAwayLuCount >= 8 ? (teamNicknameFromName ? teamNicknameFromName(awayName) : awayName)
+                                            : (teamNicknameFromName ? teamNicknameFromName(homeName) : homeName);
+      ctxItems.push('<span class="bb-ctx-item"><span class="bb-ctx-icon bb-ctx-cold">L</span><span class="bb-ctx-label">Lineups partial:</span><span class="bb-ctx-val">'+esc(postedSide)+' only</span></span>');
+    } else {
+      ctxItems.push('<span class="bb-ctx-item"><span class="bb-ctx-icon bb-ctx-cold">L</span><span class="bb-ctx-label">Lineups pending</span><span class="bb-ctx-val">signals capped</span></span>');
+    }
+  })();
+  // Phase 2B: Catcher framing badge. We surface both sides' projected framers when at least one
+  // is meaningfully above or below average. csaa of 4+ per game or -4 or lower is notable.
+  (function(){
+    if (typeof catcherFramingForGame !== 'function') return;
+    const aCf = catcherFramingForGame(g, 'away');
+    const hCf = catcherFramingForGame(g, 'home');
+    const parts = [];
+    function frag(cf, teamLabel) {
+      if (!cf) return null;
+      const csaa = Number(cf.csaa) || 0;
+      if (Math.abs(csaa) < 3) return null;
+      const sign = csaa > 0 ? '+' : '';
+      return teamLabel + ' ' + esc(cf.name || 'catcher') + ' (' + sign + csaa.toFixed(1) + ' CSAA)';
+    }
+    const awayLab = (typeof teamNicknameFromName === 'function') ? teamNicknameFromName(awayName) : awayName;
+    const homeLab = (typeof teamNicknameFromName === 'function') ? teamNicknameFromName(homeName) : homeName;
+    const aFrag = frag(aCf, awayLab);
+    const hFrag = frag(hCf, homeLab);
+    if (aFrag) parts.push(aFrag);
+    if (hFrag) parts.push(hFrag);
+    if (!parts.length) return;
+    const combinedCsaa = (aCf ? aCf.csaa : 0) + (hCf ? hCf.csaa : 0);
+    const cls = combinedCsaa >= 5 ? 'bb-ctx-hot' : combinedCsaa <= -5 ? 'bb-ctx-cold' : '';
+    ctxItems.push('<span class="bb-ctx-item"><span class="bb-ctx-icon '+cls+'">C</span><span class="bb-ctx-label">Framing:</span><span class="bb-ctx-val">'+parts.join(' · ')+'</span></span>');
+  })();
+  // Phase 2C: Pitch type matchup badge. Fires when the opposing arsenal lines up
+  // poorly (or very well) with the offense's xSLG against those pitch types.
+  (function(){
+    if (typeof pitchMatchupFor !== 'function') return;
+    const aMatch = pitchMatchupFor(g.teams && g.teams.home && g.teams.home.probablePitcher, 'away', g);
+    const hMatch = pitchMatchupFor(g.teams && g.teams.away && g.teams.away.probablePitcher, 'home', g);
+    if (!aMatch && !hMatch) return;
+    const parts = [];
+    function frag(match, teamLabel) {
+      if (!match) return null;
+      const runs = match.delta * 3.2;
+      if (Math.abs(runs) < 0.15) return null;
+      const sign = runs > 0 ? '+' : '';
+      const dom = match.dominant ? ' (' + esc(match.dominant) + ')' : '';
+      return teamLabel + ' ' + sign + runs.toFixed(2) + ' runs' + dom;
+    }
+    const awayLab = (typeof teamNicknameFromName === 'function') ? teamNicknameFromName(awayName) : awayName;
+    const homeLab = (typeof teamNicknameFromName === 'function') ? teamNicknameFromName(homeName) : homeName;
+    const aFrag = frag(aMatch, awayLab);
+    const hFrag = frag(hMatch, homeLab);
+    if (aFrag) parts.push(aFrag);
+    if (hFrag) parts.push(hFrag);
+    if (!parts.length) return;
+    const combined = (aMatch ? aMatch.delta : 0) + (hMatch ? hMatch.delta : 0);
+    const cls = combined >= 0.08 ? 'bb-ctx-hot' : combined <= -0.08 ? 'bb-ctx-cold' : '';
+    ctxItems.push('<span class="bb-ctx-item"><span class="bb-ctx-icon '+cls+'">M</span><span class="bb-ctx-label">Matchup:</span><span class="bb-ctx-val">'+parts.join(' · ')+'</span></span>');
+  })();
   // Rolling form: show hot or cold team badges when the delta is meaningful.
   function formBadge(teamName, form) {
     if (!form || !form.games15 || form.games15 < 5) return null;
@@ -4246,13 +4542,18 @@ function renderBets() {
 
     // ── 3. TOTALS ──
     // Raw projection, then blend park runs delta, wind runs delta, home plate umpire
-    // run multiplier, and rolling team form so the totals call reflects the full stack.
+    // run multiplier, rolling team form, catcher framing suppression, and pitch type
+    // matchup so the totals call reflects the full stack.
     const projRaw = projectTotal(g);
-    const proj = (projRaw + __parkRunsDelta + __windRunsDelta + __formTotalDelta) * __umpRunMult;
+    const __cframeDelta = (typeof catcherTotalRunDelta === 'function') ? catcherTotalRunDelta(g) : 0;
+    const __matchupDelta = (typeof pitchMatchupTotalRunDelta === 'function') ? pitchMatchupTotalRunDelta(g) : 0;
+    const proj = (projRaw + __parkRunsDelta + __windRunsDelta + __formTotalDelta + __cframeDelta + __matchupDelta) * __umpRunMult;
     const __factorNote = (Math.abs(__parkRunsDelta)>=0.2?" · park "+(__parkRunsDelta>=0?"+":"")+__parkRunsDelta.toFixed(1):"")
       + (Math.abs(__windRunsDelta)>=0.2?" · wind "+(__windRunsDelta>=0?"+":"")+__windRunsDelta.toFixed(1):"")
       + (Math.abs(__umpRunMult-1)>=0.02?" · ump "+(__umpRunMult>=1?"+":"")+Math.round((__umpRunMult-1)*100)+"%":"")
-      + (Math.abs(__formTotalDelta)>=0.1?" · form "+(__formTotalDelta>=0?"+":"")+__formTotalDelta.toFixed(1):"");
+      + (Math.abs(__formTotalDelta)>=0.1?" · form "+(__formTotalDelta>=0?"+":"")+__formTotalDelta.toFixed(1):"")
+      + (Math.abs(__cframeDelta)>=0.08?" · framing "+(__cframeDelta>=0?"+":"")+__cframeDelta.toFixed(2):"")
+      + (Math.abs(__matchupDelta)>=0.1?" · matchup "+(__matchupDelta>=0?"+":"")+__matchupDelta.toFixed(2):"");
     if(proj>=9.8) bets.push({cat:"📊 Total",type:"Total OVER",pick:"OVER "+Math.round(proj-0.5)+".5",game:label,tier:proj>=10.5?"STRONG":"LEAN",score:(proj-8.8)*4,
       cashProb: cashPctFromDelta(proj-8.8, 0.55),
       note:"Proj "+fmt(proj,1)+" runs"+__factorNote});
@@ -4270,30 +4571,44 @@ function renderBets() {
       note:"F5 proj "+fmt(f5proj,1)+__factorNote});
 
     // ── 5. SP K PROPS ──
-    [g.teams.away.probablePitcher, g.teams.home.probablePitcher].forEach(function(p){
-      if(!p) return;
-      const ps2 = STATE.pitcherStats[p.id];
+    // Catcher framing per side: positive csaa nudges Ks upward (stolen strikes become Ks).
+    // We use the opposing team's catcher because that catcher catches this pitcher.
+    const __awayFramer = (typeof catcherFramingForGame === 'function') ? catcherFramingForGame(g, 'away') : null;
+    const __homeFramer = (typeof catcherFramingForGame === 'function') ? catcherFramingForGame(g, 'home') : null;
+    [{p:g.teams.away.probablePitcher, side:'away', framer:__awayFramer},
+     {p:g.teams.home.probablePitcher, side:'home', framer:__homeFramer}].forEach(function(o){
+      if(!o.p) return;
+      const ps2 = STATE.pitcherStats[o.p.id];
       const k9 = Number(ps2&&ps2.season&&ps2.season.strikeoutsPer9Inn)||0;
       const projK = k9*5.5/9;
       const kLine = Math.round(projK*2)/2;
       // Ump K factor: umpires with a tight zone suppress Ks. Apply multiplier.
-      const projKAdj = projK * __umpKMult;
+      const projKAdj0 = projK * __umpKMult;
+      // Catcher framing K nudge: starter catcher for this pitching staff steals/gives strikes.
+      const frameK = o.framer ? Math.max(-0.6, Math.min(0.6, o.framer.kNudgePerGame || 0)) : 0;
+      const projKAdj = projKAdj0 + frameK;
       const umpKNote = Math.abs(__umpKMult-1)>=0.02 ? " · ump K "+(__umpKMult>=1?"+":"")+Math.round((__umpKMult-1)*100)+"%" : "";
-      if(projKAdj>=kLine+1.2) bets.push({cat:"📊 K",type:"SP Ks OVER",pick:p.fullName+" O"+fmt(kLine,1)+" Ks",game:label,tier:projKAdj>=kLine+1.8?"STRONG":"LEAN",score:(projKAdj-kLine)*3,
+      const frameNote = Math.abs(frameK)>=0.15 ? " · framing "+(frameK>=0?"+":"")+frameK.toFixed(2) : "";
+      if(projKAdj>=kLine+1.2) bets.push({cat:"📊 K",type:"SP Ks OVER",pick:o.p.fullName+" O"+fmt(kLine,1)+" Ks",game:label,tier:projKAdj>=kLine+1.8?"STRONG":"LEAN",score:(projKAdj-kLine)*3,
         cashProb: cashPctFromDelta(projKAdj-kLine, 0.75),
-        note:"K/9 "+fmt(k9,1)+" · Proj "+fmt(projKAdj,1)+umpKNote});
+        note:"K/9 "+fmt(k9,1)+" · Proj "+fmt(projKAdj,1)+umpKNote+frameNote});
     });
 
     // ── 6. TEAM K PROPS ──
     ["away","home"].forEach(function(side){
       const tk = projectTeamK(side, g);
       const tkLine = Math.round(tk*2)/2;
-      const tkAdj = tk * __umpKMult;
+      const tkAdj0 = tk * __umpKMult;
+      // Framing nudge: staff's own catcher (same side) adds/subtracts Ks for the whole staff.
+      const sideFramer = side === 'away' ? __awayFramer : __homeFramer;
+      const frameTK = sideFramer ? Math.max(-0.8, Math.min(0.8, sideFramer.kNudgePerGame || 0)) : 0;
+      const tkAdj = tkAdj0 + frameTK;
       const umpTKNote = Math.abs(__umpKMult-1)>=0.02 ? " · ump K "+(__umpKMult>=1?"+":"")+Math.round((__umpKMult-1)*100)+"%" : "";
+      const frameTKNote = Math.abs(frameTK)>=0.2 ? " · framing "+(frameTK>=0?"+":"")+frameTK.toFixed(2) : "";
       const __teamNick = (typeof teamNicknameFromName === 'function') ? teamNicknameFromName(g.teams[side].team.name) : g.teams[side].team.name;
       if(tkAdj>=tkLine+0.8) bets.push({cat:"📊 Team K",type:"Team Ks OVER",pick:__teamNick+" O"+fmt(tkLine,1)+" Ks",game:label,tier:tkAdj>=tkLine+1.5?"STRONG":"LEAN",score:(tkAdj-tkLine)*3,
         cashProb: cashPctFromDelta(tkAdj-tkLine, 0.65),
-        note:"Proj "+fmt(tkAdj,1)+" Ks"+umpTKNote});
+        note:"Proj "+fmt(tkAdj,1)+" Ks"+umpTKNote+frameTKNote});
     });
 
     // ── 7. SP EARNED RUNS PROPS ──
@@ -4316,14 +4631,20 @@ function renderBets() {
       const erDiff=Math.abs(projER-erLine);
       // Umpire run factor squeezes or inflates run environment, which flows through to ER.
       projER = projER * __umpRunMult;
+      // Catcher framing run suppression: elite framers knock a small amount off projected ER.
+      // runNudgePerGame is positive when the catcher saves runs, so subtract half to land on the SP's share.
+      const erFramer = side === 'away' ? __awayFramer : __homeFramer;
+      const erFrameDelta = erFramer ? -Math.max(-0.35, Math.min(0.35, erFramer.runNudgePerGame || 0)) * 0.5 : 0;
+      projER = projER + erFrameDelta;
       const erLine2 = Math.round(projER*2)/2;
       const erDiff2 = Math.abs(projER - erLine2);
       if(erDiff2>=0.4){
         const erDir=projER>=erLine2+0.4?"OVER":"UNDER";
         const umpERNote = Math.abs(__umpRunMult-1)>=0.02 ? " · ump "+(__umpRunMult>=1?"+":"")+Math.round((__umpRunMult-1)*100)+"%" : "";
+        const frameERNote = Math.abs(erFrameDelta)>=0.08 ? " · framing "+(erFrameDelta>=0?"+":"")+erFrameDelta.toFixed(2) : "";
         bets.push({cat:"📊 ER",type:"SP ER "+erDir,pick:sp.fullName+" "+erDir+" "+fmt(erLine2,1)+" ER",game:label,tier:erDiff2>=0.8?"STRONG":"LEAN",score:erDiff2*4,
           cashProb: cashPctFromDelta(erDiff2, 1.0),
-          note:"Proj "+fmt(projER,1)+" ER · ERA "+fmt(spEra,2)+(pl&&pl.d14&&pl.d14.era!=null?" (recent "+fmt(pl.d14.era,2)+")":"")+umpERNote});
+          note:"Proj "+fmt(projER,1)+" ER · ERA "+fmt(spEra,2)+(pl&&pl.d14&&pl.d14.era!=null?" (recent "+fmt(pl.d14.era,2)+")":"")+umpERNote+frameERNote});
       }
     });
 
@@ -6361,7 +6682,7 @@ async function refreshAllData() {
     // All four feed the scoring engine's adjustments on projected totals, HR
     // probability, K props, and ML edge.
     setStatus("Loading park, umpire, and rolling form overlays…");
-    await Promise.all([fetchParkFactors(), fetchParkWindRules(), fetchUmpireFactors(), fetchRollingForm()]);
+    await Promise.all([fetchParkFactors(), fetchParkWindRules(), fetchUmpireFactors(), fetchRollingForm(), fetchCatcherFraming(), fetchPitchMatchup()]);
 
     renderHotCold(); renderTeamK(); renderHitProps();
     renderERProps(); renderBBProps();
