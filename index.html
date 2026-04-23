@@ -659,6 +659,7 @@
     <button class="tab-group-label">💰 Picks ▾</button>
     <span class="tab-group-items">
       <button data-tab="bets">Top Bets</button>
+      <button data-tab="altparlay" style="color:#86efac;font-weight:600;">🎯 Alt / Parlay</button>
       <button data-tab="moneyline">Moneyline</button>
       <button data-tab="runline">Run Line</button>
       <button data-tab="totals">Totals</button>
@@ -711,6 +712,7 @@
     <option value="overview">Overview</option>
     <option value="analysis">Analysis</option>
     <option value="bets">Top Bets</option>
+    <option value="altparlay">🎯 Alt / Parlay</option>
     <option value="moneyline">Moneyline</option>
     <option value="runline">Run Line</option>
     <option value="totals">Totals</option>
@@ -721,6 +723,7 @@
     <option value="hitprops">Hit Props</option>
     <option value="erprops">SP Earned Runs</option>
     <option value="bbprops">SP Walk Props</option>
+    <option value="hrprops">💣 HR Props</option>
     <option value="hotcold">Hot/Cold Teams</option>
     <option value="hothitters">Hot/Cold Hitters</option>
     <option value="spotlight">Yesterday's Stars</option>
@@ -740,6 +743,7 @@
     <option value="overview">Overview</option>
     <option value="analysis">Analysis</option>
     <option value="bets" selected>Top Bets</option>
+    <option value="altparlay">🎯 Alt / Parlay</option>
     <option value="moneyline">Moneyline</option>
     <option value="runline">Run Line</option>
     <option value="totals">Totals</option>
@@ -750,6 +754,7 @@
     <option value="hitprops">Hit Props</option>
     <option value="erprops">SP Earned Runs</option>
     <option value="bbprops">SP Walk Props</option>
+    <option value="hrprops">💣 HR Props</option>
     <option value="hotcold">Hot/Cold Teams</option>
     <option value="hothitters">Hot/Cold Hitters</option>
     <option value="spotlight">Yesterday's Stars</option>
@@ -826,6 +831,16 @@
   <section class="tab" id="tab-bets">
     <div class="section-head"><h2>Top Bets (Model-Ranked)</h2><p>Edge derived from park + weather + pitcher + team K model. Human element layer applied.</p></div>
     <div id="betsGrid"></div>
+  </section>
+
+  <section class="tab" id="tab-altparlay">
+    <div class="section-head">
+      <div>
+        <h2>🎯 Alt / Parlay Builder</h2>
+        <p>Only legs that model at 70% or higher cash probability. Built for stacking two, three, or four legs into a parlay without blowing up the joint probability. Alt Run Lines, soft Team Totals, soft SP K Unders, 1+ Hit ladders, 2+ TB, F5 alt lines, and F5 spreads all feed this board. Click any column header to sort.</p>
+      </div>
+    </div>
+    <div id="altParlayGrid"></div>
   </section>
 
   <section class="tab" id="tab-moneyline">
@@ -1192,6 +1207,8 @@ const STATE = {
   betsSort: { key: 'score', dir: 'desc' }, // active sort key and direction for the Best Bets table headers
   hrPropsTable: [],        // filtered HR Props rows (>= 28% per game), cached for instant sorting
   hrPropsSort: { key: 'prob', dir: 'desc' }, // active sort key and direction for the HR Props table headers
+  altParlayTable: [],      // cached Alt / Parlay legs (>= 70% cash), for instant sort re-renders
+  altParlaySort: { key: 'cash', dir: 'desc' }, // active sort key and direction for the Alt / Parlay table headers
   loading: false
 };
 
@@ -4989,6 +5006,79 @@ function renderBets() {
       cashProb: cashPctFromDelta(4.5-f5proj, 0.7),
       note:"F5 proj "+fmt(f5proj,1)+__factorNote});
 
+    // ── 4a. F5 MONEYLINE — SP vs SP winner after 5 innings ──
+    // F5 strips out bullpen noise, so the starters' quality + recent form dominate.
+    // We weight SP quality (spSS+spRS) double and lineup OPS vs hand at 60% of its
+    // full game weight, since middle-of-order hitters rarely get a third look in F5.
+    const f5Edge = (spSS * 0.60) + (spRS * 0.25) + (offSS * 0.07) + (hhcS * 0.05 * luPen) + (__formSideTilt * 0.20);
+    const f5AbsEdge = Math.abs(f5Edge);
+    if (f5AbsEdge >= 0.30) {
+      const f5Pick = f5Edge > 0 ? homeTeam.name : awayTeam.name;
+      const __f5Nick = (typeof teamNicknameFromName === 'function') ? teamNicknameFromName(f5Pick) : f5Pick;
+      const f5Tier = f5AbsEdge >= 0.85 ? "LOCK" : f5AbsEdge >= 0.55 ? "STRONG" : "LEAN";
+      bets.push({ cat:"💰 F5 ML", type:"F5 Moneyline", pick:__f5Nick+" F5", game:label, tier:f5Tier,
+        score: f5AbsEdge * 9,
+        cashProb: cashPctFromDelta(f5AbsEdge, 0.80),
+        note:"F5 edge "+(f5Edge>=0?"+":"")+f5Edge.toFixed(2)+" · SP gap "+fmt(spSS,2)+(Math.abs(spRS)>=0.05?" · recent "+(spRS>=0?"+":"")+spRS.toFixed(2):"")
+      });
+    }
+
+    // ── 4b. F5 RUN LINE — half run in 5 inning context ──
+    // When F5 edge clears 0.7, the favored SP covers -0.5 about 60-68% of the time.
+    // Projected F5 margin uses f5Edge scaled into runs (roughly ~1.1 run spread at max edge).
+    const f5MarginRuns = f5Edge * 1.1;
+    const f5MarginAbs = Math.abs(f5MarginRuns);
+    if (f5MarginAbs >= 0.70) {
+      const f5RlPick = f5MarginRuns > 0 ? homeTeam.name : awayTeam.name;
+      const __f5RlNick = (typeof teamNicknameFromName === 'function') ? teamNicknameFromName(f5RlPick) : f5RlPick;
+      const f5RlCash = Math.min(0.82, 0.52 + (f5MarginAbs - 0.70) * 0.55);
+      bets.push({ cat:"💰 F5 RL", type:"F5 Run Line", pick:__f5RlNick+" F5 -0.5", game:label,
+        tier: f5RlCash >= 0.68 ? "STRONG" : "LEAN",
+        score: f5MarginAbs * 6,
+        cashProb: f5RlCash,
+        note:"Proj F5 margin "+(f5MarginRuns>=0?"+":"")+f5MarginRuns.toFixed(2)+" R · favored SP covers 5.5 innings"
+      });
+    }
+
+    // ── 4c. F5 TEAM TOTAL 1.5 — per side first-five-inning run projection ──
+    // Side projection: half of f5proj, nudged by this side's hitter quality (OPS vs opposing SP ERA).
+    ["away","home"].forEach(function(side){
+      const lu = (g.lineups && g.lineups[side+"Players"]) || [];
+      const oppSide = side === 'away' ? 'home' : 'away';
+      const oppSP = g.teams[oppSide].probablePitcher;
+      const oppPS = STATE.pitcherStats[oppSP && oppSP.id];
+      const oppEra = Number(oppPS && oppPS.season && oppPS.season.era) || 4.50;
+      // Side F5 OPS: use top 5 OPS (since F5 is mostly top of order).
+      let sideTopOps = 0.720;
+      if (lu.length >= 5) {
+        let n = 0, s = 0;
+        lu.slice(0, 5).forEach(function(p){
+          const bs = STATE.batterSplits && STATE.batterSplits[p.id];
+          const ops = bs && bs.season && Number(bs.season.ops);
+          if (ops) { s += ops; n++; }
+        });
+        if (n) sideTopOps = s / n;
+      }
+      // Base F5 side projection: half the game F5 projection, then scale by OPS vs ERA.
+      const f5SideProj = (f5proj / 2) * (sideTopOps / 0.720) * (oppEra / 4.50);
+      const f5TtNick = (typeof teamNicknameFromName === 'function') ? teamNicknameFromName(g.teams[side].team.name) : g.teams[side].team.name;
+      if (f5SideProj >= 1.90) {
+        bets.push({ cat:"📊 F5 Team", type:"F5 Team Total OVER", pick:f5TtNick+" F5 O1.5 Runs", game:label,
+          tier: f5SideProj >= 2.30 ? "STRONG" : "LEAN",
+          score: (f5SideProj - 1.50) * 6,
+          cashProb: cashPctFromDelta(f5SideProj - 1.50, 0.70),
+          note:"F5 side proj "+fmt(f5SideProj,2)+" R · top 5 OPS "+fmt(sideTopOps,3)+" vs "+fmt(oppEra,2)+" ERA"
+        });
+      } else if (f5SideProj <= 1.15) {
+        bets.push({ cat:"📊 F5 Team", type:"F5 Team Total UNDER", pick:f5TtNick+" F5 U1.5 Runs", game:label,
+          tier: f5SideProj <= 0.85 ? "STRONG" : "LEAN",
+          score: (1.50 - f5SideProj) * 6,
+          cashProb: cashPctFromDelta(1.50 - f5SideProj, 0.70),
+          note:"F5 side proj "+fmt(f5SideProj,2)+" R · top 5 OPS "+fmt(sideTopOps,3)+" vs "+fmt(oppEra,2)+" ERA"
+        });
+      }
+    });
+
     // ── 5. SP K PROPS ──
     // Catcher framing per side: positive csaa nudges Ks upward (stolen strikes become Ks).
     // We use the opposing team's catcher because that catcher catches this pitcher.
@@ -5346,6 +5436,201 @@ function renderBets() {
       });
     }
 
+    // ══════════════════════════════════════════════════════════════════════════
+    // ALT LADDER MARKETS — built specifically for parlay leg stacking.
+    // Each one targets a high cash probability band (70%+ typical) so stringing
+    // two or three together still produces a tolerable parlay win rate. The
+    // separate Alt / Parlay tab pulls only entries that model at >= 70% cash.
+    // ══════════════════════════════════════════════════════════════════════════
+
+    // ── ALT a. RUN LINE +2.5 — deep dog coverage ──
+    // Dog getting 2.5 runs cashes whenever the loss margin is under 3 runs, which
+    // is the vast majority of MLB games. Even neutral matchups score around 78%.
+    {
+      const altRl25Margin = Math.abs(rlComp);
+      const altRl25Dog = rlComp > 0 ? awayTeam.name : homeTeam.name;
+      const altRl25Nick = (typeof teamNicknameFromName === 'function') ? teamNicknameFromName(altRl25Dog) : altRl25Dog;
+      // Base 78%, subtract for larger projected margin, bonus for tight games.
+      const altRl25Cash = Math.max(0.62, Math.min(0.90, 0.82 - (altRl25Margin - 1.0) * 0.06));
+      if (altRl25Cash >= 0.70) {
+        bets.push({ cat:"🎯 Alt RL", type:"Run Line +2.5", pick:altRl25Nick+" +2.5", game:label,
+          tier: altRl25Cash >= 0.80 ? "STRONG" : "LEAN",
+          score: (altRl25Cash - 0.60) * 18,
+          cashProb: altRl25Cash,
+          note:"Proj margin "+fmt(altRl25Margin,2)+" R · dog covers 2.5 cushion"
+        });
+      }
+    }
+
+    // ── ALT b. TEAM TOTAL UNDER (soft line +1) — high cash UNDER ──
+    // When our projection is below the main team total, the line+1 UNDER (soft line)
+    // clears comfortably. Triggers when side projects under the soft UNDER line by 0.8+ runs.
+    ["away","home"].forEach(function(side){
+      const lu = (g.lineups && g.lineups[side+"Players"]) || [];
+      const oppSP = g.teams[side === 'away' ? 'home' : 'away'].probablePitcher;
+      const oppPS = STATE.pitcherStats[oppSP && oppSP.id];
+      const oppEra = Number(oppPS && oppPS.season && oppPS.season.era) || 4.50;
+      let sideOpsAlt = 0.720;
+      if (lu.length >= 8) {
+        let n = 0, s = 0;
+        lu.slice(0, 9).forEach(function(p){
+          const bs = STATE.batterSplits && STATE.batterSplits[p.id];
+          const ops = bs && bs.season && Number(bs.season.ops);
+          if (ops) { s += ops; n++; }
+        });
+        if (n) sideOpsAlt = s / n;
+      } else {
+        const tst = STATE.teamStats[g.teams[side].team.id];
+        sideOpsAlt = Number(tst && tst.season && tst.season.ops) || 0.720;
+      }
+      const sideProjAlt = (proj / 2) * (sideOpsAlt / 0.720) * (oppEra / 4.50);
+      const ttLineAlt = Math.round(sideProjAlt + 0.5) - 0.5; // main line near projection
+      const softLineAlt = ttLineAlt + 1; // soft UNDER one above main
+      const altTtMargin = softLineAlt - sideProjAlt;
+      if (altTtMargin >= 1.3) {
+        const altTtNick = (typeof teamNicknameFromName === 'function') ? teamNicknameFromName(g.teams[side].team.name) : g.teams[side].team.name;
+        const altTtCash = Math.min(0.88, 0.66 + (altTtMargin - 1.0) * 0.12);
+        if (altTtCash >= 0.70) {
+          bets.push({ cat:"🎯 Alt Team Total", type:"Team Total UNDER (soft)", pick:altTtNick+" U"+fmt(softLineAlt,1)+" Runs", game:label,
+            tier: altTtCash >= 0.80 ? "STRONG" : "LEAN",
+            score: (altTtCash - 0.60) * 18,
+            cashProb: altTtCash,
+            note:"Proj "+fmt(sideProjAlt,2)+" R · soft line "+fmt(softLineAlt,1)+" · OPS "+fmt(sideOpsAlt,3)
+          });
+        }
+      }
+    });
+
+    // ── ALT c. SP STRIKEOUTS UNDER (soft line +1) — low K ceiling ──
+    // When projected Ks sit comfortably under line+1, the soft UNDER cashes 78%+.
+    ["away","home"].forEach(function(side){
+      const sp = g.teams[side].probablePitcher;
+      if (!sp) return;
+      const psKA = STATE.pitcherStats[sp.id];
+      const k9A = Number(psKA && psKA.season && psKA.season.strikeoutsPer9Inn) || 0;
+      if (!k9A) return;
+      const projKA = (k9A * 5.5) / 9;
+      const kLineA = Math.round(projKA * 2) / 2;
+      const softKLine = kLineA + 1;
+      const altKMargin = softKLine - projKA;
+      if (altKMargin >= 1.2) {
+        const altKCash = Math.min(0.90, 0.70 + (altKMargin - 1.2) * 0.09);
+        if (altKCash >= 0.70) {
+          bets.push({ cat:"🎯 Alt K", type:"SP Ks UNDER (soft)", pick:sp.fullName+" U"+fmt(softKLine,1)+" Ks", game:label,
+            tier: altKCash >= 0.82 ? "STRONG" : "LEAN",
+            score: (altKCash - 0.60) * 18,
+            cashProb: altKCash,
+            note:"Proj "+fmt(projKA,1)+" Ks · soft line "+fmt(softKLine,1)+" · K/9 "+fmt(k9A,1)
+          });
+        }
+      }
+    });
+
+    // ── ALT d. HIT PROPS 1+ — broad coverage top of lineup ──
+    // Broader than the hot-hitter Hit Props in section 9: any top-6 slot vs a
+    // non-elite SP (WHIP >= 1.20) with projected 1.25+ hits clears 72%+ cash.
+    ["away","home"].forEach(function(side){
+      const lu = (g.lineups && g.lineups[side+"Players"]) || [];
+      const oppSPa = g.teams[side==="away"?"home":"away"].probablePitcher;
+      const oppPSa = STATE.pitcherStats[oppSPa && oppSPa.id];
+      const whipAlt = Number(oppPSa && oppPSa.season && oppPSa.season.whip) || 1.30;
+      // Only surface against non-elite starters, otherwise the hit probability collapses.
+      if (whipAlt < 1.15) return;
+      lu.slice(0, 6).forEach(function(p, idx){
+        const paAlt = idx < 3 ? 4.4 : 4.0;
+        const bsAlt = STATE.batterSplits && STATE.batterSplits[p.id];
+        const avgAlt = Number(bsAlt && bsAlt.season && bsAlt.season.avg) || 0.250;
+        if (avgAlt < 0.240) return;
+        // Hits per PA approximation blends AVG and WHIP relative to league baseline.
+        const hppa = avgAlt * (whipAlt / 1.30);
+        const hitProbAlt = 1 - Math.pow(1 - hppa, paAlt);
+        if (hitProbAlt >= 0.72) {
+          bets.push({ cat:"🎯 Alt Hits", type:"1+ Hit", pick:p.fullName+" O0.5 Hits", game:label,
+            tier: hitProbAlt >= 0.80 ? "STRONG" : "LEAN",
+            score: (hitProbAlt - 0.60) * 18,
+            cashProb: Math.min(0.90, hitProbAlt),
+            note:"AVG "+fmt(avgAlt,3)+" vs WHIP "+fmt(whipAlt,2)+" · "+paAlt.toFixed(1)+" PA · slot "+(idx+1)
+          });
+        }
+      });
+    });
+
+    // ── ALT e. TOTAL BASES 2+ — power hitter ladder ──
+    // TB >= 2 = any extra base hit or two singles. SLG 0.470+ against middling WHIP
+    // puts this in the 55-70% cash band. Less sure than TB 1+ but still strong for parlay tails.
+    ["away","home"].forEach(function(side){
+      const lu = (g.lineups && g.lineups[side+"Players"]) || [];
+      if (lu.length < 8) return;
+      const oppSP2 = g.teams[side === 'away' ? 'home' : 'away'].probablePitcher;
+      const oppPS2 = STATE.pitcherStats[oppSP2 && oppSP2.id];
+      const whipTB2 = Number(oppPS2 && oppPS2.season && oppPS2.season.whip) || 1.30;
+      lu.slice(0, 5).forEach(function(p, idx){
+        const paTB2 = idx < 3 ? 4.3 : 4.0;
+        const bsTB2 = STATE.batterSplits && STATE.batterSplits[p.id];
+        const slgTB2 = Number(bsTB2 && bsTB2.season && bsTB2.season.slg) || 0.400;
+        if (slgTB2 < 0.460) return;
+        // TB per PA from SLG * WHIP, then Poisson-like 2+ probability using per PA ≈ SLG × 0.55.
+        const tbPerPa = slgTB2 * (whipTB2 / 1.30) * 0.55;
+        // Approximate P(TB >= 2) using mean = tbPerPa * paTB2 and Poisson tail.
+        const mean = tbPerPa * paTB2;
+        const pZero = Math.exp(-mean);
+        const pOne = mean * Math.exp(-mean);
+        const tb2Prob = Math.max(0, Math.min(0.78, 1 - pZero - pOne * 0.9));
+        if (tb2Prob >= 0.52) {
+          bets.push({ cat:"🎯 Alt TB", type:"2+ Total Bases", pick:p.fullName+" O1.5 TB", game:label,
+            tier: tb2Prob >= 0.62 ? "STRONG" : "LEAN",
+            score: (tb2Prob - 0.45) * 22,
+            cashProb: tb2Prob,
+            note:"SLG "+fmt(slgTB2,3)+" vs WHIP "+fmt(whipTB2,2)+" · proj mean "+fmt(mean,2)+" TB"
+          });
+        }
+      });
+    });
+
+    // ── ALT f. F5 TOTAL (soft line) — one above/below main F5 line ──
+    // F5 main line is 4.5. Soft UNDER 5.5 cashes when proj <= 4.0, soft OVER 3.5 when proj >= 5.0.
+    if (f5proj <= 4.0) {
+      const f5UnderMargin = 5.5 - f5proj;
+      const f5UnderCash = Math.min(0.88, 0.64 + (f5UnderMargin - 1.5) * 0.10);
+      if (f5UnderCash >= 0.70) {
+        bets.push({ cat:"🎯 Alt F5", type:"F5 UNDER (soft)", pick:"F5 U5.5", game:label,
+          tier: f5UnderCash >= 0.80 ? "STRONG" : "LEAN",
+          score: (f5UnderCash - 0.60) * 18,
+          cashProb: f5UnderCash,
+          note:"F5 proj "+fmt(f5proj,1)+" vs soft line 5.5"+__factorNote
+        });
+      }
+    }
+    if (f5proj >= 5.0) {
+      const f5OverMargin = f5proj - 3.5;
+      const f5OverCash = Math.min(0.88, 0.64 + (f5OverMargin - 1.5) * 0.10);
+      if (f5OverCash >= 0.70) {
+        bets.push({ cat:"🎯 Alt F5", type:"F5 OVER (soft)", pick:"F5 O3.5", game:label,
+          tier: f5OverCash >= 0.80 ? "STRONG" : "LEAN",
+          score: (f5OverCash - 0.60) * 18,
+          cashProb: f5OverCash,
+          note:"F5 proj "+fmt(f5proj,1)+" vs soft line 3.5"+__factorNote
+        });
+      }
+    }
+
+    // ── ALT g. F5 SPREAD +1.5 — F5 dog covers big cushion ──
+    // F5 dog getting 1.5 runs is one of the safest parlay legs in the book (80%+ typical).
+    {
+      const f5MarginAltAbs = Math.abs(f5MarginRuns);
+      const f5SpreadCash = Math.max(0.60, Math.min(0.90, 0.82 - (f5MarginAltAbs - 0.5) * 0.08));
+      if (f5SpreadCash >= 0.70) {
+        const f5SpreadDog = f5MarginRuns > 0 ? awayTeam.name : homeTeam.name;
+        const __f5SpDogNick = (typeof teamNicknameFromName === 'function') ? teamNicknameFromName(f5SpreadDog) : f5SpreadDog;
+        bets.push({ cat:"🎯 Alt F5 RL", type:"F5 Run Line +1.5", pick:__f5SpDogNick+" F5 +1.5", game:label,
+          tier: f5SpreadCash >= 0.82 ? "STRONG" : "LEAN",
+          score: (f5SpreadCash - 0.60) * 18,
+          cashProb: f5SpreadCash,
+          note:"Proj F5 margin "+(f5MarginRuns>=0?"+":"")+f5MarginRuns.toFixed(2)+" R · dog covers 1.5 F5 cushion"
+        });
+      }
+    }
+
     // ── 13. RBI PROPS — middle-of-order hitter with hot bats behind RISP opportunities ──
     // We project RBI per batter from team run projection * slot RBI share, then adjust
     // by the hitter's season SLG and recent-7 AVG. Slots 3-5 carry ~42% of RBI share.
@@ -5505,6 +5790,127 @@ function drawBetsTable() {
         STATE.betsSort = { key: k, dir: defaultDir };
       }
       drawBetsTable();
+    });
+  });
+}
+
+/* =========== ALT / PARLAY RENDERER (70% cash floor, sortable) =========== */
+// Pulls the unified bets table and filters down to only the legs that model at
+// 70% or higher cash probability. These are the parlay friendly plays: alt run
+// lines, soft team totals, soft SP K unders, 1+ hit ladders, 2+ TB, F5 alt
+// lines, and F5 spreads. Any category in STATE.betsTable that meets the bar
+// flows into this tab so you have one place to pick parlay legs.
+function renderAltParlay() {
+  const el = document.getElementById('altParlayGrid');
+  if (!el) return;
+  // Pull every market from the unified bets table and keep only the high cash legs.
+  // We explicitly include any category labeled Alt plus any other market (ML, RL, TT,
+  // F5, K, Outs, NRFI, Hits, TB) whose cash probability clears 70%.
+  const source = (STATE.betsTable || []);
+  const filtered = source.filter(function(b){
+    return typeof b.cashProb === 'number' && b.cashProb >= 0.70;
+  });
+  STATE.altParlayTable = filtered.slice();
+  if (!STATE.altParlaySort) STATE.altParlaySort = { key: 'cash', dir: 'desc' };
+  drawAltParlayTable();
+}
+
+function drawAltParlayTable() {
+  const el = document.getElementById('altParlayGrid');
+  if (!el) return;
+  const rows = (STATE.altParlayTable || []).slice();
+  const sort = STATE.altParlaySort || { key: 'cash', dir: 'desc' };
+  const keyFns = {
+    cat:  function(b){ return (b.cat||'').toLowerCase(); },
+    type: function(b){ return (b.type||'').toLowerCase(); },
+    pick: function(b){ return (b.pick||'').toLowerCase(); },
+    game: function(b){ return (b.game||'').toLowerCase(); },
+    tier: function(b){
+      const t = (b.tier||'').replace(/[↑↓*]/g,'');
+      return t==='LOCK'?3:t==='STRONG'?2:t==='LEAN'?1:0;
+    },
+    cash: function(b){ return typeof b.cashProb==='number'?b.cashProb:-1; },
+    score:function(b){ return typeof b.score==='number'?b.score:-1; }
+  };
+  const keyFn = keyFns[sort.key] || keyFns.cash;
+  rows.sort(function(a,b){
+    const av = keyFn(a), bv = keyFn(b);
+    if (av < bv) return sort.dir === 'asc' ? -1 : 1;
+    if (av > bv) return sort.dir === 'asc' ? 1 : -1;
+    return 0;
+  });
+
+  var html = '<div class="explain-banner" style="background:linear-gradient(135deg, rgba(16,185,129,0.10), rgba(6,182,212,0.06));border-left:3px solid #10b981;">'+
+    '<span class="eb-title">🎯 Parlay friendly legs only:</span> '+
+    'every play on this board models at 70% or higher cash. Stack two legs for a break even parlay around 50%, three legs around 35%, four legs around 25%. Columns are click sortable so you can stack by game, category, or tier.</div>';
+
+  if (!rows.length) {
+    html += '<div class="loader">No legs clear 70% cash right now. Overlays may still be loading, or the slate is simply thin.</div>';
+    el.innerHTML = html;
+    return;
+  }
+
+  // Category summary pills so you can see leg availability at a glance.
+  var cats = {};
+  rows.forEach(function(b){ cats[b.cat]=(cats[b.cat]||0)+1; });
+  html += '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;">';
+  Object.keys(cats).forEach(function(c){
+    html += '<span class="pill" style="font-size:11px;background:rgba(16,185,129,0.15);border-color:rgba(16,185,129,0.35);">'+c+': '+cats[c]+'</span>';
+  });
+  html += '</div>';
+
+  // Sortable header builder.
+  function th(key, label, align){
+    const active = sort.key === key;
+    const arrow = active ? (sort.dir === 'asc' ? ' ▲' : ' ▼') : '';
+    const style = 'cursor:pointer;user-select:none;'+(align==='right'?'text-align:right;':'');
+    return '<th data-alt-sort="'+key+'" style="'+style+'">'+esc(label)+arrow+'</th>';
+  }
+
+  html += '<table><thead><tr>'+
+    th('cat','Category')+
+    th('type','Type')+
+    th('pick','Pick')+
+    th('game','Game')+
+    th('tier','Tier')+
+    th('cash','Cash %','right')+
+    th('score','Score','right')+
+    '<th>Notes</th>'+
+  '</tr></thead><tbody>';
+  rows.forEach(function(b){
+    const tb = b.tier.replace(/[↑↓*]/g,"");
+    const tierCls = tb==="LOCK"?"pill good":tb==="STRONG"?"pill good":"pill warn";
+    const tierIcon = tb==="LOCK"?"🔒":tb==="STRONG"?"💪":"👍";
+    const cashN = Math.round(b.cashProb * 100);
+    const cashCls = cashN >= 85 ? 'edge-good' : cashN >= 75 ? 'edge-good' : 'edge-neu';
+    const pickDisplay = (typeof normalizeTeamCodesInText === 'function') ? normalizeTeamCodesInText(b.pick||'') : (b.pick||'');
+    const gameDisplay = (typeof normalizeTeamCodesInText === 'function') ? normalizeTeamCodesInText(b.game||'') : (b.game||'');
+    html += '<tr>'+
+      '<td><b>'+esc(b.cat)+'</b></td>'+
+      '<td>'+esc(b.type)+'</td>'+
+      '<td><b>'+esc(pickDisplay)+'</b></td>'+
+      '<td>'+esc(gameDisplay)+'</td>'+
+      '<td><span class="'+tierCls+'">'+tierIcon+' '+esc(b.tier)+'</span></td>'+
+      '<td class="'+cashCls+'" style="text-align:right;"><b>'+cashN+'%</b></td>'+
+      '<td class="edge-good" style="text-align:right;">'+fmt(b.score,1)+'</td>'+
+      '<td class="small" style="color:var(--muted);max-width:360px;">'+esc(b.note)+'</td></tr>';
+  });
+  html += '</tbody></table>';
+
+  el.innerHTML = html;
+
+  // Attach click handlers to sortable headers. Toggle direction on repeat click.
+  const headers = document.querySelectorAll('#altParlayGrid th[data-alt-sort]');
+  headers.forEach(function(h){
+    h.addEventListener('click', function(){
+      const k = h.getAttribute('data-alt-sort');
+      if (STATE.altParlaySort && STATE.altParlaySort.key === k) {
+        STATE.altParlaySort.dir = STATE.altParlaySort.dir === 'asc' ? 'desc' : 'asc';
+      } else {
+        const defaultDir = (k === 'cash' || k === 'score' || k === 'tier') ? 'desc' : 'asc';
+        STATE.altParlaySort = { key: k, dir: defaultDir };
+      }
+      drawAltParlayTable();
     });
   });
 }
@@ -7374,6 +7780,7 @@ function renderAll() {
   renderLineups(); renderTotals(); renderKProps(); renderTeamK();
   renderHitProps(); renderERProps(); renderBBProps(); renderHRProps(); renderHotCold(); renderBets(); renderML();
   renderRL(); renderF5();
+  if (typeof renderAltParlay === 'function') renderAltParlay();
   renderKPIs(); renderTotalsChart(); renderTeamKChart();
   renderSplitsChart(); renderSplitsTable();
   renderMatchups(); renderBullpen(); renderYankees();
@@ -7442,6 +7849,7 @@ async function refreshAllData() {
     renderHotCold(); renderTeamK(); renderHitProps();
     renderERProps(); renderBBProps(); renderHRProps();
     renderTotals(); renderBets(); renderML(); renderRL(); renderF5();
+    if (typeof renderAltParlay === 'function') renderAltParlay();
     renderSplitsChart(); renderSplitsTable(); renderTeamKChart(); renderKPIs();
     renderMatchups(); renderYankees(); renderAnalysis();
     renderAIWizard(); renderValue();
@@ -7496,6 +7904,7 @@ async function refreshAllData() {
     await Promise.all(splitsPromises);
     // Re-render everything that uses lineup-level splits
     renderMatchups(); renderML(); renderRL(); renderBets(); renderAIWizard(); renderValue();
+    if (typeof renderAltParlay === 'function') renderAltParlay();
     // Analysis cards pick up Statcast + pitch matchup overlays, so refresh them too.
     if (typeof renderAnalysis === 'function') renderAnalysis();
     // HR Props table depends on batter splits for season ISO/HR rate, so refresh it.
@@ -7520,6 +7929,7 @@ async function refreshAllData() {
     Promise.all(hrBvpPromises).then(function(){
       if (typeof renderAnalysis === 'function') renderAnalysis();
       if (typeof renderBets === 'function') renderBets();
+      if (typeof renderAltParlay === 'function') renderAltParlay();
       if (typeof renderHRProps === 'function') renderHRProps();
     }).catch(function(){});
 
