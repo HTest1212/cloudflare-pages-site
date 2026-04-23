@@ -2719,337 +2719,255 @@ function buildGameNarrative(g) {
 /* =========== CLAUDE DAILY ANALYSIS (pre built afternoon refresh) =========== */
 /* =========== CLAUDE DAILY ANALYSIS (pre built afternoon refresh) =========== */
 const CLAUDE_DAILY_ANALYSIS = {
-  date: "2026-04-22",
-  lastUpdated: "2026-04-23T01:05:00Z",
-  window: "late evening (9 PM)",
+  date: "2026-04-23",
+  lastUpdated: "2026-04-23T16:05:00Z",
+  window: "afternoon (midday)",
   games: {
-    "823878": {
+    "822745": {
       paragraphs: [
-        { h: "Final Recap", b: "Miami closed out the Cardinals 4 to 1 at loanDepot park. Janson Junk carried the Marlins and Kyle Leahy wore the loss. The 9 PM refresh keeps the final posted, no fresh pre game read applies. Marlins split the set and take the series finale." },
+        { h: "Pitching Matchup", b: "JR Ritchie gets the ball for Atlanta, a right hander still settling into a major league book and working off a fastball changeup look. Cade Cavalli counters for Washington at a 4.12 ERA, 1.73 WHIP and 8.24 K/9 across 19.2 innings, strong stuff but the walk rate sits at 5.49 per nine and the traffic is real. Both arms have command questions, neither profiles as a shut it down starter on a short porch day in the District." },
+        { h: "Offense vs Handedness", b: "Atlanta against right handers keeps Acuña, Olson and Riley in the danger zone, a top heavy lineup built to punish mistakes over the plate. Washington against right handers gets full looks from James Wood and the young core, a lineup with upside but a wider strikeout floor. Cavalli's walks plus the Braves top of the order is the game's most leverage heavy sequence." },
+        { h: "Park and Weather", b: "Nationals Park reads 77 degrees, partly cloudy, with 6 mph blowing in from left field per the venue read. That's a neutral to slightly suppressive wind for the pull side bats, but air temperature in the high 70s usually adds a tick of carry. Park plays close to neutral on runs and mildly friendly to left handed power, James Wood gets that tailwind." },
+        { h: "Strikeout Projection", b: "Cavalli's K/9 says six whiffs through five is the realistic ceiling given the walks will shorten him. Ritchie is a wildcard but probably closer to four through four or five innings in his look. Combined starter punch outs land in the 9 to 11 zone, the real K volume comes from bullpens." },
+        { h: "Verdict Setup", b: "Announced lineups in for both sides. No scratches flagged. Braves are the rested road club coming off a series split and the pitching matchup leans their way given Cavalli's command. Midday read sharpens the Braves lean and keeps the total in the 9ish zone." },
       ],
       verdict: {
-        kind: "final",
-        text: "Final, Marlins 4 Cardinals 1. No fresh read.",
-        winner: "MIA",
-        projHome: "4",
-        projAway: "1",
+        kind: "lean-away",
+        text: "Braves lean with Cavalli's command issues and the Atlanta top of the order. Over 9 lives on both starters' traffic profile.",
+        winner: "ATL",
+        projHome: "4.2",
+        projAway: "5.4",
         bets: [
-          { t: "Final", cls: "chip-neutral" },
+          { t: "Braves ML", cls: "chip-lean" },
+          { t: "Over 9", cls: "chip-lean" },
+          { t: "Acuña over 1.5 total bases", cls: "chip-lean" },
         ]
       },
       grade: {
-        letter: "C",
-        cls: "grade-c",
-        score: 55,
-        blurb: "Final posted, nothing to project."
+        letter: "B",
+        cls: "grade-b",
+        score: 78,
+        blurb: "Lineups posted, Cavalli walks plus an Atlanta top three give the read a clear edge."
       }
     },
-    "824449": {
+    "824288": {
       paragraphs: [
-        { h: "Final Recap", b: "Houston clipped Cleveland 2 to 0 at Progressive Field. Peter Lambert outpitched Tanner Bibee in a low scoring affair and the 9 PM refresh logs the final. Astros steal the series finale on the road." },
-      ],
-      verdict: {
-        kind: "final",
-        text: "Final, Astros 2 Guardians 0.",
-        winner: "HOU",
-        projHome: "0",
-        projAway: "2",
-        bets: [
-          { t: "Final", cls: "chip-neutral" },
-        ]
-      },
-      grade: {
-        letter: "C",
-        cls: "grade-c",
-        score: 55,
-        blurb: "Final posted, nothing to project."
-      }
-    },
-    "822993": {
-      paragraphs: [
-        { h: "Final Recap", b: "Tampa Bay handled Cincinnati 6 to 1 at Tropicana Field. Nick Martinez worked a clean start and Brandon Williamson fell short. Final is locked, the 9 PM refresh keeps the boxscore view." },
-      ],
-      verdict: {
-        kind: "final",
-        text: "Final, Rays 6 Reds 1.",
-        winner: "TB",
-        projHome: "6",
-        projAway: "1",
-        bets: [
-          { t: "Final", cls: "chip-neutral" },
-        ]
-      },
-      grade: {
-        letter: "C",
-        cls: "grade-c",
-        score: 55,
-        blurb: "Final posted."
-      }
-    },
-    "824123": {
-      paragraphs: [
-        { h: "Final Recap", b: "Baltimore outlasted Kansas City 8 to 6 at Kauffman Stadium. Chris Bassitt avoided disaster and the Orioles bats got to Michael Wacha, a final that went against the original afternoon read. The 9 PM refresh records the outcome." },
-      ],
-      verdict: {
-        kind: "final",
-        text: "Final, Orioles 8 Royals 6. Original lean did not cash.",
-        winner: "BAL",
-        projHome: "6",
-        projAway: "8",
-        bets: [
-          { t: "Final", cls: "chip-neutral" },
-        ]
-      },
-      grade: {
-        letter: "C",
-        cls: "grade-c",
-        score: 55,
-        blurb: "Final posted, pre built lean went the other way."
-      }
-    },
-    "824044": {
-      paragraphs: [
-        { h: "Final Recap", b: "Los Angeles Angels took down Toronto 7 to 3 at Angel Stadium. Jose Soriano cruised and Eric Lauer gave it up early. Angels grab the series finale and the 9 PM refresh locks the final." },
-      ],
-      verdict: {
-        kind: "final",
-        text: "Final, Angels 7 Blue Jays 3.",
-        winner: "LAA",
-        projHome: "7",
-        projAway: "3",
-        bets: [
-          { t: "Final", cls: "chip-neutral" },
-        ]
-      },
-      grade: {
-        letter: "C",
-        cls: "grade-c",
-        score: 55,
-        blurb: "Final posted."
-      }
-    },
-    "823147": {
-      paragraphs: [
-        { h: "Final Recap", b: "Seattle edged the Athletics 5 to 4 at T Mobile Park. Logan Gilbert did enough and the Mariners survived a late push. A one run final caps the series and the 9 PM refresh records the outcome." },
-      ],
-      verdict: {
-        kind: "final",
-        text: "Final, Mariners 5 Athletics 4.",
-        winner: "SEA",
-        projHome: "5",
-        projAway: "4",
-        bets: [
-          { t: "Final", cls: "chip-neutral" },
-        ]
-      },
-      grade: {
-        letter: "C",
-        cls: "grade-c",
-        score: 55,
-        blurb: "Final posted."
-      }
-    },
-    "824286": {
-      paragraphs: [
-        { h: "In Progress", b: "Milwaukee at Detroit is wrapping up at Comerica Park with the Tigers ahead 5 to 2 heading to the ninth based on the latest read. Live feed owns the tile, no fresh pre game read is issued at the 9 PM window. The earlier Tigers lean is cashing as Casey Mize navigated the middle innings and the bullpen is closing the door." },
-      ],
-      verdict: {
-        kind: "neutral",
-        text: "Live game, Tigers leading late. No fresh read while at bats are live.",
-        winner: "",
-        projHome: "",
-        projAway: "",
-        bets: [
-          { t: "In progress", cls: "chip-neutral" },
-        ]
-      },
-      grade: {
-        letter: "C",
-        cls: "grade-c",
-        score: 55,
-        blurb: "Skipped because first pitch already happened."
-      }
-    },
-    "822748": {
-      paragraphs: [
-        { h: "In Progress", b: "Atlanta at Washington is live at Nationals Park with the Braves ahead 8 to 6 in the middle innings based on the latest score read. The pre built Braves lean is in a good spot to cash but Washington is putting up counter punches, bullpen usage will be the tell on the final margin. Live scoring owns the card." },
-      ],
-      verdict: {
-        kind: "neutral",
-        text: "Live game, Braves leading. Live scoring owns the tile.",
-        winner: "",
-        projHome: "",
-        projAway: "",
-        bets: [
-          { t: "In progress", cls: "chip-neutral" },
-        ]
-      },
-      grade: {
-        letter: "C",
-        cls: "grade-c",
-        score: 55,
-        blurb: "Skipped because first pitch already happened."
-      }
-    },
-    "824774": {
-      paragraphs: [
-        { h: "In Progress", b: "Yankees at Boston is rolling toward a Yankees win at Fenway Park. The score read at the 9 PM refresh is New York 4 Boston 0 heading to the ninth inning, a clean execution of the afternoon play. Max Fried carved the Boston lineup exactly the way the pre built read projected, cold air and the platoon edge both played out, and the Yankees right handed bats capitalized on Ranger Suarez mistakes. This is the top rated card of the slate cashing as expected." },
-        { h: "Yankees Angle", b: "Fried's road dominance continues and the New York bullpen is in position to close a shutout bid if it holds. The Yankees are on track to open the series exactly the way the grade A plus read called for, with the starter edge, platoon edge, cold air, and park configuration all stacking the same direction. Extra attention warranted here given this was the top play of the board and it is executing." },
-      ],
-      verdict: {
-        kind: "neutral",
-        text: "Live game, Yankees up 4 to 0 late. Pre built top play is cashing.",
-        winner: "",
-        projHome: "",
-        projAway: "",
-        bets: [
-          { t: "In progress, pre built play cashing", cls: "chip-neutral" },
-        ]
-      },
-      grade: {
-        letter: "C",
-        cls: "grade-c",
-        score: 55,
-        blurb: "Live tile. Original A plus read is in strong shape."
-      }
-    },
-    "823641": {
-      paragraphs: [
-        { h: "In Progress", b: "Minnesota at Mets is tied 2 to 2 in the middle innings at Citi Field. Clay Holmes worked the game the way the afternoon read projected and the Mets bullpen now takes on the Twins middle order. Close game, live scoring owns the tile." },
-      ],
-      verdict: {
-        kind: "neutral",
-        text: "Live game, tied in the middle innings.",
-        winner: "",
-        projHome: "",
-        projAway: "",
-        bets: [
-          { t: "In progress", cls: "chip-neutral" },
-        ]
-      },
-      grade: {
-        letter: "C",
-        cls: "grade-c",
-        score: 55,
-        blurb: "Skipped because first pitch already happened."
-      }
-    },
-    "824688": {
-      paragraphs: [
-        { h: "In Progress", b: "Philadelphia at Cubs is live at Wrigley Field with the Cubs ahead 4 to 2 in the fifth based on the latest score read. The pre built Cubs lean is tracking well, Matthew Boyd has been getting swings and misses and the cold wind in setup is suppressing carry as projected. Under watch also holds shape at this stage." },
-      ],
-      verdict: {
-        kind: "neutral",
-        text: "Live game, Cubs leading. Pre built lean is in good shape.",
-        winner: "",
-        projHome: "",
-        projAway: "",
-        bets: [
-          { t: "In progress", cls: "chip-neutral" },
-        ]
-      },
-      grade: {
-        letter: "C",
-        cls: "grade-c",
-        score: 55,
-        blurb: "Skipped because first pitch already happened."
-      }
-    },
-    "822913": {
-      paragraphs: [
-        { h: "In Progress", b: "Pittsburgh at Texas is live at Globe Life Field, Rangers up 2 to 1 in the fifth on the latest score read. Jack Leiter and Braxton Ashcraft are trading zeros more than the K totals projected, but both arms remain in the game and the strikeout live totals are still in play. Rangers side pick is tracking." },
-      ],
-      verdict: {
-        kind: "neutral",
-        text: "Live game, Rangers leading by one.",
-        winner: "",
-        projHome: "",
-        projAway: "",
-        bets: [
-          { t: "In progress", cls: "chip-neutral" },
-        ]
-      },
-      grade: {
-        letter: "C",
-        cls: "grade-c",
-        score: 55,
-        blurb: "Skipped because first pitch already happened."
-      }
-    },
-    "824367": {
-      paragraphs: [
-        { h: "In Progress", b: "San Diego at Colorado is early at Coors Field with the Padres up 1 to 0 in the second. Walker Buehler is working quick and Tomoyuki Sugano has kept the Padres in check through the opening inning. Too early to call the over total read but the Padres side is looking live. Live scoring owns the tile." },
-      ],
-      verdict: {
-        kind: "neutral",
-        text: "Live game, Padres leading early.",
-        winner: "",
-        projHome: "",
-        projAway: "",
-        bets: [
-          { t: "In progress", cls: "chip-neutral" },
-        ]
-      },
-      grade: {
-        letter: "C",
-        cls: "grade-c",
-        score: 55,
-        blurb: "Skipped because first pitch already happened."
-      }
-    },
-    "825097": {
-      paragraphs: [
-        { h: "Pitching Matchup", b: "Eduardo Rodriguez is the Arizona lefty sitting at a 1.96 ERA, 1.22 WHIP and 5.48 K/9 across 23 innings, changeup locating on both sides of the plate and a fastball that does not beat itself with walks. Anthony Kay is the Chicago lefty at 2.60 ERA, 1.27 WHIP and 6.23 K/9 across 17.1 innings, a solid look on the surface but a thinner major league track record and a narrower error band once the order turns over. Arizona holds a meaningful experience edge and the home club gets the better of the two lefties on paper." },
-        { h: "Offense vs Handedness", b: "Chicago against left handed pitching has been among the worst splits in the sport with too many same handed bats in the core. Arizona against left handers is average leaguewide but the home crowd and the lineup construction with Marte, Carroll, Perdomo and Arenado through the top four gives the Diamondbacks a meaningful handedness edge in this spot. Both lineups now confirmed posted as of the 9 PM check." },
-        { h: "Park and Weather", b: "Chase Field with the roof closed removes all weather noise. A near neutral run environment that leans slightly hitter friendly because of the foul territory profile and carry. Clean indoor conditions, no wind or temperature variable to tilt the read either direction." },
-        { h: "Strikeout Projection", b: "Rodriguez should collect five to six punch outs across a six inning look, Kay sits near five in a shorter span. Combined total lands in the 11 to 13 band, no clear over or under edge on the combined K total." },
-        { h: "Late Info", b: "Both lineups now officially confirmed at the 9 PM check with Marte leading off and Carroll in the two hole for Arizona as expected, the White Sox running their standard order with Meidroth leadoff. No late scratches reported. Weather is a non factor given the roof." },
+        { h: "Pitching Matchup", b: "Tarik Skubal continues his ace tour for Detroit at a 2.08 ERA, 0.96 WHIP and 9.79 K/9 across 30.1 innings, the kind of dominant season long profile that flattens a lineup top to bottom. Brandon Sproat is the Milwaukee right hander at 6.88 ERA, 1.71 WHIP and 8.47 K/9 across 17 innings, four home runs allowed already and 5.82 walks per nine, a volatile road arm in a bad matchup." },
+        { h: "Offense vs Handedness", b: "Milwaukee against left handers has been adequate with Contreras and Turang leading the way, but the depth behind them has not tested an arm like Skubal. Detroit against right handers gives Skubal a full menu of traffic from Greene, Carpenter and Torkelson. Sproat's homer rate is the single scariest stat on the sheet, Riley Greene at Comerica is a live pull side swing even with the wind blowing in." },
+        { h: "Park and Weather", b: "Comerica Park sits at 65 degrees and sunny with an 8 mph wind blowing in from right field. That suppresses Greene's natural pull carry a touch, but Comerica is already a pitcher friendly venue for non lefty right field power. Skubal's whiff profile flattens regardless of wind direction, the park read pushes the total slightly under." },
+        { h: "Strikeout Projection", b: "Skubal in this spot is a prime nine punch out night given the Brewers road swing whiff rate. Sproat near six in a short look as his walk profile caps his length. Combined starter K total lands 14 to 16, Skubal over 8.5 strikeouts is a premium play." },
+        { h: "Verdict Setup", b: "Lineups confirmed for both sides, no late scratches. Skubal on the mound, the Tigers at home with a rested bullpen behind him, Brewers traveling cross country and into a matchup that favors Detroit at every layer. Midday read hardens the Tigers side and keeps the under in play." },
       ],
       verdict: {
         kind: "lean-home",
-        text: "Arizona in a spot you bet. Veteran lefty versus a cold same side offense at home with both lineups confirmed.",
-        winner: "AZ",
-        projHome: "5",
-        projAway: "2",
+        text: "Tigers are the play top to bottom. Skubal is the best pitcher on the slate and the total wants under with Sproat's walks balanced by Skubal's shutdown look.",
+        winner: "DET",
+        projHome: "4.6",
+        projAway: "2.8",
         bets: [
-          { t: "Diamondbacks ML", cls: "chip-lean" },
-          { t: "Diamondbacks run line", cls: "chip-lean" },
-          { t: "Under 8.5", cls: "chip-lean" },
+          { t: "Tigers ML", cls: "chip-lean" },
+          { t: "Tigers run line", cls: "chip-lean" },
+          { t: "Skubal over 8.5 Ks", cls: "chip-lean" },
+          { t: "Under 8", cls: "chip-lean" },
         ]
       },
       grade: {
         letter: "A",
         cls: "grade-a",
-        score: 83,
-        blurb: "Starter edge plus a lineup mismatch confirmed on both sides of the card."
+        score: 90,
+        blurb: "Premium ace spot, wind aids the under, announced cards confirmed."
       }
     },
-    "823231": {
+    "824689": {
       paragraphs: [
-        { h: "Pitching Matchup", b: "Shohei Ohtani takes the ball for the Dodgers at a 0.50 ERA, 0.72 WHIP and 9.00 K/9 across 18 innings, a fastball splitter sweeper mix that has overwhelmed lineups every time out. Tyler Mahle is the Giants right hander at a 7.23 ERA and 1.93 WHIP across 18.2 innings, a K/9 of 10.13 that signals swing and miss is there but the traffic profile is loud and the margin for error is thin. The matchup is as lopsided as it looks on paper, Ohtani is the single biggest difference maker on the late slate." },
-        { h: "Offense vs Handedness", b: "San Francisco against right handers is average with too much of the weight carried by the top of the order. The Dodgers against right handers is the best offensive split in baseball with a full stack of elite bats. Every turn through the Los Angeles lineup is an event, and Mahle's WHIP says traffic will reach him early." },
-        { h: "Park and Weather", b: "Oracle Park at 6:45 first pitch reads 58 to 61 degrees with a 7 to 9 mph west northwest breeze and zero precipitation, the classic cool marine evening that suppresses right field carry and rewards ground ball work. This helps Ohtani keep any Dodgers lefty swing from getting punished, and it does push the total a hair lower." },
-        { h: "Strikeout Projection", b: "Ohtani should push eight punch outs in a six inning look. Mahle sits near six given the elevated K/9 paired with the traffic profile. Combined total lands in the 13 to 15 zone, Ohtani over 6.5 remains the cleanest K play of the card." },
-        { h: "Late Info", b: "Lineups not yet officially posted at the 9 PM check as the West Coast clubs tend to release later. Ohtani batting himself leadoff or second in the order remains the wrinkle to watch once the card drops. Marine layer confirmed steady on the evening read, cool and dry." },
+        { h: "Pitching Matchup", b: "Cristopher Sánchez is the Philly left hander at a 1.59 ERA, 1.41 WHIP and 12.39 K/9 across 28.1 innings, a sinker changeup artist with swing and miss stuff that has flattened NL opponents. Edward Cabrera is the Cubs right hander at 2.38 ERA, 1.28 WHIP and 6.75 K/9 across 22.2 innings, but the walk rate is 4.37 per nine and his command comes and goes. Sánchez has the better profile, and a lefty arm into the Cubs righty heavy lineup keeps this read tight." },
+        { h: "Offense vs Handedness", b: "Chicago against lefties is where Bregman, Suzuki and Happ all sharpen, their lineup is built for a LHP day. Philadelphia against right handers gets the full Schwarber, Harper, Marsh look which is one of the better NL splits. Cabrera's walks vs a patient Philly top of the order tilts traffic loud, while Sánchez has to survive a Cubs lineup specifically designed to beat him." },
+        { h: "Park and Weather", b: "Wrigley Field reads 72 degrees, partly cloudy, with a 14 mph wind blowing out to left field. That is the classic Wrigley juice day, the ball carries on the pull side for right handers and pull side lefties, this is a material boost to scoring for Schwarber, Suzuki, Bregman and Harper all at once. The total deserves a real bump, the wind read is the single biggest park variable on the card." },
+        { h: "Strikeout Projection", b: "Sánchez near eight whiffs in six innings given his ceiling K/9, Cabrera nearer five as his length is capped. Combined in the 12 to 14 zone, Sánchez over 7 strikeouts is a candidate play, but the traffic concern is real with the wind blowing out." },
+        { h: "Verdict Setup", b: "Both lineups posted early and confirmed. The wind is the dominant variable and it is firmly out to left with a strong steady reading. Midday check hardens the over and shifts the side read slightly toward the Cubs given the lineup matchup advantage vs the lefty. Keep an eye on the wind gauge near first pitch, if it drops the over risk falls off fast." },
+      ],
+      verdict: {
+        kind: "lean-home",
+        text: "Cubs lean on the lineup matchup, the over is the strongest play on the card given the Wrigley wind. Sánchez is excellent but the conditions are against him.",
+        winner: "CHC",
+        projHome: "5.4",
+        projAway: "4.3",
+        bets: [
+          { t: "Over 8.5", cls: "chip-lean" },
+          { t: "Cubs ML", cls: "chip-lean" },
+          { t: "Schwarber HR prop", cls: "chip-lean" },
+          { t: "Suzuki over 1.5 TB", cls: "chip-lean" },
+        ]
+      },
+      grade: {
+        letter: "A",
+        cls: "grade-a",
+        score: 86,
+        blurb: "Wind out to left at Wrigley, lineups posted, the total play is the highest conviction on the slate."
+      }
+    },
+    "824368": {
+      paragraphs: [
+        { h: "Pitching Matchup", b: "Matt Waldron is the Padres right hander, knuckleball artist whose one start this season went for a 14.73 ERA line across 3.2 innings, eight hits and a home run. Ryan Feltner is the Rockies right hander at 6.00 ERA, 1.50 WHIP and 7.00 K/9 across 18 innings with five home runs allowed, the classic Coors profile where nothing on the arm side travels well. Neither starter inspires confidence, the pitching read leans toward volume in both dugouts." },
+        { h: "Offense vs Handedness", b: "San Diego against right handers sends out Tatis, Machado and Arraez, a balanced mix that punishes the mistakes Waldron's recent knuckleball fade will give up. Colorado against right handers gets a short altitude boost and typically beats up road arms at home. Both sides profile to put up crooked numbers if the command concerns from both starters carry over." },
+        { h: "Park and Weather", b: "Coors Field is the run factory on the slate, any weather read on a dry afternoon puts carry at maximum. No active weather object returned yet, but altitude is the park factor. Over plays are the default at Coors and this matchup does nothing to push them down." },
+        { h: "Strikeout Projection", b: "Waldron's K/9 is elevated but the batted ball damage is worse. Feltner near six whiffs through five. Combined total lands near 10 given the short starts expected, bullpens bring the variance." },
+        { h: "Verdict Setup", b: "Lineups not yet posted at the midday check. Given Coors, the pitching matchup and both offenses' right handed look, the over is the cleanest read. Padres are the better team on paper but road dog spots at Coors always carry noise." },
+      ],
+      verdict: {
+        kind: "lean-over",
+        text: "Coors plus two shaky starters equals runs. The over is the call, Padres lean on side but cap exposure with the altitude variance.",
+        winner: "SD",
+        projHome: "5.7",
+        projAway: "6.6",
+        bets: [
+          { t: "Over 11", cls: "chip-lean" },
+          { t: "Padres ML", cls: "chip-lean" },
+          { t: "Tatis over 1.5 TB", cls: "chip-lean" },
+        ]
+      },
+      grade: {
+        letter: "B",
+        cls: "grade-b",
+        score: 74,
+        blurb: "Coors run environment plus two rough pitching lines, over is the main lean."
+      }
+    },
+    "825096": {
+      paragraphs: [
+        { h: "Pitching Matchup", b: "Michael Soroka goes for Arizona at 2.78 ERA, 1.06 WHIP and 11.12 K/9 across 22.2 innings, bounce back season carrying a sharp slider and a vastly improved whiff rate. Davis Martin counters for Chicago at 2.16 ERA, 1.00 WHIP and 6.84 K/9 across 25 innings, a strike thrower with a modest K rate but a clean walk profile. The overall pitching edge leans Arizona but this is the sneaky pitching duel on the slate." },
+        { h: "Offense vs Handedness", b: "Chicago against right handers is one of the weaker lineups in the league, Colas and Vaughn carry most of the right handed damage and the lineup thins fast. Arizona against right handers sends out Carroll, Marte and Walker, a top heavy group with real extra base juice. The lineup mismatch is stark and it favors the D backs in every leverage spot." },
+        { h: "Park and Weather", b: "Chase Field has the roof lever, generally neutral to slightly hitter friendly when closed. No live weather field returned, indoor afternoon read is the default. Park does not move the total much in either direction." },
+        { h: "Strikeout Projection", b: "Soroka near seven whiffs through six, Martin near five. Combined starter Ks in the 11 to 13 zone, Soroka over 6.5 strikeouts is a live prop." },
+        { h: "Verdict Setup", b: "Lineups not yet posted. Arizona is the rested home side with the lineup and pitching edge. White Sox road trip continues with a thin offensive profile. Midday call is D backs on the side and a slight lean under given both starters have workable walk and hit rates." },
+      ],
+      verdict: {
+        kind: "lean-home",
+        text: "D backs are the cleaner side at home. Under is a secondary lean given Soroka's form and Martin's control.",
+        winner: "ARI",
+        projHome: "4.8",
+        projAway: "3.0",
+        bets: [
+          { t: "D backs ML", cls: "chip-lean" },
+          { t: "Under 8", cls: "chip-lean" },
+          { t: "Soroka over 6.5 Ks", cls: "chip-lean" },
+        ]
+      },
+      grade: {
+        letter: "B+",
+        cls: "grade-b",
+        score: 82,
+        blurb: "Lineup mismatch plus a sharp Soroka line, cards not yet posted."
+      }
+    },
+    "823233": {
+      paragraphs: [
+        { h: "Pitching Matchup", b: "Tyler Glasnow takes the ball for the Dodgers at 3.24 ERA, 0.84 WHIP and 10.44 K/9 across 25 innings, huge stuff and a stingy hit rate at 5.40 per nine. Logan Webb counters for San Francisco at 5.10 ERA, 1.40 WHIP and 8.10 K/9 across 30 innings, an uncharacteristically rough early season look with elevated traffic. Glasnow is the best pitcher in the duel and the profile gap is wider than the ERA delta suggests." },
+        { h: "Offense vs Handedness", b: "San Francisco against right handers is average with the top of the order doing most of the work. Los Angeles against right handers is the best split in baseball, Ohtani, Betts, Freeman, Hernández stacked in a row. Webb's ground ball profile works against the Dodgers to a point but the overall lineup depth is the story, Glasnow meanwhile gets to attack a thinner Giants card." },
+        { h: "Park and Weather", b: "Oracle Park is the most pitcher friendly park in MLB, the marine layer on a cool afternoon suppresses right field carry. No live weather object yet, assume classic San Francisco bay conditions. Total should sit in the 7 range." },
+        { h: "Strikeout Projection", b: "Glasnow near eight whiffs through five and a half innings given his K/9 ceiling. Webb in the six range on pure volume. Combined starter Ks land 13 to 15, Glasnow over 7 strikeouts is a strong play." },
+        { h: "Verdict Setup", b: "Lineups not yet posted, West Coast clubs tend to release later in the window. Glasnow in a pitcher's park against a slumping Webb is the cleanest pitching edge on the late slate. Dodgers lean on side, under plays in a cool Oracle Park." },
       ],
       verdict: {
         kind: "lean-away",
-        text: "Dodgers in a marquee spot. Ohtani on the mound is the biggest pitching edge of the slate and the Los Angeles lineup is the best in baseball.",
+        text: "Dodgers have the better starter, the better lineup and the lineup vs park matchup favors a low scoring affair with LA taking the close margin.",
         winner: "LAD",
-        projHome: "2",
-        projAway: "5",
+        projHome: "2.6",
+        projAway: "4.5",
         bets: [
           { t: "Dodgers ML", cls: "chip-lean" },
           { t: "Dodgers run line", cls: "chip-lean" },
-          { t: "Ohtani over 6.5 Ks", cls: "chip-lean" },
+          { t: "Glasnow over 7 Ks", cls: "chip-lean" },
           { t: "Under 7.5", cls: "chip-lean" },
         ]
       },
       grade: {
         letter: "A",
         cls: "grade-a",
+        score: 87,
+        blurb: "Ace arm, best lineup, pitcher friendly park, cards still to come."
+      }
+    },
+    "824770": {
+      paragraphs: [
+        { h: "Pitching Matchup", b: "Cam Schlittler takes the ball for the Yankees at a spectacular 1.95 ERA, 0.76 WHIP and 11.71 K/9 across 27.2 innings, a breakout that has featured a refined slider and a fastball playing up with extension. Payton Tolle is the Red Sox left hander working his early season ramp, big bodied kid at 6'6 with a mid 90s heater but the season stats are still limited. The matchup tilts sharply toward Schlittler on the mound, and the Yankees enter with the rotational edge in a marquee rivalry spot." },
+        { h: "Offense vs Handedness", b: "Boston against right handers is a tough draw for Schlittler with Devers, Duran and Abreu all dangerous, but Schlittler's K profile shortens even the better lefty swings. New York against lefties is where Judge, Stanton and Rice all feast, the Yankees lineup against a young lefty starter is one of the scariest splits in baseball. The matchup specifically sets up Judge for a multi hit night and it elevates the top of the order's extra base projection." },
+        { h: "Park and Weather", b: "Fenway Park at the 6:10 PM ET first pitch should play in the mid 60s with a light west to southwest breeze, a fair weather evening in Boston and neutral to mildly friendly for right handed pull carry. The Monster always matters, right handed doubles are in the Yankees profile, and the park factor pushes the total a hair higher than you would expect against this pitching." },
+        { h: "Strikeout Projection", b: "Schlittler near nine whiffs through six and a half given his K/9 and the Boston strikeout rate in recent looks. Tolle is a wildcard but his stuff plays for five or six whiffs in a short look. Combined starter Ks land 13 to 15, Schlittler over 7.5 strikeouts is a high conviction play." },
+        { h: "Verdict Setup", b: "Lineups not yet posted at the midday check, Fenway cards tend to release by 4 PM ET. The Yankees profile to the cleanest ML play of the evening slate with Schlittler's shutdown look, Judge's matchup and Tolle's command uncertainty. User is a Yankees fan and this is a premium spot to lean hard, expect the Yankees listed as solid favorites once the number prints." },
+      ],
+      verdict: {
+        kind: "lean-away",
+        text: "Yankees are the premium play of the evening slate. Schlittler's breakout plus Judge vs a young lefty is the cleanest single matchup on the card.",
+        winner: "NYY",
+        projHome: "3.2",
+        projAway: "5.7",
+        bets: [
+          { t: "Yankees ML", cls: "chip-lean" },
+          { t: "Yankees run line", cls: "chip-lean" },
+          { t: "Schlittler over 7.5 Ks", cls: "chip-lean" },
+          { t: "Judge over 1.5 TB", cls: "chip-lean" },
+        ]
+      },
+      grade: {
+        letter: "A+",
+        cls: "grade-a",
+        score: 93,
+        blurb: "Yankees read of the slate. Schlittler's form plus the lineup matchup at Fenway is the highest conviction evening play."
+      }
+    },
+    "823639": {
+      paragraphs: [
+        { h: "Pitching Matchup", b: "Joe Ryan takes the ball for Minnesota at 3.29 ERA, 0.88 WHIP and 9.22 K/9 across 27.1 innings, elite command with an elevated fly ball profile. Christian Scott is the Mets right hander making his season turn with limited current year sample, he profiles as a fastball slider artist but the hits per nine have been elevated on lesser innings. Ryan is the better arm and the more complete read here." },
+        { h: "Offense vs Handedness", b: "New York against right handers sends Lindor, Alonso and Nimmo, a reliable top of the order that has handled average right handers but gets tested by high spin fastballs. Minnesota against right handers has Buxton and Correa carrying the damage with an otherwise middling supporting cast. Both sides are roughly even on the split, the pitching is the differentiator." },
+        { h: "Park and Weather", b: "Citi Field at 7:10 PM ET should play near 70 degrees with a light breeze, the early read is benign conditions with no major wind story. Citi plays slightly pitcher friendly especially to right field, this suppresses Alonso's pull side carry a touch. Total sits in the 7 to 7.5 zone." },
+        { h: "Strikeout Projection", b: "Ryan near seven whiffs through six, Scott near five in a shorter look given his current innings cap. Combined starter Ks land 11 to 13, Ryan over 6.5 is a play if the number opens there." },
+        { h: "Verdict Setup", b: "Lineups not yet posted. Ryan's form plus Mets' rough early season stretch tilts the side to Minnesota. Under plays given both starters have workable whiff rates and the park is neutral to suppressive. Midday reads hold firm." },
+      ],
+      verdict: {
+        kind: "lean-away",
+        text: "Twins are the side, Ryan's elite command is the cleanest pitching profile in the matchup. Under is a secondary lean.",
+        winner: "MIN",
+        projHome: "3.2",
+        projAway: "4.5",
+        bets: [
+          { t: "Twins ML", cls: "chip-lean" },
+          { t: "Under 7.5", cls: "chip-lean" },
+          { t: "Ryan over 6.5 Ks", cls: "chip-lean" },
+        ]
+      },
+      grade: {
+        letter: "B+",
+        cls: "grade-b",
+        score: 80,
+        blurb: "Ryan profile is the reliable play, cards still to post."
+      }
+    },
+    "822912": {
+      paragraphs: [
+        { h: "Pitching Matchup", b: "Bubba Chandler is the Pirates rookie right hander at 3.15 ERA, 1.30 WHIP and 7.65 K/9 across 20 innings, promising stuff with a 5.85 walk rate that caps his length. Jacob deGrom counters for Texas at 2.29 ERA, 1.07 WHIP and 11.44 K/9 across 19.2 innings, the all time profile is back in full flight with the fastball command clicking. deGrom is a massive pitching edge and the matchup flattens any young pitcher on the other side." },
+        { h: "Offense vs Handedness", b: "Texas against right handers gives deGrom full support with Seager, Semien and García, a powerful lineup against a walk prone rookie. Pittsburgh against right handers runs through Reynolds and Hayes with depth concerns. deGrom attacking that group in a dome is the most pitcher friendly single attribute on the board." },
+        { h: "Park and Weather", b: "Globe Life Field has the roof which generally plays neutral to slightly hitter friendly when closed. No live weather read needed. Park does not move the dial much either direction, total sits in the 8 zone." },
+        { h: "Strikeout Projection", b: "deGrom near nine whiffs through six given his K/9 and the Pirates recent swing and miss rate. Chandler near four in a shorter look given the walk cap. Combined 13 to 15, deGrom over 8.5 strikeouts is a premium play." },
+        { h: "Verdict Setup", b: "Lineups not yet posted at the midday mark, late night game. Rangers are the rested home side, deGrom on the mound, Chandler is a talented young arm but the matchup flattens almost all of that. Midday call is Rangers ML and deGrom K over play." },
+      ],
+      verdict: {
+        kind: "lean-home",
+        text: "Rangers with deGrom on the mound is the evening capper play. Pirates young arm in a tough lineup matchup seals it.",
+        winner: "TEX",
+        projHome: "5.1",
+        projAway: "3.0",
+        bets: [
+          { t: "Rangers ML", cls: "chip-lean" },
+          { t: "Rangers run line", cls: "chip-lean" },
+          { t: "deGrom over 8.5 Ks", cls: "chip-lean" },
+        ]
+      },
+      grade: {
+        letter: "A",
+        cls: "grade-a",
         score: 88,
-        blurb: "Ace starter with the best offense behind him in a pitcher friendly park. Premium spot, cards not yet posted at 9 PM."
+        blurb: "deGrom in full flight against a thin Pittsburgh road lineup, premium late night read."
       }
     },
   }
