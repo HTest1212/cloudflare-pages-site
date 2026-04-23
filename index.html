@@ -99,6 +99,13 @@
   .pill.good { background:#0e3a2e; color:var(--good); border-color:#1b6f58; }
   .pill.bad { background:#3a1020; color:var(--bad); border-color:#6b1f33; }
   .pill.warn { background:#3a2a10; color:var(--warn); border-color:#6f4c1b; }
+  /* Lineup status badges: one shared shape, four distinct color families. */
+  .lu-badge { display:inline-block; padding:2px 7px; border-radius:999px; font-size:10.5px; font-weight:600; letter-spacing:0.2px; white-space:nowrap; }
+  .lu-confirmed { background:#0e3a2e; color:#86efac; border:1px solid #1b6f58; }
+  .lu-posted    { background:#0f2a4a; color:#93c5fd; border:1px solid #1e4b7a; }
+  .lu-partial   { background:#3a2a10; color:#fbbf24; border:1px solid #6f4c1b; }
+  .lu-projected { background:#2a1a10; color:#fb923c; border:1px solid #7a3e1e; }
+  .tier-scratch { display:inline-block; margin-left:6px; font-size:10px; color:#fca5a5; font-weight:600; }
   table { width:100%; border-collapse: collapse; font-size:13px; }
   table th, table td { padding:8px 10px; text-align:left; border-bottom:1px solid var(--border); }
   table th { color: var(--muted); font-weight:600; font-size:12px; text-transform: uppercase; }
@@ -3934,7 +3941,7 @@ function buildDeepAnalysis(g) {
   // and the Moneyline Picks tab never contradict each other.
   const mlPick      = __ml && __ml.pick && __ml.pick !== "no edge" ? __ml.pick : null;
   const mlTierRaw   = __ml ? (__ml.tier || "") : "";
-  const mlTierBase  = mlTierRaw.replace(/[↑↓*]/g, "");
+  const mlTierBase  = mlTierRaw.replace(/[↑↓*⚠]/g, "");
   const mlAbsEdge   = __ml ? (__ml.absEdge || 0) : 0;
   const verdictKind = total >= 9.5 ? "lean-over" : total <= 8.0 ? "lean-under" : "lean-push";
   let verdictText = "";
@@ -4848,6 +4855,173 @@ async function renderBvP() {
   el.innerHTML = sections.length ? '<div class="grid cards">'+sections.join("")+'</div>' : '<div class="loader">No qualifying BvP history (need 5+ career ABs vs today\'s SP).</div>';
 }
 
+/* =========== LINEUP STATUS ENGINE (drives tier evolution as lineups drop) =========== */
+// Returns a structured lineup status for a game. Four buckets:
+//   confirmed  -> both lineups posted AND batting order assigned (MLB marks as official)
+//   posted     -> both lineups posted but batting order may still shift
+//   partial    -> one side posted, one side TBD
+//   projected  -> no lineups posted yet (card is provisional, based on expected starters)
+// luPen is the scoring penalty applied to lineup dependent edge terms. confidence is the
+// 0 to 1 badge number surfaced to the user. label is the human readable status string.
+function lineupStatusFor(game){
+  const away = (game && game.lineups && game.lineups.awayPlayers) || [];
+  const home = (game && game.lineups && game.lineups.homePlayers) || [];
+  const aLC = away.length >= 8;
+  const hLC = home.length >= 8;
+  function hasOrder(list){
+    return list.some(function(p){ return p && p.battingOrder != null && String(p.battingOrder).length > 0; });
+  }
+  const aOfficial = aLC && hasOrder(away);
+  const hOfficial = hLC && hasOrder(home);
+  let overall, luPen, confidence, badge, label, badgeClass;
+  if (aOfficial && hOfficial) { overall='confirmed'; luPen=1.00; confidence=1.00; badge='✅ CONFIRMED'; badgeClass='lu-confirmed'; label='Both lineups official with batting order locked'; }
+  else if (aLC && hLC)        { overall='posted';    luPen=0.95; confidence=0.85; badge='📝 POSTED';    badgeClass='lu-posted';    label='Both lineups posted; batting order may still shift'; }
+  else if (aLC || hLC)        { overall='partial';   luPen=0.80; confidence=0.55; badge='⚠️ PARTIAL';   badgeClass='lu-partial';   label=(aLC?'Away posted, home TBD':'Home posted, away TBD'); }
+  else                        { overall='projected'; luPen=0.60; confidence=0.30; badge='🕐 PROJECTED'; badgeClass='lu-projected'; label='No lineups posted yet; using projected starters'; }
+  return { aLC:aLC, hLC:hLC, aOfficial:aOfficial, hOfficial:hOfficial, overall:overall, luPen:luPen, confidence:confidence, badge:badge, badgeClass:badgeClass, label:label };
+}
+
+// Compare posted lineups to each team's best hitters (by 14 day OPS, min 20 ABs or fallback
+// to season OPS). If any top 3 hitter is missing from the posted lineup, count that as a
+// key scratch. Returns per side counts plus the names that got scratched, so we can both
+// adjust the tier and surface the reason to the user.
+function detectKeyScratches(game){
+  const result = { away: 0, home: 0, awayNames: [], homeNames: [] };
+  if (!game || !game.lineups || !game.teams) return result;
+  ['away','home'].forEach(function(side){
+    const lu = (game.lineups && game.lineups[side+'Players']) || [];
+    if (lu.length < 8) return; // no lineup yet, nothing to compare against
+    const teamId = game.teams[side] && game.teams[side].team && game.teams[side].team.id;
+    if (!teamId) return;
+    const logs = STATE.hitterLogs || {};
+    const candidates = [];
+    Object.keys(logs).forEach(function(pid){
+      const h = logs[pid];
+      if (!h || h.teamId !== teamId) return;
+      const ops14 = h.d14 && h.d14.ops != null ? Number(h.d14.ops) : null;
+      const opsS  = h.season && h.season.ops != null ? Number(h.season.ops) : null;
+      const ops = (ops14 != null && !isNaN(ops14)) ? ops14 : opsS;
+      if (ops == null || isNaN(ops)) return;
+      candidates.push({ id: Number(pid), name: h.name || ('#'+pid), ops: ops });
+    });
+    if (candidates.length < 3) return; // not enough signal, skip
+    candidates.sort(function(a,b){ return b.ops - a.ops; });
+    const top3 = candidates.slice(0, 3).filter(function(x){ return x.ops >= 0.750; });
+    const luIds = new Set(lu.map(function(p){ return p && p.id; }));
+    top3.forEach(function(x){
+      if (!luIds.has(x.id)) {
+        result[side]++;
+        result[side+'Names'].push(x.name);
+      }
+    });
+  });
+  return result;
+}
+
+// Takes a base tier (LOCK / STRONG / LEAN / PASS) and modifies it based on the lineup
+// status for the game plus any key player scratches that move the needle. Returns
+// { tier, cashDelta, scoreDelta, reason } so the caller can apply all adjustments in
+// one place and show the user why the tier moved.
+function adjustTierForLineup(baseTier, status, keyScratches, bet){
+  const result = { tier: baseTier, cashDelta: 0, scoreDelta: 0, reason: '' };
+  if (!baseTier || baseTier === 'PASS' || !status) return result;
+  const tClean = String(baseTier).replace(/[↑↓*⚠]/g,'');
+  let newTier = tClean;
+  const typeStr = (bet && bet.type) || '';
+  const pickStr = (bet && bet.pick) || '';
+  const isOffensiveOver = /OVER|Hit|HR|TB|Team Total|YRFI|F5 OVER|Run Line|F5 Moneyline|Moneyline/.test(typeStr);
+  const isSpOver = /SP Ks OVER|SP Outs OVER|Team Ks OVER|Pitcher Win/.test(typeStr);
+  const totalScratches = (keyScratches && (keyScratches.away||0) + (keyScratches.home||0)) || 0;
+  const notes = [];
+
+  if (status.overall === 'projected') {
+    // No lineups at all: every market gets the projected tag and a one tier haircut.
+    if (tClean === 'LOCK') newTier = 'STRONG*';
+    else if (tClean === 'STRONG') newTier = 'LEAN*';
+    else if (tClean === 'LEAN') newTier = 'LEAN*';
+    result.cashDelta -= 0.04;
+    result.scoreDelta -= 1.5;
+    notes.push('no lineups posted');
+  } else if (status.overall === 'partial') {
+    if (tClean === 'LOCK') newTier = 'STRONG⚠';
+    else if (tClean === 'STRONG') newTier = 'LEAN⚠';
+    else newTier = tClean + '⚠';
+    result.cashDelta -= 0.02;
+    result.scoreDelta -= 0.8;
+    notes.push('one side posted');
+  } else if (status.overall === 'posted') {
+    // Both posted but not yet official. Tiny haircut only.
+    result.cashDelta -= 0.005;
+  }
+
+  // Key scratches carry real signal once lineups are posted. Two plus scratches on the
+  // offensive side tank an OVER play. For pitcher OVER markets a weaker lineup should help,
+  // so we mark the scratch as a boost instead of a penalty.
+  if ((status.overall === 'posted' || status.overall === 'confirmed') && totalScratches > 0) {
+    const scratchedNames = [].concat(keyScratches.awayNames || [], keyScratches.homeNames || []);
+    if (totalScratches >= 2 && isOffensiveOver) {
+      if (newTier.replace(/[⚠*↑↓]/g,'') === 'LOCK') newTier = 'STRONG⚠';
+      else if (newTier.replace(/[⚠*↑↓]/g,'') === 'STRONG') newTier = 'LEAN⚠';
+      else if (!/⚠/.test(newTier)) newTier = newTier.replace(/[*]/g,'') + '⚠';
+      result.cashDelta -= 0.04;
+      result.scoreDelta -= 1.2;
+      notes.push(totalScratches+' key scratches: '+scratchedNames.slice(0,3).join(', '));
+    } else if (totalScratches >= 1 && isOffensiveOver) {
+      if (!/⚠/.test(newTier)) newTier = newTier.replace(/[*]/g,'') + '⚠';
+      result.cashDelta -= 0.02;
+      result.scoreDelta -= 0.6;
+      notes.push('key scratch: '+scratchedNames.slice(0,2).join(', '));
+    } else if (totalScratches >= 1 && isSpOver) {
+      // Weak opposing lineup helps SP OVER, so bump cash a touch.
+      result.cashDelta += 0.02;
+      result.scoreDelta += 0.5;
+      notes.push('opp missing top bat: '+scratchedNames.slice(0,1).join(''));
+    }
+  }
+
+  result.tier = newTier;
+  result.reason = notes.join(' · ');
+  return result;
+}
+
+// Final pass that walks every row in STATE.betsTable, looks up the game via label,
+// and applies lineup status + scratch adjustments. Runs after bets are scored so every
+// market (ML, RL, Totals, F5, K Props, Team K, ER, BB, Hits, TB, HR, NRFI, Outs, Alt
+// markets, F3, SP Win) gets the same evolving tier treatment instead of only Moneyline.
+function applyLineupAdjustments(){
+  if (!Array.isArray(STATE.betsTable) || !Array.isArray(STATE.games)) return;
+  const statusByLabel = {};
+  const scratchByLabel = {};
+  STATE.games.forEach(function(g){
+    if (!g || !g.teams) return;
+    const label = g.teams.away.team.name + " @ " + g.teams.home.team.name;
+    statusByLabel[label] = lineupStatusFor(g);
+    scratchByLabel[label] = detectKeyScratches(g);
+  });
+  STATE.betsTable.forEach(function(b){
+    if (!b || !b.game) return;
+    const s = statusByLabel[b.game];
+    const ks = scratchByLabel[b.game] || { away:0, home:0, awayNames:[], homeNames:[] };
+    if (!s) return;
+    b.lineupStatus = s;
+    b.keyScratches = ks;
+    const adj = adjustTierForLineup(b.tier, s, ks, b);
+    b.tier = adj.tier;
+    if (typeof b.cashProb === 'number') {
+      b.cashProb = Math.max(0.05, Math.min(0.95, b.cashProb + adj.cashDelta));
+    }
+    if (typeof b.score === 'number') {
+      b.score = Math.max(0, b.score + adj.scoreDelta);
+    }
+    // Append the lineup reason to the note so the user sees why the tier moved.
+    if (adj.reason) {
+      b.note = (b.note ? b.note + ' · ' : '') + 'LU: ' + adj.reason;
+    }
+  });
+  // Re-sort after adjustments so upgraded plays float, downgraded plays settle.
+  STATE.betsTable.sort(function(a,b){ return (b.score||0) - (a.score||0); });
+}
+
 function renderBets() {
   const bets = [];
 
@@ -4945,7 +5119,7 @@ function renderBets() {
     else if(luQ==="strong"){if(absEdge>=0.80)tier="LOCK↑";else if(absEdge>=0.45)tier="STRONG↑";else if(absEdge>=0.20)tier="LEAN";else tier="PASS";}
     else{if(absEdge>=1.0)tier="LOCK";else if(absEdge>=0.55)tier="STRONG";else if(absEdge>=0.25)tier="LEAN";else tier="PASS";}
     const pick = edge>0.12?homeTeam.name:edge<-0.12?awayTeam.name:"no edge";
-    const tierBase = tier.replace(/[↑↓*]/g,"");
+    const tierBase = tier.replace(/[↑↓*⚠]/g,"");
     if(tierBase==="LOCK"||tierBase==="STRONG"){
       const __pickNick2 = (typeof teamNicknameFromName === 'function') ? teamNicknameFromName(pick) : pick;
       bets.push({cat:"💰 ML", type:"Moneyline", pick:__pickNick2, game:label, tier:tier,
@@ -5672,7 +5846,7 @@ function renderBets() {
   // ── SCORE & SORT: higher score = stronger play ──
   bets.forEach(function(b){
     // Tier bonus: LOCK/STRONG get big boost so they float to top
-    const tb = b.tier.replace(/[↑↓*]/g,"");
+    const tb = b.tier.replace(/[↑↓*⚠]/g,"");
     if(tb==="LOCK") b.score+=20;
     else if(tb==="STRONG") b.score+=10;
     else if(tb==="LEAN") b.score+=2;
@@ -5686,6 +5860,10 @@ function renderBets() {
   // Stash a stable copy on the window so the sort UI can re-render without recomputing.
   STATE.betsTable = filtered.slice();
   if (!STATE.betsSort) STATE.betsSort = { key: 'score', dir: 'desc' };
+
+  // Lineup aware final pass: evolve tiers and cash% across ALL markets based on whether
+  // lineups are posted/confirmed/partial/projected and whether any top 3 hitters are scratched.
+  applyLineupAdjustments();
 
   drawBetsTable();
 }
@@ -5703,7 +5881,7 @@ function drawBetsTable() {
     pick: function(b){ return (b.pick||'').toLowerCase(); },
     game: function(b){ return (b.game||'').toLowerCase(); },
     tier: function(b){
-      const t = (b.tier||'').replace(/[↑↓*]/g,'');
+      const t = (b.tier||'').replace(/[↑↓*⚠]/g,'');
       return t==='LOCK'?3:t==='STRONG'?2:t==='LEAN'?1:0;
     },
     cash: function(b){ return typeof b.cashProb==='number'?b.cashProb:-1; },
@@ -5750,12 +5928,13 @@ function drawBetsTable() {
     th('pick','Pick')+
     th('game','Game')+
     th('tier','Tier')+
+    '<th>Lineup</th>'+
     th('cash','Cash %')+
     th('score','Score')+
     '<th>Notes</th>'+
   '</tr></thead><tbody>';
   filtered.forEach(function(b){
-    const tb = b.tier.replace(/[↑↓*]/g,"");
+    const tb = b.tier.replace(/[↑↓*⚠]/g,"");
     const tierCls = tb==="LOCK"?"pill good":tb==="STRONG"?"pill good":"pill warn";
     const tierIcon = tb==="LOCK"?"🔒":tb==="STRONG"?"💪":"👍";
     const cashN = (typeof b.cashProb === 'number') ? Math.round(b.cashProb * 100) : null;
@@ -5763,12 +5942,20 @@ function drawBetsTable() {
     const cashTxt = cashN == null ? '—' : (cashN + '%');
     const pickDisplay = (typeof normalizeTeamCodesInText === 'function') ? normalizeTeamCodesInText(b.pick||'') : (b.pick||'');
     const gameDisplay = (typeof normalizeTeamCodesInText === 'function') ? normalizeTeamCodesInText(b.game||'') : (b.game||'');
+    const lu = b.lineupStatus;
+    const ks = b.keyScratches;
+    const totalScratches = ks ? ((ks.away||0)+(ks.home||0)) : 0;
+    const luCell = lu
+      ? '<span class="lu-badge '+esc(lu.badgeClass)+'" title="'+esc(lu.label)+'">'+esc(lu.badge)+'</span>'+
+        (totalScratches>0 ? '<span class="tier-scratch" title="Key scratches: '+esc([].concat(ks.awayNames||[], ks.homeNames||[]).join(", "))+'">⚠ '+totalScratches+' scratch</span>' : '')
+      : '<span class="lu-badge lu-projected">🕐 PROJECTED</span>';
     html += '<tr>'+
       '<td><b>'+esc(b.cat)+'</b></td>'+
       '<td>'+esc(b.type)+'</td>'+
       '<td><b>'+esc(pickDisplay)+'</b></td>'+
       '<td>'+esc(gameDisplay)+'</td>'+
       '<td><span class="'+tierCls+'">'+tierIcon+' '+esc(b.tier)+'</span></td>'+
+      '<td>'+luCell+'</td>'+
       '<td class="'+cashCls+'"><b>'+cashTxt+'</b></td>'+
       '<td class="edge-good">'+fmt(b.score,1)+'</td>'+
       '<td class="small" style="color:var(--muted);max-width:350px;">'+esc(b.note)+'</td></tr>';
@@ -5826,7 +6013,7 @@ function drawAltParlayTable() {
     pick: function(b){ return (b.pick||'').toLowerCase(); },
     game: function(b){ return (b.game||'').toLowerCase(); },
     tier: function(b){
-      const t = (b.tier||'').replace(/[↑↓*]/g,'');
+      const t = (b.tier||'').replace(/[↑↓*⚠]/g,'');
       return t==='LOCK'?3:t==='STRONG'?2:t==='LEAN'?1:0;
     },
     cash: function(b){ return typeof b.cashProb==='number'?b.cashProb:-1; },
@@ -5873,24 +6060,33 @@ function drawAltParlayTable() {
     th('pick','Pick')+
     th('game','Game')+
     th('tier','Tier')+
+    '<th>Lineup</th>'+
     th('cash','Cash %','right')+
     th('score','Score','right')+
     '<th>Notes</th>'+
   '</tr></thead><tbody>';
   rows.forEach(function(b){
-    const tb = b.tier.replace(/[↑↓*]/g,"");
+    const tb = b.tier.replace(/[↑↓*⚠]/g,"");
     const tierCls = tb==="LOCK"?"pill good":tb==="STRONG"?"pill good":"pill warn";
     const tierIcon = tb==="LOCK"?"🔒":tb==="STRONG"?"💪":"👍";
     const cashN = Math.round(b.cashProb * 100);
     const cashCls = cashN >= 85 ? 'edge-good' : cashN >= 75 ? 'edge-good' : 'edge-neu';
     const pickDisplay = (typeof normalizeTeamCodesInText === 'function') ? normalizeTeamCodesInText(b.pick||'') : (b.pick||'');
     const gameDisplay = (typeof normalizeTeamCodesInText === 'function') ? normalizeTeamCodesInText(b.game||'') : (b.game||'');
+    const lu = b.lineupStatus;
+    const ks = b.keyScratches;
+    const totalScratches = ks ? ((ks.away||0)+(ks.home||0)) : 0;
+    const luCell = lu
+      ? '<span class="lu-badge '+esc(lu.badgeClass)+'" title="'+esc(lu.label)+'">'+esc(lu.badge)+'</span>'+
+        (totalScratches>0 ? '<span class="tier-scratch" title="Key scratches: '+esc([].concat(ks.awayNames||[], ks.homeNames||[]).join(", "))+'">⚠ '+totalScratches+'</span>' : '')
+      : '<span class="lu-badge lu-projected">🕐 PROJECTED</span>';
     html += '<tr>'+
       '<td><b>'+esc(b.cat)+'</b></td>'+
       '<td>'+esc(b.type)+'</td>'+
       '<td><b>'+esc(pickDisplay)+'</b></td>'+
       '<td>'+esc(gameDisplay)+'</td>'+
       '<td><span class="'+tierCls+'">'+tierIcon+' '+esc(b.tier)+'</span></td>'+
+      '<td>'+luCell+'</td>'+
       '<td class="'+cashCls+'" style="text-align:right;"><b>'+cashN+'%</b></td>'+
       '<td class="edge-good" style="text-align:right;">'+fmt(b.score,1)+'</td>'+
       '<td class="small" style="color:var(--muted);max-width:360px;">'+esc(b.note)+'</td></tr>';
@@ -7270,7 +7466,7 @@ function renderML() {
     'Tiers: 🔒 LOCK · 💪 STRONG · 👍 LEAN · ⏸️ PASS. Tiers shift when lineups drop.</div>'+
     '<table><thead><tr><th>Game</th><th>Pick</th><th>Tier</th><th>Edge</th><th>Market</th><th>Value</th><th>Top Driver</th><th>Lineup</th><th>Factor Breakdown</th></tr></thead><tbody>'+
     rows.map(function(r){
-      const tierBase = r.tier.replace(/[↑↓*]/g,"");
+      const tierBase = r.tier.replace(/[↑↓*⚠]/g,"");
       const tierCls = (tierBase==="LOCK"?"pill good":tierBase==="STRONG"?"pill good":tierBase==="LEAN"?"pill warn":"pill bad");
       const edgeCls = r.absEdge >= 0.55 ? "edge-good" : r.absEdge < 0.25 ? "" : "";
       const luCls = r.lineupQuality==="tbd"?"pill warn":r.lineupQuality==="weak"?"pill bad":r.lineupQuality==="strong"?"pill good":"pill good";
@@ -7381,7 +7577,7 @@ function buildWizardCard(g) {
   /* ---------- Tier badge ---------- */
   let tierCls = "pass", tierLabel = "PASS", tierEdge = "—", tierIcon = "⏸️";
   if (ml && ml.pick && ml.pick !== "no edge") {
-    const tb = (ml.tier||"").replace(/[↑↓*]/g, "");
+    const tb = (ml.tier||"").replace(/[↑↓*⚠]/g, "");
     tierLabel = ml.tier || "PASS";
     tierIcon = ml.tierIcon || "👍";
     tierEdge = (ml.edge>=0?"+":"")+Number(ml.edge||0).toFixed(2);
@@ -7981,6 +8177,61 @@ setInterval(function(){
   STATE.odds = {};
   refreshAllData();
 }, 30*60*1000);
+
+/* =========== LINEUP ONLY POLLER (90 second cadence) =========== */
+// Light refresh that pulls only the schedule + lineups hydrate and re-renders the bet
+// views if anything changed. This is what drives tier evolution: when a lineup drops
+// from TBD to POSTED to CONFIRMED, or when a top hitter is scratched, this poller
+// picks it up within 90 seconds and re-runs applyLineupAdjustments so the tiers move.
+// We snapshot a fingerprint per game (player ids + batting order) and only trigger a
+// re-render when something actually changed, so this is cheap to run on an idle tab.
+function _lineupFingerprint(g){
+  const away = (g && g.lineups && g.lineups.awayPlayers) || [];
+  const home = (g && g.lineups && g.lineups.homePlayers) || [];
+  function sig(list){
+    return list.map(function(p){ return (p && p.id ? p.id : '0') + ':' + (p && p.battingOrder != null ? p.battingOrder : ''); }).join('|');
+  }
+  return sig(away) + '#' + sig(home);
+}
+async function refreshLineupsOnly(){
+  if (STATE.loading) return;
+  try {
+    const date = STATE.date || todayISO();
+    const newGames = await fetchSchedule(date);
+    if (!Array.isArray(newGames) || !newGames.length) return;
+    const prevByPk = {};
+    (STATE.games || []).forEach(function(g){ if (g && g.gamePk != null) prevByPk[g.gamePk] = g; });
+    let anyChange = false;
+    newGames.forEach(function(g){
+      const prev = prevByPk[g.gamePk];
+      const newFp = _lineupFingerprint(g);
+      const oldFp = prev ? _lineupFingerprint(prev) : '';
+      if (newFp !== oldFp) anyChange = true;
+    });
+    if (!anyChange) return;
+    STATE.games = newGames;
+    // Re-run every bet view so tiers, cash %, scores, and badges all reflect the new lineups.
+    if (typeof renderLineups === 'function') renderLineups();
+    if (typeof renderBets === 'function') renderBets();
+    if (typeof renderAltParlay === 'function') renderAltParlay();
+    if (typeof renderML === 'function') renderML();
+    if (typeof renderRL === 'function') renderRL();
+    if (typeof renderF5 === 'function') renderF5();
+    if (typeof renderTotals === 'function') renderTotals();
+    if (typeof renderKProps === 'function') renderKProps();
+    if (typeof renderTeamK === 'function') renderTeamK();
+    if (typeof renderHitProps === 'function') renderHitProps();
+    if (typeof renderERProps === 'function') renderERProps();
+    if (typeof renderBBProps === 'function') renderBBProps();
+    if (typeof renderHRProps === 'function') renderHRProps();
+    if (typeof renderAnalysis === 'function') renderAnalysis();
+    if (typeof renderValue === 'function') renderValue();
+    if (typeof setStatus === 'function') setStatus('Lineup change detected · tiers updated', 'ok');
+  } catch(e) {
+    // swallow; we'll try again next cycle
+  }
+}
+setInterval(refreshLineupsOnly, 90 * 1000);
 
 // Day rollover watchdog: if local day ticks while the tab is open, wipe and refetch
 (function(){
