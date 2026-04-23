@@ -654,6 +654,7 @@
   <button data-tab="analysis">📝 Analysis</button>
   <button data-tab="aiwizard" style="background:linear-gradient(135deg,#6d28d9,#2563eb);color:#fff;border-radius:6px 6px 0 0;font-weight:600;">🧙 AI Wizard</button>
   <button data-tab="value" style="background:linear-gradient(135deg,#059669,#0891b2);color:#fff;border-radius:6px 6px 0 0;font-weight:600;">💎 Value Bets</button>
+  <button data-tab="hrprops" style="background:linear-gradient(135deg,#b91c1c,#ea580c);color:#fff;border-radius:6px 6px 0 0;font-weight:600;">💣 HR Props</button>
 
   <span class="tab-group">
     <button class="tab-group-label">💰 Picks ▾</button>
@@ -675,7 +676,6 @@
       <button data-tab="hitprops">Hit Props</button>
       <button data-tab="erprops">SP Earned Runs</button>
       <button data-tab="bbprops">SP Walk Props</button>
-      <button data-tab="hrprops" style="background:linear-gradient(135deg,#b91c1c,#ea580c);color:#fff;border-radius:6px 6px 0 0;font-weight:600;">💣 HR Props</button>
     </span>
   </span>
 
@@ -902,7 +902,7 @@
     <div class="section-head">
       <div>
         <h2>💣 Anytime Home Run Props</h2>
-        <p>Only hitters with a per game HR probability of 28% or higher. Model blends Statcast Barrel%, HardHit%, xSLG and ISO with starter HR/9, park HR factor, wind HR carry, temperature, platoon and recent form, layered with career BvP when available. Sort by any column by clicking its header.</p>
+        <p>Only hitters with a per game HR probability of 26% or higher. Model blends Statcast Barrel%, HardHit%, xSLG and ISO with starter HR/9, park HR factor, wind HR carry, temperature, platoon and recent form, layered with career BvP when available. Sort by any column by clicking its header.</p>
       </div>
     </div>
     <div id="hrPropsGrid"></div>
@@ -4061,14 +4061,14 @@ function renderAnalysis() {
 }
 
 /* ───────────────────────────── TOP HR PICK (Analysis tab) ───────────────────────────── */
-// Shows at most one home run prop per game, gated at 28% model probability so only the
+// Shows at most one home run prop per game, gated at 26% model probability so only the
 // strongest power matchups surface. Returns an empty string when nothing clears the bar.
 function renderTopHRPickBlock(g) {
   try {
     if (typeof hrCandidatesForGame !== 'function') return '';
     const pool = hrCandidatesForGame(g) || [];
-    // Only promote a pick when the model probability clears 28 percent for the game.
-    const best = pool.find(function(c){ return c && c.probPerGame >= 0.28; });
+    // Only promote a pick when the model probability clears 26 percent for the game.
+    const best = pool.find(function(c){ return c && c.probPerGame >= 0.26; });
     if (!best) return '';
     const pct = Math.round(best.probPerGame * 100);
     const paPct = (best.probPerPA * 100).toFixed(1);
@@ -4677,8 +4677,8 @@ function renderHRProps() {
   const rows = [];
   (STATE.games || []).forEach(function(g){
     const pool = hrCandidatesForGame(g) || [];
-    // Floor the board at 28 percent model cash.
-    const qualified = pool.filter(function(c){ return c && typeof c.probPerGame === 'number' && c.probPerGame >= 0.28; });
+    // Floor the board at 26 percent model cash.
+    const qualified = pool.filter(function(c){ return c && typeof c.probPerGame === 'number' && c.probPerGame >= 0.26; });
     // Keep only the two best per game so one lineup cannot dominate the board.
     qualified.slice(0, 2).forEach(function(c){
       const teamObj = g.teams[c.teamSide] && g.teams[c.teamSide].team;
@@ -4735,7 +4735,7 @@ function drawHRPropsTable() {
   });
 
   var html = '<div class="explain-banner"><span class="eb-title">💣 Anytime HR leaderboard:</span> '+
-    'Only hitters with a model per game HR probability of 28% or higher. Up to two picks per game. Columns are click sortable.</div>';
+    'Only hitters with a model per game HR probability of 26% or higher. Up to two picks per game. Columns are click sortable.</div>';
 
   if (!rows.length) {
     html += '<div class="loader">No HR candidates model above 28% right now. Lineups or Statcast overlays may still be loading.</div>';
@@ -4770,7 +4770,7 @@ function drawHRPropsTable() {
     const pct = Math.round(r.prob * 100);
     const paPct = (r.probPA * 100).toFixed(1);
     const price = (typeof r.price === 'number') ? ((r.price > 0 ? '+' : '') + r.price) : '—';
-    const probCls = pct >= 36 ? 'edge-good' : pct >= 30 ? 'edge-good' : pct >= 28 ? 'edge-neu' : 'edge-soft';
+    const probCls = pct >= 36 ? 'edge-good' : pct >= 30 ? 'edge-good' : pct >= 26 ? 'edge-neu' : 'edge-soft';
     html += '<tr>'+
       '<td><b>'+esc(r.batter)+'</b></td>'+
       '<td>'+esc(r.team)+'</td>'+
