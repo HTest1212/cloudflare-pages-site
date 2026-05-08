@@ -1,22 +1,22 @@
 {
   "date": "2026-05-08",
   "slate_date": "2026-05-08",
-  "asof": "2026-05-08T07:15:48Z",
-  "refreshedAt": "2026-05-08T07:15:48Z",
+  "asof": "2026-05-08T10:04:30Z",
+  "refreshedAt": "2026-05-08T10:04:30Z",
   "window": {
     "season_to_date": true,
     "rolling_days_pitchers": 15,
     "rolling_days_batters": 15
   },
   "source_notes": [
-    "Auto refresh at 2026-05-08T07:15:48Z (6 AM ET window)",
-    "Yesterday slate (2026-05-07): 10 games, all Final; box scores parsed for batter and pitcher appearance lists (302 batters, 91 pitchers)",
-    "Today slate (2026-05-08): 15 games scheduled; probable pitchers carried from prior overlay (lineup endpoint returned empty arrays at 6 AM ET as expected)",
-    "Pitcher 2026 season stats refreshed via get_multiple_mlb_player_stats: 28/30 today probables",
-    "Batter 2026 season hitting stats refreshed via get_multiple_mlb_player_stats: 150/150 today batters",
-    "Statcast advanced metrics (xBA/xSLG/xwOBA, barrel%, exit velo, whiff%) carried from prior overlay (next deep statcast pull when individual endpoints fit response budget)",
+    "Auto refresh at 2026-05-08T10:04:30Z (6 AM ET window)",
+    "Yesterday slate (2026-05-07): 10 games, all Final; box scores pulled from MLB schedule for player appearance enumeration (304 players appeared)",
+    "Today slate (2026-05-08): 15 games scheduled; probable pitchers carried from prior overlay (lineup endpoint returned empty player arrays at 6 AM ET as expected; probables were announced previous evening)",
+    "Pitcher 2026 season stats refreshed via get_multiple_mlb_player_stats: 28/30 today probables (post yesterday games, ERA/WHIP/IP updated; 2 returned no 2026 splits and were carried over: Nick Lodolo, Robby Snelling)",
+    "Batter 2026 season hitting stats refreshed via get_multiple_mlb_player_stats: 150/150 today batters (post yesterday games, AVG/OBP/SLG/OPS updated)",
+    "Statcast advanced metrics (xBA/xSLG/xwOBA, barrel%, exit velo, whiff%) carried from prior overlay; rolling 15 day window targeted next refresh cycle",
     "Sabermetrics (FIP/xFIP/SIERA) carried from prior overlay where available",
-    "Lineup endpoint behavior at 6 AM ET: empty player arrays for all 15 games (expected; lineups post day-of)"
+    "Lineup endpoint behavior at 6 AM ET: empty player arrays for all 15 games (expected; lineups post day-of, often closer to first pitch)"
   ],
   "games": {
     "824522": {
@@ -62,7 +62,11 @@
             "k9": 8.6,
             "bb9": 3.11,
             "hr9": 1.91,
-            "babip": null
+            "babip": null,
+            "ops_against": 0.898,
+            "avg_against": 0.318,
+            "wins": 1,
+            "losses": 4
           }
         },
         "home": {
@@ -381,7 +385,11 @@
             "k9": 10.13,
             "bb9": 2.89,
             "hr9": 0.96,
-            "babip": null
+            "babip": null,
+            "ops_against": 0.662,
+            "avg_against": 0.226,
+            "wins": 3,
+            "losses": 2
           }
         },
         "home": {
@@ -419,7 +427,11 @@
             "k9": 11.29,
             "bb9": 1.99,
             "hr9": 0.89,
-            "babip": null
+            "babip": null,
+            "ops_against": 0.705,
+            "avg_against": 0.267,
+            "wins": 3,
+            "losses": 3
           }
         }
       },
@@ -713,7 +725,11 @@
             "k9": 6.9,
             "bb9": 6.6,
             "hr9": 1.8,
-            "babip": null
+            "babip": null,
+            "ops_against": 0.885,
+            "avg_against": 0.292,
+            "wins": 2,
+            "losses": 2
           }
         },
         "home": {
@@ -751,7 +767,11 @@
             "k9": 9.26,
             "bb9": 5.56,
             "hr9": 1.32,
-            "babip": null
+            "babip": null,
+            "ops_against": 0.899,
+            "avg_against": 0.304,
+            "wins": 1,
+            "losses": 4
           }
         }
       },
@@ -1045,7 +1065,11 @@
             "k9": 9.9,
             "bb9": 2.03,
             "hr9": 0.68,
-            "babip": null
+            "babip": null,
+            "ops_against": 0.671,
+            "avg_against": 0.242,
+            "wins": 1,
+            "losses": 2
           }
         },
         "home": {
@@ -1083,7 +1107,11 @@
             "k9": 13.15,
             "bb9": 4.23,
             "hr9": 0.23,
-            "babip": null
+            "babip": null,
+            "ops_against": 0.602,
+            "avg_against": 0.228,
+            "wins": 2,
+            "losses": 1
           }
         }
       },
@@ -1377,7 +1405,11 @@
             "k9": 6.75,
             "bb9": 2.38,
             "hr9": 0.79,
-            "babip": null
+            "babip": null,
+            "ops_against": 0.705,
+            "avg_against": 0.233,
+            "wins": 3,
+            "losses": 1
           }
         },
         "home": {
@@ -1415,7 +1447,11 @@
             "k9": 7.82,
             "bb9": 4.29,
             "hr9": 1.26,
-            "babip": null
+            "babip": null,
+            "ops_against": 0.723,
+            "avg_against": 0.231,
+            "wins": 2,
+            "losses": 2
           }
         }
       },
@@ -1709,7 +1745,11 @@
             "k9": 7.49,
             "bb9": 3.18,
             "hr9": 1.13,
-            "babip": null
+            "babip": null,
+            "ops_against": 0.614,
+            "avg_against": 0.199,
+            "wins": 3,
+            "losses": 1
           }
         },
         "home": {
@@ -2028,7 +2068,11 @@
             "k9": 9.64,
             "bb9": 3.21,
             "hr9": 1.29,
-            "babip": null
+            "babip": null,
+            "ops_against": 0.597,
+            "avg_against": 0.163,
+            "wins": 1,
+            "losses": 0
           }
         },
         "home": {
@@ -2066,7 +2110,11 @@
             "k9": 9.58,
             "bb9": 2.18,
             "hr9": 0.87,
-            "babip": null
+            "babip": null,
+            "ops_against": 0.553,
+            "avg_against": 0.193,
+            "wins": 3,
+            "losses": 1
           }
         }
       },
@@ -2360,7 +2408,11 @@
             "k9": 6.68,
             "bb9": 1.87,
             "hr9": 0.8,
-            "babip": null
+            "babip": null,
+            "ops_against": 0.624,
+            "avg_against": 0.216,
+            "wins": 2,
+            "losses": 2
           }
         },
         "home": {
@@ -2398,7 +2450,11 @@
             "k9": 9.3,
             "bb9": 4.2,
             "hr9": 0.66,
-            "babip": null
+            "babip": null,
+            "ops_against": 0.596,
+            "avg_against": 0.189,
+            "wins": 3,
+            "losses": 1
           }
         }
       },
@@ -2692,7 +2748,11 @@
             "k9": 9.94,
             "bb9": 1.3,
             "hr9": 1.51,
-            "babip": null
+            "babip": null,
+            "ops_against": 0.668,
+            "avg_against": 0.225,
+            "wins": 2,
+            "losses": 1
           }
         },
         "home": {
@@ -2730,7 +2790,11 @@
             "k9": 7.26,
             "bb9": 1.82,
             "hr9": 0.68,
-            "babip": null
+            "babip": null,
+            "ops_against": 0.614,
+            "avg_against": 0.219,
+            "wins": 2,
+            "losses": 2
           }
         }
       },
@@ -3024,7 +3088,11 @@
             "k9": 7.35,
             "bb9": 2.56,
             "hr9": 0.17,
-            "babip": null
+            "babip": null,
+            "ops_against": 0.476,
+            "avg_against": 0.176,
+            "wins": 4,
+            "losses": 1
           }
         },
         "home": {
@@ -3062,7 +3130,11 @@
             "k9": 13.97,
             "bb9": 3.55,
             "hr9": 0.95,
-            "babip": null
+            "babip": null,
+            "ops_against": 0.553,
+            "avg_against": 0.172,
+            "wins": 2,
+            "losses": 2
           }
         }
       },
@@ -3356,7 +3428,11 @@
             "k9": 8.42,
             "bb9": 2.81,
             "hr9": 0.35,
-            "babip": null
+            "babip": null,
+            "ops_against": 0.51,
+            "avg_against": 0.198,
+            "wins": 1,
+            "losses": 1
           }
         },
         "home": {
@@ -3394,7 +3470,11 @@
             "k9": 7.53,
             "bb9": 3.14,
             "hr9": 0.94,
-            "babip": null
+            "babip": null,
+            "ops_against": 0.748,
+            "avg_against": 0.278,
+            "wins": 1,
+            "losses": 3
           }
         }
       },
@@ -3688,7 +3768,11 @@
             "k9": 11.67,
             "bb9": 2.52,
             "hr9": 0.46,
-            "babip": null
+            "babip": null,
+            "ops_against": 0.518,
+            "avg_against": 0.184,
+            "wins": 1,
+            "losses": 2
           }
         },
         "home": {
@@ -3726,7 +3810,11 @@
             "k9": 8.04,
             "bb9": 3.73,
             "hr9": 2.01,
-            "babip": null
+            "babip": null,
+            "ops_against": 0.813,
+            "avg_against": 0.248,
+            "wins": 1,
+            "losses": 3
           }
         }
       },
@@ -4020,7 +4108,11 @@
             "k9": 5.49,
             "bb9": 1.83,
             "hr9": 1.14,
-            "babip": null
+            "babip": null,
+            "ops_against": 0.59,
+            "avg_against": 0.201,
+            "wins": 2,
+            "losses": 2
           }
         },
         "home": {
@@ -4058,7 +4150,11 @@
             "k9": 12.6,
             "bb9": 5.4,
             "hr9": 1.8,
-            "babip": null
+            "babip": null,
+            "ops_against": 0.691,
+            "avg_against": 0.188,
+            "wins": 0,
+            "losses": 0
           }
         }
       },
@@ -4352,7 +4448,11 @@
             "k9": 10.5,
             "bb9": 2.57,
             "hr9": 1.07,
-            "babip": null
+            "babip": null,
+            "ops_against": 0.553,
+            "avg_against": 0.176,
+            "wins": 6,
+            "losses": 1
           }
         },
         "home": {
@@ -4390,7 +4490,11 @@
             "k9": 10.45,
             "bb9": 2.61,
             "hr9": 1.74,
-            "babip": null
+            "babip": null,
+            "ops_against": 0.814,
+            "avg_against": 0.264,
+            "wins": 2,
+            "losses": 1
           }
         }
       },
@@ -4684,7 +4788,11 @@
             "k9": 10.59,
             "bb9": 3.44,
             "hr9": 0.26,
-            "babip": null
+            "babip": null,
+            "ops_against": 0.736,
+            "avg_against": 0.279,
+            "wins": 2,
+            "losses": 2
           }
         },
         "home": {
@@ -4722,7 +4830,11 @@
             "k9": 7.88,
             "bb9": 2.81,
             "hr9": 0.75,
-            "babip": null
+            "babip": null,
+            "ops_against": 0.751,
+            "avg_against": 0.275,
+            "wins": 2,
+            "losses": 4
           }
         }
       },
