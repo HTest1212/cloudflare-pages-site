@@ -744,7 +744,8 @@
   .best-bets-block .bb-ctx-label { color: #e4efff; font-weight: 700; }
   .best-bets-block .bb-ctx-val { color: #b0c5db; }
 
-  /* MOBILE BREAKPOINTS, added 2026-05-06 */
+  /* MOBILE BREAKPOINTS, updated 2026-05-08 v3 */
+
   @media (max-width: 1023px) {
     main { padding: 16px 16px 60px; max-width: 100%; }
     .grid.cards { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
@@ -755,13 +756,79 @@
     body.split-mode main > .tab.active-left,
     body.split-mode main > .tab.active-right { max-height: none; overflow: visible; padding: 0; border: none; }
   }
+
   @media (max-width: 767px) {
-    header { padding: 12px 14px 8px; }
-    h1 { font-size: 18px; }
-    nav.tabs { padding: 6px 14px 0; gap: 4px; top: auto; position: relative; overflow-x: auto; flex-wrap: nowrap; -webkit-overflow-scrolling: touch; }
-    nav.tabs > button { padding: 8px 10px; font-size: 12px; flex: 0 0 auto; }
+    /* Header tightened: title row stacks cleanly, controls wrap, smaller buttons */
+    header { padding: 10px 12px 6px; position: sticky; top: 0; }
+    .title-row { gap: 8px; align-items: flex-start; }
+    h1 { font-size: 17px; line-height: 1.25; }
+    h1 span.date { font-size: 13px; display: inline; }
+    .controls { gap: 6px; flex-wrap: wrap; }
+    .controls button.btn { padding: 8px 12px; font-size: 12px; min-height: 36px; }
+    .status { font-size: 11px; }
+
+    /* Tabs: horizontal scroll with a right edge fade so the user knows there is more */
+    nav.tabs {
+      padding: 4px 12px 0;
+      gap: 2px;
+      top: auto;
+      position: relative;
+      overflow-x: auto;
+      overflow-y: hidden;
+      flex-wrap: nowrap;
+      -webkit-overflow-scrolling: touch;
+      scroll-snap-type: x proximity;
+      scrollbar-width: thin;
+      mask-image: linear-gradient(to right, black calc(100% - 24px), transparent);
+      -webkit-mask-image: linear-gradient(to right, black calc(100% - 24px), transparent);
+    }
     nav.tabs::-webkit-scrollbar { height: 3px; }
     nav.tabs::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+    nav.tabs > button {
+      padding: 10px 14px;
+      font-size: 13px;
+      flex: 0 0 auto;
+      min-height: 40px;
+      scroll-snap-align: start;
+      border-radius: 6px 6px 0 0;
+    }
+
+    /* Flatten tab-group dropdowns on mobile: every child button becomes a top level tab */
+    nav.tabs .tab-group { display: contents; }
+    nav.tabs .tab-group-label { display: none !important; }
+    nav.tabs .tab-group-items {
+      display: contents !important;
+      position: static !important;
+      background: transparent !important;
+      box-shadow: none !important;
+      border: none !important;
+      min-width: 0 !important;
+    }
+    nav.tabs .tab-group-items button[data-tab] {
+      display: inline-flex !important;
+      align-items: center;
+      flex: 0 0 auto;
+      min-height: 40px;
+      padding: 10px 14px !important;
+      font-size: 13px !important;
+      background: transparent !important;
+      color: var(--muted) !important;
+      border: none !important;
+      border-bottom: 2px solid transparent !important;
+      border-radius: 0 !important;
+      width: auto !important;
+      text-align: center !important;
+      letter-spacing: 0 !important;
+      text-transform: none !important;
+      scroll-snap-align: start;
+    }
+    nav.tabs .tab-group-items button[data-tab].active {
+      color: var(--text) !important;
+      border-bottom-color: var(--accent) !important;
+      background: transparent !important;
+    }
+
+    /* Main content tightened */
     main { padding: 12px 12px 60px; }
     .grid.cards { grid-template-columns: 1fr; gap: 10px; }
     .card { padding: 12px 12px; border-radius: 10px; overflow-x: auto; }
@@ -775,12 +842,24 @@
     th.th-info::after,
     .info-popup { left: 8px; right: 8px; transform: none; width: auto; max-width: none; min-width: 0; }
     .lu-badge, .corr-badge, .data-badge { padding: 2px 6px; font-size: 10px; }
+
+    /* Hide v2 banner entirely on mobile (also disabled in JS, this is belt and suspenders) */
+    .v2-banner, #v2Banner { display: none !important; }
+
+    /* Section heads stack: title above the meta on small screens */
+    .section-head { flex-direction: column; align-items: flex-start; gap: 4px; }
+    .section-head p { margin: 0; }
+
+    /* Track Record window cards: scroll horizontally instead of stacking many tall rows */
+    #tab-record .record-windows { display: flex !important; overflow-x: auto; gap: 8px; padding-bottom: 4px; -webkit-overflow-scrolling: touch; }
+    #tab-record .record-windows .card { flex: 0 0 70%; max-width: 280px; }
   }
+
   @media (max-width: 479px) {
-    h1 { font-size: 16px; }
-    .title-row { gap: 6px; }
-    .controls { gap: 6px; flex-wrap: wrap; }
-    button.btn { padding: 10px 12px; font-size: 13px; }
+    h1 { font-size: 15px; }
+    .title-row { gap: 6px; flex-direction: column; align-items: flex-start; }
+    .controls { gap: 6px; flex-wrap: wrap; width: 100%; }
+    .controls button.btn { padding: 8px 10px; font-size: 12px; }
     .kpi-grid { grid-template-columns: 1fr; }
     .lock-card { gap: 8px; padding: 10px 12px; }
     .lock-rank { flex: 0 0 26px; height: 26px; font-size: 12px; }
@@ -788,8 +867,9 @@
     .parlay-card { padding: 12px; }
     .parlay-joint { font-size: 16px; }
     table { font-size: 10.5px; min-width: 420px; }
+    nav.tabs > button,
+    nav.tabs .tab-group-items button[data-tab] { padding: 9px 12px !important; font-size: 12px !important; min-height: 38px; }
   }
-
 
   /* TRACK RECORD TAB, added 2026-05-06 */
   #tab-record .record-windows .card { padding: 14px 16px; }
@@ -13641,20 +13721,10 @@ document.addEventListener('DOMContentLoaded', function(){
   }
 
   function renderBanner() {
-    const hdr = document.querySelector("header") || document.querySelector(".header") || document.body;
-    if (!hdr || document.getElementById("v2Banner")) return;
-    const banner = document.createElement("div");
-    banner.id = "v2Banner";
-    banner.className = "v2-banner";
-    const updated = v2State.updatedIso
-      ? new Date(v2State.updatedIso).toLocaleString()
-      : "—";
-    banner.innerHTML =
-      '<span><span class="pill">v2 Algorithm Active</span> &nbsp; ' +
-      'Heat classification + win probability ranker + parlay builder. ' +
-      v2State.picks.length + ' picks · ' + v2State.parlays.length + ' parlay tickets</span>' +
-      '<span>Updated ' + updated + ' · <a href="top_picks.html">Standalone view →</a></span>';
-    hdr.parentNode.insertBefore(banner, hdr.nextSibling);
+    // Banner disabled per user request 2026 05 08. Also remove any pre existing one.
+    var existing = document.getElementById("v2Banner");
+    if (existing && existing.parentNode) existing.parentNode.removeChild(existing);
+    return;
   }
 
   function renderV2BetsPanel() {
