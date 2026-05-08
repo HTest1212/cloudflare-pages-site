@@ -878,7 +878,7 @@
 
   /* MOBILE HAMBURGER MENU, added 2026-05-08 */
   .mobile-menu-btn {
-    display: none;
+    display: inline-flex;
     background: rgba(255,255,255,0.06);
     color: var(--text);
     border: 1px solid var(--border);
@@ -13771,6 +13771,64 @@ document.addEventListener('DOMContentLoaded', function(){
   if (document.querySelector('#tab-record.active')) loadTrackRecord();
 });
 
+
+// ===== MOBILE HAMBURGER MENU JS =====
+(function setupMobileMenu(){
+  function init() {
+    var btn = document.getElementById('mobileMenuBtn');
+    var panel = document.getElementById('mobileMenuPanel');
+    var closeBtn = document.getElementById('mobileMenuClose');
+    var backdrop = document.getElementById('mobileMenuBackdrop');
+    var mainTabs = document.getElementById('tabs');
+    if (!btn || !panel || !backdrop || !mainTabs) return;
+
+    function syncActive() {
+      var activeMain = mainTabs.querySelector('button[data-tab].active') || mainTabs.querySelector('.tab-group-items button[data-tab].active');
+      if (!activeMain) return;
+      var name = activeMain.getAttribute('data-tab');
+      panel.querySelectorAll('button[data-tab]').forEach(function(b){
+        b.classList.toggle('active', b.getAttribute('data-tab') === name);
+      });
+    }
+    function openMenu() {
+      syncActive();
+      panel.classList.add('open');
+      backdrop.classList.add('open');
+      panel.setAttribute('aria-hidden','false');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMenu() {
+      panel.classList.remove('open');
+      backdrop.classList.remove('open');
+      panel.setAttribute('aria-hidden','true');
+      document.body.style.overflow = '';
+    }
+
+    btn.addEventListener('click', openMenu);
+    if (closeBtn) closeBtn.addEventListener('click', closeMenu);
+    backdrop.addEventListener('click', closeMenu);
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape' && panel.classList.contains('open')) closeMenu();
+    });
+
+    panel.addEventListener('click', function(e){
+      var tabBtn = e.target.closest('button[data-tab]');
+      if (!tabBtn) return;
+      var name = tabBtn.getAttribute('data-tab');
+      var mainBtn = mainTabs.querySelector('button[data-tab="' + name + '"]');
+      if (mainBtn) mainBtn.click();
+      closeMenu();
+    });
+
+    mainTabs.addEventListener('click', function(){ setTimeout(syncActive, 60); });
+    syncActive();
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
 </script>
 
 <!-- ===== v2 Algorithm Overlay (heat classification + win-prob ranker + parlay builder) ===== -->
