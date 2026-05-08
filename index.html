@@ -1000,31 +1000,53 @@
     <div class="section-head">
       <div>
         <h2>📈 Track Record</h2>
-        <p>Lifetime performance, win rate by market and tier, and the active rules learned from past losses. Updated daily by the 4 AM retrospective.</p>
+        <p>Lifetime performance, win rate by market and tier, with sortable tables. Updated daily by the 4 AM retrospective.</p>
       </div>
     </div>
 
     <div class="kpi-grid" id="recordKpiTop"></div>
 
-    <div class="grid cards record-windows" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
-      <div class="card"><h3>Recent 14 days</h3><div id="record14" class="record-mini"></div></div>
-      <div class="card"><h3>Recent 30 days</h3><div id="record30" class="record-mini"></div></div>
-      <div class="card"><h3>Lifetime</h3><div id="recordLifetime" class="record-mini"></div></div>
+    <div class="card record-table-card" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 14px;">
+      <span style="font-size:13px;font-weight:600;color:var(--muted);">Time window:</span>
+      <div id="windowButtons" class="window-buttons"></div>
+      <span style="flex:1;"></span>
+      <span style="font-size:11px;color:var(--muted);">Click to refilter the tables.</span>
+    </div>
+
+    <div class="grid cards record-windows" style="grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));">
+      <div class="card window-card" data-win="yesterday"><h3>Yesterday</h3><div id="recordYesterday" class="record-mini"></div></div>
+      <div class="card window-card" data-win="recent7"><h3>Last 7 days</h3><div id="recordRecent7" class="record-mini"></div></div>
+      <div class="card window-card" data-win="recent14"><h3>Last 14 days</h3><div id="record14" class="record-mini"></div></div>
+      <div class="card window-card" data-win="recent30"><h3>Last 30 days</h3><div id="record30" class="record-mini"></div></div>
+      <div class="card window-card" data-win="lifetime"><h3>Lifetime</h3><div id="recordLifetime" class="record-mini"></div></div>
     </div>
 
     <div class="card record-table-card">
-      <h3>Win rate by market</h3>
-      <p class="small">Lifetime hit percentage broken out by bet type. Bar shows win rate at a glance.</p>
-      <table id="recordByMarketTable"><thead><tr>
-        <th>Market</th><th class="num">Picks</th><th class="num">Wins</th><th class="num">Losses</th><th>Win %</th><th class="num">Units</th><th class="num">ROI</th>
+      <h3>Win rate by market <span id="byMarketWin" style="color:var(--muted);font-size:12px;font-weight:400;"></span></h3>
+      <p class="small">Hit percentage broken out by bet type. Click any column header to sort. Categories: Game Outcome, Pitcher Props, Hitter Props, Specialty.</p>
+      <table id="recordByMarketTable" class="sortable-table"><thead><tr>
+        <th data-sort="category" data-sort-default="asc">Category</th>
+        <th data-sort="market">Market</th>
+        <th data-sort="picks" class="num">Picks</th>
+        <th data-sort="wins" class="num">Wins</th>
+        <th data-sort="losses" class="num">Losses</th>
+        <th data-sort="winRate">Win %</th>
+        <th data-sort="units" class="num">Units</th>
+        <th data-sort="roi" class="num">ROI</th>
       </tr></thead><tbody></tbody></table>
     </div>
 
     <div class="card record-table-card">
-      <h3>Win rate by tier</h3>
-      <p class="small">Performance broken out by confidence tier. A is highest confidence, watch is sub threshold leans.</p>
-      <table id="recordByTierTable"><thead><tr>
-        <th>Tier</th><th class="num">Picks</th><th class="num">Wins</th><th class="num">Losses</th><th>Win %</th><th class="num">Units</th><th class="num">ROI</th>
+      <h3>Win rate by tier <span id="byTierWin" style="color:var(--muted);font-size:12px;font-weight:400;"></span></h3>
+      <p class="small">Performance broken out by confidence tier. A is highest confidence, watch is sub threshold leans. Click any column header to sort.</p>
+      <table id="recordByTierTable" class="sortable-table"><thead><tr>
+        <th data-sort="tier">Tier</th>
+        <th data-sort="picks" class="num">Picks</th>
+        <th data-sort="wins" class="num">Wins</th>
+        <th data-sort="losses" class="num">Losses</th>
+        <th data-sort="winRate">Win %</th>
+        <th data-sort="units" class="num">Units</th>
+        <th data-sort="roi" class="num">ROI</th>
       </tr></thead><tbody></tbody></table>
     </div>
 
@@ -11664,193 +11686,348 @@ setInterval(refreshLineupsOnly, 90 * 1000);
 refreshAllData();
 
 
-// ===== TRACK RECORD TAB =====
+// ===== TRACK RECORD TAB v2: categories, 5 windows, sortable =====
+
+const TR_MARKET_CATEGORIES = {
+  ML: 'Game Outcome', F5_ML: 'Game Outcome', RL: 'Game Outcome', F5_RL: 'Game Outcome',
+  Total: 'Game Outcome', F5_Total: 'Game Outcome',
+  K: 'Pitcher Props', ER: 'Pitcher Props', BB: 'Pitcher Props',
+  Hits: 'Hitter Props', HR: 'Hitter Props', TotalBases: 'Hitter Props',
+  NRFI: 'Specialty', YRFI: 'Specialty'
+};
+const TR_CATEGORY_CLASS = {
+  'Game Outcome': 'cat-game',
+  'Pitcher Props': 'cat-pitcher',
+  'Hitter Props': 'cat-hitter',
+  'Specialty': 'cat-specialty'
+};
+const TR_WINDOWS = [
+  { key: 'yesterday', label: 'Yesterday', miniId: 'recordYesterday' },
+  { key: 'recent7', label: 'Last 7d', miniId: 'recordRecent7' },
+  { key: 'recent14', label: 'Last 14d', miniId: 'record14' },
+  { key: 'recent30', label: 'Last 30d', miniId: 'record30' },
+  { key: 'lifetime', label: 'Lifetime', miniId: 'recordLifetime' }
+];
+
+const TR_STATE = {
+  data: { summary: null, outcomes: [], picks: [], learnings: null },
+  currentWindow: 'lifetime',
+  marketSort: { col: 'roi', dir: 'desc' },
+  tierSort: { col: 'roi', dir: 'desc' }
+};
+
+function trFmtPct(v, digits) { if (v === null || v === undefined || isNaN(v)) return '-'; return (v * 100).toFixed(digits || 1) + '%'; }
+function trFmtUnits(v) { if (v === null || v === undefined || isNaN(v)) return '-'; var sign = v >= 0 ? '+' : ''; return sign + v.toFixed(2) + 'u'; }
+function trUnitsClass(v) { if (v === null || v === undefined) return ''; return v >= 0 ? 'up' : 'down'; }
+function trEsc(s) { if (s === null || s === undefined) return ''; return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+function trNormalize(d) {
+  if (!d || typeof d !== 'object') return null;
+  var out = {};
+  out.picks = +(d.picks || 0);
+  out.wins = +(d.wins || 0);
+  out.losses = +(d.losses || 0);
+  out.pushes = +(d.pushes || 0);
+  out.voids = +(d.voids || 0);
+  out.units = +(d.units || 0);
+  var wr = d.winRate !== undefined ? +d.winRate : (d.win_rate !== undefined ? +d.win_rate : null);
+  if (wr !== null && !isNaN(wr)) {
+    if (wr > 1.0001) wr = wr / 100;
+    out.winRate = wr;
+  }
+  var roi = d.roi !== undefined ? +d.roi : (d.ROI !== undefined ? +d.ROI : null);
+  if (roi !== null && !isNaN(roi)) {
+    if (Math.abs(roi) > 1.0001) roi = roi / 100;
+    out.roi = roi;
+  }
+  var total = out.wins + out.losses;
+  if (total > 0 && (out.winRate === undefined || out.winRate === null || isNaN(out.winRate))) {
+    out.winRate = out.wins / total;
+  }
+  if (out.picks > 0 && (out.roi === undefined || out.roi === null || isNaN(out.roi))) {
+    out.roi = out.units / out.picks;
+  }
+  return out;
+}
+
+function trGetWindow(summary, key) {
+  if (!summary) return null;
+  if (summary.windows && summary.windows[key]) return summary.windows[key];
+  if (summary[key]) return summary[key];
+  return null;
+}
+function trGetMarketMap(window) { if (!window) return {}; return window.byMarket || window.by_market || {}; }
+function trGetTierMap(window) { if (!window) return {}; return window.byTier || window.by_tier || {}; }
+function trGetSummary(window) {
+  if (!window) return null;
+  if (window.summary) return trNormalize(window.summary);
+  if ('picks' in window || 'wins' in window) return trNormalize(window);
+  return null;
+}
+
 async function loadTrackRecord() {
-  const fetchJsonSafe = async (path, fallback) => {
+  var fetchJsonSafe = async function(path, fallback) {
     try {
-      const r = await fetch(path + '?t=' + Date.now(), { cache: 'no-store' });
+      var r = await fetch(path + '?t=' + Date.now(), { cache: 'no-store' });
       if (!r.ok) return fallback;
       return await r.json();
     } catch (e) { return fallback; }
   };
-  const [summary, outcomes, picks, learnings] = await Promise.all([
+  var results = await Promise.all([
     fetchJsonSafe('bet_record_summary.json', null),
     fetchJsonSafe('outcomes_log.json', []),
     fetchJsonSafe('picks_log.json', []),
     fetchJsonSafe('learnings.json', null)
   ]);
-  renderRecordKpi(summary);
-  renderRecordWindows(summary);
-  renderRecordByMarket(summary);
-  renderRecordByTier(summary);
-  renderActiveRules(learnings);
-  renderOpenPositions(picks, outcomes);
-  renderRecentSettled(picks, outcomes);
+  TR_STATE.data = { summary: results[0], outcomes: results[1] || [], picks: results[2] || [], learnings: results[3] };
+  trRenderAll();
 }
 
-function fmtPct(v, digits) { if (v === null || v === undefined || isNaN(v)) return '—'; return (v * 100).toFixed(digits || 1) + '%'; }
-function fmtUnits(v) { if (v === null || v === undefined || isNaN(v)) return '—'; const sign = v >= 0 ? '+' : ''; return sign + v.toFixed(2) + 'u'; }
-function unitsClass(v) { if (v === null || v === undefined) return ''; return v >= 0 ? 'up' : 'down'; }
-function escTr(s) { if (s === null || s === undefined) return ''; return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
-function recomputeStats(d) {
-  if (!d) return d;
-  const out = Object.assign({}, d);
-  const wins = +(out.wins || 0);
-  const losses = +(out.losses || 0);
-  const total = wins + losses;
-  if (total > 0) out.winRate = wins / total;
-  const units = +(out.units || 0);
-  const picks = +(out.picks || 0);
-  if (picks > 0) out.roi = units / picks;
-  return out;
+function trRenderAll() {
+  var data = TR_STATE.data || {};
+  trRenderWindowButtons();
+  trRenderWindowMinis(data.summary);
+  trRenderKpiTop(data.summary);
+  trRenderByMarket(data.summary);
+  trRenderByTier(data.summary);
+  trRenderActiveRules(data.learnings);
+  trRenderOpenPositions(data.picks, data.outcomes);
+  trRenderRecentSettled(data.picks, data.outcomes);
 }
 
+function trRenderWindowButtons() {
+  var el = document.getElementById('windowButtons');
+  if (el) {
+    el.innerHTML = TR_WINDOWS.map(function(w){
+      return '<button data-win="' + w.key + '"' + (TR_STATE.currentWindow === w.key ? ' class="active"' : '') + '>' + trEsc(w.label) + '</button>';
+    }).join('');
+    el.querySelectorAll('button').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        TR_STATE.currentWindow = btn.getAttribute('data-win');
+        trRenderAll();
+      });
+    });
+  }
+  document.querySelectorAll('#tab-record .window-card').forEach(function(card){
+    card.classList.toggle('active', card.getAttribute('data-win') === TR_STATE.currentWindow);
+    card.onclick = function(){
+      TR_STATE.currentWindow = card.getAttribute('data-win');
+      trRenderAll();
+    };
+  });
+}
 
-function renderRecordKpi(summary) {
-  const el = document.getElementById('recordKpiTop');
+function trRenderWindowMinis(summary) {
+  TR_WINDOWS.forEach(function(w){
+    var el = document.getElementById(w.miniId);
+    if (!el) return;
+    var stats = trGetSummary(trGetWindow(summary, w.key));
+    if (!stats || stats.picks === 0) {
+      el.innerHTML = '<span class="k" style="grid-column:1/3;">No data yet.</span>';
+      return;
+    }
+    el.innerHTML =
+      '<span class="k">Picks</span><span class="v">' + stats.picks + '</span>' +
+      '<span class="k">Win %</span><span class="v">' + trFmtPct(stats.winRate) + '</span>' +
+      '<span class="k">W . L</span><span class="v">' + stats.wins + ' . ' + stats.losses + '</span>' +
+      '<span class="k">Units</span><span class="v ' + trUnitsClass(stats.units) + '">' + trFmtUnits(stats.units) + '</span>' +
+      '<span class="k">ROI</span><span class="v ' + trUnitsClass(stats.roi) + '">' + trFmtPct(stats.roi) + '</span>';
+  });
+}
+
+function trRenderKpiTop(summary) {
+  var el = document.getElementById('recordKpiTop');
   if (!el) return;
-  if (!summary || !summary.lifetime) {
+  if (!summary) {
     el.innerHTML = '<div class="kpi"><div class="label">Track Record</div><div class="value" style="font-size:14px;">No data yet</div><div class="sub">4 AM retrospective writes this file daily</div></div>';
     return;
   }
-  const lt = recomputeStats(summary.lifetime);
+  var winInfo = TR_WINDOWS.filter(function(w){ return w.key === TR_STATE.currentWindow; })[0] || TR_WINDOWS[TR_WINDOWS.length-1];
+  var stats = trGetSummary(trGetWindow(summary, TR_STATE.currentWindow)) || {};
+  var lifetime = trGetSummary(trGetWindow(summary, 'lifetime')) || {};
   el.innerHTML =
-    '<div class="kpi"><div class="label">Lifetime Win %</div><div class="value">' + fmtPct(lt.winRate) + '</div><div class="sub">' + (lt.wins||0) + ' W . ' + (lt.losses||0) + ' L</div></div>' +
-    '<div class="kpi"><div class="label">Lifetime Units</div><div class="value" style="color:' + ((lt.units||0)>=0?'var(--good)':'var(--bad)') + ';">' + fmtUnits(lt.units) + '</div><div class="sub">' + (lt.picks||0) + ' picks</div></div>' +
-    '<div class="kpi"><div class="label">Lifetime ROI</div><div class="value" style="color:' + ((lt.roi||0)>=0?'var(--good)':'var(--bad)') + ';">' + fmtPct(lt.roi) + '</div><div class="sub">payout vs stake</div></div>' +
-    '<div class="kpi"><div class="label">Last Updated</div><div class="value" style="font-size:13px;">' + escTr((summary.asof||'').slice(0,16).replace('T',' ')) + '</div><div class="sub">UTC</div></div>';
+    '<div class="kpi"><div class="label">' + trEsc(winInfo.label) + ' Win %</div><div class="value">' + trFmtPct(stats.winRate) + '</div><div class="sub">' + (stats.wins||0) + ' W . ' + (stats.losses||0) + ' L</div></div>' +
+    '<div class="kpi"><div class="label">' + trEsc(winInfo.label) + ' Units</div><div class="value" style="color:' + ((stats.units||0)>=0?'var(--good)':'var(--bad)') + ';">' + trFmtUnits(stats.units) + '</div><div class="sub">' + (stats.picks||0) + ' picks</div></div>' +
+    '<div class="kpi"><div class="label">' + trEsc(winInfo.label) + ' ROI</div><div class="value" style="color:' + ((stats.roi||0)>=0?'var(--good)':'var(--bad)') + ';">' + trFmtPct(stats.roi) + '</div><div class="sub">profit / stake</div></div>' +
+    '<div class="kpi"><div class="label">Lifetime Win %</div><div class="value">' + trFmtPct(lifetime.winRate) + '</div><div class="sub">' + (lifetime.picks||0) + ' picks total</div></div>';
 }
 
-function renderMiniBlock(elId, data) {
-  const el = document.getElementById(elId);
-  if (!el) return;
-  if (!data) { el.innerHTML = '<span class="k" style="grid-column:1/3;">No data yet.</span>'; return; }
-  el.innerHTML =
-    '<span class="k">Picks</span><span class="v">' + (data.picks||0) + '</span>' +
-    '<span class="k">Win %</span><span class="v">' + fmtPct(data.winRate) + '</span>' +
-    '<span class="k">W . L</span><span class="v">' + (data.wins||0) + ' . ' + (data.losses||0) + '</span>' +
-    '<span class="k">Units</span><span class="v ' + unitsClass(data.units) + '">' + fmtUnits(data.units) + '</span>' +
-    '<span class="k">ROI</span><span class="v ' + unitsClass(data.roi) + '">' + fmtPct(data.roi) + '</span>';
+function trWinBarHtml(rate) {
+  var pct = Math.max(0, Math.min(100, (rate||0) * 100));
+  return trFmtPct(rate) + ' <span class="win-rate-bar"><div style="width:' + pct.toFixed(1) + '%;"></div></span>';
 }
 
-function renderRecordWindows(summary) {
-  if (!summary) {
-    renderMiniBlock('record14', null);
-    renderMiniBlock('record30', null);
-    renderMiniBlock('recordLifetime', null);
+function trMakeSortable(table, sortStateKey, rerender) {
+  if (!table) return;
+  table.querySelectorAll('th[data-sort]').forEach(function(th){
+    th.classList.remove('sort-asc','sort-desc');
+    var col = th.getAttribute('data-sort');
+    var state = TR_STATE[sortStateKey];
+    if (state && state.col === col) th.classList.add(state.dir === 'asc' ? 'sort-asc' : 'sort-desc');
+    th.onclick = function(){
+      var cur = TR_STATE[sortStateKey];
+      if (cur.col === col) {
+        cur.dir = cur.dir === 'asc' ? 'desc' : 'asc';
+      } else {
+        cur.col = col;
+        cur.dir = th.getAttribute('data-sort-default') === 'asc' ? 'asc' : 'desc';
+      }
+      rerender();
+    };
+  });
+}
+
+function trSortRows(rows, col, dir) {
+  var numCols = { picks:1, wins:1, losses:1, winRate:1, units:1, roi:1 };
+  return rows.slice().sort(function(a,b){
+    var av = a[col], bv = b[col];
+    if (numCols[col]) { av = +av || 0; bv = +bv || 0; return dir === 'asc' ? av-bv : bv-av; }
+    av = (av==null?'':av).toString(); bv = (bv==null?'':bv).toString();
+    return dir === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av);
+  });
+}
+
+function trRenderByMarket(summary) {
+  var tbody = document.querySelector('#recordByMarketTable tbody');
+  var labelEl = document.getElementById('byMarketWin');
+  if (!tbody) return;
+  var win = trGetWindow(summary, TR_STATE.currentWindow);
+  var map = trGetMarketMap(win);
+  var winInfo = TR_WINDOWS.filter(function(w){ return w.key === TR_STATE.currentWindow; })[0];
+  if (labelEl) labelEl.textContent = winInfo ? '- window: ' + winInfo.label : '';
+  var keys = Object.keys(map);
+  if (!keys.length) {
+    tbody.innerHTML = '<tr><td colspan="8" class="empty-state">No market data for this window. Switch the window above or wait for the next 4 AM retrospective.</td></tr>';
+    trMakeSortable(document.getElementById('recordByMarketTable'), 'marketSort', function(){ trRenderByMarket(summary); });
     return;
   }
-  renderMiniBlock('record14', recomputeStats(summary.recent14));
-  renderMiniBlock('record30', recomputeStats(summary.recent30));
-  renderMiniBlock('recordLifetime', recomputeStats(summary.lifetime));
-}
-
-function winRateBarHtml(rate) {
-  const pct = Math.max(0, Math.min(100, (rate||0) * 100));
-  return fmtPct(rate) + ' <span class="win-rate-bar"><div style="width:' + pct.toFixed(1) + '%;"></div></span>';
-}
-
-function renderRecordByMarket(summary) {
-  const tbody = document.querySelector('#recordByMarketTable tbody');
-  if (!tbody) return;
-  if (!summary || !summary.byMarket) { tbody.innerHTML = '<tr><td colspan="7" class="empty-state">No market data yet.</td></tr>'; return; }
-  const order = ['ML','F5_ML','RL','Total','F5_Total','K','Hits','NRFI','YRFI'];
-  const keys = Object.keys(summary.byMarket).sort(function(a,b){
-    const ai = order.indexOf(a), bi = order.indexOf(b);
-    return (ai===-1?999:ai) - (bi===-1?999:bi);
+  var rows = keys.map(function(m){
+    var s = trNormalize(map[m]) || {};
+    return {
+      category: TR_MARKET_CATEGORIES[m] || 'Other',
+      market: m,
+      picks: s.picks || 0,
+      wins: s.wins || 0,
+      losses: s.losses || 0,
+      winRate: s.winRate || 0,
+      units: s.units || 0,
+      roi: s.roi || 0
+    };
   });
-  if (!keys.length) { tbody.innerHTML = '<tr><td colspan="7" class="empty-state">No market data yet.</td></tr>'; return; }
-  tbody.innerHTML = keys.map(function(m){
-    const d = recomputeStats(summary.byMarket[m] || {});
+  var sorted = trSortRows(rows, TR_STATE.marketSort.col, TR_STATE.marketSort.dir);
+  tbody.innerHTML = sorted.map(function(r){
+    var catCls = TR_CATEGORY_CLASS[r.category] || 'cat-specialty';
+    var marketLabel = r.market.replace(/_/g, ' ');
     return '<tr>' +
-      '<td><b>' + escTr(m.replace('_',' ')) + '</b></td>' +
-      '<td class="num">' + (d.picks||0) + '</td>' +
-      '<td class="num">' + (d.wins||0) + '</td>' +
-      '<td class="num">' + (d.losses||0) + '</td>' +
-      '<td>' + winRateBarHtml(d.winRate) + '</td>' +
-      '<td class="num" style="color:' + ((d.units||0)>=0?'var(--good)':'var(--bad)') + ';">' + fmtUnits(d.units) + '</td>' +
-      '<td class="num" style="color:' + ((d.roi||0)>=0?'var(--good)':'var(--bad)') + ';">' + fmtPct(d.roi) + '</td>' +
+      '<td><span class="market-cat-pill ' + catCls + '">' + trEsc(r.category) + '</span></td>' +
+      '<td><b>' + trEsc(marketLabel) + '</b></td>' +
+      '<td class="num">' + r.picks + '</td>' +
+      '<td class="num">' + r.wins + '</td>' +
+      '<td class="num">' + r.losses + '</td>' +
+      '<td>' + trWinBarHtml(r.winRate) + '</td>' +
+      '<td class="num" style="color:' + (r.units>=0?'var(--good)':'var(--bad)') + ';">' + trFmtUnits(r.units) + '</td>' +
+      '<td class="num" style="color:' + (r.roi>=0?'var(--good)':'var(--bad)') + ';">' + trFmtPct(r.roi) + '</td>' +
     '</tr>';
   }).join('');
+  trMakeSortable(document.getElementById('recordByMarketTable'), 'marketSort', function(){ trRenderByMarket(summary); });
 }
 
-function renderRecordByTier(summary) {
-  const tbody = document.querySelector('#recordByTierTable tbody');
+function trRenderByTier(summary) {
+  var tbody = document.querySelector('#recordByTierTable tbody');
+  var labelEl = document.getElementById('byTierWin');
   if (!tbody) return;
-  if (!summary || !summary.byTier) { tbody.innerHTML = '<tr><td colspan="7" class="empty-state">No tier data yet.</td></tr>'; return; }
-  const order = ['A','B','C','watch'];
-  const keys = order.filter(function(t){ return summary.byTier[t]; });
-  if (!keys.length) { tbody.innerHTML = '<tr><td colspan="7" class="empty-state">No tier data yet.</td></tr>'; return; }
-  tbody.innerHTML = keys.map(function(t){
-    const d = recomputeStats(summary.byTier[t] || {});
+  var win = trGetWindow(summary, TR_STATE.currentWindow);
+  var map = trGetTierMap(win);
+  var winInfo = TR_WINDOWS.filter(function(w){ return w.key === TR_STATE.currentWindow; })[0];
+  if (labelEl) labelEl.textContent = winInfo ? '- window: ' + winInfo.label : '';
+  var keys = Object.keys(map);
+  if (!keys.length) {
+    tbody.innerHTML = '<tr><td colspan="7" class="empty-state">No tier data for this window.</td></tr>';
+    trMakeSortable(document.getElementById('recordByTierTable'), 'tierSort', function(){ trRenderByTier(summary); });
+    return;
+  }
+  var rows = keys.map(function(t){
+    var s = trNormalize(map[t]) || {};
+    return {
+      tier: t,
+      picks: s.picks || 0,
+      wins: s.wins || 0,
+      losses: s.losses || 0,
+      winRate: s.winRate || 0,
+      units: s.units || 0,
+      roi: s.roi || 0
+    };
+  });
+  var sorted = trSortRows(rows, TR_STATE.tierSort.col, TR_STATE.tierSort.dir);
+  tbody.innerHTML = sorted.map(function(r){
     return '<tr>' +
-      '<td><b>' + escTr(t.toUpperCase()) + '</b></td>' +
-      '<td class="num">' + (d.picks||0) + '</td>' +
-      '<td class="num">' + (d.wins||0) + '</td>' +
-      '<td class="num">' + (d.losses||0) + '</td>' +
-      '<td>' + winRateBarHtml(d.winRate) + '</td>' +
-      '<td class="num" style="color:' + ((d.units||0)>=0?'var(--good)':'var(--bad)') + ';">' + fmtUnits(d.units) + '</td>' +
-      '<td class="num" style="color:' + ((d.roi||0)>=0?'var(--good)':'var(--bad)') + ';">' + fmtPct(d.roi) + '</td>' +
+      '<td><b>' + trEsc(r.tier.toUpperCase()) + '</b></td>' +
+      '<td class="num">' + r.picks + '</td>' +
+      '<td class="num">' + r.wins + '</td>' +
+      '<td class="num">' + r.losses + '</td>' +
+      '<td>' + trWinBarHtml(r.winRate) + '</td>' +
+      '<td class="num" style="color:' + (r.units>=0?'var(--good)':'var(--bad)') + ';">' + trFmtUnits(r.units) + '</td>' +
+      '<td class="num" style="color:' + (r.roi>=0?'var(--good)':'var(--bad)') + ';">' + trFmtPct(r.roi) + '</td>' +
     '</tr>';
   }).join('');
+  trMakeSortable(document.getElementById('recordByTierTable'), 'tierSort', function(){ trRenderByTier(summary); });
 }
 
-function renderActiveRules(learnings) {
-  const ul = document.getElementById('recordActiveRules');
+function trRenderActiveRules(learnings) {
+  var ul = document.getElementById('recordActiveRules');
   if (!ul) return;
-  const rules = (learnings && (learnings.adjustments_for_today || [])) || [];
-  if (!rules.length) { ul.innerHTML = '<li class="empty-state">No active rules yet. The 4 AM retrospective writes these once it has identified patterns from past losses.</li>'; return; }
-  ul.innerHTML = rules.map(function(r){ return '<li>' + escTr(r) + '</li>'; }).join('');
+  var rules = (learnings && (learnings.adjustments_for_today || [])) || [];
+  if (!rules.length) { ul.innerHTML = '<li class="empty-state">No active rules yet.</li>'; return; }
+  ul.innerHTML = rules.map(function(r){ return '<li>' + trEsc(r) + '</li>'; }).join('');
 }
 
-function renderOpenPositions(picks, outcomes) {
-  const tbody = document.querySelector('#recordOpenTable tbody');
+function trRenderOpenPositions(picks, outcomes) {
+  var tbody = document.querySelector('#recordOpenTable tbody');
   if (!tbody) return;
   if (!Array.isArray(picks) || !picks.length) { tbody.innerHTML = '<tr><td colspan="6" class="empty-state">No picks logged yet.</td></tr>'; return; }
-  const settledIds = new Set((outcomes||[]).map(function(o){ return o.id; }));
-  const today = new Date().toISOString().slice(0,10);
-  const open = picks.filter(function(p){ return p.date === today && !settledIds.has(p.id); });
-  if (!open.length) { tbody.innerHTML = '<tr><td colspan="6" class="empty-state">No open picks for today yet. After the 11:30 AM run lands, today\'s picks appear here until settled.</td></tr>'; return; }
+  var settledIds = {};
+  (outcomes||[]).forEach(function(o){ if (o && o.id) settledIds[o.id] = 1; });
+  var today = new Date().toISOString().slice(0,10);
+  var open = picks.filter(function(p){ return p.date === today && !settledIds[p.id]; });
+  if (!open.length) { tbody.innerHTML = '<tr><td colspan="6" class="empty-state">No open picks for today yet.</td></tr>'; return; }
   tbody.innerHTML = open.map(function(p){
     return '<tr>' +
-      '<td>' + escTr((p.away||'') + ' @ ' + (p.home||'')) + '</td>' +
-      '<td>' + escTr((p.market||'').replace('_',' ')) + '</td>' +
-      '<td>' + escTr(p.pick||'') + '</td>' +
-      '<td>' + escTr(p.line||'') + '</td>' +
+      '<td>' + trEsc((p.away||'') + ' @ ' + (p.home||'')) + '</td>' +
+      '<td>' + trEsc((p.market||'').replace('_',' ')) + '</td>' +
+      '<td>' + trEsc(p.pick||'') + '</td>' +
+      '<td>' + trEsc(p.line||'') + '</td>' +
       '<td class="num">' + (p.confidence||0) + '</td>' +
-      '<td><span class="result-pill pending">' + escTr((p.tier||'').toUpperCase()) + '</span></td>' +
+      '<td><span class="result-pill pending">' + trEsc((p.tier||'').toUpperCase()) + '</span></td>' +
     '</tr>';
   }).join('');
 }
 
-function renderRecentSettled(picks, outcomes) {
-  const tbody = document.querySelector('#recordRecentTable tbody');
+function trRenderRecentSettled(picks, outcomes) {
+  var tbody = document.querySelector('#recordRecentTable tbody');
   if (!tbody) return;
-  if (!Array.isArray(outcomes) || !outcomes.length) { tbody.innerHTML = '<tr><td colspan="8" class="empty-state">No settled picks yet. The 4 AM retrospective writes outcomes once games finalize.</td></tr>'; return; }
-  const pickById = {};
+  if (!Array.isArray(outcomes) || !outcomes.length) { tbody.innerHTML = '<tr><td colspan="8" class="empty-state">No settled picks yet.</td></tr>'; return; }
+  var pickById = {};
   (picks||[]).forEach(function(p){ pickById[p.id] = p; });
-  const sorted = outcomes.slice().sort(function(a,b){ return (b.settledAt||'').localeCompare(a.settledAt||''); }).slice(0, 50);
+  var sorted = outcomes.slice().sort(function(a,b){ return (b.settledAt||'').localeCompare(a.settledAt||''); }).slice(0, 50);
   tbody.innerHTML = sorted.map(function(o){
-    const p = pickById[o.id] || {};
-    const pillClass = o.result === 'win' ? 'win' : o.result === 'loss' ? 'loss' : o.result === 'push' ? 'push' : 'pending';
+    var p = pickById[o.id] || {};
+    var pillClass = o.result === 'win' ? 'win' : o.result === 'loss' ? 'loss' : o.result === 'push' ? 'push' : 'pending';
     return '<tr>' +
-      '<td>' + escTr(p.date||(o.settledAt||'').slice(0,10)) + '</td>' +
-      '<td>' + escTr((p.away||'') + ' @ ' + (p.home||'')) + '</td>' +
-      '<td>' + escTr((p.market||'').replace('_',' ')) + '</td>' +
-      '<td>' + escTr(p.pick||'') + '</td>' +
-      '<td>' + escTr((p.tier||'').toUpperCase()) + '</td>' +
-      '<td><span class="result-pill ' + pillClass + '">' + escTr((o.result||'pending').toUpperCase()) + '</span></td>' +
-      '<td class="num" style="color:' + ((o.profit||0)>=0?'var(--good)':'var(--bad)') + ';">' + fmtUnits(o.profit) + '</td>' +
-      '<td style="color:var(--muted);font-size:11px;">' + escTr(o.diagnosis||'') + '</td>' +
+      '<td>' + trEsc(p.date||(o.settledAt||'').slice(0,10)) + '</td>' +
+      '<td>' + trEsc((p.away||'') + ' @ ' + (p.home||'')) + '</td>' +
+      '<td>' + trEsc((p.market||'').replace('_',' ')) + '</td>' +
+      '<td>' + trEsc(p.pick||'') + '</td>' +
+      '<td>' + trEsc((p.tier||'').toUpperCase()) + '</td>' +
+      '<td><span class="result-pill ' + pillClass + '">' + trEsc((o.result||'pending').toUpperCase()) + '</span></td>' +
+      '<td class="num" style="color:' + ((o.profit||0)>=0?'var(--good)':'var(--bad)') + ';">' + trFmtUnits(o.profit) + '</td>' +
+      '<td style="color:var(--muted);font-size:11px;">' + trEsc(o.diagnosis||'') + '</td>' +
     '</tr>';
   }).join('');
 }
 
-// Hook into existing tab activation. Load track record when the tab becomes active.
 document.addEventListener('DOMContentLoaded', function(){
-  const recordBtn = document.querySelector('button[data-tab="record"]');
+  var recordBtn = document.querySelector('button[data-tab="record"]');
   if (recordBtn) recordBtn.addEventListener('click', function(){ loadTrackRecord(); });
-  // Also load if the tab is the active one on initial render (after a deep link)
   if (document.querySelector('#tab-record.active')) loadTrackRecord();
 });
 
