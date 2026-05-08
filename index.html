@@ -843,6 +843,10 @@
     .info-popup { left: 8px; right: 8px; transform: none; width: auto; max-width: none; min-width: 0; }
     .lu-badge, .corr-badge, .data-badge { padding: 2px 6px; font-size: 10px; }
 
+
+    /* Hamburger menu replaces the scrollable tab nav on mobile */
+    .mobile-menu-btn { display: inline-flex; }
+    nav.tabs#tabs { display: none !important; }
     /* Hide v2 banner entirely on mobile (also disabled in JS, this is belt and suspenders) */
     .v2-banner, #v2Banner { display: none !important; }
 
@@ -869,6 +873,87 @@
     table { font-size: 10.5px; min-width: 420px; }
     nav.tabs > button,
     nav.tabs .tab-group-items button[data-tab] { padding: 9px 12px !important; font-size: 12px !important; min-height: 38px; }
+  }
+
+
+  /* MOBILE HAMBURGER MENU, added 2026-05-08 */
+  .mobile-menu-btn {
+    display: none;
+    background: rgba(255,255,255,0.06);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 10px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    min-height: 40px;
+  }
+  .mobile-menu-btn svg { width: 20px; height: 20px; }
+  .mobile-menu-btn:hover { background: var(--panel2); border-color: var(--accent); }
+
+  .mobile-menu-backdrop {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 998;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+  }
+  .mobile-menu-backdrop.open { opacity: 1; pointer-events: auto; }
+
+  .mobile-menu-panel {
+    position: fixed;
+    top: 0; right: 0; bottom: 0;
+    width: min(85%, 360px);
+    background: var(--bg);
+    border-left: 1px solid var(--border);
+    z-index: 999;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    transform: translateX(100%);
+    transition: transform 0.25s ease;
+    box-shadow: -8px 0 24px rgba(0,0,0,0.5);
+  }
+  .mobile-menu-panel.open { transform: translateX(0); }
+
+  .mobile-menu-header {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+    background: rgba(11,16,32,0.95);
+    backdrop-filter: blur(8px);
+    position: sticky; top: 0; z-index: 1;
+  }
+  .mobile-menu-header h3 { margin: 0; font-size: 15px; letter-spacing: 0.3px; }
+  .mobile-menu-header button {
+    background: none; border: none; color: var(--muted);
+    font-size: 22px; line-height: 1; cursor: pointer; padding: 4px 10px;
+    border-radius: 6px;
+  }
+  .mobile-menu-header button:hover { color: var(--text); background: rgba(255,255,255,0.04); }
+
+  .mobile-menu-section { padding: 6px 0 10px; border-bottom: 1px solid rgba(255,255,255,0.04); }
+  .mobile-menu-section:last-child { border-bottom: none; }
+  .mobile-menu-section h4 {
+    margin: 0; padding: 14px 16px 4px;
+    font-size: 10px; color: var(--muted);
+    text-transform: uppercase; letter-spacing: 1px; font-weight: 700;
+  }
+  .mobile-menu-panel button.menu-tab {
+    display: block; width: 100%; text-align: left;
+    background: transparent; color: var(--text);
+    border: none; border-left: 3px solid transparent;
+    padding: 12px 16px; font-size: 14px; cursor: pointer;
+    font-family: inherit;
+  }
+  .mobile-menu-panel button.menu-tab:hover { background: rgba(255,255,255,0.03); }
+  .mobile-menu-panel button.menu-tab.active {
+    background: rgba(110,168,255,0.1);
+    color: var(--accent);
+    border-left-color: var(--accent);
+    font-weight: 600;
   }
 
   /* TRACK RECORD TAB, added 2026-05-06 */
@@ -904,6 +989,7 @@
   <div class="title-row">
     <h1>MLB Betting Dashboard — <span class="date" id="todayDate">Loading…</span> <span class="badge-live">LIVE</span></h1>
     <div class="controls">
+      <button id="mobileMenuBtn" class="mobile-menu-btn" type="button" aria-label="Open menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
       <span class="status" id="status">Initializing…</span>
       <button class="split-toggle" id="splitToggle" title="Split screen: view two tabs side by side">⬜⬜ Split View</button>
       <button class="btn" id="refreshBtn">&#8635; Refresh All</button>
@@ -969,6 +1055,70 @@
   <button data-tab="yankees" style="color:#fff;background:linear-gradient(135deg,#0c2340,#1a3d6b);border-radius:6px 6px 0 0;">⭐ NYY</button>
   <button data-tab="games">All Games</button>
 </nav>
+
+<div id="mobileMenuBackdrop" class="mobile-menu-backdrop"></div>
+<aside id="mobileMenuPanel" class="mobile-menu-panel" aria-hidden="true">
+  <div class="mobile-menu-header">
+    <h3>Navigate</h3>
+    <button id="mobileMenuClose" type="button" aria-label="Close menu">&times;</button>
+  </div>
+
+  <div class="mobile-menu-section">
+    <h4>Overview</h4>
+    <button class="menu-tab" data-tab="overview">📊 Today's Slate</button>
+    <button class="menu-tab" data-tab="analysis">📝 Analysis</button>
+    <button class="menu-tab" data-tab="aiwizard">🧙 AI Wizard</button>
+    <button class="menu-tab" data-tab="value">💎 Value Bets</button>
+  </div>
+
+  <div class="mobile-menu-section">
+    <h4>💰 Picks</h4>
+    <button class="menu-tab" data-tab="bets">Top Bets</button>
+    <button class="menu-tab" data-tab="altparlay">🎯 Alt / Parlay</button>
+    <button class="menu-tab" data-tab="moneyline">Moneyline</button>
+    <button class="menu-tab" data-tab="runline">Run Line</button>
+    <button class="menu-tab" data-tab="totals">Totals</button>
+    <button class="menu-tab" data-tab="f5">F5 Overs</button>
+    <button class="menu-tab" data-tab="f5under">F5 Unders</button>
+  </div>
+
+  <div class="mobile-menu-section">
+    <h4>📊 Props</h4>
+    <button class="menu-tab" data-tab="kprops">Pitcher K Props</button>
+    <button class="menu-tab" data-tab="teamk">Team K Props</button>
+    <button class="menu-tab" data-tab="hitprops">Hit Props</button>
+    <button class="menu-tab" data-tab="erprops">SP Earned Runs</button>
+    <button class="menu-tab" data-tab="bbprops">SP Walk Props</button>
+    <button class="menu-tab" data-tab="hrprops">💣 HR Props</button>
+  </div>
+
+  <div class="mobile-menu-section">
+    <h4>🔥 Hot / Cold</h4>
+    <button class="menu-tab" data-tab="hotcold">Teams</button>
+    <button class="menu-tab" data-tab="hothitters">Hitters</button>
+    <button class="menu-tab" data-tab="spotlight">Yesterday's Stars</button>
+  </div>
+
+  <div class="mobile-menu-section">
+    <h4>🔬 Research</h4>
+    <button class="menu-tab" data-tab="matchups">Matchups</button>
+    <button class="menu-tab" data-tab="splits">Splits vs LHP / RHP</button>
+    <button class="menu-tab" data-tab="pitchers">Pitcher Analysis</button>
+    <button class="menu-tab" data-tab="bvp">Batter vs Pitcher</button>
+    <button class="menu-tab" data-tab="bullpen">Bullpen Usage</button>
+    <button class="menu-tab" data-tab="lineups">Lineups</button>
+    <button class="menu-tab" data-tab="weather">Weather / Parks</button>
+    <button class="menu-tab" data-tab="calibration">🎯 Calibration</button>
+  </div>
+
+  <div class="mobile-menu-section">
+    <h4>Other</h4>
+    <button class="menu-tab" data-tab="record">📈 Track Record</button>
+    <button class="menu-tab" data-tab="yankees">⭐ NYY</button>
+    <button class="menu-tab" data-tab="games">All Games</button>
+  </div>
+</aside>
+
 
 <div class="split-bar" id="splitBar">
   <span class="pane-label">Left Pane</span>
