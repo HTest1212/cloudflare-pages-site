@@ -1,0 +1,670 @@
+[
+  {
+    "asof": "2026-05-08T07:11:56Z",
+    "yesterday_date": "2026-05-06",
+    "record": {
+      "picks": 73,
+      "wins": 30,
+      "losses": 34,
+      "pushes": 2,
+      "voids": 7,
+      "units": 2.2655,
+      "win_rate": 46.88,
+      "roi": 3.54
+    },
+    "by_market": {
+      "F5_ML": {
+        "picks": 15,
+        "wins": 6,
+        "losses": 8,
+        "pushes": 1,
+        "voids": 0,
+        "units": 0.5,
+        "win_rate": 42.86,
+        "roi": 3.57
+      },
+      "Hits": {
+        "picks": 15,
+        "wins": 5,
+        "losses": 4,
+        "pushes": 0,
+        "voids": 6,
+        "units": 1.7,
+        "win_rate": 55.56,
+        "roi": 18.89
+      },
+      "K": {
+        "picks": 14,
+        "wins": 4,
+        "losses": 9,
+        "pushes": 0,
+        "voids": 1,
+        "units": -4.45,
+        "win_rate": 30.77,
+        "roi": -34.23
+      },
+      "ML": {
+        "picks": 14,
+        "wins": 6,
+        "losses": 8,
+        "pushes": 0,
+        "voids": 0,
+        "units": 0.62,
+        "win_rate": 42.86,
+        "roi": 4.43
+      },
+      "RL": {
+        "picks": 2,
+        "wins": 2,
+        "losses": 0,
+        "pushes": 0,
+        "voids": 0,
+        "units": 2.15,
+        "win_rate": 100.0,
+        "roi": 107.5
+      },
+      "Total": {
+        "picks": 13,
+        "wins": 7,
+        "losses": 5,
+        "pushes": 1,
+        "voids": 0,
+        "units": 1.7455,
+        "win_rate": 58.33,
+        "roi": 14.55
+      }
+    },
+    "by_tier": {
+      "B": {
+        "picks": 33,
+        "wins": 12,
+        "losses": 20,
+        "pushes": 1,
+        "voids": 0,
+        "units": -4.2827,
+        "win_rate": 37.5,
+        "roi": -13.38
+      },
+      "C": {
+        "picks": 9,
+        "wins": 4,
+        "losses": 4,
+        "pushes": 0,
+        "voids": 1,
+        "units": 0.4582,
+        "win_rate": 50.0,
+        "roi": 5.73
+      },
+      "watch": {
+        "picks": 31,
+        "wins": 14,
+        "losses": 10,
+        "pushes": 1,
+        "voids": 6,
+        "units": 6.09,
+        "win_rate": 58.33,
+        "roi": 25.37
+      }
+    },
+    "patterns_identified": [
+      {
+        "category": "STARTER_OVERRATED",
+        "frequency": 9,
+        "summary": "Pitcher K overs went 4-9 with ROI -34.23%, model overestimated K thresholds across the slate.",
+        "adjustment_rule": "Cap pitcher K thresholds 0.5 below market average and require 6+ projected innings before taking K over."
+      },
+      {
+        "category": "MODEL_ERROR",
+        "frequency": 20,
+        "summary": "B tier (high confidence) ROI -13.38% underperformed watch tier (25.37%); confidence calibration is inverted on this slate.",
+        "adjustment_rule": "Apply 5 point confidence haircut to B tier picks until 7 day rolling B tier ROI returns to positive."
+      },
+      {
+        "category": "LINEUP_CHANGE",
+        "frequency": 6,
+        "summary": "6 hitter props voided due to player not in lineup (likely scratched, IL, or roster mismatch).",
+        "adjustment_rule": "Confirm hitter is on active roster within 2 hours of first pitch before publishing Hits chips; haircut confidence by 10 if pulled from projected lineup."
+      },
+      {
+        "category": "STARTER_OVERRATED",
+        "frequency": 8,
+        "summary": "F5 ML lost 8 times \u2014 chosen starters trailed at the 5 inning mark too often.",
+        "adjustment_rule": "Cap F5 ML confidence at 60 when opposing starter has K rate above 25 percent or recent ERA under 3.50."
+      },
+      {
+        "category": "STARTER_REGRESSION",
+        "frequency": 8,
+        "summary": "8 losses tagged STARTER_REGRESSION, including blowup outings under 5 IP.",
+        "adjustment_rule": "Cap starter side confidence at 60 when the most recent start had 5 plus ER in 5 or fewer IP."
+      },
+      {
+        "category": "MISSED_NEWS",
+        "frequency": 6,
+        "summary": "Multiple Hits voids stem from 11:30 AM publish using projected lineups that did not match the actual lineup card.",
+        "adjustment_rule": "Add a lineup confirmation gate: publish Hits chips only after the official lineup post hits at first pitch minus 2 hours."
+      }
+    ],
+    "adjustments_generated": [
+      "Cap pitcher K thresholds 0.5 below market average and require 6+ projected innings before taking K over.",
+      "Apply 5 point confidence haircut to B tier picks until 7 day rolling B tier ROI returns to positive.",
+      "Confirm hitter is on active roster within 2 hours of first pitch before publishing Hits chips; haircut confidence by 10 if pulled from projected lineup.",
+      "Cap F5 ML confidence at 60 when opposing starter has K rate above 25 percent or recent ERA under 3.50.",
+      "Cap starter side confidence at 60 when the most recent start had 5 plus ER in 5 or fewer IP.",
+      "Add a lineup confirmation gate: publish Hits chips only after the official lineup post hits at first pitch minus 2 hours."
+    ],
+    "rules_dropped": [],
+    "diagnoses": [
+      {
+        "id": "20260506-824198-ML-1",
+        "market": "ML",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "Model called the side correctly: LAD 12 - HOU 2."
+      },
+      {
+        "id": "20260506-824198-K-2",
+        "market": "K",
+        "result": "loss",
+        "category": "STARTER_REGRESSION",
+        "diagnosis": "Pulled early after 1.0 IP, 1 ER \u2014 couldn't accumulate Ks."
+      },
+      {
+        "id": "20260506-824198-F5_ML-3",
+        "market": "F5_ML",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "F5 read correct: LAD 10 - HOU 1."
+      },
+      {
+        "id": "20260506-823550-ML-1",
+        "market": "ML",
+        "result": "loss",
+        "category": "STARTER_REGRESSION",
+        "diagnosis": "Starter regression drove the loss; chosen side outpitched on the day. Final TEX 6 - NYY 1."
+      },
+      {
+        "id": "20260506-823550-K-2",
+        "market": "K",
+        "result": "loss",
+        "category": "STARTER_REGRESSION",
+        "diagnosis": "Got rocked: 6 ER, 7 K in 4.0 IP, hook came early."
+      },
+      {
+        "id": "20260506-823550-F5_ML-3",
+        "market": "F5_ML",
+        "result": "loss",
+        "category": "STARTER_OVERRATED",
+        "diagnosis": "Chosen starter trailed at F5: TEX 6 - NYY 0."
+      },
+      {
+        "id": "20260506-823063-ML-1",
+        "market": "ML",
+        "result": "loss",
+        "category": "VARIANCE",
+        "diagnosis": "Side lost without a clear pitching collapse, narrative was thin: MIL 6 - STL 2."
+      },
+      {
+        "id": "20260506-823063-Total-2",
+        "market": "Total",
+        "result": "push",
+        "category": "VARIANCE",
+        "diagnosis": "Total pushed at 8."
+      },
+      {
+        "id": "20260506-823063-F5_ML-3",
+        "market": "F5_ML",
+        "result": "loss",
+        "category": "STARTER_OVERRATED",
+        "diagnosis": "Chosen starter trailed at F5: MIL 5 - STL 0."
+      },
+      {
+        "id": "20260506-823470-RL-1",
+        "market": "RL",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "Run line covered: final OAK 3 - PHI 6."
+      },
+      {
+        "id": "20260506-823470-K-2",
+        "market": "K",
+        "result": "loss",
+        "category": "STARTER_OVERRATED",
+        "diagnosis": "Stayed in but fell short: 4 K in 6.1 IP, contact-driven outing."
+      },
+      {
+        "id": "20260506-823470-F5_ML-3",
+        "market": "F5_ML",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "F5 read correct: OAK 1 - PHI 2."
+      },
+      {
+        "id": "20260506-824683-ML-1",
+        "market": "ML",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "Model called the side correctly: CIN 6 - CHC 7."
+      },
+      {
+        "id": "20260506-824683-Total-2",
+        "market": "Total",
+        "result": "loss",
+        "category": "BAD_PARK_READ",
+        "diagnosis": "Under busted at 13 runs; offense outproduced model."
+      },
+      {
+        "id": "20260506-824683-F5_ML-3",
+        "market": "F5_ML",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "F5 read correct: CIN 2 - CHC 4."
+      },
+      {
+        "id": "20260506-822985-ML-1",
+        "market": "ML",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "Model called the side correctly: TOR 0 - TB 3."
+      },
+      {
+        "id": "20260506-822985-Total-2",
+        "market": "Total",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "Total read correct: 3 runs."
+      },
+      {
+        "id": "20260506-822985-K-3",
+        "market": "K",
+        "result": "loss",
+        "category": "STARTER_OVERRATED",
+        "diagnosis": "Stayed in but fell short: 4 K in 5.2 IP, contact-driven outing."
+      },
+      {
+        "id": "20260506-823141-ML-1",
+        "market": "ML",
+        "result": "loss",
+        "category": "VARIANCE",
+        "diagnosis": "Side lost without a clear pitching collapse, narrative was thin: ATL 1 - SEA 3."
+      },
+      {
+        "id": "20260506-823141-Total-2",
+        "market": "Total",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "Total read correct: 4 runs."
+      },
+      {
+        "id": "20260506-823141-F5_ML-3",
+        "market": "F5_ML",
+        "result": "loss",
+        "category": "STARTER_OVERRATED",
+        "diagnosis": "Chosen starter trailed at F5: ATL 0 - SEA 1."
+      },
+      {
+        "id": "20260506-825091-ML-1",
+        "market": "ML",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "Model called the side correctly: PIT 1 - ARI 0."
+      },
+      {
+        "id": "20260506-825091-K-2",
+        "market": "K",
+        "result": "loss",
+        "category": "STARTER_OVERRATED",
+        "diagnosis": "Stayed in but fell short: 7 K in 8.0 IP, contact-driven outing."
+      },
+      {
+        "id": "20260506-825091-F5_ML-3",
+        "market": "F5_ML",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "F5 read correct: PIT 1 - ARI 0."
+      },
+      {
+        "id": "20260506-822740-ML-1",
+        "market": "ML",
+        "result": "loss",
+        "category": "STARTER_REGRESSION",
+        "diagnosis": "Starter regression drove the loss; chosen side outpitched on the day. Final MIN 2 - WSH 15."
+      },
+      {
+        "id": "20260506-822740-F5_ML-2",
+        "market": "F5_ML",
+        "result": "loss",
+        "category": "STARTER_OVERRATED",
+        "diagnosis": "Chosen starter trailed at F5: MIN 2 - WSH 3."
+      },
+      {
+        "id": "20260506-822740-K-3",
+        "market": "K",
+        "result": "loss",
+        "category": "STARTER_REGRESSION",
+        "diagnosis": "Got rocked: 5 ER, 3 K in 5.0 IP, hook came early."
+      },
+      {
+        "id": "20260506-824282-ML-1",
+        "market": "ML",
+        "result": "loss",
+        "category": "VARIANCE",
+        "diagnosis": "Side lost without a clear pitching collapse, narrative was thin: BOS 4 - DET 0."
+      },
+      {
+        "id": "20260506-824282-Total-2",
+        "market": "Total",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "Total read correct: 4 runs."
+      },
+      {
+        "id": "20260506-824282-F5_ML-3",
+        "market": "F5_ML",
+        "result": "loss",
+        "category": "STARTER_OVERRATED",
+        "diagnosis": "Chosen starter trailed at F5: BOS 4 - DET 0."
+      },
+      {
+        "id": "20260506-824118-ML-1",
+        "market": "ML",
+        "result": "loss",
+        "category": "VARIANCE",
+        "diagnosis": "Side lost without a clear pitching collapse, narrative was thin: CLE 3 - KC 1."
+      },
+      {
+        "id": "20260506-824118-K-2",
+        "market": "K",
+        "result": "loss",
+        "category": "STARTER_REGRESSION",
+        "diagnosis": "Pulled early after 3.0 IP, 0 ER \u2014 couldn't accumulate Ks."
+      },
+      {
+        "id": "20260506-824118-F5_ML-3",
+        "market": "F5_ML",
+        "result": "loss",
+        "category": "STARTER_OVERRATED",
+        "diagnosis": "Chosen starter trailed at F5: CLE 2 - KC 1."
+      },
+      {
+        "id": "20260506-822985-F5_ML-watch-1",
+        "market": "F5_ML",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "F5 read correct: TOR 0 - TB 2."
+      },
+      {
+        "id": "20260506-823550-Hits-watch-1",
+        "market": "Hits",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "Got the hit: 1 for 4."
+      },
+      {
+        "id": "20260506-823141-Hits-watch-1",
+        "market": "Hits",
+        "result": "void",
+        "category": "LINEUP_CHANGE",
+        "diagnosis": "Player did not appear (DNP/scratched/inactive); 11:30 AM card published before lineup confirmed."
+      },
+      {
+        "id": "20260506-823872-ML-1",
+        "market": "ML",
+        "result": "loss",
+        "category": "STARTER_REGRESSION",
+        "diagnosis": "Starter regression drove the loss; chosen side outpitched on the day. Final BAL 7 - MIA 4."
+      },
+      {
+        "id": "20260506-823872-K-2",
+        "market": "K",
+        "result": "void",
+        "category": "DATA_GAP",
+        "diagnosis": "No box score data for pitcher p\u00e9rez"
+      },
+      {
+        "id": "20260506-823872-Total-3",
+        "market": "Total",
+        "result": "loss",
+        "category": "BAD_PARK_READ",
+        "diagnosis": "Under busted at 11 runs; offense outproduced model."
+      },
+      {
+        "id": "20260506-824361-ML-1",
+        "market": "ML",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "Model called the side correctly: NYM 10 - COL 5."
+      },
+      {
+        "id": "20260506-824361-K-2",
+        "market": "K",
+        "result": "loss",
+        "category": "STARTER_OVERRATED",
+        "diagnosis": "Stayed in but fell short: 1 K in 5.0 IP, contact-driven outing."
+      },
+      {
+        "id": "20260506-824036-ML-1",
+        "market": "ML",
+        "result": "loss",
+        "category": "VARIANCE",
+        "diagnosis": "Side lost without a clear pitching collapse, narrative was thin: CWS 2 - LAA 8."
+      },
+      {
+        "id": "20260506-824036-Total-2",
+        "market": "Total",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "Total read correct: 10 runs."
+      },
+      {
+        "id": "20260506-824683-Hits-watch-1",
+        "market": "Hits",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "Got the hit: 2 for 3."
+      },
+      {
+        "id": "20260506-824118-Hits-watch-1",
+        "market": "Hits",
+        "result": "loss",
+        "category": "VARIANCE",
+        "diagnosis": "0 for 4, contact failed to find a hole."
+      },
+      {
+        "id": "20260506-824198-Hits-watch-1",
+        "market": "Hits",
+        "result": "void",
+        "category": "LINEUP_CHANGE",
+        "diagnosis": "Player did not appear (DNP/scratched/inactive); 11:30 AM card published before lineup confirmed."
+      },
+      {
+        "id": "20260506-822740-Hits-watch-1",
+        "market": "Hits",
+        "result": "loss",
+        "category": "VARIANCE",
+        "diagnosis": "0 for 3, contact failed to find a hole."
+      },
+      {
+        "id": "20260506-825091-Hits-watch-1",
+        "market": "Hits",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "Got the hit: 2 for 4."
+      },
+      {
+        "id": "20260506-823063-Hits-watch-2",
+        "market": "Hits",
+        "result": "void",
+        "category": "LINEUP_CHANGE",
+        "diagnosis": "Player did not appear (DNP/scratched/inactive); 11:30 AM card published before lineup confirmed."
+      },
+      {
+        "id": "20260506-824036-F5_ML-watch-1",
+        "market": "F5_ML",
+        "result": "loss",
+        "category": "STARTER_OVERRATED",
+        "diagnosis": "Chosen starter trailed at F5: CWS 1 - LAA 7."
+      },
+      {
+        "id": "20260506-824036-Hits-watch-2",
+        "market": "Hits",
+        "result": "void",
+        "category": "LINEUP_CHANGE",
+        "diagnosis": "Player did not appear (DNP/scratched/inactive); 11:30 AM card published before lineup confirmed."
+      },
+      {
+        "id": "20260506-824282-Hits-watch-1",
+        "market": "Hits",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "Got the hit: 2 for 4."
+      },
+      {
+        "id": "20260506-823226-ML-1",
+        "market": "ML",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "Model called the side correctly: SD 5 - SF 1."
+      },
+      {
+        "id": "20260506-823226-Total-2",
+        "market": "Total",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "Total read correct: 6 runs."
+      },
+      {
+        "id": "20260506-823063-K-watch-1",
+        "market": "K",
+        "result": "loss",
+        "category": "STARTER_REGRESSION",
+        "diagnosis": "Got rocked: 5 ER, 3 K in 6.0 IP, hook came early."
+      },
+      {
+        "id": "20260506-823470-Hits-watch-1",
+        "market": "Hits",
+        "result": "loss",
+        "category": "VARIANCE",
+        "diagnosis": "0 for 4, contact failed to find a hole."
+      },
+      {
+        "id": "20260506-823872-F5_ML-watch-1",
+        "market": "F5_ML",
+        "result": "loss",
+        "category": "STARTER_OVERRATED",
+        "diagnosis": "Chosen starter trailed at F5: BAL 5 - MIA 3."
+      },
+      {
+        "id": "20260506-824361-F5_ML-watch-1",
+        "market": "F5_ML",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "F5 read correct: NYM 4 - COL 0."
+      },
+      {
+        "id": "20260506-822985-Hits-watch-2",
+        "market": "Hits",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "Got the hit: 1 for 4."
+      },
+      {
+        "id": "20260506-823226-F5_ML-watch-1",
+        "market": "F5_ML",
+        "result": "push",
+        "category": "VARIANCE",
+        "diagnosis": "F5 tied 1-1, push."
+      },
+      {
+        "id": "20260506-823226-Hits-watch-2",
+        "market": "Hits",
+        "result": "loss",
+        "category": "VARIANCE",
+        "diagnosis": "0 for 3, contact failed to find a hole."
+      },
+      {
+        "id": "20260506-824282-K-watch-2",
+        "market": "K",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "Pitcher delivered: 10 K in 5.0 IP."
+      },
+      {
+        "id": "20260506-823872-Hits-watch-2",
+        "market": "Hits",
+        "result": "void",
+        "category": "LINEUP_CHANGE",
+        "diagnosis": "Player did not appear (DNP/scratched/inactive); 11:30 AM card published before lineup confirmed."
+      },
+      {
+        "id": "20260506-824361-Hits-watch-2",
+        "market": "Hits",
+        "result": "void",
+        "category": "LINEUP_CHANGE",
+        "diagnosis": "Player did not appear (DNP/scratched/inactive); 11:30 AM card published before lineup confirmed."
+      },
+      {
+        "id": "20260506-824198-RL-watch-2",
+        "market": "RL",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "Run line covered: final LAD 12 - HOU 2."
+      },
+      {
+        "id": "20260506-823141-K-watch-2",
+        "market": "K",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "Pitcher delivered: 9 K in 6.0 IP."
+      },
+      {
+        "id": "20260506-823470-Total-watch-2",
+        "market": "Total",
+        "result": "loss",
+        "category": "VARIANCE",
+        "diagnosis": "Total missed by 1-2 runs: 9 ran vs line in pick."
+      },
+      {
+        "id": "20260506-822740-Total-watch-2",
+        "market": "Total",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "Total read correct: 17 runs."
+      },
+      {
+        "id": "20260506-823550-K-watch-2",
+        "market": "K",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "Pitcher delivered: 8 K in 8.0 IP."
+      },
+      {
+        "id": "20260506-824683-K-watch-2",
+        "market": "K",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "Pitcher delivered: 5 K in 5.1 IP."
+      },
+      {
+        "id": "20260506-824118-Total-watch-2",
+        "market": "Total",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "Total read correct: 4 runs."
+      },
+      {
+        "id": "20260506-825091-Total-watch-2",
+        "market": "Total",
+        "result": "loss",
+        "category": "BAD_PARK_READ",
+        "diagnosis": "Over fell short at 1 runs."
+      },
+      {
+        "id": "20260506-824361-Total-watch-3",
+        "market": "Total",
+        "result": "loss",
+        "category": "BAD_PARK_READ",
+        "diagnosis": "Under busted at 15 runs; offense outproduced model."
+      }
+    ]
+  }
+]

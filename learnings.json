@@ -1,0 +1,175 @@
+{
+  "asof": "2026-05-08T07:11:56Z",
+  "yesterday_date": "2026-05-06",
+  "yesterday_record": {
+    "picks": 73,
+    "wins": 30,
+    "losses": 34,
+    "pushes": 2,
+    "voids": 7,
+    "units": 2.2655,
+    "win_rate": 46.88,
+    "roi": 3.54
+  },
+  "by_market": {
+    "F5_ML": {
+      "picks": 15,
+      "wins": 6,
+      "losses": 8,
+      "pushes": 1,
+      "voids": 0,
+      "units": 0.5,
+      "win_rate": 42.86,
+      "roi": 3.57
+    },
+    "Hits": {
+      "picks": 15,
+      "wins": 5,
+      "losses": 4,
+      "pushes": 0,
+      "voids": 6,
+      "units": 1.7,
+      "win_rate": 55.56,
+      "roi": 18.89
+    },
+    "K": {
+      "picks": 14,
+      "wins": 4,
+      "losses": 9,
+      "pushes": 0,
+      "voids": 1,
+      "units": -4.45,
+      "win_rate": 30.77,
+      "roi": -34.23
+    },
+    "ML": {
+      "picks": 14,
+      "wins": 6,
+      "losses": 8,
+      "pushes": 0,
+      "voids": 0,
+      "units": 0.62,
+      "win_rate": 42.86,
+      "roi": 4.43
+    },
+    "RL": {
+      "picks": 2,
+      "wins": 2,
+      "losses": 0,
+      "pushes": 0,
+      "voids": 0,
+      "units": 2.15,
+      "win_rate": 100.0,
+      "roi": 107.5
+    },
+    "Total": {
+      "picks": 13,
+      "wins": 7,
+      "losses": 5,
+      "pushes": 1,
+      "voids": 0,
+      "units": 1.7455,
+      "win_rate": 58.33,
+      "roi": 14.55
+    }
+  },
+  "by_tier": {
+    "B": {
+      "picks": 33,
+      "wins": 12,
+      "losses": 20,
+      "pushes": 1,
+      "voids": 0,
+      "units": -4.2827,
+      "win_rate": 37.5,
+      "roi": -13.38
+    },
+    "C": {
+      "picks": 9,
+      "wins": 4,
+      "losses": 4,
+      "pushes": 0,
+      "voids": 1,
+      "units": 0.4582,
+      "win_rate": 50.0,
+      "roi": 5.73
+    },
+    "watch": {
+      "picks": 31,
+      "wins": 14,
+      "losses": 10,
+      "pushes": 1,
+      "voids": 6,
+      "units": 6.09,
+      "win_rate": 58.33,
+      "roi": 25.37
+    }
+  },
+  "loss_categories": {
+    "STARTER_REGRESSION": 8,
+    "STARTER_OVERRATED": 12,
+    "VARIANCE": 10,
+    "BAD_PARK_READ": 4
+  },
+  "win_categories": {
+    "NARRATIVE_CORRECT": 30
+  },
+  "patterns_identified": [
+    {
+      "category": "STARTER_OVERRATED",
+      "frequency": 9,
+      "summary": "Pitcher K overs went 4-9 with ROI -34.23%, model overestimated K thresholds across the slate.",
+      "adjustment_rule": "Cap pitcher K thresholds 0.5 below market average and require 6+ projected innings before taking K over."
+    },
+    {
+      "category": "MODEL_ERROR",
+      "frequency": 20,
+      "summary": "B tier (high confidence) ROI -13.38% underperformed watch tier (25.37%); confidence calibration is inverted on this slate.",
+      "adjustment_rule": "Apply 5 point confidence haircut to B tier picks until 7 day rolling B tier ROI returns to positive."
+    },
+    {
+      "category": "LINEUP_CHANGE",
+      "frequency": 6,
+      "summary": "6 hitter props voided due to player not in lineup (likely scratched, IL, or roster mismatch).",
+      "adjustment_rule": "Confirm hitter is on active roster within 2 hours of first pitch before publishing Hits chips; haircut confidence by 10 if pulled from projected lineup."
+    },
+    {
+      "category": "STARTER_OVERRATED",
+      "frequency": 8,
+      "summary": "F5 ML lost 8 times \u2014 chosen starters trailed at the 5 inning mark too often.",
+      "adjustment_rule": "Cap F5 ML confidence at 60 when opposing starter has K rate above 25 percent or recent ERA under 3.50."
+    },
+    {
+      "category": "STARTER_REGRESSION",
+      "frequency": 8,
+      "summary": "8 losses tagged STARTER_REGRESSION, including blowup outings under 5 IP.",
+      "adjustment_rule": "Cap starter side confidence at 60 when the most recent start had 5 plus ER in 5 or fewer IP."
+    },
+    {
+      "category": "MISSED_NEWS",
+      "frequency": 6,
+      "summary": "Multiple Hits voids stem from 11:30 AM publish using projected lineups that did not match the actual lineup card.",
+      "adjustment_rule": "Add a lineup confirmation gate: publish Hits chips only after the official lineup post hits at first pitch minus 2 hours."
+    }
+  ],
+  "adjustments_for_today": [
+    "Cap pitcher K thresholds 0.5 below market average and require 6+ projected innings before taking K over.",
+    "Apply 5 point confidence haircut to B tier picks until 7 day rolling B tier ROI returns to positive.",
+    "Confirm hitter is on active roster within 2 hours of first pitch before publishing Hits chips; haircut confidence by 10 if pulled from projected lineup.",
+    "Cap F5 ML confidence at 60 when opposing starter has K rate above 25 percent or recent ERA under 3.50.",
+    "Cap starter side confidence at 60 when the most recent start had 5 plus ER in 5 or fewer IP.",
+    "Add a lineup confirmation gate: publish Hits chips only after the official lineup post hits at first pitch minus 2 hours."
+  ],
+  "monitoring_list": [
+    "K market ROI is deeply negative; track another 3 days before lifting the threshold cap.",
+    "6 Hits voids today \u2014 lineup confirmation pipeline needs work."
+  ],
+  "carryover_rules": [
+    "Cap pitcher K thresholds 0.5 below market average and require 6+ projected innings before taking K over.",
+    "Apply 5 point confidence haircut to B tier picks until 7 day rolling B tier ROI returns to positive.",
+    "Confirm hitter is on active roster within 2 hours of first pitch before publishing Hits chips; haircut confidence by 10 if pulled from projected lineup.",
+    "Cap F5 ML confidence at 60 when opposing starter has K rate above 25 percent or recent ERA under 3.50.",
+    "Cap starter side confidence at 60 when the most recent start had 5 plus ER in 5 or fewer IP.",
+    "Add a lineup confirmation gate: publish Hits chips only after the official lineup post hits at first pitch minus 2 hours."
+  ]
+}
