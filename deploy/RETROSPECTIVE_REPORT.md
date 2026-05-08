@@ -1,73 +1,131 @@
-# Daily Retrospective — 2026-05-06
-_Generated 2026-05-08T07:11:56Z_
+# Daily Retrospective Report  2026 05 07
+
+Generated: 2026-05-08T07:24:34Z
+
 ## Slate Summary
-Total games on slate: 15
-Picks logged: 73
-Record: 30 W, 34 L, 2 P, 7 V
-Units: +2.27, ROI: +3.54%, Win rate (decided): 46.9%
+
+Yesterday slate date: 2026-05-07. Total games settled: 10.
+
+Pick count: 52. Record: 30 W, 16 L, 2 P, 4 V. Units: +12.99. Win rate: 65.22%. ROI: 27.05%.
 
 ## By Market
-- F5_ML: 6-8-1 (V:0), units +0.50, ROI +3.57%
-- Hits: 5-4-0 (V:6), units +1.70, ROI +18.89%
-- K: 4-9-0 (V:1), units -4.45, ROI -34.23%
-- ML: 6-8-0 (V:0), units +0.62, ROI +4.43%
-- RL: 2-0-0 (V:0), units +2.15, ROI +107.50%
-- Total: 7-5-1 (V:0), units +1.75, ROI +14.55%
+
+| Market | Picks | W | L | P | V | Units | Win % | ROI |
+|--------|------:|--:|--:|--:|--:|------:|------:|----:|
+| F5_ML | 10 | 6 | 2 | 2 | 0 | +5.08 | 75.0% | 50.8% |
+| Hits | 10 | 5 | 1 | 0 | 4 | +3.55 | 83.33% | 59.09% |
+| K | 10 | 3 | 7 | 0 | 0 | -4.50 | 30.0% | -45.0% |
+| ML | 11 | 6 | 5 | 0 | 0 | +0.26 | 54.55% | 2.35% |
+| RL | 1 | 1 | 0 | 0 | 0 | +1.42 | 100.0% | 142.0% |
+| Total | 10 | 9 | 1 | 0 | 0 | +7.18 | 90.0% | 71.82% |
 
 ## By Tier
-- B: 12-20-1 (V:0), units -4.28, ROI -13.38%
-- C: 4-4-0 (V:1), units +0.46, ROI +5.73%
-- watch: 14-10-1 (V:6), units +6.09, ROI +25.37%
+
+| Tier | Picks | W | L | P | V | Units | Win % | ROI |
+|------|------:|--:|--:|--:|--:|------:|------:|----:|
+| B | 18 | 12 | 6 | 0 | 0 | +4.56 | 66.67% | 25.34% |
+| C | 9 | 4 | 5 | 0 | 0 | -1.44 | 44.44% | -15.99% |
+| watch | 25 | 14 | 5 | 2 | 4 | +9.86 | 73.68% | 46.97% |
+
+## Loss Categories
+
+- VARIANCE: 7
+- STARTER_OVERRATED: 7
+- STARTER_REGRESSION: 2
 
 ## Top 3 Losses
-- **20260506-824198-K-2** — K | Glasnow K over 7.5 (conf 84, tier B)
-  - Final: 12-2
-  - Diagnosis: Pulled early after 1.0 IP, 1 ER — couldn't accumulate Ks.
-  - Category: **STARTER_REGRESSION**
-- **20260506-823550-ML-1** — ML | Yankees ML 160 to 180 (conf 84, tier B)
-  - Final: 6-1
-  - Diagnosis: Starter regression drove the loss; chosen side outpitched on the day. Final TEX 6 - NYY 1.
-  - Category: **STARTER_REGRESSION**
-- **20260506-823550-K-2** — K | Warren K over 7.5 (conf 84, tier B)
-  - Final: 6-1
-  - Diagnosis: Got rocked: 6 ER, 7 K in 4.0 IP, hook came early.
-  - Category: **STARTER_REGRESSION**
+
+### 1. 20260507-823306-ML-1 . ML . Padres ML minus 145 to minus 160
+
+Tier B, confidence 84. Final score: away 2, home 1. Result: loss, profit -1.00u.
+
+Diagnosis: SD lost 2-1; offense did not produce as projected.
+
+Category: VARIANCE.
+
+### 2. 20260507-823306-K-3 . K . King K over 6.5
+
+Tier B, confidence 84. Final score: away 2, home 1. Result: loss, profit -1.00u.
+
+Diagnosis: Michael King: 6.0 IP, 6 K, 1 ER (line over 6.5).
+
+Category: STARTER_OVERRATED.
+
+### 3. 20260507-823870-K-3 . K . Meyer K over 6.5
+
+Tier B, confidence 80. Final score: away 3, home 4. Result: loss, profit -1.00u.
+
+Diagnosis: Max Meyer: 5.0 IP, 5 K, 2 ER (line over 6.5).
+
+Category: STARTER_OVERRATED.
 
 ## Patterns Identified
-- **STARTER_OVERRATED** (x9): Pitcher K overs went 4-9 with ROI -34.23%, model overestimated K thresholds across the slate.
-  - Rule: Cap pitcher K thresholds 0.5 below market average and require 6+ projected innings before taking K over.
-- **MODEL_ERROR** (x20): B tier (high confidence) ROI -13.38% underperformed watch tier (25.37%); confidence calibration is inverted on this slate.
-  - Rule: Apply 5 point confidence haircut to B tier picks until 7 day rolling B tier ROI returns to positive.
-- **LINEUP_CHANGE** (x6): 6 hitter props voided due to player not in lineup (likely scratched, IL, or roster mismatch).
-  - Rule: Confirm hitter is on active roster within 2 hours of first pitch before publishing Hits chips; haircut confidence by 10 if pulled from projected lineup.
-- **STARTER_OVERRATED** (x8): F5 ML lost 8 times — chosen starters trailed at the 5 inning mark too often.
-  - Rule: Cap F5 ML confidence at 60 when opposing starter has K rate above 25 percent or recent ERA under 3.50.
-- **STARTER_REGRESSION** (x8): 8 losses tagged STARTER_REGRESSION, including blowup outings under 5 IP.
-  - Rule: Cap starter side confidence at 60 when the most recent start had 5 plus ER in 5 or fewer IP.
-- **MISSED_NEWS** (x6): Multiple Hits voids stem from 11:30 AM publish using projected lineups that did not match the actual lineup card.
-  - Rule: Add a lineup confirmation gate: publish Hits chips only after the official lineup post hits at first pitch minus 2 hours.
 
-## Adjustments For Today
-- Cap pitcher K thresholds 0.5 below market average and require 6+ projected innings before taking K over.
-- Apply 5 point confidence haircut to B tier picks until 7 day rolling B tier ROI returns to positive.
-- Confirm hitter is on active roster within 2 hours of first pitch before publishing Hits chips; haircut confidence by 10 if pulled from projected lineup.
+### STARTER_OVERRATED . frequency 6
+
+K market went 3-7 ROI -45.0%; chosen starters fell short of K thresholds 6 times. Pattern continues from yesterday.
+
+Rule: Cap pitcher K thresholds 0.5 below market average and require projected 6 plus innings AND a recent start with 7 plus Ks before taking K over.
+
+### STARTER_OVERRATED . frequency 2
+
+F5 ML lost 2 times; chosen starters trailed at the 5 inning mark.
+
+Rule: Cap F5 ML confidence at 60 when opposing starter has K rate above 25 percent or recent ERA under 3.50.
+
+### LINEUP_CHANGE . frequency 4
+
+4 hitter props voided due to player not in lineup or assigned to the wrong gamePk (Suzuki DNP, Devers absent, Chisholm wrong game, Doyle DNP).
+
+Rule: Verify the picked hitter is on the actual gamePk roster within 90 minutes of first pitch; do not publish Hits chips before lineup confirmation.
+
+### MODEL_ERROR . frequency 18
+
+B tier ROI rebounded to 25.34% (W12 L6); confidence calibration looks healthier today.
+
+Rule: Lift the 5 point B tier confidence haircut once 7 day rolling B tier ROI is back above plus 5 percent (today's B tier delivered).
+
+### MISSED_NEWS . frequency 2
+
+Hits chips referenced players not on the gamePk roster (Devers, Chisholm). Pick generation is mapping the wrong batter to the wrong game.
+
+Rule: Validate every Hitter prop pick by checking the player ID against the gamePk team roster from the MLB API before publishing.
+
+### BAD_PARK_READ . frequency 1
+
+Coors F5 ML lost again; cold weather Coors model kept undershooting how late the home offense lights up.
+
+Rule: Do not take F5 ML on the visiting team at Coors when the home pitcher has a track record of escaping the first 5 with limited damage; Coors edges accumulate after the 5th.
+
+## Adjustments for Today (the 11:30 AM run will apply these)
+
+- Cap pitcher K thresholds 0.5 below market average and require projected 6 plus innings AND a recent start with 7 plus Ks before taking K over.
 - Cap F5 ML confidence at 60 when opposing starter has K rate above 25 percent or recent ERA under 3.50.
+- Verify the picked hitter is on the actual gamePk roster within 90 minutes of first pitch; do not publish Hits chips before lineup confirmation.
+- Lift the 5 point B tier confidence haircut once 7 day rolling B tier ROI is back above plus 5 percent (today's B tier delivered).
+- Validate every Hitter prop pick by checking the player ID against the gamePk team roster from the MLB API before publishing.
+- Do not take F5 ML on the visiting team at Coors when the home pitcher has a track record of escaping the first 5 with limited damage; Coors edges accumulate after the 5th.
+- Cap pitcher K thresholds 0.5 below market average and require 6+ projected innings before taking K over.
+- Confirm hitter is on active roster within 2 hours of first pitch before publishing Hits chips; haircut confidence by 10 if pulled from projected lineup.
 - Cap starter side confidence at 60 when the most recent start had 5 plus ER in 5 or fewer IP.
 - Add a lineup confirmation gate: publish Hits chips only after the official lineup post hits at first pitch minus 2 hours.
 
-## Loss Category Breakdown
-- STARTER_OVERRATED: 12
-- VARIANCE: 10
-- STARTER_REGRESSION: 8
-- BAD_PARK_READ: 4
+## Monitoring List
 
-## Lifetime KPIs (single day so far)
-- Picks: 73
-- Units: +2.27
-- ROI: +3.54%
-- Win rate: 46.9%
+- K market: today 3 wins, 7 losses (-45.0% ROI). Trend after two days of overrated K props is stabilizing; track 3 more days before lifting the confidence haircut.
+- Hitter Hits voids: 4 today (Suzuki, Devers, Chisholm, Doyle). Pre publish lineup gate is still leaking.
+- Coors F5 ML on visiting team: lost again. Reconsider F5 ML edges at Coors specifically.
 
-## Notes
-- The 2026-05-07 slate had no picks logged in picks_log.json; this retrospective settles 2026-05-06 picks that the previous run missed.
-- 6 hitter Hits chips voided due to projected lineup mismatch with the official card.
-- Mookie Betts, Lars Nootbaar, Ronald Acuña Jr., Jazz Chisholm Jr., Pete Alonso, and Luis Robert Jr. were all named in picks but did not appear in their team boxscores.
+## Lifetime KPIs
+
+Picks 125, wins 60, losses 50, pushes 4, voids 11. Units +15.25. Win rate 54.55%. ROI 13.38%.
+
+## Recent 14 Day KPIs
+
+Picks 125, wins 60, losses 50. Units +15.25. ROI 13.38%.
+
+## Data Gaps and Notes
+
+- 4 voids logged: 2 LINEUP_CHANGE (Seiya Suzuki and Brenton Doyle did not bat), 2 MISSED_NEWS (Devers and Chisholm Hits chips referenced players not on the actual gamePk roster).
+- 2 F5 ML pushes logged where the F5 score was tied (STL/SD 1-1 and TB/BOS 3-3).
+- All 10 games reached Final status; no postponements or live games on yesterday's slate.

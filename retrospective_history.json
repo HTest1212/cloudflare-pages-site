@@ -666,5 +666,476 @@
         "diagnosis": "Under busted at 15 runs; offense outproduced model."
       }
     ]
+  },
+  {
+    "asof": "2026-05-08T07:23:59Z",
+    "yesterday_date": "2026-05-07",
+    "record": {
+      "picks": 52,
+      "wins": 30,
+      "losses": 16,
+      "pushes": 2,
+      "voids": 4,
+      "units": 12.9856,
+      "win_rate": 65.22,
+      "roi": 27.05
+    },
+    "by_market": {
+      "F5_ML": {
+        "picks": 10,
+        "wins": 6,
+        "losses": 2,
+        "pushes": 2,
+        "voids": 0,
+        "units": 5.0799,
+        "win_rate": 75.0,
+        "roi": 50.8
+      },
+      "Hits": {
+        "picks": 10,
+        "wins": 5,
+        "losses": 1,
+        "pushes": 0,
+        "voids": 4,
+        "units": 3.5455,
+        "win_rate": 83.33,
+        "roi": 59.09
+      },
+      "K": {
+        "picks": 10,
+        "wins": 3,
+        "losses": 7,
+        "pushes": 0,
+        "voids": 0,
+        "units": -4.5001,
+        "win_rate": 30.0,
+        "roi": -45.0
+      },
+      "ML": {
+        "picks": 11,
+        "wins": 6,
+        "losses": 5,
+        "pushes": 0,
+        "voids": 0,
+        "units": 0.2584,
+        "win_rate": 54.55,
+        "roi": 2.35
+      },
+      "RL": {
+        "picks": 1,
+        "wins": 1,
+        "losses": 0,
+        "pushes": 0,
+        "voids": 0,
+        "units": 1.42,
+        "win_rate": 100.0,
+        "roi": 142.0
+      },
+      "Total": {
+        "picks": 10,
+        "wins": 9,
+        "losses": 1,
+        "pushes": 0,
+        "voids": 0,
+        "units": 7.1819,
+        "win_rate": 90.0,
+        "roi": 71.82
+      }
+    },
+    "by_tier": {
+      "B": {
+        "picks": 18,
+        "wins": 12,
+        "losses": 6,
+        "pushes": 0,
+        "voids": 0,
+        "units": 4.5614,
+        "win_rate": 66.67,
+        "roi": 25.34
+      },
+      "C": {
+        "picks": 9,
+        "wins": 4,
+        "losses": 5,
+        "pushes": 0,
+        "voids": 0,
+        "units": -1.4394,
+        "win_rate": 44.44,
+        "roi": -15.99
+      },
+      "watch": {
+        "picks": 25,
+        "wins": 14,
+        "losses": 5,
+        "pushes": 2,
+        "voids": 4,
+        "units": 9.8636,
+        "win_rate": 73.68,
+        "roi": 46.97
+      }
+    },
+    "patterns_identified": [
+      {
+        "category": "STARTER_OVERRATED",
+        "frequency": 6,
+        "summary": "K market went 3-7 ROI -45.0%; chosen starters fell short of K thresholds 6 times. Pattern continues from yesterday.",
+        "adjustment_rule": "Cap pitcher K thresholds 0.5 below market average and require projected 6 plus innings AND a recent start with 7 plus Ks before taking K over."
+      },
+      {
+        "category": "STARTER_OVERRATED",
+        "frequency": 2,
+        "summary": "F5 ML lost 2 times; chosen starters trailed at the 5 inning mark.",
+        "adjustment_rule": "Cap F5 ML confidence at 60 when opposing starter has K rate above 25 percent or recent ERA under 3.50."
+      },
+      {
+        "category": "LINEUP_CHANGE",
+        "frequency": 4,
+        "summary": "4 hitter props voided due to player not in lineup or assigned to the wrong gamePk (Suzuki DNP, Devers absent, Chisholm wrong game, Doyle DNP).",
+        "adjustment_rule": "Verify the picked hitter is on the actual gamePk roster within 90 minutes of first pitch; do not publish Hits chips before lineup confirmation."
+      },
+      {
+        "category": "MODEL_ERROR",
+        "frequency": 18,
+        "summary": "B tier ROI rebounded to 25.34% (W12 L6); confidence calibration looks healthier today.",
+        "adjustment_rule": "Lift the 5 point B tier confidence haircut once 7 day rolling B tier ROI is back above plus 5 percent (today's B tier delivered)."
+      },
+      {
+        "category": "MISSED_NEWS",
+        "frequency": 2,
+        "summary": "Hits chips referenced players not on the gamePk roster (Devers, Chisholm). Pick generation is mapping the wrong batter to the wrong game.",
+        "adjustment_rule": "Validate every Hitter prop pick by checking the player ID against the gamePk team roster from the MLB API before publishing."
+      },
+      {
+        "category": "BAD_PARK_READ",
+        "frequency": 1,
+        "summary": "Coors F5 ML lost again; cold weather Coors model kept undershooting how late the home offense lights up.",
+        "adjustment_rule": "Do not take F5 ML on the visiting team at Coors when the home pitcher has a track record of escaping the first 5 with limited damage; Coors edges accumulate after the 5th."
+      }
+    ],
+    "adjustments_generated": [
+      "Cap pitcher K thresholds 0.5 below market average and require projected 6 plus innings AND a recent start with 7 plus Ks before taking K over.",
+      "Cap F5 ML confidence at 60 when opposing starter has K rate above 25 percent or recent ERA under 3.50.",
+      "Verify the picked hitter is on the actual gamePk roster within 90 minutes of first pitch; do not publish Hits chips before lineup confirmation.",
+      "Lift the 5 point B tier confidence haircut once 7 day rolling B tier ROI is back above plus 5 percent (today's B tier delivered).",
+      "Validate every Hitter prop pick by checking the player ID against the gamePk team roster from the MLB API before publishing.",
+      "Do not take F5 ML on the visiting team at Coors when the home pitcher has a track record of escaping the first 5 with limited damage; Coors edges accumulate after the 5th."
+    ],
+    "rules_dropped": [
+      "Apply 5 point confidence haircut to B tier picks until 7 day rolling B tier ROI returns to positive."
+    ],
+    "diagnoses": [
+      {
+        "id": "20260507-823306-ML-1",
+        "result": "loss",
+        "category": "VARIANCE",
+        "diagnosis": "SD lost 2-1; offense did not produce as projected."
+      },
+      {
+        "id": "20260507-823306-Total-2",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "Total was 3; under 8.0 cashed by 5.0 runs."
+      },
+      {
+        "id": "20260507-823306-K-3",
+        "result": "loss",
+        "category": "STARTER_OVERRATED",
+        "diagnosis": "Michael King: 6.0 IP, 6 K, 1 ER (line over 6.5)."
+      },
+      {
+        "id": "20260507-824681-ML-1",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "CHC dominated as projected, won 3-8; model called the side correctly."
+      },
+      {
+        "id": "20260507-824681-Total-2",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "Total was 11; over 9.0 cashed by 2.0 runs."
+      },
+      {
+        "id": "20260507-824681-K-3",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "Shota Imanaga: 6.0 IP, 10 K, 1 ER (line over 6.5)."
+      },
+      {
+        "id": "20260507-823467-ML-1",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "OAK dominated as projected, won 12-1; model called the side correctly."
+      },
+      {
+        "id": "20260507-823467-Total-2",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "Total was 13; over 9.5 cashed by 3.5 runs."
+      },
+      {
+        "id": "20260507-823467-K-3",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "J.T. Ginn: 8.0 IP, 8 K, 1 ER (line over 5.5)."
+      },
+      {
+        "id": "20260507-823870-ML-1",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "MIA won 3-4 as projected."
+      },
+      {
+        "id": "20260507-823870-Total-2",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "Total was 7; under 7.5 cashed by 0.5 runs."
+      },
+      {
+        "id": "20260507-823870-K-3",
+        "result": "loss",
+        "category": "STARTER_OVERRATED",
+        "diagnosis": "Max Meyer: 5.0 IP, 5 K, 2 ER (line over 6.5)."
+      },
+      {
+        "id": "20260507-822741-ML-1",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "WSH won 5-7 as projected."
+      },
+      {
+        "id": "20260507-822741-Total-2",
+        "result": "loss",
+        "category": "VARIANCE",
+        "diagnosis": "Total was 12; under 9.0 lost by 3.0 runs."
+      },
+      {
+        "id": "20260507-822741-K-3",
+        "result": "loss",
+        "category": "STARTER_OVERRATED",
+        "diagnosis": "Jake Irvin: 5.0 IP, 2 K, 4 ER (line over 5.5)."
+      },
+      {
+        "id": "20260507-825090-ML-1",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "PIT won 4-2 as projected."
+      },
+      {
+        "id": "20260507-825090-Total-2",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "Total was 6; under 8.0 cashed by 2.0 runs."
+      },
+      {
+        "id": "20260507-825090-K-3",
+        "result": "loss",
+        "category": "STARTER_OVERRATED",
+        "diagnosis": "Mitch Keller: 6.0 IP, 4 K, 2 ER (line over 5.5)."
+      },
+      {
+        "id": "20260507-824681-F5_ML-watch-4",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "F5 score CIN 0 - CHC 8; CHC F5 win."
+      },
+      {
+        "id": "20260507-824681-Hits-watch-5",
+        "result": "void",
+        "category": "LINEUP_CHANGE",
+        "diagnosis": "Seiya Suzuki did not bat (DNP/scratched)."
+      },
+      {
+        "id": "20260507-823306-F5_ML-watch-4",
+        "result": "push",
+        "category": "VARIANCE",
+        "diagnosis": "F5 score STL 1 - SD 1; SD F5 push."
+      },
+      {
+        "id": "20260507-822741-F5_ML-watch-4",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "F5 score MIN 3 - WSH 5; WSH F5 win."
+      },
+      {
+        "id": "20260507-824117-ML-1",
+        "result": "loss",
+        "category": "VARIANCE",
+        "diagnosis": "KC lost 8-5; offense did not produce as projected."
+      },
+      {
+        "id": "20260507-824117-K-2",
+        "result": "loss",
+        "category": "STARTER_REGRESSION",
+        "diagnosis": "Seth Lugo: 4.0 IP, 5 K, 4 ER (line over 5.5)."
+      },
+      {
+        "id": "20260507-823467-F5_ML-watch-4",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "F5 score OAK 10 - PHI 1; OAK F5 win."
+      },
+      {
+        "id": "20260507-823870-F5_ML-watch-4",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "F5 score BAL 1 - MIA 3; MIA F5 win."
+      },
+      {
+        "id": "20260507-824117-F5_ML-watch-3",
+        "result": "loss",
+        "category": "STARTER_REGRESSION",
+        "diagnosis": "F5 score CLE 4 - KC 1; KC F5 loss."
+      },
+      {
+        "id": "20260507-824117-Hits-watch-4",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "Bobby Witt Jr.: 4 AB, 4 H, 7 TB; line over 1.5 tb."
+      },
+      {
+        "id": "20260507-825090-F5_ML-watch-4",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "F5 score PIT 3 - ARI 2; PIT F5 win."
+      },
+      {
+        "id": "20260507-824767-Hits-watch-5",
+        "result": "void",
+        "category": "MISSED_NEWS",
+        "diagnosis": "Devers not on roster for this game (likely scratched or wrong gamePk)"
+      },
+      {
+        "id": "20260507-823306-Hits-watch-5",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "Fernando Tatis Jr.: 3 AB, 2 H, 2 TB; line over 0.5 hits."
+      },
+      {
+        "id": "20260507-822741-Hits-watch-5",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "James Wood: 2 AB, 1 H, 2 TB; line over 0.5 hits."
+      },
+      {
+        "id": "20260507-823467-Hits-watch-5",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "Brent Rooker: 4 AB, 2 H, 5 TB; line over 0.5 hits."
+      },
+      {
+        "id": "20260507-823551-ML-1",
+        "result": "loss",
+        "category": "VARIANCE",
+        "diagnosis": "TEX lost 2-9; offense did not produce as projected."
+      },
+      {
+        "id": "20260507-823551-Total-2",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "Total was 11; over 9.0 cashed by 2.0 runs."
+      },
+      {
+        "id": "20260507-823551-K-3",
+        "result": "loss",
+        "category": "STARTER_OVERRATED",
+        "diagnosis": "MacKenzie Gore: 5.1 IP, 3 K, 5 ER (line over 6.5)."
+      },
+      {
+        "id": "20260507-823551-Hits-watch-4",
+        "result": "loss",
+        "category": "VARIANCE",
+        "diagnosis": "Aaron Judge: 5 AB, 1 H, 1 TB; line over 1.5 tb."
+      },
+      {
+        "id": "20260507-825090-Hits-watch-5",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "Corbin Carroll: 4 AB, 2 H, 5 TB; line over 0.5 hits."
+      },
+      {
+        "id": "20260507-823870-Hits-watch-5",
+        "result": "void",
+        "category": "MISSED_NEWS",
+        "diagnosis": "Chisholm not on roster for this game (likely scratched or wrong gamePk)"
+      },
+      {
+        "id": "20260507-824767-Total-1",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "Total was 12; over 9.5 cashed by 2.5 runs."
+      },
+      {
+        "id": "20260507-824767-K-2",
+        "result": "loss",
+        "category": "STARTER_OVERRATED",
+        "diagnosis": "Griffin Jax: 4.0 IP, 3 K, 2 ER (line over 4.5)."
+      },
+      {
+        "id": "20260507-823551-F5_ML-watch-5",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "F5 score TEX 2 - NYY 1; TEX F5 win."
+      },
+      {
+        "id": "20260507-823551-ML-watch-6",
+        "result": "loss",
+        "category": "VARIANCE",
+        "diagnosis": "TEX lost 2-9; offense did not produce as projected."
+      },
+      {
+        "id": "20260507-824362-Hits-watch-4",
+        "result": "void",
+        "category": "LINEUP_CHANGE",
+        "diagnosis": "Brenton Doyle did not bat (DNP/scratched)."
+      },
+      {
+        "id": "20260507-824681-RL-watch-6",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "CHC margin was +5; covered minus 1.5."
+      },
+      {
+        "id": "20260507-824767-ML-watch-3",
+        "result": "loss",
+        "category": "VARIANCE",
+        "diagnosis": "BOS lost 8-4; offense did not produce as projected."
+      },
+      {
+        "id": "20260507-824767-F5_ML-watch-4",
+        "result": "push",
+        "category": "VARIANCE",
+        "diagnosis": "F5 score TB 3 - BOS 3; TB F5 push."
+      },
+      {
+        "id": "20260507-824362-ML-1",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "COL won 2-6 as projected."
+      },
+      {
+        "id": "20260507-824362-K-2",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "Jose Quintana: 5.2 IP, 2 K, 2 ER (line under 4.5)."
+      },
+      {
+        "id": "20260507-824362-F5_ML-watch-3",
+        "result": "loss",
+        "category": "STARTER_OVERRATED",
+        "diagnosis": "F5 score NYM 2 - COL 1; COL F5 loss."
+      },
+      {
+        "id": "20260507-824117-Total-watch-5",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "Total was 13; over 9.0 cashed by 4.0 runs."
+      },
+      {
+        "id": "20260507-824362-Total-watch-5",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "Total was 8; under 11.5 cashed by 3.5 runs."
+      }
+    ]
   }
 ]
