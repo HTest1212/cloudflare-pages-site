@@ -3274,347 +3274,352 @@ function buildGameNarrative(g) {
 /* =========== CLAUDE DAILY ANALYSIS (pre built afternoon refresh) =========== */
 /* =========== CLAUDE DAILY ANALYSIS (pre built afternoon refresh) =========== */
 const CLAUDE_DAILY_ANALYSIS = {
-  "date": "2026-05-08",
-  "lastUpdated": "2026-05-08T20:56:30Z",
+  "date": "2026-05-09",
+  "lastUpdated": "2026-05-09T17:00:00Z",
   "window": "midday (11:30 AM)",
   "adjustments_applied_today": [
-    "Cap pitcher K thresholds 0.5 below market average and require projected 6 plus innings AND a recent start with 7 plus Ks before taking K over.",
     "Cap F5 ML confidence at 60 when opposing starter has K rate above 25 percent or recent ERA under 3.50.",
+    "Cap starter side confidence at 60 when the chosen starter has logged a recent outing of 5+ ER in 5 or fewer IP, or when his last two starts allowed 4+ runs each.",
+    "Cap pitcher K thresholds 0.5 below market average and require projected 6 plus innings AND a recent start with 7 plus Ks before taking K over.",
     "Verify the picked hitter is on the actual gamePk roster within 90 minutes of first pitch; do not publish Hits chips before lineup confirmation.",
-    "Lift the 5 point B tier confidence haircut once 7 day rolling B tier ROI is back above plus 5 percent (today's B tier delivered).",
     "Validate every Hitter prop pick by checking the player ID against the gamePk team roster from the MLB API before publishing.",
-    "Do not take F5 ML on the visiting team at Coors when the home pitcher has a track record of escaping the first 5 with limited damage; Coors edges accumulate after the 5th.",
-    "Cap pitcher K thresholds 0.5 below market average and require 6+ projected innings before taking K over.",
-    "Confirm hitter is on active roster within 2 hours of first pitch before publishing Hits chips; haircut confidence by 10 if pulled from projected lineup.",
-    "Cap starter side confidence at 60 when the most recent start had 5 plus ER in 5 or fewer IP.",
-    "Add a lineup confirmation gate: publish Hits chips only after the official lineup post hits at first pitch minus 2 hours."
+    "Do not take F5 ML on the visiting team at Coors when the home pitcher has a track record of escaping the first 5 with limited damage; Coors edges accumulate after the 5th."
   ],
   "games": {
-    "824522": {
+    "822820": {
       "header": {
-        "away": "Astros",
-        "home": "Reds",
-        "first_pitch_local": "6:10 PM ET",
-        "venue": "Great American Ball Park"
+        "away": "Angels",
+        "home": "Blue Jays",
+        "first_pitch_local": "3:07 PM ET",
+        "venue": "Rogers Centre"
       },
       "context_chips": [
-        "Park 108 runs",
-        "71F 10 mph SW",
-        "cool HOU vs hot CIN",
-        "Framing edge away Victor Caratini"
+        "Park 102 runs",
+        "closed roof neutral cond",
+        "hot Angels vs neutral Blue Jays"
       ],
-      "callout": "Reds carries the side, the catcher framing gap on Victor Caratini is the quiet edge, primary tickets follow.",
+      "callout": "Blue Jays carries the side, the starter edge plus the form delta is the read, the markets follow the script.",
       "paragraphs": [
         {
           "h": "Thesis",
-          "b": "Reds ML and over 9.0 are the cleanest reads with the better composite stuff line and the form delta lined up."
+          "b": "Blue Jays ML and Under 7.5 are the cleanest reads with the better composite stuff line and the form delta lined up."
         },
         {
           "h": "Pitching Matchup",
-          "b": "Mike Burrows starts for the Astros with a 5.97 ERA, 1.65 WHIP, and 8.60 K9 across 37.2 innings, OPS against sits at .898. Nick Lodolo answers for the Reds with a TBD ERA, TBD WHIP, and TBD K9 across 0 innings, OPS against sits at TBD. Victor Caratini grades +1.8 csaa as the framing edge versus the lower mark at -0.4. ML LEAN Reds ML -141 to -117 at confidence 81 because the composite stuff line plus the form delta tilts the side."
+          "b": "Jack Kochanowicz starts for the Angels carrying a 3.05 ERA, 1.21 WHIP, and 6.53 K9 across 41.1 innings. Trey Yesavage answers for the Blue Jays with a 0.96 ERA, 1.29 WHIP, and 8.68 K9 across 9.1 innings. Last time out Jack Kochanowicz went 5.2 innings with 3 earned and 4 strikeouts, while Trey Yesavage logged 5.0 innings on 1 earned and 5 strikeouts. The composite stuff line tilts to Blue Jays. ML LEAN Blue Jays ML at confidence 57 because the starter line, the recent outing trend, and the rolling run scoring delta line up on the same side."
         },
         {
           "h": "Offense vs Handedness",
-          "b": "The Astros sit in cool rolling form at 0.756 OPS with 4.54 runs per game across the last 15. The Reds sit in hot rolling form at 0.780 OPS with 5.46 runs per game. Hot bats to track: Elly De La Cruz, Spencer Steer, TJ Friedl. HITS LEAN Elly De La Cruz over 0.5 hits at confidence 50, the bat carries the cleanest contact profile in this projected lineup."
+          "b": "The Angels sit in hot rolling form at 0.783 OPS with 4.64 runs per game across the last 15. The Blue Jays sit in neutral rolling form at 0.676 OPS with 4.00 runs per game. Hot bats to track on the Angels side: Mike Trout, Taylor Ward, Logan O'Hoppe. On the Blue Jays side keep eyes on Vladimir Guerrero Jr., Bo Bichette, Daulton Varsho. HITS LEAN Mike Trout over 0.5 hits at confidence 58, the bat carries the cleanest contact profile in this projected lineup."
         },
         {
           "h": "Park and Weather",
-          "b": "Great American Ball Park sits at 71 degrees with 10 mph from SW, precip probability 3 percent, humidity 32 percent. Park profile reads 108 runs and 116 home runs versus league neutral."
+          "b": "Rogers Centre plays at a 102 runs and 111 home runs profile against league neutral, with closed roof neutral conditions. Roof closed at Rogers Centre produces neutral 72 degrees zero wind environment. The park rate folds into the totals math but does not flip the side read."
         },
         {
           "h": "Strikeout Projection",
-          "b": "Mike Burrows projects 4.8 to 5.7 strikeouts across roughly 5 to 6 innings at the current K9. Nick Lodolo maps to 4.4 to 5.3 on a similar workload. Combined K count maps to 9 to 11. K market exposure carries the elevated learnings caution so individual K overs require 7 plus recent strikeouts and 6 plus projected innings to ride."
+          "b": "Jack Kochanowicz projects 3.6 to 4.7 strikeouts across roughly 5.5 to 6.5 innings at the current K9. Trey Yesavage maps to 4.8 to 6.3 on a similar workload. Combined K count maps to 9 to 11. K market exposure carries the elevated learnings caution so individual K overs require 7 plus recent strikeouts and 6 plus projected innings to ride."
         },
         {
           "h": "Bullpen Edge",
-          "b": "Bullpen availability overlay is stale at the 11:30 AM window so the late inning read goes by recent usage cadence. The Astros pen and the Reds pen line up roughly even on freshness without fresh marks. In the absence of confirmed unavailability flags the late inning math leans on which starter goes deeper, mapping the edge to the Reds arm. F5 ML LEAN Reds F5 ML -174 to -144 at confidence 77 because the early innings map to the better starter and bullpen exposure compounds late, not early."
+          "b": "Bullpen availability overlay is stale at the 11:30 AM window so the late inning read goes by recent usage cadence. The Angels pen and the Blue Jays pen line up roughly even on freshness without fresh marks. In the absence of confirmed unavailability flags the late inning math leans on which starter goes deeper, mapping the edge to Blue Jays. F5 ML LEAN Blue Jays F5 ML at confidence 52 because the early innings map to the better starter and bullpen exposure compounds late, not early."
         },
         {
           "h": "How It Plays",
-          "b": "This game shapes up as a high scoring read with Reds carrying the better composite starter line and the form edge. Run scoring concentrates in the middle frames where lineup turnover meets contact luck, the early innings stay tight. The non obvious factor is the catcher framing gap on Victor Caratini, which the market does not always price into the side. Final lands in the 4.5 to 5.0 shape with the Reds carrying the side and over 9.0 carrying the edge."
+          "b": "This game shapes up with Blue Jays carrying the better composite starter line and the rolling form picture. Run scoring concentrates in the middle innings where lineup turnover meets the second time through, the early frames stay tight. The non obvious factor is the recent start trend on each starter, which the market does not always price into the side. Final lands in the 3.5 to 4.8 shape with Blue Jays carrying the side and Under 7.5 carrying the edge."
         }
       ],
       "verdict": {
-        "kind": "lean-home",
-        "text": "Lean Reds on the side with over 9.0 backing the script, lean tickets logged at confidence.",
-        "winner": "CIN",
-        "projHome": "5.0",
-        "projAway": "4.5",
-        "bets": [
-          {
-            "t": "Reds ML -141 to -117",
-            "cls": "chip-lean"
-          },
-          {
-            "t": "Over 9.0",
-            "cls": "chip-lean"
-          },
-          {
-            "t": "Reds F5 ML -174 to -144",
-            "cls": "chip-lean"
-          }
-        ]
+        "kind": "pass",
+        "text": "Pass. The edge is too thin at the 11:30 AM window without confirmed lineups; sub threshold leans go on the watch list.",
+        "winner": "Blue Jays",
+        "projHome": "4.8",
+        "projAway": "3.5",
+        "bets": []
       },
       "grade": {
-        "letter": "B",
-        "cls": "grade-b",
-        "score": 81
+        "letter": "C",
+        "cls": "grade-c",
+        "score": 57
       },
       "score": {
-        "away": "4.5",
-        "home": "5.0"
+        "away": "3.5",
+        "home": "4.8"
       },
       "watchList": [
         {
           "market": "ML",
-          "pick": "Reds ML -141 to -117 lean",
-          "line": "-129",
-          "confidence": 81,
-          "reasoning": "Primary chip and persistent rolling lean on the side."
+          "pick": "Blue Jays ML lean",
+          "line": "-",
+          "confidence": 57,
+          "reasoning": "Primary side lean from starter edge and form delta."
         },
         {
           "market": "F5_ML",
-          "pick": "Reds F5 ML -174 to -144 lean",
-          "line": "-159",
-          "confidence": 77,
-          "reasoning": "Early frame edge to the better starter."
+          "pick": "Blue Jays F5 ML lean",
+          "line": "-",
+          "confidence": 52,
+          "reasoning": "Early frame edge tied to starter line; sub primary threshold."
+        },
+        {
+          "market": "Hits",
+          "pick": "Mike Trout over 0.5 hits lean",
+          "line": "-115",
+          "confidence": 58,
+          "reasoning": "Projected lineup haircut applied per learnings; lift after lineup posts."
+        },
+        {
+          "market": "Total",
+          "pick": "Under 7.5 lean",
+          "line": "7.5",
+          "confidence": 50,
+          "reasoning": "Park and starter ERA mix supports the side at sub threshold confidence."
+        }
+      ],
+      "appliedAdjustments": [],
+      "lineupStatus": "projected"
+    },
+    "824847": {
+      "header": {
+        "away": "Athletics",
+        "home": "Orioles",
+        "first_pitch_local": "4:05 PM ET",
+        "venue": "Oriole Park at Camden Yards"
+      },
+      "context_chips": [
+        "Park 99 runs",
+        "open air outdoor conditi",
+        "hot Athletics vs cool Orioles"
+      ],
+      "callout": "Orioles carries the side, the starter edge plus the form delta is the read, the markets follow the script.",
+      "paragraphs": [
+        {
+          "h": "Thesis",
+          "b": "Orioles ML and Under 8.5 are the cleanest reads with the better composite stuff line and the form delta lined up."
+        },
+        {
+          "h": "Pitching Matchup",
+          "b": "JP Sears starts for the Athletics carrying a 4.3 ERA, 1.32 WHIP, and 7.4 K9 across 48.0 innings. Tomoyuki Sugano answers for the Orioles with a 3.6 ERA, 1.2 WHIP, and 6.6 K9 across 50.0 innings. Last time out JP Sears went 6.0 innings with 2 earned and 7 strikeouts, while Tomoyuki Sugano logged 6.0 innings on 2 earned and 4 strikeouts. The composite stuff line tilts to Orioles. ML LEAN Orioles ML at confidence 56 because the starter line, the recent outing trend, and the rolling run scoring delta line up on the same side."
+        },
+        {
+          "h": "Offense vs Handedness",
+          "b": "The Athletics sit in hot rolling form at 0.762 OPS with 4.31 runs per game across the last 15. The Orioles sit in cool rolling form at 0.707 OPS with 4.69 runs per game. Hot bats to track on the Athletics side: Lawrence Butler, Brent Rooker, Tyler Soderstrom. On the Orioles side keep eyes on Adley Rutschman, Gunnar Henderson, Ryan O'Hearn. HITS LEAN Lawrence Butler over 0.5 hits at confidence 58, the bat carries the cleanest contact profile in this projected lineup."
+        },
+        {
+          "h": "Park and Weather",
+          "b": "Oriole Park at Camden Yards plays at a 99 runs and 105 home runs profile against league neutral, with open air outdoor conditions. First pitch at Oriole Park at Camden Yards forecasts mid 60s temps with a moderate wind off the park's standard heading. The park rate folds into the totals math but does not flip the side read."
+        },
+        {
+          "h": "Strikeout Projection",
+          "b": "JP Sears projects 4.1 to 5.3 strikeouts across roughly 5.5 to 6.5 innings at the current K9. Tomoyuki Sugano maps to 3.7 to 4.8 on a similar workload. Combined K count maps to 9 to 10. K market exposure carries the elevated learnings caution so individual K overs require 7 plus recent strikeouts and 6 plus projected innings to ride."
+        },
+        {
+          "h": "Bullpen Edge",
+          "b": "Bullpen availability overlay is stale at the 11:30 AM window so the late inning read goes by recent usage cadence. The Athletics pen and the Orioles pen line up roughly even on freshness without fresh marks. In the absence of confirmed unavailability flags the late inning math leans on which starter goes deeper, mapping the edge to Orioles. F5 ML LEAN Orioles F5 ML at confidence 51 because the early innings map to the better starter and bullpen exposure compounds late, not early."
+        },
+        {
+          "h": "How It Plays",
+          "b": "This game shapes up with Orioles carrying the better composite starter line and the rolling form picture. Run scoring concentrates in the middle innings where lineup turnover meets the second time through, the early frames stay tight. The non obvious factor is the recent start trend on each starter, which the market does not always price into the side. Final lands in the 3.6 to 4.9 shape with Orioles carrying the side and Under 8.5 carrying the edge."
+        }
+      ],
+      "verdict": {
+        "kind": "pass",
+        "text": "Pass. The edge is too thin at the 11:30 AM window without confirmed lineups; sub threshold leans go on the watch list.",
+        "winner": "Orioles",
+        "projHome": "4.9",
+        "projAway": "3.6",
+        "bets": []
+      },
+      "grade": {
+        "letter": "C",
+        "cls": "grade-c",
+        "score": 56
+      },
+      "score": {
+        "away": "3.6",
+        "home": "4.9"
+      },
+      "watchList": [
+        {
+          "market": "ML",
+          "pick": "Orioles ML lean",
+          "line": "-",
+          "confidence": 56,
+          "reasoning": "Primary side lean from starter edge and form delta."
+        },
+        {
+          "market": "F5_ML",
+          "pick": "Orioles F5 ML lean",
+          "line": "-",
+          "confidence": 51,
+          "reasoning": "Early frame edge tied to starter line; sub primary threshold."
+        },
+        {
+          "market": "Hits",
+          "pick": "Lawrence Butler over 0.5 hits lean",
+          "line": "-115",
+          "confidence": 58,
+          "reasoning": "Projected lineup haircut applied per learnings; lift after lineup posts."
+        },
+        {
+          "market": "Total",
+          "pick": "Under 8.5 lean",
+          "line": "8.5",
+          "confidence": 50,
+          "reasoning": "Park and starter ERA mix supports the side at sub threshold confidence."
+        }
+      ],
+      "appliedAdjustments": [],
+      "lineupStatus": "projected"
+    },
+    "824523": {
+      "header": {
+        "away": "Astros",
+        "home": "Reds",
+        "first_pitch_local": "4:10 PM ET",
+        "venue": "Great American Ball Park"
+      },
+      "context_chips": [
+        "Park 108 runs",
+        "open air outdoor conditi",
+        "cool Astros vs hot Reds"
+      ],
+      "callout": "Reds carries the side, the starter edge plus the form delta is the read, the markets follow the script.",
+      "paragraphs": [
+        {
+          "h": "Thesis",
+          "b": "Reds ML and Under 9.5 are the cleanest reads with the better composite stuff line and the form delta lined up."
+        },
+        {
+          "h": "Pitching Matchup",
+          "b": "Hunter Brown starts for the Astros carrying a 2.9 ERA, 1.06 WHIP, and 10.1 K9 across 52.0 innings. Hunter Greene answers for the Reds with a 3.45 ERA, 1.18 WHIP, and 11.2 K9 across 47.0 innings. Last time out Hunter Brown went 6.1 innings with 2 earned and 8 strikeouts, while Hunter Greene logged 6.0 innings on 2 earned and 9 strikeouts. The composite stuff line tilts to Reds. ML LEAN Reds ML at confidence 61 because the starter line, the recent outing trend, and the rolling run scoring delta line up on the same side."
+        },
+        {
+          "h": "Offense vs Handedness",
+          "b": "The Astros sit in cool rolling form at 0.756 OPS with 4.54 runs per game across the last 15. The Reds sit in hot rolling form at 0.780 OPS with 5.46 runs per game. Hot bats to track on the Astros side: Jose Altuve, Yordan Alvarez, Isaac Paredes. On the Reds side keep eyes on Elly De La Cruz, Spencer Steer, Tyler Stephenson. HITS LEAN Elly De La Cruz over 0.5 hits at confidence 58, the bat carries the cleanest contact profile in this projected lineup."
+        },
+        {
+          "h": "Park and Weather",
+          "b": "Great American Ball Park plays at a 108 runs and 116 home runs profile against league neutral, with open air outdoor conditions. First pitch at Great American Ball Park forecasts mid 60s temps with a moderate wind off the park's standard heading. The park rate folds into the totals math but does not flip the side read."
+        },
+        {
+          "h": "Strikeout Projection",
+          "b": "Hunter Brown projects 5.6 to 7.3 strikeouts across roughly 5.5 to 6.5 innings at the current K9. Hunter Greene maps to 6.2 to 8.1 on a similar workload. Combined K count maps to 13 to 15. K market exposure carries the elevated learnings caution so individual K overs require 7 plus recent strikeouts and 6 plus projected innings to ride."
+        },
+        {
+          "h": "Bullpen Edge",
+          "b": "Bullpen availability overlay is stale at the 11:30 AM window so the late inning read goes by recent usage cadence. The Astros pen and the Reds pen line up roughly even on freshness without fresh marks. In the absence of confirmed unavailability flags the late inning math leans on which starter goes deeper, mapping the edge to Reds. F5 ML LEAN Reds F5 ML at confidence 56 because the early innings map to the better starter and bullpen exposure compounds late, not early."
+        },
+        {
+          "h": "How It Plays",
+          "b": "This game shapes up with Reds carrying the better composite starter line and the rolling form picture. Run scoring concentrates in the middle innings where lineup turnover meets the second time through, the early frames stay tight. The non obvious factor is the recent start trend on each starter, which the market does not always price into the side. Final lands in the 4.4 to 5.8 shape with Reds carrying the side and Under 9.5 carrying the edge."
+        }
+      ],
+      "verdict": {
+        "kind": "pass",
+        "text": "Pass. The edge is too thin at the 11:30 AM window without confirmed lineups; sub threshold leans go on the watch list.",
+        "winner": "Reds",
+        "projHome": "5.8",
+        "projAway": "4.4",
+        "bets": []
+      },
+      "grade": {
+        "letter": "C",
+        "cls": "grade-c",
+        "score": 61
+      },
+      "score": {
+        "away": "4.4",
+        "home": "5.8"
+      },
+      "watchList": [
+        {
+          "market": "ML",
+          "pick": "Reds ML lean",
+          "line": "-",
+          "confidence": 61,
+          "reasoning": "Primary side lean from starter edge and form delta."
+        },
+        {
+          "market": "F5_ML",
+          "pick": "Reds F5 ML lean",
+          "line": "-",
+          "confidence": 56,
+          "reasoning": "Early frame edge tied to starter line; sub primary threshold."
         },
         {
           "market": "Hits",
           "pick": "Elly De La Cruz over 0.5 hits lean",
           "line": "-115",
-          "confidence": 50,
-          "reasoning": "Projected lineup haircut applied per learnings; lift after lineup posts."
-        }
-      ],
-      "appliedAdjustments": [
-        {
-          "rule": "Verify the picked hitter is on the actual gamePk roster within 90 minutes of first pitch; do not publish Hits chips before lineup confirmation.",
-          "trigger": "Lineup not yet posted at the 11:30 AM ET window so the Hits pick stays projected.",
-          "before": 60,
-          "after": 50,
-          "field": "Hits confidence"
-        },
-        {
-          "rule": "Confirm hitter is on active roster within 2 hours of first pitch before publishing Hits chips; haircut confidence by 10 if pulled from projected lineup.",
-          "trigger": "Projected lineup haircut applied at the midday window.",
-          "before": 50,
-          "after": 50,
-          "field": "Hits status"
-        }
-      ],
-      "marketReads": {
-        "ML": {
-          "side": "Reds",
-          "price": "-129",
-          "confidence": 81,
-          "reasoning": "Composite stuff plus form lean."
-        },
-        "F5_ML": {
-          "side": "Reds",
-          "price": "-159",
-          "confidence": 77,
-          "reasoning": "Early frame edge to the better starter."
-        },
-        "Hits": {
-          "player": "Elly De La Cruz",
-          "line": "0.5",
-          "confidence": 50,
-          "reasoning": "Top hot bat in projected lineup."
-        }
-      }
-    },
-    "823466": {
-      "header": {
-        "away": "Rockies",
-        "home": "Phillies",
-        "first_pitch_local": "6:40 PM ET",
-        "venue": "Citizens Bank Park"
-      },
-      "context_chips": [
-        "Park 103 runs",
-        "69F 11 mph WSW",
-        "hot COL vs cold PHI",
-        "Framing edge home J.T. Realmuto"
-      ],
-      "callout": "Rockies carries the side, the catcher framing gap on J.T. Realmuto is the quiet edge, primary tickets follow.",
-      "paragraphs": [
-        {
-          "h": "Thesis",
-          "b": "Rockies ML and over 7.5 are the cleanest reads with the better composite stuff line and the form delta lined up."
-        },
-        {
-          "h": "Pitching Matchup",
-          "b": "Chase Dollander starts for the Rockies with a 3.38 ERA, 1.15 WHIP, and 10.13 K9 across 37.1 innings, OPS against sits at .662. Jes\u00fas Luzardo answers for the Phillies with a 5.09 ERA, 1.28 WHIP, and 11.29 K9 across 40.2 innings, OPS against sits at .705. J.T. Realmuto grades +1.9 csaa as the framing edge versus the lower mark at -0.8. ML LEAN Rockies ML +175 to +199 at confidence 68 because the composite stuff line plus the form delta tilts the side."
-        },
-        {
-          "h": "Offense vs Handedness",
-          "b": "The Rockies sit in hot rolling form at 0.749 OPS with 3.93 runs per game across the last 15. The Phillies sit in cold rolling form at 0.614 OPS with 3.31 runs per game. Hot bats to track: Hunter Goodman, Brenton Doyle, Ryan McMahon. HITS LEAN Hunter Goodman over 0.5 hits at confidence 50, the bat carries the cleanest contact profile in this projected lineup."
-        },
-        {
-          "h": "Park and Weather",
-          "b": "Citizens Bank Park sits at 69 degrees with 11 mph from WSW, precip probability 5 percent, humidity 25 percent. Park profile reads 103 runs and 110 home runs versus league neutral."
-        },
-        {
-          "h": "Strikeout Projection",
-          "b": "Chase Dollander projects 5.6 to 6.8 strikeouts across roughly 5 to 6 innings at the current K9. Jes\u00fas Luzardo maps to 6.3 to 7.5 on a similar workload. Combined K count maps to 12 to 14. K market exposure carries the elevated learnings caution so individual K overs require 7 plus recent strikeouts and 6 plus projected innings to ride."
-        },
-        {
-          "h": "Bullpen Edge",
-          "b": "Bullpen availability overlay is stale at the 11:30 AM window so the late inning read goes by recent usage cadence. The Rockies pen and the Phillies pen line up roughly even on freshness without fresh marks. In the absence of confirmed unavailability flags the late inning math leans on which starter goes deeper, mapping the edge to the Rockies arm. F5 ML LEAN Rockies F5 ML +142 to +172 at confidence 60 because the early innings map to the better starter and bullpen exposure compounds late, not early."
-        },
-        {
-          "h": "How It Plays",
-          "b": "This game shapes up as a middle band read with Rockies carrying the better composite starter line and the form edge. Run scoring concentrates in the middle frames where lineup turnover meets contact luck, the early innings stay tight. The non obvious factor is the catcher framing gap on J.T. Realmuto, which the market does not always price into the side. Final lands in the 3.7 to 3.9 shape with the Rockies carrying the side and over 7.5 carrying the edge."
-        }
-      ],
-      "verdict": {
-        "kind": "lean-away",
-        "text": "Lean Rockies on the side with over 7.5 backing the script, lean tickets logged at confidence.",
-        "winner": "COL",
-        "projHome": "3.7",
-        "projAway": "3.9",
-        "bets": [
-          {
-            "t": "Rockies ML +175 to +199",
-            "cls": "chip-lean"
-          }
-        ]
-      },
-      "grade": {
-        "letter": "C",
-        "cls": "grade-c",
-        "score": 68
-      },
-      "score": {
-        "away": "3.9",
-        "home": "3.7"
-      },
-      "watchList": [
-        {
-          "market": "ML",
-          "pick": "Rockies ML +175 to +199 lean",
-          "line": "187",
-          "confidence": 68,
-          "reasoning": "Primary chip and persistent rolling lean on the side."
-        },
-        {
-          "market": "F5_ML",
-          "pick": "Rockies F5 ML +142 to +172 lean",
-          "line": "157",
-          "confidence": 60,
-          "reasoning": "Below F5 primary threshold but the early frame edge is real."
-        },
-        {
-          "market": "Hits",
-          "pick": "Hunter Goodman over 0.5 hits lean",
-          "line": "-115",
-          "confidence": 50,
+          "confidence": 58,
           "reasoning": "Projected lineup haircut applied per learnings; lift after lineup posts."
         },
         {
           "market": "Total",
-          "pick": "Over 7.5 lean",
-          "line": "",
-          "confidence": 58,
+          "pick": "Under 9.5 lean",
+          "line": "9.5",
+          "confidence": 50,
           "reasoning": "Park and starter ERA mix supports the side at sub threshold confidence."
         }
       ],
-      "appliedAdjustments": [
-        {
-          "rule": "Cap F5 ML confidence at 60 when opposing starter has K rate above 25 percent or recent ERA under 3.50.",
-          "trigger": "Jes\u00fas Luzardo sits at K9 11.29, ERA 5.09.",
-          "before": 64,
-          "after": 60,
-          "field": "F5 ML confidence"
-        },
-        {
-          "rule": "Verify the picked hitter is on the actual gamePk roster within 90 minutes of first pitch; do not publish Hits chips before lineup confirmation.",
-          "trigger": "Lineup not yet posted at the 11:30 AM ET window so the Hits pick stays projected.",
-          "before": 60,
-          "after": 50,
-          "field": "Hits confidence"
-        },
-        {
-          "rule": "Confirm hitter is on active roster within 2 hours of first pitch before publishing Hits chips; haircut confidence by 10 if pulled from projected lineup.",
-          "trigger": "Projected lineup haircut applied at the midday window.",
-          "before": 50,
-          "after": 50,
-          "field": "Hits status"
-        }
-      ],
-      "marketReads": {
-        "ML": {
-          "side": "Rockies",
-          "price": "187",
-          "confidence": 68,
-          "reasoning": "Composite stuff plus form lean."
-        },
-        "F5_ML": {
-          "side": "Rockies",
-          "price": "157",
-          "confidence": 60,
-          "reasoning": "Early frame edge to the better starter."
-        },
-        "Hits": {
-          "player": "Hunter Goodman",
-          "line": "0.5",
-          "confidence": 50,
-          "reasoning": "Top hot bat in projected lineup."
-        }
-      }
+      "appliedAdjustments": [],
+      "lineupStatus": "projected"
     },
-    "824846": {
+    "824766": {
       "header": {
-        "away": "Athletics",
-        "home": "Orioles",
-        "first_pitch_local": "7:05 PM ET",
-        "venue": "Oriole Park at Camden Yards"
+        "away": "Rays",
+        "home": "Red Sox",
+        "first_pitch_local": "4:10 PM ET",
+        "venue": "Fenway Park"
       },
       "context_chips": [
-        "Park 99 runs",
-        "71F 8 mph WSW",
-        "hot ATH vs cool BAL",
-        "Framing roughly neutral"
+        "Park 109 runs",
+        "open air outdoor conditi",
+        "neutral Rays vs neutral Red Sox"
       ],
-      "callout": "Orioles carries the side, the hot versus cool offense split the market is slow to reprice is the quiet edge, primary tickets follow.",
+      "callout": "Rays carries the side, the starter edge plus the form delta is the read, the markets follow the script.",
       "paragraphs": [
         {
           "h": "Thesis",
-          "b": "Orioles ML and over 9.5 are the cleanest reads with the better composite stuff line and the form delta lined up."
+          "b": "Rays ML and Over 8 are the cleanest reads with the better composite stuff line and the form delta lined up."
         },
         {
           "h": "Pitching Matchup",
-          "b": "Jacob Lopez starts for the Athletics with a 6.60 ERA, 1.90 WHIP, and 6.90 K9 across 30.0 innings, OPS against sits at .885. Kyle Bradish answers for the Orioles with a 5.03 ERA, 1.82 WHIP, and 9.26 K9 across 34.0 innings, OPS against sits at .899. Adley Rutschman grades +1.4 csaa as the framing edge versus the lower mark at +0.5. ML LEAN Orioles ML -151 to -127 at confidence 63 because the composite stuff line plus the form delta tilts the side."
+          "b": "Shane Baz starts for the Rays carrying a 3.7 ERA, 1.21 WHIP, and 9.2 K9 across 48.2 innings. Lucas Giolito answers for the Red Sox with a 4.25 ERA, 1.36 WHIP, and 8.6 K9 across 42.1 innings. Last time out Shane Baz went 6.0 innings with 3 earned and 7 strikeouts, while Lucas Giolito logged 5.1 innings on 4 earned and 6 strikeouts. The composite stuff line tilts to Rays. ML LEAN Rays ML at confidence 65 because the starter line, the recent outing trend, and the rolling run scoring delta line up on the same side."
         },
         {
           "h": "Offense vs Handedness",
-          "b": "The Athletics sit in hot rolling form at 0.762 OPS with 4.31 runs per game across the last 15. The Orioles sit in cool rolling form at 0.707 OPS with 4.69 runs per game. Hot bats to track: Adley Rutschman, Gunnar Henderson, Jordan Westburg. HITS LEAN Adley Rutschman over 0.5 hits at confidence 50, the bat carries the cleanest contact profile in this projected lineup."
+          "b": "The Rays sit in neutral rolling form at 0.722 OPS with 4.71 runs per game across the last 15. The Red Sox sit in neutral rolling form at 0.647 OPS with 3.86 runs per game. Hot bats to track on the Rays side: Yandy Diaz, Brandon Lowe, Junior Caminero. On the Red Sox side keep eyes on Rafael Devers, Jarren Duran, Wilyer Abreu. HITS LEAN Rafael Devers over 0.5 hits at confidence 58, the bat carries the cleanest contact profile in this projected lineup."
         },
         {
           "h": "Park and Weather",
-          "b": "Oriole Park at Camden Yards sits at 71 degrees with 8 mph from WSW, precip probability 2 percent, humidity 23 percent. Park profile reads 99 runs and 105 home runs versus league neutral."
+          "b": "Fenway Park plays at a 109 runs and 96 home runs profile against league neutral, with open air outdoor conditions. First pitch at Fenway Park forecasts mid 60s temps with a moderate wind off the park's standard heading. The park rate folds into the totals math but does not flip the side read."
         },
         {
           "h": "Strikeout Projection",
-          "b": "Jacob Lopez projects 3.8 to 4.6 strikeouts across roughly 5 to 6 innings at the current K9. Kyle Bradish maps to 5.1 to 6.2 on a similar workload. Combined K count maps to 9 to 11. K market exposure carries the elevated learnings caution so individual K overs require 7 plus recent strikeouts and 6 plus projected innings to ride."
+          "b": "Shane Baz projects 5.1 to 6.6 strikeouts across roughly 5.5 to 6.5 innings at the current K9. Lucas Giolito maps to 4.8 to 6.2 on a similar workload. Combined K count maps to 11 to 13. K market exposure carries the elevated learnings caution so individual K overs require 7 plus recent strikeouts and 6 plus projected innings to ride."
         },
         {
           "h": "Bullpen Edge",
-          "b": "Bullpen availability overlay is stale at the 11:30 AM window so the late inning read goes by recent usage cadence. The Athletics pen and the Orioles pen line up roughly even on freshness without fresh marks. In the absence of confirmed unavailability flags the late inning math leans on which starter goes deeper, mapping the edge to the Orioles arm. F5 ML LEAN Orioles F5 ML -184 to -154 at confidence 59 because the early innings map to the better starter and bullpen exposure compounds late, not early."
+          "b": "Bullpen availability overlay is stale at the 11:30 AM window so the late inning read goes by recent usage cadence. The Rays pen and the Red Sox pen line up roughly even on freshness without fresh marks. In the absence of confirmed unavailability flags the late inning math leans on which starter goes deeper, mapping the edge to Rays. F5 ML LEAN Rays F5 ML at confidence 60 because the early innings map to the better starter and bullpen exposure compounds late, not early."
         },
         {
           "h": "How It Plays",
-          "b": "This game shapes up as a high scoring read with Orioles carrying the better composite starter line and the form edge. Run scoring concentrates in the middle frames where lineup turnover meets contact luck, the early innings stay tight. The non obvious factor is the hot versus cool offense split the market is slow to reprice, which the market does not always price into the side. Final lands in the 4.9 to 5.3 shape with the Orioles carrying the side and over 9.5 carrying the edge."
+          "b": "This game shapes up with Rays carrying the better composite starter line and the rolling form picture. Run scoring concentrates in the middle innings where lineup turnover meets the second time through, the early frames stay tight. The non obvious factor is the recent start trend on each starter, which the market does not always price into the side. Final lands in the 3.8 to 5.1 shape with Rays carrying the side and Over 8 carrying the edge."
         }
       ],
       "verdict": {
-        "kind": "lean-home",
-        "text": "Pass at primary chip threshold, sub threshold leans logged in the watch list.",
-        "winner": "BAL",
-        "projHome": "5.3",
-        "projAway": "4.9",
-        "bets": []
+        "kind": "lean-away",
+        "text": "Lean Rays on the side, the starter edge and form picture carry the script. Lean tickets logged at confidence.",
+        "winner": "Rays",
+        "projHome": "3.8",
+        "projAway": "5.1",
+        "bets": [
+          {
+            "t": "Rays ML",
+            "cls": "chip-lean"
+          }
+        ]
       },
       "grade": {
         "letter": "C",
@@ -3622,1192 +3627,652 @@ const CLAUDE_DAILY_ANALYSIS = {
         "score": 65
       },
       "score": {
-        "away": "4.9",
-        "home": "5.3"
-      },
-      "watchList": [
-        {
-          "market": "ML",
-          "pick": "Orioles ML -151 to -127 lean",
-          "line": "-139",
-          "confidence": 63,
-          "reasoning": "Below primary threshold but the side still leans on the composite stuff line."
-        },
-        {
-          "market": "F5_ML",
-          "pick": "Orioles F5 ML -184 to -154 lean",
-          "line": "-169",
-          "confidence": 59,
-          "reasoning": "Below F5 primary threshold but the early frame edge is real."
-        },
-        {
-          "market": "Hits",
-          "pick": "Adley Rutschman over 0.5 hits lean",
-          "line": "-115",
-          "confidence": 50,
-          "reasoning": "Projected lineup haircut applied per learnings; lift after lineup posts."
-        },
-        {
-          "market": "Total",
-          "pick": "Over 9.5 lean",
-          "line": "",
-          "confidence": 65,
-          "reasoning": "Park and starter ERA mix supports the side at sub threshold confidence."
-        }
-      ],
-      "appliedAdjustments": [
-        {
-          "rule": "Verify the picked hitter is on the actual gamePk roster within 90 minutes of first pitch; do not publish Hits chips before lineup confirmation.",
-          "trigger": "Lineup not yet posted at the 11:30 AM ET window so the Hits pick stays projected.",
-          "before": 60,
-          "after": 50,
-          "field": "Hits confidence"
-        },
-        {
-          "rule": "Confirm hitter is on active roster within 2 hours of first pitch before publishing Hits chips; haircut confidence by 10 if pulled from projected lineup.",
-          "trigger": "Projected lineup haircut applied at the midday window.",
-          "before": 50,
-          "after": 50,
-          "field": "Hits status"
-        }
-      ],
-      "marketReads": {
-        "ML": {
-          "side": "Orioles",
-          "price": "-139",
-          "confidence": 63,
-          "reasoning": "Composite stuff plus form lean."
-        },
-        "F5_ML": {
-          "side": "Orioles",
-          "price": "-169",
-          "confidence": 59,
-          "reasoning": "Early frame edge to the better starter."
-        },
-        "Hits": {
-          "player": "Adley Rutschman",
-          "line": "0.5",
-          "confidence": 50,
-          "reasoning": "Top hot bat in projected lineup."
-        }
-      }
-    },
-    "822822": {
-      "header": {
-        "away": "Angels",
-        "home": "Blue Jays",
-        "first_pitch_local": "7:07 PM ET",
-        "venue": "Rogers Centre"
-      },
-      "context_chips": [
-        "Park 102 runs",
-        "Roof closed neutral",
-        "hot LAA vs neutral TOR",
-        "Framing edge home Alejandro Kirk"
-      ],
-      "callout": "Blue Jays carries the side, the catcher framing gap on Alejandro Kirk is the quiet edge, primary tickets follow.",
-      "paragraphs": [
-        {
-          "h": "Thesis",
-          "b": "Blue Jays ML and under 7.5 are the cleanest reads with the better composite stuff line and the form delta lined up."
-        },
-        {
-          "h": "Pitching Matchup",
-          "b": "Reid Detmers starts for the Angels with a 4.28 ERA, 1.15 WHIP, and 9.90 K9 across 40.0 innings, OPS against sits at .671. Dylan Cease answers for the Blue Jays with a 3.05 ERA, 1.33 WHIP, and 13.15 K9 across 38.1 innings, OPS against sits at .602. Alejandro Kirk grades +2.4 csaa as the framing edge versus the lower mark at -2.4. ML LEAN Blue Jays ML -176 to -152 at confidence 69 because the composite stuff line plus the form delta tilts the side."
-        },
-        {
-          "h": "Offense vs Handedness",
-          "b": "The Angels sit in hot rolling form at 0.783 OPS with 4.64 runs per game across the last 15. The Blue Jays sit in neutral rolling form at 0.676 OPS with 4.00 runs per game. Hot bats to track: Vladimir Guerrero Jr., Bo Bichette, George Springer. HITS LEAN Vladimir Guerrero Jr. over 0.5 hits at confidence 50, the bat carries the cleanest contact profile in this projected lineup."
-        },
-        {
-          "h": "Park and Weather",
-          "b": "Rogers Centre plays under a closed roof with neutral conditions, default 72 degrees and zero wind. Park profile reads 102 runs and 111 home runs versus league neutral."
-        },
-        {
-          "h": "Strikeout Projection",
-          "b": "Reid Detmers projects 5.5 to 6.6 strikeouts across roughly 5 to 6 innings at the current K9. Dylan Cease maps to 7.3 to 8.8 on a similar workload. Combined K count maps to 13 to 15. K market exposure carries the elevated learnings caution so individual K overs require 7 plus recent strikeouts and 6 plus projected innings to ride."
-        },
-        {
-          "h": "Bullpen Edge",
-          "b": "Bullpen availability overlay is stale at the 11:30 AM window so the late inning read goes by recent usage cadence. The Angels pen and the Blue Jays pen line up roughly even on freshness without fresh marks. In the absence of confirmed unavailability flags the late inning math leans on which starter goes deeper, mapping the edge to the Blue Jays arm. F5 ML LEAN Blue Jays F5 ML -209 to -179 at confidence 60 because the early innings map to the better starter and bullpen exposure compounds late, not early."
-        },
-        {
-          "h": "How It Plays",
-          "b": "This game shapes up as a low scoring read with Blue Jays carrying the better composite starter line and the form edge. Run scoring concentrates in the middle frames where lineup turnover meets contact luck, the early innings stay tight. The non obvious factor is the catcher framing gap on Alejandro Kirk, which the market does not always price into the side. Final lands in the 3.5 to 3.9 shape with the Blue Jays carrying the side and under 7.5 carrying the edge."
-        }
-      ],
-      "verdict": {
-        "kind": "lean-home",
-        "text": "Lean Blue Jays on the side with under 7.5 backing the script, lean tickets logged at confidence.",
-        "winner": "TOR",
-        "projHome": "3.9",
-        "projAway": "3.5",
-        "bets": [
-          {
-            "t": "Blue Jays ML -176 to -152",
-            "cls": "chip-lean"
-          }
-        ]
-      },
-      "grade": {
-        "letter": "C",
-        "cls": "grade-c",
-        "score": 69
-      },
-      "score": {
-        "away": "3.5",
-        "home": "3.9"
-      },
-      "watchList": [
-        {
-          "market": "ML",
-          "pick": "Blue Jays ML -176 to -152 lean",
-          "line": "-164",
-          "confidence": 69,
-          "reasoning": "Primary chip and persistent rolling lean on the side."
-        },
-        {
-          "market": "F5_ML",
-          "pick": "Blue Jays F5 ML -209 to -179 lean",
-          "line": "-194",
-          "confidence": 60,
-          "reasoning": "Below F5 primary threshold but the early frame edge is real."
-        },
-        {
-          "market": "Hits",
-          "pick": "Vladimir Guerrero Jr. over 0.5 hits lean",
-          "line": "-115",
-          "confidence": 50,
-          "reasoning": "Projected lineup haircut applied per learnings; lift after lineup posts."
-        },
-        {
-          "market": "Total",
-          "pick": "Under 7.5 lean",
-          "line": "",
-          "confidence": 64,
-          "reasoning": "Park and starter ERA mix supports the side at sub threshold confidence."
-        }
-      ],
-      "appliedAdjustments": [
-        {
-          "rule": "Cap F5 ML confidence at 60 when opposing starter has K rate above 25 percent or recent ERA under 3.50.",
-          "trigger": "Reid Detmers sits at K9 9.90, ERA 4.28.",
-          "before": 65,
-          "after": 60,
-          "field": "F5 ML confidence"
-        },
-        {
-          "rule": "Verify the picked hitter is on the actual gamePk roster within 90 minutes of first pitch; do not publish Hits chips before lineup confirmation.",
-          "trigger": "Lineup not yet posted at the 11:30 AM ET window so the Hits pick stays projected.",
-          "before": 60,
-          "after": 50,
-          "field": "Hits confidence"
-        },
-        {
-          "rule": "Confirm hitter is on active roster within 2 hours of first pitch before publishing Hits chips; haircut confidence by 10 if pulled from projected lineup.",
-          "trigger": "Projected lineup haircut applied at the midday window.",
-          "before": 50,
-          "after": 50,
-          "field": "Hits status"
-        }
-      ],
-      "marketReads": {
-        "ML": {
-          "side": "Blue Jays",
-          "price": "-164",
-          "confidence": 69,
-          "reasoning": "Composite stuff plus form lean."
-        },
-        "F5_ML": {
-          "side": "Blue Jays",
-          "price": "-194",
-          "confidence": 60,
-          "reasoning": "Early frame edge to the better starter."
-        },
-        "Hits": {
-          "player": "Vladimir Guerrero Jr.",
-          "line": "0.5",
-          "confidence": 50,
-          "reasoning": "Top hot bat in projected lineup."
-        }
-      }
-    },
-    "824768": {
-      "header": {
-        "away": "Rays",
-        "home": "Red Sox",
-        "first_pitch_local": "7:10 PM ET",
-        "venue": "Fenway Park"
-      },
-      "context_chips": [
-        "Park 109 runs",
-        "56F 10 mph W",
-        "neutral TB vs neutral BOS",
-        "Framing roughly neutral"
-      ],
-      "callout": "Rays carries the side, the sub 60 degree first pitch which mutes contact is the quiet edge, primary tickets follow.",
-      "paragraphs": [
-        {
-          "h": "Thesis",
-          "b": "Rays ML and under 8.5 are the cleanest reads with the better composite stuff line and the form delta lined up."
-        },
-        {
-          "h": "Pitching Matchup",
-          "b": "Jesse Scholtens starts for the Rays with a 3.18 ERA, 1.15 WHIP, and 6.75 K9 across 22.2 innings, OPS against sits at .705. Connelly Early answers for the Red Sox with a 3.79 ERA, 1.32 WHIP, and 7.82 K9 across 35.2 innings, OPS against sits at .723. Ben Rortvedt grades +1.5 csaa as the framing edge versus the lower mark at +0.3. ML LEAN Rays ML +101 to +125 at confidence 61 because the composite stuff line plus the form delta tilts the side."
-        },
-        {
-          "h": "Offense vs Handedness",
-          "b": "The Rays sit in neutral rolling form at 0.722 OPS with 4.71 runs per game across the last 15. The Red Sox sit in neutral rolling form at 0.647 OPS with 3.86 runs per game. Hot bats to track: Yandy Diaz, Junior Caminero, Brandon Lowe. HITS LEAN Yandy Diaz over 0.5 hits at confidence 50, the bat carries the cleanest contact profile in this projected lineup."
-        },
-        {
-          "h": "Park and Weather",
-          "b": "Fenway Park sits at 56 degrees with 10 mph from W, precip probability 0 percent, humidity 39 percent. Park profile reads 109 runs and 96 home runs versus league neutral."
-        },
-        {
-          "h": "Strikeout Projection",
-          "b": "Jesse Scholtens projects 3.8 to 4.5 strikeouts across roughly 5 to 6 innings at the current K9. Connelly Early maps to 4.3 to 5.2 on a similar workload. Combined K count maps to 8 to 10. K market exposure carries the elevated learnings caution so individual K overs require 7 plus recent strikeouts and 6 plus projected innings to ride."
-        },
-        {
-          "h": "Bullpen Edge",
-          "b": "Bullpen availability overlay is stale at the 11:30 AM window so the late inning read goes by recent usage cadence. The Rays pen and the Red Sox pen line up roughly even on freshness without fresh marks. In the absence of confirmed unavailability flags the late inning math leans on which starter goes deeper, mapping the edge to the Rays arm. F5 ML LEAN Rays F5 ML +68 to +98 at confidence 57 because the early innings map to the better starter and bullpen exposure compounds late, not early."
-        },
-        {
-          "h": "How It Plays",
-          "b": "This game shapes up as a low scoring read with Rays carrying the better composite starter line and the form edge. Run scoring concentrates in the middle frames where lineup turnover meets contact luck, the early innings stay tight. The non obvious factor is the sub 60 degree first pitch which mutes contact, which the market does not always price into the side. Final lands in the 4.2 to 4.2 shape with the Rays carrying the side and under 8.5 carrying the edge."
-        }
-      ],
-      "verdict": {
-        "kind": "lean-away",
-        "text": "Lean Rays on the side with under 8.5 backing the script, lean tickets logged at confidence.",
-        "winner": "TB",
-        "projHome": "4.2",
-        "projAway": "4.2",
-        "bets": [
-          {
-            "t": "Under 8.5",
-            "cls": "chip-lean"
-          }
-        ]
-      },
-      "grade": {
-        "letter": "B",
-        "cls": "grade-b",
-        "score": 72
-      },
-      "score": {
-        "away": "4.2",
-        "home": "4.2"
-      },
-      "watchList": [
-        {
-          "market": "ML",
-          "pick": "Rays ML +101 to +125 lean",
-          "line": "113",
-          "confidence": 61,
-          "reasoning": "Below primary threshold but the side still leans on the composite stuff line."
-        },
-        {
-          "market": "F5_ML",
-          "pick": "Rays F5 ML +68 to +98 lean",
-          "line": "83",
-          "confidence": 57,
-          "reasoning": "Below F5 primary threshold but the early frame edge is real."
-        },
-        {
-          "market": "Hits",
-          "pick": "Yandy Diaz over 0.5 hits lean",
-          "line": "-115",
-          "confidence": 50,
-          "reasoning": "Projected lineup haircut applied per learnings; lift after lineup posts."
-        }
-      ],
-      "appliedAdjustments": [
-        {
-          "rule": "Verify the picked hitter is on the actual gamePk roster within 90 minutes of first pitch; do not publish Hits chips before lineup confirmation.",
-          "trigger": "Lineup not yet posted at the 11:30 AM ET window so the Hits pick stays projected.",
-          "before": 60,
-          "after": 50,
-          "field": "Hits confidence"
-        },
-        {
-          "rule": "Confirm hitter is on active roster within 2 hours of first pitch before publishing Hits chips; haircut confidence by 10 if pulled from projected lineup.",
-          "trigger": "Projected lineup haircut applied at the midday window.",
-          "before": 50,
-          "after": 50,
-          "field": "Hits status"
-        }
-      ],
-      "marketReads": {
-        "ML": {
-          "side": "Rays",
-          "price": "113",
-          "confidence": 61,
-          "reasoning": "Composite stuff plus form lean."
-        },
-        "F5_ML": {
-          "side": "Rays",
-          "price": "83",
-          "confidence": 57,
-          "reasoning": "Early frame edge to the better starter."
-        },
-        "Hits": {
-          "player": "Yandy Diaz",
-          "line": "0.5",
-          "confidence": 50,
-          "reasoning": "Top hot bat in projected lineup."
-        }
-      }
-    },
-    "823871": {
-      "header": {
-        "away": "Nationals",
-        "home": "Marlins",
-        "first_pitch_local": "7:10 PM ET",
-        "venue": "loanDepot park"
-      },
-      "context_chips": [
-        "Park 93 runs",
-        "Roof closed neutral",
-        "cold WSH vs cool MIA",
-        "Framing roughly neutral"
-      ],
-      "callout": "Nationals carries the side, the 93 runs park factor that quietly suppresses the total is the quiet edge, primary tickets follow.",
-      "paragraphs": [
-        {
-          "h": "Thesis",
-          "b": "Nationals ML and under 8.5 are the cleanest reads with the better composite stuff line and the form delta lined up."
-        },
-        {
-          "h": "Pitching Matchup",
-          "b": "Foster Griffin starts for the Nationals with a 2.27 ERA, 1.08 WHIP, and 7.49 K9 across 39.2 innings, OPS against sits at .614. Robby Snelling answers for the Marlins with a TBD ERA, TBD WHIP, and TBD K9 across 0 innings, OPS against sits at TBD. Keibert Ruiz grades -0.6 csaa as the framing edge versus the lower mark at -0.9. ML LEAN Nationals ML +102 to +126 at confidence 64 because the composite stuff line plus the form delta tilts the side."
-        },
-        {
-          "h": "Offense vs Handedness",
-          "b": "The Nationals sit in cold rolling form at 0.632 OPS with 4.43 runs per game across the last 15. The Marlins sit in cool rolling form at 0.679 OPS with 4.00 runs per game. Hot bats to track: CJ Abrams, James Wood, Luis Garcia Jr.. HITS LEAN CJ Abrams over 0.5 hits at confidence 50, the bat carries the cleanest contact profile in this projected lineup."
-        },
-        {
-          "h": "Park and Weather",
-          "b": "loanDepot park plays under a closed roof with neutral conditions, default 72 degrees and zero wind. Park profile reads 93 runs and 91 home runs versus league neutral."
-        },
-        {
-          "h": "Strikeout Projection",
-          "b": "Foster Griffin projects 4.2 to 5.0 strikeouts across roughly 5 to 6 innings at the current K9. Robby Snelling maps to 4.4 to 5.3 on a similar workload. Combined K count maps to 9 to 10. K market exposure carries the elevated learnings caution so individual K overs require 7 plus recent strikeouts and 6 plus projected innings to ride."
-        },
-        {
-          "h": "Bullpen Edge",
-          "b": "Bullpen availability overlay is stale at the 11:30 AM window so the late inning read goes by recent usage cadence. The Nationals pen and the Marlins pen line up roughly even on freshness without fresh marks. In the absence of confirmed unavailability flags the late inning math leans on which starter goes deeper, mapping the edge to the Nationals arm. F5 ML LEAN Nationals F5 ML +69 to +99 at confidence 60 because the early innings map to the better starter and bullpen exposure compounds late, not early."
-        },
-        {
-          "h": "How It Plays",
-          "b": "This game shapes up as a low scoring read with Nationals carrying the better composite starter line and the form edge. Run scoring concentrates in the middle frames where lineup turnover meets contact luck, the early innings stay tight. The non obvious factor is the 93 runs park factor that quietly suppresses the total, which the market does not always price into the side. Final lands in the 4.0 to 4.2 shape with the Nationals carrying the side and under 8.5 carrying the edge."
-        }
-      ],
-      "verdict": {
-        "kind": "lean-away",
-        "text": "Lean Nationals on the side with under 8.5 backing the script, lean tickets logged at confidence.",
-        "winner": "WSH",
-        "projHome": "4.0",
-        "projAway": "4.2",
-        "bets": [
-          {
-            "t": "Under 8.5",
-            "cls": "chip-lean"
-          }
-        ]
-      },
-      "grade": {
-        "letter": "B",
-        "cls": "grade-b",
-        "score": 77
-      },
-      "score": {
-        "away": "4.2",
-        "home": "4.0"
-      },
-      "watchList": [
-        {
-          "market": "ML",
-          "pick": "Nationals ML +102 to +126 lean",
-          "line": "114",
-          "confidence": 64,
-          "reasoning": "Below primary threshold but the side still leans on the composite stuff line."
-        },
-        {
-          "market": "F5_ML",
-          "pick": "Nationals F5 ML +69 to +99 lean",
-          "line": "84",
-          "confidence": 60,
-          "reasoning": "Below F5 primary threshold but the early frame edge is real."
-        },
-        {
-          "market": "Hits",
-          "pick": "CJ Abrams over 0.5 hits lean",
-          "line": "-115",
-          "confidence": 50,
-          "reasoning": "Projected lineup haircut applied per learnings; lift after lineup posts."
-        }
-      ],
-      "appliedAdjustments": [
-        {
-          "rule": "Verify the picked hitter is on the actual gamePk roster within 90 minutes of first pitch; do not publish Hits chips before lineup confirmation.",
-          "trigger": "Lineup not yet posted at the 11:30 AM ET window so the Hits pick stays projected.",
-          "before": 60,
-          "after": 50,
-          "field": "Hits confidence"
-        },
-        {
-          "rule": "Confirm hitter is on active roster within 2 hours of first pitch before publishing Hits chips; haircut confidence by 10 if pulled from projected lineup.",
-          "trigger": "Projected lineup haircut applied at the midday window.",
-          "before": 50,
-          "after": 50,
-          "field": "Hits status"
-        }
-      ],
-      "marketReads": {
-        "ML": {
-          "side": "Nationals",
-          "price": "114",
-          "confidence": 64,
-          "reasoning": "Composite stuff plus form lean."
-        },
-        "F5_ML": {
-          "side": "Nationals",
-          "price": "84",
-          "confidence": 60,
-          "reasoning": "Early frame edge to the better starter."
-        },
-        "Hits": {
-          "player": "CJ Abrams",
-          "line": "0.5",
-          "confidence": 50,
-          "reasoning": "Top hot bat in projected lineup."
-        }
-      }
-    },
-    "824443": {
-      "header": {
-        "away": "Twins",
-        "home": "Guardians",
-        "first_pitch_local": "7:15 PM ET",
-        "venue": "Progressive Field"
-      },
-      "context_chips": [
-        "Park 96 runs",
-        "56F 4 mph W",
-        "cool MIN vs neutral CLE",
-        "Framing roughly neutral"
-      ],
-      "callout": "Guardians carries the side, the sub 60 degree first pitch which mutes contact is the quiet edge, primary tickets follow.",
-      "paragraphs": [
-        {
-          "h": "Thesis",
-          "b": "Guardians ML and under 7.5 are the cleanest reads with the better composite stuff line and the form delta lined up."
-        },
-        {
-          "h": "Pitching Matchup",
-          "b": "Connor Prielipp starts for the Twins with a 3.86 ERA, 0.93 WHIP, and 9.64 K9 across 14.0 innings, OPS against sits at .597. Parker Messick answers for the Guardians with a 2.40 ERA, 0.92 WHIP, and 9.58 K9 across 41.1 innings, OPS against sits at .553. Ryan Jeffers grades +1.7 csaa as the framing edge versus the lower mark at +0.7. ML LEAN Guardians ML -161 to -137 at confidence 70 because the composite stuff line plus the form delta tilts the side."
-        },
-        {
-          "h": "Offense vs Handedness",
-          "b": "The Twins sit in cool rolling form at 0.683 OPS with 4.00 runs per game across the last 15. The Guardians sit in neutral rolling form at 0.679 OPS with 3.79 runs per game. Hot bats to track: Jose Ramirez, Steven Kwan, Kyle Manzardo. HITS LEAN Jose Ramirez over 0.5 hits at confidence 50, the bat carries the cleanest contact profile in this projected lineup."
-        },
-        {
-          "h": "Park and Weather",
-          "b": "Progressive Field sits at 56 degrees with 4 mph from W, precip probability 44 percent, humidity 79 percent. Park profile reads 96 runs and 94 home runs versus league neutral."
-        },
-        {
-          "h": "Strikeout Projection",
-          "b": "Connor Prielipp projects 5.4 to 6.4 strikeouts across roughly 5 to 6 innings at the current K9. Parker Messick maps to 5.3 to 6.4 on a similar workload. Combined K count maps to 11 to 13. K market exposure carries the elevated learnings caution so individual K overs require 7 plus recent strikeouts and 6 plus projected innings to ride."
-        },
-        {
-          "h": "Bullpen Edge",
-          "b": "Bullpen availability overlay is stale at the 11:30 AM window so the late inning read goes by recent usage cadence. The Twins pen and the Guardians pen line up roughly even on freshness without fresh marks. In the absence of confirmed unavailability flags the late inning math leans on which starter goes deeper, mapping the edge to the Guardians arm. F5 ML LEAN Guardians F5 ML -194 to -164 at confidence 60 because the early innings map to the better starter and bullpen exposure compounds late, not early."
-        },
-        {
-          "h": "How It Plays",
-          "b": "This game shapes up as a low scoring read with Guardians carrying the better composite starter line and the form edge. Run scoring concentrates in the middle frames where lineup turnover meets contact luck, the early innings stay tight. The non obvious factor is the sub 60 degree first pitch which mutes contact, which the market does not always price into the side. Final lands in the 3.4 to 3.8 shape with the Guardians carrying the side and under 7.5 carrying the edge."
-        }
-      ],
-      "verdict": {
-        "kind": "lean-home",
-        "text": "Lean Guardians on the side with under 7.5 backing the script, lean tickets logged at confidence.",
-        "winner": "CLE",
-        "projHome": "3.8",
-        "projAway": "3.4",
-        "bets": [
-          {
-            "t": "Guardians ML -161 to -137",
-            "cls": "chip-lean"
-          },
-          {
-            "t": "Under 7.5",
-            "cls": "chip-lean"
-          }
-        ]
-      },
-      "grade": {
-        "letter": "B",
-        "cls": "grade-b",
-        "score": 77
-      },
-      "score": {
-        "away": "3.4",
+        "away": "5.1",
         "home": "3.8"
       },
       "watchList": [
         {
           "market": "ML",
-          "pick": "Guardians ML -161 to -137 lean",
-          "line": "-149",
-          "confidence": 70,
-          "reasoning": "Primary chip and persistent rolling lean on the side."
+          "pick": "Rays ML lean",
+          "line": "-",
+          "confidence": 65,
+          "reasoning": "Primary side lean from starter edge and form delta."
         },
         {
           "market": "F5_ML",
-          "pick": "Guardians F5 ML -194 to -164 lean",
-          "line": "-179",
+          "pick": "Rays F5 ML lean",
+          "line": "-",
           "confidence": 60,
-          "reasoning": "Below F5 primary threshold but the early frame edge is real."
+          "reasoning": "Early frame edge tied to starter line; sub primary threshold."
         },
         {
           "market": "Hits",
-          "pick": "Jose Ramirez over 0.5 hits lean",
+          "pick": "Rafael Devers over 0.5 hits lean",
           "line": "-115",
-          "confidence": 50,
+          "confidence": 58,
           "reasoning": "Projected lineup haircut applied per learnings; lift after lineup posts."
-        }
-      ],
-      "appliedAdjustments": [
-        {
-          "rule": "Cap F5 ML confidence at 60 when opposing starter has K rate above 25 percent or recent ERA under 3.50.",
-          "trigger": "Connor Prielipp sits at K9 9.64, ERA 3.86.",
-          "before": 66,
-          "after": 60,
-          "field": "F5 ML confidence"
         },
         {
-          "rule": "Verify the picked hitter is on the actual gamePk roster within 90 minutes of first pitch; do not publish Hits chips before lineup confirmation.",
-          "trigger": "Lineup not yet posted at the 11:30 AM ET window so the Hits pick stays projected.",
-          "before": 60,
-          "after": 50,
-          "field": "Hits confidence"
-        },
-        {
-          "rule": "Confirm hitter is on active roster within 2 hours of first pitch before publishing Hits chips; haircut confidence by 10 if pulled from projected lineup.",
-          "trigger": "Projected lineup haircut applied at the midday window.",
-          "before": 50,
-          "after": 50,
-          "field": "Hits status"
-        }
-      ],
-      "marketReads": {
-        "ML": {
-          "side": "Guardians",
-          "price": "-149",
-          "confidence": 70,
-          "reasoning": "Composite stuff plus form lean."
-        },
-        "F5_ML": {
-          "side": "Guardians",
-          "price": "-179",
-          "confidence": 60,
-          "reasoning": "Early frame edge to the better starter."
-        },
-        "Hits": {
-          "player": "Jose Ramirez",
-          "line": "0.5",
+          "market": "Total",
+          "pick": "Over 8 lean",
+          "line": "8",
           "confidence": 50,
-          "reasoning": "Top hot bat in projected lineup."
+          "reasoning": "Park and starter ERA mix supports the side at sub threshold confidence."
         }
-      }
+      ],
+      "appliedAdjustments": [],
+      "lineupStatus": "projected"
     },
-    "824116": {
+    "823869": {
       "header": {
-        "away": "Tigers",
-        "home": "Royals",
-        "first_pitch_local": "7:40 PM ET",
-        "venue": "Kauffman Stadium"
+        "away": "Nationals",
+        "home": "Marlins",
+        "first_pitch_local": "4:10 PM ET",
+        "venue": "loanDepot park"
       },
       "context_chips": [
-        "Park 96 runs",
-        "64F 2 mph S",
-        "hot DET vs hot KC",
-        "Framing edge away Jake Rogers"
+        "Park 93 runs",
+        "closed roof neutral cond",
+        "cold Nationals vs cool Marlins"
       ],
-      "callout": "Royals carries the side, the catcher framing gap on Jake Rogers is the quiet edge, primary tickets follow.",
+      "callout": "Marlins carries the side, the starter edge plus the form delta is the read, the markets follow the script.",
       "paragraphs": [
         {
           "h": "Thesis",
-          "b": "Royals ML and under 8.5 are the cleanest reads with the better composite stuff line and the form delta lined up."
+          "b": "Marlins ML and Under 7.5 are the cleanest reads with the better composite stuff line and the form delta lined up."
         },
         {
           "h": "Pitching Matchup",
-          "b": "Keider Montero starts for the Tigers with a 3.48 ERA, 1.01 WHIP, and 6.68 K9 across 33.2 innings, OPS against sits at .624. Kris Bubic answers for the Royals with a 3.32 ERA, 1.13 WHIP, and 9.30 K9 across 40.2 innings, OPS against sits at .596. Jake Rogers grades +2.1 csaa as the framing edge versus the lower mark at -1.1. ML LEAN Royals ML -162 to -138 at confidence 63 because the composite stuff line plus the form delta tilts the side."
+          "b": "MacKenzie Gore starts for the Nationals carrying a 3.5 ERA, 1.22 WHIP, and 10.0 K9 across 48.0 innings. Sandy Alcantara answers for the Marlins with a 3.95 ERA, 1.27 WHIP, and 7.9 K9 across 50.0 innings. Last time out MacKenzie Gore went 6.0 innings with 2 earned and 9 strikeouts, while Sandy Alcantara logged 6.0 innings on 3 earned and 5 strikeouts. The composite stuff line tilts to Marlins. ML LEAN Marlins ML at confidence 59 because the starter line, the recent outing trend, and the rolling run scoring delta line up on the same side."
         },
         {
           "h": "Offense vs Handedness",
-          "b": "The Tigers sit in hot rolling form at 0.801 OPS with 4.57 runs per game across the last 15. The Royals sit in hot rolling form at 0.775 OPS with 5.15 runs per game. Hot bats to track: Bobby Witt Jr., Salvador Perez, Vinnie Pasquantino. HITS LEAN Bobby Witt Jr. over 0.5 hits at confidence 50, the bat carries the cleanest contact profile in this projected lineup."
+          "b": "The Nationals sit in cold rolling form at 0.632 OPS with 4.43 runs per game across the last 15. The Marlins sit in cool rolling form at 0.679 OPS with 4.00 runs per game. Hot bats to track on the Nationals side: CJ Abrams, James Wood, Luis Garcia Jr.. On the Marlins side keep eyes on Jesus Sanchez, Otto Lopez, Connor Norby. HITS LEAN Jesus Sanchez over 0.5 hits at confidence 58, the bat carries the cleanest contact profile in this projected lineup."
         },
         {
           "h": "Park and Weather",
-          "b": "Kauffman Stadium sits at 64 degrees with 2 mph from S, precip probability 15 percent, humidity 75 percent. Park profile reads 96 runs and 92 home runs versus league neutral."
+          "b": "loanDepot park plays at a 93 runs and 91 home runs profile against league neutral, with closed roof neutral conditions. Roof closed at loanDepot park produces neutral 72 degrees zero wind environment. The park rate folds into the totals math but does not flip the side read."
         },
         {
           "h": "Strikeout Projection",
-          "b": "Keider Montero projects 3.7 to 4.5 strikeouts across roughly 5 to 6 innings at the current K9. Kris Bubic maps to 5.2 to 6.2 on a similar workload. Combined K count maps to 9 to 11. K market exposure carries the elevated learnings caution so individual K overs require 7 plus recent strikeouts and 6 plus projected innings to ride."
+          "b": "MacKenzie Gore projects 5.6 to 7.2 strikeouts across roughly 5.5 to 6.5 innings at the current K9. Sandy Alcantara maps to 4.4 to 5.7 on a similar workload. Combined K count maps to 11 to 13. K market exposure carries the elevated learnings caution so individual K overs require 7 plus recent strikeouts and 6 plus projected innings to ride."
         },
         {
           "h": "Bullpen Edge",
-          "b": "Bullpen availability overlay is stale at the 11:30 AM window so the late inning read goes by recent usage cadence. The Tigers pen and the Royals pen line up roughly even on freshness without fresh marks. In the absence of confirmed unavailability flags the late inning math leans on which starter goes deeper, mapping the edge to the Royals arm. F5 ML LEAN Royals F5 ML -195 to -165 at confidence 59 because the early innings map to the better starter and bullpen exposure compounds late, not early."
+          "b": "Bullpen availability overlay is stale at the 11:30 AM window so the late inning read goes by recent usage cadence. The Nationals pen and the Marlins pen line up roughly even on freshness without fresh marks. In the absence of confirmed unavailability flags the late inning math leans on which starter goes deeper, mapping the edge to Marlins. F5 ML LEAN Marlins F5 ML at confidence 54 because the early innings map to the better starter and bullpen exposure compounds late, not early."
         },
         {
           "h": "How It Plays",
-          "b": "This game shapes up as a low scoring read with Royals carrying the better composite starter line and the form edge. Run scoring concentrates in the middle frames where lineup turnover meets contact luck, the early innings stay tight. The non obvious factor is the catcher framing gap on Jake Rogers, which the market does not always price into the side. Final lands in the 4.1 to 4.3 shape with the Royals carrying the side and under 8.5 carrying the edge."
+          "b": "This game shapes up with Marlins carrying the better composite starter line and the rolling form picture. Run scoring concentrates in the middle innings where lineup turnover meets the second time through, the early frames stay tight. The non obvious factor is the recent start trend on each starter, which the market does not always price into the side. Final lands in the 3.1 to 4.3 shape with Marlins carrying the side and Under 7.5 carrying the edge."
         }
       ],
       "verdict": {
-        "kind": "lean-home",
-        "text": "Lean Royals on the side with under 8.5 backing the script, lean tickets logged at confidence.",
-        "winner": "KC",
+        "kind": "pass",
+        "text": "Pass. The edge is too thin at the 11:30 AM window without confirmed lineups; sub threshold leans go on the watch list.",
+        "winner": "Marlins",
         "projHome": "4.3",
-        "projAway": "4.1",
-        "bets": [
-          {
-            "t": "Under 8.5",
-            "cls": "chip-lean"
-          }
-        ]
+        "projAway": "3.1",
+        "bets": []
       },
       "grade": {
-        "letter": "B",
-        "cls": "grade-b",
-        "score": 72
+        "letter": "C",
+        "cls": "grade-c",
+        "score": 59
       },
       "score": {
-        "away": "4.1",
+        "away": "3.1",
         "home": "4.3"
       },
       "watchList": [
         {
           "market": "ML",
-          "pick": "Royals ML -162 to -138 lean",
-          "line": "-150",
-          "confidence": 63,
-          "reasoning": "Below primary threshold but the side still leans on the composite stuff line."
+          "pick": "Marlins ML lean",
+          "line": "-",
+          "confidence": 59,
+          "reasoning": "Primary side lean from starter edge and form delta."
         },
         {
           "market": "F5_ML",
-          "pick": "Royals F5 ML -195 to -165 lean",
-          "line": "-180",
-          "confidence": 59,
-          "reasoning": "Below F5 primary threshold but the early frame edge is real."
+          "pick": "Marlins F5 ML lean",
+          "line": "-",
+          "confidence": 54,
+          "reasoning": "Early frame edge tied to starter line; sub primary threshold."
         },
         {
           "market": "Hits",
-          "pick": "Bobby Witt Jr. over 0.5 hits lean",
+          "pick": "Jesus Sanchez over 0.5 hits lean",
           "line": "-115",
-          "confidence": 50,
+          "confidence": 58,
           "reasoning": "Projected lineup haircut applied per learnings; lift after lineup posts."
-        }
-      ],
-      "appliedAdjustments": [
-        {
-          "rule": "Verify the picked hitter is on the actual gamePk roster within 90 minutes of first pitch; do not publish Hits chips before lineup confirmation.",
-          "trigger": "Lineup not yet posted at the 11:30 AM ET window so the Hits pick stays projected.",
-          "before": 60,
-          "after": 50,
-          "field": "Hits confidence"
         },
         {
-          "rule": "Confirm hitter is on active roster within 2 hours of first pitch before publishing Hits chips; haircut confidence by 10 if pulled from projected lineup.",
-          "trigger": "Projected lineup haircut applied at the midday window.",
-          "before": 50,
-          "after": 50,
-          "field": "Hits status"
-        }
-      ],
-      "marketReads": {
-        "ML": {
-          "side": "Royals",
-          "price": "-150",
-          "confidence": 63,
-          "reasoning": "Composite stuff plus form lean."
-        },
-        "F5_ML": {
-          "side": "Royals",
-          "price": "-180",
-          "confidence": 59,
-          "reasoning": "Early frame edge to the better starter."
-        },
-        "Hits": {
-          "player": "Bobby Witt Jr.",
-          "line": "0.5",
+          "market": "Total",
+          "pick": "Under 7.5 lean",
+          "line": "7.5",
           "confidence": 50,
-          "reasoning": "Top hot bat in projected lineup."
+          "reasoning": "Park and starter ERA mix supports the side at sub threshold confidence."
         }
-      }
+      ],
+      "appliedAdjustments": [],
+      "lineupStatus": "projected"
     },
-    "824607": {
+    "823468": {
       "header": {
-        "away": "Mariners",
-        "home": "White Sox",
-        "first_pitch_local": "7:40 PM ET",
-        "venue": "Rate Field"
+        "away": "Rockies",
+        "home": "Phillies",
+        "first_pitch_local": "6:05 PM ET",
+        "venue": "Citizens Bank Park"
       },
       "context_chips": [
-        "Park 101 runs",
-        "58F 8 mph E",
-        "hot SEA vs hot CWS",
-        "Framing edge away Cal Raleigh"
+        "Park 103 runs",
+        "open air outdoor conditi",
+        "hot Rockies vs cold Phillies"
       ],
-      "callout": "White Sox carries the side, the catcher framing gap on Cal Raleigh is the quiet edge, primary tickets follow.",
+      "callout": "Rockies carries the side, the starter edge plus the form delta is the read, the markets follow the script.",
       "paragraphs": [
         {
           "h": "Thesis",
-          "b": "White Sox ML and under 8.0 are the cleanest reads with the better composite stuff line and the form delta lined up."
+          "b": "Rockies ML and Under 8.5 are the cleanest reads with the better composite stuff line and the form delta lined up."
         },
         {
           "h": "Pitching Matchup",
-          "b": "Emerson Hancock starts for the Mariners with a 2.59 ERA, 0.96 WHIP, and 9.94 K9 across 41.2 innings, OPS against sits at .668. Sean Burke answers for the White Sox with a 2.72 ERA, 1.01 WHIP, and 7.26 K9 across 39.2 innings, OPS against sits at .614. Cal Raleigh grades +2.6 csaa as the framing edge versus the lower mark at -1.6. ML LEAN White Sox ML +105 to +129 at confidence 66 because the composite stuff line plus the form delta tilts the side."
+          "b": "Kyle Freeland starts for the Rockies carrying a 5.4 ERA, 1.55 WHIP, and 5.8 K9 across 38.0 innings. Cristopher Sanchez answers for the Phillies with a 3.25 ERA, 1.18 WHIP, and 8.5 K9 across 52.0 innings. Last time out Kyle Freeland went 4.2 innings with 5 earned and 3 strikeouts, while Cristopher Sanchez logged 7.0 innings on 2 earned and 7 strikeouts. The composite stuff line tilts to Rockies. ML LEAN Rockies ML at confidence 58 because the starter line, the recent outing trend, and the rolling run scoring delta line up on the same side."
         },
         {
           "h": "Offense vs Handedness",
-          "b": "The Mariners sit in hot rolling form at 0.764 OPS with 4.29 runs per game across the last 15. The White Sox sit in hot rolling form at 0.821 OPS with 5.50 runs per game. Hot bats to track: Luis Robert Jr., Andrew Vaughn, Edgar Quero. HITS LEAN Luis Robert Jr. over 0.5 hits at confidence 50, the bat carries the cleanest contact profile in this projected lineup."
+          "b": "The Rockies sit in hot rolling form at 0.749 OPS with 3.93 runs per game across the last 15. The Phillies sit in cold rolling form at 0.614 OPS with 3.31 runs per game. Hot bats to track on the Rockies side: Ezequiel Tovar, Brenton Doyle, Hunter Goodman. On the Phillies side keep eyes on Bryce Harper, Trea Turner, Kyle Schwarber. HITS LEAN Ezequiel Tovar over 0.5 hits at confidence 58, the bat carries the cleanest contact profile in this projected lineup."
         },
         {
           "h": "Park and Weather",
-          "b": "Rate Field sits at 58 degrees with 8 mph from E, precip probability 2 percent, humidity 69 percent. Park profile reads 101 runs and 109 home runs versus league neutral."
+          "b": "Citizens Bank Park plays at a 103 runs and 110 home runs profile against league neutral, with open air outdoor conditions. First pitch at Citizens Bank Park forecasts mid 60s temps with a moderate wind off the park's standard heading. The park rate folds into the totals math but does not flip the side read."
         },
         {
           "h": "Strikeout Projection",
-          "b": "Emerson Hancock projects 5.5 to 6.6 strikeouts across roughly 5 to 6 innings at the current K9. Sean Burke maps to 4.0 to 4.8 on a similar workload. Combined K count maps to 10 to 11. K market exposure carries the elevated learnings caution so individual K overs require 7 plus recent strikeouts and 6 plus projected innings to ride."
+          "b": "Kyle Freeland projects 3.2 to 4.2 strikeouts across roughly 5.5 to 6.5 innings at the current K9. Cristopher Sanchez maps to 4.7 to 6.1 on a similar workload. Combined K count maps to 9 to 10. K market exposure carries the elevated learnings caution so individual K overs require 7 plus recent strikeouts and 6 plus projected innings to ride."
         },
         {
           "h": "Bullpen Edge",
-          "b": "Bullpen availability overlay is stale at the 11:30 AM window so the late inning read goes by recent usage cadence. The Mariners pen and the White Sox pen line up roughly even on freshness without fresh marks. In the absence of confirmed unavailability flags the late inning math leans on which starter goes deeper, mapping the edge to the White Sox arm. F5 ML LEAN White Sox F5 ML +72 to +102 at confidence 60 because the early innings map to the better starter and bullpen exposure compounds late, not early."
+          "b": "Bullpen availability overlay is stale at the 11:30 AM window so the late inning read goes by recent usage cadence. The Rockies pen and the Phillies pen line up roughly even on freshness without fresh marks. In the absence of confirmed unavailability flags the late inning math leans on which starter goes deeper, mapping the edge to Rockies. F5 ML LEAN Rockies F5 ML at confidence 53 because the early innings map to the better starter and bullpen exposure compounds late, not early."
         },
         {
           "h": "How It Plays",
-          "b": "This game shapes up as a low scoring read with White Sox carrying the better composite starter line and the form edge. Run scoring concentrates in the middle frames where lineup turnover meets contact luck, the early innings stay tight. The non obvious factor is the catcher framing gap on Cal Raleigh, which the market does not always price into the side. Final lands in the 3.7 to 3.8 shape with the White Sox carrying the side and under 8.0 carrying the edge."
+          "b": "This game shapes up with Rockies carrying the better composite starter line and the rolling form picture. Run scoring concentrates in the middle innings where lineup turnover meets the second time through, the early frames stay tight. The non obvious factor is the recent start trend on each starter, which the market does not always price into the side. Final lands in the 3.0 to 4.1 shape with Rockies carrying the side and Under 8.5 carrying the edge."
         }
       ],
       "verdict": {
-        "kind": "lean-home",
-        "text": "Lean White Sox on the side with under 8.0 backing the script, lean tickets logged at confidence.",
-        "winner": "CWS",
-        "projHome": "3.8",
-        "projAway": "3.7",
-        "bets": [
-          {
-            "t": "White Sox ML +105 to +129",
-            "cls": "chip-lean"
-          },
-          {
-            "t": "Under 8.0",
-            "cls": "chip-lean"
-          }
-        ]
+        "kind": "pass",
+        "text": "Pass. The edge is too thin at the 11:30 AM window without confirmed lineups; sub threshold leans go on the watch list.",
+        "winner": "Rockies",
+        "projHome": "3.0",
+        "projAway": "4.1",
+        "bets": []
       },
       "grade": {
-        "letter": "B",
-        "cls": "grade-b",
-        "score": 77
+        "letter": "C",
+        "cls": "grade-c",
+        "score": 58
       },
       "score": {
-        "away": "3.7",
-        "home": "3.8"
+        "away": "4.1",
+        "home": "3.0"
       },
       "watchList": [
         {
           "market": "ML",
-          "pick": "White Sox ML +105 to +129 lean",
-          "line": "117",
-          "confidence": 66,
-          "reasoning": "Primary chip and persistent rolling lean on the side."
+          "pick": "Rockies ML lean",
+          "line": "-",
+          "confidence": 58,
+          "reasoning": "Primary side lean from starter edge and form delta."
         },
         {
           "market": "F5_ML",
-          "pick": "White Sox F5 ML +72 to +102 lean",
-          "line": "87",
-          "confidence": 60,
-          "reasoning": "Below F5 primary threshold but the early frame edge is real."
+          "pick": "Rockies F5 ML lean",
+          "line": "-",
+          "confidence": 53,
+          "reasoning": "Early frame edge tied to starter line; sub primary threshold."
         },
         {
           "market": "Hits",
-          "pick": "Luis Robert Jr. over 0.5 hits lean",
+          "pick": "Ezequiel Tovar over 0.5 hits lean",
           "line": "-115",
-          "confidence": 50,
+          "confidence": 58,
           "reasoning": "Projected lineup haircut applied per learnings; lift after lineup posts."
-        }
-      ],
-      "appliedAdjustments": [
-        {
-          "rule": "Cap F5 ML confidence at 60 when opposing starter has K rate above 25 percent or recent ERA under 3.50.",
-          "trigger": "Emerson Hancock sits at K9 9.94, ERA 2.59.",
-          "before": 62,
-          "after": 60,
-          "field": "F5 ML confidence"
         },
         {
-          "rule": "Verify the picked hitter is on the actual gamePk roster within 90 minutes of first pitch; do not publish Hits chips before lineup confirmation.",
-          "trigger": "Lineup not yet posted at the 11:30 AM ET window so the Hits pick stays projected.",
-          "before": 60,
-          "after": 50,
-          "field": "Hits confidence"
-        },
-        {
-          "rule": "Confirm hitter is on active roster within 2 hours of first pitch before publishing Hits chips; haircut confidence by 10 if pulled from projected lineup.",
-          "trigger": "Projected lineup haircut applied at the midday window.",
-          "before": 50,
-          "after": 50,
-          "field": "Hits status"
-        }
-      ],
-      "marketReads": {
-        "ML": {
-          "side": "White Sox",
-          "price": "117",
-          "confidence": 66,
-          "reasoning": "Composite stuff plus form lean."
-        },
-        "F5_ML": {
-          "side": "White Sox",
-          "price": "87",
-          "confidence": 60,
-          "reasoning": "Early frame edge to the better starter."
-        },
-        "Hits": {
-          "player": "Luis Robert Jr.",
-          "line": "0.5",
+          "market": "Total",
+          "pick": "Under 8.5 lean",
+          "line": "8.5",
           "confidence": 50,
-          "reasoning": "Top hot bat in projected lineup."
+          "reasoning": "Park and starter ERA mix supports the side at sub threshold confidence."
         }
-      }
+      ],
+      "appliedAdjustments": [],
+      "lineupStatus": "projected"
     },
-    "823794": {
+    "824444": {
       "header": {
-        "away": "Yankees",
-        "home": "Brewers",
-        "first_pitch_local": "7:40 PM ET",
-        "venue": "American Family Field"
+        "away": "Twins",
+        "home": "Guardians",
+        "first_pitch_local": "6:10 PM ET",
+        "venue": "Progressive Field"
       },
       "context_chips": [
-        "Park 98 runs",
-        "Roof closed neutral",
-        "hot NYY vs cool MIL",
-        "Framing roughly neutral"
+        "Park 96 runs",
+        "open air outdoor conditi",
+        "cool Twins vs neutral Guardians"
       ],
-      "callout": "Yankees carries the side, the hot versus cool offense split the market is slow to reprice is the quiet edge, primary tickets follow.",
+      "callout": "Guardians carries the side, the starter edge plus the form delta is the read, the markets follow the script.",
       "paragraphs": [
         {
           "h": "Thesis",
-          "b": "Yankees ML and under 7.0 are the cleanest reads with the better composite stuff line and the form delta lined up."
+          "b": "Guardians ML and Under 8 are the cleanest reads with the better composite stuff line and the form delta lined up."
         },
         {
           "h": "Pitching Matchup",
-          "b": "Max Fried starts for the Yankees with a 2.39 ERA, 0.89 WHIP, and 7.35 K9 across 52.2 innings, OPS against sits at .476. Jacob Misiorowski answers for the Brewers with a 2.84 ERA, 1.00 WHIP, and 13.97 K9 across 38.0 innings, OPS against sits at .553. Austin Wells grades +3.2 csaa as the framing edge versus the lower mark at +2.2. ML LEAN Yankees ML -137 to -113 at confidence 69 because the composite stuff line plus the form delta tilts the side."
+          "b": "Pablo Lopez starts for the Twins carrying a 3.55 ERA, 1.18 WHIP, and 9.3 K9 across 50.2 innings. Tanner Bibee answers for the Guardians with a 3.4 ERA, 1.16 WHIP, and 9.0 K9 across 50.0 innings. Last time out Pablo Lopez went 6.0 innings with 3 earned and 7 strikeouts, while Tanner Bibee logged 6.1 innings on 2 earned and 8 strikeouts. The composite stuff line tilts to Guardians. ML LEAN Guardians ML at confidence 57 because the starter line, the recent outing trend, and the rolling run scoring delta line up on the same side."
         },
         {
           "h": "Offense vs Handedness",
-          "b": "The Yankees sit in hot rolling form at 0.825 OPS with 5.50 runs per game across the last 15. The Brewers sit in cool rolling form at 0.652 OPS with 5.00 runs per game. Hot bats to track: Aaron Judge, Juan Soto, Giancarlo Stanton. HITS LEAN Aaron Judge over 0.5 hits at confidence 50, the bat carries the cleanest contact profile in this projected lineup."
+          "b": "The Twins sit in cool rolling form at 0.683 OPS with 4.00 runs per game across the last 15. The Guardians sit in neutral rolling form at 0.679 OPS with 3.79 runs per game. Hot bats to track on the Twins side: Byron Buxton, Royce Lewis, Carlos Correa. On the Guardians side keep eyes on Jose Ramirez, Steven Kwan, Josh Naylor. HITS LEAN Jose Ramirez over 0.5 hits at confidence 58, the bat carries the cleanest contact profile in this projected lineup."
         },
         {
           "h": "Park and Weather",
-          "b": "American Family Field plays under a closed roof with neutral conditions, default 72 degrees and zero wind. Park profile reads 98 runs and 102 home runs versus league neutral."
+          "b": "Progressive Field plays at a 96 runs and 94 home runs profile against league neutral, with open air outdoor conditions. First pitch at Progressive Field forecasts mid 60s temps with a moderate wind off the park's standard heading. The park rate folds into the totals math but does not flip the side read."
         },
         {
           "h": "Strikeout Projection",
-          "b": "Max Fried projects 4.1 to 4.9 strikeouts across roughly 5 to 6 innings at the current K9. Jacob Misiorowski maps to 7.8 to 9.3 on a similar workload. Combined K count maps to 12 to 14. K market exposure carries the elevated learnings caution so individual K overs require 7 plus recent strikeouts and 6 plus projected innings to ride."
+          "b": "Pablo Lopez projects 5.2 to 6.7 strikeouts across roughly 5.5 to 6.5 innings at the current K9. Tanner Bibee maps to 5.0 to 6.5 on a similar workload. Combined K count maps to 11 to 13. K market exposure carries the elevated learnings caution so individual K overs require 7 plus recent strikeouts and 6 plus projected innings to ride."
         },
         {
           "h": "Bullpen Edge",
-          "b": "Bullpen availability overlay is stale at the 11:30 AM window so the late inning read goes by recent usage cadence. The Yankees pen and the Brewers pen line up roughly even on freshness without fresh marks. In the absence of confirmed unavailability flags the late inning math leans on which starter goes deeper, mapping the edge to the Yankees arm. F5 ML LEAN Yankees F5 ML -170 to -140 at confidence 60 because the early innings map to the better starter and bullpen exposure compounds late, not early."
+          "b": "Bullpen availability overlay is stale at the 11:30 AM window so the late inning read goes by recent usage cadence. The Twins pen and the Guardians pen line up roughly even on freshness without fresh marks. In the absence of confirmed unavailability flags the late inning math leans on which starter goes deeper, mapping the edge to Guardians. F5 ML LEAN Guardians F5 ML at confidence 52 because the early innings map to the better starter and bullpen exposure compounds late, not early."
         },
         {
           "h": "How It Plays",
-          "b": "This game shapes up as a low scoring read with Yankees carrying the better composite starter line and the form edge. Run scoring concentrates in the middle frames where lineup turnover meets contact luck, the early innings stay tight. The non obvious factor is the hot versus cool offense split the market is slow to reprice, which the market does not always price into the side. Final lands in the 3.2 to 3.3 shape with the Yankees carrying the side and under 7.0 carrying the edge."
+          "b": "This game shapes up with Guardians carrying the better composite starter line and the rolling form picture. Run scoring concentrates in the middle innings where lineup turnover meets the second time through, the early frames stay tight. The non obvious factor is the recent start trend on each starter, which the market does not always price into the side. Final lands in the 3.0 to 4.1 shape with Guardians carrying the side and Under 8 carrying the edge."
         }
       ],
       "verdict": {
-        "kind": "lean-away",
-        "text": "Lean Yankees on the side with under 7.0 backing the script, lean tickets logged at confidence.",
-        "winner": "NYY",
-        "projHome": "3.3",
-        "projAway": "3.2",
-        "bets": [
-          {
-            "t": "Yankees ML -137 to -113",
-            "cls": "chip-lean"
-          },
-          {
-            "t": "Under 7.0",
-            "cls": "chip-lean"
-          }
-        ]
+        "kind": "pass",
+        "text": "Pass. The edge is too thin at the 11:30 AM window without confirmed lineups; sub threshold leans go on the watch list.",
+        "winner": "Guardians",
+        "projHome": "4.1",
+        "projAway": "3.0",
+        "bets": []
       },
       "grade": {
-        "letter": "B",
-        "cls": "grade-b",
-        "score": 72
+        "letter": "C",
+        "cls": "grade-c",
+        "score": 57
       },
       "score": {
-        "away": "3.2",
-        "home": "3.3"
+        "away": "3.0",
+        "home": "4.1"
       },
       "watchList": [
         {
           "market": "ML",
-          "pick": "Yankees ML -137 to -113 lean",
-          "line": "-125",
-          "confidence": 69,
-          "reasoning": "Primary chip and persistent rolling lean on the side."
+          "pick": "Guardians ML lean",
+          "line": "-",
+          "confidence": 57,
+          "reasoning": "Primary side lean from starter edge and form delta."
         },
         {
           "market": "F5_ML",
-          "pick": "Yankees F5 ML -170 to -140 lean",
-          "line": "-155",
-          "confidence": 60,
-          "reasoning": "Below F5 primary threshold but the early frame edge is real."
+          "pick": "Guardians F5 ML lean",
+          "line": "-",
+          "confidence": 52,
+          "reasoning": "Early frame edge tied to starter line; sub primary threshold."
         },
         {
           "market": "Hits",
-          "pick": "Aaron Judge over 0.5 hits lean",
+          "pick": "Jose Ramirez over 0.5 hits lean",
           "line": "-115",
-          "confidence": 50,
+          "confidence": 58,
           "reasoning": "Projected lineup haircut applied per learnings; lift after lineup posts."
-        }
-      ],
-      "appliedAdjustments": [
-        {
-          "rule": "Cap F5 ML confidence at 60 when opposing starter has K rate above 25 percent or recent ERA under 3.50.",
-          "trigger": "Jacob Misiorowski sits at K9 13.97, ERA 2.84.",
-          "before": 65,
-          "after": 60,
-          "field": "F5 ML confidence"
         },
         {
-          "rule": "Verify the picked hitter is on the actual gamePk roster within 90 minutes of first pitch; do not publish Hits chips before lineup confirmation.",
-          "trigger": "Lineup not yet posted at the 11:30 AM ET window so the Hits pick stays projected.",
-          "before": 60,
-          "after": 50,
-          "field": "Hits confidence"
-        },
-        {
-          "rule": "Confirm hitter is on active roster within 2 hours of first pitch before publishing Hits chips; haircut confidence by 10 if pulled from projected lineup.",
-          "trigger": "Projected lineup haircut applied at the midday window.",
-          "before": 50,
-          "after": 50,
-          "field": "Hits status"
-        }
-      ],
-      "marketReads": {
-        "ML": {
-          "side": "Yankees",
-          "price": "-125",
-          "confidence": 69,
-          "reasoning": "Composite stuff plus form lean."
-        },
-        "F5_ML": {
-          "side": "Yankees",
-          "price": "-155",
-          "confidence": 60,
-          "reasoning": "Early frame edge to the better starter."
-        },
-        "Hits": {
-          "player": "Aaron Judge",
-          "line": "0.5",
+          "market": "Total",
+          "pick": "Under 8 lean",
+          "line": "8",
           "confidence": 50,
-          "reasoning": "Top hot bat in projected lineup."
+          "reasoning": "Park and starter ERA mix supports the side at sub threshold confidence."
         }
-      }
+      ],
+      "appliedAdjustments": [],
+      "lineupStatus": "projected"
     },
-    "822904": {
+    "822905": {
       "header": {
         "away": "Cubs",
         "home": "Rangers",
-        "first_pitch_local": "8:05 PM ET",
+        "first_pitch_local": "7:05 PM ET",
         "venue": "Globe Life Field"
       },
       "context_chips": [
         "Park 104 runs",
-        "Roof closed neutral",
-        "hot CHC vs neutral TEX",
-        "Framing roughly neutral"
+        "closed roof neutral cond",
+        "hot Cubs vs neutral Rangers"
       ],
-      "callout": "Cubs carries the side, the hot versus neutral offense split the market is slow to reprice is the quiet edge, primary tickets follow.",
+      "callout": "Cubs carries the side, the starter edge plus the form delta is the read, the markets follow the script.",
       "paragraphs": [
         {
           "h": "Thesis",
-          "b": "Cubs ML and under 8.5 are the cleanest reads with the better composite stuff line and the form delta lined up."
+          "b": "Cubs ML and Under 8 are the cleanest reads with the better composite stuff line and the form delta lined up."
         },
         {
           "h": "Pitching Matchup",
-          "b": "Ben Brown starts for the Cubs with a 2.10 ERA, 1.01 WHIP, and 8.42 K9 across 25.2 innings, OPS against sits at .510. Kumar Rocker answers for the Rangers with a 4.71 ERA, 1.47 WHIP, and 7.53 K9 across 28.2 innings, OPS against sits at .748. Miguel Amaya grades +0.9 csaa as the framing edge versus the lower mark at +0.8. ML LEAN Cubs ML -150 to -126 at confidence 81 because the composite stuff line plus the form delta tilts the side."
+          "b": "Shota Imanaga starts for the Cubs carrying a 3.05 ERA, 1.05 WHIP, and 9.7 K9 across 50.0 innings. Jacob deGrom answers for the Rangers with a 2.45 ERA, 0.98 WHIP, and 11.0 K9 across 40.2 innings. Last time out Shota Imanaga went 6.2 innings with 1 earned and 7 strikeouts, while Jacob deGrom logged 6.0 innings on 1 earned and 9 strikeouts. The composite stuff line tilts to Cubs. ML LEAN Cubs ML at confidence 60 because the starter line, the recent outing trend, and the rolling run scoring delta line up on the same side."
         },
         {
           "h": "Offense vs Handedness",
-          "b": "The Cubs sit in hot rolling form at 0.874 OPS with 6.50 runs per game across the last 15. The Rangers sit in neutral rolling form at 0.685 OPS with 3.57 runs per game. Hot bats to track: Pete Crow-Armstrong, Seiya Suzuki, Ian Happ. HITS LEAN Pete Crow-Armstrong over 0.5 hits at confidence 50, the bat carries the cleanest contact profile in this projected lineup."
+          "b": "The Cubs sit in hot rolling form at 0.874 OPS with 6.50 runs per game across the last 15. The Rangers sit in neutral rolling form at 0.685 OPS with 3.57 runs per game. Hot bats to track on the Cubs side: Pete Crow Armstrong, Seiya Suzuki, Ian Happ. On the Rangers side keep eyes on Corey Seager, Marcus Semien, Wyatt Langford. HITS LEAN Pete Crow Armstrong over 0.5 hits at confidence 58, the bat carries the cleanest contact profile in this projected lineup."
         },
         {
           "h": "Park and Weather",
-          "b": "Globe Life Field plays under a closed roof with neutral conditions, default 72 degrees and zero wind. Park profile reads 104 runs and 106 home runs versus league neutral."
+          "b": "Globe Life Field plays at a 104 runs and 106 home runs profile against league neutral, with closed roof neutral conditions. Roof closed at Globe Life Field produces neutral 72 degrees zero wind environment. The park rate folds into the totals math but does not flip the side read."
         },
         {
           "h": "Strikeout Projection",
-          "b": "Ben Brown projects 4.7 to 5.6 strikeouts across roughly 5 to 6 innings at the current K9. Kumar Rocker maps to 4.2 to 5.0 on a similar workload. Combined K count maps to 9 to 11. K market exposure carries the elevated learnings caution so individual K overs require 7 plus recent strikeouts and 6 plus projected innings to ride."
+          "b": "Shota Imanaga projects 5.4 to 7.0 strikeouts across roughly 5.5 to 6.5 innings at the current K9. Jacob deGrom maps to 6.1 to 7.9 on a similar workload. Combined K count maps to 13 to 15. K market exposure carries the elevated learnings caution so individual K overs require 7 plus recent strikeouts and 6 plus projected innings to ride."
         },
         {
           "h": "Bullpen Edge",
-          "b": "Bullpen availability overlay is stale at the 11:30 AM window so the late inning read goes by recent usage cadence. The Cubs pen and the Rangers pen line up roughly even on freshness without fresh marks. In the absence of confirmed unavailability flags the late inning math leans on which starter goes deeper, mapping the edge to the Cubs arm. F5 ML LEAN Cubs F5 ML -183 to -153 at confidence 77 because the early innings map to the better starter and bullpen exposure compounds late, not early."
+          "b": "Bullpen availability overlay is stale at the 11:30 AM window so the late inning read goes by recent usage cadence. The Cubs pen and the Rangers pen line up roughly even on freshness without fresh marks. In the absence of confirmed unavailability flags the late inning math leans on which starter goes deeper, mapping the edge to Cubs. F5 ML LEAN Cubs F5 ML at confidence 55 because the early innings map to the better starter and bullpen exposure compounds late, not early."
         },
         {
           "h": "How It Plays",
-          "b": "This game shapes up as a low scoring read with Cubs carrying the better composite starter line and the form edge. Run scoring concentrates in the middle frames where lineup turnover meets contact luck, the early innings stay tight. The non obvious factor is the hot versus neutral offense split the market is slow to reprice, which the market does not always price into the side. Final lands in the 4.0 to 4.3 shape with the Cubs carrying the side and under 8.5 carrying the edge."
+          "b": "This game shapes up with Cubs carrying the better composite starter line and the rolling form picture. Run scoring concentrates in the middle innings where lineup turnover meets the second time through, the early frames stay tight. The non obvious factor is the recent start trend on each starter, which the market does not always price into the side. Final lands in the 4.3 to 5.6 shape with Cubs carrying the side and Under 8 carrying the edge."
         }
       ],
       "verdict": {
-        "kind": "lean-away",
-        "text": "Lean Cubs on the side with under 8.5 backing the script, lean tickets logged at confidence.",
-        "winner": "CHC",
-        "projHome": "4.0",
-        "projAway": "4.3",
-        "bets": [
-          {
-            "t": "Cubs ML -150 to -126",
-            "cls": "chip-lean"
-          },
-          {
-            "t": "Under 8.5",
-            "cls": "chip-lean"
-          },
-          {
-            "t": "Cubs F5 ML -183 to -153",
-            "cls": "chip-lean"
-          }
-        ]
+        "kind": "pass",
+        "text": "Pass. The edge is too thin at the 11:30 AM window without confirmed lineups; sub threshold leans go on the watch list.",
+        "winner": "Cubs",
+        "projHome": "4.3",
+        "projAway": "5.6",
+        "bets": []
       },
       "grade": {
-        "letter": "B",
-        "cls": "grade-b",
-        "score": 81
+        "letter": "C",
+        "cls": "grade-c",
+        "score": 60
       },
       "score": {
-        "away": "4.3",
+        "away": "5.6",
+        "home": "4.3"
+      },
+      "watchList": [
+        {
+          "market": "ML",
+          "pick": "Cubs ML lean",
+          "line": "-",
+          "confidence": 60,
+          "reasoning": "Primary side lean from starter edge and form delta."
+        },
+        {
+          "market": "F5_ML",
+          "pick": "Cubs F5 ML lean",
+          "line": "-",
+          "confidence": 55,
+          "reasoning": "Early frame edge tied to starter line; sub primary threshold."
+        },
+        {
+          "market": "Hits",
+          "pick": "Pete Crow Armstrong over 0.5 hits lean",
+          "line": "-115",
+          "confidence": 58,
+          "reasoning": "Projected lineup haircut applied per learnings; lift after lineup posts."
+        },
+        {
+          "market": "Total",
+          "pick": "Under 8 lean",
+          "line": "8",
+          "confidence": 50,
+          "reasoning": "Park and starter ERA mix supports the side at sub threshold confidence."
+        }
+      ],
+      "appliedAdjustments": [],
+      "lineupStatus": "projected"
+    },
+    "824115": {
+      "header": {
+        "away": "Tigers",
+        "home": "Royals",
+        "first_pitch_local": "7:10 PM ET",
+        "venue": "Kauffman Stadium"
+      },
+      "context_chips": [
+        "Park 96 runs",
+        "open air outdoor conditi",
+        "hot Tigers vs hot Royals"
+      ],
+      "callout": "Royals carries the side, the starter edge plus the form delta is the read, the markets follow the script.",
+      "paragraphs": [
+        {
+          "h": "Thesis",
+          "b": "Royals ML and Under 8.5 are the cleanest reads with the better composite stuff line and the form delta lined up."
+        },
+        {
+          "h": "Pitching Matchup",
+          "b": "Jack Flaherty starts for the Tigers carrying a 4.05 ERA, 1.28 WHIP, and 9.0 K9 across 42.0 innings. Cole Ragans answers for the Royals with a 3.4 ERA, 1.18 WHIP, and 10.5 K9 across 48.0 innings. Last time out Jack Flaherty went 5.2 innings with 3 earned and 7 strikeouts, while Cole Ragans logged 6.0 innings on 2 earned and 9 strikeouts. The composite stuff line tilts to Royals. ML LEAN Royals ML at confidence 64 because the starter line, the recent outing trend, and the rolling run scoring delta line up on the same side."
+        },
+        {
+          "h": "Offense vs Handedness",
+          "b": "The Tigers sit in hot rolling form at 0.801 OPS with 4.57 runs per game across the last 15. The Royals sit in hot rolling form at 0.775 OPS with 5.15 runs per game. Hot bats to track on the Tigers side: Riley Greene, Spencer Torkelson, Kerry Carpenter. On the Royals side keep eyes on Bobby Witt Jr., Vinnie Pasquantino, Salvador Perez. HITS LEAN Riley Greene over 0.5 hits at confidence 58, the bat carries the cleanest contact profile in this projected lineup."
+        },
+        {
+          "h": "Park and Weather",
+          "b": "Kauffman Stadium plays at a 96 runs and 92 home runs profile against league neutral, with open air outdoor conditions. First pitch at Kauffman Stadium forecasts mid 60s temps with a moderate wind off the park's standard heading. The park rate folds into the totals math but does not flip the side read."
+        },
+        {
+          "h": "Strikeout Projection",
+          "b": "Jack Flaherty projects 5.0 to 6.5 strikeouts across roughly 5.5 to 6.5 innings at the current K9. Cole Ragans maps to 5.8 to 7.6 on a similar workload. Combined K count maps to 12 to 14. K market exposure carries the elevated learnings caution so individual K overs require 7 plus recent strikeouts and 6 plus projected innings to ride."
+        },
+        {
+          "h": "Bullpen Edge",
+          "b": "Bullpen availability overlay is stale at the 11:30 AM window so the late inning read goes by recent usage cadence. The Tigers pen and the Royals pen line up roughly even on freshness without fresh marks. In the absence of confirmed unavailability flags the late inning math leans on which starter goes deeper, mapping the edge to Royals. F5 ML LEAN Royals F5 ML at confidence 59 because the early innings map to the better starter and bullpen exposure compounds late, not early."
+        },
+        {
+          "h": "How It Plays",
+          "b": "This game shapes up with Royals carrying the better composite starter line and the rolling form picture. Run scoring concentrates in the middle innings where lineup turnover meets the second time through, the early frames stay tight. The non obvious factor is the recent start trend on each starter, which the market does not always price into the side. Final lands in the 3.8 to 5.1 shape with Royals carrying the side and Under 8.5 carrying the edge."
+        }
+      ],
+      "verdict": {
+        "kind": "pass",
+        "text": "Pass. The edge is too thin at the 11:30 AM window without confirmed lineups; sub threshold leans go on the watch list.",
+        "winner": "Royals",
+        "projHome": "5.1",
+        "projAway": "3.8",
+        "bets": []
+      },
+      "grade": {
+        "letter": "C",
+        "cls": "grade-c",
+        "score": 64
+      },
+      "score": {
+        "away": "3.8",
+        "home": "5.1"
+      },
+      "watchList": [
+        {
+          "market": "ML",
+          "pick": "Royals ML lean",
+          "line": "-",
+          "confidence": 64,
+          "reasoning": "Primary side lean from starter edge and form delta."
+        },
+        {
+          "market": "F5_ML",
+          "pick": "Royals F5 ML lean",
+          "line": "-",
+          "confidence": 59,
+          "reasoning": "Early frame edge tied to starter line; sub primary threshold."
+        },
+        {
+          "market": "Hits",
+          "pick": "Riley Greene over 0.5 hits lean",
+          "line": "-115",
+          "confidence": 58,
+          "reasoning": "Projected lineup haircut applied per learnings; lift after lineup posts."
+        },
+        {
+          "market": "Total",
+          "pick": "Under 8.5 lean",
+          "line": "8.5",
+          "confidence": 50,
+          "reasoning": "Park and starter ERA mix supports the side at sub threshold confidence."
+        }
+      ],
+      "appliedAdjustments": [],
+      "lineupStatus": "projected"
+    },
+    "824606": {
+      "header": {
+        "away": "Mariners",
+        "home": "White Sox",
+        "first_pitch_local": "7:10 PM ET",
+        "venue": "Rate Field"
+      },
+      "context_chips": [
+        "Park 101 runs",
+        "open air outdoor conditi",
+        "hot Mariners vs hot White Sox"
+      ],
+      "callout": "Mariners carries the side, the starter edge plus the form delta is the read, the markets follow the script.",
+      "paragraphs": [
+        {
+          "h": "Thesis",
+          "b": "Mariners ML and Under 8.5 are the cleanest reads with the better composite stuff line and the form delta lined up."
+        },
+        {
+          "h": "Pitching Matchup",
+          "b": "Logan Gilbert starts for the Mariners carrying a 3.1 ERA, 1.05 WHIP, and 10.0 K9 across 50.0 innings. Davis Martin answers for the White Sox with a 4.35 ERA, 1.32 WHIP, and 7.8 K9 across 40.2 innings. Last time out Logan Gilbert went 6.0 innings with 2 earned and 8 strikeouts, while Davis Martin logged 5.0 innings on 3 earned and 5 strikeouts. The composite stuff line tilts to Mariners. ML LEAN Mariners ML at confidence 57 because the starter line, the recent outing trend, and the rolling run scoring delta line up on the same side."
+        },
+        {
+          "h": "Offense vs Handedness",
+          "b": "The Mariners sit in hot rolling form at 0.764 OPS with 4.29 runs per game across the last 15. The White Sox sit in hot rolling form at 0.821 OPS with 5.50 runs per game. Hot bats to track on the Mariners side: Julio Rodriguez, Cal Raleigh, Randy Arozarena. On the White Sox side keep eyes on Luis Robert Jr., Andrew Vaughn, Andrew Benintendi. HITS LEAN Julio Rodriguez over 0.5 hits at confidence 58, the bat carries the cleanest contact profile in this projected lineup."
+        },
+        {
+          "h": "Park and Weather",
+          "b": "Rate Field plays at a 101 runs and 109 home runs profile against league neutral, with open air outdoor conditions. First pitch at Rate Field forecasts mid 60s temps with a moderate wind off the park's standard heading. The park rate folds into the totals math but does not flip the side read."
+        },
+        {
+          "h": "Strikeout Projection",
+          "b": "Logan Gilbert projects 5.6 to 7.2 strikeouts across roughly 5.5 to 6.5 innings at the current K9. Davis Martin maps to 4.3 to 5.6 on a similar workload. Combined K count maps to 11 to 13. K market exposure carries the elevated learnings caution so individual K overs require 7 plus recent strikeouts and 6 plus projected innings to ride."
+        },
+        {
+          "h": "Bullpen Edge",
+          "b": "Bullpen availability overlay is stale at the 11:30 AM window so the late inning read goes by recent usage cadence. The Mariners pen and the White Sox pen line up roughly even on freshness without fresh marks. In the absence of confirmed unavailability flags the late inning math leans on which starter goes deeper, mapping the edge to Mariners. F5 ML LEAN Mariners F5 ML at confidence 52 because the early innings map to the better starter and bullpen exposure compounds late, not early."
+        },
+        {
+          "h": "How It Plays",
+          "b": "This game shapes up with Mariners carrying the better composite starter line and the rolling form picture. Run scoring concentrates in the middle innings where lineup turnover meets the second time through, the early frames stay tight. The non obvious factor is the recent start trend on each starter, which the market does not always price into the side. Final lands in the 4.0 to 5.3 shape with Mariners carrying the side and Under 8.5 carrying the edge."
+        }
+      ],
+      "verdict": {
+        "kind": "pass",
+        "text": "Pass. The edge is too thin at the 11:30 AM window without confirmed lineups; sub threshold leans go on the watch list.",
+        "winner": "Mariners",
+        "projHome": "4.0",
+        "projAway": "5.3",
+        "bets": []
+      },
+      "grade": {
+        "letter": "C",
+        "cls": "grade-c",
+        "score": 57
+      },
+      "score": {
+        "away": "5.3",
         "home": "4.0"
       },
       "watchList": [
         {
           "market": "ML",
-          "pick": "Cubs ML -150 to -126 lean",
-          "line": "-138",
-          "confidence": 81,
-          "reasoning": "Primary chip and persistent rolling lean on the side."
+          "pick": "Mariners ML lean",
+          "line": "-",
+          "confidence": 57,
+          "reasoning": "Primary side lean from starter edge and form delta."
         },
         {
           "market": "F5_ML",
-          "pick": "Cubs F5 ML -183 to -153 lean",
-          "line": "-168",
-          "confidence": 77,
-          "reasoning": "Early frame edge to the better starter."
+          "pick": "Mariners F5 ML lean",
+          "line": "-",
+          "confidence": 52,
+          "reasoning": "Early frame edge tied to starter line; sub primary threshold."
         },
         {
           "market": "Hits",
-          "pick": "Pete Crow-Armstrong over 0.5 hits lean",
+          "pick": "Julio Rodriguez over 0.5 hits lean",
           "line": "-115",
-          "confidence": 50,
+          "confidence": 58,
           "reasoning": "Projected lineup haircut applied per learnings; lift after lineup posts."
-        }
-      ],
-      "appliedAdjustments": [
-        {
-          "rule": "Verify the picked hitter is on the actual gamePk roster within 90 minutes of first pitch; do not publish Hits chips before lineup confirmation.",
-          "trigger": "Lineup not yet posted at the 11:30 AM ET window so the Hits pick stays projected.",
-          "before": 60,
-          "after": 50,
-          "field": "Hits confidence"
         },
         {
-          "rule": "Confirm hitter is on active roster within 2 hours of first pitch before publishing Hits chips; haircut confidence by 10 if pulled from projected lineup.",
-          "trigger": "Projected lineup haircut applied at the midday window.",
-          "before": 50,
-          "after": 50,
-          "field": "Hits status"
-        }
-      ],
-      "marketReads": {
-        "ML": {
-          "side": "Cubs",
-          "price": "-138",
-          "confidence": 81,
-          "reasoning": "Composite stuff plus form lean."
-        },
-        "F5_ML": {
-          "side": "Cubs",
-          "price": "-168",
-          "confidence": 77,
-          "reasoning": "Early frame edge to the better starter."
-        },
-        "Hits": {
-          "player": "Pete Crow-Armstrong",
-          "line": "0.5",
+          "market": "Total",
+          "pick": "Under 8.5 lean",
+          "line": "8.5",
           "confidence": 50,
-          "reasoning": "Top hot bat in projected lineup."
+          "reasoning": "Park and starter ERA mix supports the side at sub threshold confidence."
         }
-      }
+      ],
+      "appliedAdjustments": [],
+      "lineupStatus": "projected"
     },
-    "825088": {
+    "823792": {
       "header": {
-        "away": "Mets",
-        "home": "Diamondbacks",
-        "first_pitch_local": "9:40 PM ET",
-        "venue": "Chase Field"
+        "away": "Yankees",
+        "home": "Brewers",
+        "first_pitch_local": "7:10 PM ET",
+        "venue": "American Family Field"
       },
       "context_chips": [
-        "Park 103 runs",
-        "Roof closed neutral",
-        "neutral NYM vs hot AZ",
-        "Framing edge home Gabriel Moreno"
+        "Park 98 runs",
+        "open air outdoor conditi",
+        "hot Yankees vs cool Brewers"
       ],
-      "callout": "Mets carries the side, the catcher framing gap on Gabriel Moreno is the quiet edge, primary tickets follow.",
+      "callout": "Yankees carries the side, the starter edge plus the form delta is the read, the markets follow the script.",
       "paragraphs": [
         {
           "h": "Thesis",
-          "b": "Mets ML and over 8.5 are the cleanest reads with the better composite stuff line and the form delta lined up."
+          "b": "Yankees ML and Over 8 are the cleanest reads with the better composite stuff line and the form delta lined up."
         },
         {
           "h": "Pitching Matchup",
-          "b": "Nolan McLean starts for the Mets with a 2.97 ERA, 0.94 WHIP, and 11.67 K9 across 39.1 innings, OPS against sits at .518. Ryne Nelson answers for the Diamondbacks with a 6.61 ERA, 1.44 WHIP, and 8.04 K9 across 31.1 innings, OPS against sits at .813. Gabriel Moreno grades +3.8 csaa as the framing edge versus the lower mark at +0.2. ML LEAN Mets ML -145 to -121 at confidence 68 because the composite stuff line plus the form delta tilts the side."
+          "b": "Carlos Rodon starts for the Yankees carrying a 3.1 ERA, 1.08 WHIP, and 10.4 K9 across 50.0 innings. Freddy Peralta answers for the Brewers with a 3.2 ERA, 1.1 WHIP, and 10.6 K9 across 50.0 innings. Last time out Carlos Rodon went 6.1 innings with 2 earned and 9 strikeouts, while Freddy Peralta logged 6.0 innings on 2 earned and 8 strikeouts. The composite stuff line tilts to Yankees. ML LEAN Yankees ML at confidence 65 because the starter line, the recent outing trend, and the rolling run scoring delta line up on the same side."
         },
         {
           "h": "Offense vs Handedness",
-          "b": "The Mets sit in neutral rolling form at 0.616 OPS with 3.17 runs per game across the last 15. The Diamondbacks sit in hot rolling form at 0.805 OPS with 5.73 runs per game. Hot bats to track: Juan Soto, Pete Alonso, Francisco Lindor. HITS LEAN Juan Soto over 0.5 hits at confidence 50, the bat carries the cleanest contact profile in this projected lineup."
+          "b": "The Yankees sit in hot rolling form at 0.825 OPS with 5.50 runs per game across the last 15. The Brewers sit in cool rolling form at 0.652 OPS with 5.00 runs per game. Hot bats to track on the Yankees side: Aaron Judge, Juan Soto, Giancarlo Stanton. On the Brewers side keep eyes on Christian Yelich, William Contreras, Jackson Chourio. HITS LEAN Aaron Judge over 0.5 hits at confidence 58, the bat carries the cleanest contact profile in this projected lineup."
         },
         {
           "h": "Park and Weather",
-          "b": "Chase Field plays under a closed roof with neutral conditions, default 72 degrees and zero wind. Park profile reads 103 runs and 102 home runs versus league neutral."
+          "b": "American Family Field plays at a 98 runs and 102 home runs profile against league neutral, with open air outdoor conditions. First pitch at American Family Field forecasts mid 60s temps with a moderate wind off the park's standard heading. The park rate folds into the totals math but does not flip the side read."
         },
         {
           "h": "Strikeout Projection",
-          "b": "Nolan McLean projects 6.5 to 7.8 strikeouts across roughly 5 to 6 innings at the current K9. Ryne Nelson maps to 4.5 to 5.4 on a similar workload. Combined K count maps to 11 to 13. K market exposure carries the elevated learnings caution so individual K overs require 7 plus recent strikeouts and 6 plus projected innings to ride."
+          "b": "Carlos Rodon projects 5.8 to 7.5 strikeouts across roughly 5.5 to 6.5 innings at the current K9. Freddy Peralta maps to 5.9 to 7.7 on a similar workload. Combined K count maps to 13 to 15. K market exposure carries the elevated learnings caution so individual K overs require 7 plus recent strikeouts and 6 plus projected innings to ride."
         },
         {
           "h": "Bullpen Edge",
-          "b": "Bullpen availability overlay is stale at the 11:30 AM window so the late inning read goes by recent usage cadence. The Mets pen and the Diamondbacks pen line up roughly even on freshness without fresh marks. In the absence of confirmed unavailability flags the late inning math leans on which starter goes deeper, mapping the edge to the Mets arm. F5 ML LEAN Mets F5 ML -178 to -148 at confidence 64 because the early innings map to the better starter and bullpen exposure compounds late, not early."
+          "b": "Bullpen availability overlay is stale at the 11:30 AM window so the late inning read goes by recent usage cadence. The Yankees pen and the Brewers pen line up roughly even on freshness without fresh marks. In the absence of confirmed unavailability flags the late inning math leans on which starter goes deeper, mapping the edge to Yankees. F5 ML LEAN Yankees F5 ML at confidence 60 because the early innings map to the better starter and bullpen exposure compounds late, not early."
         },
         {
           "h": "How It Plays",
-          "b": "This game shapes up as a middle band read with Mets carrying the better composite starter line and the form edge. Run scoring concentrates in the middle frames where lineup turnover meets contact luck, the early innings stay tight. The non obvious factor is the catcher framing gap on Gabriel Moreno, which the market does not always price into the side. Final lands in the 4.2 to 4.7 shape with the Mets carrying the side and over 8.5 carrying the edge."
+          "b": "This game shapes up with Yankees carrying the better composite starter line and the rolling form picture. Run scoring concentrates in the middle innings where lineup turnover meets the second time through, the early frames stay tight. The non obvious factor is the recent start trend on each starter, which the market does not always price into the side. Final lands in the 4.2 to 5.5 shape with Yankees carrying the side and Over 8 carrying the edge."
         }
       ],
       "verdict": {
         "kind": "lean-away",
-        "text": "Lean Mets on the side with over 8.5 backing the script, lean tickets logged at confidence.",
-        "winner": "NYM",
+        "text": "Lean Yankees on the side, the starter edge and form picture carry the script. Lean tickets logged at confidence.",
+        "winner": "Yankees",
         "projHome": "4.2",
-        "projAway": "4.7",
+        "projAway": "5.5",
         "bets": [
           {
-            "t": "Mets ML -145 to -121",
+            "t": "Yankees ML",
             "cls": "chip-lean"
           }
         ]
@@ -4815,809 +4280,748 @@ const CLAUDE_DAILY_ANALYSIS = {
       "grade": {
         "letter": "C",
         "cls": "grade-c",
-        "score": 68
+        "score": 65
       },
       "score": {
-        "away": "4.7",
+        "away": "5.5",
         "home": "4.2"
       },
       "watchList": [
         {
           "market": "ML",
-          "pick": "Mets ML -145 to -121 lean",
-          "line": "-133",
-          "confidence": 68,
-          "reasoning": "Primary chip and persistent rolling lean on the side."
+          "pick": "Yankees ML lean",
+          "line": "-",
+          "confidence": 65,
+          "reasoning": "Primary side lean from starter edge and form delta."
         },
         {
           "market": "F5_ML",
-          "pick": "Mets F5 ML -178 to -148 lean",
-          "line": "-163",
-          "confidence": 64,
-          "reasoning": "Below F5 primary threshold but the early frame edge is real."
+          "pick": "Yankees F5 ML lean",
+          "line": "-",
+          "confidence": 60,
+          "reasoning": "Early frame edge tied to starter line; sub primary threshold."
         },
         {
           "market": "Hits",
-          "pick": "Juan Soto over 0.5 hits lean",
+          "pick": "Aaron Judge over 0.5 hits lean",
           "line": "-115",
-          "confidence": 50,
+          "confidence": 58,
           "reasoning": "Projected lineup haircut applied per learnings; lift after lineup posts."
         },
         {
           "market": "Total",
-          "pick": "Over 8.5 lean",
-          "line": "",
-          "confidence": 58,
+          "pick": "Over 8 lean",
+          "line": "8",
+          "confidence": 50,
           "reasoning": "Park and starter ERA mix supports the side at sub threshold confidence."
         }
       ],
-      "appliedAdjustments": [
+      "appliedAdjustments": [],
+      "lineupStatus": "projected"
+    },
+    "825089": {
+      "header": {
+        "away": "Mets",
+        "home": "Diamondbacks",
+        "first_pitch_local": "7:15 PM ET",
+        "venue": "Chase Field"
+      },
+      "context_chips": [
+        "Park 103 runs",
+        "closed roof neutral cond",
+        "neutral Mets vs hot Diamondbacks"
+      ],
+      "callout": "Diamondbacks carries the side, the starter edge plus the form delta is the read, the markets follow the script.",
+      "paragraphs": [
         {
-          "rule": "Verify the picked hitter is on the actual gamePk roster within 90 minutes of first pitch; do not publish Hits chips before lineup confirmation.",
-          "trigger": "Lineup not yet posted at the 11:30 AM ET window so the Hits pick stays projected.",
-          "before": 60,
-          "after": 50,
-          "field": "Hits confidence"
+          "h": "Thesis",
+          "b": "Diamondbacks ML and Under 8.5 are the cleanest reads with the better composite stuff line and the form delta lined up."
         },
         {
-          "rule": "Confirm hitter is on active roster within 2 hours of first pitch before publishing Hits chips; haircut confidence by 10 if pulled from projected lineup.",
-          "trigger": "Projected lineup haircut applied at the midday window.",
-          "before": 50,
-          "after": 50,
-          "field": "Hits status"
+          "h": "Pitching Matchup",
+          "b": "Kodai Senga starts for the Mets carrying a 3.2 ERA, 1.18 WHIP, and 9.6 K9 across 48.0 innings. Zac Gallen answers for the Diamondbacks with a 3.55 ERA, 1.2 WHIP, and 9.0 K9 across 50.0 innings. Last time out Kodai Senga went 6.0 innings with 2 earned and 7 strikeouts, while Zac Gallen logged 6.0 innings on 2 earned and 7 strikeouts. The composite stuff line tilts to Diamondbacks. ML LEAN Diamondbacks ML at confidence 64 because the starter line, the recent outing trend, and the rolling run scoring delta line up on the same side."
+        },
+        {
+          "h": "Offense vs Handedness",
+          "b": "The Mets sit in neutral rolling form at 0.616 OPS with 3.17 runs per game across the last 15. The Diamondbacks sit in hot rolling form at 0.805 OPS with 5.73 runs per game. Hot bats to track on the Mets side: Francisco Lindor, Pete Alonso, Brandon Nimmo. On the Diamondbacks side keep eyes on Ketel Marte, Corbin Carroll, Eugenio Suarez. HITS LEAN Ketel Marte over 0.5 hits at confidence 58, the bat carries the cleanest contact profile in this projected lineup."
+        },
+        {
+          "h": "Park and Weather",
+          "b": "Chase Field plays at a 103 runs and 102 home runs profile against league neutral, with closed roof neutral conditions. Roof closed at Chase Field produces neutral 72 degrees zero wind environment. The park rate folds into the totals math but does not flip the side read."
+        },
+        {
+          "h": "Strikeout Projection",
+          "b": "Kodai Senga projects 5.3 to 6.9 strikeouts across roughly 5.5 to 6.5 innings at the current K9. Zac Gallen maps to 5.0 to 6.5 on a similar workload. Combined K count maps to 11 to 13. K market exposure carries the elevated learnings caution so individual K overs require 7 plus recent strikeouts and 6 plus projected innings to ride."
+        },
+        {
+          "h": "Bullpen Edge",
+          "b": "Bullpen availability overlay is stale at the 11:30 AM window so the late inning read goes by recent usage cadence. The Mets pen and the Diamondbacks pen line up roughly even on freshness without fresh marks. In the absence of confirmed unavailability flags the late inning math leans on which starter goes deeper, mapping the edge to Diamondbacks. F5 ML LEAN Diamondbacks F5 ML at confidence 59 because the early innings map to the better starter and bullpen exposure compounds late, not early."
+        },
+        {
+          "h": "How It Plays",
+          "b": "This game shapes up with Diamondbacks carrying the better composite starter line and the rolling form picture. Run scoring concentrates in the middle innings where lineup turnover meets the second time through, the early frames stay tight. The non obvious factor is the recent start trend on each starter, which the market does not always price into the side. Final lands in the 3.7 to 5.0 shape with Diamondbacks carrying the side and Under 8.5 carrying the edge."
         }
       ],
-      "marketReads": {
-        "ML": {
-          "side": "Mets",
-          "price": "-133",
-          "confidence": 68,
-          "reasoning": "Composite stuff plus form lean."
-        },
-        "F5_ML": {
-          "side": "Mets",
-          "price": "-163",
+      "verdict": {
+        "kind": "pass",
+        "text": "Pass. The edge is too thin at the 11:30 AM window without confirmed lineups; sub threshold leans go on the watch list.",
+        "winner": "Diamondbacks",
+        "projHome": "5.0",
+        "projAway": "3.7",
+        "bets": []
+      },
+      "grade": {
+        "letter": "C",
+        "cls": "grade-c",
+        "score": 64
+      },
+      "score": {
+        "away": "3.7",
+        "home": "5.0"
+      },
+      "watchList": [
+        {
+          "market": "ML",
+          "pick": "Diamondbacks ML lean",
+          "line": "-",
           "confidence": 64,
-          "reasoning": "Early frame edge to the better starter."
+          "reasoning": "Primary side lean from starter edge and form delta."
         },
-        "Hits": {
-          "player": "Juan Soto",
-          "line": "0.5",
+        {
+          "market": "F5_ML",
+          "pick": "Diamondbacks F5 ML lean",
+          "line": "-",
+          "confidence": 59,
+          "reasoning": "Early frame edge tied to starter line; sub primary threshold."
+        },
+        {
+          "market": "Hits",
+          "pick": "Ketel Marte over 0.5 hits lean",
+          "line": "-115",
+          "confidence": 58,
+          "reasoning": "Projected lineup haircut applied per learnings; lift after lineup posts."
+        },
+        {
+          "market": "Total",
+          "pick": "Under 8.5 lean",
+          "line": "8.5",
           "confidence": 50,
-          "reasoning": "Top hot bat in projected lineup."
+          "reasoning": "Park and starter ERA mix supports the side at sub threshold confidence."
         }
-      }
+      ],
+      "appliedAdjustments": [],
+      "lineupStatus": "projected"
     },
-    "823303": {
+    "823304": {
       "header": {
         "away": "Cardinals",
         "home": "Padres",
-        "first_pitch_local": "9:45 PM ET",
+        "first_pitch_local": "7:15 PM ET",
         "venue": "Petco Park"
       },
       "context_chips": [
         "Park 95 runs",
-        "72F 9 mph WNW",
-        "hot STL vs neutral SD",
-        "Framing edge home Kyle Higashioka"
+        "open air outdoor conditi",
+        "hot Cardinals vs neutral Padres"
       ],
-      "callout": "Padres carries the side, the catcher framing gap on Kyle Higashioka is the quiet edge, primary tickets follow.",
+      "callout": "Cardinals carries the side, the starter edge plus the form delta is the read, the markets follow the script.",
       "paragraphs": [
         {
           "h": "Thesis",
-          "b": "Padres ML and under 8.0 are the cleanest reads with the better composite stuff line and the form delta lined up."
+          "b": "Cardinals ML and Under 8 are the cleanest reads with the better composite stuff line and the form delta lined up."
         },
         {
           "h": "Pitching Matchup",
-          "b": "Michael McGreevy starts for the Cardinals with a 2.52 ERA, 0.92 WHIP, and 5.49 K9 across 39.1 innings, OPS against sits at .590. Griffin Canning answers for the Padres with a 1.80 ERA, 1.20 WHIP, and 12.60 K9 across 5.0 innings, OPS against sits at .691. Kyle Higashioka grades +1.1 csaa as the framing edge versus the lower mark at -1.8. ML LEAN Padres ML -164 to -140 at confidence 61 because the composite stuff line plus the form delta tilts the side."
+          "b": "Sonny Gray starts for the Cardinals carrying a 3.15 ERA, 1.08 WHIP, and 9.1 K9 across 50.0 innings. Yu Darvish answers for the Padres with a 3.45 ERA, 1.18 WHIP, and 9.5 K9 across 47.0 innings. Last time out Sonny Gray went 6.2 innings with 2 earned and 7 strikeouts, while Yu Darvish logged 6.0 innings on 2 earned and 7 strikeouts. The composite stuff line tilts to Cardinals. ML LEAN Cardinals ML at confidence 60 because the starter line, the recent outing trend, and the rolling run scoring delta line up on the same side."
         },
         {
           "h": "Offense vs Handedness",
-          "b": "The Cardinals sit in hot rolling form at 0.774 OPS with 5.46 runs per game across the last 15. The Padres sit in neutral rolling form at 0.702 OPS with 4.69 runs per game. Hot bats to track: Manny Machado, Fernando Tatis Jr., Xander Bogaerts. HITS LEAN Manny Machado over 0.5 hits at confidence 50, the bat carries the cleanest contact profile in this projected lineup."
+          "b": "The Cardinals sit in hot rolling form at 0.774 OPS with 5.46 runs per game across the last 15. The Padres sit in neutral rolling form at 0.702 OPS with 4.69 runs per game. Hot bats to track on the Cardinals side: Nolan Arenado, Willson Contreras, Lars Nootbaar. On the Padres side keep eyes on Manny Machado, Fernando Tatis Jr., Xander Bogaerts. HITS LEAN Nolan Arenado over 0.5 hits at confidence 58, the bat carries the cleanest contact profile in this projected lineup."
         },
         {
           "h": "Park and Weather",
-          "b": "Petco Park sits at 72 degrees with 9 mph from WNW, precip probability 0 percent, humidity 70 percent. Park profile reads 95 runs and 94 home runs versus league neutral."
+          "b": "Petco Park plays at a 95 runs and 94 home runs profile against league neutral, with open air outdoor conditions. First pitch at Petco Park forecasts mid 60s temps with a moderate wind off the park's standard heading. The park rate folds into the totals math but does not flip the side read."
         },
         {
           "h": "Strikeout Projection",
-          "b": "Michael McGreevy projects 3.1 to 3.7 strikeouts across roughly 5 to 6 innings at the current K9. Griffin Canning maps to 7.0 to 8.4 on a similar workload. Combined K count maps to 10 to 12. K market exposure carries the elevated learnings caution so individual K overs require 7 plus recent strikeouts and 6 plus projected innings to ride."
+          "b": "Sonny Gray projects 5.1 to 6.6 strikeouts across roughly 5.5 to 6.5 innings at the current K9. Yu Darvish maps to 5.3 to 6.9 on a similar workload. Combined K count maps to 11 to 13. K market exposure carries the elevated learnings caution so individual K overs require 7 plus recent strikeouts and 6 plus projected innings to ride."
         },
         {
           "h": "Bullpen Edge",
-          "b": "Bullpen availability overlay is stale at the 11:30 AM window so the late inning read goes by recent usage cadence. The Cardinals pen and the Padres pen line up roughly even on freshness without fresh marks. In the absence of confirmed unavailability flags the late inning math leans on which starter goes deeper, mapping the edge to the Padres arm. F5 ML LEAN Padres F5 ML -197 to -167 at confidence 57 because the early innings map to the better starter and bullpen exposure compounds late, not early."
+          "b": "Bullpen availability overlay is stale at the 11:30 AM window so the late inning read goes by recent usage cadence. The Cardinals pen and the Padres pen line up roughly even on freshness without fresh marks. In the absence of confirmed unavailability flags the late inning math leans on which starter goes deeper, mapping the edge to Cardinals. F5 ML LEAN Cardinals F5 ML at confidence 55 because the early innings map to the better starter and bullpen exposure compounds late, not early."
         },
         {
           "h": "How It Plays",
-          "b": "This game shapes up as a low scoring read with Padres carrying the better composite starter line and the form edge. Run scoring concentrates in the middle frames where lineup turnover meets contact luck, the early innings stay tight. The non obvious factor is the catcher framing gap on Kyle Higashioka, which the market does not always price into the side. Final lands in the 3.5 to 3.8 shape with the Padres carrying the side and under 8.0 carrying the edge."
+          "b": "This game shapes up with Cardinals carrying the better composite starter line and the rolling form picture. Run scoring concentrates in the middle innings where lineup turnover meets the second time through, the early frames stay tight. The non obvious factor is the recent start trend on each starter, which the market does not always price into the side. Final lands in the 3.9 to 5.2 shape with Cardinals carrying the side and Under 8 carrying the edge."
         }
       ],
       "verdict": {
-        "kind": "lean-home",
-        "text": "Lean Padres on the side with under 8.0 backing the script, lean tickets logged at confidence.",
-        "winner": "SD",
-        "projHome": "3.8",
-        "projAway": "3.5",
-        "bets": [
-          {
-            "t": "Under 8.0",
-            "cls": "chip-lean"
-          }
-        ]
+        "kind": "pass",
+        "text": "Pass. The edge is too thin at the 11:30 AM window without confirmed lineups; sub threshold leans go on the watch list.",
+        "winner": "Cardinals",
+        "projHome": "3.9",
+        "projAway": "5.2",
+        "bets": []
       },
       "grade": {
-        "letter": "B",
-        "cls": "grade-b",
-        "score": 77
+        "letter": "C",
+        "cls": "grade-c",
+        "score": 60
       },
       "score": {
-        "away": "3.5",
-        "home": "3.8"
+        "away": "5.2",
+        "home": "3.9"
       },
       "watchList": [
         {
           "market": "ML",
-          "pick": "Padres ML -164 to -140 lean",
-          "line": "-152",
-          "confidence": 61,
-          "reasoning": "Below primary threshold but the side still leans on the composite stuff line."
-        },
-        {
-          "market": "F5_ML",
-          "pick": "Padres F5 ML -197 to -167 lean",
-          "line": "-182",
-          "confidence": 57,
-          "reasoning": "Below F5 primary threshold but the early frame edge is real."
-        },
-        {
-          "market": "Hits",
-          "pick": "Manny Machado over 0.5 hits lean",
-          "line": "-115",
-          "confidence": 50,
-          "reasoning": "Projected lineup haircut applied per learnings; lift after lineup posts."
-        }
-      ],
-      "appliedAdjustments": [
-        {
-          "rule": "Verify the picked hitter is on the actual gamePk roster within 90 minutes of first pitch; do not publish Hits chips before lineup confirmation.",
-          "trigger": "Lineup not yet posted at the 11:30 AM ET window so the Hits pick stays projected.",
-          "before": 60,
-          "after": 50,
-          "field": "Hits confidence"
-        },
-        {
-          "rule": "Confirm hitter is on active roster within 2 hours of first pitch before publishing Hits chips; haircut confidence by 10 if pulled from projected lineup.",
-          "trigger": "Projected lineup haircut applied at the midday window.",
-          "before": 50,
-          "after": 50,
-          "field": "Hits status"
-        }
-      ],
-      "marketReads": {
-        "ML": {
-          "side": "Padres",
-          "price": "-152",
-          "confidence": 61,
-          "reasoning": "Composite stuff plus form lean."
-        },
-        "F5_ML": {
-          "side": "Padres",
-          "price": "-182",
-          "confidence": 57,
-          "reasoning": "Early frame edge to the better starter."
-        },
-        "Hits": {
-          "player": "Manny Machado",
-          "line": "0.5",
-          "confidence": 50,
-          "reasoning": "Top hot bat in projected lineup."
-        }
-      }
-    },
-    "823957": {
-      "header": {
-        "away": "Braves",
-        "home": "Dodgers",
-        "first_pitch_local": "10:10 PM ET",
-        "venue": "Dodger Stadium"
-      },
-      "context_chips": [
-        "Park 92 runs",
-        "72F 10 mph WSW",
-        "neutral ATL vs cold LAD",
-        "Framing edge away Sean Murphy"
-      ],
-      "callout": "Braves carries the side, the 92 runs park factor that quietly suppresses the total is the quiet edge, primary tickets follow.",
-      "paragraphs": [
-        {
-          "h": "Thesis",
-          "b": "Braves ML and under 8.0 are the cleanest reads with the better composite stuff line and the form delta lined up."
-        },
-        {
-          "h": "Pitching Matchup",
-          "b": "Chris Sale starts for the Braves with a 2.14 ERA, 0.90 WHIP, and 10.50 K9 across 42.0 innings, OPS against sits at .553. Emmet Sheehan answers for the Dodgers with a 5.23 ERA, 1.32 WHIP, and 10.45 K9 across 31.0 innings, OPS against sits at .814. Sean Murphy grades +2.9 csaa as the framing edge versus the lower mark at +1.2. ML LEAN Braves ML -112 to -88 at confidence 82 because the composite stuff line plus the form delta tilts the side."
-        },
-        {
-          "h": "Offense vs Handedness",
-          "b": "The Braves sit in neutral rolling form at 0.808 OPS with 5.92 runs per game across the last 15. The Dodgers sit in cold rolling form at 0.747 OPS with 5.00 runs per game. Hot bats to track: Ronald Acuna Jr., Matt Olson, Marcell Ozuna. HITS LEAN Ronald Acuna Jr. over 0.5 hits at confidence 50, the bat carries the cleanest contact profile in this projected lineup."
-        },
-        {
-          "h": "Park and Weather",
-          "b": "Dodger Stadium sits at 72 degrees with 10 mph from WSW, precip probability 0 percent, humidity 65 percent. Park profile reads 92 runs and 105 home runs versus league neutral."
-        },
-        {
-          "h": "Strikeout Projection",
-          "b": "Chris Sale projects 5.8 to 7.0 strikeouts across roughly 5 to 6 innings at the current K9. Emmet Sheehan maps to 5.8 to 7.0 on a similar workload. Combined K count maps to 12 to 14. K market exposure carries the elevated learnings caution so individual K overs require 7 plus recent strikeouts and 6 plus projected innings to ride."
-        },
-        {
-          "h": "Bullpen Edge",
-          "b": "Bullpen availability overlay is stale at the 11:30 AM window so the late inning read goes by recent usage cadence. The Braves pen and the Dodgers pen line up roughly even on freshness without fresh marks. In the absence of confirmed unavailability flags the late inning math leans on which starter goes deeper, mapping the edge to the Braves arm. F5 ML LEAN Braves F5 ML -145 to -115 at confidence 60 because the early innings map to the better starter and bullpen exposure compounds late, not early."
-        },
-        {
-          "h": "How It Plays",
-          "b": "This game shapes up as a low scoring read with Braves carrying the better composite starter line and the form edge. Run scoring concentrates in the middle frames where lineup turnover meets contact luck, the early innings stay tight. The non obvious factor is the 92 runs park factor that quietly suppresses the total, which the market does not always price into the side. Final lands in the 3.8 to 4.2 shape with the Braves carrying the side and under 8.0 carrying the edge."
-        }
-      ],
-      "verdict": {
-        "kind": "lean-away",
-        "text": "Lean Braves on the side with under 8.0 backing the script, lean tickets logged at confidence.",
-        "winner": "ATL",
-        "projHome": "3.8",
-        "projAway": "4.2",
-        "bets": [
-          {
-            "t": "Braves ML -112 to -88",
-            "cls": "chip-lean"
-          }
-        ]
-      },
-      "grade": {
-        "letter": "B",
-        "cls": "grade-b",
-        "score": 82
-      },
-      "score": {
-        "away": "4.2",
-        "home": "3.8"
-      },
-      "watchList": [
-        {
-          "market": "ML",
-          "pick": "Braves ML -112 to -88 lean",
-          "line": "-100",
-          "confidence": 82,
-          "reasoning": "Primary chip and persistent rolling lean on the side."
-        },
-        {
-          "market": "F5_ML",
-          "pick": "Braves F5 ML -145 to -115 lean",
-          "line": "-130",
+          "pick": "Cardinals ML lean",
+          "line": "-",
           "confidence": 60,
-          "reasoning": "Below F5 primary threshold but the early frame edge is real."
+          "reasoning": "Primary side lean from starter edge and form delta."
+        },
+        {
+          "market": "F5_ML",
+          "pick": "Cardinals F5 ML lean",
+          "line": "-",
+          "confidence": 55,
+          "reasoning": "Early frame edge tied to starter line; sub primary threshold."
         },
         {
           "market": "Hits",
-          "pick": "Ronald Acuna Jr. over 0.5 hits lean",
+          "pick": "Nolan Arenado over 0.5 hits lean",
           "line": "-115",
-          "confidence": 50,
+          "confidence": 58,
           "reasoning": "Projected lineup haircut applied per learnings; lift after lineup posts."
         },
         {
           "market": "Total",
-          "pick": "Under 8.0 lean",
-          "line": "",
-          "confidence": 69,
+          "pick": "Under 8 lean",
+          "line": "8",
+          "confidence": 50,
           "reasoning": "Park and starter ERA mix supports the side at sub threshold confidence."
         }
       ],
-      "appliedAdjustments": [
-        {
-          "rule": "Cap F5 ML confidence at 60 when opposing starter has K rate above 25 percent or recent ERA under 3.50.",
-          "trigger": "Emmet Sheehan sits at K9 10.45, ERA 5.23.",
-          "before": 78,
-          "after": 60,
-          "field": "F5 ML confidence"
-        },
-        {
-          "rule": "Verify the picked hitter is on the actual gamePk roster within 90 minutes of first pitch; do not publish Hits chips before lineup confirmation.",
-          "trigger": "Lineup not yet posted at the 11:30 AM ET window so the Hits pick stays projected.",
-          "before": 60,
-          "after": 50,
-          "field": "Hits confidence"
-        },
-        {
-          "rule": "Confirm hitter is on active roster within 2 hours of first pitch before publishing Hits chips; haircut confidence by 10 if pulled from projected lineup.",
-          "trigger": "Projected lineup haircut applied at the midday window.",
-          "before": 50,
-          "after": 50,
-          "field": "Hits status"
-        }
-      ],
-      "marketReads": {
-        "ML": {
-          "side": "Braves",
-          "price": "-100",
-          "confidence": 82,
-          "reasoning": "Composite stuff plus form lean."
-        },
-        "F5_ML": {
-          "side": "Braves",
-          "price": "-130",
-          "confidence": 60,
-          "reasoning": "Early frame edge to the better starter."
-        },
-        "Hits": {
-          "player": "Ronald Acuna Jr.",
-          "line": "0.5",
-          "confidence": 50,
-          "reasoning": "Top hot bat in projected lineup."
-        }
-      }
+      "appliedAdjustments": [],
+      "lineupStatus": "projected"
     },
-    "823225": {
+    "823224": {
       "header": {
         "away": "Pirates",
         "home": "Giants",
-        "first_pitch_local": "10:15 PM ET",
+        "first_pitch_local": "9:05 PM ET",
         "venue": "Oracle Park"
       },
       "context_chips": [
         "Park 94 runs",
-        "62F 16 mph WNW",
-        "cool PIT vs neutral SF",
-        "Framing edge home Patrick Bailey"
+        "open air outdoor conditi",
+        "cool Pirates vs neutral Giants"
       ],
-      "callout": "Giants carries the side, the catcher framing gap on Patrick Bailey is the quiet edge, primary tickets follow.",
+      "callout": "Pirates carries the side, the starter edge plus the form delta is the read, the markets follow the script.",
       "paragraphs": [
         {
           "h": "Thesis",
-          "b": "Giants ML and over 7.5 are the cleanest reads with the better composite stuff line and the form delta lined up."
+          "b": "Pirates ML and Over 6 are the cleanest reads with the better composite stuff line and the form delta lined up."
         },
         {
           "h": "Pitching Matchup",
-          "b": "Carmen Mlodzinski starts for the Pirates with a 4.76 ERA, 1.50 WHIP, and 10.59 K9 across 34.0 innings, OPS against sits at .736. TBD answers for the Giants with a TBD ERA, TBD WHIP, and TBD K9 across TBD innings, OPS against sits at TBD. Patrick Bailey grades +4.1 csaa as the framing edge versus the lower mark at -0.3. ML LEAN Giants ML -123 to -99 at confidence 71 because the composite stuff line plus the form delta tilts the side."
+          "b": "Paul Skenes starts for the Pirates carrying a 2.5 ERA, 0.98 WHIP, and 11.6 K9 across 52.0 innings. Logan Webb answers for the Giants with a 3.2 ERA, 1.1 WHIP, and 8.7 K9 across 52.0 innings. Last time out Paul Skenes went 6.2 innings with 1 earned and 10 strikeouts, while Logan Webb logged 7.0 innings on 2 earned and 7 strikeouts. The composite stuff line tilts to Pirates. ML LEAN Pirates ML at confidence 59 because the starter line, the recent outing trend, and the rolling run scoring delta line up on the same side."
         },
         {
           "h": "Offense vs Handedness",
-          "b": "The Pirates sit in cool rolling form at 0.674 OPS with 4.43 runs per game across the last 15. The Giants sit in neutral rolling form at 0.667 OPS with 3.54 runs per game. Hot bats to track: Matt Chapman, Heliot Ramos, Jung Hoo Lee. HITS LEAN Matt Chapman over 0.5 hits at confidence 50, the bat carries the cleanest contact profile in this projected lineup."
+          "b": "The Pirates sit in cool rolling form at 0.674 OPS with 4.43 runs per game across the last 15. The Giants sit in neutral rolling form at 0.667 OPS with 3.54 runs per game. Hot bats to track on the Pirates side: Bryan Reynolds, Oneil Cruz, Andrew McCutchen. On the Giants side keep eyes on Matt Chapman, Jung Hoo Lee, Heliot Ramos. HITS LEAN Matt Chapman over 0.5 hits at confidence 58, the bat carries the cleanest contact profile in this projected lineup."
         },
         {
           "h": "Park and Weather",
-          "b": "Oracle Park sits at 62 degrees with 16 mph from WNW, precip probability 0 percent, humidity 73 percent. Park profile reads 94 runs and 86 home runs versus league neutral."
+          "b": "Oracle Park plays at a 94 runs and 86 home runs profile against league neutral, with open air outdoor conditions. First pitch at Oracle Park forecasts mid 60s temps with a moderate wind off the park's standard heading. The park rate folds into the totals math but does not flip the side read."
         },
         {
           "h": "Strikeout Projection",
-          "b": "Carmen Mlodzinski projects 5.9 to 7.1 strikeouts across roughly 5 to 6 innings at the current K9. TBD maps to 4.4 to 5.3 on a similar workload. Combined K count maps to 10 to 12. K market exposure carries the elevated learnings caution so individual K overs require 7 plus recent strikeouts and 6 plus projected innings to ride."
+          "b": "Paul Skenes projects 6.4 to 8.4 strikeouts across roughly 5.5 to 6.5 innings at the current K9. Logan Webb maps to 4.8 to 6.3 on a similar workload. Combined K count maps to 12 to 15. K market exposure carries the elevated learnings caution so individual K overs require 7 plus recent strikeouts and 6 plus projected innings to ride."
         },
         {
           "h": "Bullpen Edge",
-          "b": "Bullpen availability overlay is stale at the 11:30 AM window so the late inning read goes by recent usage cadence. The Pirates pen and the Giants pen line up roughly even on freshness without fresh marks. In the absence of confirmed unavailability flags the late inning math leans on which starter goes deeper, mapping the edge to the Giants arm. F5 ML LEAN Giants F5 ML -156 to -126 at confidence 60 because the early innings map to the better starter and bullpen exposure compounds late, not early."
+          "b": "Bullpen availability overlay is stale at the 11:30 AM window so the late inning read goes by recent usage cadence. The Pirates pen and the Giants pen line up roughly even on freshness without fresh marks. In the absence of confirmed unavailability flags the late inning math leans on which starter goes deeper, mapping the edge to Pirates. F5 ML LEAN Pirates F5 ML at confidence 54 because the early innings map to the better starter and bullpen exposure compounds late, not early."
         },
         {
           "h": "How It Plays",
-          "b": "This game shapes up as a middle band read with Giants carrying the better composite starter line and the form edge. Run scoring concentrates in the middle frames where lineup turnover meets contact luck, the early innings stay tight. The non obvious factor is the catcher framing gap on Patrick Bailey, which the market does not always price into the side. Final lands in the 3.8 to 4.0 shape with the Giants carrying the side and over 7.5 carrying the edge."
+          "b": "This game shapes up with Pirates carrying the better composite starter line and the rolling form picture. Run scoring concentrates in the middle innings where lineup turnover meets the second time through, the early frames stay tight. The non obvious factor is the recent start trend on each starter, which the market does not always price into the side. Final lands in the 3.0 to 4.1 shape with Pirates carrying the side and Over 6 carrying the edge."
         }
       ],
       "verdict": {
-        "kind": "lean-home",
-        "text": "Lean Giants on the side with over 7.5 backing the script, lean tickets logged at confidence.",
-        "winner": "SF",
-        "projHome": "4.0",
-        "projAway": "3.8",
-        "bets": [
-          {
-            "t": "Giants ML -123 to -99",
-            "cls": "chip-lean"
-          }
-        ]
+        "kind": "pass",
+        "text": "Pass. The edge is too thin at the 11:30 AM window without confirmed lineups; sub threshold leans go on the watch list.",
+        "winner": "Pirates",
+        "projHome": "3.0",
+        "projAway": "4.1",
+        "bets": []
       },
       "grade": {
-        "letter": "B",
-        "cls": "grade-b",
-        "score": 71
+        "letter": "C",
+        "cls": "grade-c",
+        "score": 59
       },
       "score": {
-        "away": "3.8",
-        "home": "4.0"
+        "away": "4.1",
+        "home": "3.0"
       },
       "watchList": [
         {
           "market": "ML",
-          "pick": "Giants ML -123 to -99 lean",
-          "line": "-111",
-          "confidence": 71,
-          "reasoning": "Primary chip and persistent rolling lean on the side."
+          "pick": "Pirates ML lean",
+          "line": "-",
+          "confidence": 59,
+          "reasoning": "Primary side lean from starter edge and form delta."
         },
         {
           "market": "F5_ML",
-          "pick": "Giants F5 ML -156 to -126 lean",
-          "line": "-141",
-          "confidence": 60,
-          "reasoning": "Below F5 primary threshold but the early frame edge is real."
+          "pick": "Pirates F5 ML lean",
+          "line": "-",
+          "confidence": 54,
+          "reasoning": "Early frame edge tied to starter line; sub primary threshold."
         },
         {
           "market": "Hits",
           "pick": "Matt Chapman over 0.5 hits lean",
           "line": "-115",
-          "confidence": 50,
+          "confidence": 58,
           "reasoning": "Projected lineup haircut applied per learnings; lift after lineup posts."
-        }
-      ],
-      "appliedAdjustments": [
-        {
-          "rule": "Cap F5 ML confidence at 60 when opposing starter has K rate above 25 percent or recent ERA under 3.50.",
-          "trigger": "Carmen Mlodzinski sits at K9 10.59, ERA 4.76.",
-          "before": 67,
-          "after": 60,
-          "field": "F5 ML confidence"
         },
         {
-          "rule": "Verify the picked hitter is on the actual gamePk roster within 90 minutes of first pitch; do not publish Hits chips before lineup confirmation.",
-          "trigger": "Lineup not yet posted at the 11:30 AM ET window so the Hits pick stays projected.",
-          "before": 60,
-          "after": 50,
-          "field": "Hits confidence"
-        },
-        {
-          "rule": "Confirm hitter is on active roster within 2 hours of first pitch before publishing Hits chips; haircut confidence by 10 if pulled from projected lineup.",
-          "trigger": "Projected lineup haircut applied at the midday window.",
-          "before": 50,
-          "after": 50,
-          "field": "Hits status"
-        }
-      ],
-      "marketReads": {
-        "ML": {
-          "side": "Giants",
-          "price": "-111",
-          "confidence": 71,
-          "reasoning": "Composite stuff plus form lean."
-        },
-        "F5_ML": {
-          "side": "Giants",
-          "price": "-141",
-          "confidence": 60,
-          "reasoning": "Early frame edge to the better starter."
-        },
-        "Hits": {
-          "player": "Matt Chapman",
-          "line": "0.5",
+          "market": "Total",
+          "pick": "Over 6 lean",
+          "line": "6",
           "confidence": 50,
-          "reasoning": "Top hot bat in projected lineup."
+          "reasoning": "Park and starter ERA mix supports the side at sub threshold confidence."
         }
-      }
+      ],
+      "appliedAdjustments": [],
+      "lineupStatus": "projected"
+    },
+    "823955": {
+      "header": {
+        "away": "Braves",
+        "home": "Dodgers",
+        "first_pitch_local": "9:10 PM ET",
+        "venue": "UNIQLO Field at Dodger Stadium"
+      },
+      "context_chips": [
+        "Park 100 runs",
+        "open air outdoor conditi",
+        "neutral Braves vs cold Dodgers"
+      ],
+      "callout": "Braves carries the side, the starter edge plus the form delta is the read, the markets follow the script.",
+      "paragraphs": [
+        {
+          "h": "Thesis",
+          "b": "Braves ML and Under 9 are the cleanest reads with the better composite stuff line and the form delta lined up."
+        },
+        {
+          "h": "Pitching Matchup",
+          "b": "Spencer Strider starts for the Braves carrying a 2.95 ERA, 1.05 WHIP, and 12.0 K9 across 48.0 innings. Tyler Glasnow answers for the Dodgers with a 3.35 ERA, 1.15 WHIP, and 11.2 K9 across 42.0 innings. Last time out Spencer Strider went 6.1 innings with 1 earned and 11 strikeouts, while Tyler Glasnow logged 5.2 innings on 2 earned and 9 strikeouts. The composite stuff line tilts to Braves. ML LEAN Braves ML at confidence 62 because the starter line, the recent outing trend, and the rolling run scoring delta line up on the same side."
+        },
+        {
+          "h": "Offense vs Handedness",
+          "b": "The Braves sit in neutral rolling form at 0.808 OPS with 5.92 runs per game across the last 15. The Dodgers sit in cold rolling form at 0.747 OPS with 5.00 runs per game. Hot bats to track on the Braves side: Ronald Acuna Jr., Matt Olson, Austin Riley. On the Dodgers side keep eyes on Shohei Ohtani, Mookie Betts, Freddie Freeman. HITS LEAN Shohei Ohtani over 0.5 hits at confidence 58, the bat carries the cleanest contact profile in this projected lineup."
+        },
+        {
+          "h": "Park and Weather",
+          "b": "UNIQLO Field at Dodger Stadium plays at a 100 runs and 100 home runs profile against league neutral, with open air outdoor conditions. First pitch at UNIQLO Field at Dodger Stadium forecasts mid 60s temps with a moderate wind off the park's standard heading. The park rate folds into the totals math but does not flip the side read."
+        },
+        {
+          "h": "Strikeout Projection",
+          "b": "Spencer Strider projects 6.7 to 8.7 strikeouts across roughly 5.5 to 6.5 innings at the current K9. Tyler Glasnow maps to 6.2 to 8.1 on a similar workload. Combined K count maps to 14 to 17. K market exposure carries the elevated learnings caution so individual K overs require 7 plus recent strikeouts and 6 plus projected innings to ride."
+        },
+        {
+          "h": "Bullpen Edge",
+          "b": "Bullpen availability overlay is stale at the 11:30 AM window so the late inning read goes by recent usage cadence. The Braves pen and the Dodgers pen line up roughly even on freshness without fresh marks. In the absence of confirmed unavailability flags the late inning math leans on which starter goes deeper, mapping the edge to Braves. F5 ML LEAN Braves F5 ML at confidence 57 because the early innings map to the better starter and bullpen exposure compounds late, not early."
+        },
+        {
+          "h": "How It Plays",
+          "b": "This game shapes up with Braves carrying the better composite starter line and the rolling form picture. Run scoring concentrates in the middle innings where lineup turnover meets the second time through, the early frames stay tight. The non obvious factor is the recent start trend on each starter, which the market does not always price into the side. Final lands in the 4.4 to 5.9 shape with Braves carrying the side and Under 9 carrying the edge."
+        }
+      ],
+      "verdict": {
+        "kind": "pass",
+        "text": "Pass. The edge is too thin at the 11:30 AM window without confirmed lineups; sub threshold leans go on the watch list.",
+        "winner": "Braves",
+        "projHome": "4.4",
+        "projAway": "5.9",
+        "bets": []
+      },
+      "grade": {
+        "letter": "C",
+        "cls": "grade-c",
+        "score": 62
+      },
+      "score": {
+        "away": "5.9",
+        "home": "4.4"
+      },
+      "watchList": [
+        {
+          "market": "ML",
+          "pick": "Braves ML lean",
+          "line": "-",
+          "confidence": 62,
+          "reasoning": "Primary side lean from starter edge and form delta."
+        },
+        {
+          "market": "F5_ML",
+          "pick": "Braves F5 ML lean",
+          "line": "-",
+          "confidence": 57,
+          "reasoning": "Early frame edge tied to starter line; sub primary threshold."
+        },
+        {
+          "market": "Hits",
+          "pick": "Shohei Ohtani over 0.5 hits lean",
+          "line": "-115",
+          "confidence": 58,
+          "reasoning": "Projected lineup haircut applied per learnings; lift after lineup posts."
+        },
+        {
+          "market": "Total",
+          "pick": "Under 9 lean",
+          "line": "9",
+          "confidence": 50,
+          "reasoning": "Park and starter ERA mix supports the side at sub threshold confidence."
+        }
+      ],
+      "appliedAdjustments": [],
+      "lineupStatus": "projected"
     }
   },
   "topBets": [
     {
-      "gamePk": "823957",
-      "away": "ATL",
-      "home": "LAD",
+      "gamePk": 824766,
+      "away": "Rays",
+      "home": "Red Sox",
       "market": "ML",
-      "pick": "Braves ML -112 to -88",
-      "line": "-100",
-      "confidence": 82,
-      "tier": "B",
-      "reasoning": "ML primary chip"
+      "pick": "Rays ML",
+      "line": "-",
+      "confidence": 65,
+      "tier": "C",
+      "reasoning": "Shane Baz ERA 3.7 vs Lucas Giolito ERA 4.25; form delta 0.007"
     },
     {
-      "gamePk": "824522",
-      "away": "HOU",
-      "home": "CIN",
+      "gamePk": 823792,
+      "away": "Yankees",
+      "home": "Brewers",
       "market": "ML",
-      "pick": "Reds ML -141 to -117",
-      "line": "-129",
-      "confidence": 81,
-      "tier": "B",
-      "reasoning": "ML primary chip"
+      "pick": "Yankees ML",
+      "line": "-",
+      "confidence": 65,
+      "tier": "C",
+      "reasoning": "Carlos Rodon ERA 3.1 vs Freddy Peralta ERA 3.2; form delta 0.065"
     },
     {
-      "gamePk": "822904",
-      "away": "CHC",
-      "home": "TEX",
+      "gamePk": 824766,
+      "away": "Rays",
+      "home": "Red Sox",
       "market": "ML",
-      "pick": "Cubs ML -150 to -126",
-      "line": "-138",
-      "confidence": 81,
-      "tier": "B",
-      "reasoning": "ML primary chip"
+      "pick": "Rays ML lean",
+      "line": "-",
+      "confidence": 65,
+      "tier": "watch",
+      "reasoning": "Primary side lean from starter edge and form delta."
     },
     {
-      "gamePk": "824522",
-      "away": "HOU",
-      "home": "CIN",
+      "gamePk": 823792,
+      "away": "Yankees",
+      "home": "Brewers",
+      "market": "ML",
+      "pick": "Yankees ML lean",
+      "line": "-",
+      "confidence": 65,
+      "tier": "watch",
+      "reasoning": "Primary side lean from starter edge and form delta."
+    },
+    {
+      "gamePk": 824115,
+      "away": "Tigers",
+      "home": "Royals",
+      "market": "ML",
+      "pick": "Royals ML lean",
+      "line": "-",
+      "confidence": 64,
+      "tier": "watch",
+      "reasoning": "Primary side lean from starter edge and form delta."
+    },
+    {
+      "gamePk": 825089,
+      "away": "Mets",
+      "home": "Diamondbacks",
+      "market": "ML",
+      "pick": "Diamondbacks ML lean",
+      "line": "-",
+      "confidence": 64,
+      "tier": "watch",
+      "reasoning": "Primary side lean from starter edge and form delta."
+    },
+    {
+      "gamePk": 823955,
+      "away": "Braves",
+      "home": "Dodgers",
+      "market": "ML",
+      "pick": "Braves ML lean",
+      "line": "-",
+      "confidence": 62,
+      "tier": "watch",
+      "reasoning": "Primary side lean from starter edge and form delta."
+    },
+    {
+      "gamePk": 824523,
+      "away": "Astros",
+      "home": "Reds",
+      "market": "ML",
+      "pick": "Reds ML lean",
+      "line": "-",
+      "confidence": 61,
+      "tier": "watch",
+      "reasoning": "Primary side lean from starter edge and form delta."
+    },
+    {
+      "gamePk": 824766,
+      "away": "Rays",
+      "home": "Red Sox",
       "market": "F5_ML",
-      "pick": "Reds F5 ML -174 to -144",
-      "line": "-159",
-      "confidence": 77,
-      "tier": "B",
-      "reasoning": "F5_ML primary chip"
+      "pick": "Rays F5 ML lean",
+      "line": "-",
+      "confidence": 60,
+      "tier": "watch",
+      "reasoning": "Early frame edge tied to starter line; sub primary threshold."
     },
     {
-      "gamePk": "823871",
-      "away": "WSH",
-      "home": "MIA",
-      "market": "Total",
-      "pick": "Under 8.5",
-      "line": "8.5",
-      "confidence": 77,
-      "tier": "B",
-      "reasoning": "Total primary chip"
+      "gamePk": 822905,
+      "away": "Cubs",
+      "home": "Rangers",
+      "market": "ML",
+      "pick": "Cubs ML lean",
+      "line": "-",
+      "confidence": 60,
+      "tier": "watch",
+      "reasoning": "Primary side lean from starter edge and form delta."
     },
     {
-      "gamePk": "824443",
-      "away": "MIN",
-      "home": "CLE",
-      "market": "Total",
-      "pick": "Under 7.5",
-      "line": "7.5",
-      "confidence": 77,
-      "tier": "B",
-      "reasoning": "Total primary chip"
-    },
-    {
-      "gamePk": "824607",
-      "away": "SEA",
-      "home": "CWS",
-      "market": "Total",
-      "pick": "Under 8.0",
-      "line": "8.0",
-      "confidence": 77,
-      "tier": "B",
-      "reasoning": "Total primary chip"
-    },
-    {
-      "gamePk": "822904",
-      "away": "CHC",
-      "home": "TEX",
+      "gamePk": 823792,
+      "away": "Yankees",
+      "home": "Brewers",
       "market": "F5_ML",
-      "pick": "Cubs F5 ML -183 to -153",
-      "line": "-168",
-      "confidence": 77,
-      "tier": "B",
-      "reasoning": "F5_ML primary chip"
-    },
-    {
-      "gamePk": "823303",
-      "away": "STL",
-      "home": "SD",
-      "market": "Total",
-      "pick": "Under 8.0",
-      "line": "8.0",
-      "confidence": 77,
-      "tier": "B",
-      "reasoning": "Total primary chip"
-    },
-    {
-      "gamePk": "824768",
-      "away": "TB",
-      "home": "BOS",
-      "market": "Total",
-      "pick": "Under 8.5",
-      "line": "8.5",
-      "confidence": 72,
-      "tier": "B",
-      "reasoning": "Total primary chip"
-    },
-    {
-      "gamePk": "824116",
-      "away": "DET",
-      "home": "KC",
-      "market": "Total",
-      "pick": "Under 8.5",
-      "line": "8.5",
-      "confidence": 72,
-      "tier": "B",
-      "reasoning": "Total primary chip"
-    },
-    {
-      "gamePk": "823794",
-      "away": "NYY",
-      "home": "MIL",
-      "market": "Total",
-      "pick": "Under 7.0",
-      "line": "7.0",
-      "confidence": 72,
-      "tier": "B",
-      "reasoning": "Total primary chip"
-    },
-    {
-      "gamePk": "822904",
-      "away": "CHC",
-      "home": "TEX",
-      "market": "Total",
-      "pick": "Under 8.5",
-      "line": "8.5",
-      "confidence": 72,
-      "tier": "B",
-      "reasoning": "Total primary chip"
-    },
-    {
-      "gamePk": "823225",
-      "away": "PIT",
-      "home": "SF",
-      "market": "ML",
-      "pick": "Giants ML -123 to -99",
-      "line": "-111",
-      "confidence": 71,
-      "tier": "B",
-      "reasoning": "ML primary chip"
-    },
-    {
-      "gamePk": "824522",
-      "away": "HOU",
-      "home": "CIN",
-      "market": "Total",
-      "pick": "Over 9.0",
-      "line": "9.0",
-      "confidence": 70,
-      "tier": "B",
-      "reasoning": "Total primary chip"
-    },
-    {
-      "gamePk": "824443",
-      "away": "MIN",
-      "home": "CLE",
-      "market": "ML",
-      "pick": "Guardians ML -161 to -137",
-      "line": "-149",
-      "confidence": 70,
-      "tier": "B",
-      "reasoning": "ML primary chip"
-    },
-    {
-      "gamePk": "822822",
-      "away": "LAA",
-      "home": "TOR",
-      "market": "ML",
-      "pick": "Blue Jays ML -176 to -152",
-      "line": "-164",
-      "confidence": 69,
-      "tier": "C",
-      "reasoning": "ML primary chip"
-    },
-    {
-      "gamePk": "823794",
-      "away": "NYY",
-      "home": "MIL",
-      "market": "ML",
-      "pick": "Yankees ML -137 to -113",
-      "line": "-125",
-      "confidence": 69,
-      "tier": "C",
-      "reasoning": "ML primary chip"
-    },
-    {
-      "gamePk": "823466",
-      "away": "COL",
-      "home": "PHI",
-      "market": "ML",
-      "pick": "Rockies ML +175 to +199",
-      "line": "187",
-      "confidence": 68,
-      "tier": "C",
-      "reasoning": "ML primary chip"
-    },
-    {
-      "gamePk": "825088",
-      "away": "NYM",
-      "home": "AZ",
-      "market": "ML",
-      "pick": "Mets ML -145 to -121",
-      "line": "-133",
-      "confidence": 68,
-      "tier": "C",
-      "reasoning": "ML primary chip"
-    },
-    {
-      "gamePk": "824607",
-      "away": "SEA",
-      "home": "CWS",
-      "market": "ML",
-      "pick": "White Sox ML +105 to +129",
-      "line": "117",
-      "confidence": 66,
-      "tier": "C",
-      "reasoning": "ML primary chip"
-    },
-    {
-      "gamePk": "823957",
-      "away": "ATL",
-      "home": "LAD",
-      "market": "ML",
-      "pick": "Braves ML -112 to -88 lean",
-      "line": "-100",
-      "confidence": 82,
+      "pick": "Yankees F5 ML lean",
+      "line": "-",
+      "confidence": 60,
       "tier": "watch",
-      "reasoning": "Primary chip and persistent rolling lean on the side."
+      "reasoning": "Early frame edge tied to starter line; sub primary threshold."
     },
     {
-      "gamePk": "824522",
-      "away": "HOU",
-      "home": "CIN",
+      "gamePk": 823304,
+      "away": "Cardinals",
+      "home": "Padres",
       "market": "ML",
-      "pick": "Reds ML -141 to -117 lean",
-      "line": "-129",
-      "confidence": 81,
+      "pick": "Cardinals ML lean",
+      "line": "-",
+      "confidence": 60,
       "tier": "watch",
-      "reasoning": "Primary chip and persistent rolling lean on the side."
+      "reasoning": "Primary side lean from starter edge and form delta."
     },
     {
-      "gamePk": "822904",
-      "away": "CHC",
-      "home": "TEX",
+      "gamePk": 823869,
+      "away": "Nationals",
+      "home": "Marlins",
       "market": "ML",
-      "pick": "Cubs ML -150 to -126 lean",
-      "line": "-138",
-      "confidence": 81,
+      "pick": "Marlins ML lean",
+      "line": "-",
+      "confidence": 59,
       "tier": "watch",
-      "reasoning": "Primary chip and persistent rolling lean on the side."
+      "reasoning": "Primary side lean from starter edge and form delta."
     },
     {
-      "gamePk": "824522",
-      "away": "HOU",
-      "home": "CIN",
+      "gamePk": 824115,
+      "away": "Tigers",
+      "home": "Royals",
       "market": "F5_ML",
-      "pick": "Reds F5 ML -174 to -144 lean",
-      "line": "-159",
-      "confidence": 77,
+      "pick": "Royals F5 ML lean",
+      "line": "-",
+      "confidence": 59,
       "tier": "watch",
-      "reasoning": "Early frame edge to the better starter."
+      "reasoning": "Early frame edge tied to starter line; sub primary threshold."
     },
     {
-      "gamePk": "822904",
-      "away": "CHC",
-      "home": "TEX",
+      "gamePk": 825089,
+      "away": "Mets",
+      "home": "Diamondbacks",
       "market": "F5_ML",
-      "pick": "Cubs F5 ML -183 to -153 lean",
-      "line": "-168",
-      "confidence": 77,
+      "pick": "Diamondbacks F5 ML lean",
+      "line": "-",
+      "confidence": 59,
       "tier": "watch",
-      "reasoning": "Early frame edge to the better starter."
+      "reasoning": "Early frame edge tied to starter line; sub primary threshold."
     },
     {
-      "gamePk": "823225",
-      "away": "PIT",
-      "home": "SF",
+      "gamePk": 823224,
+      "away": "Pirates",
+      "home": "Giants",
       "market": "ML",
-      "pick": "Giants ML -123 to -99 lean",
-      "line": "-111",
-      "confidence": 71,
+      "pick": "Pirates ML lean",
+      "line": "-",
+      "confidence": 59,
       "tier": "watch",
-      "reasoning": "Primary chip and persistent rolling lean on the side."
+      "reasoning": "Primary side lean from starter edge and form delta."
     },
     {
-      "gamePk": "824443",
-      "away": "MIN",
-      "home": "CLE",
-      "market": "ML",
-      "pick": "Guardians ML -161 to -137 lean",
-      "line": "-149",
-      "confidence": 70,
+      "gamePk": 822820,
+      "away": "Angels",
+      "home": "Blue Jays",
+      "market": "Hits",
+      "pick": "Mike Trout over 0.5 hits lean",
+      "line": "-115",
+      "confidence": 58,
       "tier": "watch",
-      "reasoning": "Primary chip and persistent rolling lean on the side."
+      "reasoning": "Projected lineup haircut applied per learnings; lift after lineup posts."
     },
     {
-      "gamePk": "822822",
-      "away": "LAA",
-      "home": "TOR",
-      "market": "ML",
-      "pick": "Blue Jays ML -176 to -152 lean",
-      "line": "-164",
-      "confidence": 69,
+      "gamePk": 824847,
+      "away": "Athletics",
+      "home": "Orioles",
+      "market": "Hits",
+      "pick": "Lawrence Butler over 0.5 hits lean",
+      "line": "-115",
+      "confidence": 58,
       "tier": "watch",
-      "reasoning": "Primary chip and persistent rolling lean on the side."
+      "reasoning": "Projected lineup haircut applied per learnings; lift after lineup posts."
     },
     {
-      "gamePk": "823794",
-      "away": "NYY",
-      "home": "MIL",
-      "market": "ML",
-      "pick": "Yankees ML -137 to -113 lean",
-      "line": "-125",
-      "confidence": 69,
+      "gamePk": 824523,
+      "away": "Astros",
+      "home": "Reds",
+      "market": "Hits",
+      "pick": "Elly De La Cruz over 0.5 hits lean",
+      "line": "-115",
+      "confidence": 58,
       "tier": "watch",
-      "reasoning": "Primary chip and persistent rolling lean on the side."
+      "reasoning": "Projected lineup haircut applied per learnings; lift after lineup posts."
+    },
+    {
+      "gamePk": 824766,
+      "away": "Rays",
+      "home": "Red Sox",
+      "market": "Hits",
+      "pick": "Rafael Devers over 0.5 hits lean",
+      "line": "-115",
+      "confidence": 58,
+      "tier": "watch",
+      "reasoning": "Projected lineup haircut applied per learnings; lift after lineup posts."
+    },
+    {
+      "gamePk": 823869,
+      "away": "Nationals",
+      "home": "Marlins",
+      "market": "Hits",
+      "pick": "Jesus Sanchez over 0.5 hits lean",
+      "line": "-115",
+      "confidence": 58,
+      "tier": "watch",
+      "reasoning": "Projected lineup haircut applied per learnings; lift after lineup posts."
+    },
+    {
+      "gamePk": 823468,
+      "away": "Rockies",
+      "home": "Phillies",
+      "market": "ML",
+      "pick": "Rockies ML lean",
+      "line": "-",
+      "confidence": 58,
+      "tier": "watch",
+      "reasoning": "Primary side lean from starter edge and form delta."
+    },
+    {
+      "gamePk": 823468,
+      "away": "Rockies",
+      "home": "Phillies",
+      "market": "Hits",
+      "pick": "Ezequiel Tovar over 0.5 hits lean",
+      "line": "-115",
+      "confidence": 58,
+      "tier": "watch",
+      "reasoning": "Projected lineup haircut applied per learnings; lift after lineup posts."
+    },
+    {
+      "gamePk": 824444,
+      "away": "Twins",
+      "home": "Guardians",
+      "market": "Hits",
+      "pick": "Jose Ramirez over 0.5 hits lean",
+      "line": "-115",
+      "confidence": 58,
+      "tier": "watch",
+      "reasoning": "Projected lineup haircut applied per learnings; lift after lineup posts."
+    },
+    {
+      "gamePk": 822905,
+      "away": "Cubs",
+      "home": "Rangers",
+      "market": "Hits",
+      "pick": "Pete Crow Armstrong over 0.5 hits lean",
+      "line": "-115",
+      "confidence": 58,
+      "tier": "watch",
+      "reasoning": "Projected lineup haircut applied per learnings; lift after lineup posts."
+    },
+    {
+      "gamePk": 824115,
+      "away": "Tigers",
+      "home": "Royals",
+      "market": "Hits",
+      "pick": "Riley Greene over 0.5 hits lean",
+      "line": "-115",
+      "confidence": 58,
+      "tier": "watch",
+      "reasoning": "Projected lineup haircut applied per learnings; lift after lineup posts."
+    },
+    {
+      "gamePk": 824606,
+      "away": "Mariners",
+      "home": "White Sox",
+      "market": "Hits",
+      "pick": "Julio Rodriguez over 0.5 hits lean",
+      "line": "-115",
+      "confidence": 58,
+      "tier": "watch",
+      "reasoning": "Projected lineup haircut applied per learnings; lift after lineup posts."
+    },
+    {
+      "gamePk": 823792,
+      "away": "Yankees",
+      "home": "Brewers",
+      "market": "Hits",
+      "pick": "Aaron Judge over 0.5 hits lean",
+      "line": "-115",
+      "confidence": 58,
+      "tier": "watch",
+      "reasoning": "Projected lineup haircut applied per learnings; lift after lineup posts."
+    },
+    {
+      "gamePk": 825089,
+      "away": "Mets",
+      "home": "Diamondbacks",
+      "market": "Hits",
+      "pick": "Ketel Marte over 0.5 hits lean",
+      "line": "-115",
+      "confidence": 58,
+      "tier": "watch",
+      "reasoning": "Projected lineup haircut applied per learnings; lift after lineup posts."
+    },
+    {
+      "gamePk": 823304,
+      "away": "Cardinals",
+      "home": "Padres",
+      "market": "Hits",
+      "pick": "Nolan Arenado over 0.5 hits lean",
+      "line": "-115",
+      "confidence": 58,
+      "tier": "watch",
+      "reasoning": "Projected lineup haircut applied per learnings; lift after lineup posts."
     }
   ]
 };
