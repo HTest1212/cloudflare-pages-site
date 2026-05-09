@@ -128,7 +128,7 @@
       {
         "category": "STARTER_OVERRATED",
         "frequency": 8,
-        "summary": "F5 ML lost 8 times \u2014 chosen starters trailed at the 5 inning mark too often.",
+        "summary": "F5 ML lost 8 times — chosen starters trailed at the 5 inning mark too often.",
         "adjustment_rule": "Cap F5 ML confidence at 60 when opposing starter has K rate above 25 percent or recent ERA under 3.50."
       },
       {
@@ -166,7 +166,7 @@
         "market": "K",
         "result": "loss",
         "category": "STARTER_REGRESSION",
-        "diagnosis": "Pulled early after 1.0 IP, 1 ER \u2014 couldn't accumulate Ks."
+        "diagnosis": "Pulled early after 1.0 IP, 1 ER — couldn't accumulate Ks."
       },
       {
         "id": "20260506-824198-F5_ML-3",
@@ -376,7 +376,7 @@
         "market": "K",
         "result": "loss",
         "category": "STARTER_REGRESSION",
-        "diagnosis": "Pulled early after 3.0 IP, 0 ER \u2014 couldn't accumulate Ks."
+        "diagnosis": "Pulled early after 3.0 IP, 0 ER — couldn't accumulate Ks."
       },
       {
         "id": "20260506-824118-F5_ML-3",
@@ -418,7 +418,7 @@
         "market": "K",
         "result": "void",
         "category": "DATA_GAP",
-        "diagnosis": "No box score data for pitcher p\u00e9rez"
+        "diagnosis": "No box score data for pitcher pérez"
       },
       {
         "id": "20260506-823872-Total-3",
@@ -1135,5 +1135,210 @@
         "diagnosis": "Total was 8; under 11.5 cashed by 3.5 runs."
       }
     ]
+  },
+  {
+    "asof": "2026-05-09T09:25:00Z",
+    "yesterday_date": "2026-05-08",
+    "yesterday_record": {
+      "picks": 156,
+      "wins": 86,
+      "losses": 63,
+      "pushes": 4,
+      "voids": 3,
+      "units": 16.0958,
+      "totalStake": 153.0,
+      "winRate": 0.5772,
+      "roi": 0.1052
+    },
+    "by_market": {
+      "F5_ML": {
+        "picks": 34,
+        "wins": 13,
+        "losses": 17,
+        "pushes": 4,
+        "voids": 0,
+        "units": -4.9436,
+        "totalStake": 34.0,
+        "winRate": 0.4333,
+        "roi": -0.1454
+      },
+      "Hits": {
+        "picks": 30,
+        "wins": 16,
+        "losses": 11,
+        "pushes": 0,
+        "voids": 3,
+        "units": 3.5456,
+        "totalStake": 27.0,
+        "winRate": 0.5926,
+        "roi": 0.1313
+      },
+      "ML": {
+        "picks": 48,
+        "wins": 25,
+        "losses": 23,
+        "pushes": 0,
+        "voids": 0,
+        "units": 0.4026,
+        "totalStake": 48.0,
+        "winRate": 0.5208,
+        "roi": 0.0084
+      },
+      "Total": {
+        "picks": 44,
+        "wins": 32,
+        "losses": 12,
+        "pushes": 0,
+        "voids": 0,
+        "units": 17.0912,
+        "totalStake": 44.0,
+        "winRate": 0.7273,
+        "roi": 0.3884
+      }
+    },
+    "by_tier": {
+      "B": {
+        "picks": 41,
+        "wins": 27,
+        "losses": 14,
+        "pushes": 0,
+        "voids": 0,
+        "units": 10.2251,
+        "totalStake": 41.0,
+        "winRate": 0.6585,
+        "roi": 0.2494
+      },
+      "C": {
+        "picks": 5,
+        "wins": 3,
+        "losses": 2,
+        "pushes": 0,
+        "voids": 0,
+        "units": 1.2317,
+        "totalStake": 5.0,
+        "winRate": 0.6,
+        "roi": 0.2463
+      },
+      "watch": {
+        "picks": 110,
+        "wins": 56,
+        "losses": 47,
+        "pushes": 4,
+        "voids": 3,
+        "units": 4.639,
+        "totalStake": 107.0,
+        "winRate": 0.5437,
+        "roi": 0.0434
+      }
+    },
+    "loss_categories": {
+      "STARTER_OVERRATED": 17,
+      "VARIANCE": 29,
+      "STARTER_REGRESSION": 16,
+      "BAD_PARK_READ": 1
+    },
+    "patterns_identified": [
+      {
+        "category": "STARTER_OVERRATED",
+        "frequency": 17,
+        "summary": "17 losses tagged STARTER_OVERRATED, concentrated on F5_ML; chosen starters trailed at the F5 mark or fell short of K thresholds.",
+        "adjustment_rule": "Cap F5 ML confidence at 60 when opposing starter has K rate above 25 percent or recent ERA under 3.50."
+      },
+      {
+        "category": "STARTER_REGRESSION",
+        "frequency": 16,
+        "summary": "16 losses tagged STARTER_REGRESSION, mostly on ML where chosen starters got hit harder than projected.",
+        "adjustment_rule": "Cap starter side confidence at 60 when the chosen starter has logged a recent outing of 5+ ER in 5 or fewer IP, or when his last two starts allowed 4+ runs each."
+      }
+    ],
+    "rules_generated": [
+      "Cap starter side confidence at 60 when the chosen starter has logged a recent outing of 5+ ER in 5 or fewer IP, or when his last two starts allowed 4+ runs each."
+    ],
+    "rules_dropped": [
+      "Lift the 5 point B tier confidence haircut once 7 day rolling B tier ROI is back above plus 5 percent (today's B tier delivered)."
+    ],
+    "top_loss_diagnoses": [
+      {
+        "id": "20260508-822822-F5ML-W2",
+        "market": "F5_ML",
+        "pick": "Angels F5 ML +105 to +145 lean",
+        "tier": "watch",
+        "category": "STARTER_OVERRATED",
+        "diagnosis": "Angels trailed F5 2 to 0; starter underperformed or opposing starter dominated."
+      },
+      {
+        "id": "20260508-822822-Hits-watch",
+        "market": "Hits",
+        "pick": "Vladimir Guerrero Jr. over 0.5 hits lean",
+        "tier": "watch",
+        "category": "VARIANCE",
+        "diagnosis": "Vladimir Guerrero Jr. went 0 for 2."
+      },
+      {
+        "id": "20260508-822822-ML-W1",
+        "market": "ML",
+        "pick": "Angels ML +125 to +145 lean",
+        "tier": "watch",
+        "category": "VARIANCE",
+        "diagnosis": "Angels lost 2 to 0; opposing offense outproduced ours."
+      },
+      {
+        "id": "20260508-823225-Hits-watch",
+        "market": "Hits",
+        "pick": "Matt Chapman over 0.5 hits lean",
+        "tier": "watch",
+        "category": "VARIANCE",
+        "diagnosis": "Matt Chapman went 0 for 4."
+      },
+      {
+        "id": "20260508-823303-F5ML-W2",
+        "market": "F5_ML",
+        "pick": "Padres F5 ML -123 to -93 lean",
+        "tier": "watch",
+        "category": "STARTER_OVERRATED",
+        "diagnosis": "Padres trailed F5 6 to 0; starter underperformed or opposing starter dominated."
+      },
+      {
+        "id": "20260508-823303-F5_ML-watch",
+        "market": "F5_ML",
+        "pick": "Padres F5 ML -197 to -167 lean",
+        "tier": "watch",
+        "category": "STARTER_OVERRATED",
+        "diagnosis": "Padres trailed F5 6 to 0; starter underperformed or opposing starter dominated."
+      },
+      {
+        "id": "20260508-823303-Hits-W3",
+        "market": "Hits",
+        "pick": "Xander Bogaerts over 0.5 hits lean",
+        "tier": "watch",
+        "category": "VARIANCE",
+        "diagnosis": "Xander Bogaerts went 0 for 4."
+      },
+      {
+        "id": "20260508-823303-Hits-watch",
+        "market": "Hits",
+        "pick": "Manny Machado over 0.5 hits lean",
+        "tier": "watch",
+        "category": "VARIANCE",
+        "diagnosis": "Manny Machado went 0 for 4."
+      },
+      {
+        "id": "20260508-823303-ML-W1",
+        "market": "ML",
+        "pick": "Padres ML -163 to -143 lean",
+        "tier": "watch",
+        "category": "VARIANCE",
+        "diagnosis": "Padres lost 6 to 0; opposing offense outproduced ours."
+      },
+      {
+        "id": "20260508-823303-ML-watch",
+        "market": "ML",
+        "pick": "Padres ML -164 to -140 lean",
+        "tier": "watch",
+        "category": "VARIANCE",
+        "diagnosis": "Padres lost 6 to 0; opposing offense outproduced ours."
+      }
+    ],
+    "all_loss_diagnoses_count": 63
   }
 ]

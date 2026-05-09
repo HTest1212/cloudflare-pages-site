@@ -1,104 +1,68 @@
-# Daily Retrospective — 2026-05-07
+# MLB Daily Retrospective Report
 
-asof: 2026-05-08 (idempotent re-run)
+As of: 2026-05-09T09:35:20Z
 
-## Yesterday's slate
+## Slate: 2026-05-08 (156 picks across 15 games)
 
-Date: 2026-05-07 (Thursday). Total games on the schedule: 10. All 10 finals.
+Yesterday: picks 156, W 86 L 63 P 4 V 3, units 16.10, winRate 57.7%, ROI 10.5%
 
-Final scores:
-- TEX 2 @ NYY 9
-- MIN 5 @ WSH 7
-- CLE 8 @ KC 5
-- CIN 3 @ CHC 8
-- NYM 2 @ COL 6
-- PIT 4 @ ARI 2
-- OAK 12 @ PHI 1
-- BAL 3 @ MIA 4
-- TB 8 @ BOS 4
-- STL 2 @ SD 1
+### By market (yesterday)
+- **F5_ML**: picks 34, W 13 L 17 P 4 V 0, units -4.94, winRate 43.3%, ROI -14.5%
+- **Hits**: picks 30, W 16 L 11 P 0 V 3, units 3.55, winRate 59.3%, ROI 13.1%
+- **ML**: picks 48, W 25 L 23 P 0 V 0, units 0.40, winRate 52.1%, ROI 0.8%
+- **Total**: picks 44, W 32 L 12 P 0 V 0, units 17.09, winRate 72.7%, ROI 38.8%
 
-## Yesterday's picks: record
+### By tier (yesterday)
+- **Tier B**: picks 41, W 27 L 14 P 0 V 0, units 10.23, winRate 65.8%, ROI 24.9%
+- **Tier C**: picks 5, W 3 L 2 P 0 V 0, units 1.23, winRate 60.0%, ROI 24.6%
+- **Tier watch**: picks 110, W 56 L 47 P 4 V 3, units 4.64, winRate 54.4%, ROI 4.3%
 
-52 picks settled.
-
-| Bucket | Picks | W | L | P | V | Units | Win % | ROI |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| All | 52 | 30 | 16 | 2 | 4 | 12.99 | 65.22 | 27.05 |
-
-By market:
-- F5_ML: 10 picks, 6 W, 2 L, 2 P, 0 V, +5.08 u, ROI 50.80
-- Hits: 10 picks, 5 W, 1 L, 0 P, 4 V, +3.55 u, ROI 59.09
-- K: 10 picks, 3 W, 7 L, 0 P, 0 V, -4.50 u, ROI -45.00
-- ML: 11 picks, 6 W, 5 L, 0 P, 0 V, +0.26 u, ROI 2.35
-- RL: 1 pick, 1 W, 0 L, 0 P, 0 V, +1.42 u, ROI 142.00
-- Total: 10 picks, 9 W, 1 L, 0 P, 0 V, +7.18 u, ROI 71.82
-
-By tier:
-- B: 18 picks, 12 W, 6 L, +4.56 u, ROI 25.34
-- C: 9 picks, 4 W, 5 L, -1.44 u, ROI -15.99
-- watch: 25 picks, 14 W, 5 L, 2 P, 4 V, +9.86 u, ROI 46.97
-
-## Top three losses
-
-1. Padres ML at minus 145 to minus 160 (B tier, conf 84). SD lost 2 to 1; the bats never produced against the Cardinals despite the home favorite read. Category VARIANCE.
-
-2. Michael King strikeouts over 6.5 (B tier, conf 84). King went 6.0 IP with 6 K and 1 ER, one short of the line on a usage limited night. Category STARTER_OVERRATED.
-
-3. Max Meyer strikeouts over 6.5 (B tier, conf 80). Meyer pulled at 5.0 IP with 5 K and 2 ER, well short of 6.5. Category STARTER_OVERRATED.
+## Top losses (highest confidence first)
+- `20260508-823466-TOTAL-2` (Total, tier B, conf 84): Under 7.5  ->  Total landed 16, blew through Under 7.5; offense outpaced model.
+- `20260508-823957-ML-1` (ML, tier B, conf 84): Braves ML -111 to -91  ->  Braves lost 3 to 1; opposing offense outproduced ours.
+- `20260508-823957-ML-W1` (ML, tier watch, conf 84): Braves ML -111 to -91 lean  ->  Braves lost 3 to 1; opposing offense outproduced ours.
+- `20260508-824522-F5ML-3` (F5_ML, tier B, conf 84): Reds F5 ML -102 to -72  ->  Reds trailed F5 2 to 0; starter underperformed or opposing starter dominated.
+- `20260508-824522-ML-1` (ML, tier B, conf 84): Reds ML -142 to -122  ->  Reds lost 10 to 0; opposing offense outproduced ours.
 
 ## Patterns identified
-
-1. STARTER_OVERRATED on the K market. The K book went 3 wins and 7 losses for ROI minus 45. Six losses tagged STARTER_OVERRATED. Adjustment rule: cap pitcher K thresholds 0.5 below market average and require projected 6 plus innings AND a recent start with 7 plus Ks before taking K over.
-
-2. STARTER_OVERRATED on F5 ML. Two F5 ML losses where the chosen starter trailed at the 5 inning mark. Rule: cap F5 ML confidence at 60 when the opposing starter has K rate above 25 percent or recent ERA under 3.50.
-
-3. LINEUP_CHANGE void leakage. Four hitter props voided yesterday because the player was not in the lineup or was mapped to the wrong gamePk (Suzuki DNP, Devers absent, Chisholm wrong game, Doyle DNP). Rule: verify the picked hitter is on the actual gamePk roster within 90 minutes of first pitch; do not publish Hits chips before lineup confirmation.
-
-4. MODEL_ERROR — B tier rebound. B tier ROI 25.34 today (W12 L6). Rule: lift the 5 point B tier confidence haircut once 7 day rolling B tier ROI is back above plus 5 percent.
-
-5. MISSED_NEWS — wrong gamePk mappings on Hits. Devers and Chisholm Hits chips referenced wrong games. Rule: validate every Hitter prop pick by checking the player ID against the gamePk team roster from the MLB API before publishing.
-
-6. BAD_PARK_READ — Coors F5 visiting team. Coors F5 ML on the visitor lost again as the Rockies bats got going late. Rule: do not take F5 ML on the visiting team at Coors when the home pitcher has a track record of escaping the first 5 with limited damage.
+- **STARTER_OVERRATED** (x17): 17 losses tagged STARTER_OVERRATED, concentrated on F5_ML; chosen starters trailed at the F5 mark or fell short of K thresholds.
+  - Rule: Cap F5 ML confidence at 60 when opposing starter has K rate above 25 percent or recent ERA under 3.50.
+- **STARTER_REGRESSION** (x16): 16 losses tagged STARTER_REGRESSION, mostly on ML where chosen starters got hit harder than projected.
+  - Rule: Cap starter side confidence at 60 when the chosen starter has logged a recent outing of 5+ ER in 5 or fewer IP, or when his last two starts allowed 4+ runs each.
 
 ## Adjustments for today
+- Cap F5 ML confidence at 60 when opposing starter has K rate above 25 percent or recent ERA under 3.50.
+- Cap starter side confidence at 60 when the chosen starter has logged a recent outing of 5+ ER in 5 or fewer IP, or when his last two starts allowed 4+ runs each.
+- Cap pitcher K thresholds 0.5 below market average and require projected 6 plus innings AND a recent start with 7 plus Ks before taking K over.
+- Verify the picked hitter is on the actual gamePk roster within 90 minutes of first pitch; do not publish Hits chips before lineup confirmation.
+- Validate every Hitter prop pick by checking the player ID against the gamePk team roster from the MLB API before publishing.
+- Do not take F5 ML on the visiting team at Coors when the home pitcher has a track record of escaping the first 5 with limited damage; Coors edges accumulate after the 5th.
 
-1. Cap pitcher K thresholds 0.5 below market average and require projected 6 plus innings AND a recent start with 7 plus Ks before taking K over.
-2. Cap F5 ML confidence at 60 when opposing starter has K rate above 25 percent or recent ERA under 3.50.
-3. Verify the picked hitter is on the actual gamePk roster within 90 minutes of first pitch; do not publish Hits chips before lineup confirmation.
-4. Lift the 5 point B tier confidence haircut once 7 day rolling B tier ROI is back above plus 5 percent.
-5. Validate every Hitter prop pick by checking the player ID against the gamePk team roster from the MLB API before publishing.
-6. Do not take F5 ML on the visiting team at Coors when the home pitcher has a track record of escaping the first 5 with limited damage.
-7. Cap pitcher K thresholds 0.5 below market average and require 6 plus projected innings before taking K over.
-8. Confirm hitter is on active roster within 2 hours of first pitch before publishing Hits chips; haircut confidence by 10 if pulled from projected lineup.
-9. Cap starter side confidence at 60 when the most recent start had 5 plus ER in 5 or fewer IP.
-10. Add a lineup confirmation gate: publish Hits chips only after the official lineup post hits at first pitch minus 2 hours.
+## Lifetime KPIs
+picks 208, W 116 L 79 P 6 V 7, units 29.08, winRate 59.5%, ROI 14.5%
 
-## Lifetime KPIs (settled through 2026-05-07)
+### Lifetime by market
+- **F5_ML**: picks 44, W 19 L 19 P 6 V 0, units 0.14, winRate 50.0%, ROI 0.3%
+- **Hits**: picks 40, W 21 L 12 P 0 V 7, units 7.09, winRate 63.6%, ROI 21.5%
+- **K**: picks 10, W 3 L 7 P 0 V 0, units -4.50, winRate 30.0%, ROI -45.0%
+- **ML**: picks 59, W 31 L 28 P 0 V 0, units 0.66, winRate 52.5%, ROI 1.1%
+- **RL**: picks 1, W 1 L 0 P 0 V 0, units 1.42, winRate 100.0%, ROI 142.0%
+- **Total**: picks 54, W 41 L 13 P 0 V 0, units 24.27, winRate 75.9%, ROI 45.0%
 
-| Window | Picks | W | L | P | V | Units | Win % | ROI |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| Lifetime | 125 | 60 | 50 | 4 | 11 | 15.25 | 54.55 | 13.38 |
-| Recent 14 | 125 | 60 | 50 | 4 | 11 | 15.25 | 54.55 | 13.38 |
-| Recent 30 | 125 | 60 | 50 | 4 | 11 | 15.25 | 54.55 | 13.38 |
+### Lifetime by tier
+- **Tier B**: picks 59, W 39 L 20 P 0 V 0, units 14.79, winRate 66.1%, ROI 25.1%
+- **Tier C**: picks 14, W 7 L 7 P 0 V 0, units -0.21, winRate 50.0%, ROI -1.5%
+- **Tier watch**: picks 135, W 70 L 52 P 6 V 7, units 14.50, winRate 57.4%, ROI 11.3%
 
-Recent 14 and 30 day windows currently equal lifetime because only two settled days exist in the ledger (May 6 and May 7); both fall inside both windows. The numbers will diverge naturally as history grows past 14 days.
+## Recent 14 day KPIs
+picks 208, W 116 L 79 P 6 V 7, units 29.08, winRate 59.5%, ROI 14.5%
 
-By market lifetime:
-- F5_ML: 25 picks, ROI 22.32
-- Hits: 25 picks, ROI 34.97
-- K: 24 picks, ROI minus 38.91
-- ML: 25 picks, ROI 3.51
-- RL: 3 picks, ROI 119.00
-- Total: 23 picks, ROI 38.81
+## Notes on data gaps
+- 3 picks voided due to lineup mismatches:
+  - `20260508-823957-Hits-watch`: Ronald Acuna Jr. did not appear in the game (likely scratched/IL/wrong roster).
+  - `20260508-824443-Hits-W3`: Chase DeLauter did not appear in the game (likely scratched/IL/wrong roster).
+  - `20260508-824607-Hits-watch`: Luis Robert Jr. did not appear in the game (likely scratched/IL/wrong roster).
 
-By tier lifetime:
-- B: 51 picks, ROI 0.55
-- C: 18 picks, ROI minus 5.77
-- watch: 56 picks, ROI 34.68
-
-## Notes on data state
-
-This is an idempotent re run of the morning retrospective. The earlier run today (asof 07:23:59 UTC) had already settled the May 7 slate. picks_log no longer contains May 7 entries (only May 6 carry over picks remain), so this re run sourced settlements from outcomes_log directly rather than re settling from picks_log. Output content matches the prior run; only timestamps were refreshed. retrospective_history was updated in place rather than appending a duplicate May 7 entry.
-
-No data gaps for the slate itself: all 10 May 7 games reached Final, all 52 picks have a result tag, and all final scores reconcile against the live MLB schedule pulled this run.
+## Settled date list (lifetime)
+- 2026-05-07
+- 2026-05-08
