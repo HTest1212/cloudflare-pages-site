@@ -3041,6 +3041,34 @@ async function fetchStatcastOverlay() {
   }
 }
 
+/* =========== HITTER LOGS OVERLAY (pre baked d3/d7 game logs) =========== */
+// Scheduled task writes /hitter_logs_overlay.json with prebuilt d3 and d7 hitting
+// splits per playerId for every batter on today's slate. Loading this overlay
+// pre populates STATE.hitterLogs so the live fetchHitterLogs() short circuits
+// instead of fanning out 200+ slow API calls per page load. Fixes the Hit Props
+// panel from rendering with empty 7D AVG and FORM columns at the start of the
+// session. Format: { asof, date, count, hitters: { playerId: {name, team, d3, d7} } }
+async function fetchHitterLogsOverlay() {
+  if (STATE._hitterLogsOverlayLoaded) return;
+  try {
+    const r = await fetch("hitter_logs_overlay.json", {cache:"no-store"});
+    if (!r.ok) throw new Error("no overlay (" + r.status + ")");
+    const j = await r.json();
+    if (j && j.hitters) {
+      Object.keys(j.hitters).forEach(function(pid){
+        // Don't clobber a record we already fetched live this session
+        if (!STATE.hitterLogs[pid]) STATE.hitterLogs[pid] = j.hitters[pid];
+      });
+    }
+    STATE._hitterLogsOverlayLoaded = true;
+    STATE._hitterLogsOverlayAsOf = j && j.asof || null;
+    STATE._hitterLogsOverlayCount = j && j.count || 0;
+  } catch(e) {
+    STATE._hitterLogsOverlayLoaded = true;
+    STATE._hitterLogsOverlayMissing = true;
+  }
+}
+
 /* =========== INJURIES (IL + day-to-day) =========== */
 async function fetchInjuries() {
   if (STATE.injuries && STATE.injuries.__loaded) return;
@@ -13085,6 +13113,14 @@ async function refreshAllData() {
     // Must fire after pitcherStats + teamStats so it can blend xERA / xwOBA in place.
     setStatus("Loading Statcast overlay (xERA, xwOBA, barrel%)…");
     await fetchStatcastOverlay();
+
+    // Hitter logs overlay: pre baked d3/d7 game logs per batter. Pre populates
+    // STATE.hitterLogs so the Hit Props panel renders immediately with proper
+    // 7D AVG, FORM, and per batter xHits instead of waiting on 240+ live calls.
+    setStatus("Loading hitter logs overlay (d3/d7 splits)…");
+    await fetchHitterLogsOverlay();
+    if (typeof renderHitProps === 'function') renderHitProps();
+    if (typeof renderHotHitters === 'function') renderHotHitters();
 
     // Odds overlay: moneyline + totals + runline prices per game from the book aggregator.
     // Drives the Value Bets tab and the market-vs-model edge column on Moneyline Picks.
