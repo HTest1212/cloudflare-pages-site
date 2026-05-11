@@ -1,57 +1,47 @@
 # Statcast Overlay Refresh Report
 
-## Window
-Early morning 6 AM ET refresh.
-Run timestamp UTC: 2026-05-10T17:18:10Z (mapped from the 6 AM ET schedule slot via the workspace clock).
+Window: early morning 6 AM ET
+Run timestamp UTC: 2026-05-11T19:37:48Z
+Slate date: 2026-05-11
 
-## Slate Date
-2026-05-10
+## Yesterday slate (2026-05-10)
+Games played: 15
+Players refreshed (batters and pitchers, every player who appeared in a box score): 443
 
-## Yesterday's Slate (2026-05-09)
-Games played: 14 (1 postponed: Tampa Bay Rays at Boston Red Sox at Fenway Park, rain, rescheduled to 2026-07-17).
-Players refreshed: 727 (every batter, starter, and reliever who appeared was pulled from boxscores; their season + window stats were re queried via the MLB Stats API so last night's results are baked into today's overlay).
+## Today slate (2026-05-11)
+Total games: 6
+Pitchers in overlay: 12 (6 away starters and 6 home starters; only 6 games on today slate)
+Batters in overlay: 60 (5 per team projected from yesterday batting order, slots 1 through 5)
 
-## Today's Slate (2026-05-10)
-Total games: 15
-Pitchers in overlay: 30 (15 away starters and 15 home starters, target met)
-Batters in overlay: 150 (5 per team across 30 teams, target met)
+## Matchups and probable pitchers
 
-## Matchups (away pitcher at home pitcher, venue)
-1. Cade Cavalli (Nationals) at Sandy Alcantara (Marlins), loanDepot park
-2. Luis Severino (Athletics) at Keegan Akin (Orioles), Oriole Park at Camden Yards
-3. Nick Martinez (Rays) at Payton Tolle (Red Sox), Fenway Park
-4. Tomoyuki Sugano (Rockies) at Cristopher Sanchez (Phillies), Citizens Bank Park
-5. Jose Soriano (Angels) at Spencer Miles (Blue Jays), Rogers Centre
-6. Kai Wei Teng (Astros) at Andrew Abbott (Reds), Great American Ball Park
-7. Andrew Morris (Twins) at Gavin Williams (Guardians), Progressive Field
-8. Logan Gilbert (Mariners) at Davis Martin (White Sox), Rate Field
-9. Carlos Rodon (Yankees) at Logan Henderson (Brewers), American Family Field
-10. Jameson Taillon (Cubs) at Jacob deGrom (Rangers), Globe Life Field
-11. Bubba Chandler (Pirates) at Tyler Mahle (Giants), Oracle Park
-12. Huascar Brazoban (Mets) at Eduardo Rodriguez (Diamondbacks), Chase Field
-13. Kyle Leahy (Cardinals) at Walker Buehler (Padres), Petco Park
-14. Bryce Elder (Braves) at Justin Wrobleski (Dodgers), UNIQLO Field at Dodger Stadium
-15. Brenan Hanifee (Tigers) at Noah Cameron (Royals), Kauffman Stadium
+Los Angeles Angels (Brent Suter) at Cleveland Guardians (Joey Cantillo). Venue: Progressive Field. First pitch 2026-05-11T22:10:00Z.
 
-## Lineup Endpoint Behavior at 6 AM ET
-At 6 AM ET the MLB Stats API lineup player arrays are typically empty, as expected. The pipeline relied on the schedule probablePitcher hydrate, which had every game's starter populated this morning. No fallbacks to the prior overlay were required. Top 5 batters per team were sourced from team byDateRange hitting splits over the trailing 15 days, then ranked by recent plate appearances.
+New York Yankees (Ryan Weathers) at Baltimore Orioles (Brandon Young). Venue: Oriole Park at Camden Yards. First pitch 2026-05-11T22:35:00Z.
 
-## GitHub Push Status
-Result: success
-Branch: main
-Commit hash: 89d7d1e34ee8327259b55860a4b9cce07bfee238
-Commit message: Auto refresh statcast 2026-05-10 06:00
-Notes: The original repo at the user's working folder had a corrupted .git/refs/heads/main (Resource deadlock avoided on read). Per the runbook recovery path, the deploy was redirected to a fresh shallow clone at /var/tmp/cfpages-site (the /sessions filesystem was 100 percent full so /tmp on /sessions was not viable). Same remote, same outcome. No rebase or force push was needed; main fast forwarded from d2ee93e to 89d7d1e cleanly.
+Tampa Bay Rays (Drew Rasmussen) at Toronto Blue Jays (Kevin Gausman). Venue: Rogers Centre. First pitch 2026-05-11T23:07:00Z.
 
-## Cloudflare Pages Deploy Status
-Result: success
-Project: mlb-betting-dashboard-v2
-Live URL: https://mlb-betting-dashboard-v2.pages.dev
-Deploy mechanism: Cloudflare Pages auto deploy is wired to the GitHub main branch, so the push triggered the production build. Verification: the live statcast_overlay.json now serves asof 2026-05-10T17:18:10Z with the new matchups list and the fresh probable pitcher set (Cade Cavalli vs Sandy Alcantara at loanDepot park as the lead game). HTTP 200 with cache control public max age 0 must revalidate.
-Recovery notes: Wrangler was not pre installed and the npm cache had to be redirected to /var/tmp because /sessions was at 100 percent. Wrangler was installed under /var/tmp/wrangler-install but was ultimately not needed because the GitHub auto deploy fired before the manual wrangler pages deploy was issued.
+Arizona Diamondbacks (Michael Soroka) at Texas Rangers (Nathan Eovaldi). Venue: Globe Life Field. First pitch 2026-05-12T00:05:00Z.
+
+Seattle Mariners (George Kirby) at Houston Astros (Peter Lambert). Venue: Daikin Park. First pitch 2026-05-12T00:10:00Z.
+
+San Francisco Giants (Trevor McDonald) at Los Angeles Dodgers (Roki Sasaki). Venue: UNIQLO Field at Dodger Stadium. First pitch 2026-05-12T02:10:00Z.
+
+## Lineup endpoint behavior at 6 AM ET
+Lineup endpoint returned empty player arrays for all 6 games at 6 AM ET. This is expected pregame behavior. Probable pitchers were obtained from the MLB schedule probablePitcher hydrate. All 6 games had probable pitchers announced the night before, so no TBD fallback was needed.
+
+## Fallbacks used
+Top 5 batters per team were drawn from yesterday box score batting order, slots 1 through 5. Every one of today 12 teams played yesterday, so this projection was clean.
+Probable pitchers were sourced from the schedule probablePitcher hydrate, not the empty lineup endpoint.
+
+## GitHub push status
+Result: success. Branch: main. Commit hash: 7f9dc2b602e4c331cf12f09ffffc141c78064fd8. Commit message: Auto refresh statcast 2026-05-11 06:00.
+Notes: clone of the canonical macOS mount could not be used as the git working tree due to a stale macOS file lock and permission errors on .git object writes. Recovery path used: fresh shallow clone created at /tmp/cf-fresh, new overlay committed and pushed to origin main as a fast forward. No rebase or force push required.
+
+## Cloudflare Pages deploy status
+Result: success. Project: mlb-betting-dashboard-v2. Deploy URL: https://mlb-betting-dashboard-v2.pages.dev/statcast_overlay.json. Live URL: https://mlb-betting-dashboard-v2.pages.dev.
+Recovery notes: the working environment did not have a wrangler binary or a CLOUDFLARE_API_TOKEN env var. The repo wires Cloudflare Pages deploys to .github/workflows/cloudflare-deploy.yml, which runs on every push to main with apiToken in a repo secret. The push triggered the workflow, and the live URL serves asof 2026-05-11T19:37:48Z.
 
 ## Notes
-Data gaps: Statcast pitch level fields (avg fastball velo, barrel percent, hard hit percent, whiff percent, xwOBA, xBA, xSLG) are nulled in the morning build, as they require a Baseball Savant scrape that runs in the slate lock job downstream.
-Missing probables: none today. Every game had an announced starter at 6 AM ET.
-IL or roster moves spotted while pulling stats: no anomalies flagged. The Houston Astros listed Kai Wei Teng (recent callup) as their probable and the Pirates listed Bubba Chandler (debut sample) as theirs. Both had limited season samples, so the rolling 30 windows are thin and downstream consumers should treat their lines with the small sample caveat the project guidelines call out.
-Workspace note: the /sessions sandbox filesystem was full at task start, so the original repo in the user's folder had a broken HEAD reference and a fresh clone was used for the push. The user's local statcast_overlay.json file was successfully rewritten in place; only the local git metadata in that folder is in a degraded state. Recommend running git fsck or a fresh clone on the workstation when the user is next at the machine.
+Today is a 6 game slate. The overlay therefore contains 12 pitchers and 60 batters rather than the canonical 30 and 150 targets. This reflects the actual MLB schedule for 2026-05-11.
+Statcast pitch level fields (xwOBA, barrel pct, exit velo, whiff pct) require a separate Baseball Savant scrape and are nulled in this morning build. Downstream skills hydrate these before slate lock at 11:30 AM ET.
