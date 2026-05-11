@@ -128,7 +128,7 @@
       {
         "category": "STARTER_OVERRATED",
         "frequency": 8,
-        "summary": "F5 ML lost 8 times — chosen starters trailed at the 5 inning mark too often.",
+        "summary": "F5 ML lost 8 times \u2014 chosen starters trailed at the 5 inning mark too often.",
         "adjustment_rule": "Cap F5 ML confidence at 60 when opposing starter has K rate above 25 percent or recent ERA under 3.50."
       },
       {
@@ -166,7 +166,7 @@
         "market": "K",
         "result": "loss",
         "category": "STARTER_REGRESSION",
-        "diagnosis": "Pulled early after 1.0 IP, 1 ER — couldn't accumulate Ks."
+        "diagnosis": "Pulled early after 1.0 IP, 1 ER \u2014 couldn't accumulate Ks."
       },
       {
         "id": "20260506-824198-F5_ML-3",
@@ -376,7 +376,7 @@
         "market": "K",
         "result": "loss",
         "category": "STARTER_REGRESSION",
-        "diagnosis": "Pulled early after 3.0 IP, 0 ER — couldn't accumulate Ks."
+        "diagnosis": "Pulled early after 3.0 IP, 0 ER \u2014 couldn't accumulate Ks."
       },
       {
         "id": "20260506-824118-F5_ML-3",
@@ -418,7 +418,7 @@
         "market": "K",
         "result": "void",
         "category": "DATA_GAP",
-        "diagnosis": "No box score data for pitcher pérez"
+        "diagnosis": "No box score data for pitcher p\u00e9rez"
       },
       {
         "id": "20260506-823872-Total-3",
@@ -1137,7 +1137,7 @@
     ]
   },
   {
-    "asof": "2026-05-09T09:25:00Z",
+    "asof": "2026-05-09T17:04:35Z",
     "yesterday_date": "2026-05-08",
     "yesterday_record": {
       "picks": 156,
@@ -1340,5 +1340,588 @@
       }
     ],
     "all_loss_diagnoses_count": 63
+  },
+  {
+    "asof": "2026-05-10T08:00:00Z",
+    "yesterday_date": "2026-05-09",
+    "yesterday_record": {
+      "picks": 122,
+      "wins": 63,
+      "losses": 42,
+      "pushes": 3,
+      "voids": 14,
+      "units": 14.6413,
+      "totalStake": 108.0,
+      "winRate": 0.6,
+      "roi": 0.1356
+    },
+    "by_market": {
+      "F5_ML": {
+        "picks": 30,
+        "wins": 14,
+        "losses": 12,
+        "pushes": 2,
+        "voids": 2,
+        "units": 0.7274,
+        "totalStake": 28.0,
+        "winRate": 0.5385,
+        "roi": 0.026
+      },
+      "Hits": {
+        "picks": 30,
+        "wins": 16,
+        "losses": 7,
+        "pushes": 0,
+        "voids": 7,
+        "units": 6.9136,
+        "totalStake": 23.0,
+        "winRate": 0.6957,
+        "roi": 0.3006
+      },
+      "ML": {
+        "picks": 32,
+        "wins": 15,
+        "losses": 14,
+        "pushes": 0,
+        "voids": 3,
+        "units": -0.3635,
+        "totalStake": 29.0,
+        "winRate": 0.5172,
+        "roi": -0.0125
+      },
+      "Total": {
+        "picks": 30,
+        "wins": 18,
+        "losses": 9,
+        "pushes": 1,
+        "voids": 2,
+        "units": 7.3638,
+        "totalStake": 28.0,
+        "winRate": 0.6667,
+        "roi": 0.263
+      }
+    },
+    "by_tier": {
+      "C": {
+        "picks": 2,
+        "wins": 0,
+        "losses": 1,
+        "pushes": 0,
+        "voids": 1,
+        "units": -1.0,
+        "totalStake": 1.0,
+        "winRate": 0.0,
+        "roi": -1.0
+      },
+      "watch": {
+        "picks": 120,
+        "wins": 63,
+        "losses": 41,
+        "pushes": 3,
+        "voids": 13,
+        "units": 15.6413,
+        "totalStake": 107.0,
+        "winRate": 0.6058,
+        "roi": 0.1462
+      }
+    },
+    "loss_categories": {
+      "VARIANCE": 20,
+      "STARTER_OVERRATED": 9,
+      "STARTER_REGRESSION": 12,
+      "BAD_PARK_READ": 1
+    },
+    "patterns_identified": [
+      {
+        "category": "VARIANCE",
+        "frequency": 20,
+        "summary": "20 losses tagged VARIANCE; coin flips and small sample noise dominated.",
+        "adjustment_rule": "Tighten Hits prop selection to hitters with rolling 14 day OBP above .340 and project a strong matchup, since 0.5 hits at minus 115 needs more than narrative."
+      },
+      {
+        "category": "STARTER_REGRESSION",
+        "frequency": 12,
+        "summary": "12 losses tagged STARTER_REGRESSION, most common on Total where chosen starters got hit harder than projected.",
+        "adjustment_rule": "Cap starter side confidence at 60 when chosen starter has a recent outing of 5 or more ER in 5 IP or fewer, or has logged back to back outings allowing 4 or more runs each."
+      },
+      {
+        "category": "STARTER_OVERRATED",
+        "frequency": 9,
+        "summary": "9 losses tagged STARTER_OVERRATED, concentrated on ML; opposing starter outpitched the projection.",
+        "adjustment_rule": "Cap F5 ML and ML confidence at 60 when opposing starter has K rate above 25 percent or recent ERA under 3.50."
+      }
+    ],
+    "rules_generated": [
+      "Cap starter side confidence at 60 when chosen starter has a recent outing of 5 or more ER in 5 IP or fewer, or has logged back to back outings allowing 4 or more runs each.",
+      "Cap F5 ML and ML confidence at 60 when opposing starter has K rate above 25 percent or recent ERA under 3.50.",
+      "Tighten Hits prop selection to hitters with rolling 14 day OBP above .340 and project a strong matchup, since 0.5 hits at minus 115 needs more than narrative."
+    ],
+    "rules_dropped": [],
+    "top_loss_diagnoses": [
+      {
+        "id": "20260509-825089-ML-ml",
+        "gamePk": 825089,
+        "market": "ML",
+        "pick": "Mets ML lean",
+        "category": "VARIANCE",
+        "diagnosis": "Run distribution diverged from projection; final 1-2 did not back our side.",
+        "actualLine": "New York Mets 1 Arizona Diamondbacks 2"
+      },
+      {
+        "id": "20260509-822905-ML-ml",
+        "gamePk": 822905,
+        "market": "ML",
+        "pick": "Cubs ML lean",
+        "category": "VARIANCE",
+        "diagnosis": "Run distribution diverged from projection; final 0-6 did not back our side.",
+        "actualLine": "Chicago Cubs 0 Texas Rangers 6"
+      },
+      {
+        "id": "20260509-824115-ML-ml",
+        "gamePk": 824115,
+        "market": "ML",
+        "pick": "Tigers ML lean",
+        "category": "STARTER_OVERRATED",
+        "diagnosis": "Opposing starter Michael Wacha (ERA 3.05) was a tougher matchup than confidence implied.",
+        "actualLine": "Detroit Tigers 1 Kansas City Royals 5"
+      },
+      {
+        "id": "20260509-822820-Total-total",
+        "gamePk": 822820,
+        "market": "Total",
+        "pick": "Under 8.5 lean",
+        "category": "STARTER_REGRESSION",
+        "diagnosis": "Total cleared 8.5; combined 15 runs implies starter or bullpen breakdown not in the projection.",
+        "actualLine": "Total 15 (line 8.5)"
+      },
+      {
+        "id": "20260509-823869-Total-total",
+        "gamePk": 823869,
+        "market": "Total",
+        "pick": "Under 8.5 lean",
+        "category": "STARTER_REGRESSION",
+        "diagnosis": "Total cleared 8.5; combined 15 runs implies starter or bullpen breakdown not in the projection.",
+        "actualLine": "Total 15 (line 8.5)"
+      },
+      {
+        "id": "20260509-823468-Total-total",
+        "gamePk": 823468,
+        "market": "Total",
+        "pick": "Under 8.5 lean",
+        "category": "STARTER_REGRESSION",
+        "diagnosis": "Total cleared 8.5; combined 12 runs implies starter or bullpen breakdown not in the projection.",
+        "actualLine": "Total 12 (line 8.5)"
+      },
+      {
+        "id": "20260509-823224-Total-total",
+        "gamePk": 823224,
+        "market": "Total",
+        "pick": "Under 8.5 lean",
+        "category": "STARTER_REGRESSION",
+        "diagnosis": "Total cleared 8.5; combined 16 runs implies starter or bullpen breakdown not in the projection.",
+        "actualLine": "Total 16 (line 8.5)"
+      },
+      {
+        "id": "20260509-823955-ML-ml",
+        "gamePk": 823955,
+        "market": "ML",
+        "pick": "Dodgers ML lean",
+        "category": "VARIANCE",
+        "diagnosis": "Run distribution diverged from projection; final 7-2 did not back our side.",
+        "actualLine": "Atlanta Braves 7 Los Angeles Dodgers 2"
+      },
+      {
+        "id": "20260509-823792-ML-primary0",
+        "gamePk": 823792,
+        "market": "ML",
+        "pick": "Yankees ML",
+        "category": "STARTER_OVERRATED",
+        "diagnosis": "Opposing starter Freddy Peralta (ERA 3.2) was a tougher matchup than confidence implied.",
+        "actualLine": "New York Yankees 3 Milwaukee Brewers 4"
+      },
+      {
+        "id": "20260509-823792-ML-watch0",
+        "gamePk": 823792,
+        "market": "ML",
+        "pick": "Yankees ML lean",
+        "category": "STARTER_OVERRATED",
+        "diagnosis": "Opposing starter Freddy Peralta (ERA 3.2) was a tougher matchup than confidence implied.",
+        "actualLine": "New York Yankees 3 Milwaukee Brewers 4"
+      }
+    ],
+    "all_loss_diagnoses_count": 42
+  },
+  {
+    "yesterday_date": "2026-05-10",
+    "asof": "2026-05-11T08:00:00Z",
+    "yesterday_record": {
+      "picks": 39,
+      "wins": 16,
+      "losses": 21,
+      "pushes": 2,
+      "voids": 0,
+      "units": -3.6352,
+      "totalStake": 39.0,
+      "winRate": 0.4324,
+      "roi": -0.0932
+    },
+    "by_market": {
+      "ML": {
+        "picks": 11,
+        "wins": 5,
+        "losses": 6,
+        "pushes": 0,
+        "voids": 0,
+        "units": -0.3885,
+        "totalStake": 11.0,
+        "winRate": 0.4545,
+        "roi": -0.0353
+      },
+      "F5_ML": {
+        "picks": 9,
+        "wins": 3,
+        "losses": 4,
+        "pushes": 2,
+        "voids": 0,
+        "units": -0.2467,
+        "totalStake": 9.0,
+        "winRate": 0.4286,
+        "roi": -0.0274
+      },
+      "Hits": {
+        "picks": 14,
+        "wins": 6,
+        "losses": 8,
+        "pushes": 0,
+        "voids": 0,
+        "units": -2.0,
+        "totalStake": 14.0,
+        "winRate": 0.4286,
+        "roi": -0.1429
+      },
+      "Total": {
+        "picks": 5,
+        "wins": 2,
+        "losses": 3,
+        "pushes": 0,
+        "voids": 0,
+        "units": -1.0,
+        "totalStake": 5.0,
+        "winRate": 0.4,
+        "roi": -0.2
+      }
+    },
+    "loss_categories": {
+      "MODEL_ERROR": 13,
+      "VARIANCE": 8
+    },
+    "patterns_identified": [
+      {
+        "category": "VARIANCE",
+        "frequency": 8,
+        "summary": "Hits over 0.5 props at conf 60 went 6 and 8; 8 0-fers across watch tier picks suggests blanket coverage adds noise.",
+        "adjustment_rule": "Cap Hits over 0.5 props to confirmed lineup leadoff/2 hole hitters with at least 4 expected at bats and recent 7 day batting average over 0.260."
+      },
+      {
+        "category": "MODEL_ERROR",
+        "frequency": 2,
+        "summary": "Both Over leans at park amplifier venues stayed well under (5 each). Park profile alone is not enough; both starters were sharp.",
+        "adjustment_rule": "Do not lean Over on Total when both starters carry season ERA below 3.50 even at hitter friendly parks."
+      },
+      {
+        "category": "STARTER_OVERRATED",
+        "frequency": 4,
+        "summary": "F5 ML went 3 and 4 with 2 pushes. Two heavy chalk F5 plays at minus 200 plus odds (CWS, CLE) lost outright.",
+        "adjustment_rule": "Do not lay more than minus 175 on F5 ML when chosen starter has a single previous start with at least 3 ER allowed in last 14 days."
+      },
+      {
+        "category": "MODEL_ERROR",
+        "frequency": 6,
+        "summary": "ML went 5 and 6 with chalk teams (CLE -223, ATL hosting LAD type alignments). Pricing tighter than form.",
+        "adjustment_rule": "Lower ML confidence by 5 when home dog price beats plus 110 and starter ERA delta vs opposing starter is under 1.00."
+      }
+    ],
+    "rules_generated": [
+      "Cap Hits over 0.5 props to confirmed lineup leadoff/2 hole hitters with at least 4 expected at bats and recent 7 day batting average over 0.260.",
+      "Do not lean Over on Total when both starters carry season ERA below 3.50 even at hitter friendly parks.",
+      "Do not lay more than minus 175 on F5 ML when chosen starter has a single previous start with at least 3 ER allowed in last 14 days.",
+      "Lower ML confidence by 5 when home dog price beats plus 110 and starter ERA delta vs opposing starter is under 1.00."
+    ],
+    "rules_dropped": [],
+    "diagnoses": [
+      {
+        "id": "20260510-824605-ML-WhiteSoxML243to213",
+        "market": "ML",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "Final SEA 1 - CWS 2; pick covered."
+      },
+      {
+        "id": "20260510-824113-ML-TigersML213to243",
+        "market": "ML",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "Final DET 6 - KC 3; pick covered."
+      },
+      {
+        "id": "20260510-824845-ML-AthleticsML209to239",
+        "market": "ML",
+        "result": "loss",
+        "category": "MODEL_ERROR",
+        "diagnosis": "Final OAK 1 - BAL 2; pick lost."
+      },
+      {
+        "id": "20260510-824605-F5_ML-WhiteSoxF5ML227to197",
+        "market": "F5_ML",
+        "result": "loss",
+        "category": "MODEL_ERROR",
+        "diagnosis": "F5 score SEA 1 - CWS 0; F5 pick loss."
+      },
+      {
+        "id": "20260510-824113-F5_ML-TigersF5ML197to227",
+        "market": "F5_ML",
+        "result": "push",
+        "category": "VARIANCE",
+        "diagnosis": "F5 score DET 3 - KC 3; F5 pick push."
+      },
+      {
+        "id": "20260510-824845-F5_ML-AthleticsF5ML193to22",
+        "market": "F5_ML",
+        "result": "push",
+        "category": "VARIANCE",
+        "diagnosis": "F5 score OAK 1 - BAL 1; F5 pick push."
+      },
+      {
+        "id": "20260510-824440-ML-GuardiansML223to193",
+        "market": "ML",
+        "result": "loss",
+        "category": "MODEL_ERROR",
+        "diagnosis": "Final MIN 5 - CLE 4; pick lost."
+      },
+      {
+        "id": "20260510-824440-F5_ML-GuardiansF5ML207to17",
+        "market": "F5_ML",
+        "result": "loss",
+        "category": "MODEL_ERROR",
+        "diagnosis": "F5 score MIN 5 - CLE 2; F5 pick loss."
+      },
+      {
+        "id": "20260510-823305-ML-CardinalsML153to183",
+        "market": "ML",
+        "result": "loss",
+        "category": "MODEL_ERROR",
+        "diagnosis": "Final STL 2 - SD 3; pick lost."
+      },
+      {
+        "id": "20260510-823305-F5_ML-CardinalsF5ML137to16",
+        "market": "F5_ML",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "F5 score STL 2 - SD 0; F5 pick win."
+      },
+      {
+        "id": "20260510-824520-ML-AstrosML133to163lean",
+        "market": "ML",
+        "result": "loss",
+        "category": "MODEL_ERROR",
+        "diagnosis": "Final HOU 0 - CIN 5; pick lost."
+      },
+      {
+        "id": "20260510-823793-ML-YankeesML133to163lea",
+        "market": "ML",
+        "result": "loss",
+        "category": "MODEL_ERROR",
+        "diagnosis": "Final NYY 3 - MIL 4; pick lost."
+      },
+      {
+        "id": "20260510-823868-Hits-XavierEdwardsover05h",
+        "market": "Hits",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "Xavier Edwards went 1-for-4."
+      },
+      {
+        "id": "20260510-824845-Hits-NickKurtzover05hits1",
+        "market": "Hits",
+        "result": "loss",
+        "category": "VARIANCE",
+        "diagnosis": "Nick Kurtz went 0-for-3."
+      },
+      {
+        "id": "20260510-824765-Hits-YandyDazover05hits11",
+        "market": "Hits",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "Yandy D\u00edaz went 1-for-4."
+      },
+      {
+        "id": "20260510-823463-Hits-TroyJohnstonover05hi",
+        "market": "Hits",
+        "result": "loss",
+        "category": "VARIANCE",
+        "diagnosis": "Troy Johnston went 0-for-1."
+      },
+      {
+        "id": "20260510-822819-ML-AngelsML125to155lean",
+        "market": "ML",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "Final LAA 6 - TOR 1; pick covered."
+      },
+      {
+        "id": "20260510-822819-F5_ML-AngelsF5ML125to155le",
+        "market": "F5_ML",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "F5 score LAA 4 - TOR 1; F5 pick win."
+      },
+      {
+        "id": "20260510-822819-Hits-MikeTroutover05hits1",
+        "market": "Hits",
+        "result": "loss",
+        "category": "VARIANCE",
+        "diagnosis": "Mike Trout went 0-for-3."
+      },
+      {
+        "id": "20260510-824520-Hits-YordanAlvarezover05h",
+        "market": "Hits",
+        "result": "loss",
+        "category": "VARIANCE",
+        "diagnosis": "Yordan Alvarez went 0-for-4."
+      },
+      {
+        "id": "20260510-824440-Hits-ChaseDeLauterover05h",
+        "market": "Hits",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "Chase DeLauter went 2-for-5."
+      },
+      {
+        "id": "20260510-824605-Hits-MiguelVargasover05hi",
+        "market": "Hits",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "Miguel Vargas went 1-for-3."
+      },
+      {
+        "id": "20260510-823793-Hits-BenRiceover05hits110",
+        "market": "Hits",
+        "result": "loss",
+        "category": "VARIANCE",
+        "diagnosis": "Ben Rice went 0-for-4."
+      },
+      {
+        "id": "20260510-822902-Hits-IanHappover05hits110",
+        "market": "Hits",
+        "result": "loss",
+        "category": "VARIANCE",
+        "diagnosis": "Ian Happ went 0-for-3."
+      },
+      {
+        "id": "20260510-825085-Hits-IldemaroVargasover05",
+        "market": "Hits",
+        "result": "loss",
+        "category": "VARIANCE",
+        "diagnosis": "Ildemaro Vargas went 0-for-3."
+      },
+      {
+        "id": "20260510-823305-Hits-IvnHerreraover05hits",
+        "market": "Hits",
+        "result": "loss",
+        "category": "VARIANCE",
+        "diagnosis": "Iv\u00e1n Herrera went 0-for-4."
+      },
+      {
+        "id": "20260510-823954-Hits-DrakeBaldwinover05hi",
+        "market": "Hits",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "Drake Baldwin went 1-for-4."
+      },
+      {
+        "id": "20260510-824113-Hits-RileyGreeneover05hit",
+        "market": "Hits",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "Riley Greene went 2-for-3."
+      },
+      {
+        "id": "20260510-825085-ML-DiamondbacksML151to1",
+        "market": "ML",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "Final NYM 1 - AZ 5; pick covered."
+      },
+      {
+        "id": "20260510-823868-ML-MarlinsML147to117lea",
+        "market": "ML",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "Final WSH 2 - MIA 5; pick covered."
+      },
+      {
+        "id": "20260510-823868-Total-Under81leanconf58par",
+        "market": "Total",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "Final total 7 vs Under 8.1."
+      },
+      {
+        "id": "20260510-824765-Total-Over57leanconf58park",
+        "market": "Total",
+        "result": "loss",
+        "category": "MODEL_ERROR",
+        "diagnosis": "Final total 5 vs Over 5.7."
+      },
+      {
+        "id": "20260510-824520-F5_ML-AstrosF5ML117to147le",
+        "market": "F5_ML",
+        "result": "loss",
+        "category": "MODEL_ERROR",
+        "diagnosis": "F5 score HOU 0 - CIN 4; F5 pick loss."
+      },
+      {
+        "id": "20260510-824520-Total-Over94leanconf58park",
+        "market": "Total",
+        "result": "loss",
+        "category": "MODEL_ERROR",
+        "diagnosis": "Final total 5 vs Over 9.4."
+      },
+      {
+        "id": "20260510-823793-F5_ML-YankeesF5ML117to147l",
+        "market": "F5_ML",
+        "result": "loss",
+        "category": "MODEL_ERROR",
+        "diagnosis": "F5 score NYY 2 - MIL 3; F5 pick loss."
+      },
+      {
+        "id": "20260510-823221-Total-Under92leanconf58par",
+        "market": "Total",
+        "result": "loss",
+        "category": "MODEL_ERROR",
+        "diagnosis": "Final total 13 vs Under 9.2."
+      },
+      {
+        "id": "20260510-823305-Total-Under123leanconf58pa",
+        "market": "Total",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "Final total 5 vs Under 12.3."
+      },
+      {
+        "id": "20260510-823463-ML-RockiesML109to139lea",
+        "market": "ML",
+        "result": "loss",
+        "category": "MODEL_ERROR",
+        "diagnosis": "Final COL 0 - PHI 6; pick lost."
+      },
+      {
+        "id": "20260510-825085-F5_ML-DiamondbacksF5ML135t",
+        "market": "F5_ML",
+        "result": "win",
+        "category": "NARRATIVE_CORRECT",
+        "diagnosis": "F5 score NYM 0 - AZ 2; F5 pick win."
+      }
+    ]
   }
 ]
