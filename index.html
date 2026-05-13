@@ -8021,7 +8021,10 @@ function buildDeepAnalysis(g) {
       if (CLAUDE_DAILY_ANALYSIS.date === __today) {
         var __pre = CLAUDE_DAILY_ANALYSIS.games[String(g.gamePk)];
         if (__pre) {
-          return { prebuilt: true, paragraphs: __pre.paragraphs, verdict: __pre.verdict, grade: __pre.grade, lastUpdated: CLAUDE_DAILY_ANALYSIS.lastUpdated, window: CLAUDE_DAILY_ANALYSIS.window };
+          // Defensive: synthesize a placeholder grade when the prebuilt entry omits it,
+          // otherwise a.grade.cls blows up the whole render. Real grade still preferred when present.
+          var __preGrade = (__pre.grade && __pre.grade.cls) ? __pre.grade : { letter: "\u2014", cls: "grade-c", score: 0, blurb: "Grade pending from daily build." };
+          return { prebuilt: true, paragraphs: __pre.paragraphs, verdict: __pre.verdict, grade: __preGrade, lastUpdated: CLAUDE_DAILY_ANALYSIS.lastUpdated, window: CLAUDE_DAILY_ANALYSIS.window };
         }
       }
     }
@@ -8277,10 +8280,7 @@ function renderAnalysis() {
           '<h3>'+esc(away)+' @ '+esc(home)+'</h3>'+
           '<div class="meta">'+esc(time)+' &bull; '+esc((pf&&pf.name)||(g.venue&&g.venue.name)||"")+'</div>'+
         '</div>'+
-        '<div class="grade-badge '+a.grade.cls+'" title="Claude confidence score '+a.grade.score+'/100">'+
-          '<div class="grade-letter">'+a.grade.letter+'</div>'+
-          '<div class="grade-score">'+a.grade.score+'/100</div>'+
-        '</div>'+
+        (function(){ var _g = a.grade || { letter:"\u2014", cls:"grade-c", score:0 }; return '<div class="grade-badge '+(_g.cls||"grade-c")+'" title="Claude confidence score '+(_g.score||0)+'/100">'+'<div class="grade-letter">'+(_g.letter||"\u2014")+'</div>'+'<div class="grade-score">'+(_g.score||0)+'/100</div>'+'</div>'; })()+
       '</div>'+
       '<div class="grade-blurb">'+esc(a.grade.blurb)+'</div>'+
       '<div class="pill-row">'+pills.join("")+'</div>'+
