@@ -8264,7 +8264,7 @@ function buildDeepAnalysis(g) {
   const __pickNick = mlPick ? ((typeof teamNicknameFromName === 'function') ? teamNicknameFromName(mlPick) : mlPick) : null;
   const __awayNick = (typeof teamNicknameFromName === 'function') ? teamNicknameFromName(away) : away;
   const __homeNick = (typeof teamNicknameFromName === 'function') ? teamNicknameFromName(home) : home;
-  if (mlPick && (mlTierBase === "LOCK" || mlTierBase === "STRONG")) bets.push({t:__pickNick+" ML", cls:"good"});
+  if (mlPick && (mlTierBase === "LOCK" || mlTierBase === "STRONG" || mlTierBase === "LEAN")) bets.push({t:__pickNick+" ML", cls:(mlTierBase === "LEAN" ? "warn" : "good")});
   else if (mlPick && mlTierBase === "LEAN") bets.push({t:__pickNick+" ML (small)", cls:"neu"});
   if (mlPick && mlAbsEdge >= 0.8) bets.push({t:__pickNick+" -1.5 if priced fair", cls:"neu"});
   if (aK >= 10) bets.push({t:__awayNick+" Team Ks OVER", cls:"good"});
@@ -8752,6 +8752,55 @@ function pctOverDisplay(proj, line, sigma) {
   var cls = shown >= 0.62 ? 'edge-good' : shown >= 0.55 ? '' : '';
   return '<span class="' + cls + '" style="font-weight:600;">' + dir + ' ' + (shown*100).toFixed(0) + '%</span>';
 }
+
+// ===== GENERIC TABLE SORTER for prop tables, added 2026-05-13 =====
+function attachPropSort(tableEl) {
+  if (!tableEl || tableEl.dataset.sortBound === '1') return;
+  var ths = tableEl.querySelectorAll('thead th');
+  ths.forEach(function(th, idx){
+    th.style.cursor = 'pointer';
+    th.style.userSelect = 'none';
+    th.setAttribute('data-col-idx', idx);
+    th.addEventListener('click', function(){
+      var current = tableEl.getAttribute('data-sort-col');
+      var dir = tableEl.getAttribute('data-sort-dir') || 'desc';
+      if (current === String(idx)) {
+        dir = dir === 'asc' ? 'desc' : 'asc';
+      } else {
+        dir = 'desc';
+      }
+      tableEl.setAttribute('data-sort-col', String(idx));
+      tableEl.setAttribute('data-sort-dir', dir);
+      ths.forEach(function(h){
+        h.textContent = h.textContent.replace(/[ ]?[▲▼]$/,'');
+      });
+      th.textContent = th.textContent + ' ' + (dir === 'asc' ? '▲' : '▼');
+      var tbody = tableEl.querySelector('tbody');
+      if (!tbody) return;
+      var rows = Array.prototype.slice.call(tbody.querySelectorAll('tr'));
+      rows.sort(function(a, b){
+        var aCell = a.children[idx]; var bCell = b.children[idx];
+        if (!aCell || !bCell) return 0;
+        var aT = aCell.textContent.trim();
+        var bT = bCell.textContent.trim();
+        var aN = parseFloat(aT.replace(/[%+u,]/g, ''));
+        var bN = parseFloat(bT.replace(/[%+u,]/g, ''));
+        if (!isNaN(aN) && !isNaN(bN)) {
+          return dir === 'asc' ? aN - bN : bN - aN;
+        }
+        return dir === 'asc' ? aT.localeCompare(bT) : bT.localeCompare(aT);
+      });
+      rows.forEach(function(r){ tbody.appendChild(r); });
+    });
+  });
+  tableEl.dataset.sortBound = '1';
+}
+function attachPropSortByGridId(gridId) {
+  var grid = document.getElementById(gridId);
+  if (!grid) return;
+  var table = grid.querySelector('table');
+  if (table) attachPropSort(table);
+}
 function gradeFromEdge(edge, t, hasGoodData) {
   // t: { a, b, c, d } absolute edge thresholds
   var ae = Math.abs(edge);
@@ -8861,6 +8910,7 @@ function renderKProps() {
       '</tr>';
     }).join("")+
     '</tbody></table>';
+  attachPropSortByGridId('kPropsGrid');
 }
 
 function renderTeamK() {
@@ -8896,6 +8946,7 @@ function renderTeamK() {
       return '<tr><td>'+esc(r.team)+'</td><td>'+esc(r.opp)+'</td><td>'+whiffDisp+'</td><td><b>'+fmt(r.proj,1)+'</b></td><td>'+fmt(line,1)+'</td><td>'+lean+'</td><td>'+gradeBadgeHtml(_grTeamK)+'</td></tr>';
     }).join("")+
     '</tbody></table>';
+  attachPropSortByGridId('teamKGrid');
 }
 
 function renderHitProps() {
@@ -9126,6 +9177,7 @@ function renderERProps() {
     }).join("")+
     '</tbody></table>' :
     '<div class="loader">Loading pitcher stats…</div>';
+  attachPropSortByGridId('erPropsGrid');
 }
 
 /* =========== SP WALK PROPS =========== */
@@ -9204,6 +9256,7 @@ function renderBBProps() {
     }).join("")+
     '</tbody></table>' :
     '<div class="loader">Loading pitcher stats…</div>';
+  attachPropSortByGridId('bbPropsGrid');
 }
 
 /* =========== HR PROPS (top anytime HR picks, 28% floor, sortable) =========== */
@@ -9640,7 +9693,7 @@ function renderBets() {
     else{if(absEdge>=1.0)tier="LOCK";else if(absEdge>=0.55)tier="STRONG";else if(absEdge>=0.25)tier="LEAN";else tier="PASS";}
     const pick = edge>0.12?homeTeam.name:edge<-0.12?awayTeam.name:"no edge";
     const tierBase = tier.replace(/[↑↓*⚠]/g,"");
-    if(tierBase==="LOCK"||tierBase==="STRONG"){
+    if(tierBase==="LOCK"||tierBase==="STRONG"||tierBase==="LEAN"){
       const __pickNick2 = (typeof teamNicknameFromName === 'function') ? teamNicknameFromName(pick) : pick;
       bets.push({cat:"💰 ML", type:"Moneyline", pick:__pickNick2, game:label, tier:tier,
         score: absEdge*10,
