@@ -10434,11 +10434,40 @@ function renderBets() {
   // We also auto-upgrade tier labels: any pick at cash >= 0.78 that the
   // market originally tagged LEAN or VALUE gets promoted to STRONG so the
   // displayed tier in the table is consistent with the headline board's bar.
+  // Merge CLAUDE_DAILY_ANALYSIS.topBets into bets so all AI analysis picks land in Top Bets
+  try {
+    if (typeof CLAUDE_DAILY_ANALYSIS !== 'undefined' && CLAUDE_DAILY_ANALYSIS && Array.isArray(CLAUDE_DAILY_ANALYSIS.topBets)) {
+      var __catMap = {
+        ML: 'ML', F5_ML: 'F5 ML', RL: 'RL', F5_RL: 'F5 RL',
+        Total: 'Total', F5_Total: 'F5 Total',
+        Hits: 'Hits', HR: 'HR', TotalBases: 'TB',
+        K: 'K', ER: 'ER', BB: 'BB',
+        NRFI: 'NRFI', YRFI: 'YRFI'
+      };
+      var __tierMap = { A: 'LOCK', B: 'STRONG', C: 'LEAN', watch: 'PASS' };
+      CLAUDE_DAILY_ANALYSIS.topBets.forEach(function(p){
+        if (!p || !p.pick) return;
+        var conf = Number(p.confidence || 0);
+        var cashGuess = Math.max(0.30, Math.min(0.95, conf / 100));
+        bets.push({
+          cat: __catMap[p.market] || (p.market || 'Pick'),
+          type: 'Analysis ' + (p.market || ''),
+          pick: p.pick,
+          game: (p.away || '') + ' @ ' + (p.home || ''),
+          tier: __tierMap[String(p.tier||'').toUpperCase()] || __tierMap[p.tier] || 'LEAN',
+          score: conf / 10,
+          cashProb: cashGuess,
+          note: p.reasoning || 'AI analysis pick',
+          source: 'analysis'
+        });
+      });
+    }
+  } catch (e) { if (typeof console !== 'undefined') console.warn('topBets merge failed', e); }
+
   STATE.allBetsTable = bets.filter(function(b){ return (typeof b.cashProb === 'number') && b.cashProb >= 0.28; }).slice();
+  // Include ALL analysis picks regardless of percentage per user request 2026 05 13.
   const filtered = bets.filter(function(b){
-    if (typeof b.cashProb !== 'number') return false;
-    if (b.cashProb < 0.78) return false;
-    return true;
+    return (typeof b.cashProb === 'number');
   });
   // Tier consistency pass: anything that cleared the 78% cash bar deserves
   // at least a STRONG label. Picks at 90%+ cash get bumped to LOCK so the
