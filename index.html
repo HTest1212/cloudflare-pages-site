@@ -9693,7 +9693,7 @@ function renderBets() {
     else{if(absEdge>=1.0)tier="LOCK";else if(absEdge>=0.55)tier="STRONG";else if(absEdge>=0.25)tier="LEAN";else tier="PASS";}
     const pick = edge>0.12?homeTeam.name:edge<-0.12?awayTeam.name:"no edge";
     const tierBase = tier.replace(/[↑↓*⚠]/g,"");
-    if(tierBase==="LOCK"||tierBase==="STRONG"||tierBase==="LEAN"){
+    if(true){ // include all tiers regardless of percentage
       const __pickNick2 = (typeof teamNicknameFromName === 'function') ? teamNicknameFromName(pick) : pick;
       bets.push({cat:"💰 ML", type:"Moneyline", pick:__pickNick2, game:label, tier:tier,
         score: absEdge*10,
@@ -9722,7 +9722,7 @@ function renderBets() {
     const __lambdaFav = Math.max(1.0, __projForRL/2 + rlAbs/2);
     const __lambdaDog = Math.max(1.0, __projForRL/2 - rlAbs/2);
     const __rlProbs = runLineProbabilities(__lambdaFav, __lambdaDog);
-    if(__rlProbs.favMinus15 >= 0.55){
+    if(__rlProbs.favMinus15 >= 0.25){
       const __rlNick = (typeof teamNicknameFromName === 'function') ? teamNicknameFromName(rlFav) : rlFav;
       const __rlTier = __rlProbs.favMinus15 >= 0.70 ? "STRONG" : (__rlProbs.favMinus15 >= 0.62 ? "LEAN" : "VALUE");
       bets.push({cat:"💰 RL",type:"Run Line",pick:__rlNick+" -1.5",game:label,tier:__rlTier,score:rlAbs*5,
@@ -9746,7 +9746,7 @@ function renderBets() {
       + (Math.abs(__matchupDelta)>=0.1?" · matchup "+(__matchupDelta>=0?"+":"")+__matchupDelta.toFixed(2):"");
     // Total OVER / UNDER cash prob now uses Poisson on projected game runs rather than
     // a sigmoid on the projection delta. Integer run cliffs (O/U 8.5 vs 7.5) are preserved.
-    if(proj>=9.8) {
+    if(proj>=8.0) {
       const __tOverLine = Math.round(proj-0.5)+0.5;
       bets.push({cat:"📊 Total",type:"Total OVER",pick:"OVER "+__tOverLine.toFixed(1),game:label,tier:proj>=10.5?"STRONG":"LEAN",score:(proj-8.8)*4,
         cashProb: poissonCashProb(proj, __tOverLine, 'over'),
@@ -9761,7 +9761,7 @@ function renderBets() {
 
     // ── 4. F5 TOTALS ──
     const f5proj = proj*0.52;
-    if(f5proj>=5.2) bets.push({cat:"📊 F5",type:"F5 OVER",pick:"F5 OVER 4.5",game:label,tier:f5proj>=5.8?"STRONG":"LEAN",score:(f5proj-4.5)*5,
+    if(f5proj>=4.0) bets.push({cat:"📊 F5",type:"F5 OVER",pick:"F5 OVER 4.5",game:label,tier:f5proj>=5.8?"STRONG":"LEAN",score:(f5proj-4.5)*5,
       cashProb: poissonCashProb(f5proj, 4.5, 'over'),
       note:"F5 proj "+fmt(f5proj,1)+" · Poisson λ="+fmt(f5proj,2)+__factorNote});
     if(f5proj<=4.0) bets.push({cat:"📊 F5",type:"F5 UNDER",pick:"F5 UNDER 4.5",game:label,tier:f5proj<=3.5?"STRONG":"LEAN",score:(4.5-f5proj)*5,
@@ -9774,7 +9774,7 @@ function renderBets() {
     // full game weight, since middle-of-order hitters rarely get a third look in F5.
     const f5Edge = (spSS * 0.60) + (spRS * 0.25) + (offSS * 0.07) + (hhcS * 0.05 * luPen) + (__formSideTilt * 0.20);
     const f5AbsEdge = Math.abs(f5Edge);
-    if (f5AbsEdge >= 0.30) {
+    if (f5AbsEdge >= 0.10) {
       const f5Pick = f5Edge > 0 ? homeTeam.name : awayTeam.name;
       const __f5Nick = (typeof teamNicknameFromName === 'function') ? teamNicknameFromName(f5Pick) : f5Pick;
       const f5Tier = f5AbsEdge >= 0.85 ? "LOCK" : f5AbsEdge >= 0.55 ? "STRONG" : "LEAN";
@@ -9790,7 +9790,7 @@ function renderBets() {
     // Projected F5 margin uses f5Edge scaled into runs (roughly ~1.1 run spread at max edge).
     const f5MarginRuns = f5Edge * 1.1;
     const f5MarginAbs = Math.abs(f5MarginRuns);
-    if (f5MarginAbs >= 0.70) {
+    if (f5MarginAbs >= 0.25) {
       const f5RlPick = f5MarginRuns > 0 ? homeTeam.name : awayTeam.name;
       const __f5RlNick = (typeof teamNicknameFromName === 'function') ? teamNicknameFromName(f5RlPick) : f5RlPick;
       const f5RlCash = Math.min(0.82, 0.52 + (f5MarginAbs - 0.70) * 0.55);
@@ -9824,7 +9824,7 @@ function renderBets() {
       // Base F5 side projection: half the game F5 projection, then scale by OPS vs ERA.
       const f5SideProj = (f5proj / 2) * (sideTopOps / 0.720) * (oppEra / 4.50);
       const f5TtNick = (typeof teamNicknameFromName === 'function') ? teamNicknameFromName(g.teams[side].team.name) : g.teams[side].team.name;
-      if (f5SideProj >= 1.90) {
+      if (f5SideProj >= 1.20) {
         bets.push({ cat:"📊 F5 Team", type:"F5 Team Total OVER", pick:f5TtNick+" F5 O1.5 Runs", game:label,
           tier: f5SideProj >= 2.30 ? "STRONG" : "LEAN",
           score: (f5SideProj - 1.50) * 6,
@@ -9860,7 +9860,7 @@ function renderBets() {
       const projKAdj = projKAdj0 + frameK;
       const umpKNote = Math.abs(__umpKMult-1)>=0.02 ? " · ump K "+(__umpKMult>=1?"+":"")+Math.round((__umpKMult-1)*100)+"%" : "";
       const frameNote = Math.abs(frameK)>=0.15 ? " · framing "+(frameK>=0?"+":"")+frameK.toFixed(2) : "";
-      if(projKAdj>=kLine+1.2) bets.push({cat:"📊 K",type:"SP Ks OVER",pick:o.p.fullName+" O"+fmt(kLine,1)+" Ks",game:label,tier:projKAdj>=kLine+1.8?"STRONG":"LEAN",score:(projKAdj-kLine)*3,
+      if(projKAdj>=kLine+0.3) bets.push({cat:"📊 K",type:"SP Ks OVER",pick:o.p.fullName+" O"+fmt(kLine,1)+" Ks",game:label,tier:projKAdj>=kLine+1.8?"STRONG":"LEAN",score:(projKAdj-kLine)*3,
         cashProb: cashPctFromDelta(projKAdj-kLine, 0.75),
         note:"K/9 "+fmt(k9,1)+" · Proj "+fmt(projKAdj,1)+umpKNote+frameNote});
     });
@@ -9877,7 +9877,7 @@ function renderBets() {
       const umpTKNote = Math.abs(__umpKMult-1)>=0.02 ? " · ump K "+(__umpKMult>=1?"+":"")+Math.round((__umpKMult-1)*100)+"%" : "";
       const frameTKNote = Math.abs(frameTK)>=0.2 ? " · framing "+(frameTK>=0?"+":"")+frameTK.toFixed(2) : "";
       const __teamNick = (typeof teamNicknameFromName === 'function') ? teamNicknameFromName(g.teams[side].team.name) : g.teams[side].team.name;
-      if(tkAdj>=tkLine+0.8) bets.push({cat:"📊 Team K",type:"Team Ks OVER",pick:__teamNick+" O"+fmt(tkLine,1)+" Ks",game:label,tier:tkAdj>=tkLine+1.5?"STRONG":"LEAN",score:(tkAdj-tkLine)*3,
+      if(tkAdj>=tkLine+0.3) bets.push({cat:"📊 Team K",type:"Team Ks OVER",pick:__teamNick+" O"+fmt(tkLine,1)+" Ks",game:label,tier:tkAdj>=tkLine+1.5?"STRONG":"LEAN",score:(tkAdj-tkLine)*3,
         cashProb: cashPctFromDelta(tkAdj-tkLine, 0.65),
         note:"Proj "+fmt(tkAdj,1)+" Ks"+umpTKNote+frameTKNote});
     });
@@ -9909,7 +9909,7 @@ function renderBets() {
       projER = projER + erFrameDelta;
       const erLine2 = Math.round(projER*2)/2;
       const erDiff2 = Math.abs(projER - erLine2);
-      if(erDiff2>=0.4){
+      if(erDiff2>=0.15){
         const erDir=projER>=erLine2+0.4?"OVER":"UNDER";
         const umpERNote = Math.abs(__umpRunMult-1)>=0.02 ? " · ump "+(__umpRunMult>=1?"+":"")+Math.round((__umpRunMult-1)*100)+"%" : "";
         const frameERNote = Math.abs(erFrameDelta)>=0.08 ? " · framing "+(erFrameDelta>=0?"+":"")+erFrameDelta.toFixed(2) : "";
@@ -9937,7 +9937,7 @@ function renderBets() {
       if(pl2&&pl2.d14&&pl2.d14.ip>0){const rBB9=(pl2.d14.bb/pl2.d14.ip)*9;projBB=((bb9*0.6+rBB9*0.4)/9)*5.5*(oBBPct/0.085);}
       const bbLine=Math.round(projBB*2)/2;
       const bbDiff=Math.abs(projBB-bbLine);
-      if(bbDiff>=0.4){
+      if(bbDiff>=0.15){
         const bbDir=projBB>=bbLine+0.4?"OVER":"UNDER";
         bets.push({cat:"📊 BB",type:"SP BB "+bbDir,pick:sp.fullName+" "+bbDir+" "+fmt(bbLine,1)+" BB",game:label,tier:bbDiff>=0.8?"STRONG":"LEAN",score:bbDiff*4,
           cashProb: cashPctFromDelta(bbDiff, 1.0),
@@ -10018,14 +10018,14 @@ function renderBets() {
       const t1Home = 0.52 * (aWhipEff/1.30) * (homeTopOps/0.720);
       const firstInningRuns = t1Away + t1Home;
       const nrfiProb = Math.max(0.05, Math.min(0.92, 1 - firstInningRuns * 0.60));
-      if (nrfiProb >= 0.62) {
+      if (nrfiProb >= 0.52) {
         bets.push({ cat:"🥜 NRFI", type:"NRFI", pick:"NRFI", game:label,
           tier: nrfiProb >= 0.70 ? "STRONG" : "LEAN",
           score: (nrfiProb - 0.50) * 25,
           cashProb: nrfiProb,
           note:"1st inning proj "+fmt(firstInningRuns,2)+" R · WHIPs "+fmt(aWhipEff,2)+"/"+fmt(hWhipEff,2)+" · top OPS "+fmt(awayTopOps,3)+"/"+fmt(homeTopOps,3)
         });
-      } else if ((1 - nrfiProb) >= 0.58) {
+      } else if ((1 - nrfiProb) >= 0.48) {
         const yrfiProb = 1 - nrfiProb;
         bets.push({ cat:"🥜 YRFI", type:"YRFI", pick:"YRFI", game:label,
           tier: yrfiProb >= 0.65 ? "STRONG" : "LEAN",
@@ -10057,7 +10057,7 @@ function renderBets() {
       const projOuts = ipPerStart * 3;
       const outsLine = Math.round(projOuts - 0.5) + 0.5; // typical line is X.5 outs, one tick below projection
       const outsDiff = projOuts - outsLine;
-      if (outsDiff >= 1.0) {
+      if (outsDiff >= 0.3) {
         bets.push({ cat:"🎯 Outs", type:"SP Outs OVER", pick:sp.fullName+" O"+fmt(outsLine,1)+" Outs", game:label,
           tier: outsDiff >= 1.8 ? "STRONG" : "LEAN",
           score: outsDiff * 3,
@@ -10102,7 +10102,7 @@ function renderBets() {
       const ttLine = Math.round(sideProj - 0.5) + 0.5;
       const ttDiff = sideProj - ttLine;
       const teamNick = (typeof teamNicknameFromName === 'function') ? teamNicknameFromName(g.teams[side].team.name) : g.teams[side].team.name;
-      if (ttDiff >= 0.6) {
+      if (ttDiff >= 0.2) {
         bets.push({ cat:"📊 Team Total", type:"Team Total OVER", pick:teamNick+" O"+fmt(ttLine,1)+" Runs", game:label,
           tier: ttDiff >= 1.1 ? "STRONG" : "LEAN",
           score: ttDiff * 5,
@@ -10127,7 +10127,7 @@ function renderBets() {
       const altDog = rlComp > 0 ? awayTeam.name : homeTeam.name;
       const altNick = (typeof teamNicknameFromName === 'function') ? teamNicknameFromName(altDog) : altDog;
       const coverProb = __rlProbs.dogPlus15;
-      if (coverProb >= 0.60) {
+      if (coverProb >= 0.45) {
         bets.push({ cat:"💰 Alt RL", type:"Run Line +1.5", pick:altNick+" +1.5", game:label,
           tier: coverProb >= 0.78 ? "STRONG" : (coverProb >= 0.68 ? "LEAN" : "VALUE"),
           score: (coverProb - 0.50) * 22,
@@ -10155,7 +10155,7 @@ function renderBets() {
       const teamWinProb = Math.max(0.25, Math.min(0.75, mlBase));
       // P(SP gets W) ~= P(5IP) * P(team wins AND SP leaves with lead, approx 0.55)
       const winProb = fiveIpProb * teamWinProb * 0.60;
-      if (winProb >= 0.30) {
+      if (winProb >= 0.20) {
         bets.push({ cat:"🏆 SP Win", type:"Pitcher Win", pick:sp.fullName+" to record W", game:label,
           tier: winProb >= 0.40 ? "STRONG" : "LEAN",
           score: (winProb - 0.25) * 25,
@@ -10215,7 +10215,7 @@ function renderBets() {
     // First 3 innings ~= 35% of game runs. Same park/wind/form adjustments apply but
     // lineup quality matters more because both teams face only the starter's first pass.
     const f3proj = proj * 0.35;
-    if (f3proj >= 3.5) {
+    if (f3proj >= 2.5) {
       const __f3OverLine = Math.round(f3proj-0.5)+0.5;
       bets.push({ cat:"📊 F3", type:"F3 OVER", pick:"F3 OVER "+fmt(__f3OverLine,1), game:label,
         tier: f3proj >= 4.0 ? "STRONG" : "LEAN",
@@ -10247,7 +10247,7 @@ function renderBets() {
       const altRl25Dog = rlComp > 0 ? awayTeam.name : homeTeam.name;
       const altRl25Nick = (typeof teamNicknameFromName === 'function') ? teamNicknameFromName(altRl25Dog) : altRl25Dog;
       const altRl25Cash = __rlProbs.dogPlus25;
-      if (altRl25Cash >= 0.70) {
+      if (altRl25Cash >= 0.50) {
         bets.push({ cat:"🎯 Alt RL", type:"Run Line +2.5", pick:altRl25Nick+" +2.5", game:label,
           tier: altRl25Cash >= 0.85 ? "STRONG" : (altRl25Cash >= 0.78 ? "LEAN" : "VALUE"),
           score: (altRl25Cash - 0.60) * 18,
@@ -10282,10 +10282,10 @@ function renderBets() {
       const ttLineAlt = Math.round(sideProjAlt + 0.5) - 0.5; // main line near projection
       const softLineAlt = ttLineAlt + 1; // soft UNDER one above main
       const altTtMargin = softLineAlt - sideProjAlt;
-      if (altTtMargin >= 1.3) {
+      if (altTtMargin >= 0.6) {
         const altTtNick = (typeof teamNicknameFromName === 'function') ? teamNicknameFromName(g.teams[side].team.name) : g.teams[side].team.name;
         const altTtCash = Math.min(0.88, 0.66 + (altTtMargin - 1.0) * 0.12);
-        if (altTtCash >= 0.70) {
+        if (altTtCash >= 0.50) {
           bets.push({ cat:"🎯 Alt Team Total", type:"Team Total UNDER (soft)", pick:altTtNick+" U"+fmt(softLineAlt,1)+" Runs", game:label,
             tier: altTtCash >= 0.80 ? "STRONG" : "LEAN",
             score: (altTtCash - 0.60) * 18,
@@ -10308,9 +10308,9 @@ function renderBets() {
       const kLineA = Math.round(projKA * 2) / 2;
       const softKLine = kLineA + 1;
       const altKMargin = softKLine - projKA;
-      if (altKMargin >= 1.2) {
+      if (altKMargin >= 0.5) {
         const altKCash = Math.min(0.90, 0.70 + (altKMargin - 1.2) * 0.09);
-        if (altKCash >= 0.70) {
+        if (altKCash >= 0.50) {
           bets.push({ cat:"🎯 Alt K", type:"SP Ks UNDER (soft)", pick:sp.fullName+" U"+fmt(softKLine,1)+" Ks", game:label,
             tier: altKCash >= 0.82 ? "STRONG" : "LEAN",
             score: (altKCash - 0.60) * 18,
@@ -10336,7 +10336,7 @@ function renderBets() {
     if (f5proj <= 4.0) {
       const f5UnderMargin = 5.5 - f5proj;
       const f5UnderCash = Math.min(0.88, 0.64 + (f5UnderMargin - 1.5) * 0.10);
-      if (f5UnderCash >= 0.70) {
+      if (f5UnderCash >= 0.50) {
         bets.push({ cat:"🎯 Alt F5", type:"F5 UNDER (soft)", pick:"F5 U5.5", game:label,
           tier: f5UnderCash >= 0.80 ? "STRONG" : "LEAN",
           score: (f5UnderCash - 0.60) * 18,
@@ -10348,7 +10348,7 @@ function renderBets() {
     if (f5proj >= 5.0) {
       const f5OverMargin = f5proj - 3.5;
       const f5OverCash = Math.min(0.88, 0.64 + (f5OverMargin - 1.5) * 0.10);
-      if (f5OverCash >= 0.70) {
+      if (f5OverCash >= 0.50) {
         bets.push({ cat:"🎯 Alt F5", type:"F5 OVER (soft)", pick:"F5 O3.5", game:label,
           tier: f5OverCash >= 0.80 ? "STRONG" : "LEAN",
           score: (f5OverCash - 0.60) * 18,
@@ -10363,7 +10363,7 @@ function renderBets() {
     {
       const f5MarginAltAbs = Math.abs(f5MarginRuns);
       const f5SpreadCash = Math.max(0.60, Math.min(0.90, 0.82 - (f5MarginAltAbs - 0.5) * 0.08));
-      if (f5SpreadCash >= 0.70) {
+      if (f5SpreadCash >= 0.50) {
         const f5SpreadDog = f5MarginRuns > 0 ? awayTeam.name : homeTeam.name;
         const __f5SpDogNick = (typeof teamNicknameFromName === 'function') ? teamNicknameFromName(f5SpreadDog) : f5SpreadDog;
         bets.push({ cat:"🎯 Alt F5 RL", type:"F5 Run Line +1.5", pick:__f5SpDogNick+" F5 +1.5", game:label,
@@ -10397,7 +10397,7 @@ function renderBets() {
         const __pfLocal = (typeof parkForGame === 'function') ? parkForGame(g) : null;
         const __parkRunsLocal = (__pfLocal && __pfLocal.r) ? Number(__pfLocal.r) : 1.0;
         projRbi *= __parkRunsLocal;
-        if (projRbi >= 0.85) {
+        if (projRbi >= 0.55) {
           const rbiProb = Math.min(0.80, 1 - Math.exp(-projRbi * 0.95));
           const lineLbl = projRbi >= 1.25 ? "O0.5" : "O0.5";
           if (rbiProb >= 0.56) {
