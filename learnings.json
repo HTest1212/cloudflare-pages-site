@@ -1,124 +1,36 @@
 {
-  "asof": "2026-05-11T08:00:00Z",
-  "yesterday_date": "2026-05-10",
+  "asof": "2026-05-14T06:09:17Z",
+  "yesterday_date": "2026 05 13",
   "yesterday_record": {
-    "picks": 39,
-    "wins": 16,
-    "losses": 21,
-    "pushes": 2,
+    "picks": 0,
+    "wins": 0,
+    "losses": 0,
+    "pushes": 0,
     "voids": 0,
-    "units": -3.6352,
-    "totalStake": 39.0,
-    "winRate": 0.4324,
-    "roi": -0.0932
+    "units": 0,
+    "totalStake": 0,
+    "winRate": 0.0,
+    "roi": 0.0
   },
-  "by_market": {
-    "ML": {
-      "picks": 11,
-      "wins": 5,
-      "losses": 6,
-      "pushes": 0,
-      "voids": 0,
-      "units": -0.3885,
-      "totalStake": 11.0,
-      "winRate": 0.4545,
-      "roi": -0.0353
-    },
-    "F5_ML": {
-      "picks": 9,
-      "wins": 3,
-      "losses": 4,
-      "pushes": 2,
-      "voids": 0,
-      "units": -0.2467,
-      "totalStake": 9.0,
-      "winRate": 0.4286,
-      "roi": -0.0274
-    },
-    "Hits": {
-      "picks": 14,
-      "wins": 6,
-      "losses": 8,
-      "pushes": 0,
-      "voids": 0,
-      "units": -2.0,
-      "totalStake": 14.0,
-      "winRate": 0.4286,
-      "roi": -0.1429
-    },
-    "Total": {
-      "picks": 5,
-      "wins": 2,
-      "losses": 3,
-      "pushes": 0,
-      "voids": 0,
-      "units": -1.0,
-      "totalStake": 5.0,
-      "winRate": 0.4,
-      "roi": -0.2
-    }
-  },
-  "loss_categories": {
-    "MODEL_ERROR": 13,
-    "VARIANCE": 8
-  },
-  "patterns_identified": [
-    {
-      "category": "VARIANCE",
-      "frequency": 8,
-      "summary": "Hits over 0.5 props at conf 60 went 6 and 8; 8 0-fers across watch tier picks suggests blanket coverage adds noise.",
-      "adjustment_rule": "Cap Hits over 0.5 props to confirmed lineup leadoff/2 hole hitters with at least 4 expected at bats and recent 7 day batting average over 0.260."
-    },
-    {
-      "category": "MODEL_ERROR",
-      "frequency": 2,
-      "summary": "Both Over leans at park amplifier venues stayed well under (5 each). Park profile alone is not enough; both starters were sharp.",
-      "adjustment_rule": "Do not lean Over on Total when both starters carry season ERA below 3.50 even at hitter friendly parks."
-    },
-    {
-      "category": "STARTER_OVERRATED",
-      "frequency": 4,
-      "summary": "F5 ML went 3 and 4 with 2 pushes. Two heavy chalk F5 plays at minus 200 plus odds (CWS, CLE) lost outright.",
-      "adjustment_rule": "Do not lay more than minus 175 on F5 ML when chosen starter has a single previous start with at least 3 ER allowed in last 14 days."
-    },
-    {
-      "category": "MODEL_ERROR",
-      "frequency": 6,
-      "summary": "ML went 5 and 6 with chalk teams (CLE -223, ATL hosting LAD type alignments). Pricing tighter than form.",
-      "adjustment_rule": "Lower ML confidence by 5 when home dog price beats plus 110 and starter ERA delta vs opposing starter is under 1.00."
-    }
-  ],
+  "by_market": {},
+  "loss_categories": {},
+  "patterns_identified": [],
   "adjustments_for_today": [
+    "Tighten chip count to two when expected value gap is below 1.5 points.",
+    "Cap starter ML confidence at 70 when last start ERA >= 5 in 5 IP or fewer.",
     "Cap Hits over 0.5 props to confirmed lineup leadoff/2 hole hitters with at least 4 expected at bats and recent 7 day batting average over 0.260.",
     "Do not lean Over on Total when both starters carry season ERA below 3.50 even at hitter friendly parks.",
-    "Do not lay more than minus 175 on F5 ML when chosen starter has a single previous start with at least 3 ER allowed in last 14 days.",
-    "Lower ML confidence by 5 when home dog price beats plus 110 and starter ERA delta vs opposing starter is under 1.00.",
-    "Tighten Hits prop selection to hitters with rolling 14 day OBP above .340 and project a strong matchup, since 0.5 hits at minus 115 needs more than narrative.",
-    "Cap starter side confidence at 60 when chosen starter has a recent outing of 5 or more ER in 5 IP or fewer, or has logged back to back outings allowing 4 or more runs each.",
-    "Cap F5 ML and ML confidence at 60 when opposing starter has K rate above 25 percent or recent ERA under 3.50.",
-    "Cap pitcher K thresholds 0.5 below market average and require projected 6 plus innings AND a recent start with 7 plus Ks before taking K over.",
-    "Verify the picked hitter is on the actual gamePk roster within 90 minutes of first pitch; do not publish Hits chips before lineup confirmation.",
-    "Validate every Hitter prop pick by checking the player ID against the gamePk team roster from the MLB API before publishing.",
-    "Do not take F5 ML on the visiting team at Coors when the home pitcher has a track record of escaping the first 5 with limited damage; Coors edges accumulate after the 5th.",
-    "Cap F5 ML confidence at 60 when opposing starter has K rate above 25 percent or recent ERA under 3.50."
+    "Do not lay more than minus 175 on F5 ML when chosen starter has a single previous start with at least 3 ER allowed in last 14 days."
   ],
   "monitoring_list": [
-    "Track Hits over 0.5 hit rate by tier this week. If watch tier sub 45 percent hit rate persists, retire the entire bucket.",
-    "Watch road dog F5 ML pricing. Confirm bullpen openers vs traditional starters before placing F5 leans.",
-    "Audit Total Over picks at hitter friendly parks when both starters have ERA under 3.50."
+    "Verify daily card generator publishes picks for the slate on 2026-05-14",
+    "Investigate why picks_log.json has no entries for 2026-05-13 (slate of 15 finals existed)"
   ],
   "carryover_rules": [
+    "Tighten chip count to two when expected value gap is below 1.5 points.",
+    "Cap starter ML confidence at 70 when last start ERA >= 5 in 5 IP or fewer.",
     "Cap Hits over 0.5 props to confirmed lineup leadoff/2 hole hitters with at least 4 expected at bats and recent 7 day batting average over 0.260.",
-    "Validate every Hitter prop pick by checking the player ID against the gamePk team roster from the MLB API before publishing.",
-    "Tighten Hits prop selection to hitters with rolling 14 day OBP above .340 and project a strong matchup, since 0.5 hits at minus 115 needs more than narrative.",
-    "Cap F5 ML confidence at 60 when opposing starter has K rate above 25 percent or recent ERA under 3.50.",
-    "Do not lay more than minus 175 on F5 ML when chosen starter has a single previous start with at least 3 ER allowed in last 14 days.",
-    "Cap F5 ML and ML confidence at 60 when opposing starter has K rate above 25 percent or recent ERA under 3.50.",
-    "Lower ML confidence by 5 when home dog price beats plus 110 and starter ERA delta vs opposing starter is under 1.00.",
-    "Cap starter side confidence at 60 when the chosen starter has logged a recent outing of 5+ ER in 5 or fewer IP, or when his last two starts allowed 4+ runs each.",
-    "Cap starter side confidence at 60 when chosen starter has a recent outing of 5 or more ER in 5 IP or fewer, or has logged back to back outings allowing 4 or more runs each.",
     "Do not lean Over on Total when both starters carry season ERA below 3.50 even at hitter friendly parks.",
-    "Cap pitcher K thresholds 0.5 below market average and require projected 6 plus innings AND a recent start with 7 plus Ks before taking K over.",
-    "Do not take F5 ML on the visiting team at Coors when the home pitcher has a track record of escaping the first 5 with limited damage; Coors edges accumulate after the 5th."
+    "Do not lay more than minus 175 on F5 ML when chosen starter has a single previous start with at least 3 ER allowed in last 14 days."
   ]
 }
