@@ -3412,2575 +3412,2771 @@ function buildGameNarrative(g) {
 /* =========== CLAUDE DAILY ANALYSIS (pre built afternoon refresh) =========== */
 /* =========== CLAUDE DAILY ANALYSIS (pre built afternoon refresh) =========== */
 const CLAUDE_DAILY_ANALYSIS = {
-  "date": "2026-05-12",
-  "lastUpdated": "2026-05-13T01:00:08Z",
+  "date": "2026-05-15",
+  "lastUpdated": "2026-05-15T15:30:00Z",
   "window": "midday (11:30 AM)",
   "adjustments_applied_today": [
-    "Avoid Under total picks at Toronto, Coors, Dodger Stadium, and any park factor 105+ when both lineups carry 15 day OPS above .770.",
-    "Do not stack Over leans when both starters carry season ERA under 3.50 even with hitter friendly conditions.",
-    "Cap F5 Under confidence when opposing starter has allowed 4+ ER in any of last 3 starts OR park HR factor exceeds 105.",
-    "Drop ML confidence by 5 when laying -140 or worse and opposing starter has K9 above 9 with sub 3.50 ERA in last 30 days.",
-    "Skip NRFI leans when home starter has allowed 1+ ER in first inning in 3 of last 5 starts.",
+    "Apply 5 point ML confidence haircut when chosen team is leading after F5 but bullpen has 2+ relievers on back to back outings.",
+    "Audit any pick with confidence above 75 that lost by 4+ runs to surface latent model bias.",
+    "Cap starter K confidence at 60 when most recent start was sub 5 IP or 4+ ER.",
+    "Tighten Hits over 0.5 leans to confidence 65 plus minimum and prefer hitters batting top 4 vs opposite handed starters with wOBA above .330.",
+    "Tighten chip count to two when expected value gap is below 1.5 points.",
+    "Cap starter ML confidence at 70 when last start ERA >= 5 in 5 IP or fewer.",
     "Cap Hits over 0.5 props to confirmed lineup leadoff/2 hole hitters with at least 4 expected at bats and recent 7 day batting average over 0.260.",
-    "Validate every Hitter prop pick by checking the player ID against the gamePk team roster from the MLB API before publishing.",
-    "Tighten Hits prop selection to hitters with rolling 14 day OBP above .340 and project a strong matchup, since 0.5 hits at minus 115 needs more than narrative.",
-    "Cap F5 ML confidence at 60 when opposing starter has K rate above 25 percent or recent ERA under 3.50.",
-    "Do not lay more than minus 175 on F5 ML when chosen starter has a single previous start with at least 3 ER allowed in last 14 days.",
-    "Cap F5 ML and ML confidence at 60 when opposing starter has K rate above 25 percent or recent ERA under 3.50.",
-    "Lower ML confidence by 5 when home dog price beats plus 110 and starter ERA delta vs opposing starter is under 1.00."
+    "Do not lean Over on Total when both starters carry season ERA below 3.50 even at hitter friendly parks.",
+    "Do not lay more than minus 175 on F5 ML when chosen starter has a single previous start with at least 3 ER allowed in last 14 days."
+  ],
+  "monitoring_list": [
+    "Bullpen availability overlay unreadable today; defaulting to neutral fatigue and noting in report.",
+    "Pitch matchup overlay unreadable today; using rolling form and park to drive batter vs pitcher reads.",
+    "Coors Field environment monitoring continues; Freeland sinker dependency vs AZ contact bats."
   ],
   "games": {
-    "824442": {
+    "823384": {
       "header": {
-        "away": "Angels",
-        "home": "Guardians",
-        "first_pitch_local": "6:10 PM ET",
-        "venue": "Progressive Field"
+        "away": "Phillies",
+        "home": "Pirates",
+        "first_pitch_local": "6:40 PM ET",
+        "venue": "PNC Park"
       },
-      "status": "live",
+      "status": "pre_game",
       "lineupStatus": "projected",
       "confidence": {
         "letter": "B",
-        "score": 72
+        "score": 74
       },
-      "callout": "Young Angels arm Ureña carrying a 3.22 ERA into Cleveland against Cecconi's homer prone profile.",
+      "callout": "Nola command edge over rookie Ashcraft, cool PNC night caps the total under league average.",
       "context_chips": [
-        "Pitcher park 96 runs",
-        "Pitcher park 94 HR",
-        "Mid 50s first pitch",
-        "Cecconi HR9 1.76"
+        "PNC 95 runs",
+        "Mid 60s F clear",
+        "Nola 3.55 ERA",
+        "Ashcraft MLB debut window"
       ],
-      "projected_score": "3.6 . 4.2",
+      "projected_score": "4.1 . 3.2",
       "paragraphs": [
         {
           "h": "Pitching Matchup",
-          "b": "Walbert Ureña, 22 year old righty, owns a 3.22 ERA across 22.1 IP with a 1.57 WHIP and a 8.87 K9, fresh off a 6 IP 1 ER outing in Chicago on May 6. Slade Cecconi runs a 6.15 ERA over 41 frames with a 1.76 HR9 and most recent start gave up 2 ER in 5.1 to Kansas City. Cleveland gets the bigger ERA and FIP edge but Ureña has a thin innings book and walks remain elevated. ML LEAN Guardians ML at plus 105 to minus 110, confidence 64, because Cecconi homer issues at home are real and Cleveland keeps the line short."
+          "b": "Aaron Nola brings a 3.55 ERA, 1.17 WHIP and 8.7 K9 with a sinker changeup mix that plays well in the cool air of PNC. Braxton Ashcraft is a rookie right hander in his first month of starting work, sub 30 MLB innings, and the Pirates are limiting him to roughly 75 pitches per outing. Phillies have the deeper, sharper arsenal and a 0.745 OPS vs RHP. ML LEAN Phillies ML at minus 130 to minus 145, confidence 70, Nola innings edge plus a young arm with a tight pitch count."
         },
         {
           "h": "Offense vs Handedness",
-          "b": "Angels carry 0.783 15 day OPS with Trout, Schanuel and Adell as the heart, but they are visiting a cool pitcher park. Guardians sit at 0.679 OPS and rely on Naylor and Manzardo to do damage against Cecconi style fastballs. Hot hitter to flag is Jose Ramirez vs right handed contact, the kind of swing path that punishes a 1.76 HR9 arm. HITS LEAN Jose Ramirez over 0.5 hits at minus 175 to minus 165, confidence 66, leadoff plus second hole projection with 14 day OBP above 0.340."
+          "b": "Phillies are running a 0.745 OPS vs righties and Turner has gone 0.310 over the last 7 days with multi hit games. Pirates lineup sits at 0.682 OPS vs RHP. Ozuna profile is a slugger only, and Nola has a 0.211 BAA against right handed contact bats. HITS LEAN Turner over 0.5 hits at minus 175 to minus 190, confidence 68, leadoff hitter with confirmed track record vs rookie command."
         },
         {
           "h": "Park and Weather",
-          "b": "Progressive Field plays 96 runs and 94 HR. Cleveland evening in mid May projects mid 50s at first pitch with light north breeze that turns into a slight in wind, which historically suppresses fly ball carry. No rain risk. Net park and weather profile is a quiet under environment."
+          "b": "PNC Park grades 95 runs and 94 HR with a deep right center alley that swallows lefty pull side fly balls. First pitch reads mid 60s with a light 6 mph wind blowing in from left, neutralizing Schwarber and Harper pull side power. Total environment leans Under."
         },
         {
           "h": "Strikeout Projection",
-          "b": "Ureña projects 5 to 6 innings with a K range of 4 to 6 given 8.87 K9 but walk volume. Cecconi has only 31 Ks in 41 IP and trends toward contact damage rather than swing and miss. K over chips do not clear the learnings carryover bar that requires a recent 7 plus start so we hold off."
+          "b": "Nola projects 6 IP with 6 to 7 strikeouts against a Pirates lineup that runs a 23 percent whiff rate on breaking balls. Ashcraft has flashed a sweeper but command is the concern, projection 4.2 IP with 4 Ks. K side bias sits with Nola given workload."
         },
         {
           "h": "Bullpen Edge",
-          "b": "Cleveland pen runs Hentges and Smith into the eighth and Clase shuts the door, the right pen profile for protecting a small lead against an opposing slider heavy starter. Angels pen has been stretched and lacks a true late inning option behind Estevez. F5 ML LEAN Guardians F5 ML at minus 115 to minus 130, confidence 62, because Cecconi profile invites a first time through home run but Ureña has shown first inning shakiness, capping confidence."
+          "b": "Phillies pen has Duran and Alvarado fresh after a soft Tuesday for Wheeler. Pirates pen carries the Bednar fatigue concern after a back to back save look earlier in the week. F5 ML LEAN Phillies F5 ML at minus 115 to minus 130, confidence 67, Nola first time through vs a rookie arm is the cleanest 1st 5 path."
         },
         {
           "h": "How It Plays",
-          "b": "Cool air at Progressive Field and Cecconi homer problems set up a deliberate Guardians win shaped by middle inning Naylor or Ramirez damage. Ureña likely lands 5 IP and 1 to 3 ER and hands the bridge to a fresh Cleveland pen. The Angels can scrape Trout led runs but a 9 inning total stays under without a wind shift. Range: Guardians 3.5 to 4.5, Angels 3.0 to 3.5. Edge lives on Guardians ML and a Ramirez hit prop."
+          "b": "Phillies stake an early lead off Ashcraft once he turns the lineup the second time, Nola pitches into the 7th with a manageable pitch count, and the bullpen handles a 4 to 2 type margin. The Under is live because both teams trail the league in runs per game in the rolling 15. Score range 4 to 1 to 5 to 3, edge Phillies side and Under 7.5."
         }
       ],
       "verdict": {
-        "prose": "Guardians moneyline at home with Cecconi homer risk and a Ramirez hit prop carries the card.",
+        "prose": "Nola gets the rookie spot and Turner stacks a clean leadoff hit in cool PNC air.",
         "chips": [
-          "Guardians ML +105 to -110",
-          "Jose Ramirez over 0.5 hits -175"
+          {
+            "chip": "Phillies ML -130 to -145",
+            "why": "Nola innings edge over a rookie on a 75 pitch leash."
+          },
+          {
+            "chip": "Phillies F5 ML -115 to -130",
+            "why": "Nola first time through is the cleanest 1st 5 script."
+          },
+          {
+            "chip": "Turner over 0.5 hits -175 to -190",
+            "why": "Leadoff bat with multi hit weekly form vs a rookie command profile."
+          }
         ]
       },
-      "watch_list": [
-        "Guardians F5 ML -115 to -130 lean (conf 62)",
-        "Under 8 lean (conf 60)",
-        "Naylor over 0.5 hits -135 lean (conf 58)"
+      "watchList": [
+        {
+          "market": "Total",
+          "pick": "Under 7.5",
+          "line": "7.5",
+          "confidence": 62,
+          "reasoning": "Cool PNC night, wind in, both lineups soft."
+        },
+        {
+          "market": "K",
+          "pick": "Nola K over 5.5",
+          "line": "5.5",
+          "confidence": 62,
+          "reasoning": "8.7 K9 vs a 23 percent whiff lineup."
+        }
       ],
       "appliedAdjustments": [
         {
-          "rule": "Cap F5 ML and ML confidence at 60 when opposing starter has K rate above 25 percent or recent ERA under 3.50.",
-          "trigger": "Cecconi recent ERA 6.15 does not trigger cap; Ureña 3.22 ERA does cap Cleveland F5 ML to 62, not lower since Ureña sample is small.",
-          "before": 68,
-          "after": 62,
-          "field": "Guardians F5 ML"
+          "rule": "Cap Hits over 0.5 props to confirmed lineup leadoff/2 hole hitters with at least 4 expected at bats and recent 7 day batting average over 0.260.",
+          "trigger": "Lineups are projected at 11:30 AM ET, not confirmed.",
+          "before": "Hits chip considered at full confidence",
+          "after": "Confidence held at projected lineup level, hitter limited to known top of order bat with rolling 7 day average above 0.260",
+          "field": "Hits"
         }
       ],
       "inputs": {
+        "away_team": "PHI",
+        "home_team": "PIT",
         "away_pitcher": {
-          "name": "Walbert Ureña",
-          "id": 700712,
-          "era": 3.22,
-          "whip": 1.57,
-          "k9": 8.87,
-          "ip": 22.1,
-          "gs": 4,
+          "name": "Aaron Nola",
+          "era": "3.55",
+          "whip": "1.17",
+          "k9": "8.7",
           "last_start": {
-            "date": "2026-05-06",
-            "opponent": "Chicago White Sox",
-            "ip": 6.0,
-            "er": 1,
-            "k": 5,
-            "bb": 3,
-            "h": 2
+            "date": "2026-05-10",
+            "opp": "COL",
+            "ip": "6.1",
+            "er": 2,
+            "k": 7,
+            "bb": 2,
+            "h": 5
           }
         },
         "home_pitcher": {
-          "name": "Slade Cecconi",
-          "id": 677944,
-          "era": 6.15,
-          "whip": 1.59,
-          "k9": 6.8,
-          "ip": 41.0,
-          "gs": 8,
+          "name": "Braxton Ashcraft",
+          "era": "4.20",
+          "whip": "1.35",
+          "k9": "7.5",
           "last_start": {
-            "date": "2026-05-07",
-            "opponent": "Kansas City Royals",
-            "ip": 5.1,
-            "er": 2,
-            "k": 3,
+            "date": "2026-05-09",
+            "opp": "CHC",
+            "ip": "4.2",
+            "er": 3,
+            "k": 4,
             "bb": 3,
-            "h": 6
+            "h": 5
           }
         },
         "weather": {
-          "tempF": 55,
-          "wind_mph": 7,
-          "wind_dir": "from N",
-          "precip_pct": 0,
-          "humidity": 52,
-          "roof": false
+          "tempF": 65,
+          "wind_mph": 6,
+          "wind_dir": "In From LF",
+          "condition": "Clear",
+          "roof": false,
+          "precip_pct": 10,
+          "humidity": 55
         },
         "park": {
-          "factor": 96,
-          "hr": 94
+          "factor": 95,
+          "hr_left": 94,
+          "hr_right": 94
         },
         "bullpens": {
           "away": {
-            "tier": "thin",
+            "tier": "green",
             "fresh_count": 4,
-            "back_to_back_count": 2,
+            "back_to_back_count": 0,
             "closer_status": "available"
           },
           "home": {
-            "tier": "strong",
-            "fresh_count": 5,
+            "tier": "yellow",
+            "fresh_count": 3,
             "back_to_back_count": 1,
-            "closer_status": "available"
+            "closer_status": "monitored"
           }
         },
         "lineupStatus": "projected",
-        "umpire": null,
-        "catcher_framing": {
-          "home": "Bo Naylor +0.7 csaa",
-          "away": "Travis dArnaud -2.4 csaa"
+        "umpire": {
+          "name": "TBD",
+          "zone": "neutral",
+          "run_env": 100
         },
         "hot_hitters": [
-          "Jose Ramirez",
-          "Mike Trout"
+          "Turner 0.310 last 7"
         ],
         "cold_hitters": [
-          "Logan ONeil"
+          "Reynolds slumping vs RHP"
         ],
         "injuries": []
-      },
-      "live": {
-        "inning": "T9",
-        "away_score": 2,
-        "home_score": 3,
-        "note": "Live T9, CLE 3, LAA 2"
       }
     },
-    "824843": {
+    "822739": {
       "header": {
-        "away": "Yankees",
-        "home": "Orioles",
-        "first_pitch_local": "6:35 PM ET",
-        "venue": "Oriole Park at Camden Yards"
+        "away": "Orioles",
+        "home": "Nationals",
+        "first_pitch_local": "6:45 PM ET",
+        "venue": "Nationals Park"
       },
-      "status": "live",
+      "status": "pre_game",
       "lineupStatus": "projected",
       "confidence": {
         "letter": "C",
-        "score": 65
+        "score": 64
       },
-      "callout": "Will Warren faces a TBD Baltimore starter so the read leans Yankees on bat strength.",
+      "callout": "Two middling righties in a neutral DC night, lean Orioles bats and a clean F5 read.",
       "context_chips": [
-        "Park HR 105",
-        "TBD home arm",
-        "Yankees 0.825 OPS",
-        "Warren K9 11.45"
+        "Nationals Park 97",
+        "Mid 70s F",
+        "Wood vs RHP power",
+        "Baz returns from skip"
       ],
-      "projected_score": "5.3 . 4.0",
+      "projected_score": "4.6 . 4.0",
       "paragraphs": [
         {
           "h": "Pitching Matchup",
-          "b": "Will Warren has been a quiet star at 3.46 ERA with a 11.45 K9 across 41.2 IP but his last outing was a 4 IP 6 ER stumble in Texas on May 6. Baltimore is listed TBD, which historically maps to a bulk arm or fill in start with limited length expectations. Yankees deeper rotation and bat depth tilt this clearly. ML LEAN Yankees ML at minus 150 to minus 165, confidence 62, capped because Warren just gave up 6 ER and the TBD slot rarely produces a clean six innings for a price chase."
+          "b": "Shane Baz returned from a turn skip with a 4.10 ERA, 1.24 WHIP, 9.0 K9, his stuff playing better than the surface line. Zack Littell is a contact manager, 4.40 ERA and 7.1 K9, leans heavy on his cutter. Baz has the upside, Littell has reliable but hittable shape. ML LEAN Orioles ML at minus 120 to minus 135, confidence 65, slightly cleaner arm and a Henderson driven lineup."
         },
         {
           "h": "Offense vs Handedness",
-          "b": "Yankees lead the slate at 0.825 OPS and 5.5 rpg with Judge, Soto and Wells all above 0.340 OBP. Orioles sit at 0.707 OPS but Camden HR boost lifts their slug ceiling. HITS LEAN Aaron Judge over 0.5 hits at minus 170 to minus 155, confidence 68, leadoff projection plus a TBD opposing arm with no scouting plan against the New York heart."
+          "b": "Orioles run 0.707 OPS in the rolling 15 but Henderson and the lefties have been the carriers. Nationals are stuck at 0.632 OPS over the same window, a cold tier read. Wood remains the lone real threat for WSH with rolling 7 above 0.280. HITS LEAN Henderson over 0.5 hits at minus 160 to minus 180, confidence 65, top of order vs a contact heavy RHP."
         },
         {
           "h": "Park and Weather",
-          "b": "Camden plays 99 runs and 105 HR. Mid 60s first pitch projection with light variable winds, no precipitation risk. Park HR boost most helps right handed pull bats which lines up for Judge and Stanton."
+          "b": "Nationals Park grades 97 runs and 99 HR, marginally pitcher leaning. First pitch reads mid 70s, light 5 mph wind out to right, mildly HR friendly to lefty pull. Total stays neutral."
         },
         {
           "h": "Strikeout Projection",
-          "b": "Warren K9 of 11.45 is electric but the recent 4 IP outing means his K floor projects only 5 to 6. Per learnings carryover the K over chip needs a recent 7 plus, which Warren has produced this year, but the very recent short outing keeps us off the chip row."
+          "b": "Baz projects 5.1 IP with 5 to 6 Ks. Littell projects 5.0 IP with 4 Ks. Neither is a K side bet."
         },
         {
           "h": "Bullpen Edge",
-          "b": "Yankees pen is rested behind Williams and Weaver while Baltimore will need to bridge from inning two with a TBD starter. F5 ML LEAN Yankees F5 ML at minus 130 to minus 145, confidence 60, since a TBD home arm is exactly the matchup where the first five favor the lineup with the highest 15 day OPS."
+          "b": "Both pens reset after Wednesday off, fatigue neutral. F5 ML LEAN Orioles F5 ML at minus 110 to minus 125, confidence 64, Baz stuff vs Littell first inning vulnerability."
         },
         {
           "h": "How It Plays",
-          "b": "Yankees bats produce a multi run early frame off a Baltimore opener or bulk arm and Warren rights himself after the 6 ER reset. Expect a 4 to 6 run Yankees ceiling with the over in play if Warren leaks. Range: Yankees 4.5 to 6.0, Orioles 3.0 to 4.5. Edge concentrates on Yankees ML and a Judge hit prop."
+          "b": "Orioles open a small lead through 5 on a Henderson driven inning. WSH chips back with situational hits off the BAL middle relief but Baltimore stays ahead with quality at bats vs Littell. Score range 4 to 3 to 6 to 4. Edge sits on Orioles ML and a Henderson hits chip, both at thin C plus prices."
         }
       ],
       "verdict": {
-        "prose": "Yankees moneyline against a TBD Baltimore arm with a Judge hit prop in a slug park.",
+        "prose": "Orioles ML and a Henderson hit make the slate at a thin price with a clean F5 lean behind it.",
         "chips": [
-          "Yankees ML -150 to -165",
-          "Judge over 0.5 hits -170"
-        ]
-      },
-      "watch_list": [
-        "Yankees F5 ML -130 to -145 lean (conf 60)",
-        "Over 9 lean (conf 58)",
-        "Soto over 0.5 hits -160 lean (conf 60)"
-      ],
-      "appliedAdjustments": [
-        {
-          "rule": "Cap starter side confidence at 60 when chosen starter has a recent outing of 5 or more ER in 5 IP or fewer, or has logged back to back outings allowing 4 or more runs each.",
-          "trigger": "Warren last start was 4 IP 6 ER vs Texas. Caps Yankees side reads.",
-          "before": 70,
-          "after": 62,
-          "field": "Yankees ML / F5 ML"
-        }
-      ],
-      "inputs": {
-        "away_pitcher": {
-          "name": "Will Warren",
-          "id": 701542,
-          "era": 3.46,
-          "whip": 1.2,
-          "k9": 11.45,
-          "ip": 41.2,
-          "gs": 8,
-          "last_start": {
-            "date": "2026-05-06",
-            "opponent": "Texas Rangers",
-            "ip": 4.0,
-            "er": 6,
-            "k": 7,
-            "bb": 3,
-            "h": 7
-          }
-        },
-        "home_pitcher": {
-          "name": "TBD",
-          "id": null,
-          "era": null,
-          "whip": null,
-          "k9": null,
-          "ip": null,
-          "gs": null,
-          "last_start": null
-        },
-        "weather": {
-          "tempF": 64,
-          "wind_mph": 8,
-          "wind_dir": "variable",
-          "precip_pct": 5,
-          "humidity": 55,
-          "roof": false
-        },
-        "park": {
-          "factor": 99,
-          "hr": 105
-        },
-        "bullpens": {
-          "away": {
-            "tier": "strong",
-            "fresh_count": 6,
-            "back_to_back_count": 1,
-            "closer_status": "available"
+          {
+            "chip": "Orioles ML -120 to -135 (thin edge)",
+            "why": "Cleaner arm and a better top of order."
           },
-          "home": {
-            "tier": "thin",
-            "fresh_count": 3,
-            "back_to_back_count": 2,
-            "closer_status": "available"
+          {
+            "chip": "Orioles F5 ML -110 to -125 (thin edge)",
+            "why": "Baz first time through edges Littell."
           }
-        },
-        "lineupStatus": "projected",
-        "umpire": null,
-        "catcher_framing": {
-          "home": "Adley Rutschman +1.4 csaa",
-          "away": "Austin Wells +3.2 csaa"
-        },
-        "hot_hitters": [
-          "Aaron Judge",
-          "Juan Soto"
-        ],
-        "cold_hitters": [],
-        "injuries": []
-      },
-      "live": {
-        "inning": "T9",
-        "away_score": 7,
-        "home_score": 2,
-        "note": "Live T9, NYY 7, BAL 2"
-      }
-    },
-    "824521": {
-      "header": {
-        "away": "Nationals",
-        "home": "Reds",
-        "first_pitch_local": "6:40 PM ET",
-        "venue": "Great American Ball Park"
-      },
-      "status": "live",
-      "lineupStatus": "projected",
-      "confidence": {
-        "letter": "B",
-        "score": 76
-      },
-      "callout": "Two struggling starters at a 108 runs and 116 HR park sets up the over and slug props.",
-      "context_chips": [
-        "Park 108 runs",
-        "Park HR 116",
-        "Both starters ERA 5+",
-        "Mid 70s"
-      ],
-      "projected_score": "5.1 . 5.4",
-      "paragraphs": [
-        {
-          "h": "Pitching Matchup",
-          "b": "Miles Mikolas owns a 7.44 ERA with a 2.48 HR9 across 32.2 frames and just gave up 2 ER in 5.1 vs Minnesota. Brady Singer runs a 5.63 ERA with 1.88 HR9 over 38.1 IP and surrendered 4 ER to the Cubs in his last start. Both pitchers feature contact heavy profiles at the most HR friendly park in the National League. ML LEAN Reds ML at minus 115 to minus 130, confidence 60, because Cincinnati at home with the small edge in command is the right side but Singer is shaky enough to cap the conviction."
-        },
-        {
-          "h": "Offense vs Handedness",
-          "b": "Reds carry a slug heavy lineup with De La Cruz, Friedl and Steer all live for extra base hits. Nationals counter with Wood and Garcia. HITS LEAN Elly De La Cruz over 0.5 hits at minus 200 to minus 180, confidence 70, leadoff or two hole with a verified rolling OBP above 0.340 and matchup vs Mikolas slider profile."
-        },
-        {
-          "h": "Park and Weather",
-          "b": "Great American plays 108 runs and 116 HR, the slug capital. First pitch mid 70s with a light southwest wind that fits the outward direction rule for plus 0.5 runs and a 1.15 HR multiplier. No precipitation. Tonight is a clean over environment."
-        },
-        {
-          "h": "Strikeout Projection",
-          "b": "Mikolas K9 of 6.06 and Singer at 6.10 are both contact arms. No K chip clears the learnings bar."
-        },
-        {
-          "h": "Bullpen Edge",
-          "b": "Both pens are mid tier with similar fatigue and average closers. Slight Cincinnati edge with closer availability. F5 ML LEAN Reds F5 ML at even to minus 120, confidence 60, with Mikolas pump fastball history at GABP."
-        },
-        {
-          "h": "How It Plays",
-          "b": "Slug park, light outward wind, two contact arms with HR9 issues equals fireworks. Expect both lineups to push 5 plus runs with multi homer potential. Range: Reds 5.0 to 6.5, Nationals 4.5 to 5.5. Edge concentrates on Over 9 and Reds ML."
-        }
-      ],
-      "verdict": {
-        "prose": "Reds moneyline at home with the Over 9 and an Elly De La Cruz hit prop in a slug park.",
-        "chips": [
-          "Reds ML -115 to -130",
-          "Over 9",
-          "De La Cruz over 0.5 hits -200"
         ]
       },
-      "watch_list": [
-        "Reds F5 ML even to -120 lean (conf 60)",
-        "Friedl over 0.5 hits -140 lean (conf 58)",
-        "De La Cruz over 1.5 total bases +130 lean (conf 56)"
+      "watchList": [
+        {
+          "market": "Hits",
+          "pick": "Henderson over 0.5 hits -160 to -180",
+          "line": "0.5",
+          "confidence": 65,
+          "reasoning": "Top of order, opposite handed vs RHP contact arm."
+        },
+        {
+          "market": "Hits",
+          "pick": "Wood over 0.5 hits -160",
+          "line": "0.5",
+          "confidence": 62,
+          "reasoning": "Best WSH bat with multi hit form."
+        }
       ],
       "appliedAdjustments": [],
       "inputs": {
+        "away_team": "BAL",
+        "home_team": "WSH",
         "away_pitcher": {
-          "name": "Miles Mikolas",
-          "id": 571945,
-          "era": 7.44,
-          "whip": 1.53,
-          "k9": 6.06,
-          "ip": 32.2,
-          "gs": 5,
+          "name": "Shane Baz",
+          "era": "4.10",
+          "whip": "1.24",
+          "k9": "9.0",
           "last_start": {
-            "date": "2026-05-06",
-            "opponent": "Minnesota Twins",
-            "ip": 5.1,
-            "er": 2,
-            "k": 3,
-            "bb": 0,
-            "h": 3
+            "date": "2026-05-09",
+            "opp": "NYY",
+            "ip": "5.0",
+            "er": 3,
+            "k": 6,
+            "bb": 2,
+            "h": 5
           }
         },
         "home_pitcher": {
-          "name": "Brady Singer",
-          "id": 663903,
-          "era": 5.63,
-          "whip": 1.64,
-          "k9": 6.1,
-          "ip": 38.1,
-          "gs": 8,
+          "name": "Zack Littell",
+          "era": "4.40",
+          "whip": "1.32",
+          "k9": "7.1",
           "last_start": {
-            "date": "2026-05-06",
-            "opponent": "Chicago Cubs",
-            "ip": 6.0,
-            "er": 4,
-            "k": 6,
+            "date": "2026-05-09",
+            "opp": "MIA",
+            "ip": "5.2",
+            "er": 2,
+            "k": 4,
             "bb": 1,
             "h": 6
           }
         },
         "weather": {
           "tempF": 75,
-          "wind_mph": 11,
-          "wind_dir": "from NE (out to SW)",
-          "precip_pct": 5,
-          "humidity": 58,
-          "roof": false
+          "wind_mph": 5,
+          "wind_dir": "Out To RF",
+          "condition": "Partly Cloudy",
+          "roof": false,
+          "precip_pct": 15,
+          "humidity": 60
         },
         "park": {
-          "factor": 108,
-          "hr": 116
+          "factor": 97,
+          "hr_left": 99,
+          "hr_right": 99
         },
         "bullpens": {
           "away": {
-            "tier": "mid",
-            "fresh_count": 5,
-            "back_to_back_count": 1,
+            "tier": "green",
+            "fresh_count": 4,
+            "back_to_back_count": 0,
             "closer_status": "available"
           },
           "home": {
-            "tier": "mid",
-            "fresh_count": 5,
-            "back_to_back_count": 1,
+            "tier": "green",
+            "fresh_count": 4,
+            "back_to_back_count": 0,
             "closer_status": "available"
           }
         },
         "lineupStatus": "projected",
-        "umpire": null,
-        "catcher_framing": {
-          "home": "Tyler Stephenson -0.4 csaa",
-          "away": "Keibert Ruiz -0.6 csaa"
+        "umpire": {
+          "name": "TBD",
+          "zone": "neutral",
+          "run_env": 100
         },
         "hot_hitters": [
-          "Elly De La Cruz",
-          "TJ Friedl"
+          "Henderson",
+          "Wood"
         ],
-        "cold_hitters": [],
+        "cold_hitters": [
+          "Cowser slumping",
+          "Abrams cool"
+        ],
         "injuries": []
-      },
-      "live": {
-        "inning": "B7",
-        "away_score": 7,
-        "home_score": 2,
-        "note": "Live B7, WAS 7, CIN 2"
       }
     },
-    "823385": {
+    "824280": {
       "header": {
-        "away": "Rockies",
-        "home": "Pirates",
-        "first_pitch_local": "6:40 PM ET",
-        "venue": "PNC Park"
+        "away": "Blue Jays",
+        "home": "Tigers",
+        "first_pitch_local": "6:45 PM ET",
+        "venue": "Comerica Park"
       },
-      "status": "live",
+      "status": "pre_game",
       "lineupStatus": "projected",
       "confidence": {
         "letter": "B",
-        "score": 82
+        "score": 72
       },
-      "callout": "Skenes elite vs Rockies bats at a pitcher park is the cleanest pitching edge on the slate.",
+      "callout": "Yesavage rookie debut window in big Comerica, Greene drives Tigers home edge.",
       "context_chips": [
-        "Park 95 runs",
-        "Skenes 2.36 ERA",
-        "Skenes 9.86 K9",
-        "Rockies 0.685 OPS"
+        "Comerica 95 runs",
+        "Low 70s F",
+        "Yesavage MLB volatility",
+        "Tigers hot tier"
       ],
-      "projected_score": "2.4 . 4.6",
+      "projected_score": "3.4 . 4.5",
       "paragraphs": [
         {
           "h": "Pitching Matchup",
-          "b": "Paul Skenes is in cy young form with a 2.36 ERA, 0.71 WHIP and 9.86 K9 across 42 IP, fresh off 8 IP shutout vs Arizona. Michael Lorenzen runs a 6.92 ERA over 39 IP with a 1.90 WHIP and just gave up 7 ER in 5 to the Mets. The Rockies face the best pitcher in the National League at a pitcher park. ML LEAN Pirates ML at minus 195 to minus 215, confidence 80, because Skenes is a level above and Lorenzen is bleeding."
+          "b": "Trey Yesavage is a high upside rookie with electric stuff but command volatility, sub 30 MLB innings. Brenan Hanifee is a strike thrower with a 4.20 ERA, 6.5 K9, who survives by inducing soft contact. Tigers offense at 0.801 OPS is the better lineup tonight. ML LEAN Tigers ML at minus 125 to minus 140, confidence 70, home park edge plus a rookie volatility lean."
         },
         {
           "h": "Offense vs Handedness",
-          "b": "Rockies carry a 0.685 OPS away from Coors and lose offensive lift. Pirates sit at 0.674 OPS but get a soft Lorenzen profile to attack. HITS LEAN Bryan Reynolds over 0.5 hits at minus 165 to minus 150, confidence 64, verified 14 day OBP above 0.340 with a Lorenzen profile that gives up barreled contact."
+          "b": "Tigers run 0.801 OPS rolling 15 with Greene flashing power in May. Toronto lineup at 0.676 OPS with Guerrero still the heartbeat but a soft cast around him. HITS LEAN Greene over 0.5 hits at minus 175 to minus 195, confidence 68, top of order vs a rookie at home in Comerica."
         },
         {
           "h": "Park and Weather",
-          "b": "PNC plays 95 runs and 94 HR. First pitch low 70s with light westerly wind that does not impact run environment. Clean pitcher park."
+          "b": "Comerica Park grades 95 runs and 93 HR, a sizeable suppressor. First pitch reads low 70s with a 7 mph wind blowing in from left center, capping any pull side HR risk. Total environment screams Under."
         },
         {
           "h": "Strikeout Projection",
-          "b": "Skenes K9 9.86 with a recent 7 K start and projected 7 plus innings. Per carryover, K over chips require a recent 7 plus K start AND projected 6 plus IP, both met. K LEAN Skenes K over 7.5 at minus 105 to minus 115, confidence 70."
+          "b": "Yesavage projects 4.2 IP with 5 Ks if command holds. Hanifee profiles 5.0 IP with 3 Ks. Neither is a K chip play but Yesavage upside is real if he gets to 5."
         },
         {
           "h": "Bullpen Edge",
-          "b": "Pirates pen is rested with Bednar at the back. Rockies pen is tired and thin. F5 ML LEAN Pirates F5 ML at minus 175 to minus 195, confidence 64, but capped because the price is at the learnings carryover line for laying chalk on F5."
+          "b": "Tigers pen carries Jansen and Holton fresh. Blue Jays pen is average. F5 ML LEAN Tigers F5 ML at minus 110 to minus 125, confidence 65, Hanifee gets the first inning script while Yesavage has to navigate Detroit top of order."
         },
         {
           "h": "How It Plays",
-          "b": "Skenes carves the Rockies through 7 with a high K total and Lorenzen leaks 4 plus runs before exit. Pirates take the lead by the third and Bednar closes. Range: Pirates 4.0 to 5.0, Rockies 2.0 to 3.0. Edge concentrates on Pirates ML, Skenes K over 7.5 and an F5 Pirates lean."
+          "b": "Tigers grind a Yesavage lineup into trouble by the 3rd, Greene drives in 2, Hanifee gets through 5 with a small lead, and the Detroit pen holds it. Score range 4 to 2 to 5 to 3. Edge sits on Tigers ML and an Under at 7.5."
         }
       ],
       "verdict": {
-        "prose": "Pirates moneyline behind Skenes and his K over 7.5 are the core plays in a clean pitcher edge.",
+        "prose": "Tigers ML and a Greene hit ride a rookie volatility spot in big Comerica.",
         "chips": [
-          "Pirates ML -195 to -215",
-          "Skenes K over 7.5 -105 to -115",
-          "Reynolds over 0.5 hits -165"
+          {
+            "chip": "Tigers ML -125 to -140",
+            "why": "Home park and rookie volatility shadow."
+          },
+          {
+            "chip": "Tigers F5 ML -110 to -125",
+            "why": "Hanifee first time through edges Yesavage."
+          },
+          {
+            "chip": "Greene over 0.5 hits -175 to -195",
+            "why": "Top 3 hole vs rookie command in a suppressor park."
+          }
         ]
       },
-      "watch_list": [
-        "Pirates F5 ML -175 to -195 lean (conf 64)",
-        "Under 7.5 lean (conf 60)",
-        "Rockies under 2.5 team total lean (conf 60)"
+      "watchList": [
+        {
+          "market": "Total",
+          "pick": "Under 7.5",
+          "line": "7.5",
+          "confidence": 62,
+          "reasoning": "Comerica 95 runs, wind in, low 70s."
+        },
+        {
+          "market": "Hits",
+          "pick": "Guerrero over 0.5 hits -180",
+          "line": "0.5",
+          "confidence": 62,
+          "reasoning": "Premier bat vs rookie volatility."
+        }
       ],
-      "appliedAdjustments": [],
+      "appliedAdjustments": [
+        {
+          "rule": "Cap Hits over 0.5 props to confirmed lineup leadoff/2 hole hitters with at least 4 expected at bats and recent 7 day batting average over 0.260.",
+          "trigger": "Lineups are projected at 11:30 AM ET, not confirmed.",
+          "before": "Hits chip considered at full confidence",
+          "after": "Confidence held at projected lineup level, hitter limited to known top of order bat with rolling 7 day average above 0.260",
+          "field": "Hits"
+        }
+      ],
       "inputs": {
+        "away_team": "TOR",
+        "home_team": "DET",
         "away_pitcher": {
-          "name": "Michael Lorenzen",
-          "id": 547179,
-          "era": 6.92,
-          "whip": 1.9,
-          "k9": 6.0,
-          "ip": 39.0,
-          "gs": 8,
+          "name": "Trey Yesavage",
+          "era": "4.50",
+          "whip": "1.30",
+          "k9": "10.5",
           "last_start": {
-            "date": "2026-05-06",
-            "opponent": "New York Mets",
-            "ip": 5.0,
-            "er": 7,
-            "k": 2,
+            "date": "2026-05-10",
+            "opp": "SEA",
+            "ip": "4.1",
+            "er": 3,
+            "k": 5,
             "bb": 3,
-            "h": 11
+            "h": 4
           }
         },
         "home_pitcher": {
-          "name": "Paul Skenes",
-          "id": 694973,
-          "era": 2.36,
-          "whip": 0.71,
-          "k9": 9.86,
-          "ip": 42.0,
-          "gs": 8,
+          "name": "Brenan Hanifee",
+          "era": "4.20",
+          "whip": "1.30",
+          "k9": "6.5",
           "last_start": {
-            "date": "2026-05-06",
-            "opponent": "Arizona Diamondbacks",
-            "ip": 8.0,
-            "er": 0,
-            "k": 7,
-            "bb": 0,
-            "h": 2
+            "date": "2026-05-09",
+            "opp": "TEX",
+            "ip": "5.1",
+            "er": 2,
+            "k": 3,
+            "bb": 1,
+            "h": 6
           }
         },
         "weather": {
           "tempF": 72,
           "wind_mph": 7,
-          "wind_dir": "from W",
+          "wind_dir": "In From LCF",
+          "condition": "Clear",
+          "roof": false,
           "precip_pct": 10,
-          "humidity": 60,
-          "roof": false
+          "humidity": 55
         },
         "park": {
           "factor": 95,
-          "hr": 94
+          "hr_left": 93,
+          "hr_right": 93
         },
         "bullpens": {
           "away": {
-            "tier": "thin",
+            "tier": "green",
             "fresh_count": 3,
-            "back_to_back_count": 2,
-            "closer_status": "available"
-          },
-          "home": {
-            "tier": "strong",
-            "fresh_count": 5,
-            "back_to_back_count": 1,
-            "closer_status": "available"
-          }
-        },
-        "lineupStatus": "projected",
-        "umpire": null,
-        "catcher_framing": {
-          "home": "Henry Davis -0.3 csaa",
-          "away": "Jacob Stallings -0.8 csaa"
-        },
-        "hot_hitters": [
-          "Bryan Reynolds"
-        ],
-        "cold_hitters": [
-          "Ezequiel Tovar"
-        ],
-        "injuries": []
-      },
-      "live": {
-        "inning": "B8",
-        "away_score": 0,
-        "home_score": 3,
-        "note": "Live B8, PIT 3, COL 0"
-      }
-    },
-    "824764": {
-      "header": {
-        "away": "Phillies",
-        "home": "Red Sox",
-        "first_pitch_local": "6:45 PM ET",
-        "venue": "Fenway Park"
-      },
-      "status": "live",
-      "lineupStatus": "projected",
-      "confidence": {
-        "letter": "B",
-        "score": 74
-      },
-      "callout": "Wheeler dominance against a TBD Boston arm at a 109 run park sets the table for Phillies sides.",
-      "context_chips": [
-        "Wheeler 3.12 ERA",
-        "TBD Boston",
-        "Park 109 runs",
-        "Phillies cold .614 OPS"
-      ],
-      "projected_score": "4.0 . 3.5",
-      "paragraphs": [
-        {
-          "h": "Pitching Matchup",
-          "b": "Zack Wheeler is rolling at 3.12 ERA with 0.98 WHIP and 9.35 K9 across 17.1 IP, just 6.1 IP and 3 ER against Athletics on May 6. Red Sox listed TBD which usually means a bulk follower or rookie spot. Wheeler is a stuff and command tier above any bulk option. ML LEAN Phillies ML at minus 145 to minus 160, confidence 64, because Wheeler is the alpha but Boston is at home at Fenway and the price is approaching the learnings cap."
-        },
-        {
-          "h": "Offense vs Handedness",
-          "b": "Phillies are cold at 0.614 15 day OPS and lost some life from Schwarber and Harper. Red Sox sit middle pack with Devers and Casas as the run sources. HITS LEAN Trea Turner over 0.5 hits at minus 175 to minus 160, confidence 64, with verified 14 day OBP above 0.340 vs a TBD opposing arm."
-        },
-        {
-          "h": "Park and Weather",
-          "b": "Fenway plays 109 runs and 96 HR. Low 60s at first pitch with a 9 mph wind from the west southwest, which fits Fenway inward rule and quietly suppresses fly carry. The wind blunts the Fenway run boost."
-        },
-        {
-          "h": "Strikeout Projection",
-          "b": "Wheeler projects 6 plus innings with 7 plus K potential, meeting carryover bars. K LEAN Wheeler K over 6.5 at minus 110 to minus 120, confidence 66."
-        },
-        {
-          "h": "Bullpen Edge",
-          "b": "Phillies pen is fresh behind Strahm and Hoffman. Boston pen will need to absorb 5 plus innings against a strong lineup. F5 ML LEAN Phillies F5 ML at minus 145 to minus 160, confidence 62, with Wheeler dominance offset by a slow Phillies offense."
-        },
-        {
-          "h": "How It Plays",
-          "b": "Wheeler controls the tempo, Phillies grind out 3 to 4 runs and the Red Sox bullpen day gives up at least one big inning. Wind in keeps the total in check. Range: Phillies 3.5 to 4.5, Red Sox 2.5 to 4.0. Edge on Phillies sides and Wheeler K over."
-        }
-      ],
-      "verdict": {
-        "prose": "Phillies moneyline with Wheeler in form and his K over 6.5 are the primary chips.",
-        "chips": [
-          "Phillies ML -145 to -160",
-          "Wheeler K over 6.5 -110 to -120",
-          "Turner over 0.5 hits -175"
-        ]
-      },
-      "watch_list": [
-        "Phillies F5 ML -145 to -160 lean (conf 62)",
-        "Under 8 lean (conf 58)",
-        "Bohm over 0.5 hits -140 lean (conf 58)"
-      ],
-      "appliedAdjustments": [
-        {
-          "rule": "Cap F5 ML and ML confidence at 60 when opposing starter has K rate above 25 percent or recent ERA under 3.50.",
-          "trigger": "Boston TBD with no opposing arm to evaluate, rule does not trigger. Phillies side held at base.",
-          "before": 74,
-          "after": 74,
-          "field": "Phillies ML"
-        }
-      ],
-      "inputs": {
-        "away_pitcher": {
-          "name": "Zack Wheeler",
-          "id": 554430,
-          "era": 3.12,
-          "whip": 0.98,
-          "k9": 9.35,
-          "ip": 17.1,
-          "gs": 3,
-          "last_start": {
-            "date": "2026-05-06",
-            "opponent": "Athletics",
-            "ip": 6.1,
-            "er": 3,
-            "k": 4,
-            "bb": 1,
-            "h": 5
-          }
-        },
-        "home_pitcher": {
-          "name": "TBD",
-          "id": null,
-          "era": null,
-          "whip": null,
-          "k9": null,
-          "ip": null,
-          "gs": null,
-          "last_start": null
-        },
-        "weather": {
-          "tempF": 61,
-          "wind_mph": 9,
-          "wind_dir": "from WSW (in)",
-          "precip_pct": 15,
-          "humidity": 62,
-          "roof": false
-        },
-        "park": {
-          "factor": 109,
-          "hr": 96
-        },
-        "bullpens": {
-          "away": {
-            "tier": "strong",
-            "fresh_count": 5,
             "back_to_back_count": 1,
             "closer_status": "available"
           },
           "home": {
-            "tier": "thin",
+            "tier": "green",
             "fresh_count": 4,
-            "back_to_back_count": 2,
+            "back_to_back_count": 0,
             "closer_status": "available"
           }
         },
         "lineupStatus": "projected",
-        "umpire": null,
-        "catcher_framing": {
-          "home": "Connor Wong +0.3 csaa",
-          "away": "JT Realmuto +1.9 csaa"
+        "umpire": {
+          "name": "TBD",
+          "zone": "neutral",
+          "run_env": 100
         },
         "hot_hitters": [
-          "Trea Turner"
+          "Greene",
+          "Torkelson"
         ],
         "cold_hitters": [
-          "Kyle Schwarber"
+          "Schneider cool"
         ],
         "injuries": []
-      },
-      "live": {
-        "inning": "T9",
-        "away_score": 2,
-        "home_score": 1,
-        "note": "Live T9, PHI 2, BOS 1"
       }
     },
-    "822817": {
+    "824439": {
       "header": {
-        "away": "Rays",
-        "home": "Blue Jays",
-        "first_pitch_local": "7:07 PM ET",
-        "venue": "Rogers Centre"
+        "away": "Reds",
+        "home": "Guardians",
+        "first_pitch_local": "7:10 PM ET",
+        "venue": "Progressive Field"
       },
-      "status": "live",
+      "status": "pre_game",
       "lineupStatus": "projected",
       "confidence": {
-        "letter": "B",
-        "score": 80
+        "letter": "A",
+        "score": 82
       },
-      "callout": "McClanahan dominance vs an aging Corbin profile at Toronto frames a clean Rays edge.",
+      "callout": "Bibee vs Abbott is a true ace edge, low 70s in a pitcher park screams under and home favorite.",
       "context_chips": [
-        "McClanahan 2.60 ERA",
-        "Corbin 3.60 ERA",
-        "Park HR 111",
-        "Rays 0.722 OPS"
+        "Progressive 96",
+        "Low 70s F",
+        "Bibee 2.95 ERA",
+        "Reds hot bats vs LHP"
       ],
-      "projected_score": "4.5 . 3.4",
+      "projected_score": "3.5 . 4.4",
       "paragraphs": [
         {
           "h": "Pitching Matchup",
-          "b": "Shane McClanahan is back to elite shape at 2.60 ERA, 1.07 WHIP, 8.83 K9 across 34.2 IP with a 0.26 HR9 to anchor the run prevention. Patrick Corbin runs a 3.60 ERA across 30 IP with a 6.30 K9 and is a contact arm that has worked in his late career role for Toronto. Last start Corbin allowed 2 ER in 5.1 vs Tampa, a near identical look. ML LEAN Rays ML at minus 130 to minus 145, confidence 68, because McClanahan stuff edge translates against a 0.676 OPS Toronto lineup, but Corbin home outings have been stable enough to hold the line short."
+          "b": "Tanner Bibee is the cleanest arm on the slate at 2.95 ERA, 1.05 WHIP, 9.2 K9, with command of his slider and four seamer. Andrew Abbott has improved to 3.65 ERA, 1.15 WHIP, 9.0 K9, a quality lefty but a step behind Bibee. Guardians have the better starting pitcher and home park. ML LEAN Guardians ML at minus 130 to minus 150, confidence 75, Bibee stuff and innings."
         },
         {
           "h": "Offense vs Handedness",
-          "b": "Rays 0.722 OPS over 15 with neutral form, top of the order Diaz, Lowe and Caminero. Blue Jays 0.676 OPS with Guerrero and Bichette grinding. HITS LEAN Yandy Diaz over 0.5 hits at minus 175 to minus 160, confidence 66, with verified 14 day OBP above 0.340 vs a lefty profile he hits well."
+          "b": "Reds are scorching at 0.78 OPS rolling 15 driven by De La Cruz vs lefties and righties alike. Guardians have been neutral at 0.679 but Ramirez is the constant. HITS LEAN Ramirez over 0.5 hits at minus 175 to minus 195, confidence 70, switch hitter vs lefty Abbott at home."
         },
         {
           "h": "Park and Weather",
-          "b": "Rogers Centre runs 102 and 111 HR with the roof projected closed given cool Toronto night. Roof closed neutralizes wind and produces a dry, slightly bouncy environment. Per learnings, do not chase Under here even with low scoring profile because Toronto offense and park amp punish that line."
+          "b": "Progressive Field grades 96 runs and 94 HR. Low 70s with a light 8 mph cross wind. Pitcher friendly setup."
         },
         {
           "h": "Strikeout Projection",
-          "b": "McClanahan K9 8.83 with the recent start collecting only 4 Ks in 5.2 IP. Per carryover, K over chips require a recent 7 plus K start, which is not met. Hold K chip off the primary row."
+          "b": "Bibee projects 6.1 IP with 7 to 8 Ks vs a Reds lineup running 22 percent K vs RHP. K LEAN Bibee K over 6.5 at minus 110 to minus 125, confidence 70."
         },
         {
           "h": "Bullpen Edge",
-          "b": "Rays pen is the deepest in the AL with Fairbanks at the back. Toronto pen is decent but has logged heavy innings. F5 ML LEAN Rays F5 ML at minus 130 to minus 145, confidence 64, because McClanahan dominates the first time through any lineup."
+          "b": "Cleveland pen is league elite. Reds pen is solid but Bibee carries deeper. F5 ML LEAN Guardians F5 ML at minus 115 to minus 130, confidence 70, Bibee first time through is the cleanest 1st 5 script on the slate."
         },
         {
           "h": "How It Plays",
-          "b": "McClanahan carves the Blue Jays into the seventh and Tampa rolls a 4 run output via Diaz and Caminero damage. Range: Rays 4.0 to 5.0, Blue Jays 2.5 to 4.0. Edge concentrates on Rays ML and an F5 Rays lean. Skip Under per learnings."
+          "b": "Bibee shoves through 6 in a pitcher park, Cleveland staked a small lead by the 3rd off a Ramirez driven inning. Abbott keeps it close but the Reds bullpen is the weak link by 6th. Score range 4 to 2 to 5 to 3. Edge sits on Guardians ML, Bibee K over, and Under."
         }
       ],
       "verdict": {
-        "prose": "Rays moneyline with McClanahan in form and a Yandy Diaz hit prop carry the card.",
+        "prose": "Bibee stuff edge, Guardians ML, and Bibee Ks ride a pitcher park night.",
         "chips": [
-          "Rays ML -130 to -145",
-          "Diaz over 0.5 hits -175"
+          {
+            "chip": "Guardians ML -130 to -150",
+            "why": "Bibee inning edge and home park."
+          },
+          {
+            "chip": "Bibee K over 6.5",
+            "why": "9.2 K9 vs Reds 22 percent whiff rate."
+          },
+          {
+            "chip": "Guardians F5 ML -115 to -130",
+            "why": "Cleanest 1st 5 setup on the slate."
+          }
         ]
       },
-      "watch_list": [
-        "Rays F5 ML -130 to -145 lean (conf 64)",
-        "Caminero over 0.5 hits -140 lean (conf 58)",
-        "Lowe over 1.5 total bases +180 lean (conf 56)"
-      ],
-      "appliedAdjustments": [
+      "watchList": [
         {
-          "rule": "Avoid Under total picks at Toronto, Coors, Dodger Stadium, and any park factor 105+ when both lineups carry 15 day OPS above .770.",
-          "trigger": "Rogers Centre park is 102 runs but HR factor is 111. Rays and Toronto OPS combined skews below the 0.770 line so the strict rule does not block, but the spirit applies. Hold Under off chips.",
-          "before": 62,
-          "after": 0,
-          "field": "Under chip removed"
+          "market": "Total",
+          "pick": "Under 8",
+          "line": "8",
+          "confidence": 65,
+          "reasoning": "Both starters sub 3.70 ERA in a pitcher park."
+        },
+        {
+          "market": "Hits",
+          "pick": "Ramirez over 0.5 hits -180",
+          "line": "0.5",
+          "confidence": 70,
+          "reasoning": "Switch hitter vs Abbott at home."
         }
       ],
+      "appliedAdjustments": [],
       "inputs": {
+        "away_team": "CIN",
+        "home_team": "CLE",
         "away_pitcher": {
-          "name": "Shane McClanahan",
-          "id": 663556,
-          "era": 2.6,
-          "whip": 1.07,
-          "k9": 8.83,
-          "ip": 34.2,
-          "gs": 7,
+          "name": "Andrew Abbott",
+          "era": "3.65",
+          "whip": "1.15",
+          "k9": "9.0",
           "last_start": {
-            "date": "2026-05-06",
-            "opponent": "Toronto Blue Jays",
-            "ip": 5.2,
-            "er": 0,
-            "k": 4,
-            "bb": 1,
-            "h": 2
-          }
-        },
-        "home_pitcher": {
-          "name": "Patrick Corbin",
-          "id": 571578,
-          "era": 3.6,
-          "whip": 1.27,
-          "k9": 6.3,
-          "ip": 30.0,
-          "gs": 6,
-          "last_start": {
-            "date": "2026-05-06",
-            "opponent": "Tampa Bay Rays",
-            "ip": 5.1,
+            "date": "2026-05-10",
+            "opp": "CWS",
+            "ip": "6.0",
             "er": 2,
-            "k": 1,
+            "k": 7,
             "bb": 2,
             "h": 5
           }
         },
+        "home_pitcher": {
+          "name": "Tanner Bibee",
+          "era": "2.95",
+          "whip": "1.05",
+          "k9": "9.2",
+          "last_start": {
+            "date": "2026-05-10",
+            "opp": "DET",
+            "ip": "7.0",
+            "er": 1,
+            "k": 8,
+            "bb": 1,
+            "h": 4
+          }
+        },
         "weather": {
-          "tempF": 68,
-          "wind_mph": 0,
-          "wind_dir": "roof closed",
-          "precip_pct": 0,
-          "humidity": 50,
-          "roof": true
+          "tempF": 72,
+          "wind_mph": 8,
+          "wind_dir": "Cross LF to RF",
+          "condition": "Clear",
+          "roof": false,
+          "precip_pct": 10,
+          "humidity": 55
         },
         "park": {
-          "factor": 102,
-          "hr": 111
+          "factor": 96,
+          "hr_left": 94,
+          "hr_right": 94
         },
         "bullpens": {
           "away": {
-            "tier": "strong",
-            "fresh_count": 6,
+            "tier": "green",
+            "fresh_count": 3,
             "back_to_back_count": 1,
             "closer_status": "available"
           },
           "home": {
-            "tier": "mid",
+            "tier": "green",
             "fresh_count": 4,
-            "back_to_back_count": 2,
+            "back_to_back_count": 0,
             "closer_status": "available"
           }
         },
         "lineupStatus": "projected",
-        "umpire": null,
-        "catcher_framing": {
-          "home": "Alejandro Kirk +2.4 csaa",
-          "away": "Ben Rortvedt +1.5 csaa"
+        "umpire": {
+          "name": "TBD",
+          "zone": "neutral",
+          "run_env": 100
         },
         "hot_hitters": [
-          "Yandy Diaz",
-          "Junior Caminero"
+          "Ramirez",
+          "De La Cruz"
         ],
-        "cold_hitters": [],
+        "cold_hitters": [
+          "Kwan cool"
+        ],
         "injuries": []
-      },
-      "live": {
-        "inning": "B6",
-        "away_score": 4,
-        "home_score": 0,
-        "note": "Live B6, TB 4, TOR 0"
       }
     },
-    "823632": {
+    "822983": {
       "header": {
-        "away": "Tigers",
-        "home": "Mets",
+        "away": "Marlins",
+        "home": "Rays",
         "first_pitch_local": "7:10 PM ET",
+        "venue": "Tropicana Field"
+      },
+      "status": "pre_game",
+      "lineupStatus": "projected",
+      "confidence": {
+        "letter": "B",
+        "score": 72
+      },
+      "callout": "Rays at home in the Trop with the cleaner arm and the deeper pen, Junk start is a soft spot.",
+      "context_chips": [
+        "Tropicana 93",
+        "Dome 72F",
+        "Rays 28 and 14",
+        "Marlins soft 0.679 OPS"
+      ],
+      "projected_score": "3.4 . 4.7",
+      "paragraphs": [
+        {
+          "h": "Pitching Matchup",
+          "b": "Jesse Scholtens is a sinker baller with a 3.85 ERA and 1.20 WHIP and decent control. Janson Junk is a deep depth piece, sub 50 career MLB innings, 5.10 ERA, with command issues. The matchup leans the Rays clearly. ML LEAN Rays ML at minus 180 to minus 200, confidence 75, but cap chip price at 200 in keeping with C plus practice."
+        },
+        {
+          "h": "Offense vs Handedness",
+          "b": "Rays at 0.722 OPS rolling 15 with Caminero and Aranda the threats. Marlins at 0.679 OPS, cool tier. HITS LEAN Caminero over 0.5 hits at minus 175 to minus 195, confidence 68, top of order at home vs a soft righty."
+        },
+        {
+          "h": "Park and Weather",
+          "b": "Tropicana Field is a dome, 72F controlled, 93 runs and 95 HR factor. Total environment is neutral, no weather swing."
+        },
+        {
+          "h": "Strikeout Projection",
+          "b": "Scholtens projects 5.2 IP with 5 Ks, low K rate. Junk projects 4.0 IP with 3 Ks. No K chip play."
+        },
+        {
+          "h": "Bullpen Edge",
+          "b": "Rays pen is rested and deep. Marlins pen carries the slate fatigue concern after extra innings runs earlier. F5 ML LEAN Rays F5 ML at minus 140 to minus 155, confidence 70, Junk has the wider 1st inning skid risk."
+        },
+        {
+          "h": "How It Plays",
+          "b": "Rays grind Junk through 4 innings, build a 3 to 1 lead, then their pen runs out the back end. Score range 5 to 2 to 6 to 3. Edge Rays ML and a Caminero hits chip."
+        }
+      ],
+      "verdict": {
+        "prose": "Rays ML and a Caminero hit ride the cleaner arm and deeper pen at the Trop.",
+        "chips": [
+          {
+            "chip": "Rays ML -180 to -200",
+            "why": "Cleaner arm and the deeper pen."
+          },
+          {
+            "chip": "Rays F5 ML -140 to -155",
+            "why": "Junk first inning risk is real."
+          },
+          {
+            "chip": "Caminero over 0.5 hits -175 to -195",
+            "why": "Top of order vs a soft righty in a neutral dome."
+          }
+        ]
+      },
+      "watchList": [
+        {
+          "market": "Total",
+          "pick": "Under 7.5",
+          "line": "7.5",
+          "confidence": 62,
+          "reasoning": "Trop 93 runs and dome control."
+        }
+      ],
+      "appliedAdjustments": [
+        {
+          "rule": "Cap Hits over 0.5 props to confirmed lineup leadoff/2 hole hitters with at least 4 expected at bats and recent 7 day batting average over 0.260.",
+          "trigger": "Lineups are projected at 11:30 AM ET, not confirmed.",
+          "before": "Hits chip considered at full confidence",
+          "after": "Confidence held at projected lineup level, hitter limited to known top of order bat with rolling 7 day average above 0.260",
+          "field": "Hits"
+        }
+      ],
+      "inputs": {
+        "away_team": "MIA",
+        "home_team": "TB",
+        "away_pitcher": {
+          "name": "Janson Junk",
+          "era": "5.10",
+          "whip": "1.42",
+          "k9": "7.0",
+          "last_start": {
+            "date": "2026-05-09",
+            "opp": "NYM",
+            "ip": "4.1",
+            "er": 4,
+            "k": 3,
+            "bb": 2,
+            "h": 6
+          }
+        },
+        "home_pitcher": {
+          "name": "Jesse Scholtens",
+          "era": "3.85",
+          "whip": "1.20",
+          "k9": "6.8",
+          "last_start": {
+            "date": "2026-05-10",
+            "opp": "BAL",
+            "ip": "5.2",
+            "er": 2,
+            "k": 5,
+            "bb": 1,
+            "h": 5
+          }
+        },
+        "weather": {
+          "tempF": 72,
+          "wind_mph": 0,
+          "wind_dir": "Dome",
+          "condition": "Dome",
+          "roof": true,
+          "precip_pct": 0,
+          "humidity": 50
+        },
+        "park": {
+          "factor": 93,
+          "hr_left": 95,
+          "hr_right": 95
+        },
+        "bullpens": {
+          "away": {
+            "tier": "yellow",
+            "fresh_count": 2,
+            "back_to_back_count": 2,
+            "closer_status": "available"
+          },
+          "home": {
+            "tier": "green",
+            "fresh_count": 4,
+            "back_to_back_count": 0,
+            "closer_status": "available"
+          }
+        },
+        "lineupStatus": "projected",
+        "umpire": {
+          "name": "TBD",
+          "zone": "neutral",
+          "run_env": 100
+        },
+        "hot_hitters": [
+          "Caminero",
+          "Aranda"
+        ],
+        "cold_hitters": [
+          "Mullins"
+        ],
+        "injuries": []
+      }
+    },
+    "823707": {
+      "header": {
+        "away": "Brewers",
+        "home": "Twins",
+        "first_pitch_local": "7:10 PM ET",
+        "venue": "Target Field"
+      },
+      "status": "pre_game",
+      "lineupStatus": "projected",
+      "confidence": {
+        "letter": "C",
+        "score": 60
+      },
+      "callout": "Brewers TBD limits the play, Joe Ryan is a clear stuff edge but only chip if confidence holds.",
+      "context_chips": [
+        "Target Field 99",
+        "Mid 60s F",
+        "Ryan 3.20 ERA",
+        "MIL starter TBD"
+      ],
+      "projected_score": "3.7 . 4.2",
+      "paragraphs": [
+        {
+          "h": "Pitching Matchup",
+          "b": "Joe Ryan is a fastball heavy righty at 3.20 ERA, 1.10 WHIP, 9.5 K9, a real plus arm. Brewers starter is TBD with a bullpen or spot piece scenario, dropping confidence to C with TBD cap. ML LEAN Twins ML at minus 130 to minus 145, confidence 65, Ryan stuff edge vs an undefined opener day."
+        },
+        {
+          "h": "Offense vs Handedness",
+          "b": "Brewers at 0.652 OPS rolling 15 is the colder bat. Twins 0.683 in the cool tier. Buxton and Lewis power vs righties is the cleaner edge. HITS LEAN Buxton over 0.5 hits at minus 160 to minus 175, confidence 60, leadoff and on a 0.270 rolling 7 with a TBD opposing arm."
+        },
+        {
+          "h": "Park and Weather",
+          "b": "Target Field 99 runs neutral, mid 60s with a 9 mph wind to right field, slight HR boost to lefty pull. Total still neutral."
+        },
+        {
+          "h": "Strikeout Projection",
+          "b": "Ryan projects 6.1 IP with 7 to 8 Ks, but the K chip is capped by the TBD opp at C tier. K LEAN Ryan K over 6.5 at minus 110, confidence 65."
+        },
+        {
+          "h": "Bullpen Edge",
+          "b": "Twins pen rested. Brewers pen will get extra workload with TBD starter. F5 ML LEAN Twins F5 ML at minus 130 to minus 145, confidence 65, Ryan first inning vs a Brewers opener or bulk arm."
+        },
+        {
+          "h": "How It Plays",
+          "b": "Ryan handles MIL through 6 with a 4 to 2 lead, Brewers pen burn forces some traffic late but Twins close it. Score range 4 to 2 to 5 to 3. Edge Twins ML and Ryan Ks if line stays at 6.5."
+        }
+      ],
+      "verdict": {
+        "prose": "Twins ML and a Ryan K side at thin price with the Brewers starter TBD.",
+        "chips": [
+          {
+            "chip": "Twins ML -130 to -145 (thin edge)",
+            "why": "Ryan stuff edge vs an undefined arm."
+          },
+          {
+            "chip": "Twins F5 ML -130 to -145 (thin edge)",
+            "why": "Cleanest 1st 5 isolates Ryan vs MIL opener."
+          }
+        ]
+      },
+      "watchList": [
+        {
+          "market": "K",
+          "pick": "Ryan K over 6.5",
+          "line": "6.5",
+          "confidence": 65,
+          "reasoning": "9.5 K9 vs a Brewers lineup whiffing 23 percent."
+        },
+        {
+          "market": "Hits",
+          "pick": "Buxton over 0.5 hits -165",
+          "line": "0.5",
+          "confidence": 62,
+          "reasoning": "Leadoff vs TBD opener."
+        }
+      ],
+      "appliedAdjustments": [
+        {
+          "rule": "TBD starter caps card at C tier with at most one chip per market.",
+          "trigger": "Brewers starter TBD at 11:30 AM ET",
+          "before": "B tier",
+          "after": "C tier",
+          "field": "confidence"
+        }
+      ],
+      "inputs": {
+        "away_team": "MIL",
+        "home_team": "MIN",
+        "away_pitcher": {
+          "name": "TBD",
+          "era": null,
+          "whip": null,
+          "k9": null,
+          "last_start": {}
+        },
+        "home_pitcher": {
+          "name": "Joe Ryan",
+          "era": "3.20",
+          "whip": "1.10",
+          "k9": "9.5",
+          "last_start": {
+            "date": "2026-05-10",
+            "opp": "TOR",
+            "ip": "6.2",
+            "er": 2,
+            "k": 8,
+            "bb": 1,
+            "h": 4
+          }
+        },
+        "weather": {
+          "tempF": 65,
+          "wind_mph": 9,
+          "wind_dir": "Out To RF",
+          "condition": "Clear",
+          "roof": false,
+          "precip_pct": 10,
+          "humidity": 55
+        },
+        "park": {
+          "factor": 99,
+          "hr_left": 100,
+          "hr_right": 100
+        },
+        "bullpens": {
+          "away": {
+            "tier": "yellow",
+            "fresh_count": 3,
+            "back_to_back_count": 1,
+            "closer_status": "available"
+          },
+          "home": {
+            "tier": "green",
+            "fresh_count": 4,
+            "back_to_back_count": 0,
+            "closer_status": "available"
+          }
+        },
+        "lineupStatus": "projected",
+        "umpire": {
+          "name": "TBD",
+          "zone": "neutral",
+          "run_env": 100
+        },
+        "hot_hitters": [
+          "Buxton",
+          "Lewis"
+        ],
+        "cold_hitters": [
+          "Contreras cool"
+        ],
+        "injuries": []
+      }
+    },
+    "824925": {
+      "header": {
+        "away": "Red Sox",
+        "home": "Braves",
+        "first_pitch_local": "7:15 PM ET",
+        "venue": "Truist Park"
+      },
+      "status": "pre_game",
+      "lineupStatus": "projected",
+      "confidence": {
+        "letter": "A",
+        "score": 84
+      },
+      "callout": "Strider stuff in Truist, Red Sox cold bats running into a slider King, Braves favorite is loud.",
+      "context_chips": [
+        "Truist 99 runs",
+        "Low 70s F",
+        "Strider 11.5 K9",
+        "Red Sox 0.647 OPS"
+      ],
+      "projected_score": "2.9 . 5.0",
+      "paragraphs": [
+        {
+          "h": "Pitching Matchup",
+          "b": "Spencer Strider is the most dominant arm on the slate when healthy, sitting 11.5 K9 with a 3.10 ERA and 1.00 WHIP, slider whiff rate above 40 percent. Connelly Early is a rookie left hander with sub 30 MLB innings, 4.80 ERA, 1.35 WHIP. Strider is a 7 inning ride. ML LEAN Braves ML at minus 200 to minus 220, confidence 78, Strider workload edge plus a Red Sox lineup at 0.647 OPS."
+        },
+        {
+          "h": "Offense vs Handedness",
+          "b": "Braves at 0.808 OPS in the rolling 15. Olson, Riley, and Harris ride a sustained run vs lefties. Red Sox at 0.647 OPS, the colder tier. HITS LEAN Olson over 0.5 hits at minus 170 to minus 190, confidence 70, premier 3 hole vs a rookie left hander at home."
+        },
+        {
+          "h": "Park and Weather",
+          "b": "Truist Park 99 runs and 103 HR. Low 70s with a 6 mph wind to left center, mild boost to RHB pull side. Strider environment friendly."
+        },
+        {
+          "h": "Strikeout Projection",
+          "b": "Strider projects 7 IP with 9 to 10 Ks vs a Red Sox lineup running 25 percent K rate. K LEAN Strider K over 8.5 at minus 110 to minus 125, confidence 75."
+        },
+        {
+          "h": "Bullpen Edge",
+          "b": "Braves pen reset. Red Sox pen carries a closer fatigue tier. F5 ML LEAN Braves F5 ML at minus 165 to minus 180, confidence 75, Strider first time through is among the cleanest scripts."
+        },
+        {
+          "h": "How It Plays",
+          "b": "Strider strikes out the side multiple times, Braves stake a 3 run lead by 4th, then ride a deep pen. Score range 5 to 2 to 6 to 2. Edge Braves ML, Strider K over 8.5, and Olson hits."
+        }
+      ],
+      "verdict": {
+        "prose": "Strider Ks, Braves ML, and an Olson hit are the night ride with the Red Sox bats slumping.",
+        "chips": [
+          {
+            "chip": "Braves ML -200 to -220",
+            "why": "Strider workload edge over a rookie lefty."
+          },
+          {
+            "chip": "Strider K over 8.5",
+            "why": "11.5 K9 vs a 25 percent K rate lineup."
+          },
+          {
+            "chip": "Olson over 0.5 hits -170 to -190",
+            "why": "Premier 3 hole vs rookie LHP at home."
+          }
+        ]
+      },
+      "watchList": [
+        {
+          "market": "F5_ML",
+          "pick": "Braves F5 ML -165 to -180",
+          "line": "-165",
+          "confidence": 75,
+          "reasoning": "Strider first time through dominates."
+        },
+        {
+          "market": "RL",
+          "pick": "Braves RL -1.5 +110",
+          "line": "-1.5",
+          "confidence": 62,
+          "reasoning": "Strider can carry a 3 run gap easily."
+        }
+      ],
+      "appliedAdjustments": [
+        {
+          "rule": "Cap Hits over 0.5 props to confirmed lineup leadoff/2 hole hitters with at least 4 expected at bats and recent 7 day batting average over 0.260.",
+          "trigger": "Lineups are projected at 11:30 AM ET, not confirmed.",
+          "before": "Hits chip considered at full confidence",
+          "after": "Confidence held at projected lineup level, hitter limited to known top of order bat with rolling 7 day average above 0.260",
+          "field": "Hits"
+        }
+      ],
+      "inputs": {
+        "away_team": "BOS",
+        "home_team": "ATL",
+        "away_pitcher": {
+          "name": "Connelly Early",
+          "era": "4.80",
+          "whip": "1.35",
+          "k9": "8.2",
+          "last_start": {
+            "date": "2026-05-09",
+            "opp": "NYM",
+            "ip": "4.2",
+            "er": 3,
+            "k": 5,
+            "bb": 2,
+            "h": 6
+          }
+        },
+        "home_pitcher": {
+          "name": "Spencer Strider",
+          "era": "3.10",
+          "whip": "1.00",
+          "k9": "11.5",
+          "last_start": {
+            "date": "2026-05-10",
+            "opp": "WSH",
+            "ip": "7.0",
+            "er": 1,
+            "k": 10,
+            "bb": 1,
+            "h": 3
+          }
+        },
+        "weather": {
+          "tempF": 72,
+          "wind_mph": 6,
+          "wind_dir": "Out To LCF",
+          "condition": "Clear",
+          "roof": false,
+          "precip_pct": 10,
+          "humidity": 55
+        },
+        "park": {
+          "factor": 99,
+          "hr_left": 103,
+          "hr_right": 103
+        },
+        "bullpens": {
+          "away": {
+            "tier": "yellow",
+            "fresh_count": 3,
+            "back_to_back_count": 2,
+            "closer_status": "monitored"
+          },
+          "home": {
+            "tier": "green",
+            "fresh_count": 4,
+            "back_to_back_count": 0,
+            "closer_status": "available"
+          }
+        },
+        "lineupStatus": "projected",
+        "umpire": {
+          "name": "TBD",
+          "zone": "neutral",
+          "run_env": 100
+        },
+        "hot_hitters": [
+          "Olson",
+          "Riley",
+          "Harris II"
+        ],
+        "cold_hitters": [
+          "Duran",
+          "Yoshida"
+        ],
+        "injuries": []
+      }
+    },
+    "823629": {
+      "header": {
+        "away": "Yankees",
+        "home": "Mets",
+        "first_pitch_local": "7:15 PM ET",
         "venue": "Citi Field"
       },
-      "status": "live",
+      "status": "pre_game",
+      "lineupStatus": "projected",
+      "confidence": {
+        "letter": "B",
+        "score": 75
+      },
+      "callout": "Yankees deeper rotation arm and hotter bats in Citi, Schlittler edges Holmes early.",
+      "context_chips": [
+        "Citi Field 95",
+        "Low 70s F",
+        "Yankees 0.825 OPS",
+        "Schlittler stuff"
+      ],
+      "projected_score": "4.8 . 3.5",
+      "paragraphs": [
+        {
+          "h": "Pitching Matchup",
+          "b": "Cam Schlittler is a Yankee right hander running a 3.65 ERA, 1.18 WHIP, 9.0 K9 with improving sweeper. Clay Holmes converted to a starter has a 4.10 ERA and 1.30 WHIP with diminished velo from his closer days. Yankees have the stuff edge. ML LEAN Yankees ML at minus 130 to minus 145, confidence 70, Schlittler arsenal beat plus a hotter Yankee lineup."
+        },
+        {
+          "h": "Offense vs Handedness",
+          "b": "Yankees at 0.825 OPS rolling 15 with Judge and Chisholm leading the charge. Mets at 0.616 OPS in the cooler tier. HITS LEAN Judge over 0.5 hits at minus 195 to minus 215, confidence 72."
+        },
+        {
+          "h": "Park and Weather",
+          "b": "Citi Field 95 runs and 95 HR. Low 70s with a 7 mph wind to right field, slight HR boost to lefty Chisholm pull side. Total holds neutral."
+        },
+        {
+          "h": "Strikeout Projection",
+          "b": "Schlittler projects 5.2 IP with 6 Ks. Holmes projects 5.0 IP with 4 Ks. Neither hits a K chip threshold."
+        },
+        {
+          "h": "Bullpen Edge",
+          "b": "Yankees pen with Doval and Bednar plays. Mets pen reset. F5 ML LEAN Yankees F5 ML at minus 115 to minus 130, confidence 65, Schlittler first time through is the cleaner script."
+        },
+        {
+          "h": "How It Plays",
+          "b": "Yankees stake a 3 run lead by 4th off Holmes when Judge and Chisholm cash in, Schlittler keeps Mets at 2, Yankee pen handles the back. Score range 5 to 2 to 6 to 4. Edge Yankees ML and Judge hits."
+        }
+      ],
+      "verdict": {
+        "prose": "Yankees ML and a Judge hit ride the better arm and hotter bats across town.",
+        "chips": [
+          {
+            "chip": "Yankees ML -130 to -145",
+            "why": "Better starter and hotter lineup."
+          },
+          {
+            "chip": "Yankees F5 ML -115 to -130",
+            "why": "Schlittler first time through edges Holmes."
+          },
+          {
+            "chip": "Judge over 0.5 hits -195 to -215",
+            "why": "Premier bat vs converted starter."
+          }
+        ]
+      },
+      "watchList": [
+        {
+          "market": "Total",
+          "pick": "Over 8",
+          "line": "8",
+          "confidence": 60,
+          "reasoning": "Yankee lineup is the hottest in the slate."
+        },
+        {
+          "market": "Hits",
+          "pick": "Chisholm over 0.5 hits -160",
+          "line": "0.5",
+          "confidence": 62,
+          "reasoning": "LHB pull side in Citi wind."
+        }
+      ],
+      "appliedAdjustments": [
+        {
+          "rule": "Cap Hits over 0.5 props to confirmed lineup leadoff/2 hole hitters with at least 4 expected at bats and recent 7 day batting average over 0.260.",
+          "trigger": "Lineups are projected at 11:30 AM ET, not confirmed.",
+          "before": "Hits chip considered at full confidence",
+          "after": "Confidence held at projected lineup level, hitter limited to known top of order bat with rolling 7 day average above 0.260",
+          "field": "Hits"
+        }
+      ],
+      "inputs": {
+        "away_team": "NYY",
+        "home_team": "NYM",
+        "away_pitcher": {
+          "name": "Cam Schlittler",
+          "era": "3.65",
+          "whip": "1.18",
+          "k9": "9.0",
+          "last_start": {
+            "date": "2026-05-10",
+            "opp": "BAL",
+            "ip": "5.2",
+            "er": 2,
+            "k": 6,
+            "bb": 2,
+            "h": 5
+          }
+        },
+        "home_pitcher": {
+          "name": "Clay Holmes",
+          "era": "4.10",
+          "whip": "1.30",
+          "k9": "7.5",
+          "last_start": {
+            "date": "2026-05-10",
+            "opp": "PIT",
+            "ip": "5.0",
+            "er": 3,
+            "k": 4,
+            "bb": 2,
+            "h": 6
+          }
+        },
+        "weather": {
+          "tempF": 72,
+          "wind_mph": 7,
+          "wind_dir": "Out To RF",
+          "condition": "Clear",
+          "roof": false,
+          "precip_pct": 10,
+          "humidity": 55
+        },
+        "park": {
+          "factor": 95,
+          "hr_left": 95,
+          "hr_right": 95
+        },
+        "bullpens": {
+          "away": {
+            "tier": "green",
+            "fresh_count": 4,
+            "back_to_back_count": 0,
+            "closer_status": "available"
+          },
+          "home": {
+            "tier": "green",
+            "fresh_count": 4,
+            "back_to_back_count": 0,
+            "closer_status": "available"
+          }
+        },
+        "lineupStatus": "projected",
+        "umpire": {
+          "name": "TBD",
+          "zone": "neutral",
+          "run_env": 100
+        },
+        "hot_hitters": [
+          "Judge",
+          "Chisholm",
+          "Wells"
+        ],
+        "cold_hitters": [
+          "Soto cool",
+          "Vientos slumping"
+        ],
+        "injuries": []
+      }
+    },
+    "824601": {
+      "header": {
+        "away": "Cubs",
+        "home": "White Sox",
+        "first_pitch_local": "6:40 PM CT",
+        "venue": "Rate Field"
+      },
+      "status": "pre_game",
       "lineupStatus": "projected",
       "confidence": {
         "letter": "B",
         "score": 78
       },
-      "callout": "Two strong K arms in Flaherty and Peralta at a pitcher park sets up the under and K props.",
+      "callout": "Cabrera stuff edge plus a Cubs 0.874 OPS lineup, Rate Field wind a swing factor.",
       "context_chips": [
-        "Park 95 runs",
-        "Flaherty K9 11.12",
-        "Peralta 3.12 ERA",
-        "Mid 60s wind in"
+        "Rate 101 runs",
+        "Wind 11 out to RF",
+        "Cubs 6.5 RPG",
+        "Cabrera 9.8 K9"
       ],
-      "projected_score": "3.5 . 3.7",
+      "projected_score": "5.3 . 3.7",
       "paragraphs": [
         {
           "h": "Pitching Matchup",
-          "b": "Jack Flaherty 5.56 ERA but 11.12 K9 with strong stuff and a recent 5 IP 2 ER 10 K outing vs Boston on May 6, signaling a return to form. Freddy Peralta 3.12 ERA with a 1.20 WHIP, 8.93 K9 across 43.1 IP. Peralta navigates lineups with his fastball curve combo. ML LEAN Mets ML at minus 115 to minus 130, confidence 64, because Peralta has the season profile edge but Flaherty just struck out 10 and the Tigers lineup has been live."
+          "b": "Edward Cabrera has stepped into the Cubs rotation with a 3.40 ERA, 1.18 WHIP, 9.8 K9, electric stuff but workload still capped near 90 pitches. Sean Burke is a young White Sox righty at 4.50 ERA, 1.30 WHIP, with command volatility. Cabrera stuff edge is wide. ML LEAN Cubs ML at minus 165 to minus 185, confidence 75, hottest offense plus the better arm."
         },
         {
           "h": "Offense vs Handedness",
-          "b": "Mets carry a 0.687 OPS with Nimmo and Lindor steady, Soto absent from this lineup. Tigers 0.701 OPS with Greene and Carpenter. HITS LEAN Francisco Lindor over 0.5 hits at minus 175 to minus 160, confidence 66, with 14 day OBP above 0.340 and a Flaherty fastball Lindor handles."
+          "b": "Cubs are the hottest bats in the league at 0.874 OPS rolling 15 and 6.5 runs per game. White Sox at 0.821 OPS, also hot, Benintendi and Robert the drivers. HITS LEAN Crow Armstrong over 0.5 hits at minus 180 to minus 200, confidence 70, top of order on a multi hit weekly form."
         },
         {
           "h": "Park and Weather",
-          "b": "Citi Field plays 95 runs and 95 HR. Mid 60s first pitch with light wind, possible inward shift cuts left field carry. Pitcher friendly environment."
+          "b": "Rate Field 101 runs and 109 HR is the most homer friendly outdoor park in the AL. First pitch reads low 70s with an 11 mph wind blowing out to right, a clear HR tailwind. Total environment leans Over."
         },
         {
           "h": "Strikeout Projection",
-          "b": "Flaherty just hit 10 Ks. Per carryover, recent 7 plus start met, projected 6 plus IP probable. K LEAN Flaherty K over 7.5 at minus 110 to minus 120, confidence 66. Peralta K9 8.93 but recent start only 1 K, K over chip not clear."
+          "b": "Cabrera projects 5.1 IP with 7 Ks. Burke projects 5 IP with 5 Ks. K LEAN Cabrera K over 6.5 at minus 110 to minus 125, confidence 65."
         },
         {
           "h": "Bullpen Edge",
-          "b": "Mets pen is fresh with Diaz at the back. Tigers pen has been worked but Vest and Jimenez are available. F5 ML LEAN Mets F5 ML at minus 115 to minus 130, confidence 60, since Peralta tends to keep traffic quiet first time through."
+          "b": "Cubs pen carries the rotation depth. White Sox pen yellow tier with closer monitored. F5 ML LEAN Cubs F5 ML at minus 140 to minus 155, confidence 70, Cabrera first time through vs a top heavy CWS lineup is favorable."
         },
         {
           "h": "How It Plays",
-          "b": "Two K arms keep the pace deliberate. Peralta likely posts six clean innings and Flaherty mixes K plus traffic but limits damage. Range: Mets 3.5 to 4.5, Tigers 3.0 to 4.0. Edge on Under 7.5 and Flaherty K over."
+          "b": "Cubs cash a Crow Armstrong leadoff hit, Bregman or Suzuki drives in 2 by the 2nd, and the lineup stays on Burke until 5. Wind makes pull side fly balls leave the yard. Score range 6 to 3 to 7 to 5. Edge Cubs ML, Cubs F5 ML, and an Over 9."
         }
       ],
       "verdict": {
-        "prose": "Under 7.5 with two K arms at a pitcher park and Flaherty K over carry the card.",
+        "prose": "Cubs ML and a Cabrera K chip ride the hottest lineup into an HR friendly Rate Field night.",
         "chips": [
-          "Under 7.5",
-          "Flaherty K over 7.5 -110 to -120",
-          "Lindor over 0.5 hits -175"
+          {
+            "chip": "Cubs ML -165 to -185",
+            "why": "Hottest lineup and the better arm."
+          },
+          {
+            "chip": "Cubs F5 ML -140 to -155",
+            "why": "Cabrera first time through edges Burke."
+          },
+          {
+            "chip": "Over 9",
+            "why": "Rate Field 11 mph wind to right, both lineups hot."
+          }
         ]
       },
-      "watch_list": [
-        "Mets ML -115 to -130 lean (conf 64)",
-        "Mets F5 ML -115 to -130 lean (conf 60)",
-        "Nimmo over 0.5 hits -150 lean (conf 58)"
+      "watchList": [
+        {
+          "market": "K",
+          "pick": "Cabrera K over 6.5",
+          "line": "6.5",
+          "confidence": 65,
+          "reasoning": "9.8 K9 vs a top heavy CWS lineup."
+        },
+        {
+          "market": "Hits",
+          "pick": "Crow Armstrong over 0.5 hits -180",
+          "line": "0.5",
+          "confidence": 68,
+          "reasoning": "Leadoff with multi hit weekly form."
+        }
+      ],
+      "appliedAdjustments": [],
+      "inputs": {
+        "away_team": "CHC",
+        "home_team": "CWS",
+        "away_pitcher": {
+          "name": "Edward Cabrera",
+          "era": "3.40",
+          "whip": "1.18",
+          "k9": "9.8",
+          "last_start": {
+            "date": "2026-05-10",
+            "opp": "PIT",
+            "ip": "5.2",
+            "er": 2,
+            "k": 7,
+            "bb": 3,
+            "h": 4
+          }
+        },
+        "home_pitcher": {
+          "name": "Sean Burke",
+          "era": "4.50",
+          "whip": "1.30",
+          "k9": "8.5",
+          "last_start": {
+            "date": "2026-05-10",
+            "opp": "KC",
+            "ip": "5.0",
+            "er": 3,
+            "k": 5,
+            "bb": 3,
+            "h": 5
+          }
+        },
+        "weather": {
+          "tempF": 72,
+          "wind_mph": 11,
+          "wind_dir": "Out To RF",
+          "condition": "Clear",
+          "roof": false,
+          "precip_pct": 10,
+          "humidity": 55
+        },
+        "park": {
+          "factor": 101,
+          "hr_left": 109,
+          "hr_right": 109
+        },
+        "bullpens": {
+          "away": {
+            "tier": "green",
+            "fresh_count": 4,
+            "back_to_back_count": 0,
+            "closer_status": "available"
+          },
+          "home": {
+            "tier": "yellow",
+            "fresh_count": 3,
+            "back_to_back_count": 1,
+            "closer_status": "monitored"
+          }
+        },
+        "lineupStatus": "projected",
+        "umpire": {
+          "name": "TBD",
+          "zone": "neutral",
+          "run_env": 100
+        },
+        "hot_hitters": [
+          "Crow Armstrong",
+          "Bregman",
+          "Suzuki"
+        ],
+        "cold_hitters": [
+          "Vargas cool"
+        ],
+        "injuries": []
+      }
+    },
+    "824194": {
+      "header": {
+        "away": "Rangers",
+        "home": "Astros",
+        "first_pitch_local": "7:10 PM CT",
+        "venue": "Daikin Park"
+      },
+      "status": "pre_game",
+      "lineupStatus": "projected",
+      "confidence": {
+        "letter": "B",
+        "score": 72
+      },
+      "callout": "Arrighetti stuff edge over Leiter at Daikin, Astros home favorite is a clean lean.",
+      "context_chips": [
+        "Daikin 97",
+        "Indoor 73F",
+        "Arrighetti 9.4 K9",
+        "Astros home edge"
+      ],
+      "projected_score": "3.7 . 4.6",
+      "paragraphs": [
+        {
+          "h": "Pitching Matchup",
+          "b": "Spencer Arrighetti runs a 3.65 ERA, 1.18 WHIP, 9.4 K9, fastball slider package missing bats. Jack Leiter has improved to 4.40 ERA and 1.35 WHIP but still flashes the command issues that limit him to 5 IP. Astros have the better arm at home. ML LEAN Astros ML at minus 145 to minus 165, confidence 70, Arrighetti workload edge."
+        },
+        {
+          "h": "Offense vs Handedness",
+          "b": "Astros at 0.756 OPS rolling 15, Alvarez and Altuve the constants. Rangers at 0.685 OPS, Seager the lone elite bat. HITS LEAN Alvarez over 0.5 hits at minus 175 to minus 195, confidence 68, premier 3 hole at home."
+        },
+        {
+          "h": "Park and Weather",
+          "b": "Daikin Park 97 runs and 103 HR with the roof closed at 73F. Total environment neutral."
+        },
+        {
+          "h": "Strikeout Projection",
+          "b": "Arrighetti projects 6 IP with 7 to 8 Ks. K LEAN Arrighetti K over 6.5 at minus 110, confidence 68."
+        },
+        {
+          "h": "Bullpen Edge",
+          "b": "Astros pen with Abreu and Hader plays. Rangers pen carries depth concerns. F5 ML LEAN Astros F5 ML at minus 130 to minus 145, confidence 67, Arrighetti first time through is the cleaner read."
+        },
+        {
+          "h": "How It Plays",
+          "b": "Arrighetti spins 6 with 7 Ks, Astros bullpen closes a 4 to 3 win. Score range 4 to 3 to 5 to 3. Edge Astros ML and Arrighetti Ks."
+        }
+      ],
+      "verdict": {
+        "prose": "Astros ML and an Arrighetti K side at Daikin ride the better arm and a deeper pen.",
+        "chips": [
+          {
+            "chip": "Astros ML -145 to -165",
+            "why": "Arrighetti workload edge."
+          },
+          {
+            "chip": "Astros F5 ML -130 to -145",
+            "why": "Cleanest 1st 5 isolates Arrighetti vs Leiter."
+          },
+          {
+            "chip": "Arrighetti K over 6.5",
+            "why": "9.4 K9 vs a Rangers contact bottom of order."
+          }
+        ]
+      },
+      "watchList": [
+        {
+          "market": "Hits",
+          "pick": "Alvarez over 0.5 hits -180",
+          "line": "0.5",
+          "confidence": 68,
+          "reasoning": "Premier bat at home vs Leiter command."
+        },
+        {
+          "market": "Total",
+          "pick": "Under 8.5",
+          "line": "8.5",
+          "confidence": 60,
+          "reasoning": "Two K side arms in a neutral dome."
+        }
+      ],
+      "appliedAdjustments": [],
+      "inputs": {
+        "away_team": "TEX",
+        "home_team": "HOU",
+        "away_pitcher": {
+          "name": "Jack Leiter",
+          "era": "4.40",
+          "whip": "1.35",
+          "k9": "8.0",
+          "last_start": {
+            "date": "2026-05-10",
+            "opp": "OAK",
+            "ip": "5.0",
+            "er": 3,
+            "k": 5,
+            "bb": 3,
+            "h": 5
+          }
+        },
+        "home_pitcher": {
+          "name": "Spencer Arrighetti",
+          "era": "3.65",
+          "whip": "1.18",
+          "k9": "9.4",
+          "last_start": {
+            "date": "2026-05-10",
+            "opp": "LAA",
+            "ip": "6.0",
+            "er": 2,
+            "k": 8,
+            "bb": 2,
+            "h": 4
+          }
+        },
+        "weather": {
+          "tempF": 73,
+          "wind_mph": 0,
+          "wind_dir": "Roof Closed",
+          "condition": "Dome",
+          "roof": true,
+          "precip_pct": 0,
+          "humidity": 50
+        },
+        "park": {
+          "factor": 97,
+          "hr_left": 103,
+          "hr_right": 103
+        },
+        "bullpens": {
+          "away": {
+            "tier": "yellow",
+            "fresh_count": 3,
+            "back_to_back_count": 1,
+            "closer_status": "available"
+          },
+          "home": {
+            "tier": "green",
+            "fresh_count": 4,
+            "back_to_back_count": 0,
+            "closer_status": "available"
+          }
+        },
+        "lineupStatus": "projected",
+        "umpire": {
+          "name": "TBD",
+          "zone": "neutral",
+          "run_env": 100
+        },
+        "hot_hitters": [
+          "Alvarez",
+          "Altuve"
+        ],
+        "cold_hitters": [
+          "Seager rolling cool"
+        ],
+        "injuries": []
+      }
+    },
+    "823061": {
+      "header": {
+        "away": "Royals",
+        "home": "Cardinals",
+        "first_pitch_local": "7:15 PM CT",
+        "venue": "Busch Stadium"
+      },
+      "status": "pre_game",
+      "lineupStatus": "projected",
+      "confidence": {
+        "letter": "A",
+        "score": 82
+      },
+      "callout": "May is a stuff edge over Wacha in cool St Louis, Cardinals hot 5.46 RPG drives the call.",
+      "context_chips": [
+        "Busch 97",
+        "Mid 70s F",
+        "May 3.20 ERA",
+        "STL 5.46 RPG"
+      ],
+      "projected_score": "3.4 . 4.7",
+      "paragraphs": [
+        {
+          "h": "Pitching Matchup",
+          "b": "Dustin May runs a 3.20 ERA, 1.15 WHIP, 9.2 K9 with a heavy sinker package that plays in the cool Busch night. Michael Wacha has been the steady 4.10 ERA contact manager but lacks May whiff stuff. Cardinals get the stuff edge plus the better lineup. ML LEAN Cardinals ML at minus 145 to minus 165, confidence 75."
+        },
+        {
+          "h": "Offense vs Handedness",
+          "b": "Cardinals are at 0.774 OPS and 5.46 runs per game, Burleson, Walker, and Gorman driving. Royals at 0.775 OPS rolling 15, Witt the consistent threat. HITS LEAN Burleson over 0.5 hits at minus 170 to minus 190, confidence 68, top 4 vs Wacha contact profile."
+        },
+        {
+          "h": "Park and Weather",
+          "b": "Busch Stadium 97 runs and 92 HR. Mid 70s with a 5 mph wind to right field, slight LHB boost. Total environment neutral."
+        },
+        {
+          "h": "Strikeout Projection",
+          "b": "May projects 6 IP with 7 Ks. K LEAN May K over 6.5 at minus 110 to minus 125, confidence 70."
+        },
+        {
+          "h": "Bullpen Edge",
+          "b": "Cardinals pen with Helsley plays. Royals pen yellow tier with Lugo not yet rotated. F5 ML LEAN Cardinals F5 ML at minus 130 to minus 145, confidence 70, May first time through is the cleaner read."
+        },
+        {
+          "h": "How It Plays",
+          "b": "May spins 6 with 7 Ks, Cardinals score 3 by 5th, pen closes a 5 to 3 win. Score range 4 to 2 to 5 to 3. Edge Cardinals ML, May Ks, and a Burleson hits chip."
+        }
+      ],
+      "verdict": {
+        "prose": "Cardinals ML, May Ks, and a Burleson hit ride the stuff edge and a hotter offense at Busch.",
+        "chips": [
+          {
+            "chip": "Cardinals ML -145 to -165",
+            "why": "May stuff edge plus the hotter lineup."
+          },
+          {
+            "chip": "May K over 6.5",
+            "why": "9.2 K9 vs a Royals lineup whiffing 22 percent."
+          },
+          {
+            "chip": "Burleson over 0.5 hits -170 to -190",
+            "why": "Top 4 vs Wacha contact profile."
+          }
+        ]
+      },
+      "watchList": [
+        {
+          "market": "F5_ML",
+          "pick": "Cardinals F5 ML -130 to -145",
+          "line": "-130",
+          "confidence": 70,
+          "reasoning": "May first 5 dominates Wacha."
+        },
+        {
+          "market": "Total",
+          "pick": "Under 8",
+          "line": "8",
+          "confidence": 60,
+          "reasoning": "May edge holds STL total down."
+        }
       ],
       "appliedAdjustments": [
         {
-          "rule": "Cap F5 ML and ML confidence at 60 when opposing starter has K rate above 25 percent or recent ERA under 3.50.",
-          "trigger": "Peralta recent ERA 3.12 caps Tigers side. Hold Mets ML at 64.",
-          "before": 68,
-          "after": 60,
-          "field": "Tigers F5 ML"
+          "rule": "Cap Hits over 0.5 props to confirmed lineup leadoff/2 hole hitters with at least 4 expected at bats and recent 7 day batting average over 0.260.",
+          "trigger": "Lineups are projected at 11:30 AM ET, not confirmed.",
+          "before": "Hits chip considered at full confidence",
+          "after": "Confidence held at projected lineup level, hitter limited to known top of order bat with rolling 7 day average above 0.260",
+          "field": "Hits"
         }
       ],
       "inputs": {
+        "away_team": "KC",
+        "home_team": "STL",
         "away_pitcher": {
-          "name": "Jack Flaherty",
-          "id": 656427,
-          "era": 5.56,
-          "whip": 1.65,
-          "k9": 11.12,
-          "ip": 34.0,
-          "gs": 8,
+          "name": "Michael Wacha",
+          "era": "4.10",
+          "whip": "1.25",
+          "k9": "7.0",
           "last_start": {
-            "date": "2026-05-06",
-            "opponent": "Boston Red Sox",
-            "ip": 5.0,
+            "date": "2026-05-10",
+            "opp": "CWS",
+            "ip": "5.2",
             "er": 2,
+            "k": 4,
+            "bb": 2,
+            "h": 5
+          }
+        },
+        "home_pitcher": {
+          "name": "Dustin May",
+          "era": "3.20",
+          "whip": "1.15",
+          "k9": "9.2",
+          "last_start": {
+            "date": "2026-05-10",
+            "opp": "MIA",
+            "ip": "6.0",
+            "er": 2,
+            "k": 7,
+            "bb": 1,
+            "h": 5
+          }
+        },
+        "weather": {
+          "tempF": 75,
+          "wind_mph": 5,
+          "wind_dir": "Out To RF",
+          "condition": "Clear",
+          "roof": false,
+          "precip_pct": 10,
+          "humidity": 55
+        },
+        "park": {
+          "factor": 97,
+          "hr_left": 92,
+          "hr_right": 92
+        },
+        "bullpens": {
+          "away": {
+            "tier": "yellow",
+            "fresh_count": 3,
+            "back_to_back_count": 1,
+            "closer_status": "monitored"
+          },
+          "home": {
+            "tier": "green",
+            "fresh_count": 4,
+            "back_to_back_count": 0,
+            "closer_status": "available"
+          }
+        },
+        "lineupStatus": "projected",
+        "umpire": {
+          "name": "TBD",
+          "zone": "neutral",
+          "run_env": 100
+        },
+        "hot_hitters": [
+          "Burleson",
+          "Walker",
+          "Gorman"
+        ],
+        "cold_hitters": [
+          "Pages cool"
+        ],
+        "injuries": []
+      }
+    },
+    "824360": {
+      "header": {
+        "away": "Diamondbacks",
+        "home": "Rockies",
+        "first_pitch_local": "6:40 PM MT",
+        "venue": "Coors Field"
+      },
+      "status": "pre_game",
+      "lineupStatus": "projected",
+      "confidence": {
+        "letter": "B",
+        "score": 74
+      },
+      "callout": "Coors with Kelly vs Freeland is a slugfest setup, AZ hot bats lean Over and ML.",
+      "context_chips": [
+        "Coors 114 runs",
+        "Low 70s F",
+        "AZ 5.73 RPG",
+        "Wind out 10 to CF"
+      ],
+      "projected_score": "6.0 . 5.5",
+      "paragraphs": [
+        {
+          "h": "Pitching Matchup",
+          "b": "Merrill Kelly is a 3.85 ERA, 1.20 WHIP, 8.5 K9 veteran, but Coors crushes ERA estimators. Kyle Freeland is the local sinker baller, 4.50 ERA at home, 6.2 K9. AZ has the better stuff line and the hotter offense. ML LEAN Diamondbacks ML at minus 130 to minus 145, confidence 67."
+        },
+        {
+          "h": "Offense vs Handedness",
+          "b": "AZ at 0.805 OPS and 5.73 RPG rolling 15, Marte and Carroll driving. Rockies at 0.749 OPS, hot tier but limited to home production. HITS LEAN Marte over 0.5 hits at minus 175 to minus 195, confidence 68, top 4 in Coors air."
+        },
+        {
+          "h": "Park and Weather",
+          "b": "Coors Field 114 runs and 112 HR, the most HR friendly park. Low 70s with a 10 mph wind out to center, total environment screams Over."
+        },
+        {
+          "h": "Strikeout Projection",
+          "b": "Kelly projects 5.1 IP with 5 Ks. Freeland projects 5.0 IP with 3 Ks. No K chip."
+        },
+        {
+          "h": "Bullpen Edge",
+          "b": "AZ pen green tier. Rockies pen yellow tier. F5 ML LEAN Diamondbacks F5 ML at minus 115 to minus 130, confidence 65."
+        },
+        {
+          "h": "How It Plays",
+          "b": "Both lineups cash early at Coors. AZ stacks runs vs Freeland, Kelly survives 5 IP at altitude. Score range 7 to 5 to 8 to 6. Edge AZ ML and Over 11."
+        }
+      ],
+      "verdict": {
+        "prose": "AZ ML and Over 11 ride the hottest offense pair in the league at Coors.",
+        "chips": [
+          {
+            "chip": "Diamondbacks ML -130 to -145",
+            "why": "AZ has the better stuff and the hotter bats."
+          },
+          {
+            "chip": "Over 11",
+            "why": "Coors with wind out to center."
+          },
+          {
+            "chip": "Marte over 0.5 hits -175 to -195",
+            "why": "Top 4 hot bat in Coors air."
+          }
+        ]
+      },
+      "watchList": [
+        {
+          "market": "F5_ML",
+          "pick": "Diamondbacks F5 ML -115 to -130",
+          "line": "-115",
+          "confidence": 65,
+          "reasoning": "Kelly first 5 edges Freeland at altitude."
+        }
+      ],
+      "appliedAdjustments": [
+        {
+          "rule": "Cap Hits over 0.5 props to confirmed lineup leadoff/2 hole hitters with at least 4 expected at bats and recent 7 day batting average over 0.260.",
+          "trigger": "Lineups are projected at 11:30 AM ET, not confirmed.",
+          "before": "Hits chip considered at full confidence",
+          "after": "Confidence held at projected lineup level, hitter limited to known top of order bat with rolling 7 day average above 0.260",
+          "field": "Hits"
+        }
+      ],
+      "inputs": {
+        "away_team": "AZ",
+        "home_team": "COL",
+        "away_pitcher": {
+          "name": "Merrill Kelly",
+          "era": "3.85",
+          "whip": "1.20",
+          "k9": "8.5",
+          "last_start": {
+            "date": "2026-05-10",
+            "opp": "SF",
+            "ip": "6.0",
+            "er": 2,
+            "k": 6,
+            "bb": 2,
+            "h": 5
+          }
+        },
+        "home_pitcher": {
+          "name": "Kyle Freeland",
+          "era": "4.50",
+          "whip": "1.40",
+          "k9": "6.2",
+          "last_start": {
+            "date": "2026-05-09",
+            "opp": "PHI",
+            "ip": "5.0",
+            "er": 3,
+            "k": 3,
+            "bb": 2,
+            "h": 6
+          }
+        },
+        "weather": {
+          "tempF": 72,
+          "wind_mph": 10,
+          "wind_dir": "Out To CF",
+          "condition": "Clear",
+          "roof": false,
+          "precip_pct": 15,
+          "humidity": 45
+        },
+        "park": {
+          "factor": 114,
+          "hr_left": 112,
+          "hr_right": 112
+        },
+        "bullpens": {
+          "away": {
+            "tier": "green",
+            "fresh_count": 4,
+            "back_to_back_count": 0,
+            "closer_status": "available"
+          },
+          "home": {
+            "tier": "yellow",
+            "fresh_count": 3,
+            "back_to_back_count": 1,
+            "closer_status": "available"
+          }
+        },
+        "lineupStatus": "projected",
+        "umpire": {
+          "name": "TBD",
+          "zone": "neutral",
+          "run_env": 105
+        },
+        "hot_hitters": [
+          "Marte",
+          "Carroll"
+        ],
+        "cold_hitters": [
+          "Goodman cool"
+        ],
+        "injuries": []
+      }
+    },
+    "824037": {
+      "header": {
+        "away": "Dodgers",
+        "home": "Angels",
+        "first_pitch_local": "6:38 PM PT",
+        "venue": "Angel Stadium"
+      },
+      "status": "pre_game",
+      "lineupStatus": "projected",
+      "confidence": {
+        "letter": "B",
+        "score": 78
+      },
+      "callout": "Snell stuff edge in Anaheim, Kochanowicz home start cap and a Dodgers ML lean.",
+      "context_chips": [
+        "Angel Stadium 97",
+        "Low 70s F",
+        "Snell 2.85 ERA",
+        "Dodgers 0.747 OPS"
+      ],
+      "projected_score": "4.6 . 3.1",
+      "paragraphs": [
+        {
+          "h": "Pitching Matchup",
+          "b": "Blake Snell is the cleanest left hander on the night at 2.85 ERA, 1.05 WHIP, 11.0 K9, slider whiff rate above 35 percent. Jack Kochanowicz is a sinker baller at 4.50 ERA, 1.32 WHIP, 6.2 K9, contact dependent. Dodgers have a clear stuff edge. ML LEAN Dodgers ML at minus 175 to minus 195, confidence 75."
+        },
+        {
+          "h": "Offense vs Handedness",
+          "b": "Dodgers at 0.747 OPS rolling 15, cold tier but Ohtani, Betts, Freeman remain the league elite. Angels at 0.783 OPS, hot tier with Trout swinging well. HITS LEAN Ohtani over 0.5 hits at minus 220 to minus 240, confidence 72."
+        },
+        {
+          "h": "Park and Weather",
+          "b": "Angel Stadium 97 runs and 98 HR. Low 70s with 6 mph onshore breeze, total holds neutral."
+        },
+        {
+          "h": "Strikeout Projection",
+          "b": "Snell projects 6 IP with 8 to 9 Ks. K LEAN Snell K over 7.5 at minus 110 to minus 125, confidence 72."
+        },
+        {
+          "h": "Bullpen Edge",
+          "b": "Dodgers pen with Scott and Treinen plays. Angels pen yellow tier. F5 ML LEAN Dodgers F5 ML at minus 155 to minus 170, confidence 72."
+        },
+        {
+          "h": "How It Plays",
+          "b": "Snell strikes out 9, Dodgers cash 4 off Kochanowicz by the 5th, pen closes a 5 to 2 win. Score range 5 to 2 to 6 to 3. Edge Dodgers ML and Snell Ks."
+        }
+      ],
+      "verdict": {
+        "prose": "Snell Ks and Dodgers ML ride the stuff edge in Anaheim with Kochanowicz on a contact diet.",
+        "chips": [
+          {
+            "chip": "Dodgers ML -175 to -195",
+            "why": "Snell stuff and home park advantage moot for LAA."
+          },
+          {
+            "chip": "Snell K over 7.5",
+            "why": "11.0 K9 vs LAA bottom of order whiff."
+          },
+          {
+            "chip": "Dodgers F5 ML -155 to -170",
+            "why": "Snell first time through dominates."
+          }
+        ]
+      },
+      "watchList": [
+        {
+          "market": "Hits",
+          "pick": "Ohtani over 0.5 hits -220",
+          "line": "0.5",
+          "confidence": 70,
+          "reasoning": "Premier bat vs sinker contact profile."
+        },
+        {
+          "market": "Total",
+          "pick": "Under 8.5",
+          "line": "8.5",
+          "confidence": 62,
+          "reasoning": "Snell edge holds the LAA total down."
+        }
+      ],
+      "appliedAdjustments": [],
+      "inputs": {
+        "away_team": "LAD",
+        "home_team": "LAA",
+        "away_pitcher": {
+          "name": "Blake Snell",
+          "era": "2.85",
+          "whip": "1.05",
+          "k9": "11.0",
+          "last_start": {
+            "date": "2026-05-10",
+            "opp": "COL",
+            "ip": "6.2",
+            "er": 1,
             "k": 10,
             "bb": 1,
             "h": 3
           }
         },
         "home_pitcher": {
-          "name": "Freddy Peralta",
-          "id": 642547,
-          "era": 3.12,
-          "whip": 1.2,
-          "k9": 8.93,
-          "ip": 43.1,
-          "gs": 8,
+          "name": "Jack Kochanowicz",
+          "era": "4.50",
+          "whip": "1.32",
+          "k9": "6.2",
           "last_start": {
-            "date": "2026-05-06",
-            "opponent": "Colorado Rockies",
-            "ip": 5.0,
-            "er": 0,
-            "k": 1,
-            "bb": 2,
-            "h": 4
-          }
-        },
-        "weather": {
-          "tempF": 64,
-          "wind_mph": 9,
-          "wind_dir": "from W (in)",
-          "precip_pct": 10,
-          "humidity": 58,
-          "roof": false
-        },
-        "park": {
-          "factor": 95,
-          "hr": 95
-        },
-        "bullpens": {
-          "away": {
-            "tier": "mid",
-            "fresh_count": 4,
-            "back_to_back_count": 2,
-            "closer_status": "available"
-          },
-          "home": {
-            "tier": "strong",
-            "fresh_count": 5,
-            "back_to_back_count": 1,
-            "closer_status": "available"
-          }
-        },
-        "lineupStatus": "projected",
-        "umpire": null,
-        "catcher_framing": {
-          "home": "Francisco Alvarez +0.2 csaa",
-          "away": "Jake Rogers +2.1 csaa"
-        },
-        "hot_hitters": [
-          "Francisco Lindor",
-          "Riley Greene"
-        ],
-        "cold_hitters": [],
-        "injuries": []
-      },
-      "live": {
-        "inning": "M6",
-        "away_score": 2,
-        "home_score": 3,
-        "note": "Live M6, NYM 3, DET 2"
-      }
-    },
-    "824927": {
-      "header": {
-        "away": "Cubs",
-        "home": "Braves",
-        "first_pitch_local": "7:15 PM ET",
-        "venue": "Truist Park"
-      },
-      "status": "live",
-      "lineupStatus": "projected",
-      "confidence": {
-        "letter": "B",
-        "score": 76
-      },
-      "callout": "Two contact starters at a 103 HR park and a hot Atlanta lineup at home steers Braves and overs.",
-      "context_chips": [
-        "Park 99 runs",
-        "Park HR 103",
-        "Braves 0.808 OPS",
-        "Rea HR9 0.95"
-      ],
-      "projected_score": "4.0 . 4.8",
-      "paragraphs": [
-        {
-          "h": "Pitching Matchup",
-          "b": "Colin Rea sports a 4.03 ERA with 1.37 WHIP and 8.29 K9 across 38 IP, last out 5.1 IP 1 ER vs Cincinnati. Grant Holmes runs a 4.34 ERA with 1.45 HR9 and gave up 5 ER in 5 to Colorado on May 1, a tough recent line. Both arms have HR vulnerability and Braves bats are the best in baseball over the last 15. ML LEAN Braves ML at minus 165 to minus 180, confidence 66, the Atlanta home favorite shape against a contact heavy Cubs starter."
-        },
-        {
-          "h": "Offense vs Handedness",
-          "b": "Braves carry a 0.808 OPS over 15 days, Acuna, Albies and Olson all live. Cubs 0.731 OPS with Crow Armstrong and Suzuki driving. HITS LEAN Ronald Acuna over 0.5 hits at minus 200 to minus 180, confidence 70, leadoff projection with elite recent OBP and a Rea profile that allows hard contact."
-        },
-        {
-          "h": "Park and Weather",
-          "b": "Truist plays 99 runs and 103 HR. Mid 70s with light north breeze, which fits the outward direction rule and adds modest run boost. Clean for runs."
-        },
-        {
-          "h": "Strikeout Projection",
-          "b": "Rea K9 8.29 but most recent only 5 Ks, no clear K over. Holmes K9 6.99 contact profile. No K chip clears."
-        },
-        {
-          "h": "Bullpen Edge",
-          "b": "Atlanta pen is among the best with Iglesias closing. Cubs pen middle pack. F5 ML LEAN Braves F5 ML at minus 145 to minus 160, confidence 62, Holmes recent shaky outing creates variance for Atlanta first five lead."
-        },
-        {
-          "h": "How It Plays",
-          "b": "Atlanta bats apply early pressure and Holmes leaks 2 to 3 runs through 5. Rea offers Cubs a chance to compete but the Braves pen closes it cleanly. Range: Braves 4.5 to 5.5, Cubs 3.5 to 4.5. Edge on Braves sides and an Acuna hit prop."
-        }
-      ],
-      "verdict": {
-        "prose": "Braves moneyline at home with an Acuna hit prop and a sneaky over 9 lean.",
-        "chips": [
-          "Braves ML -165 to -180",
-          "Acuna over 0.5 hits -200"
-        ]
-      },
-      "watch_list": [
-        "Braves F5 ML -145 to -160 lean (conf 62)",
-        "Over 9 lean (conf 58)",
-        "Olson over 1.5 total bases +170 lean (conf 56)"
-      ],
-      "appliedAdjustments": [],
-      "inputs": {
-        "away_pitcher": {
-          "name": "Colin Rea",
-          "id": 607067,
-          "era": 4.03,
-          "whip": 1.37,
-          "k9": 8.29,
-          "ip": 38.0,
-          "gs": 5,
-          "last_start": {
-            "date": "2026-05-06",
-            "opponent": "Cincinnati Reds",
-            "ip": 5.1,
-            "er": 1,
-            "k": 5,
-            "bb": 3,
-            "h": 6
-          }
-        },
-        "home_pitcher": {
-          "name": "Grant Holmes",
-          "id": 656550,
-          "era": 4.34,
-          "whip": 1.31,
-          "k9": 6.99,
-          "ip": 37.1,
-          "gs": 7,
-          "last_start": {
-            "date": "2026-05-01",
-            "opponent": "Colorado Rockies",
-            "ip": 5.0,
-            "er": 5,
-            "k": 4,
-            "bb": 3,
-            "h": 7
-          }
-        },
-        "weather": {
-          "tempF": 74,
-          "wind_mph": 7,
-          "wind_dir": "from N (out)",
-          "precip_pct": 10,
-          "humidity": 62,
-          "roof": false
-        },
-        "park": {
-          "factor": 99,
-          "hr": 103
-        },
-        "bullpens": {
-          "away": {
-            "tier": "mid",
-            "fresh_count": 4,
-            "back_to_back_count": 1,
-            "closer_status": "available"
-          },
-          "home": {
-            "tier": "strong",
-            "fresh_count": 5,
-            "back_to_back_count": 1,
-            "closer_status": "available"
-          }
-        },
-        "lineupStatus": "projected",
-        "umpire": null,
-        "catcher_framing": {
-          "home": "Sean Murphy +2.9 csaa",
-          "away": "Miguel Amaya +0.9 csaa"
-        },
-        "hot_hitters": [
-          "Ronald Acuna",
-          "Matt Olson"
-        ],
-        "cold_hitters": [],
-        "injuries": []
-      },
-      "live": {
-        "inning": "B6",
-        "away_score": 2,
-        "home_score": 5,
-        "note": "Live B6, ATL 5, CHC 2"
-      }
-    },
-    "824604": {
-      "header": {
-        "away": "Royals",
-        "home": "White Sox",
-        "first_pitch_local": "7:40 PM ET",
-        "venue": "Rate Field"
-      },
-      "status": "live",
-      "lineupStatus": "projected",
-      "confidence": {
-        "letter": "C",
-        "score": 64
-      },
-      "callout": "Tiny Kolek sample and Fedde HR9 issues at Rate Field create variance.",
-      "context_chips": [
-        "Kolek 6 IP sample",
-        "Fedde HR9 1.89",
-        "Park HR 109",
-        "White Sox hot 0.821 OPS"
-      ],
-      "projected_score": "4.2 . 4.5",
-      "paragraphs": [
-        {
-          "h": "Pitching Matchup",
-          "b": "Stephen Kolek brings just 6 IP and a tiny GS sample at 4.50 ERA with a 4.50 K9, recently 6 IP 3 ER vs Cleveland on May 5. Erick Fedde owns a 3.79 ERA but a 1.89 HR9 across 38 IP and gave up 4 ER in 4.2 to the Angels on May 5. Both arms have walked the edge. ML LEAN White Sox ML at plus 105 to minus 110, confidence 60, because Chicago is hot at 0.821 OPS and gets a Kolek sample we cannot trust."
-        },
-        {
-          "h": "Offense vs Handedness",
-          "b": "White Sox carry a 0.821 OPS over 15 days, leading the AL. Royals 0.704 OPS with Witt and Perez. HITS LEAN Luis Robert over 0.5 hits at minus 165 to minus 150, confidence 64, with 14 day OBP above 0.340 vs a Kolek sample that has not faced a hot lineup yet."
-        },
-        {
-          "h": "Park and Weather",
-          "b": "Rate Field plays 101 runs and 109 HR. Mid 60s with light SW wind, modest HR carry to right field. Variable run environment."
-        },
-        {
-          "h": "Strikeout Projection",
-          "b": "Both arms low K. No K chip."
-        },
-        {
-          "h": "Bullpen Edge",
-          "b": "Royals pen is light, White Sox pen has been better lately. F5 ML LEAN White Sox F5 ML at plus 105 to minus 110, confidence 58, given small sample bullpen reads."
-        },
-        {
-          "h": "How It Plays",
-          "b": "White Sox hot bats and a Kolek small sample point to an early Chicago lead. Royals can answer through Witt and Perez but White Sox at home is the side. Range: White Sox 4.0 to 5.5, Royals 3.5 to 4.5. Edge concentrates on White Sox sides and a Robert hit prop."
-        }
-      ],
-      "verdict": {
-        "prose": "White Sox moneyline at home thin edge with a Robert hit prop and a sub threshold over.",
-        "chips": [
-          "White Sox ML +105 to -110 thin edge",
-          "Robert over 0.5 hits -165"
-        ]
-      },
-      "watch_list": [
-        "White Sox F5 ML +105 to -110 lean (conf 58)",
-        "Over 9.5 lean (conf 58)",
-        "Witt over 0.5 hits -200 lean (conf 60)"
-      ],
-      "appliedAdjustments": [
-        {
-          "rule": "Cap starter side confidence at 60 when chosen starter has a recent outing of 5 or more ER in 5 IP or fewer, or has logged back to back outings allowing 4 or more runs each.",
-          "trigger": "Fedde last start 4 ER in 4.2 IP, triggers cap on White Sox side reads.",
-          "before": 68,
-          "after": 60,
-          "field": "White Sox ML"
-        }
-      ],
-      "inputs": {
-        "away_pitcher": {
-          "name": "Stephen Kolek",
-          "id": 663568,
-          "era": 4.5,
-          "whip": 0.67,
-          "k9": 4.5,
-          "ip": 6.0,
-          "gs": 1,
-          "last_start": {
-            "date": "2026-05-05",
-            "opponent": "Cleveland Guardians",
-            "ip": 6.0,
+            "date": "2026-05-10",
+            "opp": "HOU",
+            "ip": "5.0",
             "er": 3,
             "k": 3,
-            "bb": 0,
-            "h": 4
-          }
-        },
-        "home_pitcher": {
-          "name": "Erick Fedde",
-          "id": 607200,
-          "era": 3.79,
-          "whip": 1.13,
-          "k9": 5.68,
-          "ip": 38.0,
-          "gs": 5,
-          "last_start": {
-            "date": "2026-05-05",
-            "opponent": "Los Angeles Angels",
-            "ip": 4.2,
-            "er": 4,
-            "k": 2,
             "bb": 2,
             "h": 6
-          }
-        },
-        "weather": {
-          "tempF": 65,
-          "wind_mph": 9,
-          "wind_dir": "from SW (out RF)",
-          "precip_pct": 5,
-          "humidity": 60,
-          "roof": false
-        },
-        "park": {
-          "factor": 101,
-          "hr": 109
-        },
-        "bullpens": {
-          "away": {
-            "tier": "thin",
-            "fresh_count": 3,
-            "back_to_back_count": 2,
-            "closer_status": "available"
-          },
-          "home": {
-            "tier": "mid",
-            "fresh_count": 5,
-            "back_to_back_count": 1,
-            "closer_status": "available"
-          }
-        },
-        "lineupStatus": "projected",
-        "umpire": null,
-        "catcher_framing": {
-          "home": "Korey Lee -1.6 csaa",
-          "away": "Salvador Perez -1.1 csaa"
-        },
-        "hot_hitters": [
-          "Luis Robert",
-          "Andrew Vaughn"
-        ],
-        "cold_hitters": [],
-        "injuries": []
-      },
-      "live": {
-        "inning": "B5",
-        "away_score": 2,
-        "home_score": 1,
-        "note": "Live B5, KC 2, CWS 1"
-      }
-    },
-    "823712": {
-      "header": {
-        "away": "Marlins",
-        "home": "Twins",
-        "first_pitch_local": "7:40 PM ET",
-        "venue": "Target Field"
-      },
-      "status": "live",
-      "lineupStatus": "projected",
-      "confidence": {
-        "letter": "C",
-        "score": 62
-      },
-      "callout": "Ober and Pérez both giving up 5 ER recently caps both sides, Twins by a hair.",
-      "context_chips": [
-        "Pérez 5 ER last",
-        "Ober 5 ER last",
-        "Park 99 runs",
-        "Twins cool .683"
-      ],
-      "projected_score": "4.0 . 4.3",
-      "paragraphs": [
-        {
-          "h": "Pitching Matchup",
-          "b": "Eury Pérez 5.01 ERA with a 9.80 K9 and 1.52 HR9 across 41.1 IP, last out 5 IP 5 ER 5 BB vs Baltimore on May 6. Bailey Ober 4.19 ERA, 6.70 K9 across 43 IP, gave up 5 ER in 5 vs Washington on May 6 with home run problems. Both starters wobbling. ML LEAN Twins ML at minus 115 to minus 130, confidence 58, capped because both starters had 5 ER lines last out."
-        },
-        {
-          "h": "Offense vs Handedness",
-          "b": "Marlins 0.679 OPS, Twins 0.683 OPS, both quiet. HITS LEAN Carlos Correa over 0.5 hits at minus 175 to minus 160, confidence 62, with a verified 14 day OBP and a Pérez fastball Correa hits."
-        },
-        {
-          "h": "Park and Weather",
-          "b": "Target Field plays neutral at 99 runs. Mid 60s with light wind, no precipitation. Run environment neutral."
-        },
-        {
-          "h": "Strikeout Projection",
-          "b": "Pérez K9 9.80 with a recent 6 K start, but the 5 BB volatility kills the K chip risk. Ober K9 6.70 and no K chip."
-        },
-        {
-          "h": "Bullpen Edge",
-          "b": "Twins pen is rested with Jax and Duran available. Marlins pen has more workload. F5 ML LEAN Twins F5 ML at minus 115 to minus 130, confidence 58."
-        },
-        {
-          "h": "How It Plays",
-          "b": "Both arms are working through HR vulnerability and either side can get a 3 spot early. Twins bats are quiet but Pérez walks help generate traffic. Range: Twins 4.0 to 5.0, Marlins 3.5 to 4.5. Edge thin Twins ML."
-        }
-      ],
-      "verdict": {
-        "prose": "Twins moneyline thin edge with a Correa hit prop and a sub threshold over lean.",
-        "chips": [
-          "Twins ML -115 to -130 thin edge",
-          "Correa over 0.5 hits -175"
-        ]
-      },
-      "watch_list": [
-        "Twins F5 ML -115 to -130 lean (conf 58)",
-        "Over 8.5 lean (conf 56)",
-        "Buxton over 0.5 hits -150 lean (conf 56)"
-      ],
-      "appliedAdjustments": [
-        {
-          "rule": "Cap starter side confidence at 60 when chosen starter has a recent outing of 5 or more ER in 5 IP or fewer, or has logged back to back outings allowing 4 or more runs each.",
-          "trigger": "Ober last start 5 ER in 5 IP. Caps Twins side reads.",
-          "before": 68,
-          "after": 62,
-          "field": "Twins ML"
-        }
-      ],
-      "inputs": {
-        "away_pitcher": {
-          "name": "Eury Pérez",
-          "id": 691587,
-          "era": 5.01,
-          "whip": 1.43,
-          "k9": 9.8,
-          "ip": 41.1,
-          "gs": 8,
-          "last_start": {
-            "date": "2026-05-06",
-            "opponent": "Baltimore Orioles",
-            "ip": 5.0,
-            "er": 5,
-            "k": 6,
-            "bb": 5,
-            "h": 4
-          }
-        },
-        "home_pitcher": {
-          "name": "Bailey Ober",
-          "id": 641927,
-          "era": 4.19,
-          "whip": 1.19,
-          "k9": 6.7,
-          "ip": 43.0,
-          "gs": 8,
-          "last_start": {
-            "date": "2026-05-06",
-            "opponent": "Washington Nationals",
-            "ip": 5.0,
-            "er": 5,
-            "k": 3,
-            "bb": 2,
-            "h": 6
-          }
-        },
-        "weather": {
-          "tempF": 65,
-          "wind_mph": 7,
-          "wind_dir": "from N",
-          "precip_pct": 10,
-          "humidity": 55,
-          "roof": false
-        },
-        "park": {
-          "factor": 99,
-          "hr": 100
-        },
-        "bullpens": {
-          "away": {
-            "tier": "thin",
-            "fresh_count": 3,
-            "back_to_back_count": 2,
-            "closer_status": "available"
-          },
-          "home": {
-            "tier": "strong",
-            "fresh_count": 5,
-            "back_to_back_count": 1,
-            "closer_status": "available"
-          }
-        },
-        "lineupStatus": "projected",
-        "umpire": null,
-        "catcher_framing": {
-          "home": "Ryan Jeffers +1.7 csaa",
-          "away": "Nick Fortes -0.9 csaa"
-        },
-        "hot_hitters": [
-          "Carlos Correa"
-        ],
-        "cold_hitters": [
-          "Byron Buxton"
-        ],
-        "injuries": []
-      },
-      "live": {
-        "inning": "T6",
-        "away_score": 0,
-        "home_score": 3,
-        "note": "Live T6, MIN 3, MIA 0"
-      }
-    },
-    "823790": {
-      "header": {
-        "away": "Padres",
-        "home": "Brewers",
-        "first_pitch_local": "7:40 PM ET",
-        "venue": "American Family Field"
-      },
-      "status": "live",
-      "lineupStatus": "projected",
-      "confidence": {
-        "letter": "B",
-        "score": 73
-      },
-      "callout": "Waldron has small sample issues; Brewers home with Sproat covers the spread.",
-      "context_chips": [
-        "Waldron ERA 7.71",
-        "Sproat ERA 5.87",
-        "Park 98 runs",
-        "Brewers fresh pen"
-      ],
-      "projected_score": "3.8 . 4.5",
-      "paragraphs": [
-        {
-          "h": "Pitching Matchup",
-          "b": "Matt Waldron 7.71 ERA across 18.2 IP, last 5 IP 1 ER 7 K vs Giants. Brandon Sproat 5.87 ERA across 30.2 IP, last 4 IP 0 ER 5 K vs St. Louis. Both arms have wobbly profiles but Sproat is at home and has a fresher pen behind him. ML LEAN Brewers ML at minus 130 to minus 145, confidence 62, the home favorite is right but capped."
-        },
-        {
-          "h": "Offense vs Handedness",
-          "b": "Padres 0.702 OPS neutral, Brewers playing winning baseball with Yelich, Frelick and Contreras. HITS LEAN William Contreras over 0.5 hits at minus 175 to minus 160, confidence 64, with verified OBP above 0.340."
-        },
-        {
-          "h": "Park and Weather",
-          "b": "American Family roof typically closed in cool, neutral 98 runs play. Run environment neutral."
-        },
-        {
-          "h": "Strikeout Projection",
-          "b": "Waldron knuckle ball K9 7.23, no K chip. Sproat 8.80 K9 but recent only 5 in 4 IP."
-        },
-        {
-          "h": "Bullpen Edge",
-          "b": "Brewers pen strong with Megill and Devin Williams available. Padres pen has logged volume. F5 ML LEAN Brewers F5 ML at minus 130 to minus 145, confidence 60."
-        },
-        {
-          "h": "How It Plays",
-          "b": "Sproat manages 5 innings and Brewers pen takes over with rest. Padres scratch one or two on Tatis but Brewers home advantage holds. Range: Brewers 4.0 to 5.0, Padres 3.5 to 4.0. Edge on Brewers ML and Contreras hits."
-        }
-      ],
-      "verdict": {
-        "prose": "Brewers moneyline at home with a William Contreras hit prop and an F5 lean.",
-        "chips": [
-          "Brewers ML -130 to -145",
-          "Contreras over 0.5 hits -175"
-        ]
-      },
-      "watch_list": [
-        "Brewers F5 ML -130 to -145 lean (conf 60)",
-        "Yelich over 0.5 hits -140 lean (conf 58)",
-        "Under 8 lean (conf 56)"
-      ],
-      "appliedAdjustments": [],
-      "inputs": {
-        "away_pitcher": {
-          "name": "Matt Waldron",
-          "id": 663362,
-          "era": 7.71,
-          "whip": 1.55,
-          "k9": 7.23,
-          "ip": 18.2,
-          "gs": 3,
-          "last_start": {
-            "date": "2026-05-06",
-            "opponent": "San Francisco Giants",
-            "ip": 5.0,
-            "er": 1,
-            "k": 7,
-            "bb": 0,
-            "h": 2
-          }
-        },
-        "home_pitcher": {
-          "name": "Brandon Sproat",
-          "id": 687075,
-          "era": 5.87,
-          "whip": 1.53,
-          "k9": 8.8,
-          "ip": 30.2,
-          "gs": 5,
-          "last_start": {
-            "date": "2026-05-06",
-            "opponent": "St. Louis Cardinals",
-            "ip": 4.0,
-            "er": 0,
-            "k": 5,
-            "bb": 3,
-            "h": 1
-          }
-        },
-        "weather": {
-          "tempF": 68,
-          "wind_mph": 0,
-          "wind_dir": "roof closed",
-          "precip_pct": 0,
-          "humidity": 50,
-          "roof": true
-        },
-        "park": {
-          "factor": 98,
-          "hr": 102
-        },
-        "bullpens": {
-          "away": {
-            "tier": "mid",
-            "fresh_count": 4,
-            "back_to_back_count": 2,
-            "closer_status": "available"
-          },
-          "home": {
-            "tier": "strong",
-            "fresh_count": 5,
-            "back_to_back_count": 1,
-            "closer_status": "available"
-          }
-        },
-        "lineupStatus": "projected",
-        "umpire": null,
-        "catcher_framing": {
-          "home": "William Contreras +2.2 csaa",
-          "away": "Kyle Higashioka +1.1 csaa"
-        },
-        "hot_hitters": [
-          "William Contreras",
-          "Christian Yelich"
-        ],
-        "cold_hitters": [],
-        "injuries": []
-      },
-      "live": {
-        "inning": "M5",
-        "away_score": 2,
-        "home_score": 6,
-        "note": "Live M5, MIL 6, SD 2"
-      }
-    },
-    "822903": {
-      "header": {
-        "away": "Diamondbacks",
-        "home": "Rangers",
-        "first_pitch_local": "8:05 PM ET",
-        "venue": "Globe Life Field"
-      },
-      "status": "live",
-      "lineupStatus": "projected",
-      "confidence": {
-        "letter": "C",
-        "score": 64
-      },
-      "callout": "Gallen 4.70 ERA vs Gore wobble at a 104 run park sets a slight Arizona ML lean.",
-      "context_chips": [
-        "Gallen 4.70 ERA",
-        "Gore K9 10.80",
-        "Park 104 runs",
-        "Rangers cold .685"
-      ],
-      "projected_score": "4.6 . 4.0",
-      "paragraphs": [
-        {
-          "h": "Pitching Matchup",
-          "b": "Zac Gallen 4.70 ERA, 1.49 WHIP, 5.87 K9 across 38.1 IP, last 6 IP 4 ER vs Pittsburgh. MacKenzie Gore 5.18 ERA, 1.40 WHIP, 10.80 K9 across 40 IP, last 5.1 IP 5 ER vs Yankees. Both arms struggling but Gallen has the better command. ML LEAN Diamondbacks ML at minus 115 to plus 105, confidence 62, the road favorite shape with command edge."
-        },
-        {
-          "h": "Offense vs Handedness",
-          "b": "Diamondbacks neutral, Rangers cold at 0.685 OPS. HITS LEAN Corbin Carroll over 0.5 hits at minus 175 to minus 160, confidence 64, with verified rolling OBP above 0.340 vs a fastball arm in Gore."
-        },
-        {
-          "h": "Park and Weather",
-          "b": "Globe Life plays 104 runs and 106 HR. Roof commonly closed in May for climate. Slightly hitter friendly even with roof."
-        },
-        {
-          "h": "Strikeout Projection",
-          "b": "Gore K9 10.80 with most recent 3 K outing, no K over chip. Gallen 5.87 K9 no chip."
-        },
-        {
-          "h": "Bullpen Edge",
-          "b": "Both pens average, slight Arizona edge with Sewald closing. F5 ML LEAN Diamondbacks F5 ML at minus 115 to plus 105, confidence 60."
-        },
-        {
-          "h": "How It Plays",
-          "b": "Gallen navigates Texas cold lineup and Gore continues to leak. Arizona by one or two runs. Range: Diamondbacks 4.5 to 5.0, Rangers 3.5 to 4.5. Edge thin ML."
-        }
-      ],
-      "verdict": {
-        "prose": "Diamondbacks moneyline thin edge with a Carroll hit prop and an F5 lean.",
-        "chips": [
-          "Diamondbacks ML -115 to +105 thin edge",
-          "Carroll over 0.5 hits -175"
-        ]
-      },
-      "watch_list": [
-        "Diamondbacks F5 ML -115 to +105 lean (conf 60)",
-        "Marte over 0.5 hits -160 lean (conf 58)",
-        "Under 9 lean (conf 56)"
-      ],
-      "appliedAdjustments": [
-        {
-          "rule": "Cap starter side confidence at 60 when chosen starter has a recent outing of 5 or more ER in 5 IP or fewer, or has logged back to back outings allowing 4 or more runs each.",
-          "trigger": "Gore last start 5 ER in 5.1 IP. Caps Rangers side reads.",
-          "before": 65,
-          "after": 58,
-          "field": "Rangers ML"
-        }
-      ],
-      "inputs": {
-        "away_pitcher": {
-          "name": "Zac Gallen",
-          "id": 668678,
-          "era": 4.7,
-          "whip": 1.49,
-          "k9": 5.87,
-          "ip": 38.1,
-          "gs": 8,
-          "last_start": {
-            "date": "2026-05-07",
-            "opponent": "Pittsburgh Pirates",
-            "ip": 6.0,
-            "er": 4,
-            "k": 5,
-            "bb": 2,
-            "h": 6
-          }
-        },
-        "home_pitcher": {
-          "name": "MacKenzie Gore",
-          "id": 669022,
-          "era": 5.18,
-          "whip": 1.4,
-          "k9": 10.8,
-          "ip": 40.0,
-          "gs": 8,
-          "last_start": {
-            "date": "2026-05-07",
-            "opponent": "New York Yankees",
-            "ip": 5.1,
-            "er": 5,
-            "k": 3,
-            "bb": 3,
-            "h": 6
-          }
-        },
-        "weather": {
-          "tempF": 78,
-          "wind_mph": 0,
-          "wind_dir": "roof closed",
-          "precip_pct": 0,
-          "humidity": 50,
-          "roof": true
-        },
-        "park": {
-          "factor": 104,
-          "hr": 106
-        },
-        "bullpens": {
-          "away": {
-            "tier": "mid",
-            "fresh_count": 4,
-            "back_to_back_count": 1,
-            "closer_status": "available"
-          },
-          "home": {
-            "tier": "mid",
-            "fresh_count": 4,
-            "back_to_back_count": 2,
-            "closer_status": "available"
-          }
-        },
-        "lineupStatus": "projected",
-        "umpire": null,
-        "catcher_framing": {
-          "home": "Jonah Heim +0.8 csaa",
-          "away": "Gabriel Moreno +3.8 csaa"
-        },
-        "hot_hitters": [
-          "Corbin Carroll"
-        ],
-        "cold_hitters": [
-          "Marcus Semien"
-        ],
-        "injuries": []
-      },
-      "live": {
-        "inning": "M4",
-        "away_score": 1,
-        "home_score": 2,
-        "note": "Live M4, TEX 2, ARI 1"
-      }
-    },
-    "824197": {
-      "header": {
-        "away": "Mariners",
-        "home": "Astros",
-        "first_pitch_local": "8:10 PM ET",
-        "venue": "Daikin Park"
-      },
-      "status": "live",
-      "lineupStatus": "projected",
-      "confidence": {
-        "letter": "B",
-        "score": 78
-      },
-      "callout": "Woo dominance vs Imai tiny rocky sample at Daikin Park makes Mariners the cleanest road side.",
-      "context_chips": [
-        "Woo 4.02 ERA",
-        "Imai 7.27 ERA",
-        "Imai 0.1 IP last",
-        "Park 97 runs"
-      ],
-      "projected_score": "4.6 . 3.2",
-      "paragraphs": [
-        {
-          "h": "Pitching Matchup",
-          "b": "Bryan Woo 4.02 ERA with a 1.00 WHIP, 7.28 K9 across 47 IP, last 6 IP 0 ER 9 K vs Atlanta. Tatsuya Imai shaky 7.27 ERA across 8.2 IP, with a 13.50 K9 but a 2.08 WHIP that signals command issues. Last out was 0.1 IP 3 ER 4 BB vs Seattle. ML LEAN Mariners ML at minus 130 to minus 145, confidence 68, command edge plus Woo trending up."
-        },
-        {
-          "h": "Offense vs Handedness",
-          "b": "Mariners hot at 0.764 OPS over 15 days with Raleigh, Polanco and Crawford live. Astros 0.701 OPS. HITS LEAN Cal Raleigh over 0.5 hits at minus 175 to minus 160, confidence 66, verified rolling OBP above 0.340 with a strong recent batting average."
-        },
-        {
-          "h": "Park and Weather",
-          "b": "Daikin roof closed, neutral run environment at 97 runs."
-        },
-        {
-          "h": "Strikeout Projection",
-          "b": "Woo K9 7.28, last start 9 K, projected 6 plus IP. K LEAN Woo K over 5.5 at minus 130 to minus 140, confidence 64."
-        },
-        {
-          "h": "Bullpen Edge",
-          "b": "Mariners pen has been better recently with Munoz at the back. F5 ML LEAN Mariners F5 ML at minus 145 to minus 160, confidence 64, Imai walk volume and small sample is exactly the first five spot to attack."
-        },
-        {
-          "h": "How It Plays",
-          "b": "Woo controls Houston bats while Imai walks himself into trouble early. Mariners build a 3 to 5 run lead by the fifth. Range: Mariners 4.5 to 5.5, Astros 2.5 to 3.5. Edge on Mariners ML, F5 ML and Woo K over."
-        }
-      ],
-      "verdict": {
-        "prose": "Mariners moneyline behind Woo with the F5 ML pair and a Raleigh hit prop.",
-        "chips": [
-          "Mariners ML -130 to -145",
-          "Mariners F5 ML -145 to -160",
-          "Raleigh over 0.5 hits -175"
-        ]
-      },
-      "watch_list": [
-        "Woo K over 5.5 -130 to -140 lean (conf 64)",
-        "Polanco over 0.5 hits -150 lean (conf 60)",
-        "Under 8 lean (conf 60)"
-      ],
-      "appliedAdjustments": [],
-      "inputs": {
-        "away_pitcher": {
-          "name": "Bryan Woo",
-          "id": 693433,
-          "era": 4.02,
-          "whip": 1.0,
-          "k9": 7.28,
-          "ip": 47.0,
-          "gs": 8,
-          "last_start": {
-            "date": "2026-05-06",
-            "opponent": "Atlanta Braves",
-            "ip": 6.0,
-            "er": 0,
-            "k": 9,
-            "bb": 2,
-            "h": 1
-          }
-        },
-        "home_pitcher": {
-          "name": "Tatsuya Imai",
-          "id": 837227,
-          "era": 7.27,
-          "whip": 2.08,
-          "k9": 13.5,
-          "ip": 8.2,
-          "gs": 3,
-          "last_start": {
-            "date": "2026-04-10",
-            "opponent": "Seattle Mariners",
-            "ip": 0.1,
-            "er": 3,
-            "k": 0,
-            "bb": 4,
-            "h": 1
-          }
-        },
-        "weather": {
-          "tempF": 78,
-          "wind_mph": 0,
-          "wind_dir": "roof closed",
-          "precip_pct": 0,
-          "humidity": 50,
-          "roof": true
-        },
-        "park": {
-          "factor": 97,
-          "hr": 103
-        },
-        "bullpens": {
-          "away": {
-            "tier": "strong",
-            "fresh_count": 5,
-            "back_to_back_count": 1,
-            "closer_status": "available"
-          },
-          "home": {
-            "tier": "mid",
-            "fresh_count": 4,
-            "back_to_back_count": 2,
-            "closer_status": "available"
-          }
-        },
-        "lineupStatus": "projected",
-        "umpire": null,
-        "catcher_framing": {
-          "home": "Victor Caratini +1.8 csaa",
-          "away": "Cal Raleigh +2.6 csaa"
-        },
-        "hot_hitters": [
-          "Cal Raleigh",
-          "Jorge Polanco"
-        ],
-        "cold_hitters": [],
-        "injuries": []
-      },
-      "live": {
-        "inning": "B3",
-        "away_score": 2,
-        "home_score": 1,
-        "note": "Live B3, SEA 2, HOU 1"
-      }
-    },
-    "825011": {
-      "header": {
-        "away": "Cardinals",
-        "home": "Athletics",
-        "first_pitch_local": "9:40 PM ET",
-        "venue": "Sutter Health Park"
-      },
-      "status": "pregame",
-      "lineupStatus": "projected",
-      "confidence": {
-        "letter": "C",
-        "score": 62
-      },
-      "callout": "Pallante 5 ER last and Springs steady at a hitter friendly AAA field skews Athletics.",
-      "context_chips": [
-        "Park 102 runs",
-        "Park HR 105",
-        "Pallante 5 ER last",
-        "Athletics 0.762 OPS"
-      ],
-      "projected_score": "4.0 . 4.7",
-      "paragraphs": [
-        {
-          "h": "Pitching Matchup",
-          "b": "Andre Pallante 4.34 ERA, 1.37 WHIP, 6.99 K9 across 37.1 IP, last start 6 IP 5 ER vs Milwaukee. Jeffrey Springs 3.89 ERA, 1.14 WHIP, 7.98 K9 across 44 IP, last 5.1 IP 2 ER vs Philadelphia. Springs has the steadier line. ML LEAN Athletics ML at minus 125 to minus 140, confidence 60, Pallante recent stumble caps both sides."
-        },
-        {
-          "h": "Offense vs Handedness",
-          "b": "Athletics hot at 0.762 OPS over 15 days with Rooker and Soderstrom. Cardinals 0.774 OPS, also live. HITS LEAN Brent Rooker over 0.5 hits at minus 180 to minus 165, confidence 62, with verified rolling OBP."
-        },
-        {
-          "h": "Park and Weather",
-          "b": "Sutter Health Park plays 102 runs and 105 HR per smaller AAA park dynamics. Cool clear bay air, low 60s, neutral wind. Run environment modest."
-        },
-        {
-          "h": "Strikeout Projection",
-          "b": "Both around 7 to 8 K9, no clean K chip."
-        },
-        {
-          "h": "Bullpen Edge",
-          "b": "Athletics pen mid tier, Cardinals pen mid tier. Slight home edge. F5 ML LEAN Athletics F5 ML at minus 125 to minus 140, confidence 58."
-        },
-        {
-          "h": "How It Plays",
-          "b": "Springs hands the lead to a fresh A's pen and the home park boosts a low key offensive output. Range: Athletics 4.0 to 5.0, Cardinals 3.5 to 4.5. Edge thin Athletics ML."
-        }
-      ],
-      "verdict": {
-        "prose": "Athletics moneyline thin edge at home with a Rooker hit prop and a sub threshold F5 lean.",
-        "chips": [
-          "Athletics ML -125 to -140 thin edge",
-          "Rooker over 0.5 hits -180"
-        ]
-      },
-      "watch_list": [
-        "Athletics F5 ML -125 to -140 lean (conf 58)",
-        "Soderstrom over 0.5 hits -150 lean (conf 56)",
-        "Over 9 lean (conf 56)"
-      ],
-      "appliedAdjustments": [
-        {
-          "rule": "Cap starter side confidence at 60 when chosen starter has a recent outing of 5 or more ER in 5 IP or fewer, or has logged back to back outings allowing 4 or more runs each.",
-          "trigger": "Pallante 5 ER in 6 IP last out. Cap Cardinals side reads (we are taking Athletics, so trigger informs the call).",
-          "before": 66,
-          "after": 60,
-          "field": "Athletics ML"
-        }
-      ],
-      "inputs": {
-        "away_pitcher": {
-          "name": "Andre Pallante",
-          "id": 669467,
-          "era": 4.34,
-          "whip": 1.37,
-          "k9": 6.99,
-          "ip": 37.1,
-          "gs": 7,
-          "last_start": {
-            "date": "2026-05-06",
-            "opponent": "Milwaukee Brewers",
-            "ip": 6.0,
-            "er": 5,
-            "k": 3,
-            "bb": 2,
-            "h": 8
-          }
-        },
-        "home_pitcher": {
-          "name": "Jeffrey Springs",
-          "id": 605488,
-          "era": 3.89,
-          "whip": 1.14,
-          "k9": 7.98,
-          "ip": 44.0,
-          "gs": 8,
-          "last_start": {
-            "date": "2026-05-06",
-            "opponent": "Philadelphia Phillies",
-            "ip": 5.1,
-            "er": 2,
-            "k": 4,
-            "bb": 0,
-            "h": 8
-          }
-        },
-        "weather": {
-          "tempF": 62,
-          "wind_mph": 6,
-          "wind_dir": "from W",
-          "precip_pct": 0,
-          "humidity": 62,
-          "roof": false
-        },
-        "park": {
-          "factor": 102,
-          "hr": 105
-        },
-        "bullpens": {
-          "away": {
-            "tier": "mid",
-            "fresh_count": 4,
-            "back_to_back_count": 1,
-            "closer_status": "available"
-          },
-          "home": {
-            "tier": "mid",
-            "fresh_count": 4,
-            "back_to_back_count": 1,
-            "closer_status": "available"
-          }
-        },
-        "lineupStatus": "projected",
-        "umpire": null,
-        "catcher_framing": {
-          "home": "Shea Langeliers +0.5 csaa",
-          "away": "Willson Contreras -1.8 csaa"
-        },
-        "hot_hitters": [
-          "Brent Rooker",
-          "Tyler Soderstrom"
-        ],
-        "cold_hitters": [],
-        "injuries": []
-      }
-    },
-    "823951": {
-      "header": {
-        "away": "Giants",
-        "home": "Dodgers",
-        "first_pitch_local": "10:10 PM ET",
-        "venue": "UNIQLO Field at Dodger Stadium"
-      },
-      "status": "pregame",
-      "lineupStatus": "projected",
-      "confidence": {
-        "letter": "B",
-        "score": 80
-      },
-      "callout": "Yamamoto vs Houser at Dodger Stadium is a clean Dodgers laydown with a fade on Houser.",
-      "context_chips": [
-        "Yamamoto 3.09 ERA",
-        "Houser 6.19 ERA",
-        "Park HR 105",
-        "Dodgers home heavy favorite"
-      ],
-      "projected_score": "3.0 . 4.8",
-      "paragraphs": [
-        {
-          "h": "Pitching Matchup",
-          "b": "Yoshinobu Yamamoto 3.09 ERA, 1.01 WHIP, 8.24 K9 across 43.2 IP, last 6 IP 3 ER 8 K vs Houston on May 4. Adrian Houser 6.19 ERA, 1.54 WHIP, 4.71 K9, last 6 IP 1 ER vs San Diego. Houser was lucky last out but his year long line is rough. ML LEAN Dodgers ML at minus 200 to minus 220, confidence 68, capped because the price is steep and Yamamoto has not been untouchable."
-        },
-        {
-          "h": "Offense vs Handedness",
-          "b": "Dodgers slug heavy with Betts, Ohtani and Freeman all live. Giants 0.667 OPS quiet. HITS LEAN Mookie Betts over 0.5 hits at minus 200 to minus 180, confidence 70, verified rolling OBP above 0.340 with a leadoff projection vs Houser fastball heavy mix."
-        },
-        {
-          "h": "Park and Weather",
-          "b": "Dodger Stadium plays 92 runs and 105 HR. Low 70s with light wind. Per learnings, do not chase Under at Dodger Stadium when OPS combined skews above the 0.770 line, which it does. Hold Under off chips."
-        },
-        {
-          "h": "Strikeout Projection",
-          "b": "Yamamoto K9 8.24 with 8 K in last start. Per carryover, K over chip needs a recent 7 plus K start and projected 6 plus IP, both met. K LEAN Yamamoto K over 6.5 at minus 115 to minus 125, confidence 64."
-        },
-        {
-          "h": "Bullpen Edge",
-          "b": "Dodgers pen strong with Hudson, Treinen and Phillips. Giants pen overworked. F5 ML LEAN Dodgers F5 ML at minus 175 to minus 195, confidence 60, capped per learnings on laying chalk on F5 ML."
-        },
-        {
-          "h": "How It Plays",
-          "b": "Yamamoto smooths the night with traffic but limits damage and Houser leaks 4 plus runs before the sixth. Dodgers ride a 4 to 5 run output and the pen closes. Range: Dodgers 4.5 to 5.5, Giants 2.5 to 3.5. Edge on Dodgers ML and Yamamoto K over."
-        }
-      ],
-      "verdict": {
-        "prose": "Dodgers moneyline at home with Yamamoto K over 6.5 and a Betts hit prop carry the card.",
-        "chips": [
-          "Dodgers ML -200 to -220",
-          "Yamamoto K over 6.5 -115 to -125",
-          "Betts over 0.5 hits -200"
-        ]
-      },
-      "watch_list": [
-        "Dodgers F5 ML -175 to -195 lean (conf 60)",
-        "Ohtani over 1.5 total bases +160 lean (conf 60)",
-        "Freeman over 0.5 hits -160 lean (conf 58)"
-      ],
-      "appliedAdjustments": [
-        {
-          "rule": "Avoid Under total picks at Toronto, Coors, Dodger Stadium, and any park factor 105+ when both lineups carry 15 day OPS above .770.",
-          "trigger": "Dodger Stadium named explicitly. Hold Under off chips.",
-          "before": 62,
-          "after": 0,
-          "field": "Under chip removed"
-        },
-        {
-          "rule": "Do not lay more than minus 175 on F5 ML when chosen starter has a single previous start with at least 3 ER allowed in last 14 days.",
-          "trigger": "Yamamoto last start 3 ER. Cap Dodgers F5 ML chip at sub threshold lean.",
-          "before": 68,
-          "after": 60,
-          "field": "Dodgers F5 ML"
-        }
-      ],
-      "inputs": {
-        "away_pitcher": {
-          "name": "Adrian Houser",
-          "id": 605288,
-          "era": 6.19,
-          "whip": 1.54,
-          "k9": 4.71,
-          "ip": 36.1,
-          "gs": 7,
-          "last_start": {
-            "date": "2026-05-06",
-            "opponent": "San Diego Padres",
-            "ip": 6.0,
-            "er": 1,
-            "k": 3,
-            "bb": 1,
-            "h": 3
-          }
-        },
-        "home_pitcher": {
-          "name": "Yoshinobu Yamamoto",
-          "id": 808967,
-          "era": 3.09,
-          "whip": 1.01,
-          "k9": 8.24,
-          "ip": 43.2,
-          "gs": 7,
-          "last_start": {
-            "date": "2026-05-04",
-            "opponent": "Houston Astros",
-            "ip": 6.0,
-            "er": 3,
-            "k": 8,
-            "bb": 1,
-            "h": 5
           }
         },
         "weather": {
           "tempF": 72,
           "wind_mph": 6,
-          "wind_dir": "from W",
-          "precip_pct": 0,
-          "humidity": 55,
-          "roof": false
+          "wind_dir": "Out To LF",
+          "condition": "Clear",
+          "roof": false,
+          "precip_pct": 10,
+          "humidity": 55
         },
         "park": {
-          "factor": 92,
-          "hr": 105
+          "factor": 97,
+          "hr_left": 98,
+          "hr_right": 98
         },
         "bullpens": {
           "away": {
-            "tier": "thin",
-            "fresh_count": 3,
-            "back_to_back_count": 2,
+            "tier": "green",
+            "fresh_count": 4,
+            "back_to_back_count": 0,
             "closer_status": "available"
           },
           "home": {
-            "tier": "strong",
-            "fresh_count": 6,
+            "tier": "yellow",
+            "fresh_count": 3,
             "back_to_back_count": 1,
+            "closer_status": "monitored"
+          }
+        },
+        "lineupStatus": "projected",
+        "umpire": {
+          "name": "TBD",
+          "zone": "neutral",
+          "run_env": 100
+        },
+        "hot_hitters": [
+          "Ohtani",
+          "Trout",
+          "Schanuel"
+        ],
+        "cold_hitters": [
+          "Pages cool"
+        ],
+        "injuries": []
+      }
+    },
+    "823140": {
+      "header": {
+        "away": "Padres",
+        "home": "Mariners",
+        "first_pitch_local": "6:40 PM PT",
+        "venue": "T-Mobile Park"
+      },
+      "status": "pre_game",
+      "lineupStatus": "projected",
+      "confidence": {
+        "letter": "B",
+        "score": 70
+      },
+      "callout": "Hancock at home is a small step up vs Vasquez, Mariners home edge plays in the cool air.",
+      "context_chips": [
+        "T Mobile 93",
+        "Mid 60s F",
+        "Hancock 3.95",
+        "SEA hot tier"
+      ],
+      "projected_score": "3.5 . 4.3",
+      "paragraphs": [
+        {
+          "h": "Pitching Matchup",
+          "b": "Emerson Hancock is a sinker baller at 3.95 ERA, 1.18 WHIP, 7.0 K9, classic ground ball arm. Randy Vasquez is a 4.30 ERA inning eater at 1.30 WHIP. Mariners get the small stuff edge at home. ML LEAN Mariners ML at minus 125 to minus 140, confidence 68."
+        },
+        {
+          "h": "Offense vs Handedness",
+          "b": "Mariners at 0.764 OPS, hot tier with Rodriguez and Raley driving. Padres at 0.702 OPS, neutral. HITS LEAN Rodriguez over 0.5 hits at minus 160 to minus 175, confidence 65, top of order vs Vasquez at home."
+        },
+        {
+          "h": "Park and Weather",
+          "b": "T Mobile Park 93 runs and 92 HR, a real suppressor. Mid 60s with 8 mph cross wind. Total environment Under leaning."
+        },
+        {
+          "h": "Strikeout Projection",
+          "b": "Hancock projects 5.2 IP with 4 Ks, not a K play. Vasquez projects 5.0 IP with 4 Ks. No K chip."
+        },
+        {
+          "h": "Bullpen Edge",
+          "b": "Mariners pen with Munoz plays. Padres pen with Adam plays but is rested. F5 ML LEAN Mariners F5 ML at minus 110 to minus 125, confidence 64, Hancock first time through edges Vasquez."
+        },
+        {
+          "h": "How It Plays",
+          "b": "Hancock spins 5 with a 3 to 2 lead, Mariners pen closes a 4 to 3 win. Score range 4 to 2 to 5 to 3. Edge Mariners ML and Under 7.5."
+        }
+      ],
+      "verdict": {
+        "prose": "Mariners ML at thin price plus a Rodriguez hit ride the home edge in a cool T Mobile night.",
+        "chips": [
+          {
+            "chip": "Mariners ML -125 to -140",
+            "why": "Home park and the cleaner sinker arm."
+          },
+          {
+            "chip": "Mariners F5 ML -110 to -125",
+            "why": "Hancock first time through edges Vasquez."
+          },
+          {
+            "chip": "Rodriguez over 0.5 hits -160 to -175",
+            "why": "Top of order vs Vasquez at home."
+          }
+        ]
+      },
+      "watchList": [
+        {
+          "market": "Total",
+          "pick": "Under 7.5",
+          "line": "7.5",
+          "confidence": 62,
+          "reasoning": "T Mobile 93 runs in mid 60s."
+        }
+      ],
+      "appliedAdjustments": [
+        {
+          "rule": "Cap Hits over 0.5 props to confirmed lineup leadoff/2 hole hitters with at least 4 expected at bats and recent 7 day batting average over 0.260.",
+          "trigger": "Lineups are projected at 11:30 AM ET, not confirmed.",
+          "before": "Hits chip considered at full confidence",
+          "after": "Confidence held at projected lineup level, hitter limited to known top of order bat with rolling 7 day average above 0.260",
+          "field": "Hits"
+        }
+      ],
+      "inputs": {
+        "away_team": "SD",
+        "home_team": "SEA",
+        "away_pitcher": {
+          "name": "Randy Vasquez",
+          "era": "4.30",
+          "whip": "1.30",
+          "k9": "7.5",
+          "last_start": {
+            "date": "2026-05-10",
+            "opp": "SF",
+            "ip": "5.0",
+            "er": 3,
+            "k": 4,
+            "bb": 2,
+            "h": 5
+          }
+        },
+        "home_pitcher": {
+          "name": "Emerson Hancock",
+          "era": "3.95",
+          "whip": "1.18",
+          "k9": "7.0",
+          "last_start": {
+            "date": "2026-05-10",
+            "opp": "TEX",
+            "ip": "5.2",
+            "er": 2,
+            "k": 4,
+            "bb": 1,
+            "h": 5
+          }
+        },
+        "weather": {
+          "tempF": 65,
+          "wind_mph": 8,
+          "wind_dir": "Cross LF to RF",
+          "condition": "Cloudy",
+          "roof": false,
+          "precip_pct": 25,
+          "humidity": 70
+        },
+        "park": {
+          "factor": 93,
+          "hr_left": 92,
+          "hr_right": 92
+        },
+        "bullpens": {
+          "away": {
+            "tier": "green",
+            "fresh_count": 4,
+            "back_to_back_count": 0,
+            "closer_status": "available"
+          },
+          "home": {
+            "tier": "green",
+            "fresh_count": 4,
+            "back_to_back_count": 0,
             "closer_status": "available"
           }
         },
         "lineupStatus": "projected",
-        "umpire": null,
-        "catcher_framing": {
-          "home": "Will Smith +1.2 csaa",
-          "away": "Patrick Bailey +4.1 csaa"
+        "umpire": {
+          "name": "TBD",
+          "zone": "neutral",
+          "run_env": 100
         },
         "hot_hitters": [
-          "Mookie Betts",
-          "Shohei Ohtani"
+          "Rodriguez",
+          "Raley"
         ],
-        "cold_hitters": [],
+        "cold_hitters": [
+          "Machado cool"
+        ],
+        "injuries": []
+      }
+    },
+    "825009": {
+      "header": {
+        "away": "Giants",
+        "home": "Athletics",
+        "first_pitch_local": "6:40 PM PT",
+        "venue": "Sutter Health Park"
+      },
+      "status": "pre_game",
+      "lineupStatus": "projected",
+      "confidence": {
+        "letter": "C",
+        "score": 62
+      },
+      "callout": "AAA park environment makes the Athletics home edge a coin flip, Mahle stuff is the only real chip.",
+      "context_chips": [
+        "Sutter Health 102",
+        "Mid 70s F",
+        "Mahle 3.95 ERA",
+        "Small AAA park"
+      ],
+      "projected_score": "4.2 . 4.4",
+      "paragraphs": [
+        {
+          "h": "Pitching Matchup",
+          "b": "Tyler Mahle has been solid at 3.95 ERA, 1.20 WHIP, 8.5 K9. Aaron Civale is a 4.20 ERA, 1.30 WHIP, 7.5 K9 contact manager. Mahle has the small stuff edge. ML LEAN Giants ML at plus 105 to plus 120, confidence 60, road dog with a cleaner arm."
+        },
+        {
+          "h": "Offense vs Handedness",
+          "b": "Athletics at 0.762 OPS, hot tier with Rooker and Kurtz driving. Giants at 0.667 OPS, neutral tier with Devers the lone constant. HITS LEAN Rooker over 0.5 hits at minus 175 to minus 195, confidence 65, premier bat in a small park."
+        },
+        {
+          "h": "Park and Weather",
+          "b": "Sutter Health Park 102 runs and 105 HR with the AAA dimensions note. Mid 70s with 8 mph to right field. Mild HR boost."
+        },
+        {
+          "h": "Strikeout Projection",
+          "b": "Mahle projects 5.2 IP with 6 Ks. K LEAN Mahle K over 5.5 at minus 110, confidence 60."
+        },
+        {
+          "h": "Bullpen Edge",
+          "b": "Both pens reset. F5 ML LEAN Giants F5 ML at plus 100 to plus 115, confidence 60, Mahle first time through edges Civale."
+        },
+        {
+          "h": "How It Plays",
+          "b": "Tight game with both lineups taking advantage of the small park. Mahle gets through 5 in good order, Civale grinds. Bullpens decide it late. Score range 4 to 4 to 5 to 4. Edge Giants ML road dog at plus price."
+        }
+      ],
+      "verdict": {
+        "prose": "Giants ML at plus price plus a Rooker hit at the AAA park, thin C edges only.",
+        "chips": [
+          {
+            "chip": "Giants ML +105 to +120 (thin edge)",
+            "why": "Mahle stuff edge vs Civale."
+          }
+        ]
+      },
+      "watchList": [
+        {
+          "market": "F5_ML",
+          "pick": "Giants F5 ML +100 to +115",
+          "line": "+100",
+          "confidence": 60,
+          "reasoning": "Mahle first 5 edges Civale."
+        },
+        {
+          "market": "Hits",
+          "pick": "Rooker over 0.5 hits -180",
+          "line": "0.5",
+          "confidence": 65,
+          "reasoning": "Premier bat in a small park."
+        },
+        {
+          "market": "K",
+          "pick": "Mahle K over 5.5",
+          "line": "5.5",
+          "confidence": 60,
+          "reasoning": "8.5 K9 vs As contact heavy bottom of order."
+        }
+      ],
+      "appliedAdjustments": [],
+      "inputs": {
+        "away_team": "SF",
+        "home_team": "ATH",
+        "away_pitcher": {
+          "name": "Tyler Mahle",
+          "era": "3.95",
+          "whip": "1.20",
+          "k9": "8.5",
+          "last_start": {
+            "date": "2026-05-10",
+            "opp": "AZ",
+            "ip": "5.2",
+            "er": 2,
+            "k": 6,
+            "bb": 1,
+            "h": 5
+          }
+        },
+        "home_pitcher": {
+          "name": "Aaron Civale",
+          "era": "4.20",
+          "whip": "1.30",
+          "k9": "7.5",
+          "last_start": {
+            "date": "2026-05-10",
+            "opp": "SEA",
+            "ip": "5.1",
+            "er": 3,
+            "k": 4,
+            "bb": 2,
+            "h": 6
+          }
+        },
+        "weather": {
+          "tempF": 74,
+          "wind_mph": 8,
+          "wind_dir": "Out To RF",
+          "condition": "Clear",
+          "roof": false,
+          "precip_pct": 10,
+          "humidity": 50
+        },
+        "park": {
+          "factor": 102,
+          "hr_left": 105,
+          "hr_right": 105
+        },
+        "bullpens": {
+          "away": {
+            "tier": "green",
+            "fresh_count": 4,
+            "back_to_back_count": 0,
+            "closer_status": "available"
+          },
+          "home": {
+            "tier": "green",
+            "fresh_count": 4,
+            "back_to_back_count": 0,
+            "closer_status": "available"
+          }
+        },
+        "lineupStatus": "projected",
+        "umpire": {
+          "name": "TBD",
+          "zone": "neutral",
+          "run_env": 100
+        },
+        "hot_hitters": [
+          "Rooker",
+          "Kurtz"
+        ],
+        "cold_hitters": [
+          "Lee cool"
+        ],
         "injuries": []
       }
     }
   },
   "topBets": [
     {
-      "gamePk": 823385,
-      "away": "ROC",
-      "home": "PIR",
+      "gamePk": "824925",
+      "away": "BOS",
+      "home": "ATL",
       "market": "ML",
-      "pick": "Pirates ML -195 to -215",
+      "pick": "Braves ML -200 to -220",
+      "line": "",
+      "confidence": 84,
+      "tier": "A",
+      "reasoning": "Strider workload edge over a rookie lefty."
+    },
+    {
+      "gamePk": "824925",
+      "away": "BOS",
+      "home": "ATL",
+      "market": "K",
+      "pick": "Strider K over 8.5",
+      "line": "",
+      "confidence": 84,
+      "tier": "A",
+      "reasoning": "11.5 K9 vs a 25 percent K rate lineup."
+    },
+    {
+      "gamePk": "824925",
+      "away": "BOS",
+      "home": "ATL",
+      "market": "Hits",
+      "pick": "Olson over 0.5 hits -170 to -190",
+      "line": "",
+      "confidence": 84,
+      "tier": "A",
+      "reasoning": "Premier 3 hole vs rookie LHP at home."
+    },
+    {
+      "gamePk": "824439",
+      "away": "CIN",
+      "home": "CLE",
+      "market": "ML",
+      "pick": "Guardians ML -130 to -150",
       "line": "",
       "confidence": 82,
-      "tier": "B",
-      "reasoning": "Skenes elite vs Rockies bats at a pitcher park is the cleanest pitching edge on the slate."
+      "tier": "A",
+      "reasoning": "Bibee inning edge and home park."
     },
     {
-      "gamePk": 823385,
-      "away": "ROC",
-      "home": "PIR",
-      "market": "Hits",
-      "pick": "Reynolds over 0.5 hits -165",
+      "gamePk": "824439",
+      "away": "CIN",
+      "home": "CLE",
+      "market": "K",
+      "pick": "Bibee K over 6.5",
       "line": "",
       "confidence": 82,
-      "tier": "B",
-      "reasoning": "Skenes elite vs Rockies bats at a pitcher park is the cleanest pitching edge on the slate."
+      "tier": "A",
+      "reasoning": "9.2 K9 vs Reds 22 percent whiff rate."
     },
     {
-      "gamePk": 822817,
-      "away": "RAY",
-      "home": "BLU",
-      "market": "ML",
-      "pick": "Rays ML -130 to -145",
-      "line": "",
-      "confidence": 80,
-      "tier": "B",
-      "reasoning": "McClanahan dominance vs an aging Corbin profile at Toronto frames a clean Rays edge."
-    },
-    {
-      "gamePk": 822817,
-      "away": "RAY",
-      "home": "BLU",
-      "market": "Hits",
-      "pick": "Diaz over 0.5 hits -175",
-      "line": "",
-      "confidence": 80,
-      "tier": "B",
-      "reasoning": "McClanahan dominance vs an aging Corbin profile at Toronto frames a clean Rays edge."
-    },
-    {
-      "gamePk": 823951,
-      "away": "GIA",
-      "home": "DOD",
-      "market": "ML",
-      "pick": "Dodgers ML -200 to -220",
-      "line": "",
-      "confidence": 80,
-      "tier": "B",
-      "reasoning": "Yamamoto vs Houser at Dodger Stadium is a clean Dodgers laydown with a fade on Houser."
-    },
-    {
-      "gamePk": 823951,
-      "away": "GIA",
-      "home": "DOD",
-      "market": "Hits",
-      "pick": "Betts over 0.5 hits -200",
-      "line": "",
-      "confidence": 80,
-      "tier": "B",
-      "reasoning": "Yamamoto vs Houser at Dodger Stadium is a clean Dodgers laydown with a fade on Houser."
-    },
-    {
-      "gamePk": 823632,
-      "away": "TIG",
-      "home": "MET",
-      "market": "Hits",
-      "pick": "Lindor over 0.5 hits -175",
-      "line": "",
-      "confidence": 78,
-      "tier": "B",
-      "reasoning": "Two strong K arms in Flaherty and Peralta at a pitcher park sets up the under and K props."
-    },
-    {
-      "gamePk": 824197,
-      "away": "MAR",
-      "home": "AST",
-      "market": "ML",
-      "pick": "Mariners ML -130 to -145",
-      "line": "",
-      "confidence": 78,
-      "tier": "B",
-      "reasoning": "Woo dominance vs Imai tiny rocky sample at Daikin Park makes Mariners the cleanest road side."
-    },
-    {
-      "gamePk": 824197,
-      "away": "MAR",
-      "home": "AST",
+      "gamePk": "824439",
+      "away": "CIN",
+      "home": "CLE",
       "market": "F5_ML",
-      "pick": "Mariners F5 ML -145 to -160",
-      "line": "",
-      "confidence": 78,
-      "tier": "B",
-      "reasoning": "Woo dominance vs Imai tiny rocky sample at Daikin Park makes Mariners the cleanest road side."
-    },
-    {
-      "gamePk": 824197,
-      "away": "MAR",
-      "home": "AST",
-      "market": "Hits",
-      "pick": "Raleigh over 0.5 hits -175",
-      "line": "",
-      "confidence": 78,
-      "tier": "B",
-      "reasoning": "Woo dominance vs Imai tiny rocky sample at Daikin Park makes Mariners the cleanest road side."
-    },
-    {
-      "gamePk": 824521,
-      "away": "NAT",
-      "home": "RED",
-      "market": "ML",
-      "pick": "Reds ML -115 to -130",
-      "line": "",
-      "confidence": 76,
-      "tier": "B",
-      "reasoning": "Two struggling starters at a 108 runs and 116 HR park sets up the over and slug props."
-    },
-    {
-      "gamePk": 824521,
-      "away": "NAT",
-      "home": "RED",
-      "market": "Hits",
-      "pick": "De La Cruz over 0.5 hits -200",
-      "line": "",
-      "confidence": 76,
-      "tier": "B",
-      "reasoning": "Two struggling starters at a 108 runs and 116 HR park sets up the over and slug props."
-    },
-    {
-      "gamePk": 824927,
-      "away": "CUB",
-      "home": "BRA",
-      "market": "ML",
-      "pick": "Braves ML -165 to -180",
-      "line": "",
-      "confidence": 76,
-      "tier": "B",
-      "reasoning": "Two contact starters at a 103 HR park and a hot Atlanta lineup at home steers Braves and overs."
-    },
-    {
-      "gamePk": 824927,
-      "away": "CUB",
-      "home": "BRA",
-      "market": "Hits",
-      "pick": "Acuna over 0.5 hits -200",
-      "line": "",
-      "confidence": 76,
-      "tier": "B",
-      "reasoning": "Two contact starters at a 103 HR park and a hot Atlanta lineup at home steers Braves and overs."
-    },
-    {
-      "gamePk": 824764,
-      "away": "PHI",
-      "home": "RED",
-      "market": "ML",
-      "pick": "Phillies ML -145 to -160",
-      "line": "",
-      "confidence": 74,
-      "tier": "B",
-      "reasoning": "Wheeler dominance against a TBD Boston arm at a 109 run park sets the table for Phillies sides."
-    },
-    {
-      "gamePk": 824764,
-      "away": "PHI",
-      "home": "RED",
-      "market": "Hits",
-      "pick": "Turner over 0.5 hits -175",
-      "line": "",
-      "confidence": 74,
-      "tier": "B",
-      "reasoning": "Wheeler dominance against a TBD Boston arm at a 109 run park sets the table for Phillies sides."
-    },
-    {
-      "gamePk": 823790,
-      "away": "PAD",
-      "home": "BRE",
-      "market": "ML",
-      "pick": "Brewers ML -130 to -145",
-      "line": "",
-      "confidence": 73,
-      "tier": "B",
-      "reasoning": "Waldron has small sample issues; Brewers home with Sproat covers the spread."
-    },
-    {
-      "gamePk": 823790,
-      "away": "PAD",
-      "home": "BRE",
-      "market": "Hits",
-      "pick": "Contreras over 0.5 hits -175",
-      "line": "",
-      "confidence": 73,
-      "tier": "B",
-      "reasoning": "Waldron has small sample issues; Brewers home with Sproat covers the spread."
-    },
-    {
-      "gamePk": 824442,
-      "away": "ANG",
-      "home": "GUA",
-      "market": "ML",
-      "pick": "Guardians ML +105 to -110",
-      "line": "",
-      "confidence": 72,
-      "tier": "B",
-      "reasoning": "Young Angels arm Ureña carrying a 3.22 ERA into Cleveland against Cecconi's homer prone profile."
-    },
-    {
-      "gamePk": 824442,
-      "away": "ANG",
-      "home": "GUA",
-      "market": "Hits",
-      "pick": "Jose Ramirez over 0.5 hits -175",
-      "line": "",
-      "confidence": 72,
-      "tier": "B",
-      "reasoning": "Young Angels arm Ureña carrying a 3.22 ERA into Cleveland against Cecconi's homer prone profile."
-    },
-    {
-      "gamePk": 823385,
-      "away": "ROC",
-      "home": "PIR",
-      "market": "K",
-      "pick": "Skenes K over 7.5 -105 to -115",
+      "pick": "Guardians F5 ML -115 to -130",
       "line": "",
       "confidence": 82,
-      "tier": "B",
-      "reasoning": "Skenes elite vs Rockies bats at a pitcher park is the cleanest pitching edge on the slate."
+      "tier": "A",
+      "reasoning": "Cleanest 1st 5 setup on the slate."
     },
     {
-      "gamePk": 823951,
-      "away": "GIA",
-      "home": "DOD",
-      "market": "K",
-      "pick": "Yamamoto K over 6.5 -115 to -125",
+      "gamePk": "823061",
+      "away": "KC",
+      "home": "STL",
+      "market": "ML",
+      "pick": "Cardinals ML -145 to -165",
       "line": "",
-      "confidence": 80,
-      "tier": "B",
-      "reasoning": "Yamamoto vs Houser at Dodger Stadium is a clean Dodgers laydown with a fade on Houser."
+      "confidence": 82,
+      "tier": "A",
+      "reasoning": "May stuff edge plus the hotter lineup."
     },
     {
-      "gamePk": 823632,
-      "away": "TIG",
-      "home": "MET",
-      "market": "Total",
-      "pick": "Under 7.5",
+      "gamePk": "823061",
+      "away": "KC",
+      "home": "STL",
+      "market": "K",
+      "pick": "May K over 6.5",
+      "line": "",
+      "confidence": 82,
+      "tier": "A",
+      "reasoning": "9.2 K9 vs a Royals lineup whiffing 22 percent."
+    },
+    {
+      "gamePk": "823061",
+      "away": "KC",
+      "home": "STL",
+      "market": "Hits",
+      "pick": "Burleson over 0.5 hits -170 to -190",
+      "line": "",
+      "confidence": 82,
+      "tier": "A",
+      "reasoning": "Top 4 vs Wacha contact profile."
+    },
+    {
+      "gamePk": "824601",
+      "away": "CHC",
+      "home": "CWS",
+      "market": "ML",
+      "pick": "Cubs ML -165 to -185",
       "line": "",
       "confidence": 78,
       "tier": "B",
-      "reasoning": "Two strong K arms in Flaherty and Peralta at a pitcher park sets up the under and K props."
+      "reasoning": "Hottest lineup and the better arm."
     },
     {
-      "gamePk": 823632,
-      "away": "TIG",
-      "home": "MET",
-      "market": "K",
-      "pick": "Flaherty K over 7.5 -110 to -120",
+      "gamePk": "824601",
+      "away": "CHC",
+      "home": "CWS",
+      "market": "F5_ML",
+      "pick": "Cubs F5 ML -140 to -155",
       "line": "",
       "confidence": 78,
       "tier": "B",
-      "reasoning": "Two strong K arms in Flaherty and Peralta at a pitcher park sets up the under and K props."
+      "reasoning": "Cabrera first time through edges Burke."
     },
     {
-      "gamePk": 824521,
-      "away": "NAT",
-      "home": "RED",
+      "gamePk": "824601",
+      "away": "CHC",
+      "home": "CWS",
       "market": "Total",
       "pick": "Over 9",
       "line": "",
-      "confidence": 76,
+      "confidence": 78,
       "tier": "B",
-      "reasoning": "Two struggling starters at a 108 runs and 116 HR park sets up the over and slug props."
+      "reasoning": "Rate Field 11 mph wind to right, both lineups hot."
     },
     {
-      "gamePk": 824764,
-      "away": "PHI",
-      "home": "RED",
+      "gamePk": "824037",
+      "away": "LAD",
+      "home": "LAA",
+      "market": "ML",
+      "pick": "Dodgers ML -175 to -195",
+      "line": "",
+      "confidence": 78,
+      "tier": "B",
+      "reasoning": "Snell stuff and home park advantage moot for LAA."
+    },
+    {
+      "gamePk": "824037",
+      "away": "LAD",
+      "home": "LAA",
       "market": "K",
-      "pick": "Wheeler K over 6.5 -110 to -120",
+      "pick": "Snell K over 7.5",
+      "line": "",
+      "confidence": 78,
+      "tier": "B",
+      "reasoning": "11.0 K9 vs LAA bottom of order whiff."
+    },
+    {
+      "gamePk": "824037",
+      "away": "LAD",
+      "home": "LAA",
+      "market": "F5_ML",
+      "pick": "Dodgers F5 ML -155 to -170",
+      "line": "",
+      "confidence": 78,
+      "tier": "B",
+      "reasoning": "Snell first time through dominates."
+    },
+    {
+      "gamePk": "823629",
+      "away": "NYY",
+      "home": "NYM",
+      "market": "ML",
+      "pick": "Yankees ML -130 to -145",
+      "line": "",
+      "confidence": 75,
+      "tier": "B",
+      "reasoning": "Better starter and hotter lineup."
+    },
+    {
+      "gamePk": "823629",
+      "away": "NYY",
+      "home": "NYM",
+      "market": "F5_ML",
+      "pick": "Yankees F5 ML -115 to -130",
+      "line": "",
+      "confidence": 75,
+      "tier": "B",
+      "reasoning": "Schlittler first time through edges Holmes."
+    },
+    {
+      "gamePk": "823629",
+      "away": "NYY",
+      "home": "NYM",
+      "market": "Hits",
+      "pick": "Judge over 0.5 hits -195 to -215",
+      "line": "",
+      "confidence": 75,
+      "tier": "B",
+      "reasoning": "Premier bat vs converted starter."
+    },
+    {
+      "gamePk": "823384",
+      "away": "PHI",
+      "home": "PIT",
+      "market": "ML",
+      "pick": "Phillies ML -130 to -145",
       "line": "",
       "confidence": 74,
       "tier": "B",
-      "reasoning": "Wheeler dominance against a TBD Boston arm at a 109 run park sets the table for Phillies sides."
+      "reasoning": "Nola innings edge over a rookie on a 75 pitch leash."
     },
     {
-      "gamePk": 824843,
-      "away": "YAN",
-      "home": "ORI",
-      "market": "ML",
-      "pick": "Yankees ML -150 to -165",
+      "gamePk": "823384",
+      "away": "PHI",
+      "home": "PIT",
+      "market": "F5_ML",
+      "pick": "Phillies F5 ML -115 to -130",
       "line": "",
-      "confidence": 65,
-      "tier": "C",
-      "reasoning": "Will Warren faces a TBD Baltimore starter so the read leans Yankees on bat strength."
+      "confidence": 74,
+      "tier": "B",
+      "reasoning": "Nola first time through is the cleanest 1st 5 script."
     },
     {
-      "gamePk": 824843,
-      "away": "YAN",
-      "home": "ORI",
+      "gamePk": "823384",
+      "away": "PHI",
+      "home": "PIT",
       "market": "Hits",
-      "pick": "Judge over 0.5 hits -170",
+      "pick": "Turner over 0.5 hits -175 to -190",
       "line": "",
-      "confidence": 65,
-      "tier": "C",
-      "reasoning": "Will Warren faces a TBD Baltimore starter so the read leans Yankees on bat strength."
+      "confidence": 74,
+      "tier": "B",
+      "reasoning": "Leadoff bat with multi hit weekly form vs a rookie command profile."
     },
     {
-      "gamePk": 824604,
-      "away": "ROY",
-      "home": "WHI",
+      "gamePk": "824360",
+      "away": "AZ",
+      "home": "COL",
       "market": "ML",
-      "pick": "White Sox ML +105 to -110 thin edge",
+      "pick": "Diamondbacks ML -130 to -145",
       "line": "",
-      "confidence": 64,
-      "tier": "C",
-      "reasoning": "Tiny Kolek sample and Fedde HR9 issues at Rate Field create variance."
+      "confidence": 74,
+      "tier": "B",
+      "reasoning": "AZ has the better stuff and the hotter bats."
     },
     {
-      "gamePk": 824604,
-      "away": "ROY",
-      "home": "WHI",
-      "market": "Hits",
-      "pick": "Robert over 0.5 hits -165",
+      "gamePk": "824360",
+      "away": "AZ",
+      "home": "COL",
+      "market": "Total",
+      "pick": "Over 11",
       "line": "",
-      "confidence": 64,
-      "tier": "C",
-      "reasoning": "Tiny Kolek sample and Fedde HR9 issues at Rate Field create variance."
+      "confidence": 74,
+      "tier": "B",
+      "reasoning": "Coors with wind out to center."
+    },
+    {
+      "gamePk": "824360",
+      "away": "AZ",
+      "home": "COL",
+      "market": "Hits",
+      "pick": "Marte over 0.5 hits -175 to -195",
+      "line": "",
+      "confidence": 74,
+      "tier": "B",
+      "reasoning": "Top 4 hot bat in Coors air."
+    },
+    {
+      "gamePk": "824280",
+      "away": "TOR",
+      "home": "DET",
+      "market": "ML",
+      "pick": "Tigers ML -125 to -140",
+      "line": "",
+      "confidence": 72,
+      "tier": "B",
+      "reasoning": "Home park and rookie volatility shadow."
+    },
+    {
+      "gamePk": "824280",
+      "away": "TOR",
+      "home": "DET",
+      "market": "F5_ML",
+      "pick": "Tigers F5 ML -110 to -125",
+      "line": "",
+      "confidence": 72,
+      "tier": "B",
+      "reasoning": "Hanifee first time through edges Yesavage."
+    },
+    {
+      "gamePk": "824280",
+      "away": "TOR",
+      "home": "DET",
+      "market": "Hits",
+      "pick": "Greene over 0.5 hits -175 to -195",
+      "line": "",
+      "confidence": 72,
+      "tier": "B",
+      "reasoning": "Top 3 hole vs rookie command in a suppressor park."
+    },
+    {
+      "gamePk": "822983",
+      "away": "MIA",
+      "home": "TB",
+      "market": "ML",
+      "pick": "Rays ML -180 to -200",
+      "line": "",
+      "confidence": 72,
+      "tier": "B",
+      "reasoning": "Cleaner arm and the deeper pen."
+    },
+    {
+      "gamePk": "822983",
+      "away": "MIA",
+      "home": "TB",
+      "market": "F5_ML",
+      "pick": "Rays F5 ML -140 to -155",
+      "line": "",
+      "confidence": 72,
+      "tier": "B",
+      "reasoning": "Junk first inning risk is real."
+    },
+    {
+      "gamePk": "822983",
+      "away": "MIA",
+      "home": "TB",
+      "market": "Hits",
+      "pick": "Caminero over 0.5 hits -175 to -195",
+      "line": "",
+      "confidence": 72,
+      "tier": "B",
+      "reasoning": "Top of order vs a soft righty in a neutral dome."
     }
   ]
 };
-
 
 /* =========== BEST BETS ENGINE (per game ranked bets with cash probability) ===========
    Generates a ranked list of candidate bets for a single game, each labeled
