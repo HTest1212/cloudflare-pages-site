@@ -1,60 +1,90 @@
 {
-  "date": "2026-05-14",
-  "generatedAt": "2026-05-15",
-  "dayRecord": {
-    "wins": 24,
-    "losses": 27,
-    "pushes": 5,
-    "voids": 8,
-    "netUnits": -9.5052
+  "asof": "2026-05-18T04:00:00Z",
+  "yesterday_date": "2026-05-17",
+  "yesterday_record": {
+    "picks": 14,
+    "wins": 6,
+    "losses": 8,
+    "pushes": 0,
+    "voids": 0,
+    "units": -3.1822,
+    "totalStake": 14.0,
+    "winRate": 0.4286,
+    "roi": -0.2273
   },
-  "patterns": [
+  "by_market": {
+    "Total": {
+      "picks": 2,
+      "wins": 2,
+      "losses": 0,
+      "pushes": 0,
+      "voids": 0,
+      "units": 1.8182,
+      "totalStake": 2.0,
+      "winRate": 1.0,
+      "roi": 0.9091
+    },
+    "K": {
+      "picks": 2,
+      "wins": 0,
+      "losses": 2,
+      "pushes": 0,
+      "voids": 0,
+      "units": -2.0,
+      "totalStake": 2.0,
+      "winRate": 0.0,
+      "roi": -1.0
+    },
+    "ML": {
+      "picks": 10,
+      "wins": 4,
+      "losses": 6,
+      "pushes": 0,
+      "voids": 0,
+      "units": -3.0004,
+      "totalStake": 10.0,
+      "winRate": 0.4,
+      "roi": -0.3
+    }
+  },
+  "loss_categories": {
+    "VARIANCE": 5,
+    "STARTER_REGRESSION": 1,
+    "MODEL_ERROR": 2
+  },
+  "patterns_identified": [
     {
-      "pattern": "High player prop void rate",
-      "observation": "8 of 64 picks (12%) were voided due to players not in the lineup (Goldschmidt, Devers, Lindor, Acuna, Buxton, Yelich, McCutchen, and Buxton DNP). This inflated the pick volume without adding edge.",
-      "adjustment": "Before logging hitter props, verify the player is in today's confirmed lineup via a lineup source. If unavailable, skip the prop.",
-      "impact": "medium",
-      "category": "process"
+      "category": "VARIANCE",
+      "frequency": 5,
+      "summary": "5 ML losses in close games (1 run margin) indicate unfavorable variance day; model reads were directionally correct.",
+      "adjustment_rule": "On days with 3 or more variance losses in single run games, reduce ML stake by 20% and shift to run lines for top tier picks."
     },
     {
-      "pattern": "KC@CWS game analysis failure",
-      "observation": "Royals ML (-130 to -145), F5 ML, and Over 9 all lost in a game where CWS won 6-2 and Bubic only struck out 4 (vs 6.5 K line). Three separate markets missed in the same game.",
-      "adjustment": "CWS was a strong fade target at home. Do not commit multiple markets (ML + K + Total) in the same game unless the signal is exceptional across all three independently.",
-      "impact": "high",
-      "category": "model"
-    },
-    {
-      "pattern": "PHI@BOS analysis failure",
-      "observation": "Red Sox ML and F5 ML both lost (four picks across tiers). BOS starter Ranger Suarez struck out 8 but Phillies still won 3-1. Dominant K day without run support.",
-      "adjustment": "Pitcher Ks and ML are partially decoupled. High K projection does not guarantee a win for the picking team. Reduce correlation assumption when building multi-market game plays.",
-      "impact": "medium",
-      "category": "model"
-    },
-    {
-      "pattern": "SEA@HOU fade miss",
-      "observation": "Astros ML and F5 ML both missed; Altuve went 0-for (two picks). Three market losses in one game.",
-      "adjustment": "Altuve's hit prop at -180 to -195 was an aggressive line for a player in a poor stretch. Cross-reference recent performance before logging tight favorite props.",
-      "impact": "medium",
-      "category": "model"
-    },
-    {
-      "pattern": "Strong ML and F5 accuracy on core picks",
-      "observation": "CIN ML/F5_ML, NYM ML/F5_ML, MIL ML/F5_ML, MIN ML won cleanly. Four of seven confidence tier game picks (ML) correct.",
-      "adjustment": "Continue confidence tier framework. The model identifies dominant team spots well but struggles with moderate favorites in competitive matchups.",
-      "impact": "positive",
-      "category": "model"
-    },
-    {
-      "pattern": "McLean K miss despite quality start",
-      "observation": "Nolan McLean struck out 7 against a 7.5 line, missing by half a K. One missed K in a strong outing.",
-      "adjustment": "K lines set at 7.5+ carry meaningful miss risk even for quality starts. Weight confidence for K over 7.5 at B tier only if recent K rate strongly supports it.",
-      "impact": "low",
-      "category": "variance"
+      "category": "MODEL_ERROR",
+      "frequency": 2,
+      "summary": "Multiple model error losses suggest overconfidence in road team struggles or underdog narratives that did not materialize.",
+      "adjustment_rule": "Downgrade plus money picks on road underdog ML when opponent is at home with 0.500+ record; require stronger spot than narrative alone."
     }
   ],
-  "adjustments": [
-    "Require confirmed lineup check before logging hitter props",
-    "Limit to two markets per game for confidence tier plays",
-    "Reduce Altuve props when recent H/AB rate is below .200"
-  ]
+  "adjustments_for_today": [
+    "NYY ML lean at Citi was wrong; NYM home field plus uncertainty on starter should have been a pass.",
+    "CHC ML lost to CWS 9 to 8; avoid laying heavy juice on NL teams in crosstown games with wind blowing out.",
+    "WSH plus money miss; BAL road struggles did not translate, confirm recent road splits before fading.",
+    "STL ML at home lost to KC shutout; Mikolas groundball profile did not generate strikeouts or runs.",
+    "ATH ML loss to SF 10 to 1; Webb ace differential was too steep, avoid backing underdogs vs elite starters.",
+    "MIL ML narrow miss 5 to 4; injuries to Buxton and Larnach did not guarantee MIL cover.",
+    "Gausman K under 6.5 missed by 1.5 strikeouts; TOR pitcher park suppresses K volume for finesse types.",
+    "Skenes K missed by 0.5 on 7.5 line; very close, consider 7.0 line threshold for high strikeout aces.",
+    "Winning angle: aces plus pitcher parks for totals (PHI at PIT Under 7.5 nailed it 6 runs).",
+    "Winning angle: large underdog plus money on road teams at altitude or offense friendly parks (ARI at COL).",
+    "Grade C tier picks went 2W 6L; tighten grade C standards or reduce to one C pick per slate.",
+    "Grade B tier picks went 4W 2L; maintain current criteria for B tier picks."
+  ],
+  "monitoring_list": [
+    "Gausman next start velocity and K rate trend after 5 K outing",
+    "NYY bullpen depth after close loss at Citi",
+    "STL starting rotation vs KC series; Mikolas was ineffective",
+    "ATH home record vs elite starters to avoid future fades"
+  ],
+  "carryover_rules": []
 }
