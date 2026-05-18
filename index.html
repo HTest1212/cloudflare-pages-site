@@ -4749,6 +4749,14 @@ function teamNicknameFromName(name) {
   }
   return parts[parts.length - 1];
 }
+function tierFromProb(cashProb) {
+  const p = Number(cashProb) || 0;
+  if (p >= 0.80) return 'S';
+  if (p >= 0.70) return 'A';
+  if (p >= 0.60) return 'B';
+  return 'C';
+}
+
 function scoreBestBets(g, a) {
   const out = [];
   const odds = (STATE.odds && STATE.odds.games && STATE.odds.games[g.gamePk]) || null;
