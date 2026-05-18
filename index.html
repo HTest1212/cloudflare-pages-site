@@ -3412,175 +3412,129 @@ function buildGameNarrative(g) {
 /* =========== CLAUDE DAILY ANALYSIS (pre built afternoon refresh) =========== */
 /* =========== CLAUDE DAILY ANALYSIS (pre built afternoon refresh) =========== */
 const CLAUDE_DAILY_ANALYSIS = {
-<<<<<<< Updated upstream
-  "lastUpdated": "2026-05-17T15:30:00Z",
+  "lastUpdated": "2026-05-18T15:30:00Z",
   "lastUpdatedLabel": "midday (11:30 AM)",
-  "runDate": "2026-05-17",
-  "runLabel": "May 17, 2026",
-  "gamesCount": 15,
+  "runDate": "2026-05-18",
+  "runLabel": "May 18, 2026",
+  "gamesCount": 14,
   "cards": [
     {
-      "gameId": 822982,
-      "header": "Miami Marlins @ Tampa Bay Rays",
-      "subline": "6:50 PM ET . Tropicana Field",
+      "gameId": 824277,
+      "header": "Cleveland Guardians @ Detroit Tigers",
+      "subline": "6:40 PM ET . Comerica Park",
+      "confidenceGrade": "C",
+      "confidenceScore": 65,
+      "callout": "Bibee's command edge and CLE's six game record gap over DET earns a single market lean at a neutral park.",
+      "contextChips": [
+        "Comerica Park run factor 97 . HR factor 94 (slight pitcher lean)",
+        "Large outfield suppresses extra base hits",
+        "CLE 26-22 . DET 20-27 (6 game gap)",
+        "HP umpire TBD . starters projected"
+      ],
+      "projectedScore": {
+        "away": 3.9,
+        "home": 3.4
+      },
+      "analysis": {
+        "PITCHING MATCHUP": "Tanner Bibee takes the hill for Cleveland projected in this spot after his most recent rest cycle. Bibee has been one of the more reliable mid rotation arms in the AL this season, sitting in the low 3 ERA range with plus command and a mix of four seam and slider that generates early contact. Casey Mize draws the projected start for Detroit and brings a ground ball heavy approach built around sinker command. Mize post surgery has shown flashes but his ceiling sits well below Bibee's current form. Cleveland holds the pitching edge on projected arms.",
+        "OFFENSE VS HANDEDNESS": "Cleveland's lineup has been among the top third of the AL in runs scored on the road this month. The Guardians attack a right handed arm like Mize by working counts and ambushing fastballs early. Detroit's lineup against a right handed starter like Bibee generates roughly average exit velocity but below average hard contact rates. The Guardians have the lineup quality advantage in this matchup, especially on the road where they have played above their overall record.",
+        "PARK AND WEATHER": "Comerica Park plays as a slight pitcher park with a run factor of 97 and a home run factor near 94. The deep outfield gaps and large center field suppress fly balls from leaving the yard. May in Detroit typically brings mild conditions with temperatures in the upper 60s and light winds. No extreme weather factor is expected. The park profile is a modest tailwind for Bibee who profiles as a ground ball and soft contact pitcher.",
+        "STRIKEOUT PROJECTION": "Bibee projects at 7 to 8 strikeouts given his strikeout rate of roughly 8.5 per nine innings. Mize is not a high strikeout arm and projects at 4 to 5 on the night. Combined total sits around 11 to 13 Ks, unexceptional for a primary chip but consistent with the over if Bibee leans heavy slider.",
+        "BULLPEN EDGE": "Cleveland's bullpen has been solid through the first half of May with above average left on base rate and sub 3.80 reliever ERA. Detroit's pen is middle of the pack. The edge goes to Cleveland in the late innings."
+      },
+      "verdict": {
+        "prose": "CLE ML at plus value is the lone lean given the record gap, Bibee's command edge, and DET's weak offense.",
+        "primaryChips": [
+          {
+            "label": "CLE ML +105 to +120"
+          }
+        ],
+        "longShotNotes": "F5 Under 4 is live if Bibee is sharp; price needs to be minus 120 or better."
+      },
+      "mlLean": "CLE ML +105 to +120",
+      "f5MlLean": null,
+      "hitsLean": null,
+      "watchList": [
+        "Confirm Bibee is the actual starter before betting",
+        "Check wind direction at Comerica at first pitch",
+        "Pass if Mize is replaced by a backend arm with sub 15 MLB IP this season"
+      ],
+      "appliedAdjustments": [
+        "11:30 AM projected lineup cap at B+ 84 maximum; scored C at 65 given projected starters",
+        "Chip base rate guardrail: CLE ML at +105 to +120 implies 48% fair probability; base rate for better team winning as road favorite is roughly 52 to 55 percent, clears 25% floor"
+      ]
+    },
+    {
+      "gameId": 822980,
+      "header": "Baltimore Orioles @ Tampa Bay Rays",
+      "subline": "6:40 PM ET . Tropicana Field",
       "confidenceGrade": "B",
-      "confidenceScore": 70,
-      "callout": "Rays home fortress in a sealed dome with rotation depth edge earns the moneyline even in a low confidence environment.",
+      "confidenceScore": 76,
+      "callout": "Tampa Bay at 30 and 15 in their dome against a struggling Orioles squad is the cleanest team quality spot on the early slate.",
       "contextChips": [
         "Dome . turf surface . no weather factor",
-        "Park factor runs=93 HR=95 (pitcher lean)",
-        "TB 8-3 home record last 11",
-        "HP: Stu Scheurwater (neutral, kF=100)"
-      ],
-      "projectedScore": {
-        "away": 3.1,
-        "home": 3.8
-      },
-      "analysis": {
-        "PITCHING MATCHUP": "Braxton Garrett takes the ball for Miami against Shane Baz anchoring the Tampa Bay home rotation. Garrett is a left hander with decent command but below average whiff rates against right handed lineups, which the Rays load up on. Baz has recovered well from his shoulder work and brings a mid 90s heater with a tight breaking ball that generates swings and misses early in counts. The edge on the mound belongs to Tampa Bay at home.",
-        "OFFENSE VS HANDEDNESS": "Tampa Bay's lineup is built to punish left handed starters, stacking right handed bats throughout the order. Randy Arozarena and Yandy Diaz both have strong career splits against lefties with above average hard contact rates. Miami's offense is among the weaker units in the NL, averaging sub four runs on the road over the past two weeks. The Rays have a meaningful platoon advantage that should suppress Garrett's effectiveness through four or five innings.",
-        "PARK AND WEATHER": "Tropicana Field is a true pitcher's park with a runs factor of 93 and a home run factor of 95. The artificial turf speeds up grounders and turns singles into doubles off the corner pads, but the outfield is deep and the dome eliminates all wind and weather factors. This is as close to a neutral environment as possible for a hitter, and the park's history slightly favors pitching. No adjustments needed for conditions.",
-        "STRIKEOUT PROJECTION": "Baz profiles as a strikeout candidate with his fastball slider combination generating above average whiff rates in the 11 K per 9 range last season. Garrett sits closer to 7 K per 9 and is more of a contact management pitcher. Combined projection sits near 14 to 16 total Ks with Baz accounting for the bulk.",
-        "BULLPEN EDGE": "Tampa Bay's bullpen has been one of the better units in the AL this season. Miami's relief corps is middle of the pack. The dome eliminates any fatigue factor from temperature. TB has a clear edge in the late innings."
-      },
-      "verdict": {
-        "prose": "Rays at home in the dome with the rotation edge and lineup platoon advantage earns the ML.",
-        "primaryChips": [
-          {
-            "label": "TB ML -140 to -155"
-          }
-        ],
-        "longShotNotes": "NRFI is live if Baz is sharp early; priced at minus 120 or better."
-      },
-      "mlLean": "TB ML -140 to -155",
-      "f5MlLean": "TB F5 ML",
-      "hitsLean": "Yandy Diaz over 1.5 total bases",
-      "watchList": [
-        "TB ML if line holds at minus 145 or better",
-        "Watch Garrett availability; any scratch changes the card"
-      ],
-      "appliedAdjustments": [
-        "Learnings rule: projected lineup at 11:30 AM capped at B+ 84; raw 70 held as is"
-      ]
-    },
-    {
-      "gameId": 822738,
-      "header": "Baltimore Orioles @ Washington Nationals",
-      "subline": "4:05 PM ET . Nationals Park",
-      "confidenceGrade": "C",
-      "confidenceScore": 62,
-      "callout": "Gore at home against a road weary Baltimore squad offers plus money value in a neutral park, though both rotations carry risk.",
-      "contextChips": [
-        "Park factor runs=97 HR=99 (neutral)",
-        "BAL 4-8 road last 12",
-        "WSH Gore home ERA 3.21 this season",
-        "HP: Ryan Additon (neutral, kF=101)"
-      ],
-      "projectedScore": {
-        "away": 3.4,
-        "home": 3.9
-      },
-      "analysis": {
-        "PITCHING MATCHUP": "MacKenzie Gore takes the ball at home for Washington against the Baltimore rotation. Gore has been one of the better stories in the NL this season, posting a home ERA near 3.21 and generating above average groundball rates. Baltimore counters with a mid rotation arm whose command has been inconsistent on the road. Gore's left handed profile creates favorable splits against Baltimore's right heavy lineup, and the home mound gives him a comfort edge.",
-        "OFFENSE VS HANDEDNESS": "Baltimore's offense is built around right handed power bats who see left handed pitching at a slight disadvantage when facing a quality left hander with plus command. The Orioles have been particularly flat on the road, averaging fewer than four runs per game over the past twelve road contests. Washington's lineup is not elite, but at home against a struggling road rotation they can generate enough contact to win low scoring games.",
-        "PARK AND WEATHER": "Nationals Park plays almost perfectly neutral with a runs factor of 97 and home run factor of 99. May afternoon conditions in DC bring temperatures around 76 degrees with mild south southeast winds near 8 mph. No extreme weather factor. The park will not inflate or suppress scoring significantly, making this a pure matchup game.",
-        "STRIKEOUT PROJECTION": "Gore profiles as a 7 to 9 K per 9 pitcher with his slider generating solid whiff rates. The Baltimore rotation starter sits closer to 6 K per 9. Combined projection near 14 to 15 total Ks. Gore's framing tandem with Keibert Ruiz adds roughly 0.3 additional Ks per start."
-      },
-      "verdict": {
-        "prose": "Gore at home with Baltimore's road struggles makes Nationals ML the lean at plus money.",
-        "primaryChips": [
-          {
-            "label": "WSH ML +110 to +125"
-          }
-        ],
-        "longShotNotes": null
-      },
-      "mlLean": "WSH ML +110 to +125",
-      "f5MlLean": "WSH F5 ML",
-      "hitsLean": "CJ Abrams over 1.5 total bases",
-      "watchList": [
-        "WSH ML at plus 115 or better is the entry",
-        "Under 7.5 if wind shifts to a true in wind before first pitch"
-      ],
-      "appliedAdjustments": [
-        "Learnings rule: C grade cap applied at 69; Gore sample above 20 IP so no haircut"
-      ]
-    },
-    {
-      "gameId": 823381,
-      "header": "Philadelphia Phillies @ Pittsburgh Pirates",
-      "subline": "6:40 PM ET . PNC Park",
-      "confidenceGrade": "B",
-      "confidenceScore": 82,
-      "callout": "Two legitimate aces meet at the best pitcher's park in baseball; the Under and Skenes strikeout line are the plays here.",
-      "contextChips": [
-        "PNC Park . runs=95 HR=94 (pitcher friendly)",
-        "Skenes 28.4% K rate . 2.31 ERA . 67 IP",
-        "63 degrees at first pitch . 7 mph NE in wind",
-        "Wheeler 26.1% K rate last 30 days"
+        "Tropicana run factor 93 . HR factor 95 (pitcher lean)",
+        "TB 30-15 vs BAL 21-26 (9 game gap)",
+        "HP umpire TBD . starters projected"
       ],
       "projectedScore": {
         "away": 2.9,
-        "home": 3.1
+        "home": 4.1
       },
       "analysis": {
-        "PITCHING MATCHUP": "Paul Skenes against Zack Wheeler is the best pitching matchup on today's board. Skenes is already one of the elite arms in baseball, posting a 2.31 ERA across 67 innings with a 28.4 percent strikeout rate. His plus fastball and power curveball generate elite whiff rates at all count depths. Wheeler mirrors him in quality, working with a mid 90s sinker and a devastating slider that has generated a 26 percent strikeout rate over his last 30 days. Both pitchers are healthy, deep into their outings, and capable of going seven plus innings.",
-        "OFFENSE VS HANDEDNESS": "Philadelphia's lineup is built around right handed bats and switch hitters who see Skenes's power right handed stuff as a significant challenge. Harper and Trea Turner are the threats, but Skenes's command keeps them in check even in favorable counts. Pittsburgh's lineup is right handed heavy against Wheeler, and Wheeler's platoon splits are nearly neutral due to his sweeper working equally well against both sides. Expect both lineups to be held under four runs.",
-        "PARK AND WEATHER": "PNC Park is one of the premier pitcher's venues in baseball with a runs factor of 95 and a HR factor of 94. The deep power alleys and sea level air keep batted balls in the park. May evening conditions bring 63 degree temperatures and a 7 mph northeast in wind that will suppress fly balls even further. This is the single most pitcher friendly environment on today's slate in terms of combined park and weather.",
-        "STRIKEOUT PROJECTION": "Skenes projects to 7.5 to 9 Ks in a typical outing and could exceed that against a contact oriented Phillies lineup. His curveball alone has a 43 percent whiff rate this season. The over 7.5 Ks line for Skenes is the strongest individual prop on the slate. Wheeler projects near 7 Ks himself. Combined game total Ks likely land between 17 and 20."
+        "PITCHING MATCHUP": "Shane McClanahan is projected to start for Tampa Bay in what would be a significant quality of start advantage over the visiting Orioles. McClanahan returned from his Tommy John recovery earlier this season and has steadily rebuilt his velocity and breaking ball command. His four seam and change combination is especially effective against right handed lineups and he thrives in the controlled dome environment. Tyler Wells draws the projected assignment for Baltimore. Wells has been a reliable innings eater but profiles more as a back of rotation arm than a top of rotation stopper. The talent gap between these two arms is meaningful and tilts the analysis toward Tampa Bay from the first pitch.",
+        "OFFENSE VS HANDEDNESS": "Tampa Bay's lineup is stacked with right handed bats that feast against left handed starting pitchers like Wells. The Rays have been one of the best home offenses in the AL this month, averaging over 4.5 runs per game at Tropicana Field. Baltimore's lineup on the road has been inconsistent and their struggles against higher velocity starters like McClanahan are well documented from the series history. The handedness and lineup quality gap strongly favors the home team.",
+        "PARK AND WEATHER": "Tropicana Field eliminates all weather variables. The dome creates perfectly consistent conditions with no wind, no humidity shifts, and no temperature swings. The artificial turf speeds up grounders through the infield and into the outfield corners but the deep center field and high catwalk factor keep home runs suppressed at a park factor of 95. McClanahan's ground ball and strikeout profile is ideally suited for this surface.",
+        "STRIKEOUT PROJECTION": "McClanahan projects at 7 to 9 strikeouts based on his current strikeout rate and the Orioles lineup profile. Wells sits at 4 to 6. Combined total of 11 to 15 Ks is reasonable. McClanahan K over 7.5 is worth monitoring but stays in long shot notes given the projected lineup constraint.",
+        "BULLPEN EDGE": "Tampa Bay's bullpen has been one of the best in the AL all season, ranking in the top three in reliever ERA and strand rate. Baltimore's bullpen is serviceable but not in the same tier. The late inning edge belongs to Tampa Bay."
       },
       "verdict": {
-        "prose": "Two aces at a pitcher's park in cool in wind conditions; Under 7.5 and Skenes strikeouts are the tickets.",
+        "prose": "Rays ML at home in the dome with the rotation edge and nine game quality gap is the play.",
         "primaryChips": [
           {
-            "label": "Under 7.5"
-          },
-          {
-            "label": "Skenes K over 7.5"
+            "label": "TB ML -175 to -195"
           }
         ],
-        "longShotNotes": "NRFI is strong at minus 125 or better with two elite starters. F5 Under 4 also in play at minus 115."
+        "longShotNotes": "McClanahan K over 7.5 is live if priced at minus 125 or better. NRFI in play if McClanahan is sharp through two."
       },
-      "mlLean": "PIT ML +135 to +150",
-      "f5MlLean": "PIT F5 ML",
-      "hitsLean": "Skenes K over 7.5",
+      "mlLean": "TB ML -175 to -195",
+      "f5MlLean": "TB F5 ML",
+      "hitsLean": null,
       "watchList": [
-        "Skenes K over 7.5 is the primary prop; shop for best line",
-        "Under 7.5 total; look for minus 115 or better",
-        "NRFI if priced at minus 130 or better"
+        "Confirm McClanahan starting; if replaced by pen arm, downgrade to C and remove chip",
+        "TB ML at minus 195 or juicier cuts implied edge; shop for minus 175 or better"
       ],
       "appliedAdjustments": [
-        "Learnings rule: 11:30 AM lineup cap applied; raw 88 capped to 84 then adjusted to 82 for rain probability overlay",
-        "Skenes 67 IP sample clears the 15 IP minimum; no haircut applied"
+        "11:30 AM projected lineup cap at B+ 84 maximum; scored B at 76",
+        "Dome games: all weather factors set to neutral",
+        "Chip base rate guardrail: heavy home favorite ML exceeds 25% base rate floor"
       ]
     },
     {
-      "gameId": 824923,
-      "header": "Boston Red Sox @ Atlanta Braves",
-      "subline": "7:20 PM ET . Truist Park",
+      "gameId": 823465,
+      "header": "Cincinnati Reds @ Philadelphia Phillies",
+      "subline": "6:40 PM ET . Citizens Bank Park",
       "confidenceGrade": "B",
-      "confidenceScore": 74,
-      "callout": "Atlanta's superior rotation and hot lineup overwhelms a Boston road squad that has struggled at altitude and in warm weather parks.",
+      "confidenceScore": 73,
+      "callout": "Zack Wheeler at home at Citizens Bank Park against an equal record opponent is the strikeout prop anchor of the early slate.",
       "contextChips": [
-        "Park factor runs=99 HR=103 (slight hitter lean)",
-        "ATL hot tier +0.061 OPS delta 15 days",
-        "79 degrees at first pitch . 9 mph SW out wind",
-        "HP: Vic Carapazza (neutral, kF=100)"
+        "Citizens Bank Park run factor 105 . HR factor 112 (hitter lean)",
+        "CIN 24-23 vs PHI 24-23 (mirror records)",
+        "Wheeler elite K rate . Burns high whiff stuff",
+        "HP umpire TBD . ~72 degrees F partly cloudy projected"
       ],
       "projectedScore": {
-        "away": 3.2,
-        "home": 4.7
+        "away": 4.1,
+        "home": 4.4
       },
       "analysis": {
-        "PITCHING MATCHUP": "Chris Sale takes the hill at home for Atlanta, continuing his comeback season that has seen him post elite strikeout rates with a cleaned up delivery. Sale's left handed high slot plus slider combination generates swing and miss at a 27 percent clip this season. Boston counters with Brayan Bello, a right handed arm who has shown good stuff but inconsistent command on the road. Sale represents a significant edge in this matchup on both ERA and strikeout profile.",
-        "OFFENSE VS HANDEDNESS": "Atlanta's lineup is on a hot streak, posting a plus 0.061 delta OPS over the last 15 days and averaging 5.1 runs per game at home. Ozzie Albies and Austin Riley both have above average splits against right handed pitching. Boston's lineup sits neutral to slightly cold on the road, and Bello's struggles with location against experienced lineups compound the problem. The class gap is real and measurable.",
-        "PARK AND WEATHER": "Truist Park plays nearly neutral with a slight hitter lean (runs=99, HR=103). The southwest out wind at 9 mph at first pitch pushes toward left center, which marginally helps right handed hitters pulling the ball. At 79 degrees the conditions are warm and the ball carries slightly better than a neutral environment. Neither factor changes the fundamental matchup edge but they both break Atlanta's way.",
-        "STRIKEOUT PROJECTION": "Sale projects to 7 to 9 strikeouts with his elite stuff and high slot approach. Bello sits in the 6 to 7 range. Combined game total near 15 to 17 Ks. Sale has the framing support of Sean Murphy behind the plate, one of the best framers in baseball, which adds 0.3 to 0.5 additional Ks per start.",
-        "BULLPEN EDGE": "Atlanta's bullpen is deeper and more trusted in high leverage situations. Pierce Johnson and A.J. Minter have been reliable. Boston's bullpen is functional but not dominant. ATL has the edge in the back half."
+        "PITCHING MATCHUP": "Zack Wheeler is projected to start for Philadelphia and represents one of the three or four best starting pitchers in the National League. Wheeler's four seam sits 96 to 98 mph with an above average spin rate and his slider and cutter generate elite whiff rates across all handedness splits. His strikeout rate this season is in the 10 to 11 per nine innings range and his command keeps walks low. Chase Burns opposes him for Cincinnati, a young flamethrower with a power arsenal who has shown premium strikeout capability in his own right but at a lower career sample and less refined command profile. Wheeler holds a clear advantage on pure stuff and track record but Burns makes this an interesting pitching matchup.",
+        "OFFENSE VS HANDEDNESS": "Philadelphia's lineup against right handed starters like Burns has been above average in on base percentage and hard contact rate. The Phillies have multiple switch hitters and right handed power bats throughout the order who can do damage against a pitcher still refining his control. Cincinnati's offense against an elite right handed starter like Wheeler has historically underperformed, with below average walk rates and limited ability to make consistent hard contact. The park plays as a hitter's environment so both offenses will see elevated run environments but Wheeler's dominance capability is the separating factor.",
+        "PARK AND WEATHER": "Citizens Bank Park has a run factor of 105 and a home run factor near 112, making it one of the more hitter friendly environments in the NL. The short porch in right field invites pull side home runs from left handed hitters. May evenings in Philadelphia typically feature temperatures in the low 70s with variable winds that can carry balls toward right. The hitter park profile does not dampen Wheeler's K upside as his strikeouts come from swing and miss on breaking balls rather than park suppressed contact. Weather is not expected to be a major factor.",
+        "STRIKEOUT PROJECTION": "Wheeler projects for 8 to 10 strikeouts given his elite rate and the Cincinnati lineup profile. Burns projects at 6 to 8 given his power fastball against a PHI lineup that does strike out at a league average rate. Wheeler K over 7.5 clears the bar on base rate given his season average and the matchup against a Reds lineup that has posted above average strikeout rates against elite right handers.",
+        "BULLPEN EDGE": "Philadelphia's bullpen has been a strength with multiple high leverage arms. Cincinnati's pen is solid but not at the same tier. No significant edge in the late innings but PHI holds the slight advantage."
       },
       "verdict": {
-        "prose": "Sale at home with Atlanta's hot lineup and Boston's road struggles makes Braves ML the clear play.",
-=======
   "lastUpdated": "2026-05-18T15:30:00Z",
   "lastUpdatedLabel": "midday (11:30 AM)",
   "runDate": "2026-05-18",
@@ -3752,501 +3706,151 @@ const CLAUDE_DAILY_ANALYSIS = {
       },
       "verdict": {
         "prose": "ATL ML is the strongest team quality lean on the full slate; Sale plus the bullpen edge closes this game out.",
->>>>>>> Stashed changes
         "primaryChips": [
           {
             "label": "ATL ML -155 to -175"
           }
         ],
-<<<<<<< Updated upstream
-        "longShotNotes": "Sale K over 7.5 at minus 115 or better is a live secondary play."
+        "longShotNotes": "Sale K over 8.5 is live if priced at minus 120 or better. F5 Under 4 is in play given pitcher park and Sale's dominance early."
       },
       "mlLean": "ATL ML -155 to -175",
       "f5MlLean": "ATL F5 ML",
-      "hitsLean": "Austin Riley over 1.5 total bases",
+      "hitsLean": null,
       "watchList": [
-        "ATL ML entry at minus 160 or better",
-        "Sale K over 7.5 if priced near minus 115"
+        "Confirm Sale start before betting",
+        "If Strider draws the start instead, confidence stays B; card thesis unchanged",
+        "ATL run line minus 1.5 is secondary consideration if price is minus 155 or better"
       ],
       "appliedAdjustments": [
-        "Learnings rule: 11:30 AM cap at 84; raw 74 held as is, no reduction needed",
-        "Sale 40+ IP sample clears the minimum; full confidence maintained"
+        "11:30 AM projected lineup cap at B+ 84 maximum; scored B at 80",
+        "Learnings: limit to two markets per game for confidence tier; one chip selected",
+        "Learnings: Robert Suarez now in ATL closer role factored into bullpen edge section",
+        "Chip base rate guardrail: ATL ML as eleven game better team exceeds 25% base rate floor significantly"
       ]
     },
     {
-      "gameId": 824436,
-      "header": "Cincinnati Reds @ Cleveland Guardians",
-      "subline": "6:40 PM ET . Progressive Field",
+      "gameId": 822734,
+      "header": "New York Mets @ Washington Nationals",
+      "subline": "6:45 PM ET . Nationals Park",
       "confidenceGrade": "D",
       "confidenceScore": 50,
-      "callout": "Both starters are unconfirmed TBD arms in a pitcher friendly park; no actionable edge exists until starters are announced.",
+      "callout": "Two sub .500 teams with uncertain starters and no lineup confirmations makes this game a pass at 11:30 AM.",
       "contextChips": [
-        "Both starters TBD . max grade C per rules",
-        "Park factor runs=96 HR=94 (pitcher lean)",
-        "68 degrees at first pitch . 8 mph variable winds",
-        "HP: Jordan Baker (neutral, kF=100)"
+        "Nationals Park run factor 97 . HR factor 99 (near neutral)",
+        "NYM 20-26 vs WSH 23-24 (both below average)",
+        "Starters TBD projected . Cavalli health uncertain",
+        "HP umpire TBD . ~74 degrees F DC spring evening"
       ],
       "projectedScore": {
-        "away": 3.6,
+        "away": 3.5,
         "home": 3.8
       },
       "analysis": {
-        "PITCHING MATCHUP": "Both starting pitchers are unconfirmed as of this morning. Cincinnati and Cleveland each have mid rotation options available but no official announcement has been made. Without confirmed starters the pitching matchup analysis carries significant uncertainty. Progressive Field historically favors pitchers and the unconfirmed nature of this game makes it unplayable from an edge standpoint.",
-        "OFFENSE VS HANDEDNESS": "Cleveland's lineup has been solid at home with Andres Gimenez and Jose Ramirez anchoring the middle of the order. Cincinnati features Elly De La Cruz and Jonathan India as their primary threats. Without knowing the handedness of today's starters, the platoon matchup analysis is incomplete and no defensible edge can be identified.",
-        "PARK AND WEATHER": "Progressive Field plays as a pitcher's park with runs factor of 96 and HR factor of 94. The lake wind off Lake Erie typically creates variable conditions in May, and today projects near 68 degrees with light variable winds around 8 mph. Conditions are neutral to slightly pitcher friendly but not extreme enough to override the TBD starter uncertainty.",
-        "STRIKEOUT PROJECTION": "Without confirmed starters the strikeout projection is a placeholder. If elite arms are announced, revisit this card. Current estimate based on bullpen usage patterns sits near 13 to 15 combined Ks."
+        "PITCHING MATCHUP": "Sean Manaea is the projected arm for New York. Manaea is a veteran left hander with reliable command and a deceptive delivery but he is not a dominant strikeout arm and has allowed more hard contact in recent weeks. Washington projects Cade Cavalli or Zack Littell, both of whom have been inconsistent in 2026. Cavalli is a hard thrower coming back from Tommy John surgery and his health and pitch count management are unknown quantities at the 11:30 AM window. The absence of confirmed lineup and starter data makes the pitching matchup analysis unreliable.",
+        "OFFENSE VS HANDEDNESS": "New York's lineup with Bo Bichette now at third base has added lineup balance but the Mets have been averaging under four runs on the road this month. Washington has played closer to their record at home with a functional lineup but no dominant offensive catalyst. Both lineups are projected and not confirmed, per the 11:30 AM constraint. No meaningful platoon edge can be identified at this window.",
+        "PARK AND WEATHER": "Nationals Park plays near neutral with a run factor of 97 and a home run factor near 99. Washington DC in May typically features temperatures around 74 degrees with light winds. The park does not create a strong directional lean for betting purposes without knowing the wind vector at first pitch. No extreme park or weather edge exists for this game.",
+        "STRIKEOUT PROJECTION": "Manaea projects at 5 to 7 strikeouts. Cavalli or Littell project at 4 to 6. Combined total near 9 to 13 is not notable for a prop chip. The starter uncertainty suppresses any K over play.",
+        "BULLPEN EDGE": "Both bullpens are middling. No material edge exists in the late innings for either team."
       },
       "verdict": {
-        "prose": "Pass. Both starters TBD and no edge is identifiable until rotation is confirmed.",
+        "prose": "Pass. Two struggling teams with unconfirmed starters and no lineup data; no edge exists at 11:30 AM.",
         "primaryChips": [],
         "longShotNotes": null
       },
-      "mlLean": "No play",
-      "f5MlLean": "No play",
-      "hitsLean": "Jose Ramirez over 1.5 total bases if CLE starter confirmed strong",
+      "mlLean": null,
+      "f5MlLean": null,
+      "hitsLean": null,
       "watchList": [
-        "Check starter announcement by 4 PM ET; regenerate card if confirmed arms shift confidence",
-        "CLE ML at plus 100 or better if a weak Cincinnati arm is announced"
+        "If Cavalli is confirmed healthy as starter, revisit WSH ML lean given home edge",
+        "Check 6:00 PM lineups; if NYM has Bo Bichette at top of lineup vs RHP, note platoon edge"
       ],
       "appliedAdjustments": [
-        "Learnings rule: both starters TBD; grade capped at D per established rules"
+        "D grade assigned: both teams sub .500, starters unconfirmed TBD",
+        "11:30 AM projected lineup cap applies; no chips on D grade per schema rules"
       ]
     },
     {
-      "gameId": 824279,
-      "header": "Toronto Blue Jays @ Detroit Tigers",
-      "subline": "6:40 PM ET . Comerica Park",
+      "gameId": 823549,
+      "header": "Toronto Blue Jays @ New York Yankees",
+      "subline": "7:05 PM ET . Yankee Stadium",
       "confidenceGrade": "B",
-      "confidenceScore": 70,
-      "callout": "Gausman's elite strikeout profile at a pitcher's park with a stiff in wind creates the rare double chip setup of Under and Ks.",
+      "confidenceScore": 71,
+      "callout": "New York's seven game record gap at home in one of the most HR friendly parks in baseball earns a single market lean.",
       "contextChips": [
-        "Comerica Park . runs=95 HR=93 (pitcher lean)",
-        "15 mph E in wind . suppresses RF power",
-        "Gausman 27.3% K rate . 9.1 K/9 this season",
-        "HP: Dan Merzel (neutral, kF=100)"
-      ],
-      "projectedScore": {
-        "away": 3.4,
-        "home": 3.2
-      },
-      "analysis": {
-        "PITCHING MATCHUP": "Kevin Gausman makes the confirmed start for Toronto, bringing his elite splitter fastball combination that has generated a 27.3 percent strikeout rate and 9.1 K per 9 this season. Gausman is one of the best groundball strikeout pitchers in the AL and his stuff plays exceptionally well at pitcher friendly venues. Detroit counters with a mid rotation right hander who has solid command but limited upside. The edge at the top of the lineup belongs decisively to Gausman.",
-        "OFFENSE VS HANDEDNESS": "Detroit's lineup is right handed heavy which would normally be a concern against a right handed starter, but Gausman's splitter generates elite swing and miss across both platoon sides. Toronto's lineup is a balanced group that has been middling on the road this season. Neither lineup projects for significant offensive output against today's pitching, which is the core thesis for the Under.",
-        "PARK AND WEATHER": "Comerica Park has a runs factor of 95 and an HR factor of 93, making it one of the more pitcher friendly venues in the AL. The 15 mph east in wind at first pitch flows directly from the right field corner toward home plate, suppressing fly balls that would otherwise carry to the warning track. At 71 degrees the conditions are comfortable but the wind is the story. This setup favors Gausman's groundball and strikeout profile over power hitting.",
-        "STRIKEOUT PROJECTION": "Gausman projects to 7 to 9 strikeouts tonight with his splitter operating as the primary weapon. Over 6.5 Ks is the natural line to target and represents a bet that has hit over 60 percent of the time when Gausman faces right heavy lineups in pitcher friendly parks. The Detroit starter adds roughly 5 to 6 Ks bringing the combined game total near 14 to 16."
-      },
-      "verdict": {
-        "prose": "Gausman's ace stuff in a pitcher's park with in wind earns the Under and his strikeout over.",
-        "primaryChips": [
-          {
-            "label": "Under 8 or 8.5"
-          },
-          {
-            "label": "Gausman K over 6.5"
-          }
-        ],
-        "longShotNotes": "F5 Under 4 is live at minus 115 or better given Gausman's ceiling."
-      },
-      "mlLean": "TOR ML -115 to -130",
-      "f5MlLean": "TOR F5 ML",
-      "hitsLean": "Gausman K over 6.5",
-      "watchList": [
-        "Under 8 or 8.5; look for minus 115 entry on the total",
-        "Gausman K over 6.5 at minus 120 or better",
-        "Monitor wind direction; if it shifts to a cross wind the chip weakens"
-      ],
-      "appliedAdjustments": [
-        "Learnings rule: Gausman K rate above 25% triggers K prop consideration per prior session",
-        "Learnings rule: 11:30 AM lineup cap at 84; raw 72 brought to 70 after small sample DET starter haircut"
-      ]
-    },
-    {
-      "gameId": 823628,
-      "header": "New York Yankees @ New York Mets",
-      "subline": "7:10 PM ET . Citi Field",
-      "confidenceGrade": "C",
-      "confidenceScore": 67,
-      "callout": "Cole confirmed for New York while the Mets start is uncertain; the confidence cap limits this to one chip on the Yankees moneyline.",
-      "contextChips": [
-        "Citi Field . runs=95 HR=95 (pitcher lean)",
-        "Cole 2.89 ERA . 24.8% K rate confirmed start",
-        "NYM starter TBD . capped at C per rules",
-        "69 degrees at first pitch . 10 mph W winds"
-      ],
-      "projectedScore": {
-        "away": 3.6,
-        "home": 3.0
-      },
-      "analysis": {
-        "PITCHING MATCHUP": "Gerrit Cole is confirmed for the Yankees tonight, posting a 2.89 ERA and 24.8 percent strikeout rate this season. Cole's four seam fastball and knuckle curve combination is among the most effective in the AL and plays well in the pitcher friendly Citi Field environment. The Mets have not officially confirmed their starter as of this writing. The TBD status on the home side forces a confidence cap per established rules, limiting the grade regardless of how strong the Cole case would otherwise be.",
-        "OFFENSE VS HANDEDNESS": "New York's Yankees lineup is balanced and deep, with Juan Soto, Aaron Judge, and Giancarlo Stanton presenting a formidable right and left handed combination. The Mets lineup is talented at home with Pete Alonso and Francisco Lindor anchoring the order, but they face Cole's elite stuff. With the Mets starter unknown, projecting the Mets offense output against the Yankees bullpen is difficult and introduces variance.",
-        "PARK AND WEATHER": "Citi Field runs as a pitcher's park with factors of 95 for both runs and home runs. The west winds at 10 mph at first pitch push in from left center, which is slightly unfavorable for right handed pull power. At 69 degrees the conditions are ideal for pitching. Cole will benefit from the compact park and the framing tandem he gets from Jose Trevino behind the plate.",
-        "STRIKEOUT PROJECTION": "Cole projects to 7 to 9 strikeouts with his elite four pitch mix. Without a confirmed Mets starter the combined projection is incomplete. Based on typical NYM bullpen usage patterns if a bulk type arm starts, expect 5 to 6 from the Mets side. Combined estimate near 13 to 15 Ks."
-      },
-      "verdict": {
-        "prose": "Cole confirmed against a mystery Mets arm earns the Yankees ML but capped at one chip.",
-        "primaryChips": [
-          {
-            "label": "NYY ML -135 to -155"
-          }
-        ],
-        "longShotNotes": "Cole K over 7.5 is live at minus 115 or better if he gets the start deep into the lineup."
-      },
-      "mlLean": "NYY ML -135 to -155",
-      "f5MlLean": "NYY F5 ML",
-      "hitsLean": "Juan Soto over 1.5 total bases",
-      "watchList": [
-        "NYY ML entry at minus 140 or better",
-        "Check Mets starter announcement; if a quality arm is confirmed this card may be downgraded further",
-        "Cole K over 7.5 if priced near minus 110"
-      ],
-      "appliedAdjustments": [
-        "Learnings rule: NYM starter TBD caps confidence to C per established rules; raw 74 reduced to 67",
-        "Learnings rule: Peralta not starting so no K suppression rule triggered today"
-      ]
-    },
-    {
-      "gameId": 824192,
-      "header": "Texas Rangers @ Houston Astros",
-      "subline": "8:10 PM ET . Daikin Park",
-      "confidenceGrade": "C",
-      "confidenceScore": 58,
-      "callout": "Both starters unconfirmed in a dome environment with Eovaldi on the injured list; no actionable edge until Texas rotation is clarified.",
-      "contextChips": [
-        "Both starters TBD . dome eliminates weather",
-        "Park factor runs=97 HR=103 (neutral)",
-        "Eovaldi on IL (side strain) . TEX rotation thin",
-        "HP: Nic Lentz (neutral, kF=100)"
-      ],
-      "projectedScore": {
-        "away": 3.5,
-        "home": 4.1
-      },
-      "analysis": {
-        "PITCHING MATCHUP": "Nathan Eovaldi is on the injured list with a side strain, leaving Texas without their most reliable rotation option. The Rangers have not confirmed a starter as of this writing. Houston has not officially confirmed their rotation spot either, with Framber Valdez or Hunter Brown being the most likely options. Without confirmed starters on either side, this game's pitching matchup is too uncertain to build a high confidence card.",
-        "OFFENSE VS HANDEDNESS": "Houston's lineup at home is typically strong, with Jose Altuve, Kyle Tucker, and Yordan Alvarez presenting a dangerous combination. Texas counters with Corey Seager, Marcus Semien, and Adolis Garcia. Both lineups are capable of producing offense but the dome environment and uncertain pitching make the totals market the most interesting if starters are eventually confirmed.",
-        "PARK AND WEATHER": "Daikin Park is a fully enclosed climate controlled dome that eliminates all weather factors. The park plays near neutral at 97 runs factor and 103 HR factor, with a slight lean toward hitters in the home run department. The artificial surface and controlled conditions mean this game is decided entirely by pitching and lineup matchups, both of which are uncertain today.",
-        "STRIKEOUT PROJECTION": "Without confirmed starters, projecting strikeout totals is speculative. If Framber Valdez starts for Houston, his sinker focused groundball approach would suppress Ks. If Hunter Brown gets the nod, a higher strikeout projection applies. Check back when starters are confirmed."
-      },
-      "verdict": {
-        "prose": "Pass. Both starters TBD with Eovaldi on IL; no edge until Texas confirms a starter.",
-        "primaryChips": [],
-        "longShotNotes": null
-      },
-      "mlLean": "No play",
-      "f5MlLean": "No play",
-      "hitsLean": "Yordan Alvarez over 1.5 total bases if HOU starter confirmed quality",
-      "watchList": [
-        "If Framber Valdez confirmed: HOU ML and Under become live",
-        "TEX ML at plus 120 or better if a strong arm is announced"
-      ],
-      "appliedAdjustments": [
-        "Learnings rule: both starters TBD and Eovaldi IL; held at C 58 with no chips per guardrail check"
-      ]
-    },
-    {
-      "gameId": 824599,
-      "header": "Chicago Cubs @ Chicago White Sox",
-      "subline": "7:10 PM ET . Rate Field",
-      "confidenceGrade": "C",
-      "confidenceScore": 65,
-      "callout": "A 17 mph south out wind to right field turns Rate Field into a hitter's park tonight; Cubs roster edge and wind story support the road favorite.",
-      "contextChips": [
-        "Rate Field . 17 mph S wind OUT to RF",
-        "Park factor runs=101 HR=109 (hitter lean)",
-        "68 degrees at first pitch",
-        "HP: Junior Valentine (neutral, kF=100)"
-      ],
-      "projectedScore": {
-        "away": 4.2,
-        "home": 3.6
-      },
-      "analysis": {
-        "PITCHING MATCHUP": "Justin Steele takes the ball for Chicago's North Side against Erick Fedde for the White Sox. Steele is a left hander with solid command and a plus curveball that works well against right handed lineups. Fedde is a right hander whose ERA has been elevated this season and whose command has been inconsistent at home. The Cubs have the edge at the top of the lineup in this crosstown rivalry.",
-        "OFFENSE VS HANDEDNESS": "Chicago's Cubs lineup features a mix of right and left handed bats that platoon effectively against Fedde's right handed approach. Dansby Swanson and Ian Happ provide experienced left handed bats that give the Cubs an edge in this matchup. The White Sox have been one of the weaker offensive teams in baseball this season and face a Cubs arm with better than average command.",
-        "PARK AND WEATHER": "Rate Field normally plays at a runs factor of 101 with a home run factor of 109, already leaning toward hitters. Tonight's 17 mph south wind blowing out to right field amplifies the park factor significantly. Fly balls that would die at the warning track will carry over the fence, and line drives to the right center gap have extra carry. This wind setup favors right handed pull power bats on the Cubs side more than the White Sox.",
-        "STRIKEOUT PROJECTION": "Steele projects near 6 to 7 strikeouts with his curveball first approach. Fedde sits in the 5 to 6 range. Combined game total near 13 to 15 Ks. The out wind environment slightly reduces strikeout urgency as hitters can be more aggressive, which marginally reduces the K prop appeal today."
-      },
-      "verdict": {
-        "prose": "Cubs road favorite with the roster edge and out wind story; ML is the play.",
-        "primaryChips": [
-          {
-            "label": "CHC ML -155 to -175"
-          }
-        ],
-        "longShotNotes": "Over 8.5 is in play at minus 115 given the 17 mph out wind but base rate is borderline; monitor closely."
-      },
-      "mlLean": "CHC ML -155 to -175",
-      "f5MlLean": "CHC F5 ML",
-      "hitsLean": "Ian Happ over 1.5 total bases",
-      "watchList": [
-        "CHC ML entry at minus 160 or better",
-        "Over 8.5 if wind holds at 17 mph or increases through first pitch"
-      ],
-      "appliedAdjustments": [
-        "Learnings rule: park factor amplified by out wind; Over chip held out of primary row pending final wind confirmation",
-        "Learnings rule: 11:30 AM cap at 84; raw 65 held as is"
-      ]
-    },
-    {
-      "gameId": 823708,
-      "header": "Milwaukee Brewers @ Minnesota Twins",
-      "subline": "7:40 PM ET . Target Field",
-      "confidenceGrade": "C",
-      "confidenceScore": 60,
-      "callout": "Peralta confirmed for Milwaukee faces a depleted Twins lineup with Buxton and Larnach both out; in wind further suppresses scoring.",
-      "contextChips": [
-        "Target Field . 15 mph E in wind",
-        "Buxton (hip) and Larnach (back) out for MIN",
-        "Peralta 25.1% K rate . confirmed start",
-        "64 degrees at first pitch"
+        "Yankee Stadium run factor 106 . HR factor 125 (strong hitter and HR lean)",
+        "NYY 28-19 vs TOR 21-25 (7 game gap)",
+        "Right field short porch amplifies LHB power",
+        "HP umpire TBD . ~70 degrees F New York spring evening"
       ],
       "projectedScore": {
         "away": 3.8,
-        "home": 3.2
+        "home": 4.7
       },
       "analysis": {
-        "PITCHING MATCHUP": "Freddy Peralta is confirmed for Milwaukee tonight, bringing his 25.1 percent strikeout rate and plus changeup to Target Field. Peralta is a flyball pitcher whose strikeout profile generates whiffs up in the zone, and he has been effective against right handed lineups all season. Minnesota counters with Joe Ryan, a contact management right hander who has been solid at home. The Brewers have the edge at the top of the lineup.",
-        "OFFENSE VS HANDEDNESS": "Minnesota's lineup loses significant pop with Byron Buxton on the hip injury list and Trevor Larnach out with a back issue. The Twins are already a below average offensive team and these two absences drop their projected run total meaningfully. Milwaukee's lineup features a steady group that grinds at bats and is effective against right handed starters when Peralta keeps them in games.",
-        "PARK AND WEATHER": "Target Field plays at almost perfectly neutral run factors (99/100) in normal conditions. Tonight's 15 mph east in wind flowing toward the mound from right field suppresses all fly ball power. At 64 degrees the conditions are cool and the ball does not carry as well as on warmer May evenings. The combination of injuries, in wind, and cool temperatures depresses the total for both teams.",
-        "STRIKEOUT PROJECTION": "Peralta projects to 6 to 8 strikeouts with his plus changeup and elevated fastball combination. The Learnings rule notes that Peralta's K rate above 25 percent caps any strikeout projection chip at moderate confidence. Ryan projects near 5 to 6 Ks. Combined total near 12 to 14 Ks. The in wind reduces run scoring and may extend games, creating more reliever Ks in the middle innings."
+        "PITCHING MATCHUP": "Will Warren is projected for New York, a developing right hander who has shown enough command and secondary pitch quality to be a viable middle of the rotation arm at the MLB level. Warren's ability to generate weak contact and work efficiently gives the Yankees length from the starter. Yariel Rodriguez projects for Toronto, a promising Cuban right hander whose power fastball and hammer curve have flashed plus potential but who has been inconsistent in run prevention. Warren on the Yankee Stadium mound with the home crowd is a slight edge over Rodriguez on the road.",
+        "OFFENSE VS HANDEDNESS": "New York's lineup has pop throughout the order and the right field short porch at Yankee Stadium turns left handed power into home runs at one of the highest rates in baseball. Against Rodriguez, who throws a four seam that can get up in the zone, the Yankees left handed bats are set up for damage. Toronto's offense is above average but on the road in a hostile environment against a home team with a deeper roster, the Jays have struggled to score at their usual clip. The park and lineup combination gives New York a meaningful run expectation edge.",
+        "PARK AND WEATHER": "Yankee Stadium's run factor of 106 and home run factor of 125 make it one of the most offense friendly environments in the American League. The short porch in right field is 314 feet, among the shortest in the majors, and fly balls that would die on the warning track elsewhere leave the yard in the Bronx. May temperatures in New York in the upper 60s to low 70s with calm winds do not create strong directional adjustments. The park itself inflates projected scores by roughly 0.5 runs per team compared to neutral.",
+        "STRIKEOUT PROJECTION": "Warren projects at 5 to 7 strikeouts. Rodriguez projects at 6 to 8 given his power stuff. Combined total near 11 to 15. No K prop clears the bar for this game due to the hitter friendly park suppressing strikeout value.",
+        "BULLPEN EDGE": "New York's bullpen is solid with reliable high leverage arms. Toronto's pen has been inconsistent, especially on the road. The late inning edge belongs to the Yankees and reinforces the ML lean."
       },
       "verdict": {
-        "prose": "Peralta on the mound against a banged up Twins lineup in cool in wind conditions earns Brewers ML.",
+        "prose": "NYY ML at home with the record gap and short porch advantage is the lean; cap at one market.",
         "primaryChips": [
           {
-            "label": "MIL ML -130 to -145"
+            "label": "NYY ML -145 to -165"
           }
         ],
-        "longShotNotes": "Under 7.5 is also live at minus 120 or better with the injury stack and in wind."
+        "longShotNotes": "Over 9 or 9.5 is live if both bullpens are taxed from previous games; price needs minus 115 or better."
       },
-      "mlLean": "MIL ML -130 to -145",
-      "f5MlLean": "MIL F5 ML",
-      "hitsLean": "Willy Adames over 1.5 total bases",
+      "mlLean": "NYY ML -145 to -165",
+      "f5MlLean": "NYY F5 ML",
+      "hitsLean": null,
       "watchList": [
-        "MIL ML entry at minus 135 or better",
-        "Under 7.5 as a second play if priced at minus 115 or better"
+        "Confirm Warren is starting; if Aaron Boone moves to a backend arm NYY ML gets cheaper and edge grows",
+        "Check wind at first pitch; out to right field adds Over value"
       ],
       "appliedAdjustments": [
-        "Learnings rule: Peralta K rate above 25% noted; K prop chip excluded from primary row per established cap",
-        "Learnings rule: Buxton and Larnach absences factored into MIN projected score reduction"
+        "11:30 AM projected lineup cap at B+ 84 maximum; scored B at 71",
+        "Chip base rate guardrail: NYY ML as seven game better team at home exceeds 25% base rate floor"
       ]
     },
     {
-      "gameId": 823058,
-      "header": "Kansas City Royals @ St. Louis Cardinals",
-      "subline": "7:45 PM ET . Busch Stadium",
-      "confidenceGrade": "C",
-      "confidenceScore": 62,
-      "callout": "Mikolas at home with a 17 mph south in wind suppresses offense at a neutral park; Cardinals hold the home edge and pitching advantage.",
+      "gameId": 824114,
+      "header": "Boston Red Sox @ Kansas City Royals",
+      "subline": "7:10 PM ET . Kauffman Stadium",
+      "confidenceGrade": "D",
+      "confidenceScore": 48,
+      "callout": "Two of the worst teams in the AL with mirror records and uncertain starters offer no exploitable edge at 11:30 AM.",
       "contextChips": [
-        "Busch Stadium . 17 mph S in wind",
-        "Park factor runs=97 HR=92 (pitcher lean)",
-        "74 degrees at first pitch",
-        "HP: CB Bucknor (neutral, kF=101)"
+        "Kauffman Stadium run factor 96 . HR factor 94 (slight pitcher lean . spacious)",
+        "BOS 19-27 vs KC 20-27 (effectively even)",
+        "Starters projected . Bello vs Falter or Kolek",
+        "HP umpire TBD . ~68 degrees F clear KC evening"
       ],
       "projectedScore": {
         "away": 3.3,
-        "home": 4.1
+        "home": 3.5
       },
       "analysis": {
-        "PITCHING MATCHUP": "Miles Mikolas starts at home for St. Louis against Cole Ragans for Kansas City. Mikolas is a right hander who relies on a high spin sinker and a plus cutter to generate groundball contact and limit walks. He is most effective at home at Busch Stadium where the infield grass plays into his ground ball first profile. Ragans is a left hander who has shown good stuff this season but whose road numbers have been less reliable. STL has the pitching edge at home.",
-        "OFFENSE VS HANDEDNESS": "Kansas City's lineup is a right handed heavy group that Mikolas historically handles well with his sinker working down and away to produce groundball outs. The Royals do have Vinnie Pasquantino and Bobby Witt Jr. as legitimate threats, but both see groundball pitchers as a tougher matchup. St. Louis's lineup features Nolan Arenado, Paul Goldschmidt (if healthy), and Paul DeJong providing a balanced mix that works well against Ragans's left handed approach.",
-        "PARK AND WEATHER": "Busch Stadium plays at 97 runs factor and 92 HR factor, leaning pitcher friendly especially for fly ball contact. Tonight's 17 mph south in wind is a meaningful factor, blowing directly in from center field toward home plate. Fly balls that would carry to the warning track will die on the track. This wind setup strongly favors groundball pitchers like Mikolas and suppresses the total significantly.",
-        "STRIKEOUT PROJECTION": "Mikolas is not a high strikeout pitcher, projecting near 5 to 6 Ks with his contact oriented approach. Ragans projects closer to 6 to 7 with his slider. Combined total near 12 to 14 Ks in what should be a contact heavy game shaped by the in wind."
+        "PITCHING MATCHUP": "Brayan Bello is projected for Boston, a young Dominican right hander whose sinker heavy approach generates plenty of weak contact but whose ERA has sat above four this season due to hard contact clusters and inconsistent secondary stuff. Kansas City projects Bailey Falter or Stephen Kolek, both of whom are soft tossers who live on pitch tunneling and command. Neither arm grades out as anything better than back of rotation quality at this point in the season. The talent gap between these two projected starters is minimal and neither carries a clear edge.",
+        "OFFENSE VS HANDEDNESS": "Boston's offense has been one of the disappointments of the early season at 19 wins and 27 losses. The addition of Willson Contreras at first base has helped lineup depth but the club has struggled to generate consistent run production on the road. Kansas City's lineup has been similarly inconsistent and has been middle of the pack at home against soft tossers. No meaningful platoon edge exists for either side.",
+        "PARK AND WEATHER": "Kauffman Stadium plays as a slight pitcher park with a run factor near 96 and a home run factor near 94. The spacious outfield with large foul territory suppresses home runs and reduces scoring. May in Kansas City brings clear conditions in the upper 60s with typical light winds. No significant weather factor is expected. The park profile is a mild lean toward Under but not strong enough to trigger a chip in a game with this much uncertainty.",
+        "STRIKEOUT PROJECTION": "Bello projects at 5 to 7 Ks. Falter or Kolek project at 3 to 5. Combined 8 to 12 total Ks is below the threshold for any K prop chip. No strikeout value in this game at current market lines.",
+        "BULLPEN EDGE": "Both bullpens are below average. Boston's pen has been particularly unreliable in road games. Kansas City's pen has been inconsistent. No edge to either side."
       },
       "verdict": {
-        "prose": "Mikolas at home with a stiff in wind and the park's pitcher lean earns Cardinals ML.",
-        "primaryChips": [
-          {
-            "label": "STL ML -150 to -165"
-          }
-        ],
-        "longShotNotes": "Under 8 is also in play at minus 115 given the in wind and groundball pitcher profile."
-      },
-      "mlLean": "STL ML -150 to -165",
-      "f5MlLean": "STL F5 ML",
-      "hitsLean": "Nolan Arenado over 1.5 total bases",
-      "watchList": [
-        "STL ML entry at minus 155 or better",
-        "Under 8 as a secondary play if wind holds at 17 mph"
-      ],
-      "appliedAdjustments": [
-        "Learnings rule: 17 mph in wind factored into projected score reduction for both teams",
-        "Learnings rule: Mikolas groundball profile noted as in wind amplifier"
-      ]
-    },
-    {
-      "gameId": 824358,
-      "header": "Arizona Diamondbacks @ Colorado Rockies",
-      "subline": "3:10 PM ET . Coors Field",
-      "confidenceGrade": "C",
-      "confidenceScore": 62,
-      "callout": "Gallen's elite command at altitude provides plus money value on Arizona ML with rain risk adding variance to the total market.",
-      "contextChips": [
-        "Coors Field . runs=114 HR=112 (extreme hitter)",
-        "29 to 37 percent rain risk at first pitch",
-        "Gallen 3.12 ERA . 25.4% K rate",
-        "HP: Ted Barrett (neutral, kF=100)"
-      ],
-      "projectedScore": {
-        "away": 5.1,
-        "home": 6.2
-      },
-      "analysis": {
-        "PITCHING MATCHUP": "Zac Gallen is one of the few National League pitchers who has demonstrated the ability to survive at Coors Field with his elite command and willingness to pound the low zone. His 3.12 ERA and 25.4 percent strikeout rate this season are elite by any measure, and his changeup generates groundball contact that stays in the infield even at altitude. Colorado counters with Austin Gomber or Kyle Freeland, whose home ERA at Coors is inflated but whose comfort on the home mound in thin air is noted. Arizona has the clear pitching edge.",
-        "OFFENSE VS HANDEDNESS": "Arizona's lineup is hot and deep, with Corbin Carroll, Ketel Marte, and Christian Walker presenting a formidable combination. Both Carroll and Marte have plus splits against right handed pitchers which Gomber is. Colorado's lineup at altitude is dangerous regardless of the opposing pitcher, and even with Gallen on the mound the Rockies have scored three or more in five of his last seven road starts at Coors.",
-        "PARK AND WEATHER": "Coors Field is the most extreme hitter's park in baseball with a runs factor of 114 and an HR factor of 112. The thin air at 5,280 feet of elevation adds 5 to 8 percent distance to all fly balls compared to sea level parks. A 29 to 37 percent rain risk is present at first pitch, which introduces the possibility of a shortened game or delay. The Learnings system flags the Coors Under as blocked given the park's extreme inflation profile.",
-        "STRIKEOUT PROJECTION": "Gallen projects to 7 to 9 Ks with his changeup first approach at altitude. His strikeout rate actually holds well at Coors because he targets the low zone where hitters cannot extend at elevation. Gomber or Freeland projects near 5 to 6 Ks. Combined game total near 14 to 17 Ks."
-      },
-      "verdict": {
-        "prose": "Gallen's command and plus money value on Arizona ML is the play; avoid the total at Coors.",
-        "primaryChips": [
-          {
-            "label": "ARI ML +110 to +125"
-          }
-        ],
-        "longShotNotes": "Gallen K over 7.5 is live at minus 115 given his Coors history. Under is blocked by Learnings rule."
-      },
-      "mlLean": "ARI ML +110 to +125",
-      "f5MlLean": "ARI F5 ML",
-      "hitsLean": "Ketel Marte over 1.5 total bases",
-      "watchList": [
-        "ARI ML entry at plus 115 or better",
-        "Monitor rain; game postponement risk could void bets",
-        "Gallen K over 7.5 at minus 110 or better"
-      ],
-      "appliedAdjustments": [
-        "Learnings rule: Coors Under blocked by established rule; Under chip excluded from primary and long shot rows",
-        "Learnings rule: rain risk noted as variance factor for total market"
-      ]
-    },
-    {
-      "gameId": 825006,
-      "header": "San Francisco Giants @ Oakland Athletics",
-      "subline": "9:40 PM ET . Sutter Health Park",
-      "confidenceGrade": "C",
-      "confidenceScore": 62,
-      "callout": "Logan Webb against a thin Athletics roster with a 20 mph north in wind creates a pitcher friendly environment that slightly favors the road ace.",
-      "contextChips": [
-        "Sutter Health Park . 20 mph N wind IN from CF",
-        "Park factor runs=102 HR=105 (hitter lean)",
-        "Webb 2.89 ERA . confirmed start",
-        "HP: Bill Miller (neutral, kF=100)"
-      ],
-      "projectedScore": {
-        "away": 3.5,
-        "home": 3.1
-      },
-      "analysis": {
-        "PITCHING MATCHUP": "Logan Webb is confirmed for San Francisco tonight, bringing his elite sinker and groundball first approach to Sutter Health Park. Webb's 2.89 ERA and plus groundball rate make him one of the more reliable starters in the NL, and his road performance has been consistent this season. Oakland counters with JP Sears, a left hander who has been functional but limited, and whose ERA against quality lineups has trended upward. Webb holds a clear edge at the top.",
-        "OFFENSE VS HANDEDNESS": "San Francisco's lineup features recent DFS values in Michael Conforto, Jorge Soler, and Matt Chapman who all have solid splits against left handed pitching. The Giants top DFS bats project well against Sears's approach. Oakland's lineup is among the thinnest in baseball, lacking true middle of order threats, and faces an ace who has been one of the league's best groundball inducing pitchers this season.",
-        "PARK AND WEATHER": "Sutter Health Park in Sacramento plays at a slight hitter's lean (runs=102, HR=105), but tonight's 20 mph north in wind blowing directly in from center field fundamentally changes the park. Fly balls that would carry to the warning track will die short of the fence, and the wind suppresses the HR factor toward neutral or below. Webb's groundball profile benefits directly from this setup as elevated contact will not carry in these conditions.",
-        "STRIKEOUT PROJECTION": "Webb projects near 6 to 7 strikeouts with his groundball first sinker approach. He is not a traditional high K pitcher but generates weak contact consistently. Sears projects near 5 to 6 Ks. Combined game total near 12 to 14 Ks. The in wind environment encourages batters to shorten swings, which can marginally inflate K totals."
-      },
-      "verdict": {
-        "prose": "Webb's ace stuff against a thin roster in 20 mph in wind earns Athletics ML by proxy of Webb value.",
-        "primaryChips": [
-          {
-            "label": "ATH ML -115 to -130"
-          }
-        ],
-        "longShotNotes": "Under 7.5 is live at minus 120 given the in wind and Webb's groundball ceiling."
-      },
-      "mlLean": "ATH ML -115 to -130",
-      "f5MlLean": "SF F5 ML",
-      "hitsLean": "Jorge Soler over 1.5 total bases",
-      "watchList": [
-        "ATH ML entry at minus 120 or better (Webb pitching for SF means SF should be the favorite but late line movement may present value)",
-        "Under 7.5 if wind holds at 20 mph through gametime"
-      ],
-      "appliedAdjustments": [
-        "Learnings rule: 20 mph in wind from CF factored into projected score reduction; effective park factor moved from 102 to near 97",
-        "Learnings rule: 11:30 AM cap at 84; raw 62 held as is"
-      ]
-    },
-    {
-      "gameId": 824034,
-      "header": "Los Angeles Dodgers @ Los Angeles Angels",
-      "subline": "9:38 PM ET . Angel Stadium",
-      "confidenceGrade": "C",
-      "confidenceScore": 65,
-      "callout": "Glasnow's dominance and the Angels losing O'Hoppe to a wrist issue creates a straightforward Dodgers ML situation in a neutral park.",
-      "contextChips": [
-        "Angel Stadium . runs=97 HR=98 (neutral)",
-        "O'Hoppe (wrist) out for LAA",
-        "Glasnow 26.8% K rate . confirmed start",
-        "77 degrees at first pitch . 8 mph W winds"
-      ],
-      "projectedScore": {
-        "away": 4.8,
-        "home": 2.9
-      },
-      "analysis": {
-        "PITCHING MATCHUP": "Tyler Glasnow is confirmed for Los Angeles tonight, bringing his elite four seam fastball and curveball combination that has generated a 26.8 percent strikeout rate this season. Glasnow's power stuff plays in any park and against any lineup, and the Angels are currently without Logan O'Hoppe who had been handling a significant portion of their catching duties before his wrist injury. The Angels counter with Patrick Sandoval, a left hander with plus changeup action who has been one of their better starters but who faces a Dodgers lineup that is built to handle left handed pitching.",
-        "OFFENSE VS HANDEDNESS": "The Dodgers lineup is elite and balanced, featuring Shohei Ohtani, Freddie Freeman, and Mookie Betts as the core three. Freeman and Betts both have above average splits against left handed pitching, which Sandoval is. Ohtani's presence forces Sandoval into a difficult approach from the left side where he cannot lean on the changeup as effectively. The Angels lineup loses meaningful depth with O'Hoppe's absence and has been inconsistent against elite right handed starters.",
-        "PARK AND WEATHER": "Angel Stadium plays at almost perfectly neutral (runs=97, HR=98). May evening conditions in Anaheim bring 77 degree temperatures with gentle west winds at 8 mph, creating near ideal weather that does not meaningfully impact either pitcher's approach. This game is decided entirely by the matchup quality and roster depth, both of which favor Los Angeles.",
-        "STRIKEOUT PROJECTION": "Glasnow projects to 8 to 10 strikeouts with his high spin fastball curveball combination. The Angels lineup struggles against elite velocity and Glasnow's fastball sits 97 to 99 mph with elite spin. Sandoval projects near 6 to 7 Ks. Combined game total near 16 to 18 Ks. Glasnow K over 8.5 is an interesting prop but his injury history introduces some variance."
-      },
-      "verdict": {
-        "prose": "Glasnow vs a shorthanded Angels squad in a neutral park; Dodgers ML is the straightforward play.",
-        "primaryChips": [
-          {
-            "label": "LAD ML -175 to -195"
-          }
-        ],
-        "longShotNotes": "Glasnow K over 8.5 is live at minus 110 given his elite stuff vs the Angels lineup."
-      },
-      "mlLean": "LAD ML -175 to -195",
-      "f5MlLean": "LAD F5 ML",
-      "hitsLean": "Shohei Ohtani over 1.5 total bases",
-      "watchList": [
-        "LAD ML entry at minus 180 or better",
-        "Glasnow K over 8.5 as a secondary play at minus 110"
-      ],
-      "appliedAdjustments": [
-        "Learnings rule: O'Hoppe wrist injury factored into LAA projected score reduction",
-        "Learnings rule: Glasnow 26.8% K rate noted; primary K chip excluded per C grade cap at one chip"
-      ]
-    },
-    {
-      "gameId": 823138,
-      "header": "San Diego Padres @ Seattle Mariners",
-      "subline": "9:40 PM ET . T Mobile Park",
-      "confidenceGrade": "D",
-      "confidenceScore": 52,
-      "callout": "Both starters unconfirmed in a roof closed pitcher's park; no edge exists and this game is a clear pass.",
-      "contextChips": [
-        "Both starters TBD . max grade D per rules",
-        "T Mobile Park . roof closed . runs=93 HR=92",
-        "Robles on IL for SEA . rotation depleted",
-        "HP: Alan Porter (neutral, kF=100)"
-      ],
-      "projectedScore": {
-        "away": 3.4,
-        "home": 3.2
-      },
-      "analysis": {
-        "PITCHING MATCHUP": "Neither San Diego nor Seattle has confirmed their starting pitcher for tonight. Sergio Robles is on the injured list for Seattle, leaving their rotation thin. San Diego has several options available but no official announcement. The roof will be closed at T Mobile Park regardless of conditions, creating a dome like environment that normally helps pitching. Without confirmed starters this matchup cannot be evaluated with any confidence.",
-        "OFFENSE VS HANDEDNESS": "Seattle's lineup at home features Cal Raleigh, J.P. Crawford, and Julio Rodriguez as core pieces. San Diego counters with Juan Soto (if still on the roster), Manny Machado, and Jake Cronenworth. Both lineups are capable but neither gives a clear edge without knowing the handedness of today's starters. Any platoon analysis is speculative.",
-        "PARK AND WEATHER": "T Mobile Park with the roof closed plays as one of the premier pitcher friendly environments in baseball. The closed roof creates a dense air environment that suppresses fly ball carry, and the park already runs at 93 runs factor and 92 HR factor under normal conditions. This is the best pitcher's environment on tonight's West Coast slate, but it means nothing without confirmed starters.",
-        "STRIKEOUT PROJECTION": "Without confirmed starters, strikeout projections are placeholder estimates. Combined game total near 14 to 16 Ks if quality arms start for both sides. Check starter confirmations by 6 PM PT."
-      },
-      "verdict": {
-        "prose": "Pass. Both starters TBD with Robles on IL; no play until Seattle confirms a rotation arm.",
+        "prose": "Pass. Mirror records among two struggling teams with soft projected starters and no lineup confirmations.",
         "primaryChips": [],
         "longShotNotes": null
       },
-      "mlLean": "No play",
-      "f5MlLean": "No play",
-      "hitsLean": "Julio Rodriguez over 1.5 total bases if SEA confirmed quality starter",
+      "mlLean": null,
+      "f5MlLean": null,
+      "hitsLean": null,
       "watchList": [
-        "Check starter confirmations by 6 PM PT; roof closed environment creates value if an ace is confirmed",
-        "SEA ML at plus 100 or better if a quality arm is announced"
+        "If Bello is confirmed and Kolek starts for KC, revisit BOS ML at plus value",
+        "Check 6:00 PM lineups for lineup changes affecting the run total"
       ],
       "appliedAdjustments": [
-        "Learnings rule: both starters TBD and Robles on IL; grade set to D with no chips"
-=======
         "longShotNotes": "Sale K over 8.5 is live if priced at minus 120 or better. F5 Under 4 is in play given pitcher park and Sale's dominance early."
       },
       "mlLean": "ATL ML -155 to -175",
@@ -4721,147 +4325,12 @@ const CLAUDE_DAILY_ANALYSIS = {
         "Arozarena to SEA roster move noted in lineup section",
         "Under lean present but does not clear chip base rate bar with unconfirmed starters; stays in long shot notes",
         "No ML chip: 2 game record gap is below threshold for confident ML chip on road team"
->>>>>>> Stashed changes
       ]
     }
   ],
   "topBets": [
     {
       "rank": 1,
-<<<<<<< Updated upstream
-      "game": "PHI@PIT",
-      "bet": "Under 7.5",
-      "grade": "B",
-      "score": 82,
-      "rationale": "Two elite aces at a pitcher's park with in wind and 63 degree first pitch"
-    },
-    {
-      "rank": 2,
-      "game": "PHI@PIT",
-      "bet": "Skenes K over 7.5",
-      "grade": "B",
-      "score": 82,
-      "rationale": "Skenes 28.4% K rate vs PHI lineup at PNC; 43% curveball whiff rate"
-    },
-    {
-      "rank": 3,
-      "game": "BOS@ATL",
-      "bet": "ATL ML -155 to -175",
-      "grade": "B",
-      "score": 74,
-      "rationale": "Sale confirmed vs Bello; ATL hot tier plus 0.061 delta OPS and home field"
-    },
-    {
-      "rank": 4,
-      "game": "MIA@TB",
-      "bet": "TB ML -140 to -155",
-      "grade": "B",
-      "score": 70,
-      "rationale": "Rays dome home fortress with platoon edge vs Garrett; park runs=93"
-    },
-    {
-      "rank": 5,
-      "game": "TOR@DET",
-      "bet": "Under 8 or 8.5",
-      "grade": "B",
-      "score": 70,
-      "rationale": "Gausman ace plus Comerica 95 park factor plus 15 mph in wind"
-    },
-    {
-      "rank": 6,
-      "game": "TOR@DET",
-      "bet": "Gausman K over 6.5",
-      "grade": "B",
-      "score": 70,
-      "rationale": "Gausman 27.3% K rate vs DET right heavy lineup at pitcher's park"
-    },
-    {
-      "rank": 7,
-      "game": "NYY@NYM",
-      "bet": "NYY ML -135 to -155",
-      "grade": "C",
-      "score": 67,
-      "rationale": "Cole 2.89 ERA confirmed vs NYM TBD; Citi Field pitcher lean"
-    },
-    {
-      "rank": 8,
-      "game": "LAD@LAA",
-      "bet": "LAD ML -175 to -195",
-      "grade": "C",
-      "score": 65,
-      "rationale": "Glasnow elite stuff vs shorthanded Angels without O'Hoppe"
-    },
-    {
-      "rank": 9,
-      "game": "CHC@CWS",
-      "bet": "CHC ML -155 to -175",
-      "grade": "C",
-      "score": 65,
-      "rationale": "Steele vs Fedde; Cubs roster edge plus 17 mph out wind to RF"
-    },
-    {
-      "rank": 10,
-      "game": "BAL@WSH",
-      "bet": "WSH ML +110 to +125",
-      "grade": "C",
-      "score": 62,
-      "rationale": "Gore home ERA 3.21 vs BAL road struggles; plus money value"
-    },
-    {
-      "rank": 11,
-      "game": "ARI@COL",
-      "bet": "ARI ML +110 to +125",
-      "grade": "C",
-      "score": 62,
-      "rationale": "Gallen elite command at altitude offers plus money road value"
-    },
-    {
-      "rank": 12,
-      "game": "KC@STL",
-      "bet": "STL ML -150 to -165",
-      "grade": "C",
-      "score": 62,
-      "rationale": "Mikolas at home with 17 mph in wind; groundball profile plus pitcher park"
-    },
-    {
-      "rank": 13,
-      "game": "SF@ATH",
-      "bet": "ATH ML -115 to -130",
-      "grade": "C",
-      "score": 62,
-      "rationale": "Webb confirmed ace vs thin Athletics roster; 20 mph in wind suppresses park"
-    },
-    {
-      "rank": 14,
-      "game": "MIL@MIN",
-      "bet": "MIL ML -130 to -145",
-      "grade": "C",
-      "score": 60,
-      "rationale": "Peralta confirmed vs depleted Twins with Buxton and Larnach out"
-    },
-    {
-      "rank": 15,
-      "game": "KC@STL",
-      "bet": "Under 8",
-      "grade": "C",
-      "score": 60,
-      "rationale": "17 mph in wind plus groundball pitchers; watch for entry at minus 115"
-    }
-  ],
-  "learningsSummary": {
-    "appliedRules": 12,
-    "rules": [
-      "TBD starter caps confidence at C or D with no primary chips",
-      "11:30 AM projected lineup cap at B+ 84 maximum",
-      "Coors Under blocked; Over cap at 12 or lower unless both teams hot tier",
-      "Peralta K rate above 25% caps K prop chip; excluded from primary row",
-      "Gausman K rate above 25% triggers K prop chip consideration at pitcher parks",
-      "5pt haircut on Under bets with sub 20 IP starter sample",
-      "Cold offense discount waived when opposing starter ERA above 5.00",
-      "F5 Under variant considered for evenly matched games",
-      "In wind above 12 mph reduces projected runs by 0.3 to 0.5 per team",
-      "Injury absences factored into projected score for impacted lineup",
-=======
       "game": "ATL@MIA",
       "bet": "ATL ML -155 to -175",
       "grade": "B",
@@ -4965,7 +4434,109 @@ const CLAUDE_DAILY_ANALYSIS = {
       "No hitter props with unconfirmed lineups per learnings.json lineup void adjustment",
       "Limit to two markets per game for confidence tier plays",
       "Coors Under blocked; Over cap at 12 or lower unless both teams hot tier",
->>>>>>> Stashed changes
+      "game": "ATL@MIA",
+      "bet": "ATL ML -155 to -175",
+      "grade": "B",
+      "score": 80,
+      "rationale": "ATL 32-15 with Sale on the mound vs weak MIA offense at a pitcher park; 11 game quality gap"
+    },
+    {
+      "rank": 2,
+      "game": "LAD@SD",
+      "bet": "Under 7 or 7.5",
+      "grade": "B",
+      "score": 78,
+      "rationale": "Yamamoto vs Buehler at Petco under marine layer; dual elite arms in best pitcher park in NL"
+    },
+    {
+      "rank": 3,
+      "game": "TEX@COL",
+      "bet": "Over 12 or 12.5",
+      "grade": "B",
+      "score": 74,
+      "rationale": "Coors Field altitude plus two run prone starters; 70 degree dry Denver conditions"
+    },
+    {
+      "rank": 4,
+      "game": "BAL@TB",
+      "bet": "TB ML -175 to -195",
+      "grade": "B",
+      "score": 76,
+      "rationale": "TB 30-15 at home in the dome with McClanahan projected vs Wells; 9 game gap"
+    },
+    {
+      "rank": 5,
+      "game": "CIN@PHI",
+      "bet": "Wheeler K over 7.5",
+      "grade": "B",
+      "score": 73,
+      "rationale": "Wheeler elite K rate vs CIN lineup at CBP; season average supports 8 to 10 Ks"
+    },
+    {
+      "rank": 6,
+      "game": "MIL@CHC",
+      "bet": "CHC ML -140 to -160",
+      "grade": "B",
+      "score": 72,
+      "rationale": "Imanaga at home vs uncertain MIL starter; Bregman addition strengthens CHC lineup"
+    },
+    {
+      "rank": 7,
+      "game": "MIL@CHC",
+      "bet": "Imanaga K over 7.5",
+      "grade": "B",
+      "score": 72,
+      "rationale": "Elite K rate against MIL lineup; splitter generates above average whiff rate; independent from ML"
+    },
+    {
+      "rank": 8,
+      "game": "TOR@NYY",
+      "bet": "NYY ML -145 to -165",
+      "grade": "B",
+      "score": 71,
+      "rationale": "NYY 28-19 at home in Yankee Stadium vs TOR 21-25; short porch and 7 game gap"
+    },
+    {
+      "rank": 9,
+      "game": "CLE@DET",
+      "bet": "CLE ML +105 to +120",
+      "grade": "C",
+      "score": 65,
+      "rationale": "Bibee command edge plus 6 game record gap at slight pitcher park; C tier value lean"
+    },
+    {
+      "rank": 10,
+      "game": "ATH@LAA",
+      "bet": "ATH ML -120 to -135",
+      "grade": "C",
+      "score": 62,
+      "rationale": "ATH .500 vs LAA 16-31; Rodriguez keeps confidence at C but record gap earns single chip"
+    },
+    {
+      "rank": 11,
+      "game": "SF@ARI",
+      "bet": "ARI ML -125 to -140",
+      "grade": "C",
+      "score": 62,
+      "rationale": "ARI home in dome with Gallen vs SF 20-27; dome neutralizes weather; bullpen edge to ARI"
+    },
+    {
+      "rank": 12,
+      "game": "HOU@MIN",
+      "bet": "MIN ML -115 to -130",
+      "grade": "C",
+      "score": 60,
+      "rationale": "MIN home with Ober projected vs Imai TBD; HOU missing Bregman at 19-29"
+    }
+  ],
+  "learningsSummary": {
+    "appliedRules": 7,
+    "rules": [
+      "11:30 AM projected lineup cap at B+ 84 maximum",
+      "TBD or sub 15 IP starter triggers confidence cap and quarter Kelly stake advice",
+      "No hitter props with unconfirmed lineups per learnings.json lineup void adjustment",
+      "Limit to two markets per game for confidence tier plays",
+      "Coors Under blocked; Over cap at 12 or lower unless both teams hot tier",
       "Dome games: all weather factors set to neutral",
       "Chip base rate guardrail: minimum 25% base rate for primary chip inclusion"
     ]
