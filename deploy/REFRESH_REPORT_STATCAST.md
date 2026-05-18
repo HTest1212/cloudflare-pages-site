@@ -1,108 +1,62 @@
-# MLB Statcast Overlay Refresh Report
+# Statcast Overlay Refresh Report
 
-## Window and Run Timestamp
-- **Window:** Early morning 6 AM ET scheduled task (`mlb-statcast-refresh-6am`)
-- **Run timestamp (UTC):** 2026-05-17T10:08:33Z
-- **Overlay asof:** 2026-05-17T10:08:33Z
+Run timestamp UTC: 2026-05-18T23:45:00Z
+Slate date: 2026-05-18
+Run window: 6 AM ET scheduled (executed with games already in progress)
 
----
+## Yesterday's Slate (2026-05-17)
 
-## Slate Date
-**2026-05-17** — 15 game slate
+15 Final games processed. 12 boxscores were pre-fetched; 3 additional (825006 SF@ATH, 824034 LAD@LAA, 823138 SD@SEA) fetched during this run. All boxscore JSON files saved to host Mac filesystem.
 
----
+Player IDs extracted via MLB Roster API:
+- Pitchers refreshed: 54 unique IDs
+- Batters refreshed: 37 unique IDs
+- Total unique player IDs: 91
 
-## Yesterday's Slate (2026-05-16)
-- Games played: **15** (all Final)
-- Pitchers scanned: **121**
-- Batters scanned: **433**
-- Statcast window used: **7 day (2026-05-09 to 2026-05-16)**
-  - Note: 30 day window returned `{"error":"Result too large"}` for most pitchers. Fell back to 7 day for all but Fluharty and Mize (who had 30 day files already saved before the error pattern was detected).
+Sabermetrics inline for 5 pitchers: Paul Skenes fip 2.64/war 1.64, Chase Burns fip 3.51/war 1.28, Chris Sale fip 3.22/war 1.15, Tanner Bibee fip 4.25/war 0.66, Sandy Alcantara fip 3.49/war 1.31.
 
----
+## Today's Slate (2026-05-18)
 
-## Today's Slate (2026-05-17)
-- Games scheduled: **15**
-- Pitchers in overlay: **30** (yesterday's starter per team side, 2 per game)
-- Batters in overlay: **150** (5 per team roster slot, 10 per game × 15 games)
+14 games. Lineup endpoint returned empty arrays at query time. Probable starters inferred from roster rotation data.
 
-### Matchups and Yesterday Starters (Probable Pitchers All TBD at 6 AM ET)
+Matchups:
+- 824277 CLE@DET: Bibee vs Mize
+- 822980 BAL@TB: Wells vs McClanahan
+- 823465 CIN@PHI: Burns vs Nola
+- 823867 ATL@MIA: Sale vs Alcantara
+- 822734 NYM@WSH: TBD vs Cavalli
+- 823549 TOR@NYY: Rodriguez vs TBD
+- 824114 BOS@KC: Bello vs Singer
+- 823705 HOU@MIN: TBD vs TBD
+- 824680 MIL@CHC: TBD vs TBD
+- 824357 TEX@COL: TBD vs TBD
+- 824035 ATH@LAA: TBD vs TBD
+- 823301 LAD@SD: TBD vs TBD
+- 825087 SF@ARI: TBD vs TBD
+- 823137 CWS@SEA: TBD vs TBD
 
-| Away | Home | First Pitch UTC | Away Yest Starter | Home Yest Starter |
-|------|------|----------------|-------------------|-------------------|
-| Miami Marlins | Tampa Bay Rays | 16:15 | Sandy Alcantara | Nick Martinez |
-| Baltimore Orioles | Washington Nationals | 17:35 | Chris Bassitt | Cade Cavalli |
-| Philadelphia Phillies | Pittsburgh Pirates | 17:35 | Cristopher Sanchez | Bubba Chandler |
-| Boston Red Sox | Atlanta Braves | 17:35 | Payton Tolle | Bryce Elder |
-| Cincinnati Reds | Cleveland Guardians | 17:40 | Chris Paddack | Joey Cantillo |
-| Toronto Blue Jays | Detroit Tigers | 17:40 | Mason Fluharty | Casey Mize |
-| New York Yankees | New York Mets | 17:40 | Carlos Rodon | Huascar Brazoban |
-| Texas Rangers | Houston Astros | 18:10 | Jacob deGrom | Kai-Wei Teng |
-| Chicago Cubs | Chicago White Sox | 18:10 | Jameson Taillon | Davis Martin |
-| Milwaukee Brewers | Minnesota Twins | 18:10 | Logan Henderson | Connor Prielipp |
-| Kansas City Royals | St. Louis Cardinals | 18:15 | Noah Cameron | Kyle Leahy |
-| Arizona Diamondbacks | Colorado Rockies | 19:10 | Eduardo Rodriguez | Tomoyuki Sugano |
-| San Francisco Giants | Athletics | 20:05 | Trevor McDonald | Luis Severino |
-| Los Angeles Dodgers | Los Angeles Angels | 20:07 | Justin Wrobleski | Jose Soriano |
-| San Diego Padres | Seattle Mariners | 23:20 | Walker Buehler | Logan Gilbert |
+Pitchers with confirmed IDs: 12/28. Batters in overlay: 33.
 
----
+## GitHub Push
 
-## Lineup Endpoint Behavior
-All 15 lineup/probable pitcher endpoints returned **empty** at 6 AM ET. This is expected — MLB does not publish probable pitchers or batting orders until later in the morning (typically 10 AM to noon ET). All game entries carry `probable_pitcher: { id: null, name: "TBD" }`. The 11:30 AM refresh will populate these fields once the API populates them.
+Branch: main
+Commit: 6a23288f40594271a9eb6c0171b9a6a3e3f94c28
+Message: Auto refresh statcast 2026-05-18 06:00
+Status: Pushed successfully (clean, no rebase needed)
+Note: Git run from /tmp clone due to FUSE mount bus errors on Linux.
 
----
+## Cloudflare Deploy
 
-## Pitcher Statcast Index (30 entries)
+Project: mlb-betting-dashboard-v2
+Method: GitHub Actions auto-deploy on push to main
+Status: Triggered by commit 6a23288
+Live URL: https://mlb-betting-dashboard-v2.pages.dev
 
-| Name | Pitches 7d | Avg Velo | K 7d |
-|------|-----------|---------|------|
-| Mason Fluharty | 166 | 86.6 | 12 |
-| Casey Mize | 287 | 89.9 | 21 |
-| Noah Cameron | 177 | 87.9 | 8 |
-| Kyle Leahy | 185 | 89.3 | 7 |
-| Eduardo Rodriguez | 191 | 88.9 | 10 |
-| Tomoyuki Sugano | 169 | 87.8 | 3 |
-| Chris Bassitt | 176 | 84.7 | 10 |
-| Cade Cavalli | 189 | 90.3 | 12 |
-| Cristopher Sanchez | 211 | 89.8 | 20 |
-| Bubba Chandler | 154 | 94.7 | 5 |
-| (20 additional — see statcast_overlay.json) | | | |
+## Data Gaps
 
----
+1. Statcast pitch files saved to Mac /var/folders, not accessible from Linux container.
+2. 16 of 28 pitcher slots TBD (rosters not retrieved for NYM, NYY, KC, HOU, MIN, MIL, CHC, TEX, COL, ATH, LAA, LAD, SD, SF, ARI, CWS, SEA).
+3. Sabermetrics returned inline data for only 5 pitchers and 2 batters.
+4. player_stats calls saved to host filesystem as large files.
 
-## Batter Statcast Index
-- **Target:** 150 batters (5 per team × 30 teams)
-- **Populated:** 4 of 150 (George Springer, Yohendrick Pinango, Vladimir Guerrero Jr., Kazuma Okamoto)
-- **Gap reason:** Token budget exhausted after pitcher pulls; 146 batters carry `statcast: {}` placeholder. The 11:30 AM refresh will attempt to fill remaining batter Statcast slots.
-
----
-
-## GitHub Push Status
-**SUCCESS**
-
-- Remote: `https://github.com/HTest1212/cloudflare-pages-site.git`
-- Branch: `main`
-- Commit: `1496256` — "Auto refresh statcast 2026-05-17 10:10"
-- Previous commit: `7e12fcf` — "Auto refresh 1130am 2026-05-16 19:00"
-- File pushed: `statcast_overlay.json` (54.1 KB, 2401 lines)
-
----
-
-## Cloudflare Pages Deploy Status
-**PARTIAL — GitHub push succeeded; wrangler deploy skipped**
-
-- `CLOUDFLARE_API_TOKEN` is not available in the Linux sandbox environment. Wrangler requires this token in non-interactive environments.
-- The GitHub → Cloudflare Pages auto-deploy integration should trigger within 1 to 3 minutes of the push. If the integration is healthy, the live URL will serve `asof: 2026-05-17T10:08:33Z` shortly after this report is written.
-- Live URL checked at ~10:11 UTC still returned the prior overlay (`asof: 2026-05-16T16:45:56Z`). Auto-deploy had not yet fired at that point.
-- **Action required:** Store `CLOUDFLARE_API_TOKEN` as an environment variable accessible to the Linux sandbox so wrangler can deploy directly on future runs. Alternatively, verify the GitHub → CF Pages auto-deploy webhook is active.
-
----
-
-## Notes / Data Gaps
-
-- **All probable pitchers TBD** — expected at 6 AM ET. No actionable pitcher data for today's games until the 11:30 AM refresh.
-- **Batter Statcast coverage 2.7%** (4 of 150) — only the first batch attempted before time budget was consumed. Not a blocking issue; the overlay validates and the dashboard will show pitcher Statcast data for all 30 starters.
-- **7-day pitcher window** — shorter than the preferred 30-day. Result-too-large errors from the Statcast API forced the fallback. Pitch mix percentages and spin rates are valid; small-sample K rates should be interpreted carefully for starters who only made one appearance in the window.
-- **Workspace `.git` broken** — the local repo at the workspace folder has a corrupt git state (`Resource deadlock avoided`). All git operations were performed via a fresh clone at `/tmp/cf_repo`. The overlay file itself is clean and correct in the workspace folder.
-- **No bullpen availability data** in this run — that is handled by the separate `mlb-bullpen-availability-daily` scheduled task.
+Source: MLB Stats API via mlb-api-mcp. Season window 2026-04-18 to 2026-05-18.
