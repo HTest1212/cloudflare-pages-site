@@ -1,118 +1,106 @@
-# MLB Betting Retrospective Report
-**Slate Date:** 2026-05-17 | **Generated:** 2026-05-18 04:00 UTC
+# MLB Betting Retrospective — 2026-05-18
 
 ---
 
-## Slate Summary
+## SECTION 2 — SLATE SUMMARY
 
-15 games on the board (all Final). 14 picks logged via midday 11:30 AM run (Schema C). No v1 or v2 algorithm picks found for this date.
+**Date:** 2026-05-18  
+**Games on slate:** Full slate (15 picks across 11+ games)  
+**Pick schemas:** Schema C midday only (15 picks)  
+**Overall record:** 8W-6L-1V | +0.61u | Win rate 57.1% | ROI +4.35%
 
-**Pick count by schema:** v2 = 0, v1 = 0, midday = 14
+| Market | Picks | W | L | V | Units | Win% |
+|--------|-------|---|---|---|-------|------|
+| ML | 8 | 5 | 3 | 0 | +0.88 | 62.5% |
+| Total | 5 | 3 | 2 | 0 | +0.73 | 60.0% |
+| K | 2 | 0 | 1 | 1 | -1.00 | 0.0% |
 
----
-
-## Yesterday Record: 6W-8L | -3.18 units | Win Rate 42.86% | ROI -22.73%
-
-### By Market
-
-| Market | W | L | Units | Win Rate |
-|--------|---|---|-------|----------|
-| ML     | 4 | 7 | -3.63 | 36.4%    |
-| Total  | 2 | 0 | +1.82 | 100%     |
-| K      | 0 | 2 | -2.00 | 0%       |
-
-### By Tier
-
-| Tier | W | L | Units | Win Rate |
-|------|---|---|-------|----------|
-| b    | 4 | 2 | -0.12 | 66.7%    |
-| c    | 2 | 6 | -3.06 | 25.0%    |
+| Tier | Picks | W | L | V | Units |
+|------|-------|---|---|---|-------|
+| B | 10 | 5 | 4 | 1 | -0.27 |
+| C | 5 | 3 | 2 | 0 | +0.88 |
 
 ---
 
-## Top Three Losses with Diagnoses
+## SECTION 3 — LOCK TRACK RECORD
 
-### 1. ATH ML -115 to -130 (gamePk 825006)
-**Final:** SF 10, OAK 1 | **Category:** MODEL_ERROR
+**Guard status:** HEALTHY  
+**Lifetime Lock (A tier) picks:** 0  
+**Rolling 14d Lock win rate:** N/A (no A tier picks published yet)  
+**Self-tightening guard:** Inactive — threshold at 80%. No cap in effect.
 
-Picked the Athletics at home expecting Webb to be neutralized by the wind and their home record. Instead Webb was dominant and SF ran up 10 runs. Backing an underdog vs an elite ace in a large sample is a negative expected value spot regardless of home field. Narrative did not hold.
-
-### 2. WSH ML +110 to +125 (gamePk 822738)
-**Final:** BAL 7, WSH 3 | **Category:** MODEL_ERROR
-
-Faded Baltimore on the road but they scored 7 and WSH was blown out. The road struggles edge on BAL was not confirmed by recent road splits. This was a narrative based fade rather than a data driven one.
-
-### 3. STL ML -150 to -165 (gamePk 823058)
-**Final:** KC 2, STL 0 | **Category:** VARIANCE
-
-STL was shut out at home by Kansas City. Mikolas groundball profile was expected to suppress runs while the offense generated enough support. KC held STL scoreless in a 2 to 0 game which is a low probability outcome despite the rationale being directionally sound.
+*No Lock picks have been published yet. The guard system is primed and will activate on the first A tier pick.*
 
 ---
 
-## Patterns Identified
+## SECTION 4 — TOP 3 LOSSES WITH DIAGNOSES
 
-### VARIANCE (5 losses)
-Close single run losses on NYY ML, CHC ML, STL ML, MIL ML, and near miss on Skenes K (7 actual vs 7.5 line). The model reads were directionally sound on most of these but the variance went negative on every close call.
+**1. ATL ML -165 → LOSS (MIA 12, ATL 0)**  
+Category: MODEL_ERROR  
+Picked ATL behind Strider vs weak MIA offense, expected a pitcher dominated contest at Truist. MIA exploded for 12 runs — complete game blowout. Road Coors-style outlier output against a pitcher the model overrated. Thesis: wrong on both run suppression and lineup activation. Do not publish ML favorites above -150 without confirming recent opponent hard-contact rate.
 
-**Rule:** On days with 3 or more variance losses in single run games, reduce ML stake by 20% and shift to run lines for top tier picks.
+**2. CHC ML -150 and Imanaga K over 7.5 → LOSS/STARTER_REGRESSION (MIL 9, CHC 3)**  
+Category: MODEL_ERROR / STARTER_REGRESSION  
+Imanaga at home vs Sproat looked dominant on paper. Actual line: 2 Ks, 8 ER in 4.1 innings. The K prop missed by 5.5 strikeouts — the single largest K line miss of the run. Imanaga's elevated hard-contact rate in recent starts was the signal the model missed. Both the ML and K prop stemmed from the same faulty pitcher confidence. Lesson: one corrupted pitcher reading cascades into two losing picks.
 
-### MODEL_ERROR (2 losses)
-ATH ML and WSH ML both reflected overconfidence in narrative spots without confirming recent splits. The model backed an underdog vs an elite starter (Webb) and faded a road team without verifying recent form.
-
-**Rule:** Downgrade plus money picks on road underdog ML when opponent is at home with 0.500 or better record; require stronger spot than narrative alone.
-
-### STARTER REGRESSION (1 loss)
-Gausman K over 6.5 missed by 1.5 strikeouts. Pitcher park and wind in were expected to suppress offense and generate easy Ks but Gausman only worked 6 innings with 5 Ks. Comerica and 15 mph in wind suppressed his K volume rather than boosting it.
-
-**Rule:** Require at least 28% K rate season average before taking K prop over lines; bump line threshold by 0.5 in first 3 months.
+**3. PHI (Wheeler) K over 7.5 → VOID (Wheeler scratched)**  
+Category: LINEUP_CHANGE  
+Wheeler was announced as the starter at pick time but was scratched before first pitch, replaced by Andrew Painter. The K prop was correctly voided. No financial damage but this is a process gap — any K prop must be confirmed within 90 minutes of first pitch. This will become a loss rather than a void if a substitute starter is counted.
 
 ---
 
-## Adjustments for Today (2026-05-18)
+## SECTION 5 — PATTERNS IDENTIFIED
 
-1. NYY ML lean at Citi was wrong; NYM home field plus uncertainty on starter should have been a pass.
-2. CHC ML lost to CWS 9 to 8; avoid laying heavy juice on NL teams in crosstown games with wind blowing out.
-3. WSH plus money miss; BAL road struggles did not translate, confirm recent road splits before fading.
-4. STL ML at home lost to KC shutout; Mikolas groundball profile did not generate strikeouts or runs.
-5. ATH ML loss to SF 10 to 1; Webb ace differential was too steep, avoid backing underdogs vs elite starters.
-6. MIL ML narrow miss 5 to 4; injuries to Buxton and Larnach did not guarantee MIL cover.
-7. Gausman K under 6.5 missed by 1.5 strikeouts; TOR pitcher park suppresses K volume for finesse types.
-8. Skenes K missed by 0.5 on 7.5 line; consider 7.0 line threshold for high strikeout aces.
-9. Winning angle: aces plus pitcher parks for totals (PHI at PIT Under 7.5 nailed it, 6 runs total).
-10. Winning angle: large underdog plus money on road teams at altitude or offense friendly parks (ARI at COL).
-11. Grade C tier picks went 2W 6L; tighten grade C standards or reduce to one C pick per slate.
-12. Grade B tier picks went 4W 2L; maintain current criteria for B tier picks.
+**Pattern 1: MODEL_ERROR (3 losses)**  
+ATL ML, CHC ML, BOS@KC Over — all three were confident theses that collapsed due to incorrect assumptions about either starter quality or run environment.  
+Rule generated: Require recency-weighted splits (last 7 starts) before publishing any ML favorite at or above -150 odds. Confirm hard-contact rates trending in the right direction.
 
----
+**Pattern 2: STARTER SCRATCH (1 void, risk of future loss)**  
+Wheeler scratched on K prop. One void this time but represents a repeatable exposure.  
+Rule generated: All K props and starter-dependent ML picks must be re-confirmed within 90 minutes of first pitch. If starter is replaced, cancel or void immediately.
 
-## Lifetime KPIs
-
-| Metric     | Value     |
-|------------|-----------|
-| Record     | 336W-266L |
-| Units      | +29.68    |
-| Win Rate   | 55.81%    |
-| ROI        | +4.76%    |
-| Total Stake | 623.0    |
-
-## Recent 14 Day KPIs
-
-| Metric     | Value     |
-|------------|-----------|
-| Record     | 336W-266L |
-| Units      | +29.68    |
-| Win Rate   | 55.81%    |
-| ROI        | +4.76%    |
-
-*Note: Recent 14 window equals lifetime window as all logged picks fall within the 14 day lookback.*
+**Pattern 3: PARK CONTEXT MISS (1 loss)**  
+TEX@COL Under 9.5 — Coors game total ran to 13 despite 44 degree temperature. Cold weather normally suppresses Coors offense but did not here.  
+Rule generated: Coors Under plays require a 3-year historical over rate check at the specific line before publishing. Never take Under at Coors below 11 without confirming extreme suppression conditions (sub-35F and heavy rain forecast).
 
 ---
 
-## Data Notes
+## SECTION 6 — ADJUSTMENTS FOR TODAY
 
-- Git clone succeeded without PAT (public repo); picks_log.json pulled fresh from origin.
-- All 15 scheduled games finalized before this run.
-- Schema C midday format used for all 14 picks; no id, gameId, or type fields present. Stable IDs generated using {date}-{game-normalized}-{market}-mid pattern.
-- Skenes K data: 7 Ks in 5.0 IP (vs 7.5 line, loss by 0.5).
-- Gausman K data: 5 Ks in 6.0 IP (vs 6.5 line, loss by 1.5).
-- No picks found for gamePks: 824436 (CIN@CLE), 824192 (TEX@HOU), 823138 (SD@SEA), 824358 not settled via picks (ARI@COL was picked via ARI ML).
+1. Never publish a B tier ML favorite on a road game without confirming the starter is active and recent opponent contact rates
+2. Do not ride ML of a team whose starter is posting elevated hard-contact rates last 3 starts
+3. Confirm starter identity within 90 minutes of publishing any K prop or game result pick
+4. Coors field totals require historical over rate check before taking Under at any line below 11
+5. Avoid backing road favorite teams with negative recent form even at short odds
+6. Verify recent scoring pace of both teams before publishing an Over in a pitcher matchup with neither team a consistent scorer
+7. Winning angle: SD Under with Petco and elite starters (LAD@SD totaled 1 run) — continue targeting low-run games at pitcher parks
+8. Winning angle: NYM@WSH Over delivered 23 runs — warm weather plus thin bullpens is a reliable Over signal
+9. Grade B picks: 5W-4L-1V on the day. CHC ML and ATL ML were avoidable with better confirmation steps
+10. Grade C picks: 3W-2L. CLE ML +112 hit. Continue publishing plus-money C picks with strong matchup edges
+
+---
+
+## SECTION 7 — LIFETIME AND RECENT KPIs
+
+**Lifetime (system launched ~May 7):**  
+344W-272L-22P-53V | +30.29u | Win rate 55.84% | ROI +4.75% | Total stake 638u
+
+**Recent 7 days:**  
+77W-72L-10P-18V | -11.65u | Win rate 51.68% | ROI -7.33% | Total stake 159u
+
+> **Note:** Recent 7 day performance is materially weaker than lifetime average. Win rate has dropped ~4 points and ROI swung negative. This pattern warrants reducing stake on lower confidence picks until the win rate recovers above 54%.
+
+**By market (lifetime):**  
+See bet_record_summary.json for full breakdown.
+
+---
+
+## SECTION 8 — DATA NOTES
+
+- All 15 picks were Schema C midday format. No v1 or v2 algorithm picks on this date.
+- Wheeler K prop settled as VOID (LINEUP_CHANGE) — Painter started, Wheeler scratched.
+- recent14 window equals lifetime because system launched 2026-05-07; all data falls within 14 days.
+- recent7 ROI of -7.33% is a meaningful warning signal. Monitor closely over next 3 days.
+- No boxscore data gaps. All 15 gamePks resolved cleanly from MLB Stats API.
+- locks_log.json initialized with 0 entries — no A tier picks have been published.
+- Git PAT sourced from .env GITHUB_TOKEN (primary source).

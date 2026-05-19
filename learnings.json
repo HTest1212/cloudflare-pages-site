@@ -1,90 +1,92 @@
 {
-  "asof": "2026-05-18T04:00:00Z",
-  "yesterday_date": "2026-05-17",
+  "asof": "2026-05-19T04:00:00Z",
+  "yesterday_date": "2026-05-18",
   "yesterday_record": {
-    "picks": 14,
-    "wins": 6,
-    "losses": 8,
+    "picks": 15,
+    "wins": 8,
+    "losses": 6,
     "pushes": 0,
-    "voids": 0,
-    "units": -3.1822,
+    "voids": 1,
+    "units": 0.609,
     "totalStake": 14.0,
-    "winRate": 0.4286,
-    "roi": -0.2273
+    "winRate": 0.5714,
+    "roi": 0.0435
   },
   "by_market": {
-    "Total": {
-      "picks": 2,
-      "wins": 2,
-      "losses": 0,
+    "ML": {
+      "picks": 8,
+      "wins": 5,
+      "losses": 3,
       "pushes": 0,
       "voids": 0,
-      "units": 1.8182,
-      "totalStake": 2.0,
-      "winRate": 1.0,
-      "roi": 0.9091
+      "units": 0.8817,
+      "totalStake": 8.0,
+      "winRate": 0.625,
+      "roi": 0.1102
+    },
+    "Total": {
+      "picks": 5,
+      "wins": 3,
+      "losses": 2,
+      "pushes": 0,
+      "voids": 0,
+      "units": 0.7273,
+      "totalStake": 5.0,
+      "winRate": 0.6,
+      "roi": 0.1455
     },
     "K": {
       "picks": 2,
       "wins": 0,
-      "losses": 2,
+      "losses": 1,
       "pushes": 0,
-      "voids": 0,
-      "units": -2.0,
-      "totalStake": 2.0,
+      "voids": 1,
+      "units": -1.0,
+      "totalStake": 1.0,
       "winRate": 0.0,
       "roi": -1.0
-    },
-    "ML": {
-      "picks": 10,
-      "wins": 4,
-      "losses": 6,
-      "pushes": 0,
-      "voids": 0,
-      "units": -3.0004,
-      "totalStake": 10.0,
-      "winRate": 0.4,
-      "roi": -0.3
     }
   },
   "loss_categories": {
-    "VARIANCE": 5,
+    "MODEL_ERROR": 3,
+    "BAD_PARK_READ": 1,
     "STARTER_REGRESSION": 1,
-    "MODEL_ERROR": 2
+    "VARIANCE": 1
   },
+  "lock_breach_priority": "normal",
+  "lock_breach_rules": [],
+  "lock_guard_status": "healthy",
+  "lock_rolling_14d_winRate": 0.0,
   "patterns_identified": [
     {
-      "category": "VARIANCE",
-      "frequency": 5,
-      "summary": "5 ML losses in close games (1 run margin) indicate unfavorable variance day; model reads were directionally correct.",
-      "adjustment_rule": "On days with 3 or more variance losses in single run games, reduce ML stake by 20% and shift to run lines for top tier picks."
-    },
-    {
       "category": "MODEL_ERROR",
-      "frequency": 2,
-      "summary": "Multiple model error losses suggest overconfidence in road team struggles or underdog narratives that did not materialize.",
-      "adjustment_rule": "Downgrade plus money picks on road underdog ML when opponent is at home with 0.500+ record; require stronger spot than narrative alone."
+      "frequency": 3,
+      "summary": "Multiple model error losses; overconfident on favorites that underperformed or games with Coors-style run environment.",
+      "adjustment_rule": "Require recency-weighted splits (last 7 days) before publishing ML favorites at or above -165. Coors totals need explicit confirmation at time of pick."
     }
   ],
   "adjustments_for_today": [
+    "ATL ML blowout 12 to 0; never publish a B tier favorite on a road game without confirming the starter is active and recent opponent contact rates.",
+    "CHC ML lost due to Imanaga disaster outing (8 ER in 4.1 IP); do not ride ML of a team whose starter is posting elevated hard-contact rates last 3 starts.",
+    "Wheeler scratched; confirm starter identity within 90 minutes of publishing any K prop or game-result pick.",
+    "TEX@COL total 13 blown through Under 9.5; Coors field totals require historical over rate check before taking under at any line below 11.",
+    "ATH ML narrow loss at LAA; avoid backing road favorite teams with negative recent form even at short odds.",
+    "BOS@KC total only 4 on Over 8 pick; verify recent scoring pace of both teams before publishing an Over in a division-rival pitcher matchup.",
+    "Winning angle: SD Under with Petco and elite starters (LAD@SD 1 total) \u2014 continue targeting low-run games at pitcher parks.",
+    "Winning angle: NYM@WSH Over delivered 23 runs; warm weather plus both bullpens thin is a reliable Over signal.",
+    "Grade B picks today: 5W-3L-1V. CHC ML and ATL ML were avoidable with better confirmation steps.",
+    "Grade C picks today: 3W-3L. Mixed but CLE ML +112 nailed. Continue plus-money C picks with strong matchup edge."
+  ],
+  "monitoring_list": [
+    "Shota Imanaga next outing \u2014 8 ER in 4.1 IP is alarming; avoid K props until velocity and whiff rate recover.",
+    "Wheeler status for next start \u2014 confirm he pitches before any PHI K prop.",
+    "ATL SP situation \u2014 who starts next series after unexpected non-Wheeler outing.",
+    "Coors Field totals \u2014 re-confirm wind direction and temp before any Under publication."
+  ],
+  "carryover_rules": [
     "NYY ML lean at Citi was wrong; NYM home field plus uncertainty on starter should have been a pass.",
     "CHC ML lost to CWS 9 to 8; avoid laying heavy juice on NL teams in crosstown games with wind blowing out.",
     "WSH plus money miss; BAL road struggles did not translate, confirm recent road splits before fading.",
-    "STL ML at home lost to KC shutout; Mikolas groundball profile did not generate strikeouts or runs.",
-    "ATH ML loss to SF 10 to 1; Webb ace differential was too steep, avoid backing underdogs vs elite starters.",
-    "MIL ML narrow miss 5 to 4; injuries to Buxton and Larnach did not guarantee MIL cover.",
-    "Gausman K under 6.5 missed by 1.5 strikeouts; TOR pitcher park suppresses K volume for finesse types.",
-    "Skenes K missed by 0.5 on 7.5 line; very close, consider 7.0 line threshold for high strikeout aces.",
-    "Winning angle: aces plus pitcher parks for totals (PHI at PIT Under 7.5 nailed it 6 runs).",
-    "Winning angle: large underdog plus money on road teams at altitude or offense friendly parks (ARI at COL).",
-    "Grade C tier picks went 2W 6L; tighten grade C standards or reduce to one C pick per slate.",
-    "Grade B tier picks went 4W 2L; maintain current criteria for B tier picks."
-  ],
-  "monitoring_list": [
-    "Gausman next start velocity and K rate trend after 5 K outing",
-    "NYY bullpen depth after close loss at Citi",
-    "STL starting rotation vs KC series; Mikolas was ineffective",
-    "ATH home record vs elite starters to avoid future fades"
-  ],
-  "carryover_rules": []
+    "STL ML at home lost to KC shutout; Mikolas groundball profile did not generate strikeouts or runs."
+  ]
 }
