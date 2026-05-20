@@ -6709,7 +6709,17 @@ function renderClaudePicksBlock(g, a) {
   }
 
   var rows = picks.map(function(p) {
-    var tier    = (p.tier || 'C').toUpperCase();
+    // Normalize tier label: analysis writes 'primary' / 'secondary' / 'watch',
+    // legacy picks use 'A' / 'B' / 'C' / 'S'. Map both into the single letter
+    // form so the badge renders properly in a 28x28 box and gets the right color.
+    var tierRaw = (p.tier || 'C').toString().toUpperCase();
+    var tier;
+    if (tierRaw === 'PRIMARY' || tierRaw === 'LOCK' || tierRaw === 'A') tier = 'A';
+    else if (tierRaw === 'STRONG' || tierRaw === 'B') tier = 'B';
+    else if (tierRaw === 'S' || tierRaw === 'SPECIAL' || tierRaw === 'STAR') tier = 'S';
+    else if (tierRaw === 'SECONDARY' || tierRaw === 'LEAN' || tierRaw === 'C') tier = 'C';
+    else if (tierRaw === 'WATCH' || tierRaw === 'D' || tierRaw === 'PASS') tier = 'C';
+    else tier = 'C';
     var prob    = probFromTier(tier, gradeScore);
     var probPct = Math.round(prob * 100) + '%';
     var probCls = prob >= 0.78 ? 'p-hot' : prob >= 0.68 ? 'p-warm' : 'p-mid';
