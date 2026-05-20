@@ -1,6 +1,6 @@
 {
-  "asof": "2026-05-19T05:28:46Z",
-  "guard_status": "healthy",
+  "asof": "2026-05-20T14:52:46.639780+00:00",
+  "guard_status": "warning",
   "guard_threshold_14d": 0.8,
   "lifetime_summary": {
     "picks": 9,
@@ -14,30 +14,14 @@
     "roi": 0.4847,
     "current_streak": {
       "type": "win",
-      "length": 0
+      "length": 6
     },
-    "longest_win_streak": 4,
+    "longest_win_streak": 6,
     "longest_loss_streak": 1,
     "rolling_14d_winRate": 0.8571,
     "rolling_30d_winRate": 0.8571
   },
   "by_market": {
-    "F5_ML": {
-      "picks": 2,
-      "wins": 1,
-      "losses": 0,
-      "winRate": 1.0,
-      "units": 0.9091,
-      "roi": 0.4546
-    },
-    "TotalBases": {
-      "picks": 1,
-      "wins": 1,
-      "losses": 0,
-      "winRate": 1.0,
-      "units": 0.9091,
-      "roi": 0.9091
-    },
     "ML": {
       "picks": 2,
       "wins": 1,
@@ -45,6 +29,14 @@
       "winRate": 0.5,
       "units": -0.4737,
       "roi": -0.2369
+    },
+    "F5_ML": {
+      "picks": 2,
+      "wins": 1,
+      "losses": 0,
+      "winRate": 1.0,
+      "units": 0.9091,
+      "roi": 0.4546
     },
     "Hits": {
       "picks": 2,
@@ -69,6 +61,14 @@
       "winRate": 1.0,
       "units": 1.2,
       "roi": 1.2
+    },
+    "TotalBases": {
+      "picks": 1,
+      "wins": 1,
+      "losses": 0,
+      "winRate": 1.0,
+      "units": 0.9091,
+      "roi": 0.9091
     }
   },
   "loss_diagnoses": [
@@ -79,100 +79,87 @@
       "market": "ML",
       "confidence": 84,
       "signals_at_lock": "N/A",
-      "actual_outcome": {
-        "away": 2,
-        "home": 3
-      },
+      "actual_outcome": "Final NYY 2 - BAL 3; NYY ML loss.",
       "category": "VARIANCE",
       "diagnosis": "Final NYY 2 - BAL 3; NYY ML loss.",
-      "rule_generated": "Avoid posting ML on short-priced favorites when recent opponent hard contact rates are elevated."
+      "rule_generated": "Do not publish A tier ML pick when starter has ERA track record indicating run-prevention fragility in recent starts."
     }
   ],
   "entries": [
     {
-      "id": "20260511-824844-F5_ML-1",
-      "date": "2026-05-11",
-      "gamePk": 824844,
-      "away": "NYY",
-      "home": "BAL",
-      "market": "F5_ML",
-      "pick": "Yankees F5 ML 130 to 115",
-      "tier": "A",
-      "confidence": 84,
-      "settledAt": "2026-05-13T17:10:45Z",
-      "actualLine": null,
-      "stake": 1.0,
-      "finalScore": {
-        "away": 2,
-        "home": 3
-      },
-      "result": "win",
-      "payout": 1.9091,
-      "profit": 0.9091,
-      "diagnosis": "F5 score NYY 2 - BAL 0; F5 ML win.",
-      "category": "NARRATIVE_CORRECT"
-    },
-    {
-      "id": "20260511-824844-Hits-2",
-      "date": "2026-05-11",
-      "gamePk": 824844,
-      "away": "NYY",
-      "home": "BAL",
-      "market": "TotalBases",
-      "pick": "Judge over 1.5 total bases 115",
-      "tier": "A",
-      "confidence": 84,
-      "settledAt": "2026-05-13T17:10:45Z",
-      "actualLine": "1.5",
-      "stake": 1.0,
-      "finalScore": {
-        "away": 2,
-        "home": 3
-      },
-      "result": "win",
-      "payout": 1.9091,
-      "profit": 0.9091,
-      "diagnosis": "Aaron Judge 2 TB vs 1.5.",
-      "category": "NARRATIVE_CORRECT"
-    },
-    {
-      "id": "20260511-824844-ML-0",
-      "date": "2026-05-11",
-      "gamePk": 824844,
-      "away": "NYY",
-      "home": "BAL",
+      "id": "20260514-825008-ML-c0",
+      "date": "2026-05-14",
+      "gamePk": 825008,
       "market": "ML",
-      "pick": "Yankees ML 165 to 145",
-      "tier": "A",
-      "confidence": 84,
-      "settledAt": "2026-05-13T17:10:45Z",
-      "actualLine": null,
-      "stake": 1.0,
+      "pick": "Cardinals ML -180 to -200",
+      "line": "",
+      "confidence": 85,
+      "tier": "a",
+      "result": "win",
+      "actualLine": "STL 5, ATH 4 (total=9)",
+      "profit": 0.5263,
       "finalScore": {
-        "away": 2,
-        "home": 3
+        "away": 5,
+        "home": 4,
+        "f5_away": 1,
+        "f5_home": 1
       },
-      "result": "loss",
-      "payout": 0,
-      "profit": -1.0,
-      "diagnosis": "Final NYY 2 - BAL 3; NYY ML loss.",
-      "category": "VARIANCE"
+      "diagnosis": "Home ML win 5 to 4.",
+      "category": "WIN"
+    },
+    {
+      "id": "20260514-825008-F5_ML-c1",
+      "date": "2026-05-14",
+      "gamePk": 825008,
+      "market": "F5_ML",
+      "pick": "Cardinals F5 ML -155 to -170",
+      "line": "",
+      "confidence": 85,
+      "tier": "a",
+      "result": "push",
+      "actualLine": "STL 5, ATH 4 (total=9)",
+      "profit": 0.0,
+      "finalScore": {
+        "away": 5,
+        "home": 4,
+        "f5_away": 1,
+        "f5_home": 1
+      },
+      "diagnosis": "F5 tie 1-1; push.",
+      "category": "PUSH"
+    },
+    {
+      "id": "20260514-825008-Hits-c2",
+      "date": "2026-05-14",
+      "gamePk": 825008,
+      "market": "Hits",
+      "pick": "Goldschmidt over 0.5 hits -175 to -195",
+      "line": "",
+      "confidence": 85,
+      "tier": "a",
+      "result": "void",
+      "actualLine": "STL 5, ATH 4 (total=9)",
+      "profit": 0.0,
+      "finalScore": {
+        "away": 5,
+        "home": 4,
+        "f5_away": 1,
+        "f5_home": 1
+      },
+      "diagnosis": "Player not in lineup; void.",
+      "category": "VOID"
     },
     {
       "id": "20260513-823952-Hits-1",
       "date": "2026-05-13",
       "gamePk": 823952,
-      "away": "SF",
-      "home": "LAD",
       "market": "Hits",
       "pick": "Mookie Betts over 0.5 hits -200",
-      "tier": "A",
+      "line": "",
       "confidence": 86,
-      "settledAt": "2026-05-14T08:00:00Z",
+      "tier": "a",
       "result": "win",
       "actualLine": "Mookie Betts Hits: 1 (line 0.5)",
-      "stake": 1.0,
-      "payout": 1.5,
       "profit": 0.5,
       "finalScore": {
         "away": 0,
@@ -207,17 +194,13 @@
       "id": "20260513-823952-K-1",
       "date": "2026-05-13",
       "gamePk": 823952,
-      "away": "SF",
-      "home": "LAD",
       "market": "K",
       "pick": "Ohtani K over 6.5 -120",
-      "tier": "A",
+      "line": "",
       "confidence": 86,
-      "settledAt": "2026-05-14T08:00:00Z",
+      "tier": "a",
       "result": "win",
       "actualLine": "Ohtani K: 8 (line 6.5)",
-      "stake": 1.0,
-      "payout": 1.8333,
       "profit": 0.8333,
       "finalScore": {
         "away": 0,
@@ -252,17 +235,13 @@
       "id": "20260513-823952-RL-1",
       "date": "2026-05-13",
       "gamePk": 823952,
-      "away": "SF",
-      "home": "LAD",
       "market": "RL",
       "pick": "Dodgers RL -1.5 +110 to +130",
-      "tier": "A",
+      "line": "",
       "confidence": 86,
-      "settledAt": "2026-05-14T08:00:00Z",
+      "tier": "a",
       "result": "win",
       "actualLine": "Dodgers RL -1.5 +110 to +130",
-      "stake": 1.0,
-      "payout": 2.2,
       "profit": 1.2,
       "finalScore": {
         "away": 0,
@@ -294,79 +273,61 @@
       "category": "NARRATIVE_CORRECT"
     },
     {
-      "id": "20260514-825008-ML-c0",
-      "date": "2026-05-14",
-      "gamePk": 825008,
-      "away": "STL",
-      "home": "ATH",
-      "market": "ML",
-      "pick": "Cardinals ML -180 to -200",
-      "tier": "A",
-      "confidence": 85,
-      "settledAt": "2026-05-15T08:00:00Z",
-      "result": "win",
-      "actualLine": "STL 5, ATH 4 (total=9)",
-      "stake": 1.0,
-      "payout": 1.5263,
-      "profit": 0.5263,
-      "finalScore": {
-        "away": 5,
-        "home": 4,
-        "f5_away": 1,
-        "f5_home": 1
-      },
-      "diagnosis": "Home ML win 5 to 4.",
-      "category": "WIN"
-    },
-    {
-      "id": "20260514-825008-F5_ML-c1",
-      "date": "2026-05-14",
-      "gamePk": 825008,
-      "away": "STL",
-      "home": "ATH",
+      "id": "20260511-824844-F5_ML-1",
+      "date": "2026-05-11",
+      "gamePk": 824844,
       "market": "F5_ML",
-      "pick": "Cardinals F5 ML -155 to -170",
-      "tier": "A",
-      "confidence": 85,
-      "settledAt": "2026-05-15T08:00:00Z",
-      "result": "push",
-      "actualLine": "STL 5, ATH 4 (total=9)",
-      "stake": 1.0,
-      "payout": 1.0,
-      "profit": 0.0,
+      "pick": "Yankees F5 ML 130 to 115",
+      "line": "",
+      "confidence": 84,
+      "tier": "a",
+      "result": "win",
+      "actualLine": null,
+      "profit": 0.9091,
       "finalScore": {
-        "away": 5,
-        "home": 4,
-        "f5_away": 1,
-        "f5_home": 1
+        "away": 2,
+        "home": 3
       },
-      "diagnosis": "F5 tie 1-1; push.",
-      "category": "PUSH"
+      "diagnosis": "F5 score NYY 2 - BAL 0; F5 ML win.",
+      "category": "NARRATIVE_CORRECT"
     },
     {
-      "id": "20260514-825008-Hits-c2",
-      "date": "2026-05-14",
-      "gamePk": 825008,
-      "away": "STL",
-      "home": "ATH",
-      "market": "Hits",
-      "pick": "Goldschmidt over 0.5 hits -175 to -195",
-      "tier": "A",
-      "confidence": 85,
-      "settledAt": "2026-05-15T08:00:00Z",
-      "result": "void",
-      "actualLine": "STL 5, ATH 4 (total=9)",
-      "stake": 1.0,
-      "payout": 1.0,
-      "profit": 0.0,
+      "id": "20260511-824844-Hits-2",
+      "date": "2026-05-11",
+      "gamePk": 824844,
+      "market": "TotalBases",
+      "pick": "Judge over 1.5 total bases 115",
+      "line": "",
+      "confidence": 84,
+      "tier": "a",
+      "result": "win",
+      "actualLine": "1.5",
+      "profit": 0.9091,
       "finalScore": {
-        "away": 5,
-        "home": 4,
-        "f5_away": 1,
-        "f5_home": 1
+        "away": 2,
+        "home": 3
       },
-      "diagnosis": "Player not in lineup; void.",
-      "category": "VOID"
+      "diagnosis": "Aaron Judge 2 TB vs 1.5.",
+      "category": "NARRATIVE_CORRECT"
+    },
+    {
+      "id": "20260511-824844-ML-0",
+      "date": "2026-05-11",
+      "gamePk": 824844,
+      "market": "ML",
+      "pick": "Yankees ML 165 to 145",
+      "line": "",
+      "confidence": 84,
+      "tier": "a",
+      "result": "loss",
+      "actualLine": null,
+      "profit": -1.0,
+      "finalScore": {
+        "away": 2,
+        "home": 3
+      },
+      "diagnosis": "Final NYY 2 - BAL 3; NYY ML loss.",
+      "category": "VARIANCE"
     }
   ]
 }

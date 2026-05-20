@@ -1,97 +1,75 @@
 {
-  "asof": "2026-05-19T04:00:00Z",
-  "yesterday_date": "2026-05-18",
+  "asof": "2026-05-20T14:52:46.639780+00:00",
+  "yesterday_date": "2026-05-19",
   "yesterday_record": {
-    "picks": 15,
-    "wins": 8,
-    "losses": 6,
+    "picks": 8,
+    "wins": 3,
+    "losses": 5,
     "pushes": 0,
-    "voids": 1,
-    "units": 0.609,
-    "totalStake": 14.0,
-    "winRate": 0.5714,
-    "roi": 0.0435
+    "voids": 0,
+    "units": -2.6017,
+    "totalStake": 8.0,
+    "winRate": 0.375,
+    "roi": -0.3252
   },
   "by_market": {
-    "ML": {
-      "picks": 8,
-      "wins": 5,
-      "losses": 3,
-      "pushes": 0,
-      "voids": 0,
-      "units": 0.8817,
-      "totalStake": 8.0,
-      "winRate": 0.625,
-      "roi": 0.1102
-    },
-    "Total": {
-      "picks": 5,
-      "wins": 3,
+    "K": {
+      "picks": 3,
+      "wins": 1,
       "losses": 2,
       "pushes": 0,
       "voids": 0,
-      "units": 0.7273,
-      "totalStake": 5.0,
-      "winRate": 0.6,
-      "roi": 0.1455
+      "units": -1.1525,
+      "totalStake": 3.0,
+      "winRate": 0.3333,
+      "roi": -0.3842
     },
-    "K": {
+    "Total": {
+      "picks": 3,
+      "wins": 1,
+      "losses": 2,
+      "pushes": 0,
+      "voids": 0,
+      "units": -1.1071,
+      "totalStake": 3.0,
+      "winRate": 0.3333,
+      "roi": -0.369
+    },
+    "ML": {
       "picks": 2,
-      "wins": 0,
+      "wins": 1,
       "losses": 1,
       "pushes": 0,
-      "voids": 1,
-      "units": -1.0,
-      "totalStake": 1.0,
-      "winRate": 0.0,
-      "roi": -1.0
+      "voids": 0,
+      "units": -0.3421,
+      "totalStake": 2.0,
+      "winRate": 0.5,
+      "roi": -0.1711
     }
   },
   "loss_categories": {
-    "MODEL_ERROR": 3,
-    "BAD_PARK_READ": 1,
-    "STARTER_REGRESSION": 1,
-    "VARIANCE": 1
+    "STARTER_REGRESSION": 3,
+    "VARIANCE": 2
   },
   "lock_breach_priority": "normal",
   "lock_breach_rules": [],
-  "lock_guard_status": "healthy",
-  "lock_rolling_14d_winRate": 0.0,
+  "lock_guard_status": "warning",
+  "lock_rolling_14d_winRate": 0.8571,
   "patterns_identified": [
     {
-      "category": "MODEL_ERROR",
+      "category": "STARTER_REGRESSION",
       "frequency": 3,
-      "summary": "Multiple model error losses; overconfident on favorites that underperformed or games with Coors-style run environment.",
-      "adjustment_rule": "Require recency-weighted splits (last 7 days) before publishing ML favorites at or above -165. Coors totals need explicit confirmation at time of pick."
+      "summary": "Multiple starters failed to suppress runs despite strong K rate profiles, causing Under props to fail and combined K plus Under bets to both lose.",
+      "adjustment_rule": "When stacking K over and Under total on the same starter, require ERA below 3.50 in last 5 starts and minimum 5 innings pitched average in last 3 starts before publishing both as separate picks."
     }
   ],
   "adjustments_for_today": [
-    "MANDATORY STEP 1 \u2014 PROBABLE PITCHERS: Before writing any card or overlay, web search 'MLB probable pitchers [date] rotowire site:rotowire.com' and confirm all 30 starters. Store the confirmed list. If a game has no confirmed starter, that game card gets awayPitcher or homePitcher = TBD, grade capped at C, zero K props, no ML chip.",
-    "MANDATORY STEP 2 \u2014 IL CHECK: After confirming probables, web search 'MLB IL transactions [date]' and cross-check every confirmed starter name against the IL list. Any pitcher on the IL cannot start. Replace with the confirmed emergency starter or TBD. This step caught Webb on IL (May 9 knee bursitis) which was missed today for 10 days.",
-    "MANDATORY STEP 3 \u2014 OVERLAY REBUILD: statcast_overlay.json must be rebuilt from scratch at every refresh using ONLY the web-confirmed starter names from Step 1. Never reuse the prior day overlay as a source of truth. The overlay is an output, not an input. Previous sessions hallucinated Ohtani (0.82 ERA), Wheeler, Strider, Gausman into the overlay \u2014 all wrong.",
-    "MANDATORY STEP 4 \u2014 CROSS-VALIDATION: After writing CLAUDE_DAILY_ANALYSIS and statcast_overlay.json, run a check: every awayPitcher and homePitcher name in CLAUDE_DAILY_ANALYSIS must exist as a key in statcast_overlay.json pitchers dict. Any mismatch = card is flagged, grade dropped to C, and the mismatch is logged in REFRESH_REPORT.md before push.",
-    "DATA SOURCE HIERARCHY (strict): (1) Web-confirmed probable pitchers page is the only authoritative source for starter identity. (2) Statcast MCP for pitch metrics once name is confirmed. (3) Never infer starter from rotation logic, previous overlay, or schedule MCP \u2014 schedule MCP does not return probablePitcher reliably.",
-    "ATL ML blowout 12 to 0; never publish a B tier favorite on a road game without confirming the starter is active and recent opponent contact rates.",
-    "CHC ML lost due to Imanaga disaster outing (8 ER in 4.1 IP); do not ride ML of a team whose starter is posting elevated hard-contact rates last 3 starts.",
-    "Wheeler scratched; confirm starter identity within 90 minutes of publishing any K prop or game-result pick.",
-    "TEX@COL total 13 blown through Under 9.5; Coors field totals require historical over rate check before taking under at any line below 11.",
-    "ATH ML narrow loss at LAA; avoid backing road favorite teams with negative recent form even at short odds.",
-    "BOS@KC total only 4 on Over 8 pick; verify recent scoring pace of both teams before publishing an Over in a division-rival pitcher matchup.",
-    "Winning angle: SD Under with Petco and elite starters (LAD@SD 1 total) \u2014 continue targeting low-run games at pitcher parks.",
-    "Winning angle: NYM@WSH Over delivered 23 runs; warm weather plus both bullpens thin is a reliable Over signal.",
-    "Grade B picks today: 5W-3L-1V. CHC ML and ATL ML were avoidable with better confirmation steps.",
-    "Grade C picks today: 3W-3L. Mixed but CLE ML +112 nailed. Continue plus-money C picks with strong matchup edge."
+    "When stacking K over and Under total on the same starter, require ERA below 3.50 in last 5 starts and minimum 5 innings pitched average in last 3 starts before publishing both as separate picks."
   ],
   "monitoring_list": [
-    "Shota Imanaga next outing \u2014 8 ER in 4.1 IP is alarming; avoid K props until velocity and whiff rate recover.",
-    "Wheeler status for next start \u2014 confirm he pitches before any PHI K prop.",
-    "ATL SP situation \u2014 who starts next series after unexpected non-Wheeler outing.",
-    "Coors Field totals \u2014 re-confirm wind direction and temp before any Under publication."
+    "Sheehan (LAD): short outing pattern, K prop downgrade warranted",
+    "Roupp (SF): K/9 vs contact teams may be overrated \u2014 monitor",
+    "Kay (CWS): outperformed wOBA split vs RHB \u2014 watch for regression"
   ],
-  "carryover_rules": [
-    "NYY ML lean at Citi was wrong; NYM home field plus uncertainty on starter should have been a pass.",
-    "CHC ML lost to CWS 9 to 8; avoid laying heavy juice on NL teams in crosstown games with wind blowing out.",
-    "WSH plus money miss; BAL road struggles did not translate, confirm recent road splits before fading.",
-    "STL ML at home lost to KC shutout; Mikolas groundball profile did not generate strikeouts or runs."
-  ]
+  "carryover_rules": []
 }
