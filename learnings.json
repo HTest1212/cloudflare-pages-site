@@ -1,55 +1,57 @@
 {
-  "asof": "2026-05-20T14:52:46.639780+00:00",
-  "yesterday_date": "2026-05-19",
+  "asof": "2026-05-21T08:12:06.709761+00:00",
+  "yesterday_date": "2026-05-20",
   "yesterday_record": {
-    "picks": 8,
-    "wins": 3,
-    "losses": 5,
+    "picks": 19,
+    "wins": 13,
+    "losses": 6,
     "pushes": 0,
-    "voids": 0,
-    "units": -2.6017,
-    "totalStake": 8.0,
-    "winRate": 0.375,
-    "roi": -0.3252
+    "voids": 4,
+    "units": 5.1418,
+    "totalStake": 19.0,
+    "winRate": 0.6842,
+    "roi": 0.2706
   },
   "by_market": {
-    "K": {
-      "picks": 3,
-      "wins": 1,
-      "losses": 2,
-      "pushes": 0,
-      "voids": 0,
-      "units": -1.1525,
-      "totalStake": 3.0,
-      "winRate": 0.3333,
-      "roi": -0.3842
-    },
     "Total": {
-      "picks": 3,
-      "wins": 1,
-      "losses": 2,
+      "picks": 10,
+      "wins": 6,
+      "losses": 4,
       "pushes": 0,
       "voids": 0,
-      "units": -1.1071,
-      "totalStake": 3.0,
-      "winRate": 0.3333,
-      "roi": -0.369
+      "units": 1.4546,
+      "totalStake": 10.0,
+      "winRate": 0.6,
+      "roi": 0.1455
+    },
+    "K": {
+      "picks": 1,
+      "wins": 1,
+      "losses": 0,
+      "pushes": 0,
+      "voids": 4,
+      "units": 0.9091,
+      "totalStake": 1.0,
+      "winRate": 1.0,
+      "roi": 0.9091
     },
     "ML": {
-      "picks": 2,
-      "wins": 1,
-      "losses": 1,
+      "picks": 8,
+      "wins": 6,
+      "losses": 2,
       "pushes": 0,
       "voids": 0,
-      "units": -0.3421,
-      "totalStake": 2.0,
-      "winRate": 0.5,
-      "roi": -0.1711
+      "units": 2.7781,
+      "totalStake": 8.0,
+      "winRate": 0.75,
+      "roi": 0.3473
     }
   },
   "loss_categories": {
-    "STARTER_REGRESSION": 3,
-    "VARIANCE": 2
+    "BAD_PARK_READ": 1,
+    "LINEUP_CHANGE": 1,
+    "VARIANCE": 2,
+    "MODEL_ERROR": 2
   },
   "lock_breach_priority": "normal",
   "lock_breach_rules": [],
@@ -57,19 +59,27 @@
   "lock_rolling_14d_winRate": 0.8571,
   "patterns_identified": [
     {
-      "category": "STARTER_REGRESSION",
-      "frequency": 3,
-      "summary": "Multiple starters failed to suppress runs despite strong K rate profiles, causing Under props to fail and combined K plus Under bets to both lose.",
-      "adjustment_rule": "When stacking K over and Under total on the same starter, require ERA below 3.50 in last 5 starts and minimum 5 innings pitched average in last 3 starts before publishing both as separate picks."
+      "category": "VARIANCE",
+      "frequency": 2,
+      "summary": "2 losses tagged VARIANCE yesterday",
+      "adjustment_rule": "Flag all VARIANCE risk factors before publishing; require mitigation note in card when this pattern appears."
+    },
+    {
+      "category": "MODEL_ERROR",
+      "frequency": 2,
+      "summary": "2 losses tagged MODEL_ERROR yesterday",
+      "adjustment_rule": "Flag all MODEL_ERROR risk factors before publishing; require mitigation note in card when this pattern appears."
     }
   ],
   "adjustments_for_today": [
-    "When stacking K over and Under total on the same starter, require ERA below 3.50 in last 5 starts and minimum 5 innings pitched average in last 3 starts before publishing both as separate picks."
+    "Two or more MODEL_ERROR total losses yesterday: require second-pass validation on all over/total picks before publishing; cross-check run environment metrics and bullpen usage."
   ],
   "monitoring_list": [
-    "Sheehan (LAD): short outing pattern, K prop downgrade warranted",
-    "Roupp (SF): K/9 vs contact teams may be overrated \u2014 monitor",
-    "Kay (CWS): outperformed wOBA split vs RHB \u2014 watch for regression"
+    "Starter confirmation for K prop picks \u2014 verify within 90 min of first pitch",
+    "Over/total thesis in games with ace starters \u2014 revisit run environment",
+    "NYY home underdog risk \u2014 monitor trend"
   ],
-  "carryover_rules": []
+  "carryover_rules": [
+    "When stacking K over and Under total on the same starter, require ERA below 3.50 in last 5 starts and minimum 5 innings pitched average in last 3 starts before publishing both as separate picks."
+  ]
 }

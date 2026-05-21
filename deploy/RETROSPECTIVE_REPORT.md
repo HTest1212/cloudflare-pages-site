@@ -1,110 +1,122 @@
-# MLB Retrospective Report — 2026-05-19
+# MLB Betting Retrospective | 2026-05-20
+
+*Generated 2026-05-21 4:00 AM ET | Automated run*
 
 ---
 
-## SECTION 2 — SLATE SUMMARY
+## SECTION 1 - LOCK STATUS
 
-**Date:** 2026-05-19 | **Total games on slate:** 15 | **All games Final**
+No Lock (A tier) picks were published on 2026-05-20. All picks were tier B or C.
 
-**Picks settled:** 8 (all Schema A / v2 algorithm)
+Lock guard status: **WARNING** | Rolling 14d Lock win rate: **85.7%**
 
-| Metric | Value |
-|--------|-------|
-| Record | 3W 5L 0P |
-| Units | -2.6017 |
-| Win Rate | 37.5% |
-| ROI | -32.5% |
-
-**By market (yesterday):**
-
-| Market | W | L | Win Rate | Units |
-|--------|---|---|----------|-------|
-| K | 1 | 2 | 33.3% | -1.1525 |
-| Total | 1 | 2 | 33.3% | -1.1071 |
-| ML | 1 | 1 | 50.0% | -0.3421 |
-
-**By tier (yesterday):**
-
-| Tier | W | L | Win Rate | Units |
-|------|---|---|----------|-------|
-| B | 3 | 4 | 42.9% | -1.7493 |
-| C | 0 | 1 | 0.0% | -1.0000 (K win offset by Total loss in same game) |
-
-*Note: C tier Detmers K won but C tier Under 8 ATH@LAA lost in the same game.*
+Guard is in WARNING range (80 to 89 percent). The 11:30 AM run should be cautious with A tier candidates and require all quality gates before elevating to Lock.
 
 ---
 
-## SECTION 3 — LOCK TRACK RECORD
+## SECTION 2 - SLATE SUMMARY
 
-**No Lock (A tier) picks were published on 2026-05-19.**
+**Date:** 2026-05-20 | **Games on slate:** 15 | **Picks logged:** 23 (all Schema C midday run)
 
-**Lifetime Lock KPIs (all A tier settled picks):**
+**Overall record:** 13W 6L 4V | Profit: +5.14u | Win rate: 68.4% | ROI: 27.1%
 
-| Metric | Value |
-|--------|-------|
-| Record | 6W 1L |
-| Win Rate | 85.7% |
-| Units | +3.8778 |
-| ROI | 48.5% |
-| Current Streak | 6 win(s) |
-| Rolling 14d Win Rate | 85.7% |
-| Rolling 30d Win Rate | 85.7% |
+All 23 picks were from the 11:30 AM midday window. No A tier (Lock) picks published.
 
-**Guard Status: WARNING** — Rolling 14d Lock win rate is 85.7%, between 80% and 90% threshold. No cap is active but the 11:30 AM run should apply extra scrutiny before publishing any A tier pick. Require at minimum 4 of the 7 qualifier signals before elevating to A tier.
+**By market:**
+- K: 1W 0L 4V | 100.0% win rate | +0.91u
+- ML: 6W 2L 0V | 75.0% win rate | +2.78u
+- Total: 6W 4L 0V | 60.0% win rate | +1.45u
 
----
-
-## SECTION 4 — TOP THREE LOSSES WITH DIAGNOSES
-
-**1. Mariners ML (823136, B tier, conf 76)**
-Bryce Miller was dominant (5.2 IP, 7 K, 0 ER) but the SEA offense was completely shut down by Anthony Kay who outperformed his right handed batter wOBA split. The model correctly identified the pitching edge but failed to protect against the scenario where the favored team's offense goes cold. Final: CWS 2, SEA 1.
-Category: VARIANCE
-
-**2. Sheehan K Over 6.5 (823302, B tier, conf 80)**
-Sheehan lasted only 4 innings with just 2 strikeouts before being removed with 4 ER on the board. His 10.6 K per 9 rate was built on longer outings; a short early exit eliminated the counting path to 6.5 Ks. The model stacked this with an Under on the same game, creating correlated loss exposure.
-Category: STARTER_REGRESSION
-
-**3. Under 8 ATH@LAA (824033, C tier, conf 60)**
-Detmers struck out 8 batters but allowed 8 ER as the Athletics punished mistake pitches. The LAA bullpen added 5 more runs. The game finished 14 to 6 and the total of 20 crushed the Under by 12. This was the same game as the Detmers K win, showing how K upside and run prevention can decouple completely.
-Category: STARTER_REGRESSION
+**By tier:**
+- Tier B: 8W 6L 4V | 57.1% win rate | +0.75u
+- Tier C: 5W 0L 0V | 100.0% win rate | +4.39u
 
 ---
 
-## SECTION 5 — PATTERNS AND RULES GENERATED
+## SECTION 3 - LOCK TRACK RECORD
 
-**Pattern: STARTER_REGRESSION (3 occurrences)**
+**Lifetime Locks (tier A):** 8 settled picks | 6W 1L 1P 1V
+Win rate: 85.7% | Units: +3.88 | ROI: 48.5%
 
-Three losses were tied to starters who either got shelled before accumulating Ks (Sheehan), or who struck out batters while leaking runs (Detmers), causing combined K plus Under bets to split results or both lose. The core issue is that stacking a K over and an Under on the same starter creates correlated exposure: if the starter struggles with run prevention, the Under fails even if Ks accumulate; if the starter gets pulled early, both props fail simultaneously.
+**Current streak:** 1 consecutive losss
+**Longest win streak:** 6 | **Longest loss streak:** 1
+**Rolling 14d Lock win rate:** 85.7% | **Rolling 30d Lock win rate:** 85.7%
 
-**Rule generated:** When stacking K over and Under total on the same starter, require ERA below 3.50 in last 5 starts AND minimum 5 innings pitched average in last 3 starts before publishing both as separate picks. If ERA is above 3.50 in recent starts, publish only the K prop OR the Under, not both.
+**Guard status: WARNING**
+The 11:30 AM run should require all quality gates satisfied before elevating any candidate to A tier. Borderline picks held at B+.
 
----
-
-## SECTION 6 — ADJUSTMENTS FOR TODAY
-
-**(Guard status: WARNING — no cap active, but extra scrutiny required before any A tier publish)**
-
-1. When stacking K over and Under total on the same starter, require ERA below 3.50 in last 5 starts AND minimum 5 innings pitched average in last 3 starts before publishing both. Publish only one if ERA is above 3.50.
-
-2. (LOCK GUARD WARNING) Rolling 14d Lock win rate is 85.7%. Before publishing any A tier pick today, confirm at least 4 of: model confidence above 80, recent form positive, lineup confirmed, weather neutral or favorable, bullpen rested, no key injury, no umpire risk flag.
-
----
-
-## SECTION 7 — LIFETIME AND RECENT 14-DAY KPIs
-
-| Window | W | L | Win Rate | Units | ROI |
-|--------|---|---|----------|-------|-----|
-| Yesterday | 3 | 5 | 37.5% | -2.6017 | -32.5% |
-| Recent 14d | 347 | 277 | 55.6% | +27.6858 | 4.3% |
-| Lifetime | 347 | 277 | 55.6% | +27.6858 | 4.3% |
+**Locks by market:**
+- F5_ML: 2 picks | 1W 0L | 100.0% WR | +0.91u
+- Hits: 1 picks | 1W 0L | 100.0% WR | +0.50u
+- K: 1 picks | 1W 0L | 100.0% WR | +0.83u
+- ML: 2 picks | 1W 1L | 50.0% WR | -0.47u
+- RL: 1 picks | 1W 0L | 100.0% WR | +1.20u
+- TotalBases: 1 picks | 1W 0L | 100.0% WR | +0.91u
 
 ---
 
-## SECTION 8 — DATA NOTES
+## SECTION 4 - TOP THREE LOSSES WITH DIAGNOSES
 
-- **Git sync:** Existing repo at /tmp/repo_retro reused (permissions prevented rm, re-clone not needed). Local picks_log.json used (7692 bytes, last modified 2026-05-20 01:47).
-- **PAT:** Read from .env file at working folder path.
-- **Boxscores:** All 4 game boxscores retrieved successfully for gamePks 824033, 825086, 823136, 823302.
-- **Schema:** All 8 picks are Schema A (v2, id ending format YYYYMMDD-gamePk-market-key).
-- **No Schema C (midday) picks found for 2026-05-19.**
-- **Lock breaches:** None. No A tier picks were published on 2026-05-19.
+### Loss 1: Under 7
+**Final score:** ATL 9, MIA 1 (total 10) | **Market:** Total | **Tier:** B | **Confidence:** 84
+
+**Diagnosis:** Model set under 7 expecting Sale to limit ATL offense but ATL scored 9 runs against MIA pitching; Sale dominated (8K/7IP/1R) and the pitching held on the MIA side but ATL bats torched MIA's starter for a 9 run total.
+**Category:** BAD_PARK_READ
+
+### Loss 2: Under 7.5
+**Final score:** CIN 9, PHI 4 (total 13) | **Market:** Total | **Tier:** B | **Confidence:** 82
+
+**Diagnosis:** Under 7.5 collapsed as CIN put up 9 runs; model may have priced in Burnes anchoring PHI but Burnes scratched and PHI's replacement allowed a high-run total.
+**Category:** LINEUP_CHANGE
+
+### Loss 3: NYY ML -155 to -175
+**Final score:** TOR 2, NYY 1 | **Market:** ML | **Tier:** B | **Confidence:** 81
+
+**Diagnosis:** TOR pulled a 2-1 upset over NYY despite heavy favoritism; the game turned into a low-scoring pitchers' duel that went TOR's way on minimal offense.
+**Category:** VARIANCE
+
+---
+
+## SECTION 5 - PATTERNS AND RULES GENERATED
+
+**Loss categories yesterday:** {'BAD_PARK_READ': 1, 'LINEUP_CHANGE': 1, 'VARIANCE': 2, 'MODEL_ERROR': 2}
+
+**Pattern: VARIANCE** (2 losses)
+Summary: 2 losses tagged VARIANCE yesterday
+Rule: Flag all VARIANCE risk factors before publishing; require mitigation note in card when this pattern appears.
+
+**Pattern: MODEL_ERROR** (2 losses)
+Summary: 2 losses tagged MODEL_ERROR yesterday
+Rule: Flag all MODEL_ERROR risk factors before publishing; require mitigation note in card when this pattern appears.
+
+
+---
+
+## SECTION 6 - ADJUSTMENTS FOR TODAY
+
+1. Two or more MODEL_ERROR total losses yesterday: require second-pass validation on all over/total picks before publishing; cross-check run environment metrics and bullpen usage.
+
+---
+
+## SECTION 7 - LIFETIME AND RECENT KPIs
+
+| Window     | Picks | W   | L   | P  | V  | Win Rate | Units   | ROI    |
+|------------|-------|-----|-----|----|----|----------|---------|--------|
+| Yesterday  |    19 |  13 |   6 |  0 |  4 | 68.4%    | +5.14   | 27.1%  |
+| Recent 14d |   617 | 330 | 267 | 20 | 53 | 55.3%    | +19.84  | 3.2%   |
+| Recent 30d |   665 | 360 | 283 | 22 | 57 | 56.0%    | +32.83  | 4.9%   |
+| Lifetime   |   665 | 360 | 283 | 22 | 57 | 56.0%    | +32.83  | 4.9%   |
+
+---
+
+## SECTION 8 - DATA NOTES
+
+Git sync: Fresh sparse clone from origin/main succeeded (path /tmp/retro_fresh). Previous /tmp/repo_retro had permission issues from a prior session owned by 'nobody'; worked around with a fresh clone directory.
+
+Picks: 23 picks found for 2026-05-20, all Schema C (midday 11:30 AM window). No v2 or v1 algorithm picks for this date.
+
+Voided picks (4): Peralta K over 6, Burns K over 6.5, Yamamoto K over 7, Skenes K over 7. All voided because the named starters did not pitch. Actual starters: Kyle Harrison (MIL), Andrew Abbott (CIN), Shohei Ohtani (LAD), Carmen Mlodzinski (PIT).
+
+Chris Sale confirmed 8 K in 7.0 IP for ATL vs MIA (Sale K over 7 WIN).
+
+No Lock losses. Guard status: WARNING (14d Lock win rate 85.7%).
