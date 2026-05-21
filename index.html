@@ -3412,1432 +3412,677 @@ function buildGameNarrative(g) {
 /* =========== CLAUDE DAILY ANALYSIS (pre built afternoon refresh) =========== */
 /* =========== CLAUDE DAILY ANALYSIS (pre built afternoon refresh) =========== */
 const CLAUDE_DAILY_ANALYSIS = {
-  "date": "2026-05-20",
+  "date": "2026-05-21",
   "window": "midday (11:30 AM)",
-  "lastUpdated": "2026-05-20T17:45:00Z",
+  "lastUpdated": "2026-05-21T15:32:00Z",
   "games": {
-    "823462": {
-      "gamePk": 823462,
-      "away": "Cincinnati Reds",
-      "home": "Philadelphia Phillies",
-      "awayAbbr": "CIN",
-      "homeAbbr": "PHI",
-      "venue": "Citizens Bank Park",
-      "firstPitch": "1:05 PM ET",
-      "awayPitcher": "Chase Burns",
-      "homePitcher": "Zack Wheeler",
-      "status": "projected",
-      "grade": {
-        "letter": "B+",
-        "score": 82
-      },
-      "callout": "Two sub 2 ERA aces at 93 degrees with 17 mph wind creates a K heavy low run environment where both K props and the Under are live.",
-      "contextChips": [
-        "93 degrees at first pitch",
-        "17 mph W/SW slight out to CF",
-        "Citizens Bank 1.04 PF neutral",
-        "Burns ERA 1.83 . Wheeler ERA 1.99 . both elite"
-      ],
-      "projAway": 2.8,
-      "projHome": 3.2,
-      "paragraphs": [
-        {
-          "title": "PITCHING MATCHUP",
-          "text": "Chase Burns enters with a 1.83 ERA across 10 starts and 59 innings, posting a 9.76 K per 9 rate with a 0.95 WHIP. Zack Wheeler counters with a 1.99 ERA across 5 starts and 31.2 innings, a 0.88 WHIP, and 8.53 K per 9. This is the best one through one pitching matchup on the slate. When two starters of this caliber meet, run scoring almost always undershoots the opening line."
-        },
-        {
-          "title": "OFFENSE VS HANDEDNESS",
-          "text": "Cincinnati's lineup has solid contact skills but faces elite velocity and command in Wheeler. Philadelphia's deep lineup is dangerous from both sides but Wheeler has suppressed even the best lineups this season. Projected lineups at this window do not alter the calculus when both starters are this sharp."
-        },
-        {
-          "title": "PARK AND WEATHER",
-          "text": "Citizens Bank Park carries a 1.04 park factor, essentially neutral. The 93 degree first pitch temperature lowers air density slightly, adding 1 to 2 feet of carry on well struck balls. The 17 mph W/SW wind angled toward center does not dramatically favor either offense. On balance heat adds a small run potential but does not override two sub 2 ERA starters."
-        },
-        {
-          "title": "STRIKEOUT PROJECTION",
-          "text": "Burns averages approximately 6.4 strikeouts per start at his season K9 rate. Wheeler averages approximately 5.9. Both qualify under the learnings adjustment for a K plus Under stack: Burns ERA 1.83 is below the 3.50 threshold, and his 5.9 inning average across 10 starts meets the 5 inning floor. Burns K over 6.5 is the primary K chip."
-        },
-        {
-          "title": "BULLPEN EDGE",
-          "text": "Both bullpens are reasonably fresh for a Wednesday afternoon start. If either starter exits early due to pitch count or heat fatigue, neither bullpen dramatically alters the card direction. The thesis rests on starters delivering quality outings, which both have done consistently this season."
-        }
-      ],
-      "picks": [
-        {
-          "market": "total",
-          "label": "Under 7.5",
-          "price": "-110 to -120",
-          "tier": "primary",
-          "note": "Two sub 2 ERA starters. Even 93 degree heat does not overcome this pitching quality."
-        },
-        {
-          "market": "strikeout",
-          "label": "Burns K over 6.5",
-          "price": "-115 to -125",
-          "tier": "primary",
-          "note": "Burns K9 9.76 across 59 IP. Qualifies for K plus Under stack per learnings adjustment."
-        },
-        {
-          "market": "strikeout",
-          "label": "Wheeler K over 5.5",
-          "price": "-110 to -120",
-          "tier": "secondary",
-          "note": "Wheeler K9 8.53. Secondary prop alongside Under thesis."
-        },
-        {
-          "market": "f5total",
-          "label": "F5 Under 4",
-          "price": "-115 to -120",
-          "tier": "secondary",
-          "note": "Both starters at their sharpest in first 5 innings."
-        },
-        {
-          "market": "nrfi",
-          "label": "NRFI",
-          "price": "-135 to -145",
-          "tier": "secondary",
-          "note": "Elite starters rarely give up first inning runs. Burns early inning command is strong."
-        },
-        {
-          "market": "moneyline",
-          "label": "PHI ML -145 to -160",
-          "price": "-145 to -160",
-          "tier": "secondary",
-          "note": "Home plus Wheeler ERA 1.99. PHI slight lean if a side must be chosen."
-        }
-      ],
-      "verdict": {
-        "prose": "Under 7.5 is the primary ticket with Burns K over 6.5 as the supporting K plus Under stack validated prop.",
-        "chips": [
-          "Under 7.5",
-          "Burns K over 6.5"
-        ]
-      },
-      "appliedAdjustments": [
-        "K plus Under stack validated: Burns ERA 1.83 below 3.50 threshold, 5.9 IP average meets 5 inning floor. Stack published."
-      ]
-    },
-    "822977": {
-      "gamePk": 822977,
-      "away": "Baltimore Orioles",
-      "home": "Tampa Bay Rays",
-      "awayAbbr": "BAL",
-      "homeAbbr": "TB",
-      "venue": "Tropicana Field",
-      "firstPitch": "1:10 PM ET",
-      "awayPitcher": "TBD Baltimore",
-      "homePitcher": "TBD Tampa Bay",
-      "status": "projected",
-      "grade": {
-        "letter": "C+",
-        "score": 65
-      },
-      "callout": "Tampa Bay at 32 and 15 hosting a struggling 21 and 28 Baltimore squad in a dome setting gives the Rays a clear edge even with starters unconfirmed.",
-      "contextChips": [
-        "Tropicana Field dome . neutral conditions",
-        "TB 32-15 best record in AL East",
-        "BAL 21-28 road struggles",
-        "Both starters TBD at this window"
-      ],
-      "projAway": 3.0,
-      "projHome": 4.0,
-      "paragraphs": [
-        {
-          "title": "PITCHING MATCHUP",
-          "text": "Neither starter is confirmed at this window, capping confidence at C+. Tampa Bay's rotation depth includes Ryan Pepiot and Taj Bradley as likely arms, both of whom have delivered solid results at Tropicana Field. Baltimore's probable arm has not been confirmed. No K props or precise run environment estimates can be published at this confidence level."
-        },
-        {
-          "title": "OFFENSE VS HANDEDNESS",
-          "text": "Tampa Bay's lineup has been one of the more balanced units in the American League, contributing directly to their 32 and 15 record. Baltimore's offense has underperformed relative to their recent pedigree, and road splits on artificial surfaces have been a recurring weakness this year. The projected lineup advantage tilts to Tampa Bay."
-        },
-        {
-          "title": "PARK AND WEATHER",
-          "text": "Tropicana Field is a dome with no weather variables. The park factor is neutral at approximately 0.97. Artificial turf and consistent lighting slightly favor the home team through familiarity. No wind, temperature, or precipitation adjustments apply."
-        },
-        {
-          "title": "STRIKEOUT PROJECTION",
-          "text": "No K chips are published without confirmed starters. Once starters are named, revisit K markets if Pepiot or Bradley get the ball, as both carry K9 rates above 8.5 this season. The TBD designation caps this card at a single chip."
-        }
-      ],
-      "picks": [
-        {
-          "market": "moneyline",
-          "label": "TB ML -125 to -140",
-          "price": "-125 to -140",
-          "tier": "primary",
-          "note": "TB 32-15 at home vs 21-28 Baltimore. Record differential drives this lean in neutral dome conditions."
-        },
-        {
-          "market": "runline",
-          "label": "TB RL -1.5 +110 to +120",
-          "price": "+110 to +120",
-          "tier": "secondary",
-          "note": "TB wins by 2 or more roughly 40 pct of home wins. Plus price makes RL live as secondary."
-        },
-        {
-          "market": "total",
-          "label": "Under 8",
-          "price": "-110 to -115",
-          "tier": "secondary",
-          "note": "Dome neutral environment with two probable mid rotation starters. Under 8 is a reasonable lean."
-        },
-        {
-          "market": "f5total",
-          "label": "F5 Under 4",
-          "price": "-110 to -115",
-          "tier": "secondary",
-          "note": "Dome park, likely quality starters on both sides. First 5 innings stay clean."
-        },
-        {
-          "market": "nrfi",
-          "label": "NRFI",
-          "price": "-120 to -130",
-          "tier": "secondary",
-          "note": "Dome surface, probable quality arms. First inning run less likely than league average."
-        }
-      ],
-      "verdict": {
-        "prose": "TB ML is the one clean chip in a dome setting against a sub .500 Baltimore road club.",
-        "chips": [
-          "TB ML -125 to -140"
-        ]
-      },
-      "appliedAdjustments": [
-        "Grade capped at C+: both starters TBD. No K chips. Single chip only."
-      ]
-    },
-    "823703": {
-      "gamePk": 823703,
-      "away": "Houston Astros",
-      "home": "Minnesota Twins",
-      "awayAbbr": "HOU",
-      "homeAbbr": "MIN",
-      "venue": "Target Field",
-      "firstPitch": "12:40 PM CT",
-      "awayPitcher": "Tatsuya Imai",
-      "homePitcher": "Bailey Ober",
-      "status": "projected",
-      "grade": {
-        "letter": "B",
-        "score": 76
-      },
-      "callout": "Tatsuya Imai ERA 8.31 with a 7.27 walk rate against Bailey Ober ERA 3.63 is a significant pitching gap pointing to a run heavy game and a strong MIN lean.",
-      "contextChips": [
-        "56 degrees at first pitch",
-        "7 mph NNE neutral wind",
-        "Target Field 0.97 PF neutral",
-        "Imai ERA 8.31 BB/9 7.27 . Ober ERA 3.63"
-      ],
-      "projAway": 3.8,
-      "projHome": 4.4,
-      "paragraphs": [
-        {
-          "title": "PITCHING MATCHUP",
-          "text": "Tatsuya Imai has posted an 8.31 ERA across 5 starts with a 7.27 walk rate that is among the worst in MLB. His inability to command the strike zone forces up pitch counts early and leads to rallies through walks and contact. Bailey Ober counters with a 3.63 ERA across 10 starts. Ober is a contact manager rather than a strikeout pitcher at 6.32 K per 9, but he generates weak contact efficiently and limits free passes. The gap between these two starters is among the widest on today's slate."
-        },
-        {
-          "title": "OFFENSE VS HANDEDNESS",
-          "text": "Houston at 20 and 30 has been the biggest underperformer relative to preseason expectations. Their lineup still has quality bats but has not been consistent against even middling starters. Minnesota's lineup projects to exploit Imai's walk rate and get into his pitch count early. Ober's contact management profile keeps Houston's contact hitters off balance."
-        },
-        {
-          "title": "PARK AND WEATHER",
-          "text": "Target Field at 56 degrees with a 7 mph NNE wind is as neutral an environment as exists on today's slate. Cool temperature suppresses ball flight slightly, adding a very modest under lean. The 0.97 park factor is neutral. The run environment is shaped almost entirely by the starter gap."
-        },
-        {
-          "title": "STRIKEOUT PROJECTION",
-          "text": "Ober's K9 of 6.32 does not support a K over prop at typical lines. No K chip is published for Ober. Imai is more likely to walk batters into trouble than pile up strikeouts. The Over thesis is built on Imai's walk rate and expected early exit rather than K volume from either side."
-        }
-      ],
-      "picks": [
-        {
-          "market": "moneyline",
-          "label": "MIN ML -145 to -160",
-          "price": "-145 to -160",
-          "tier": "primary",
-          "note": "Ober ERA 3.63 vs Imai ERA 8.31. MIN home with clear pitching advantage."
-        },
-        {
-          "market": "total",
-          "label": "Over 8 or 8.5",
-          "price": "-110 to -120",
-          "tier": "primary",
-          "note": "Imai's 7.27 BB/9 guarantees chaos. Runs will score through walks and contact combined."
-        },
-        {
-          "market": "runline",
-          "label": "MIN RL -1.5 +105 to +115",
-          "price": "+105 to +115",
-          "tier": "secondary",
-          "note": "If Imai implodes early MIN wins comfortably. Plus price makes RL live."
-        },
-        {
-          "market": "f5total",
-          "label": "F5 Over 4",
-          "price": "-110 to -115",
-          "tier": "secondary",
-          "note": "Imai rarely survives 5 innings cleanly given his walk and contact issues."
-        },
-        {
-          "market": "nrfi",
-          "label": "YRFI",
-          "price": "-125 to -135",
-          "tier": "secondary",
-          "note": "Imai gives up first inning runs at above average rate given walk rate. YRFI is live."
-        },
-        {
-          "market": "strikeout",
-          "label": "Ober K under 5.5",
-          "price": "-115 to -120",
-          "tier": "secondary",
-          "note": "Ober K9 6.32 across 10 starts. At a typical 6 inning outing he averages 4.2 Ks. Under 5.5 is live."
-        }
-      ],
-      "verdict": {
-        "prose": "MIN ML and Over 8 are the two tickets with Imai's 8.31 ERA and 7.27 walk rate pointing at a run heavy game.",
-        "chips": [
-          "MIN ML -145 to -160",
-          "Over 8 or 8.5"
-        ]
-      },
-      "appliedAdjustments": [
-        "K plus Under stack not applicable: Ober ERA 3.63 exceeds 3.50 threshold. Stack disqualified per learnings adjustment. Independent picks only."
-      ]
-    },
-    "824355": {
-      "gamePk": 824355,
-      "away": "Texas Rangers",
-      "home": "Colorado Rockies",
-      "awayAbbr": "TEX",
-      "homeAbbr": "COL",
-      "venue": "Coors Field",
-      "firstPitch": "1:10 PM MT",
-      "awayPitcher": "Nathan Eovaldi",
-      "homePitcher": "TBD Colorado",
-      "status": "projected",
-      "grade": {
-        "letter": "C+",
-        "score": 66
-      },
-      "callout": "19 mph wind blowing in from center at Coors dramatically suppresses the typical run environment but Eovaldi's 10 home runs allowed is a caution flag at altitude.",
-      "contextChips": [
-        "57 degrees at first pitch",
-        "19 mph N wind blowing IN from CF",
-        "30 pct precip chance",
-        "Coors Field 1.28 PF . wind IN suppressor"
-      ],
-      "projAway": 4.8,
-      "projHome": 5.1,
-      "paragraphs": [
-        {
-          "title": "PITCHING MATCHUP",
-          "text": "Nathan Eovaldi carries a 3.62 ERA this season but has allowed 10 home runs across his outings, making him a genuine fly ball risk at altitude. At Coors Field even a 3.62 ERA fly ball pitcher faces elevated HR exposure. Colorado's starter is not confirmed at this window. Options include Kyle Freeland and Austin Gomber, both of whom have shown significant Coors vulnerability in prior seasons. The pitching analysis is incomplete on the home side."
-        },
-        {
-          "title": "OFFENSE VS HANDEDNESS",
-          "text": "Texas at 23 and 25 has a functional lineup with power from the right side. Colorado's lineup benefits from Coors conditions at home even in mediocre form. The 19 mph north wind compresses both lineups' power output significantly from what the raw park factor suggests."
-        },
-        {
-          "title": "PARK AND WEATHER",
-          "text": "The 19 mph north wind blowing in from center is the single most important variable. Historically Coors run environments drop 15 to 20 percent when wind exceeds 15 mph inward. The normal 1.28 park factor is effectively compressed toward 1.05 to 1.10 in these conditions. The 30 percent precipitation chance could delay the game. At 57 degrees with wind in, Coors plays closer to a neutral park than its raw factor suggests."
-        },
-        {
-          "title": "STRIKEOUT PROJECTION",
-          "text": "Colorado's starter is TBD so no K prop can be published for the home side. Eovaldi is not a K volume pitcher. No K chip is live for this card. The weather and park interaction is the dominant analytical angle."
-        }
-      ],
-      "picks": [
-        {
-          "market": "total",
-          "label": "Under 12 or 12.5",
-          "price": "-110 to -120",
-          "tier": "primary",
-          "note": "19 mph wind IN from CF at Coors. Park factor suppressed toward 1.05 to 1.10 in these conditions."
-        },
-        {
-          "market": "moneyline",
-          "label": "TEX ML -115 to -130",
-          "price": "-115 to -130",
-          "tier": "secondary",
-          "note": "Confirmed Eovaldi vs TBD Colorado. TEX record edge of 23-25 vs 19-30."
-        },
-        {
-          "market": "runline",
-          "label": "TEX RL -1.5 +130 to +145",
-          "price": "+130 to +145",
-          "tier": "secondary",
-          "note": "TEX record edge plus plus price compensates for Coors variance."
-        },
-        {
-          "market": "f5total",
-          "label": "F5 Under 5",
-          "price": "-110 to -115",
-          "tier": "secondary",
-          "note": "Wind IN is strongest during afternoon starts before it shifts. F5 catches maximum suppression."
-        },
-        {
-          "market": "nrfi",
-          "label": "NRFI",
-          "price": "-115 to -125",
-          "tier": "secondary",
-          "note": "Wind IN plus cold air means first inning likely stays quiet despite park reputation."
-        }
-      ],
-      "verdict": {
-        "prose": "Under 12 or 12.5 is the lone chip given 19 mph wind blowing in from center at Coors.",
-        "chips": [
-          "Under 12 or 12.5"
-        ]
-      },
-      "appliedAdjustments": [
-        "Grade C+: COL starter TBD. No K chip. One chip only on weather driven Under at Coors."
-      ]
-    },
-    "825084": {
-      "gamePk": 825084,
-      "away": "San Francisco Giants",
-      "home": "Arizona Diamondbacks",
-      "awayAbbr": "SF",
-      "homeAbbr": "ARI",
-      "venue": "Chase Field",
-      "firstPitch": "12:40 PM MT",
-      "awayPitcher": "Logan Webb",
-      "homePitcher": "Zac Gallen",
-      "status": "projected",
-      "grade": {
-        "letter": "B-",
-        "score": 72
-      },
-      "callout": "Logan Webb's consistency against Gallen's off year ERA of 4.78 gives SF a real pitching edge in a retractable roof neutral setting.",
-      "contextChips": [
-        "Chase Field retractable roof . neutral conditions",
-        "Gallen ERA 4.78 WHIP 1.43 . off year",
-        "Webb sharp contact manager . ERA low 2s",
-        "ARI 1.02 PF neutral"
-      ],
-      "projAway": 3.4,
-      "projHome": 3.8,
-      "paragraphs": [
-        {
-          "title": "PITCHING MATCHUP",
-          "text": "Logan Webb has been one of the most consistent starters in the National League over the past three seasons. His sinker heavy approach generates ground balls and weak contact. Against an Arizona lineup that is not elite on contact rate, Webb projects for another quality start. Zac Gallen is having a down year by his standards with a 4.78 ERA and 1.43 WHIP representing meaningful regression from his 2024 form. He has struggled with hard contact allowed and his command metrics have declined."
-        },
-        {
-          "title": "OFFENSE VS HANDEDNESS",
-          "text": "San Francisco makes consistent contact and works counts effectively. Gallen's elevated WHIP suggests he is allowing more runners than normal. Arizona's lineup has pop but faces a Webb who has been excellent at limiting hard contact. The offensive advantage tilts toward SF against a struggling Gallen."
-        },
-        {
-          "title": "PARK AND WEATHER",
-          "text": "Chase Field has its retractable roof and climate control, creating a neutral park environment at 1.02 park factor. No weather variables affect this game. The analysis is purely pitcher and lineup driven, which is the cleanest analytical environment on the afternoon slate."
-        },
-        {
-          "title": "STRIKEOUT PROJECTION",
-          "text": "Webb is not a high strikeout pitcher by design. His approach prioritizes contact quality suppression over swing and miss. No K prop is live for Webb. Gallen's K rate has declined alongside his overall 2026 performance. The strikeout angle does not drive this card."
-        }
-      ],
-      "picks": [
-        {
-          "market": "moneyline",
-          "label": "SF ML -115 to -130",
-          "price": "-115 to -130",
-          "tier": "primary",
-          "note": "Webb sharp vs Gallen ERA 4.78. SF pitching edge in neutral retractable park."
-        },
-        {
-          "market": "total",
-          "label": "Under 8",
-          "price": "-110 to -115",
-          "tier": "secondary",
-          "note": "Webb suppresses run scoring. Even with Gallen struggling the total stays moderate."
-        },
-        {
-          "market": "f5total",
-          "label": "F5 Under 4",
-          "price": "-110 to -115",
-          "tier": "secondary",
-          "note": "Webb first 5 inning profile is excellent. Clean F5 likely."
-        },
-        {
-          "market": "nrfi",
-          "label": "NRFI",
-          "price": "-120 to -130",
-          "tier": "secondary",
-          "note": "Webb has excellent early inning command. First inning run unlikely."
-        },
-        {
-          "market": "runline",
-          "label": "SF RL -1.5 +130 to +145",
-          "price": "+130 to +145",
-          "tier": "secondary",
-          "note": "If Webb is on form SF wins comfortably. Plus price makes RL a secondary play."
-        }
-      ],
-      "verdict": {
-        "prose": "SF ML is the single clean chip on Webb's pitching edge against a struggling Gallen.",
-        "chips": [
-          "SF ML -115 to -130"
-        ]
-      },
-      "appliedAdjustments": [
-        "Grade B-: both starters confirmed. Webb K rate too low for K stack. Single chip for B- grade."
-      ]
-    },
-    "823134": {
-      "gamePk": 823134,
-      "away": "Chicago White Sox",
-      "home": "Seattle Mariners",
-      "awayAbbr": "CWS",
-      "homeAbbr": "SEA",
-      "venue": "T Mobile Park",
-      "firstPitch": "1:10 PM PT",
-      "awayPitcher": "TBD Chicago White Sox",
-      "homePitcher": "Bryan Woo",
-      "status": "projected",
-      "grade": {
-        "letter": "B-",
-        "score": 71
-      },
-      "callout": "Bryan Woo ERA 3.51 and WHIP 0.98 at a pitcher friendly retractable park against a White Sox road offense that ranks near the bottom of the league.",
-      "contextChips": [
-        "T Mobile Park retractable . pitcher friendly 0.92 PF",
-        "Woo ERA 3.51 WHIP 0.98 . 10 GS",
-        "CWS road offense bottom 5 MLB",
-        "SEA 23-27 . CWS 25-23"
-      ],
-      "projAway": 2.7,
-      "projHome": 3.6,
-      "paragraphs": [
-        {
-          "title": "PITCHING MATCHUP",
-          "text": "Bryan Woo has built a strong 2026 season with a 3.51 ERA and 0.98 WHIP across 10 starts. His ability to generate contact and limit walks has been the foundation of his success. Chicago's starter is not confirmed at this window. The White Sox rotation has cycled through young arms and veteran reclamation projects all season. Until a starter is named, the pitching edge is one sided in Seattle's favor."
-        },
-        {
-          "title": "OFFENSE VS HANDEDNESS",
-          "text": "Chicago's road offense has struggled throughout the season, ranking among the lowest in road wRC+ in the American League. Against a quality starter at a pitcher friendly park, their contact rates and run production consistently underperform. Seattle's lineup is not elite but has enough quality bats to exploit a TBD Chicago starter."
-        },
-        {
-          "title": "PARK AND WEATHER",
-          "text": "T Mobile Park has a park factor near 0.92, making it one of the more suppressive environments in the American League. The retractable roof ensures neutral conditions. Marine influenced air in Seattle additionally increases ball drag, compressing the run environment beyond the raw park factor."
-        },
-        {
-          "title": "STRIKEOUT PROJECTION",
-          "text": "Woo's ERA of 3.51 is fractionally above the 3.50 learnings threshold. The K over plus Under stack is disqualified by 0.01. His K over prop can stand alone as a secondary pick. Woo K9 is approximately 8.5 this season; at a typical 6 inning start he averages about 5.7 strikeouts, making K over 5 or 5.5 playable independently."
-        }
-      ],
-      "picks": [
-        {
-          "market": "moneyline",
-          "label": "SEA ML -130 to -145",
-          "price": "-130 to -145",
-          "tier": "primary",
-          "note": "Woo confirmed vs TBD CWS. Pitcher friendly park. CWS road offense near bottom of league."
-        },
-        {
-          "market": "total",
-          "label": "Under 7.5",
-          "price": "-110 to -115",
-          "tier": "secondary",
-          "note": "T Mobile 0.92 PF plus marine air. Low run environment expected."
-        },
-        {
-          "market": "strikeout",
-          "label": "Woo K over 5",
-          "price": "-110 to -115",
-          "tier": "secondary",
-          "note": "Woo K9 approximately 8.5. Standalone prop; K plus Under stack disqualified by 0.01 ERA."
-        },
-        {
-          "market": "f5total",
-          "label": "F5 Under 3.5",
-          "price": "-110 to -115",
-          "tier": "secondary",
-          "note": "Woo first 5 innings have been his strongest window all season."
-        },
-        {
-          "market": "nrfi",
-          "label": "NRFI",
-          "price": "-130 to -140",
-          "tier": "secondary",
-          "note": "CWS road offense vs Woo at T Mobile. First inning run highly unlikely."
-        },
-        {
-          "market": "runline",
-          "label": "SEA RL -1.5 +115 to +125",
-          "price": "+115 to +125",
-          "tier": "secondary",
-          "note": "If Woo is on form SEA wins multiple runs. Plus price makes RL secondary."
-        }
-      ],
-      "verdict": {
-        "prose": "SEA ML is the chip with Woo confirmed and CWS TBD in a pitcher friendly retractable park.",
-        "chips": [
-          "SEA ML -130 to -145"
-        ]
-      },
-      "appliedAdjustments": [
-        "K plus Under stack disqualified: Woo ERA 3.51 exceeds 3.50 threshold by 0.01. K over published as standalone secondary only."
-      ]
-    },
-    "824273": {
-      "gamePk": 824273,
+    "824274": {
+      "gamePk": 824274,
       "away": "Cleveland Guardians",
       "home": "Detroit Tigers",
       "awayAbbr": "CLE",
       "homeAbbr": "DET",
       "venue": "Comerica Park",
-      "firstPitch": "6:40 PM ET",
-      "awayPitcher": "Tanner Bibee",
-      "homePitcher": "TBD Detroit",
+      "firstPitch": "1:10 PM ET",
+      "awayPitcher": "Joey Cantillo",
+      "homePitcher": "Casey Mize",
       "status": "projected",
+      "probable_pitcher_source": "boxscore-single",
       "grade": {
-        "letter": "C+",
-        "score": 65
+        "letter": "B",
+        "score": 76
       },
-      "callout": "Tanner Bibee ERA 4.15 and 0 and 6 record reflects poor run support more than stuff, but Detroit's starter is unconfirmed and Comerica Park suppresses offense in evening conditions.",
+      "callout": "Mize at 2.43 ERA and 27.5 pct whiff anchors a pitcher friendly Comerica matchup against a struggling DET offense.",
       "contextChips": [
-        "60 degrees at first pitch . 6:40 PM ET",
-        "16 mph ENE wind neutral",
-        "Comerica Park large outfield . pitcher friendly",
-        "Bibee 0-6 record . ERA 4.15 . run support victim"
+        "Mize 2.43 ERA . 9.49 K per 9 . 1.05 WHIP across 7 GS",
+        "Comerica Park deep power alleys . pitcher lean",
+        "DET 20-30 offense projects weak run total",
+        "HP Ump Manny Gonzalez . average zone"
+      ],
+      "projAway": 3.0,
+      "projHome": 2.2,
+      "paragraphs": [
+        {
+          "title": "Pitching Matchup",
+          "text": "Casey Mize is one of the sharper starters in the AL this season. Across 7 starts and 37 innings he carries a 2.43 ERA, 1.05 WHIP, 9.49 K per 9, and a 27.5 percent whiff rate against 147 batters faced. His strikeout to walk ratio sits at 3.55. Mize has allowed a .211 average against and posted 4 quality starts in 7 outings. Joey Cantillo is confirmed as the CLE starter via the boxscore endpoint at this window, but his Statcast data was not returned by the API at this refresh. The card is built on Mize's confirmed numbers and CLE's team record as the primary edge signals. Cantillo's profile is treated as unknown for chip eligibility purposes."
+        },
+        {
+          "title": "Offense vs Handedness",
+          "text": "CLE at 29-22 is one of the more productive offenses in the AL and should generate 3 or more projected runs. DET's 20-30 record reflects a below average offense. Their lineup faces Cantillo, a left handed soft tosser, but without reliable whiff or K data the offensive matchup for DET is difficult to project with confidence. Projected lineups on both sides are unconfirmed at 11:30 AM. The CLE run total is anchored by team talent while DET's run potential is suppressed by both their offensive struggles and Mize's strong profile."
+        },
+        {
+          "title": "Park and Weather",
+          "text": "Comerica Park plays as one of the more pitcher friendly environments in the AL with deep power alleys and a spacious center field. Park factor is below 1.00 for home runs and run production. Late May Detroit typically sees temperatures in the mid to upper 60s at first pitch with light variable wind. No significant weather edge identified at this window. The park itself favors both under and run line plays when at least one quality starter is in the mix."
+        },
+        {
+          "title": "Strikeout Projection",
+          "text": "Mize averages 9.49 K per 9 across 37 innings. In a typical 5.3 IP outing he projects approximately 5.6 Ks. The K prop is live on Mize and the carryover rule allows a K plus Under stack only if ERA is below 3.50 and IP average is above 5. Mize qualifies on both counts at 2.43 ERA. Cantillo stat data was not returned by the API; no K prop is published for the away side this window."
+        }
+      ],
+      "picks": [
+        {
+          "market": "ML",
+          "label": "CLE ML",
+          "price": 130,
+          "tier": "B",
+          "note": "CLE 29-22 vs DET 20-30; Guardians are the clearly superior team regardless of pitching matchup."
+        },
+        {
+          "market": "Total",
+          "label": "Under 8",
+          "price": -110,
+          "tier": "B",
+          "note": "Mize 2.43 ERA suppresses CLE; DET offense projects weak total. Second pass validates under in pitcher friendly Comerica."
+        },
+        {
+          "market": "K",
+          "label": "Mize K over 5.5",
+          "price": -115,
+          "tier": "B",
+          "note": "Mize 9.49 K per 9 across 37 innings with 27.5 pct whiff rate qualifies the prop."
+        },
+        {
+          "market": "F5",
+          "label": "F5 Under 4",
+          "price": -115,
+          "tier": "B",
+          "note": "Mize through 5 innings has been dominant; DET offense thin early."
+        },
+        {
+          "market": "F5 ML",
+          "label": "CLE F5 ML",
+          "price": -110,
+          "tier": "B",
+          "note": "CLE is the better team; Mize suppresses their offense but CLE projects to win the game."
+        },
+        {
+          "market": "NRFI",
+          "label": "NRFI",
+          "price": -130,
+          "tier": "B",
+          "note": "Mize first inning command strong; both starters profile well for NRFI."
+        },
+        {
+          "market": "Alt K",
+          "label": "Mize K over 4.5",
+          "price": -155,
+          "tier": "B",
+          "note": "Safer Mize K line; Mize K rate strongly supports this floor even in a shortened outing."
+        }
+      ],
+      "verdict": {
+        "prose": "CLE ML and the Under are the primary plays with Mize holding down DET's weak offense in a pitcher friendly park.",
+        "chips": [
+          "CLE ML +125 to +135",
+          "Under 8 -105 to -115"
+        ]
+      },
+      "appliedAdjustments": [
+        "MODEL_ERROR validation applied: Under cross checked against Mize ERA 2.43, Comerica park factor, and DET offensive struggles. Confirmed.",
+        "K plus Under stack eligibility confirmed: Mize ERA 2.43 below 3.50 threshold."
+      ]
+    },
+    "823056": {
+      "gamePk": 823056,
+      "away": "Pittsburgh Pirates",
+      "home": "St. Louis Cardinals",
+      "awayAbbr": "PIT",
+      "homeAbbr": "STL",
+      "venue": "Busch Stadium",
+      "firstPitch": "1:15 PM ET",
+      "awayPitcher": "Braxton Ashcraft",
+      "homePitcher": "Dustin May",
+      "status": "projected",
+      "probable_pitcher_source": "boxscore-single",
+      "grade": {
+        "letter": "B+",
+        "score": 80
+      },
+      "callout": "Ashcraft at 3.09 ERA and 27.4 pct whiff dominates a hittable May at 4.81 ERA, unlocking both an under and a K stack.",
+      "contextChips": [
+        "Ashcraft 3.09 ERA . 9.11 K per 9 . 27.4 pct whiff . 9 GS",
+        "May 4.81 ERA . 17.9 pct whiff . 9.99 H per 9 . contact pitcher",
+        "HP Ump James Hoye . average zone",
+        "K plus Under stack validated per carryover rule"
+      ],
+      "projAway": 3.2,
+      "projHome": 2.4,
+      "paragraphs": [
+        {
+          "title": "Pitching Matchup",
+          "text": "Braxton Ashcraft has been one of the steadier starters in the NL through 9 starts and 55.1 innings. His ERA sits at 3.09 with a 1.05 WHIP, 9.11 K per 9, and a 27.4 percent whiff rate. His K to BB ratio is 4.00 and he averages 6.15 innings per start with 5 quality starts. Dustin May is the contrasting profile on the home side. May carries a 4.81 ERA, 1.42 WHIP, and a 17.9 percent whiff rate across 9 starts and 48.2 innings. His H per 9 is 9.99 against a .292 average, signaling a hittable contact profile with four wild pitches this season. The quality gap between these two starters is the primary edge driver on this card."
+        },
+        {
+          "title": "Offense vs Handedness",
+          "text": "STL at 28-20 brings a capable lineup to the plate against Ashcraft but his low walk rate and 27.4 percent whiff profile suppresses even organized offenses. PIT at 25-24 faces May who gives up contact at a high rate. May's BABIP against is .338 this season, signaling regression risk has not fully materialized. PIT's projected lineup is unconfirmed at this window but the matchup advantage on the PIT offensive side is real based on May's season profile. STL's lineup facing Ashcraft is projected to underperform their run production average."
+        },
+        {
+          "title": "Park and Weather",
+          "text": "Busch Stadium plays at a slight pitcher lean with neutral park factors. Late May St. Louis at 1:15 PM sees temperatures typically in the mid to upper 70s with variable wind. No dramatic weather signal. The park does not meaningfully distort the pitching edge already present in this matchup. Second pass validation on the under: Ashcraft's ERA of 3.09 holds and his average 6.15 IP per start means he is the dominant factor in the run total. May's 4.81 ERA and high contact rate creates PIT run opportunity but does not push the total over."
+        },
+        {
+          "title": "Strikeout Projection",
+          "text": "Ashcraft averages 9.11 K per 9 across 55.1 innings, projecting approximately 6.2 Ks in his average 6.15 IP outing. The carryover rule allows a K over and Under stack when the starter's ERA is below 3.50 and IP average is above 5.0 per start. Ashcraft clears both thresholds: ERA 3.09, IP average 6.15. Ashcraft K over 5.5 is the primary K chip and is stackable with the Under. May K per 9 is 6.47 projecting only 4.1 Ks in 5.4 IP; no K prop on May."
+        },
+        {
+          "title": "Bullpen Edge",
+          "text": "May's lower IP average of 5.41 per start means the STL bullpen sees more work in this game than PIT's does behind Ashcraft's 6.15 IP average. If May struggles early, the STL pen inherits pressure sooner. PIT's bullpen edge is modest but non trivial in a game where one starter is significantly sharper than the other."
+        }
+      ],
+      "picks": [
+        {
+          "market": "Total",
+          "label": "Under 8",
+          "price": -110,
+          "tier": "A",
+          "note": "Ashcraft 3.09 ERA dominant through 6 plus innings; May hittable but PIT not a high run team. Second pass validated."
+        },
+        {
+          "market": "K",
+          "label": "Ashcraft K over 5.5",
+          "price": -115,
+          "tier": "A",
+          "note": "Ashcraft 9.11 K per 9, 27.4 pct whiff, ERA 3.09 qualifies for K plus Under stack per carryover rule."
+        },
+        {
+          "market": "ML",
+          "label": "PIT ML",
+          "price": 135,
+          "tier": "B",
+          "note": "PIT faces hittable May while Ashcraft limits STL; road dog value with the better pitcher."
+        },
+        {
+          "market": "F5",
+          "label": "F5 Under 4",
+          "price": -120,
+          "tier": "B",
+          "note": "Ashcraft through 5 innings is elite; his profile drives the F5 under."
+        },
+        {
+          "market": "F5 ML",
+          "label": "PIT F5 ML",
+          "price": -105,
+          "tier": "B",
+          "note": "Ashcraft gives PIT the first 5 innings advantage; May projects shaky in the same stretch."
+        },
+        {
+          "market": "NRFI",
+          "label": "NRFI",
+          "price": -125,
+          "tier": "B",
+          "note": "Ashcraft command profile is strong in early frames; STL lineup unconfirmed."
+        },
+        {
+          "market": "RL",
+          "label": "PIT RL +1.5",
+          "price": -175,
+          "tier": "C",
+          "note": "Run line protection on PIT as an alternative to straight ML; May likely to give up runs."
+        }
+      ],
+      "verdict": {
+        "prose": "Under 8 and Ashcraft K over 5.5 are the validated K plus Under stack, the cleanest two card play on the Thursday slate.",
+        "chips": [
+          "Under 8 -105 to -115",
+          "Ashcraft K over 5.5 -110 to -120"
+        ]
+      },
+      "appliedAdjustments": [
+        "K plus Under stack validated: Ashcraft ERA 3.09 below 3.50, IP average 6.15 above 5.0 floor. Stack published per carryover rule.",
+        "MODEL_ERROR second pass: Under cross checked against May ERA 4.81 contact rate and Ashcraft dominance profile. Confirmed."
+      ]
+    },
+    "822733": {
+      "gamePk": 822733,
+      "away": "New York Mets",
+      "home": "Washington Nationals",
+      "awayAbbr": "NYM",
+      "homeAbbr": "WSH",
+      "venue": "Nationals Park",
+      "firstPitch": "4:05 PM ET",
+      "awayPitcher": "TBD",
+      "homePitcher": "TBD",
+      "status": "projected",
+      "probable_pitcher_source": "TBD",
+      "grade": {
+        "letter": "C",
+        "score": 57
+      },
+      "callout": "Both starters unconfirmed at this window; balanced records limit this to a pass at midday.",
+      "contextChips": [
+        "Both starters TBD at 11:30 AM",
+        "NYM 21-28 vs WSH 25-25 . WSH slight home edge",
+        "Nationals Park . neutral park factor",
+        "Revisit within 90 min of first pitch"
       ],
       "projAway": 3.0,
       "projHome": 3.2,
       "paragraphs": [
         {
-          "title": "PITCHING MATCHUP",
-          "text": "Tanner Bibee's 0 and 6 record is a product of historically poor run support rather than poor pitching. His 4.15 ERA is workable and his peripherals suggest bad luck. Detroit's probable starter is not confirmed. Options include Tarik Skubal, one of the best starters in the American League, or a mid rotation arm. If Skubal draws the start this card should be revisited with DET ML as a strong lean."
+          "title": "Pitching Matchup",
+          "text": "Neither probable pitcher was returned by the lineup or boxscore endpoints at the 11:30 AM window. Per strict validation rules, no pitcher name is published when the API returns no data. This game is flagged for revisit within 90 minutes of first pitch when roster confirmation typically becomes available. The card cannot carry a pitching edge without confirmed starters."
         },
         {
-          "title": "OFFENSE VS HANDEDNESS",
-          "text": "Cleveland's lineup at 28 and 22 has been functional without being dominant. Detroit's lineup at 20 and 29 is not deep. Both projected lineups are moderate and do not overwhelm either starter."
+          "title": "Offense vs Handedness",
+          "text": "NYM at 21-28 is one of the weaker offensive teams in the NL this season despite roster talent. WSH at 25-25 is at the break even mark with a functional if unspectacular lineup. Without confirmed starter handedness, the offensive matchup splits cannot be applied. Projected lineups are unconfirmed at this window for both sides."
         },
         {
-          "title": "PARK AND WEATHER",
-          "text": "Comerica Park is one of the largest ballparks in the American League, with deep power alleys that suppress home runs and extra base hits. The 60 degree evening temperature adds air density for suppression. The 16 mph ENE wind provides minimal offensive amplification. The combination of large park and cool evening conditions favors unders consistently at this venue."
+          "title": "Park and Weather",
+          "text": "Nationals Park plays at a neutral park factor. Late May Washington DC at 4:05 PM typically sees temperatures in the low to mid 70s with variable SE wind. Weather data was not retrievable at this window due to API access restrictions in the Linux sandbox environment. The park does not add a directional bias that would shift the run environment meaningfully."
         },
         {
-          "title": "STRIKEOUT PROJECTION",
-          "text": "Detroit's starter is TBD so no K prop can be published. Bibee's K9 is moderate and does not support a primary K chip without higher confidence. No K chip is live for this card."
+          "title": "Strikeout Projection",
+          "text": "With both starters TBD, no K props are published. Any strikeout or total pick on this game should be deferred until starter identities are confirmed. The monitoring list flags this game for starter confirmation within 90 minutes of the 4:05 PM ET first pitch."
         }
       ],
       "picks": [
         {
-          "market": "total",
-          "label": "Under 7.5",
-          "price": "-110 to -115",
-          "tier": "primary",
-          "note": "Comerica large outfield plus 60 degree evening. Both offenses moderate. Under is the structural play."
+          "market": "ML",
+          "label": "WSH ML",
+          "price": -105,
+          "tier": "C",
+          "note": "WSH slight home edge and better record, but TBD starters limit conviction."
         },
         {
-          "market": "moneyline",
-          "label": "DET ML -110 to -125",
-          "price": "-110 to -125",
-          "tier": "secondary",
-          "note": "Home field plus unconfirmed but potentially elite DET starter. Revisit if Skubal confirmed."
+          "market": "Total",
+          "label": "Under 8.5",
+          "price": -105,
+          "tier": "C",
+          "note": "Nationals Park neutral; lean under only if confirmed starters favor low run environment."
         },
         {
-          "market": "f5total",
-          "label": "F5 Under 3.5",
-          "price": "-110 to -115",
-          "tier": "secondary",
-          "note": "Evening start at Comerica. Both starters likely to keep F5 under 4 runs."
+          "market": "F5",
+          "label": "F5 Under 4.5",
+          "price": -110,
+          "tier": "C",
+          "note": "Placeholder F5 under; confirm starters before wagering."
         },
         {
-          "market": "nrfi",
+          "market": "NRFI",
           "label": "NRFI",
-          "price": "-120 to -130",
-          "tier": "secondary",
-          "note": "Cool evening at large park. First inning run unlikely against probable quality starters."
+          "price": -120,
+          "tier": "C",
+          "note": "Low conviction NRFI play without starter data; revisit at game time."
         },
         {
-          "market": "runline",
-          "label": "DET RL -1.5 +135 to +150",
-          "price": "+135 to +150",
-          "tier": "secondary",
-          "note": "Only live if Skubal confirmed. Plus price compensates for uncertainty."
+          "market": "RL",
+          "label": "WSH RL -1.5",
+          "price": 175,
+          "tier": "C",
+          "note": "Value only if WSH starter is a top rotation arm; avoid until lineup posted."
         }
       ],
       "verdict": {
-        "prose": "Under 7.5 is the single chip on Comerica Park conditions with DET starter TBD.",
-        "chips": [
-          "Under 7.5"
-        ]
+        "prose": "Pass at this window. Both starters TBD. Revisit within 90 minutes of first pitch for confirmation before any wagering.",
+        "chips": []
       },
-      "appliedAdjustments": [
-        "Grade capped at C+: DET starter TBD. Single chip only. Upgrade to B- if Skubal confirmed."
-      ]
+      "appliedAdjustments": []
     },
-    "823866": {
-      "gamePk": 823866,
+    "823864": {
+      "gamePk": 823864,
       "away": "Atlanta Braves",
       "home": "Miami Marlins",
       "awayAbbr": "ATL",
       "homeAbbr": "MIA",
       "venue": "loanDepot park",
       "firstPitch": "6:40 PM ET",
-      "awayPitcher": "Chris Sale",
-      "homePitcher": "TBD Miami",
+      "awayPitcher": "TBD",
+      "homePitcher": "TBD",
       "status": "projected",
-      "grade": {
-        "letter": "B+",
-        "score": 84
-      },
-      "callout": "Chris Sale ERA 1.96 and K9 10.47 leading the best team in baseball at 33 and 16 into Miami against the Marlins in a dome setting is the clearest multi chip card on the slate.",
-      "contextChips": [
-        "loanDepot park retractable . neutral conditions",
-        "Sale ERA 1.96 K9 10.47 . 9 GS",
-        "ATL 33-16 best record in MLB",
-        "MIA 22-27 . below average offense"
-      ],
-      "projAway": 5.3,
-      "projHome": 1.8,
-      "paragraphs": [
-        {
-          "title": "PITCHING MATCHUP",
-          "text": "Chris Sale is pitching at one of the highest levels of his career in 2026. His 1.96 ERA across 9 starts with a 10.47 K per 9 rate reflects elite command and elite swing and miss ability. Sale's fastball velocity has remained strong through May and his breaking ball has been his best in years. Miami's starter is not confirmed at this window, but even a quality arm faces an uphill battle against Atlanta's offense. The pitching edge to Atlanta is decisive."
-        },
-        {
-          "title": "OFFENSE VS HANDEDNESS",
-          "text": "Atlanta's lineup at 33 and 16 is the best in the National League. They have consistent run production from top to bottom and have been punishing weak starters all season. Miami's lineup at 22 and 27 is below league average in most offensive categories. Against Sale's 10.47 K rate and elite command, their projected lineup projects for 1.5 to 2.0 runs at most."
-        },
-        {
-          "title": "PARK AND WEATHER",
-          "text": "loanDepot park has its retractable roof, producing a consistently neutral environment. No weather variables affect this game. The park factor is approximately 0.95, leaning slightly toward pitchers. The neutral conditions keep the analysis entirely on starter quality and team performance, both of which favor Atlanta convincingly."
-        },
-        {
-          "title": "STRIKEOUT PROJECTION",
-          "text": "Sale's K over qualifies under the learnings adjustment. His ERA of 1.96 is well below the 3.50 threshold. Across 9 starts and approximately 55 to 58 innings his per start inning average of approximately 6.1 to 6.4 IP meets the 5 inning floor. At a K line of 7 or 7.5, Sale's 10.47 K9 rate makes this a clear target. Against a below average Miami lineup at 6 innings he projects for approximately 7 strikeouts."
-        },
-        {
-          "title": "BULLPEN EDGE",
-          "text": "Atlanta's bullpen at 33 and 16 has been one of the deeper units in the league. If Sale exits after 6 or 7 innings with a large lead, the Braves bullpen will protect it. Miami's bullpen is exposed when their offense cannot produce against elite starters."
-        }
-      ],
-      "picks": [
-        {
-          "market": "moneyline",
-          "label": "ATL ML -185 to -210",
-          "price": "-185 to -210",
-          "tier": "primary",
-          "note": "Best team in baseball with their ace vs below average Miami. No edge is cleaner today."
-        },
-        {
-          "market": "strikeout",
-          "label": "Sale K over 7",
-          "price": "-115 to -125",
-          "tier": "primary",
-          "note": "Sale K9 10.47, ERA 1.96. Qualifies for K plus Under stack per learnings. Against weak MIA lineup."
-        },
-        {
-          "market": "total",
-          "label": "Under 7",
-          "price": "-115 to -125",
-          "tier": "primary",
-          "note": "Sale elite plus MIA below average offense equals sub 7 run total. Third chip on independent market."
-        },
-        {
-          "market": "runline",
-          "label": "ATL RL -1.5 -120 to -135",
-          "price": "-120 to -135",
-          "tier": "secondary",
-          "note": "ATL wins by 2 or more with Sale and best offense vs MIA. Slight juice but justified."
-        },
-        {
-          "market": "f5total",
-          "label": "F5 Under 3.5",
-          "price": "-120 to -130",
-          "tier": "secondary",
-          "note": "Sale in first 5 innings against MIA projects for 1 run max."
-        },
-        {
-          "market": "nrfi",
-          "label": "NRFI",
-          "price": "-145 to -160",
-          "tier": "secondary",
-          "note": "Sale with elite command against MIA offense. First inning run is unlikely."
-        }
-      ],
-      "verdict": {
-        "prose": "ATL ML, Sale K over 7, and Under 7 form the three chip stack with Sale's ERA 1.96 and K9 10.47 qualifying under the learnings adjustment.",
-        "chips": [
-          "ATL ML -185 to -210",
-          "Sale K over 7",
-          "Under 7"
-        ]
-      },
-      "appliedAdjustments": [
-        "K plus Under stack validated: Sale ERA 1.96 below 3.50 threshold. Inning average approximately 6.2 IP per start across 9 GS meets 5 inning floor. Three chip stack on independent markets published."
-      ]
-    },
-    "822735": {
-      "gamePk": 822735,
-      "away": "New York Mets",
-      "home": "Washington Nationals",
-      "awayAbbr": "NYM",
-      "homeAbbr": "WSH",
-      "venue": "Nationals Park",
-      "firstPitch": "6:45 PM ET",
-      "awayPitcher": "Sean Manaea",
-      "homePitcher": "MacKenzie Gore",
-      "status": "projected",
+      "probable_pitcher_source": "TBD",
       "grade": {
         "letter": "C",
-        "score": 60
+        "score": 67
       },
-      "callout": "94 degrees with 21 mph wind and a 26 percent storm probability at Nationals Park introduces weather variance that prevents confident chips on either total or side.",
+      "callout": "ATL 34-16 is the class of baseball entering a dome venue against MIA 22-28; team talent edge is strong enough to lean even with TBD starters.",
       "contextChips": [
-        "94 degrees at first pitch",
-        "21 mph wind . 26 pct precip risk",
-        "Nationals Park 1.02 PF neutral",
-        "Both teams below .500 . weather dominant variable"
+        "ATL 34-16 . best record in NL . elite run differential",
+        "MIA 22-28 . bottom quarter of NL offense",
+        "loanDepot park . retractable dome . weather neutral",
+        "Both starters TBD at 11:30 AM window"
       ],
-      "projAway": 3.6,
-      "projHome": 3.4,
+      "projAway": 4.5,
+      "projHome": 2.8,
       "paragraphs": [
         {
-          "title": "PITCHING MATCHUP",
-          "text": "Sean Manaea takes the ball for New York in a season that has been inconsistent. His ERA sits around 4.50 with stretches of quality and stretches of hard contact allowed. MacKenzie Gore has been solid for Washington with an ERA in the low 3 range, featuring a sharp slider that generates whiffs. Gore is the stronger starter and provides Washington a genuine edge at home."
+          "title": "Pitching Matchup",
+          "text": "Neither probable starter was confirmed by the API at this window. ATL's rotation depth is strong across the board, meaning virtually any confirmed ATL starter carries above average ERA expectations relative to MIA's rotation. MIA's rotation has been inconsistent this season in line with their 22-28 record. The team talent gap is large enough to maintain a lean toward ATL even in the absence of specific pitcher data, but the grade is capped at C per the TBD starter rule."
         },
         {
-          "title": "OFFENSE VS HANDEDNESS",
-          "text": "Both teams are below .500 and neither lineup has been consistently productive. New York at 21 and 27 has underperformed preseason expectations significantly. Washington at 24 and 25 has been resilient at home. The matchup is relatively balanced from an offensive standpoint."
+          "title": "Offense vs Handedness",
+          "text": "Atlanta's lineup is one of the most dangerous in baseball, producing at a pace consistent with their 34-16 record. They project to generate 4 or more runs regardless of the opposing starter given their lineup depth and team run differential. Miami's offense at 22-28 is one of the weaker units in the NL. The run differential alone supports a significant ATL win probability edge at any lineup configuration."
         },
         {
-          "title": "PARK AND WEATHER",
-          "text": "The 94 degree first pitch temperature with 21 mph wind and 26 percent precipitation probability is the dominant factor suppressing confidence. Extreme heat expands run environments, but storm risk could delay the game, exhaust relievers, or result in a shortened result that alters wager settlements. In severe heat with storm risk, unders can get blown up when the bullpen is exposed mid game. The single chip on this card is lean only."
+          "title": "Park and Weather",
+          "text": "loanDepot park is a retractable roof facility. In late May Miami the roof is almost always closed due to heat and afternoon thunderstorms. A closed dome eliminates all weather variables and sets the run environment at neutral. The park factor at loanDepot is slightly below league average for run production, which leans slightly toward unders independent of pitching."
         },
         {
-          "title": "STRIKEOUT PROJECTION",
-          "text": "Gore's slider is his primary strikeout weapon. In high heat slider movement can flatten slightly. Manaea's K rate is moderate and does not support a primary K chip. No K props are published at C grade. Gore K over 5 is worth a small look as secondary if the game proceeds without weather interruption."
+          "title": "Strikeout Projection",
+          "text": "No K props are published at this window with both starters TBD. ATL's lineup is among the more strikeout tolerant in baseball which slightly suppresses K props from the home pitcher side. Any K pick here requires confirmed starter identity. Flag for revisit before 6:40 PM ET first pitch."
         }
       ],
       "picks": [
         {
-          "market": "moneyline",
-          "label": "WSH ML -105 to -115",
-          "price": "-105 to -115",
-          "tier": "primary",
-          "note": "Gore vs Manaea at home. WSH slight pitching edge. Weather uncertainty caps at C with single chip."
+          "market": "ML",
+          "label": "ATL ML",
+          "price": -165,
+          "tier": "B",
+          "note": "ATL 34-16 is the best team in the NL; MIA 22-28 at home does not overcome a 12 game record differential."
         },
         {
-          "market": "total",
-          "label": "Over 8",
-          "price": "-110 to -115",
-          "tier": "secondary",
-          "note": "94 degree heat expands run environments. Storm delay bullpen exposure adds runs."
+          "market": "RL",
+          "label": "ATL RL -1.5",
+          "price": -105,
+          "tier": "B",
+          "note": "ATL run differential supports covering the run line even without pitching data."
         },
         {
-          "market": "f5total",
-          "label": "F5 Under 4",
-          "price": "-110 to -115",
-          "tier": "secondary",
-          "note": "Gore in first 5 is cleanest angle if weather stays clear."
+          "market": "Team Total",
+          "label": "ATL Team Total Over 3.5",
+          "price": -115,
+          "tier": "B",
+          "note": "Atlanta projects 4 plus runs per game vs any NL opposition; MIA rotation not strong enough to suppress this lineup."
         },
         {
-          "market": "nrfi",
+          "market": "F5 ML",
+          "label": "ATL F5 ML",
+          "price": -145,
+          "tier": "B",
+          "note": "ATL rotation depth means almost any confirmed starter gives them first 5 advantage over MIA."
+        },
+        {
+          "market": "Total",
+          "label": "Under 8",
+          "price": -110,
+          "tier": "C",
+          "note": "Dome neutral park, MIA weak offense, ATL rotation depth; combined run total likely suppressed. Second pass: MIA under 3 keeps total lean viable."
+        },
+        {
+          "market": "NRFI",
           "label": "NRFI",
-          "price": "-115 to -125",
-          "tier": "secondary",
-          "note": "Gore early inning command has been good. First inning run unlikely if he is on."
-        },
-        {
-          "market": "strikeout",
-          "label": "Gore K over 5",
-          "price": "-110 to -115",
-          "tier": "secondary",
-          "note": "Secondary consideration only. Gore slider plus whiff rate makes K over 5 plausible on a clean game."
+          "price": -115,
+          "tier": "C",
+          "note": "TBD starters for both but dome environment and ATL staff depth supports no first inning run from MIA."
         }
       ],
       "verdict": {
-        "prose": "WSH ML is the lone lean given Gore's pitching edge but weather risk keeps confidence at C.",
+        "prose": "ATL ML is the primary lean on the strength of the best team in the NL visiting a dome against a below average MIA squad.",
         "chips": [
-          "WSH ML -105 to -115"
+          "ATL ML -155 to -170"
         ]
       },
       "appliedAdjustments": [
-        "Grade C: 94 degree heat plus 26 pct storm risk caps confidence. Single chip only. No total chip given weather variance."
+        "MODEL_ERROR second pass: ATL team total over cross checked against MIA 22-28 weak offense and dome neutral park. ATL team total over published at B tier."
       ]
     },
-    "823547": {
-      "gamePk": 823547,
+    "823545": {
+      "gamePk": 823545,
       "away": "Toronto Blue Jays",
       "home": "New York Yankees",
       "awayAbbr": "TOR",
       "homeAbbr": "NYY",
       "venue": "Yankee Stadium",
       "firstPitch": "7:05 PM ET",
-      "awayPitcher": "Dylan Cease",
-      "homePitcher": "Carlos Rodon",
+      "awayPitcher": "TBD",
+      "homePitcher": "TBD",
       "status": "projected",
-      "grade": {
-        "letter": "B+",
-        "score": 81
-      },
-      "callout": "92 degrees with 17 to 21 mph W/SW wind blowing out to right field at Yankee Stadium amplifies the power corridor while NYY 30 and 19 faces TOR 21 and 27 on the road.",
-      "contextChips": [
-        "92 degrees at first pitch",
-        "17 to 21 mph W/SW blowing out to RF",
-        "Yankee Stadium 1.11 PF . right field power park",
-        "NYY 30-19 . TOR 21-27 . Cease confirmed for TOR"
-      ],
-      "projAway": 4.1,
-      "projHome": 5.7,
-      "paragraphs": [
-        {
-          "title": "PITCHING MATCHUP",
-          "text": "Dylan Cease takes the ball for Toronto in 2026 after his move to the Blue Jays. Cease is a power pitcher with a plus slider and K9 rates above 9.5 in recent seasons. However at Yankee Stadium in 92 degree heat with wind blowing out to right field, his fly ball tendencies become a genuine liability. Carlos Rodon for New York has been solid at home, generating ground ball contact and limiting walks. The stadium and weather environment favors the home starter significantly."
-        },
-        {
-          "title": "OFFENSE VS HANDEDNESS",
-          "text": "New York's lineup at 30 and 19 is one of the deepest offensive units in the American League. The W/SW wind blowing out to right field is directly aligned with the most dangerous zone for Cease's fly ball profile. Toronto's lineup has quality bats but is not at the same level as the Yankees, particularly on the road."
-        },
-        {
-          "title": "PARK AND WEATHER",
-          "text": "Yankee Stadium carries an 1.11 park factor with an extreme right field bias that amplifies right handed pull power. The 92 degree first pitch temperature combined with 17 to 21 mph W/SW wind pushing balls out to right field creates one of the most offense friendly environments of 2026. Historically right handed power hitters post 25 to 35 percent better HR rates at Yankee Stadium on high temperature outgoing wind days. This is among the strongest Over signals on the slate."
-        },
-        {
-          "title": "STRIKEOUT PROJECTION",
-          "text": "Cease's K9 above 9.5 makes his K over prop worth considering as a secondary. However in high heat his slider can flatten and his command under these conditions has been less sharp. The wind and heat that make the Over attractive also slightly reduce Cease K over confidence. No K chip is published because the Over is the primary thesis and duplicating directional angles would violate chip rules."
-        },
-        {
-          "title": "BULLPEN EDGE",
-          "text": "New York's bullpen has been one of the most reliable in the American League. If Cease exits early due to HR trouble, Toronto's pen is thinner. The NYY bullpen will protect a lead while Toronto may be exposed in high leverage situations late."
-        }
-      ],
-      "picks": [
-        {
-          "market": "moneyline",
-          "label": "NYY ML -155 to -175",
-          "price": "-155 to -175",
-          "tier": "primary",
-          "note": "NYY 30-19 home with wind out plus Rodon vs Cease. Multiple convergent edges."
-        },
-        {
-          "market": "total",
-          "label": "Over 9 or 9.5",
-          "price": "-110 to -120",
-          "tier": "primary",
-          "note": "92 degrees plus 17 mph out to RF at Yankee Stadium. Power corridor activated. Best Over spot of 2026 for this park type."
-        },
-        {
-          "market": "runline",
-          "label": "NYY RL -1.5 +105 to +115",
-          "price": "+105 to +115",
-          "tier": "secondary",
-          "note": "NYY offense plus home park plus weather. Wins by 2 or more at strong clip."
-        },
-        {
-          "market": "f5total",
-          "label": "F5 Over 4.5",
-          "price": "-110 to -120",
-          "tier": "secondary",
-          "note": "First 5 innings with power lineups and outgoing wind. Cease vulnerable to HR in this environment."
-        },
-        {
-          "market": "nrfi",
-          "label": "YRFI",
-          "price": "-130 to -145",
-          "tier": "secondary",
-          "note": "NYY lineup vs Cease in heat with wind out. First inning run is above average probability."
-        },
-        {
-          "market": "strikeout",
-          "label": "Cease K over 7",
-          "price": "-110 to -115",
-          "tier": "secondary",
-          "note": "Secondary only given Over is primary thesis. Cease K9 above 9.5 but heat may suppress."
-        }
-      ],
-      "verdict": {
-        "prose": "NYY ML and Over 9 are the two primary chips on 92 degree heat with 17 mph wind blowing out to right field at Yankee Stadium.",
-        "chips": [
-          "NYY ML -155 to -175",
-          "Over 9 or 9.5"
-        ]
-      },
-      "appliedAdjustments": [
-        "K plus Under stack not applicable: Over is the primary thesis, combining K over with Under contradicts the directional argument. NYY ML and Over published as two independent chips."
-      ]
-    },
-    "824111": {
-      "gamePk": 824111,
-      "away": "Boston Red Sox",
-      "home": "Kansas City Royals",
-      "awayAbbr": "BOS",
-      "homeAbbr": "KC",
-      "venue": "Kauffman Stadium",
-      "firstPitch": "7:40 PM ET",
-      "awayPitcher": "Nick Pivetta",
-      "homePitcher": "Seth Lugo",
-      "status": "projected",
+      "probable_pitcher_source": "TBD",
       "grade": {
         "letter": "C",
-        "score": 62
+        "score": 63
       },
-      "callout": "Two below .500 teams in a neutral evening park where Seth Lugo's consistency edges Nick Pivetta but no structural angle rises above lean level.",
+      "callout": "NYY 30-20 hosts a struggling TOR 22-27 club but TBD starters on both sides limit this to a speculative lean only.",
       "contextChips": [
-        "66 degrees at first pitch . 11 mph NE neutral",
-        "Kauffman Stadium 0.98 PF neutral",
-        "BOS 21-27 . KC 20-29 . both below .500",
-        "Lugo ERA around 4.0 . Pivetta inconsistent"
-      ],
-      "projAway": 3.3,
-      "projHome": 3.1,
-      "paragraphs": [
-        {
-          "title": "PITCHING MATCHUP",
-          "text": "Seth Lugo has been a reliable mid rotation veteran for Kansas City. His command and pitch mix keep lineups off balance even when his velocity is not elite. Nick Pivetta for Boston has been inconsistent this season, with stretches of quality sandwiched around starts with elevated hard contact. Lugo carries a slight edge in reliability, but the matchup is close enough that neither team's pitching gives a decisive advantage."
-        },
-        {
-          "title": "OFFENSE VS HANDEDNESS",
-          "text": "Both teams are below .500 and neither offensive unit has been consistently productive. Boston at 21 and 27 has underperformed their preseason expectations significantly. Kansas City at 20 and 29 is even worse. In a game between two struggling offenses on a neutral evening, the run scoring projection is moderate at best."
-        },
-        {
-          "title": "PARK AND WEATHER",
-          "text": "Kauffman Stadium carries a 0.98 park factor with a slight pitcher lean. The 66 degree evening temperature and 11 mph NE wind create a neutral environment with no meaningful run amplification or suppression. The total for this game will likely be set in the 7.5 to 8.5 range. With two mediocre offenses and two serviceable starters an Under lean makes sense structurally."
-        },
-        {
-          "title": "STRIKEOUT PROJECTION",
-          "text": "Lugo is not a high volume strikeout pitcher. His approach prioritizes contact management and pitch sequencing. Pivetta has moderate K rates but his inconsistency makes a K over prop unappealing without higher confidence. No K chip is published at C grade."
-        }
-      ],
-      "picks": [
-        {
-          "market": "total",
-          "label": "Under 8 or 8.5",
-          "price": "-110 to -115",
-          "tier": "primary",
-          "note": "Two struggling offenses in a neutral park with serviceable starters. Under is the structural lean."
-        },
-        {
-          "market": "moneyline",
-          "label": "BOS ML -110 to -125",
-          "price": "-110 to -125",
-          "tier": "secondary",
-          "note": "BOS has marginally better record and road offense. Very thin edge, secondary only."
-        },
-        {
-          "market": "f5total",
-          "label": "F5 Under 4",
-          "price": "-110 to -115",
-          "tier": "secondary",
-          "note": "Both starters capable of quality F5 innings."
-        },
-        {
-          "market": "nrfi",
-          "label": "NRFI",
-          "price": "-115 to -125",
-          "tier": "secondary",
-          "note": "Neutral park, evening start, Lugo command. First inning run below average probability."
-        },
-        {
-          "market": "runline",
-          "label": "BOS RL -1.5 +155 to +170",
-          "price": "+155 to +170",
-          "tier": "secondary",
-          "note": "Long shot tier only. BOS road wins by 2 or more is low probability in close game environment."
-        }
-      ],
-      "verdict": {
-        "prose": "Under 8 or 8.5 is the single lean chip with two below .500 teams in a neutral evening setting.",
-        "chips": [
-          "Under 8 or 8.5"
-        ]
-      },
-      "appliedAdjustments": [
-        "Grade C: no structural dominant edge. Both teams below .500. Single chip Under lean only. No K chips given starter profiles."
-      ]
-    },
-    "824678": {
-      "gamePk": 824678,
-      "away": "Milwaukee Brewers",
-      "home": "Chicago Cubs",
-      "awayAbbr": "MIL",
-      "homeAbbr": "CHC",
-      "venue": "Wrigley Field",
-      "firstPitch": "7:40 PM ET",
-      "awayPitcher": "Freddy Peralta",
-      "homePitcher": "Justin Steele",
-      "status": "projected",
-      "grade": {
-        "letter": "B+",
-        "score": 83
-      },
-      "callout": "53 degrees with 24 mph north wind blowing directly into home plate at Wrigley Field is the strongest structural Under signal on the full 2026 slate to date.",
-      "contextChips": [
-        "53 degrees at first pitch",
-        "24 mph N blowing IN toward home plate",
-        "Wrigley Field . wind IN reduces scoring 15 to 25 pct",
-        "Peralta ERA low 3s . K9 above 10 . Steele solid lefty"
+        "NYY 30-20 . strong home record",
+        "TOR 22-27 . below 500 road team",
+        "Both starters TBD at 11:30 AM window",
+        "Yankee Stadium . slight hitter lean . short porch RF"
       ],
       "projAway": 2.8,
-      "projHome": 2.4,
+      "projHome": 4.0,
       "paragraphs": [
         {
-          "title": "PITCHING MATCHUP",
-          "text": "Freddy Peralta has been one of the better power starters in the National League in 2026, posting an ERA in the low 3 range with a K rate above 10 per 9. His high ride fastball and sharp breaking ball are well suited to cold weather starts where batters struggle to maintain swing temperature. Justin Steele for Chicago is a quality left handed starter who generates weak contact and limits free passes. Two solid starters plus one of the most suppressive weather environments of the season makes this the clearest Under card on the slate."
+          "title": "Pitching Matchup",
+          "text": "Neither probable pitcher was returned by the API at this window. NYY's rotation has been serviceable in support of their 30-20 record. TOR's rotation has underperformed relative to roster talent, consistent with their 22-27 record. The TBD cap applies to both sides, limiting the pitching matchup section to team level inference only."
         },
         {
-          "title": "OFFENSE VS HANDEDNESS",
-          "text": "Milwaukee at 28 and 18 has the second best record in the National League and a lineup with consistent run production. Chicago at 29 and 20 has been excellent as well. Normally two good offenses push totals higher. In this case the weather environment completely overrides the offensive quality. Both lineups will struggle to elevate the ball against 24 mph wind in and 53 degree air."
+          "title": "Offense vs Handedness",
+          "text": "NYY at 30-20 brings a top third AL lineup to their home park. TOR at 22-27 has struggled offensively and on the road, with run production away from Rogers Centre below their overall average. Without confirmed starters, handedness splits cannot be applied. NYY projects to generate 4 or more runs given their home record and lineup depth."
         },
         {
-          "title": "PARK AND WEATHER",
-          "text": "Wrigley Field is the most weather sensitive ballpark in baseball. The 24 mph north wind blowing directly in toward home plate is the maximum suppression scenario. Historical Wrigley data shows run totals drop 15 to 25 percent on days with 20 or more mph wind blowing in versus neutral conditions. The total for this game will likely be set in the 7.5 to 8.5 range. Under 8 or even Under 7.5 represents genuine positive expected value given the wind and temperature combination."
+          "title": "Park and Weather",
+          "text": "Yankee Stadium carries a slightly above average park factor driven by the short right field porch. Left handed pull hitters benefit disproportionately. Late May New York at 7:05 PM sees temperatures typically in the mid 60s with variable NE wind. The wind direction at game time is not confirmed via weather API at this window. If wind blows toward right the park factor amplifies for left handed power."
         },
         {
-          "title": "STRIKEOUT PROJECTION",
-          "text": "Peralta's K rate above 10 per 9 and ERA in the low 3 range qualifies for the K plus Under stack under the learnings adjustment. His ERA is below 3.50 and his inning average across his starts meets the 5 inning floor. At a K line of 6 or 6.5, Peralta K over is the secondary chip to the Under. In cold windy conditions batters chase breaking balls more frequently, which could increase his K upside."
-        },
-        {
-          "title": "BULLPEN EDGE",
-          "text": "Milwaukee's bullpen has been strong in close games. Chicago's pen has been reliable at Wrigley. The wind IN conditions benefit both bullpens as fly balls that might leave the park in neutral conditions will die at the warning track."
+          "title": "Strikeout Projection",
+          "text": "No K props published at this window. NYY's lineup ranks among the more strikeout prone in the AL which gives a slight edge to over K props for any confirmed TOR starter with strong whiff rates. Flag for revisit once TOR's probable pitcher is confirmed before 7:05 PM ET first pitch."
         }
       ],
       "picks": [
         {
-          "market": "total",
-          "label": "Under 8",
-          "price": "-115 to -125",
-          "tier": "primary",
-          "note": "53 degrees plus 24 mph N wind directly in at Wrigley. Strongest structural Under of the 2026 slate."
+          "market": "ML",
+          "label": "NYY ML",
+          "price": -145,
+          "tier": "C",
+          "note": "NYY 30-20 home favorites against TOR 22-27; team edge is real but TBD starters limit to C tier."
         },
         {
-          "market": "strikeout",
-          "label": "Peralta K over 6",
-          "price": "-110 to -120",
-          "tier": "primary",
-          "note": "Peralta ERA low 3s, K9 above 10, IP average meets 5 inning floor. K plus Under stack validated per learnings."
+          "market": "F5 ML",
+          "label": "NYY F5 ML",
+          "price": -130,
+          "tier": "C",
+          "note": "NYY rotation depth favors home side in first 5 innings; confirm starter before wagering."
         },
         {
-          "market": "f5total",
-          "label": "F5 Under 4",
-          "price": "-115 to -120",
-          "tier": "secondary",
-          "note": "Both starters sharp plus wind IN at its strongest during evening start."
+          "market": "RL",
+          "label": "NYY RL -1.5",
+          "price": 115,
+          "tier": "C",
+          "note": "Run line value on NYY if confirmed starter is a top rotation arm."
         },
         {
-          "market": "total",
-          "label": "Under 7.5",
-          "price": "-105 to -110",
-          "tier": "secondary",
-          "note": "Aggressive version of the Under. Live if priced at minus 110 or better."
+          "market": "Total",
+          "label": "Over 8.5",
+          "price": -110,
+          "tier": "C",
+          "note": "Yankee Stadium short porch and two unconfirmed starters; over is speculative only."
         },
         {
-          "market": "nrfi",
-          "label": "NRFI",
-          "price": "-135 to -145",
-          "tier": "secondary",
-          "note": "Peralta command plus Steele early form plus wind suppression. First inning run unlikely."
-        },
-        {
-          "market": "moneyline",
-          "label": "MIL ML -115 to -130",
-          "price": "-115 to -130",
-          "tier": "secondary",
-          "note": "MIL 28-18 vs CHC 29-20. Slight MIL record edge and Peralta quality advantage."
+          "market": "YRFI",
+          "label": "YRFI",
+          "price": -115,
+          "tier": "C",
+          "note": "Yankee Stadium hitter lean; NYY lineup capable of first inning damage against unknown TOR starter."
         }
       ],
       "verdict": {
-        "prose": "Under 8 and Peralta K over 6 form the validated stack at Wrigley on 53 degrees with 24 mph wind blowing directly in.",
-        "chips": [
-          "Under 8",
-          "Peralta K over 6"
-        ],
-        "longShotNotes": "Under 7.5 is live if priced at minus 110 or better given wind suppression magnitude."
+        "prose": "Pass at this window. Both starters TBD. NYY ML is the directional lean but conviction is insufficient to chip at grade C 63.",
+        "chips": []
       },
-      "appliedAdjustments": [
-        "K plus Under stack validated: Peralta ERA low 3s below 3.50 threshold. IP average across starts meets 5 inning floor. Two chip stack published."
-      ]
+      "appliedAdjustments": []
     },
-    "823057": {
-      "gamePk": 823057,
-      "away": "Pittsburgh Pirates",
-      "home": "St. Louis Cardinals",
-      "awayAbbr": "PIT",
-      "homeAbbr": "STL",
-      "venue": "Busch Stadium",
-      "firstPitch": "7:45 PM ET",
-      "awayPitcher": "Paul Skenes",
-      "homePitcher": "Sonny Gray",
-      "status": "projected",
-      "grade": {
-        "letter": "B-",
-        "score": 73
-      },
-      "callout": "Paul Skenes against Sonny Gray at Busch Stadium in neutral conditions sets up a low scoring game where Skenes K over is the cleanest standalone prop.",
-      "contextChips": [
-        "66 degrees at first pitch . 8 mph N neutral",
-        "Busch Stadium 0.97 PF neutral",
-        "Skenes elite stuff . K rate above 11 per 9",
-        "STL 28-19 . PIT 24-24"
-      ],
-      "projAway": 3.1,
-      "projHome": 3.5,
-      "paragraphs": [
-        {
-          "title": "PITCHING MATCHUP",
-          "text": "Paul Skenes is one of the best young starters in baseball. His K rate above 11 per 9 is elite for a starter of any age. His fastball sits 99 to 101 mph with elite ride, and his plus slider generates whiffs at every count. Sonny Gray for St. Louis is a veteran who generates excellent ground ball contact and limits hard contact with his curveball and slider mix. Both starters project for quality starts and the run scoring environment is compressed."
-        },
-        {
-          "title": "OFFENSE VS HANDEDNESS",
-          "text": "St. Louis at 28 and 19 has been one of the stronger National League teams. Their lineup has consistent contact skills and has performed well at home. Pittsburgh at 24 and 24 has a mediocre lineup outside a few quality bats. Skenes will keep the Cardinals suppressed while Gray limits Pittsburgh to limited run production."
-        },
-        {
-          "title": "PARK AND WEATHER",
-          "text": "Busch Stadium is a clean neutral park at 0.97 park factor. The 66 degree evening temperature and 8 mph north wind are completely neutral variables. No weather amplification or suppression applies. The park and weather analysis is entirely flat, placing the full analytical weight on the pitching matchup."
-        },
-        {
-          "title": "STRIKEOUT PROJECTION",
-          "text": "Skenes K rate above 11 per 9 meets both learnings adjustment criteria. His ERA is well below the 3.50 threshold and his inning average per start meets the 5 inning floor. At a line of 7 or 7.5, his K rate projects him for 7 to 8 strikeouts per typical start against a quality lineup. Against St. Louis's contact oriented approach, he may exceed expectations."
-        }
-      ],
-      "picks": [
-        {
-          "market": "strikeout",
-          "label": "Skenes K over 7",
-          "price": "-115 to -125",
-          "tier": "primary",
-          "note": "Skenes K9 above 11. ERA well below 3.50. IP average meets 5 inning floor. Clean K over target."
-        },
-        {
-          "market": "total",
-          "label": "Under 7.5",
-          "price": "-110 to -115",
-          "tier": "primary",
-          "note": "Two quality starters in neutral park. Combined ERA supports Under at typical line."
-        },
-        {
-          "market": "moneyline",
-          "label": "STL ML -120 to -135",
-          "price": "-120 to -135",
-          "tier": "secondary",
-          "note": "STL 28-19 home vs PIT 24-24 road. Record edge plus Gray consistency."
-        },
-        {
-          "market": "f5total",
-          "label": "F5 Under 3.5",
-          "price": "-115 to -120",
-          "tier": "secondary",
-          "note": "Skenes and Gray both pitch quality first 5 innings consistently."
-        },
-        {
-          "market": "nrfi",
-          "label": "NRFI",
-          "price": "-130 to -140",
-          "tier": "secondary",
-          "note": "Skenes first inning command is elite. Gray early inning has been clean."
-        },
-        {
-          "market": "runline",
-          "label": "STL RL -1.5 +130 to +145",
-          "price": "+130 to +145",
-          "tier": "secondary",
-          "note": "STL record edge and home field. Plus price compensates for close game risk."
-        }
-      ],
-      "verdict": {
-        "prose": "Skenes K over 7 and Under 7.5 are the two chips on a neutral park elite starter duel.",
-        "chips": [
-          "Skenes K over 7",
-          "Under 7.5"
-        ]
-      },
-      "appliedAdjustments": [
-        "K plus Under stack validated: Skenes ERA well below 3.50 threshold. IP average meets 5 inning floor per learnings adjustment. Two chip stack on independent markets published."
-      ]
-    },
-    "823299": {
-      "gamePk": 823299,
-      "away": "Los Angeles Dodgers",
-      "home": "San Diego Padres",
-      "awayAbbr": "LAD",
-      "homeAbbr": "SD",
-      "venue": "Petco Park",
-      "firstPitch": "8:40 PM ET",
-      "awayPitcher": "Yoshinobu Yamamoto",
-      "homePitcher": "TBD San Diego",
-      "status": "projected",
-      "grade": {
-        "letter": "B",
-        "score": 75
-      },
-      "callout": "Yoshinobu Yamamoto at Petco Park with a 0.89 park factor and marine layer in late evening is the most structurally sound Under setup on the night slate.",
-      "contextChips": [
-        "67 degrees at first pitch . 9 to 11 mph SSW slight in",
-        "Petco Park 0.89 PF . extreme pitcher park",
-        "Marine layer at 8:40 PM . ball flight suppressed",
-        "Yamamoto ERA sub 2.50 . K9 near 10"
-      ],
-      "projAway": 3.6,
-      "projHome": 2.8,
-      "paragraphs": [
-        {
-          "title": "PITCHING MATCHUP",
-          "text": "Yoshinobu Yamamoto has been elite in 2026 with an ERA well below 2.50 and a K rate near 10 per 9. His command of four pitches at above average velocity makes him one of the most complete starters in the National League. San Diego's starter is not confirmed at this window. Note that Dylan Cease is confirmed starting for Toronto tonight and is not associated with any San Diego card. Even with an unconfirmed SD starter, the Petco structural Under is independent of pitcher identity."
-        },
-        {
-          "title": "OFFENSE VS HANDEDNESS",
-          "text": "Los Angeles at 30 and 19 has the best lineup in the National League with Shohei Ohtani, Freddie Freeman, and Mookie Betts anchoring a deep roster. However Petco Park compresses their power profile considerably. San Diego at 29 and 19 has a solid lineup at home but their offense at Petco has been in the upper half of the league rather than elite."
-        },
-        {
-          "title": "PARK AND WEATHER",
-          "text": "Petco Park at 0.89 is the most pitcher friendly park in baseball by raw park factor. The marine layer that forms over San Diego Bay by late evening, typically strongest between 8 and 11 PM, increases air density and flattens batted ball carry measurably. The 9 to 11 mph SSW wind is angled slightly in from right field, providing mild additional suppression. This combination has been the most consistent Under driver in the National League over five seasons."
-        },
-        {
-          "title": "STRIKEOUT PROJECTION",
-          "text": "Yamamoto's ERA below 2.50 meets the learnings adjustment threshold of 3.50. His inning average per start is approximately 6 or more innings, meeting the 5 inning floor. At a K line of 7 or 7.5, his near 10 K9 rate projects to approximately 7 strikeouts per start against a quality lineup. The K plus Under stack is validated for Yamamoto."
-        }
-      ],
-      "picks": [
-        {
-          "market": "total",
-          "label": "Under 7 or 7.5",
-          "price": "-110 to -125",
-          "tier": "primary",
-          "note": "Petco 0.89 PF plus marine layer plus Yamamoto elite. Strongest late game structural Under."
-        },
-        {
-          "market": "strikeout",
-          "label": "Yamamoto K over 7",
-          "price": "-115 to -125",
-          "tier": "primary",
-          "note": "Yamamoto ERA sub 2.50, K9 near 10. K plus Under stack validated per learnings adjustment."
-        },
-        {
-          "market": "moneyline",
-          "label": "LAD ML -125 to -145",
-          "price": "-125 to -145",
-          "tier": "secondary",
-          "note": "LAD lineup quality plus Yamamoto confirmed. SD starter TBD. Road LAD lean at pitcher park."
-        },
-        {
-          "market": "f5total",
-          "label": "F5 Under 3.5",
-          "price": "-115 to -125",
-          "tier": "secondary",
-          "note": "Yamamoto first 5 innings is the best clean Under window. Marine layer maximally suppressive in late starts."
-        },
-        {
-          "market": "nrfi",
-          "label": "NRFI",
-          "price": "-135 to -150",
-          "tier": "secondary",
-          "note": "Yamamoto command plus Petco plus marine layer. First inning run among lowest probabilities on the slate."
-        },
-        {
-          "market": "runline",
-          "label": "LAD RL -1.5 +130 to +145",
-          "price": "+130 to +145",
-          "tier": "secondary",
-          "note": "LAD wins by 2 or more given lineup depth vs TBD SD starter. Plus price makes this live."
-        }
-      ],
-      "verdict": {
-        "prose": "Under 7 and Yamamoto K over 7 form the validated stack at Petco with marine layer and 0.89 park factor.",
-        "chips": [
-          "Under 7 or 7.5",
-          "Yamamoto K over 7"
-        ]
-      },
-      "appliedAdjustments": [
-        "K plus Under stack validated: Yamamoto ERA sub 2.50 below 3.50 threshold. IP average approximately 6 per start meets 5 inning floor. SD starter TBD; Cease confirmed for Toronto not San Diego."
-      ]
-    },
-    "824032": {
-      "gamePk": 824032,
-      "away": "Oakland Athletics",
+    "824031": {
+      "gamePk": 824031,
+      "away": "Athletics",
       "home": "Los Angeles Angels",
-      "awayAbbr": "ATH",
+      "awayAbbr": "OAK",
       "homeAbbr": "LAA",
       "venue": "Angel Stadium",
       "firstPitch": "9:38 PM ET",
-      "awayPitcher": "JP Sears",
-      "homePitcher": "TBD Los Angeles Angels",
+      "awayPitcher": "TBD",
+      "homePitcher": "TBD",
       "status": "projected",
+      "probable_pitcher_source": "TBD",
       "grade": {
-        "letter": "B-",
-        "score": 71
+        "letter": "C",
+        "score": 67
       },
-      "callout": "Oakland at 24 and 24 holds a meaningful record edge over 17 and 32 Los Angeles Angels and JP Sears is the confirmed starter against a TBD Angels arm.",
+      "callout": "LAA 17-33 is one of baseball's worst teams, creating a talent edge for OAK that survives TBD starters on both sides.",
       "contextChips": [
-        "81 degrees at first pitch . 12 to 16 mph W/SW",
-        "Angel Stadium 0.98 PF neutral",
-        "LAA 17-32 worst record in AL",
-        "ATH 24-24 . JP Sears confirmed vs TBD LAA"
+        "LAA 17-33 . worst record in AL West . weak offense and rotation",
+        "OAK 25-24 . above 500 . better run differential",
+        "HP Ump Tom Hanahan . confirmed",
+        "Both starters TBD at 11:30 AM window"
       ],
-      "projAway": 3.8,
-      "projHome": 2.7,
+      "projAway": 4.2,
+      "projHome": 2.6,
       "paragraphs": [
         {
-          "title": "PITCHING MATCHUP",
-          "text": "JP Sears takes the ball for Oakland. He has been a workable mid rotation starter in 2026 with an ERA in the 4.00 range and solid command of his secondaries. The Angels starter is TBD at this window. Los Angeles at 17 and 32 has had significant rotation instability throughout the season, and whoever takes the ball for them carries inherent uncertainty about quality. The confirmed versus TBD disparity gives Oakland a mild pitching edge."
+          "title": "Pitching Matchup",
+          "text": "Neither probable pitcher was confirmed by the API at this window. LAA's rotation has been one of the worst in the AL this season, consistent with a 17-33 record that represents the worst mark in the AL West. OAK's rotation at 25-24 is league average or slightly above, meaning virtually any OAK starter carries a meaningful ERA edge over a typical LAA counterpart. The TBD cap applies, but the team level inference strongly supports OAK."
         },
         {
-          "title": "OFFENSE VS HANDEDNESS",
-          "text": "Oakland at 24 and 24 has a functional lineup with decent contact skills. The Angels at 17 and 32 have an offense that has been among the least productive in the American League this season. Their lineup has been short on consistent run production and has struggled against mid rotation starters."
+          "title": "Offense vs Handedness",
+          "text": "OAK at 25-24 has a functional offense running at .510 win rate. LAA's offense at 17-33 is near the bottom of the AL in run production and has struggled all season. OAK projects to generate 4 or more runs against a below average LAA starter. LAA against any OAK pitcher projects to underperform the league average run total. The 8 game record gap is the sharpest talent gap on the full slate."
         },
         {
-          "title": "PARK AND WEATHER",
-          "text": "Angel Stadium is a neutral park at 0.98 park factor. The 81 degree first pitch temperature is warm but not extreme. The 12 to 16 mph W/SW wind provides some outgoing push but not at a magnitude that dramatically shifts the run environment. The conditions are the closest to neutral on the late slate."
+          "title": "Park and Weather",
+          "text": "Angel Stadium plays at a slightly below average park factor for runs. The stadium is open air and late May Anaheim evening at 9:38 PM first pitch sees temperatures typically in the mid to upper 60s with light offshore wind. Weather API was unavailable at this window; standard late May coastal profile applied. No significant weather signal is expected and the park does not distort the team talent edge."
         },
         {
-          "title": "STRIKEOUT PROJECTION",
-          "text": "Sears is not a high volume strikeout pitcher. His K9 is in the 7 to 7.5 range. The Angels TBD starter caps this card at B minus and prevents a full K prop evaluation on the home side. No K chip is published for this card. The single chip reflects the team quality and starter confirmation differential."
+          "title": "Strikeout Projection",
+          "text": "No K props published at this window. LAA's lineup tends toward below average contact rate which could favor OAK starter K props once confirmed. This is the highest priority flag for revisit on the late slate: once OAK's probable starter is announced, a K prop against the LAA lineup should be the first line to check. HP Ump Tom Hanahan carries a standard zone with no material adjustment."
         }
       ],
       "picks": [
         {
-          "market": "moneyline",
-          "label": "ATH ML +115 to +130",
-          "price": "+115 to +130",
-          "tier": "primary",
-          "note": "ATH 24-24 vs LAA 17-32. Plus money on the superior team against worst record in AL."
+          "market": "ML",
+          "label": "OAK ML",
+          "price": -120,
+          "tier": "B",
+          "note": "OAK 25-24 vs LAA 17-33; one of the starkest talent gaps on the slate regardless of starters."
         },
         {
-          "market": "total",
-          "label": "Under 8",
-          "price": "-110 to -115",
-          "tier": "secondary",
-          "note": "Sears moderate ERA plus Angels weak offense. Late game conditions suppress run scoring."
+          "market": "RL",
+          "label": "OAK RL -1.5",
+          "price": 120,
+          "tier": "B",
+          "note": "LAA is bad enough that OAK covers the run line at plus money; strong value play."
         },
         {
-          "market": "f5total",
-          "label": "F5 Under 4",
-          "price": "-110 to -115",
-          "tier": "secondary",
-          "note": "Sears command in first 5 is his strongest zone. Angels TBD starter limits projection."
+          "market": "Team Total",
+          "label": "OAK Team Total Over 3.5",
+          "price": -115,
+          "tier": "B",
+          "note": "OAK projects 4 plus runs against a weak LAA rotation; team total is the cleanest market here."
         },
         {
-          "market": "nrfi",
+          "market": "F5 ML",
+          "label": "OAK F5 ML",
+          "price": -115,
+          "tier": "B",
+          "note": "OAK first 5 innings ML leverages any confirmed OAK starter vs a poor LAA offense."
+        },
+        {
+          "market": "Total",
+          "label": "Under 8.5",
+          "price": -110,
+          "tier": "C",
+          "note": "Angel Stadium slightly under leaning park; second pass: LAA weak offense holds total down. Speculative."
+        },
+        {
+          "market": "NRFI",
           "label": "NRFI",
-          "price": "-115 to -125",
-          "tier": "secondary",
-          "note": "Late start, Sears command, neutral park. First inning run probability below average."
-        },
-        {
-          "market": "runline",
-          "label": "ATH RL -1.5 +155 to +170",
-          "price": "+155 to +170",
-          "tier": "secondary",
-          "note": "ATH winning by 2 or more against worst AL team at plus money is live at the right price."
-        },
-        {
-          "market": "strikeout",
-          "label": "Sears K over 5",
-          "price": "-110 to -115",
-          "tier": "secondary",
-          "note": "Secondary only. Sears K9 7 to 7.5 makes K over 5 plausible at a 6 inning outing."
+          "price": -110,
+          "tier": "C",
+          "note": "Low conviction NRFI; confirm both starters before wagering."
         }
       ],
       "verdict": {
-        "prose": "ATH ML at plus money is the single chip against the worst record in the American League.",
+        "prose": "OAK ML is the cleanest play on the late slate given LAA's 17-33 record, one of the worst in the AL.",
         "chips": [
-          "ATH ML +115 to +130"
+          "OAK ML -115 to -125"
         ]
       },
       "appliedAdjustments": [
-        "Grade B-: LAA starter TBD caps card. Single chip. ATH ML at plus price is the structural lean given 24-24 vs 17-32 record differential."
+        "MODEL_ERROR second pass: OAK team total over cross checked against LAA weak offense and rotation. Published at B tier with TBD starter caveat."
       ]
+    },
+    "825083": {
+      "gamePk": 825083,
+      "away": "Colorado Rockies",
+      "home": "Arizona Diamondbacks",
+      "awayAbbr": "COL",
+      "homeAbbr": "ARI",
+      "venue": "Chase Field",
+      "firstPitch": "9:40 PM ET",
+      "awayPitcher": "TBD",
+      "homePitcher": "TBD",
+      "status": "projected",
+      "probable_pitcher_source": "TBD",
+      "grade": {
+        "letter": "C",
+        "score": 58
+      },
+      "callout": "COL 19-31 travels to dome Chase Field to face ARI 25-23; insufficient starter data for a strong lean at this window.",
+      "contextChips": [
+        "COL 19-31 . weak road offense away from Coors",
+        "ARI 25-23 . home advantage at Chase Field dome",
+        "Chase Field . retractable roof . weather neutral",
+        "Both starters TBD at 11:30 AM window"
+      ],
+      "projAway": 3.2,
+      "projHome": 4.2,
+      "paragraphs": [
+        {
+          "title": "Pitching Matchup",
+          "text": "Neither probable starter was confirmed by the API at this window. COL's rotation has been below average this season, consistent with a 19-31 record. ARI at 25-23 has a deeper rotation and home advantage at Chase Field. The TBD cap applies; no specific ERA or whiff data is available to anchor a pitching matchup call. Confirm starters before 9:40 PM ET first pitch."
+        },
+        {
+          "title": "Offense vs Handedness",
+          "text": "COL on the road is a notably different offense than at Coors Field. Their road batting averages and run production drop significantly away from the thin air environment. ARI at home projects to generate 4 or more runs against a typical COL starter. ARI's lineup is functional with gap power from multiple lineup spots. The matchup favors ARI offensively independent of which starters take the mound."
+        },
+        {
+          "title": "Park and Weather",
+          "text": "Chase Field has a retractable roof and in late May the dome is typically closed. Weather neutral environment. The park factor at Chase Field is slightly above league average for run production but well below Coors, making it a moderate run environment. COL's Coors effect is completely neutralized in a dome setting, which is the most significant non obvious edge on this card: the team that benefits most from Coors gets no benefit here."
+        },
+        {
+          "title": "Strikeout Projection",
+          "text": "No K props published at this window. COL's lineup typically struggles with strikeouts on the road once the Coors air density advantage is removed. If ARI's confirmed starter has above average whiff rates, a K over prop against COL's road lineup is worth flagging. Revisit once both starters are confirmed before 9:40 PM ET first pitch."
+        }
+      ],
+      "picks": [
+        {
+          "market": "ML",
+          "label": "ARI ML",
+          "price": -145,
+          "tier": "C",
+          "note": "ARI home 25-23 vs COL road 19-31; COL road offense loses the Coors advantage in a dome."
+        },
+        {
+          "market": "Team Total",
+          "label": "COL Team Total Under 3",
+          "price": -115,
+          "tier": "C",
+          "note": "COL road offense significantly weaker than home production; dome neutralizes any Coors effect."
+        },
+        {
+          "market": "F5 ML",
+          "label": "ARI F5 ML",
+          "price": -130,
+          "tier": "C",
+          "note": "ARI rotation depth should provide first 5 inning advantage over COL TBD starter."
+        },
+        {
+          "market": "Total",
+          "label": "Under 8.5",
+          "price": -110,
+          "tier": "C",
+          "note": "COL weak road offense plus dome neutral environment; under lean at this window."
+        },
+        {
+          "market": "NRFI",
+          "label": "NRFI",
+          "price": -120,
+          "tier": "C",
+          "note": "ARI rotation quality and COL road struggles create NRFI lean; confirm starters first."
+        }
+      ],
+      "verdict": {
+        "prose": "Pass at this window. ARI is the directional lean on home advantage and COL's weak road offense, but TBD starters cap conviction.",
+        "chips": []
+      },
+      "appliedAdjustments": []
     }
   }
 };
