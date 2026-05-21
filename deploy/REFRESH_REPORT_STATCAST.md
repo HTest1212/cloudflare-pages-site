@@ -1,85 +1,56 @@
-# Statcast Overlay Refresh Report
+# Statcast Refresh Report -- 2026-05-21
 
-**Window:** 6 AM ET scheduled task
-**Run timestamp (UTC):** 2026-05-19T16:41:00Z
-**Slate date:** 2026-05-19
+**Run type:** Scheduled (mlb-statcast-refresh-6am)
+**Generated:** 2026-05-21T10:45:00Z
+**Commit:** 6df389e
+**Deploy:** Cloudflare Pages via GitHub Actions (push to main)
+**Live URL:** https://mlb-betting-dashboard-v2.pages.dev
 
----
+## Slate Summary
 
-## Yesterday's Slate (2026-05-18)
+Date: 2026-05-21 | Games: 7
 
-| Stat | Value |
-|---|---|
-| Games processed | 13 of 14 |
-| Games skipped | 1 (BAL@TB gamePk 822980 — boxscore fetch timed out) |
-| Starting pitchers refreshed | 26 |
-| Batters refreshed | 130 (10 per game × 13 games) |
+| gamePk | Matchup | First Pitch UTC | Venue |
+|--------|---------|-----------------|-------|
+| 824274 | CLE @ DET | 17:10 | Comerica Park |
+| 823056 | PIT @ STL | 17:15 | Busch Stadium |
+| 822733 | NYM @ WSH | 20:05 | Nationals Park |
+| 823864 | ATL @ MIA | 22:40 | loanDepot park |
+| 823545 | TOR @ NYY | 23:05 | Yankee Stadium |
+| 824031 | ATH @ LAA | 01:38+1 | Angel Stadium |
+| 825083 | COL @ ARI | 01:40+1 | Chase Field |
 
-Starters extracted from boxscores; top 5 batters per team selected by plate appearances.
+## Pitcher Statcast Coverage: 14 of 14
 
----
+| Pitcher | Team | Pitches 15d | Avg Velo | xwOBA | SwStr% |
+|---------|------|-------------|----------|-------|--------|
+| Tanner Bibee | CLE | 185 | 87.5 | .235 | 45.4% |
+| Brant Hurter | DET | 95 | 88.5 | .272 | 43.2% |
+| Paul Skenes | PIT | 251 | 92.4 | .163 | 54.6% |
+| Dustin May | STL | 175 | 93.9 | .273 | 48.6% |
+| Tobias Myers | NYM | 100 | 90.3 | .273 | 48.0% |
+| Cade Cavalli | WSH | 183 | 91.8 | .292 | 50.8% |
+| Chris Sale | ATL | 182 | 87.5 | .251 | 56.6% |
+| Sandy Alcantara | MIA | 261 | 92.5 | .219 | 34.9% |
+| Yariel Rodriguez | TOR | 44 | 90.5 | .465 | 47.7% (SMALL SAMPLE) |
+| Will Warren | NYY | 176 | 91.1 | .197 | 65.3% |
+| Aaron Civale | ATH | 162 | 85.9 | .288 | 50.6% |
+| Grayson Rodriguez | LAA | 75 | 89.8 | .379 | 49.3% |
+| Antonio Senzatela | COL | 30 | 92.8 | .232 | 48.3% (SMALL SAMPLE) |
+| Zac Gallen | ARI | 251 | 86.8 | .257 | 46.6% |
 
-## Today's Slate (2026-05-19)
+## Batter Coverage: 41 of 46
 
-15 games scheduled. Full slate written to statcast_overlay.json.
+statcast_fetched=false (5): Chase DeLauter (CLE), Bo Bichette (NYM), Andres Gimenez (TOR), Trent Grisham (NYY), Luis Garcia (ARI)
 
-### Matchups and Probable Pitchers
+## Pipeline Notes
 
-| gamePk | Matchup | Away SP | Home SP |
-|---|---|---|---|
-| 823865 | ATL @ MIA | TBD | Max Meyer (FIP 3.07, xFIP 3.55) |
-| 823548 | BOS @ NYY | TBD | Ryan Weathers (FIP 3.89, xFIP 4.12) |
-| 824112 | MIN @ KC | TBD | Seth Lugo (FIP 3.44, xFIP 3.67) |
-| 824677 | MIL @ CHC | TBD | Shota Imanaga (FIP 2.98, xFIP 3.21) |
-| 824356 | TEX @ LAA | MacKenzie Gore (sabermetrics) | TBD |
-| 824033 | OAK @ HOU | J.T. Ginn (sabermetrics) | TBD |
-| 823302 | LAD @ SD | Yoshinobu Yamamoto (sabermetrics) | Michael King (sabermetrics) |
-| 823136 | CLE @ SEA | TBD | Bryan Woo (sabermetrics) |
-| 823059 | PIT @ STL | TBD | TBD |
-| remaining 6 | various | TBD | TBD |
+- Statcast window: 2026-05-06 to 2026-05-21 (15-day rolling)
+- FUSE workspace deadlock workaround: cloned repo to /tmp, committed and pushed from native Linux fs
+- index.lock stale artifact from prior context session; unresolvable from sandbox
+- Deploy: git push main triggered GitHub Actions (cloudflare/wrangler-action@v3)
 
-### Lineup Endpoint Behavior
+## Verification
 
-All 15 get_mlb_game_lineup calls returned empty arrays at the 6 AM ET window (expected before lineups post around 11 AM ET). Probable pitcher IDs sourced from sabermetrics where a yesterday starter matched today's game. New series matchups (PIT@STL) used 40-man roster position players for batter lists.
-
----
-
-## GitHub Push
-
-| Field | Value |
-|---|---|
-| Status | SUCCESS |
-| Branch | main |
-| Commit hash | 2c70d8a |
-| Commit message | Auto refresh statcast 2026-05-19 16:41 |
-| Previous HEAD | e00208b |
-| Remote | https://github.com/HTest1212/cloudflare-pages-site |
-
-Note: Workspace git repo (macFUSE mount) produced EDEADLK deadlocks on all git operations. Workaround: fresh clone to /tmp/mlb-repo (Linux tmpfs, no FUSE), copied overlay, committed and pushed from there.
-
----
-
-## Cloudflare Pages Deploy
-
-| Field | Value |
-|---|---|
-| Wrangler direct deploy | SKIPPED (no CLOUDFLARE_API_TOKEN in .env) |
-| GitHub Actions auto-deploy | TRIGGERED by git push to main |
-| Live URL verification | VERIFIED |
-| Live asof timestamp | 2026-05-19T16:39:49Z |
-| Live slate_date | 2026-05-19 |
-| Live game count | 15 |
-
-Live URL: https://mlb-betting-dashboard-v2.pages.dev/statcast_overlay.json
-
-GitHub Actions deployed the overlay following the git push. Verified by fetching live JSON and confirming asof timestamp and game count match local file.
-
----
-
-## Notes
-
-- BAL@TB (822980) skip: Boxscore fetch timed out during yesterday refresh. Both teams absent from yesterday_refresh. No carry-forward.
-- TBD pitchers: 9 of 15 SP slots TBD at run time. Dashboard shows sabermetrics where populated; TBD for remaining until mid-morning lineup refresh.
-- PIT@STL batter lists: Sourced from get_mlb_roster 40-man active roster (non-pitchers). Tool returned error payload containing full player list; data extracted from error text.
-- FUSE deadlock workaround: All future scheduled tasks should run git operations from a /tmp clone to avoid macFUSE EDEADLK on the workspace mount.
-- No IL moves spotted in roster or boxscore data during this run.
+curl https://mlb-betting-dashboard-v2.pages.dev/statcast_overlay.json
+Result: asof=2026-05-21T10:45:00Z, games=7 CONFIRMED LIVE
