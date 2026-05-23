@@ -1,97 +1,74 @@
-# MLB Dashboard Refresh Report — 2026-05-21
+# MLB Betting Dashboard Refresh Report
 
-**Run:** 11:30 AM ET automated refresh
-**Window:** midday (11:30 AM)
-**Timestamp UTC:** 2026-05-21T17:35:00Z
-**Commit:** 4669a8f56d85d006c908ebf2b76cad00bac74556
-**Deploy:** Cloudflare Pages CI triggered on push to main (auto-deploy)
+**Window:** midday (11:30 AM ET)
+**Run Timestamp (UTC):** 2026-05-23T19:15:00Z
+**Slate Date:** 2026-05-23
 
----
+## Data Quality
 
-## Slate: 2026-05-21 | Games: 7
+- Games on slate: 16 total (11 Preview, 3 Live, 2 Final)
+- Probable pitchers confirmed via schedule-api: 32/32 (100%)
+- Weather data: 13/13 outdoor/retractable parks fetched (Open-Meteo)
+- Short sample flags: Chase Petty opener role (5.2 IP), Robert Gasser IL return (4 IP), Lucas Giolito IP limit (5 IP), Jovani Moran reliever-to-SP (25.2 IP)
 
-### API Data Quality
+## Weather Highlights
 
-| Field | Result |
-|-------|--------|
-| Pitchers confirmed via schedule-api | 14 of 14 |
-| TBD pitchers | 0 |
-| Weather fetched | 7 parks (all outdoor / retractable) |
-| Lineups confirmed | CLE@DET, PIT@STL, NYM@WSH (3 games) |
-| Lineups projected | ATL@MIA, TOR@NYY, OAK@LAA, COL@ARI (4 games) |
+- Oracle Park: 61F, 49mph WSW — extreme suppression, most impactful weather on slate
+- Citizens Bank Park: 51F, 38mph NE blowing in — flips park to pitcher-friendly
+- Truist Park: 72F, 35mph E — strong RF headwind
+- Fenway Park: 56F, 24mph E — cold, E wind suppresses Green Monster
+- Great American Ball Park: 70F, 25mph W — wind OUT to right-center, offense-boosting
+- Kauffman Stadium: 77F, 24mph NW — crosswind, neutral
+- Rogers Centre: roof closed confirmed (97% precip, 70mph wind outside)
+- Chase Field: roof closed (92.7F outside)
+- loanDepot park: roof likely closed (81.7F, 31mph wind outside)
+- American Family Field: roof likely closed (59F, 24mph outside)
 
-### Per Game Summary
+## Per Game Summary
 
-| gamePk | Matchup | Status | Grade | Score | Proj Score | Picks | Primary Chips |
-|--------|---------|--------|-------|-------|------------|-------|---------------|
-| 824274 | CLE @ DET | Live | B | 78 | 3.2 – 3.8 | 6 | Tigers RL -1.5 +130 to +145 · Under 7 or 7.5 |
-| 823056 | PIT @ STL | Live | B | 75 | 3.9 – 3.3 | 6 | Pirates RL +1.5 -165 to -175 · Ashcraft K Over 6.5 |
-| 822733 | NYM @ WSH | Preview | C | 62 | 4.2 – 4.5 | 5 | Nationals ML -115 to -125 |
-| 823864 | ATL @ MIA | Preview | B | 72 | 3.5 – 3.1 | 6 | Braves ML -130 to -145 · Strider K Over 7.5 |
-| 823545 | TOR @ NYY | Preview | B | 74 | 4.8 – 4.3 | 6 | Blue Jays ML +115 to +130 · Over 9 or 9.5 |
-| 824031 | OAK @ LAA | Preview | A | 87 | 3.1 – 4.4 | 7 | Angels ML -155 to -170 · Soriano K Over 7.5 · Under 8 or 8.5 |
-| 825083 | COL @ ARI | Preview | B | 76 | 3.6 – 4.8 | 7 | Diamondbacks RL -1.5 -130 to -145 · E Rodriguez K Over 5.5 |
-
-### Slate Best Edge
-OAK @ LAA (824031) is the A grade slate leader. Jose Soriano posts a 2.41 ERA and 10.1 K9 in 59.2 innings against Luis Severino's 5.1 BB9 and 4.45 ERA — the largest quality gap on the full slate. Angels ML, Soriano K Over 7.5, and Angels F5 ML are the top three plays.
-
-### Weather Summary
-
-| Park | Temp | Wind | Precip |
-|------|------|------|--------|
-| Comerica Park (CLE@DET) | 59F | 11 mph ENE | 0% |
-| Busch Stadium (PIT@STL) | 64F | 7 mph NE | 0% |
-| Nationals Park (NYM@WSH) | 60F | 6 mph NNE | 32% rain watch |
-| loanDepot park (ATL@MIA) | 84F | 12 mph E | 3% |
-| Yankee Stadium (TOR@NYY) | 62F | 1 mph SSE | 18% |
-| Angel Stadium (OAK@LAA) | 72F | 8 mph SW | 0% |
-| Chase Field (COL@ARI) | 94F | 10 mph WNW | 0% roof likely open |
-
-Weather flag: NYM@WSH has 32% precip at 8:05 PM ET. Monitor for rain delay before wagering.
-
----
+| gamePk | Matchup | Grade | Verdict Chips | Picks |
+|---|---|---|---|---|
+| 823458 | CLE @ PHI | A 87 | Phillies ML, Under 7.5, Wheeler K over 6.5 | 7 |
+| 823222 | CWS @ SF | B 80 | Under 7, Giants ML | 7 |
+| 824109 | SEA @ KC | B 78 | Mariners ML, Kirby K over 5.5 | 7 |
+| 824760 | MIN @ BOS | B 75 | Twins ML, Bradley K over 6.5 | 7 |
+| 824920 | WSH @ ATL | B 78 | Braves ML, Under 8 | 7 |
+| 823862 | NYM @ MIA | B 82 | Mets ML, Meyer K over 6.5 | 7 |
+| 824516 | STL @ CIN G2 | C 68 | Over 9 | 7 |
+| 823787 | LAD @ MIL | C 66 | Pass (no primary chips) | 7 |
+| 823300 | OAK @ SD | B 74 | Padres ML, Under 7 | 7 |
+| 824030 | TEX @ LAA | B 72 | Rangers ML, Eovaldi K over 6.5 | 7 |
+| 825080 | COL @ ARI | B 75 | Diamondbacks ML, Under 9 | 7 |
+| 824518 | STL @ CIN G1 | LIVE | locked | 0 |
+| 824674 | HOU @ CHC | LIVE | locked | 0 |
+| 822814 | PIT @ TOR | LIVE | locked | 0 |
+| 823543 | TB @ NYY | FINAL | closed | 0 |
+| 824840 | DET @ BAL | FINAL | closed | 0 |
 
 ## Overlays Deployed
 
-| File | Games |
-|------|-------|
-| odds_overlay.json | 7 |
-| statcast_overlay.json | 7 |
-| picks_log.json | 56 new entries (93 total) |
-
----
+- odds_overlay.json: 16 games (ML, total, run line)
+- statcast_overlay.json: 16 games (32 pitchers, ERA-based xFIP/FIP)
+- picks_log.json: 170 total entries, 77 new today
 
 ## Learnings Adjustments Applied
 
-Active rule: Two or more MODEL_ERROR total losses yesterday — require second-pass validation on all over/total picks before publishing; cross-check run environment metrics and bullpen usage.
+Active rule: Two or more MODEL_ERROR losses yesterday. Second-pass validation on all over/total picks applied to all 11 Preview cards. Each card carries appliedAdjustments array noting validation.
 
-Carryover rule: When stacking K over and Under total on the same starter, require ERA below 3.50 in last 5 starts before publishing both as separate picks.
+Carryover rule: K over + Under total stacks only for ERA below 3.50 starters. Applied to Wheeler 1.99, Ginn 2.98, Bradley 2.87, Kirby 3.45.
 
-Applied per game:
-- CLE@DET: Under cross-checked against ENE wind and pitcher park factor — thesis holds
-- PIT@STL: Ashcraft K pick validated against 9.1 K9 and Cardinals contact tendencies — thesis holds
-- NYM@WSH: Over total moved to long shot due to rain risk and walk rate volatility; card capped at C with one chip
-- ATL@MIA: Strider small sample (14.2 IP) flagged — grade held at B; K prop validated
-- TOR@NYY: Rodon 8 IP sample flagged — over retained given extreme 9.0 BB9 at Yankee Stadium
-- OAK@LAA: Under total cross-checked — Soriano quality suppresses Athletics; thesis holds at A
-- COL@ARI: Total chip removed; run line and K chip retained with roof status unknown
+## Deploy Status
 
----
+- Git commit: 6116935
+- Branch: main
+- Push: SUCCESS
+- Cloudflare Pages auto-deploy triggered (no wrangler used)
+- Live URL: https://mlb-betting-dashboard-v2.pages.dev
 
-## GitHub Commit
+## Notable Edges This Slate
 
-Hash: 4669a8f56d85d006c908ebf2b76cad00bac74556
-Branch: main
-Push status: SUCCESS
-Files committed: index.html, odds_overlay.json, statcast_overlay.json, picks_log.json
-Deploy: Cloudflare Pages auto-deploys on push — no wrangler used
-Live URL: https://mlb-betting-dashboard-v2.pages.dev
-
----
-
-## Errors / Fallbacks
-
-- Overlay files (bullpen_availability_overlay.json, rolling_form_overlay.json, catcher_framing_overlay.json, etc.) not accessible — resource deadlock on workspace mount prevented all read methods. Fallback: built-in park factor estimates and general bullpen form assessments used.
-- Pitcher stats collected successfully via MLB Stats API batch call for all 14 confirmed starters.
-- Weather collected via Open-Meteo for all 7 parks — wind unit confirmed as km/h and converted correctly to mph.
-- Two Live games (CLE@DET, PIT@STL): morning verdict locked; picks and paragraphs generated from confirmed pre-game data.
+1. Oracle Park 49mph WSW wind: Under 7 in CWS vs SF is the highest-conviction weather play on the slate
+2. Citizens Bank Park 38mph NE: Wheeler ERA 1.99 plus wind-in earns A 87 grade, three-chip card
+3. Petty/Gasser/Giolito all short-sample: three games capped at C/B grade per short-sample rules
+4. Dodgers Pass card: C 66 grade, no primary Verdict chips despite LAD lineup quality (Gasser unknown too large)
+5. Great American W wind: C 68 over lean with opener Chase Petty driving the thesis
