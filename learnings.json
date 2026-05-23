@@ -1,85 +1,149 @@
 {
-  "asof": "2026-05-21T08:12:06.709761+00:00",
-  "yesterday_date": "2026-05-20",
+  "asof": "2026-05-21T23:00:00+00:00",
+  "yesterday_date": "2026-05-21",
   "yesterday_record": {
-    "picks": 19,
-    "wins": 13,
-    "losses": 6,
-    "pushes": 0,
-    "voids": 4,
-    "units": 5.1418,
-    "totalStake": 19.0,
-    "winRate": 0.6842,
-    "roi": 0.2706
+    "picks": 62,
+    "wins": 33,
+    "losses": 27,
+    "pushes": 2,
+    "voids": 0,
+    "units": 1.3816,
+    "totalStake": 62.0,
+    "winRate": 0.55,
+    "roi": 0.0223
   },
   "by_market": {
-    "Total": {
-      "picks": 10,
-      "wins": 6,
+    "BB": {
+      "picks": 1,
+      "wins": 0,
+      "losses": 1,
+      "pushes": 0,
+      "voids": 0,
+      "units": -1.0,
+      "totalStake": 1.0,
+      "winRate": 0.0,
+      "roi": -1.0
+    },
+    "F5_ML": {
+      "picks": 6,
+      "wins": 4,
+      "losses": 1,
+      "pushes": 1,
+      "voids": 0,
+      "units": 2.4079,
+      "totalStake": 6.0,
+      "winRate": 0.8,
+      "roi": 0.4013
+    },
+    "F5_Total": {
+      "picks": 4,
+      "wins": 3,
+      "losses": 1,
+      "pushes": 0,
+      "voids": 0,
+      "units": 1.5725,
+      "totalStake": 4.0,
+      "winRate": 0.75,
+      "roi": 0.3931
+    },
+    "K": {
+      "picks": 14,
+      "wins": 8,
+      "losses": 6,
+      "pushes": 0,
+      "voids": 0,
+      "units": 0.7155,
+      "totalStake": 14.0,
+      "winRate": 0.5714,
+      "roi": 0.0511
+    },
+    "ML": {
+      "picks": 13,
+      "wins": 9,
       "losses": 4,
       "pushes": 0,
       "voids": 0,
-      "units": 1.4546,
-      "totalStake": 10.0,
-      "winRate": 0.6,
-      "roi": 0.1455
+      "units": 4.0799,
+      "totalStake": 13.0,
+      "winRate": 0.6923,
+      "roi": 0.3138
     },
-    "K": {
-      "picks": 1,
-      "wins": 1,
-      "losses": 0,
+    "NRFI": {
+      "picks": 6,
+      "wins": 3,
+      "losses": 3,
       "pushes": 0,
-      "voids": 4,
-      "units": 0.9091,
-      "totalStake": 1.0,
-      "winRate": 1.0,
-      "roi": 0.9091
+      "voids": 0,
+      "units": -0.5279,
+      "totalStake": 6.0,
+      "winRate": 0.5,
+      "roi": -0.088
     },
-    "ML": {
-      "picks": 8,
-      "wins": 6,
+    "RL": {
+      "picks": 6,
+      "wins": 2,
+      "losses": 4,
+      "pushes": 0,
+      "voids": 0,
+      "units": -2.5027,
+      "totalStake": 6.0,
+      "winRate": 0.3333,
+      "roi": -0.4171
+    },
+    "TeamTotal": {
+      "picks": 2,
+      "wins": 0,
       "losses": 2,
       "pushes": 0,
       "voids": 0,
-      "units": 2.7781,
-      "totalStake": 8.0,
-      "winRate": 0.75,
-      "roi": 0.3473
+      "units": -2.0,
+      "totalStake": 2.0,
+      "winRate": 0.0,
+      "roi": -1.0
+    },
+    "Total": {
+      "picks": 10,
+      "wins": 4,
+      "losses": 5,
+      "pushes": 1,
+      "voids": 0,
+      "units": -1.3636,
+      "totalStake": 10.0,
+      "winRate": 0.4444,
+      "roi": -0.1364
     }
   },
   "loss_categories": {
-    "BAD_PARK_READ": 1,
-    "LINEUP_CHANGE": 1,
-    "VARIANCE": 2,
-    "MODEL_ERROR": 2
+    "VARIANCE": 8,
+    "MODEL_ERROR": 19
   },
-  "lock_breach_priority": "normal",
-  "lock_breach_rules": [],
-  "lock_guard_status": "warning",
-  "lock_rolling_14d_winRate": 0.8571,
+  "lock_breach_priority": true,
+  "lock_breach_rules": [
+    "Do not publish A-tier ML on a team whose opponent SP has ERA under 3.00 and K9 above 9.5 in the last 6 starts.",
+    "Do not publish A-tier K over 7.5 for any starter unless that starter has posted 8 or more K in 3 of last 5 starts.",
+    "Cap A-tier same-game correlated picks to 2 maximum (ML plus K on same game exceeds concentration threshold)."
+  ],
+  "lock_guard_status": "cap_active",
+  "lock_rolling_14d_winRate": 0.6667,
   "patterns_identified": [
-    {
-      "category": "VARIANCE",
-      "frequency": 2,
-      "summary": "2 losses tagged VARIANCE yesterday",
-      "adjustment_rule": "Flag all VARIANCE risk factors before publishing; require mitigation note in card when this pattern appears."
-    },
-    {
-      "category": "MODEL_ERROR",
-      "frequency": 2,
-      "summary": "2 losses tagged MODEL_ERROR yesterday",
-      "adjustment_rule": "Flag all MODEL_ERROR risk factors before publishing; require mitigation note in card when this pattern appears."
-    }
+    "Heavy losses on Over/total props; TOR-NYY and COL-ARI both produced sub-3 totals against elite starters.",
+    "NRFI went 3W-3L. Multiple games with 1st-inning runs.",
+    "Run line concentration losses (4 losses): DET RL -1.5 and ARI RL -1.5 both failed to cover tight wins."
   ],
   "adjustments_for_today": [
-    "Two or more MODEL_ERROR total losses yesterday: require second-pass validation on all over/total picks before publishing; cross-check run environment metrics and bullpen usage."
+    "LOCK BREACH on 2026-05-21: 4 A-tier losses from OAK at LAA. Enforce new A-tier ML and K-over rules before publishing any A-tier today.",
+    "K-over props severely missed (Soriano 7K vs 7.5 line, Peterson 3K vs 5.5, Mize 4K vs 5.5, E.Rodriguez 4K vs 5.5). Run second-pass on all K props today.",
+    "RL -1.5 on favourites missed twice (DET, ARI). Restrict to high-confidence blowout scenarios only.",
+    "Over totals 0 for 5 yesterday in low-scoring games. Weather and elite starter combinations crushed overs."
   ],
   "monitoring_list": [
-    "Starter confirmation for K prop picks \u2014 verify within 90 min of first pitch",
-    "Over/total thesis in games with ace starters \u2014 revisit run environment",
-    "NYY home underdog risk \u2014 monitor trend"
+    "Soriano (LAA): verify K9 trend before next A-tier K prop",
+    "Mize (DET): 4K in 6.2IP suggests regression; downgrade K confidence",
+    "E. Rodriguez (ARI): 4K in 7IP; drop K prop confidence tier"
   ],
   "carryover_rules": [
-    "When stacking K over and Under total on the same starter, require ERA below 3.50 in last 5 starts and minimum 5 innings pitched average in last 3 starts before publishing both as separate picks."
+    "When stacking K over and Under total on the same starter, require ERA below 3.50 in last 5 starts and minimum 5 innings pitched average in last 3 starts before publishing both as separate picks.",
+    "Never stack A-tier ML and A-tier K on same pitcher in same game without independent justification for each.",
+    "Never stack A-tier ML and A-tier K on same pitcher in same game without independent justification for each."
   ]
 }
