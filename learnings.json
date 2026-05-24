@@ -1,149 +1,118 @@
 {
-  "asof": "2026-05-21T23:00:00+00:00",
-  "yesterday_date": "2026-05-21",
-  "yesterday_record": {
-    "picks": 62,
-    "wins": 33,
-    "losses": 27,
-    "pushes": 2,
-    "voids": 0,
-    "units": 1.3816,
-    "totalStake": 62.0,
-    "winRate": 0.55,
-    "roi": 0.0223
+  "date": "2026-05-23",
+  "generatedAt": "2026-05-23T23:00:00+00:00",
+  "summary": {
+    "wins": 44,
+    "losses": 32,
+    "pushes": 1,
+    "winRate": 0.5789,
+    "roi": 0.0448,
+    "units": 3.4529
   },
-  "by_market": {
-    "BB": {
-      "picks": 1,
-      "wins": 0,
-      "losses": 1,
-      "pushes": 0,
-      "voids": 0,
-      "units": -1.0,
-      "totalStake": 1.0,
-      "winRate": 0.0,
-      "roi": -1.0
+  "topLossCategories": [
+    {
+      "category": "f5_miss",
+      "count": 7,
+      "examples": [
+        "F5 Under 3.5",
+        "F5 Under 3.5",
+        "Rangers F5 ML"
+      ]
     },
-    "F5_ML": {
-      "picks": 6,
-      "wins": 4,
-      "losses": 1,
-      "pushes": 1,
-      "voids": 0,
-      "units": 2.4079,
-      "totalStake": 6.0,
-      "winRate": 0.8,
-      "roi": 0.4013
+    {
+      "category": "K_shortfall",
+      "count": 7,
+      "examples": [
+        "Hudson K Over 4.5",
+        "Ginn K Over 5.5",
+        "Wheeler K Over 6.5"
+      ]
     },
-    "F5_Total": {
-      "picks": 4,
-      "wins": 3,
-      "losses": 1,
-      "pushes": 0,
-      "voids": 0,
-      "units": 1.5725,
-      "totalStake": 4.0,
-      "winRate": 0.75,
-      "roi": 0.3931
+    {
+      "category": "total_miss",
+      "count": 5,
+      "examples": [
+        "Under 7",
+        "White Sox Team Total Under 3",
+        "Angels Team Total Under 3"
+      ]
     },
-    "K": {
-      "picks": 14,
-      "wins": 8,
-      "losses": 6,
-      "pushes": 0,
-      "voids": 0,
-      "units": 0.7155,
-      "totalStake": 14.0,
-      "winRate": 0.5714,
-      "roi": 0.0511
+    {
+      "category": "nrfi_yrfi_miss",
+      "count": 5,
+      "examples": [
+        "NRFI",
+        "NRFI",
+        "NRFI"
+      ]
     },
-    "ML": {
-      "picks": 13,
-      "wins": 9,
-      "losses": 4,
-      "pushes": 0,
-      "voids": 0,
-      "units": 4.0799,
-      "totalStake": 13.0,
-      "winRate": 0.6923,
-      "roi": 0.3138
+    {
+      "category": "fade_failure",
+      "count": 4,
+      "examples": [
+        "Mets ML",
+        "Rangers ML",
+        "Mariners ML"
+      ]
     },
-    "NRFI": {
-      "picks": 6,
-      "wins": 3,
-      "losses": 3,
-      "pushes": 0,
-      "voids": 0,
-      "units": -0.5279,
-      "totalStake": 6.0,
-      "winRate": 0.5,
-      "roi": -0.088
+    {
+      "category": "run_line_miss",
+      "count": 3,
+      "examples": [
+        "Mariners RL -1.5",
+        "Braves RL -1.5",
+        "Diamondbacks RL -1.5"
+      ]
     },
-    "RL": {
-      "picks": 6,
-      "wins": 2,
-      "losses": 4,
-      "pushes": 0,
-      "voids": 0,
-      "units": -2.5027,
-      "totalStake": 6.0,
-      "winRate": 0.3333,
-      "roi": -0.4171
-    },
-    "TeamTotal": {
-      "picks": 2,
-      "wins": 0,
-      "losses": 2,
-      "pushes": 0,
-      "voids": 0,
-      "units": -2.0,
-      "totalStake": 2.0,
-      "winRate": 0.0,
-      "roi": -1.0
-    },
-    "Total": {
-      "picks": 10,
-      "wins": 4,
-      "losses": 5,
-      "pushes": 1,
-      "voids": 0,
-      "units": -1.3636,
-      "totalStake": 10.0,
-      "winRate": 0.4444,
-      "roi": -0.1364
+    {
+      "category": "prop_miss",
+      "count": 1,
+      "examples": [
+        "Ohtani HR"
+      ]
     }
-  },
-  "loss_categories": {
-    "VARIANCE": 8,
-    "MODEL_ERROR": 19
-  },
-  "lock_breach_priority": true,
-  "lock_breach_rules": [
-    "Do not publish A-tier ML on a team whose opponent SP has ERA under 3.00 and K9 above 9.5 in the last 6 starts.",
-    "Do not publish A-tier K over 7.5 for any starter unless that starter has posted 8 or more K in 3 of last 5 starts.",
-    "Cap A-tier same-game correlated picks to 2 maximum (ML plus K on same game exceeds concentration threshold)."
   ],
-  "lock_guard_status": "cap_active",
-  "lock_rolling_14d_winRate": 0.6667,
-  "patterns_identified": [
-    "Heavy losses on Over/total props; TOR-NYY and COL-ARI both produced sub-3 totals against elite starters.",
-    "NRFI went 3W-3L. Multiple games with 1st-inning runs.",
-    "Run line concentration losses (4 losses): DET RL -1.5 and ARI RL -1.5 both failed to cover tight wins."
+  "keyFindings": [
+    {
+      "finding": "K props missed at an alarming rate",
+      "detail": "7 of 11 pitcher K props lost. Wheeler (6 vs 6.5), Eovaldi (6 vs 6.5), Kirby (3 vs 5.5), Ginn (2 vs 5.5), Sasaki (4 vs 5.5), Meyer alt (8 vs 8.5). Only Bradley (7), Meyer (8), Urena (6), Holmes (7), Gallen (6) cashed.",
+      "actionable": "Tighten K line selection; avoid SP lines within 0.5 of realistic ceiling unless supported by opponent wRC+ data"
+    },
+    {
+      "finding": "F5 unders suffered from early-inning barrages",
+      "detail": "7 F5 bets lost. SF scored 9 in first five vs CWS, KC blitzed SEA with 4 F5 runs. F5 under logic broke down when opposing lineups went early on struggling starters.",
+      "actionable": "F5 under requires both starters to be in strong form; do not assume F5 under when the opposing starter has ERA above 4.50"
+    },
+    {
+      "finding": "A-tier Lock Wheeler K missed by a single out",
+      "detail": "Wheeler struck out 6 vs the 6.5 line in a 3-0 shutout win. Edge was real but the thin margin on the K line cost us. ML and under both hit.",
+      "actionable": "A-tier K props should require at least 1.5 K cushion above line; within-1 K props are too narrow for Lock designation"
+    },
+    {
+      "finding": "Two upsets burned heavy favorites today",
+      "detail": "WSH over ATL (-162) and SEA over KC (-138) both lost outright. Both had heavy line exposure on ML and F5 ML.",
+      "actionable": "Cap ML stake on dog-barrier favorites above -150 to limit upset bleed; favor run-line or F5 exposure instead"
+    },
+    {
+      "finding": "NRFI failed on games with weak openers",
+      "detail": "5 NRFI losses \u2014 LAD@MIL (MIL 3 in 1st off Sasaki), TEX@LAA (LAA 2 in 1st), SEA@KC (KC 3 in 1st), MIN@BOS (MIN 2 in 1st). All involved a SP with sub-par first-inning metrics.",
+      "actionable": "NRFI requires first-inning K rate above 25% for both starters; do not default to NRFI without checking 1st-inning splits"
+    }
   ],
-  "adjustments_for_today": [
-    "LOCK BREACH on 2026-05-21: 4 A-tier losses from OAK at LAA. Enforce new A-tier ML and K-over rules before publishing any A-tier today.",
-    "K-over props severely missed (Soriano 7K vs 7.5 line, Peterson 3K vs 5.5, Mize 4K vs 5.5, E.Rodriguez 4K vs 5.5). Run second-pass on all K props today.",
-    "RL -1.5 on favourites missed twice (DET, ARI). Restrict to high-confidence blowout scenarios only.",
-    "Over totals 0 for 5 yesterday in low-scoring games. Weather and elite starter combinations crushed overs."
+  "brightSpots": [
+    "CIN@STL G2 sweep: 6 of 7 picks won including over 9, Reds ML, F5 over, team totals, and any HR",
+    "ATH@SD sweep: 6 of 7 won in a dominant Padres pitching performance with 2-0 final",
+    "MIN@BOS: 5 of 7 won including underdog Twins ML at +110 and Bradley K 7 clearing 6.5",
+    "Meyer K Over 6.5 (A-tier Lock) delivered 8 Ks in MIA win; Peralta cashed too at 9 Ks",
+    "Holmes K 7 (WSH@ATL) and Gallen K 6 (COL@ARI) and Urena K 6 (TEX@LAA) all covered despite team losses"
   ],
-  "monitoring_list": [
-    "Soriano (LAA): verify K9 trend before next A-tier K prop",
-    "Mize (DET): 4K in 6.2IP suggests regression; downgrade K confidence",
-    "E. Rodriguez (ARI): 4K in 7IP; drop K prop confidence tier"
-  ],
-  "carryover_rules": [
-    "When stacking K over and Under total on the same starter, require ERA below 3.50 in last 5 starts and minimum 5 innings pitched average in last 3 starts before publishing both as separate picks.",
-    "Never stack A-tier ML and A-tier K on same pitcher in same game without independent justification for each.",
-    "Never stack A-tier ML and A-tier K on same pitcher in same game without independent justification for each."
-  ]
+  "rawLossBreakdown": {
+    "total_miss": 5,
+    "f5_miss": 7,
+    "K_shortfall": 7,
+    "nrfi_yrfi_miss": 5,
+    "prop_miss": 1,
+    "fade_failure": 4,
+    "run_line_miss": 3
+  }
 }
