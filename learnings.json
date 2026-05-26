@@ -1,118 +1,147 @@
 {
-  "date": "2026-05-23",
-  "generatedAt": "2026-05-23T23:00:00+00:00",
-  "summary": {
-    "wins": 44,
-    "losses": 32,
-    "pushes": 1,
-    "winRate": 0.5789,
-    "roi": 0.0448,
-    "units": 3.4529
+  "asof": "2026-05-26T04:00:00Z",
+  "yesterday_date": "2026-05-25",
+  "yesterday_record": {
+    "picks": 65,
+    "wins": 35,
+    "losses": 26,
+    "pushes": 3,
+    "voids": 1,
+    "units": 4.4484,
+    "totalStake": 64.0,
+    "winRate": 0.5738,
+    "roi": 0.0695
   },
-  "topLossCategories": [
-    {
-      "category": "f5_miss",
-      "count": 7,
-      "examples": [
-        "F5 Under 3.5",
-        "F5 Under 3.5",
-        "Rangers F5 ML"
-      ]
+  "by_market": {
+    "F5_ML": {
+      "picks": 3,
+      "wins": 3,
+      "losses": 0,
+      "pushes": 0,
+      "voids": 0,
+      "units": 2.2637,
+      "totalStake": 3.0,
+      "winRate": 1.0,
+      "roi": 0.7546
     },
-    {
-      "category": "K_shortfall",
-      "count": 7,
-      "examples": [
-        "Hudson K Over 4.5",
-        "Ginn K Over 5.5",
-        "Wheeler K Over 6.5"
-      ]
+    "F5_Total": {
+      "picks": 10,
+      "wins": 5,
+      "losses": 4,
+      "pushes": 1,
+      "voids": 0,
+      "units": 0.3875,
+      "totalStake": 10.0,
+      "winRate": 0.5556,
+      "roi": 0.0387
     },
-    {
-      "category": "total_miss",
-      "count": 5,
-      "examples": [
-        "Under 7",
-        "White Sox Team Total Under 3",
-        "Angels Team Total Under 3"
-      ]
+    "K": {
+      "picks": 12,
+      "wins": 3,
+      "losses": 7,
+      "pushes": 1,
+      "voids": 1,
+      "units": -4.3122,
+      "totalStake": 11.0,
+      "winRate": 0.3,
+      "roi": -0.392
     },
-    {
-      "category": "nrfi_yrfi_miss",
-      "count": 5,
-      "examples": [
-        "NRFI",
-        "NRFI",
-        "NRFI"
-      ]
+    "ML": {
+      "picks": 13,
+      "wins": 9,
+      "losses": 4,
+      "pushes": 0,
+      "voids": 0,
+      "units": 2.1869,
+      "totalStake": 13.0,
+      "winRate": 0.6923,
+      "roi": 0.1682
     },
-    {
-      "category": "fade_failure",
-      "count": 4,
-      "examples": [
-        "Mets ML",
-        "Rangers ML",
-        "Mariners ML"
-      ]
+    "NRFI": {
+      "picks": 5,
+      "wins": 3,
+      "losses": 2,
+      "pushes": 0,
+      "voids": 0,
+      "units": 0.5392,
+      "totalStake": 5.0,
+      "winRate": 0.6,
+      "roi": 0.1078
     },
-    {
-      "category": "run_line_miss",
-      "count": 3,
-      "examples": [
-        "Mariners RL -1.5",
-        "Braves RL -1.5",
-        "Diamondbacks RL -1.5"
-      ]
+    "RL": {
+      "picks": 4,
+      "wins": 4,
+      "losses": 0,
+      "pushes": 0,
+      "voids": 0,
+      "units": 5.15,
+      "totalStake": 4.0,
+      "winRate": 1.0,
+      "roi": 1.2875
     },
+    "Total": {
+      "picks": 14,
+      "wins": 6,
+      "losses": 7,
+      "pushes": 1,
+      "voids": 0,
+      "units": -1.5454,
+      "totalStake": 14.0,
+      "winRate": 0.4615,
+      "roi": -0.1104
+    },
+    "YRFI": {
+      "picks": 4,
+      "wins": 2,
+      "losses": 2,
+      "pushes": 0,
+      "voids": 0,
+      "units": -0.2213,
+      "totalStake": 4.0,
+      "winRate": 0.5,
+      "roi": -0.0553
+    }
+  },
+  "loss_categories": {
+    "VARIANCE": 26
+  },
+  "lock_breach_priority": "high",
+  "lock_breach_rules": [
+    "Do not publish A tier F5 Under when the run suppressor is park and weather only \u2014 require starter ERA below 3.50 and opposing lineup ranked bottom 5 NL in runs scored.",
+    "Do not publish A tier ML relying on ERA differential alone; require FIP within 0.50 of ERA and at least 3 consecutive quality starts before classifying as starter edge.",
+    "Do not publish A tier Under at Oracle Park when the visiting pitcher has a WHIP above 1.30 in last 5 starts regardless of wind magnitude.",
+    "Do not publish A tier ML against a starter with ERA above 4.50 when that starter has allowed 2 or fewer runs in 2 of his last 3 starts regardless of season ERA.",
+    "Do not publish A tier Over when the visiting team's rotation is starting a pitcher with an ERA above 6.00 but the bullpen ERA is below 3.80; the pen can neutralize the starter damage and suppress the run total."
+  ],
+  "lock_guard_status": "cap_active",
+  "lock_rolling_14d_winRate": 0.5926,
+  "patterns_identified": [
     {
-      "category": "prop_miss",
-      "count": 1,
-      "examples": [
-        "Ohtani HR"
-      ]
+      "category": "VARIANCE",
+      "frequency": 26,
+      "summary": "26 losses attributed to VARIANCE",
+      "adjustment_rule": "Monitor for variance pattern: 26 losses yesterday \u2014 add to pre-publish checklist"
     }
   ],
-  "keyFindings": [
-    {
-      "finding": "K props missed at an alarming rate",
-      "detail": "7 of 11 pitcher K props lost. Wheeler (6 vs 6.5), Eovaldi (6 vs 6.5), Kirby (3 vs 5.5), Ginn (2 vs 5.5), Sasaki (4 vs 5.5), Meyer alt (8 vs 8.5). Only Bradley (7), Meyer (8), Urena (6), Holmes (7), Gallen (6) cashed.",
-      "actionable": "Tighten K line selection; avoid SP lines within 0.5 of realistic ceiling unless supported by opponent wRC+ data"
-    },
-    {
-      "finding": "F5 unders suffered from early-inning barrages",
-      "detail": "7 F5 bets lost. SF scored 9 in first five vs CWS, KC blitzed SEA with 4 F5 runs. F5 under logic broke down when opposing lineups went early on struggling starters.",
-      "actionable": "F5 under requires both starters to be in strong form; do not assume F5 under when the opposing starter has ERA above 4.50"
-    },
-    {
-      "finding": "A-tier Lock Wheeler K missed by a single out",
-      "detail": "Wheeler struck out 6 vs the 6.5 line in a 3-0 shutout win. Edge was real but the thin margin on the K line cost us. ML and under both hit.",
-      "actionable": "A-tier K props should require at least 1.5 K cushion above line; within-1 K props are too narrow for Lock designation"
-    },
-    {
-      "finding": "Two upsets burned heavy favorites today",
-      "detail": "WSH over ATL (-162) and SEA over KC (-138) both lost outright. Both had heavy line exposure on ML and F5 ML.",
-      "actionable": "Cap ML stake on dog-barrier favorites above -150 to limit upset bleed; favor run-line or F5 exposure instead"
-    },
-    {
-      "finding": "NRFI failed on games with weak openers",
-      "detail": "5 NRFI losses \u2014 LAD@MIL (MIL 3 in 1st off Sasaki), TEX@LAA (LAA 2 in 1st), SEA@KC (KC 3 in 1st), MIN@BOS (MIN 2 in 1st). All involved a SP with sub-par first-inning metrics.",
-      "actionable": "NRFI requires first-inning K rate above 25% for both starters; do not default to NRFI without checking 1st-inning splits"
-    }
+  "adjustments_for_today": [
+    "LOCK GUARD ACTIVE: Cap A tier publication until rolling 14d Lock win rate recovers to 0.85. Demote any A tier candidate missing 4 or more of: model confidence above 80, recent form positive, lineup confirmed, weather neutral or favorable, bullpen rested, no key injury, no umpire risk flag.",
+    "Do not publish A tier F5 Under when the run suppressor is park and weather only \u2014 require starter ERA below 3.50 and opposing lineup ranked bottom 5 NL in runs scored.",
+    "Do not publish A tier ML relying on ERA differential alone; require FIP within 0.50 of ERA and at least 3 consecutive quality starts before classifying as starter edge.",
+    "Do not publish A tier Under at Oracle Park when the visiting pitcher has a WHIP above 1.30 in last 5 starts regardless of wind magnitude.",
+    "Do not publish A tier ML against a starter with ERA above 4.50 when that starter has allowed 2 or fewer runs in 2 of his last 3 starts regardless of season ERA.",
+    "Do not publish A tier Over when the visiting team's rotation is starting a pitcher with an ERA above 6.00 but the bullpen ERA is below 3.80; the pen can neutralize the starter damage and suppress the run total."
   ],
-  "brightSpots": [
-    "CIN@STL G2 sweep: 6 of 7 picks won including over 9, Reds ML, F5 over, team totals, and any HR",
-    "ATH@SD sweep: 6 of 7 won in a dominant Padres pitching performance with 2-0 final",
-    "MIN@BOS: 5 of 7 won including underdog Twins ML at +110 and Bradley K 7 clearing 6.5",
-    "Meyer K Over 6.5 (A-tier Lock) delivered 8 Ks in MIA win; Peralta cashed too at 9 Ks",
-    "Holmes K 7 (WSH@ATL) and Gallen K 6 (COL@ARI) and Urena K 6 (TEX@LAA) all covered despite team losses"
+  "monitoring_list": [
+    "F5 Under 4",
+    "Giants ML",
+    "Under 7 or 7.5",
+    "Padres ML",
+    "Over 9"
   ],
-  "rawLossBreakdown": {
-    "total_miss": 5,
-    "f5_miss": 7,
-    "K_shortfall": 7,
-    "nrfi_yrfi_miss": 5,
-    "prop_miss": 1,
-    "fade_failure": 4,
-    "run_line_miss": 3
-  }
+  "carryover_rules": [
+    "Never issue A-tier Under 7.0 at Oracle when the opposing starter has sub 3.50 ERA and top 5 K rate. The park cannot overcome elite SP offense suppression that also kills the under edge.",
+    "Never issue Giants ML as A-tier unless SF starting pitcher has sub 3.20 ERA AND Giants offense ranks top 10 NL in runs last 14 days. Suppress juice requirement to no worse than -125 when both conditions are not met.",
+    "Cap A-tier exposure at 2 picks per game maximum. F5 Under 4 requires both starters sub 3.50 ERA with sub 7.0 BB9. Never stack F5 Under + ML + Total all A-tier on same game.",
+    "Never issue A-tier ML on any team when their offense ranks bottom third in runs scored last 7 days regardless of park advantage. Minimum requirement: top half run production last 7 days for A-tier ML designation."
+  ]
 }
