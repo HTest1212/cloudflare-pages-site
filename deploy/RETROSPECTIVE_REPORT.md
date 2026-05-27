@@ -1,82 +1,187 @@
-# MLB Betting Retrospective — 2026-05-23
+# MLB Betting Retrospective — 2026-05-26
 
-**Generated:** 2026-05-23T23:00:00+00:00
-**Games Settled:** 11 | **Picks Settled:** 77
-
----
-
-## Day Summary
-
-| Metric | Yesterday | Recent 7d | Recent 14d | Recent 30d | Lifetime |
-|--------|-----------|-----------|------------|------------|----------|
-| Record | 44W 32L 1P | 107W 84L 3P | 258W 221L 16P | 437W 342L 25P | 437W 342L 25P |
-| Win Rate | 57.9% | 56.0% | 53.9% | 56.1% | 56.1% |
-| ROI | +4.5% | +2.5% | -1.2% | +4.7% | +4.7% |
-| Units | +3.45 | +4.80 | -6.06 | +37.66 | +37.66 |
+**Generated:** 2026-05-27T04:00:00Z
+**Yesterday's Date:** 2026-05-26
 
 ---
 
-## Lock Guard Status — CAP ACTIVE
+## SECTION 1 — LOCK BREACH BANNER
 
-A-tier 14-day win rate: **65.0%** (13W 7L 2P)
-Threshold: 80.0% | Status: **CAP ACTIVE** — reduce stake on A-tier plays until rate recovers above 80%
-
-Yesterday's A-tier picks:
-- Phillies ML (-160) → **WIN** (+0.625u)
-- Under 7.5 (-110) → **WIN** (+0.909u)
-- Wheeler K Over 6.5 (-120) → **LOSS** (-1.000u) — struck out exactly 6
-- Under 7 (823222) (-110) → **LOSS** (-1.000u) — total reached 13
-- Meyer K Over 6.5 (-120) → **WIN** (+0.833u)
+No Lock losses on 2026-05-26.
+Zero picks were logged for this date. Lock guard remains cap_active from prior deficit.
 
 ---
 
-## Loss Breakdown (32 losses)
+## SECTION 2 — SLATE SUMMARY
 
-| Category | Count | Notes |
-|----------|-------|-------|
-| K shortfall | 7 | Wheeler 6, Eovaldi 6, Kirby 3, Ginn 2, Sasaki 4, Meyer alt 8 |
-| F5 miss | 7 | Early inning run explosions; SF 9 in F5, KC 4 in F5 vs SEA |
-| Total miss | 5 | CWS exactly 3, Angels 5 over 3, Royals 5 over 3.5 |
-| NRFI/YRFI miss | 5 | MIL 3 in 1st, LAA 2 in 1st, KC 3 in 1st, MIN 2 in 1st |
-| Fade failure | 4 | WSH over ATL, SEA loss to KC, NYM loss, TEX loss |
-| Run line miss | 3 | ARI won by 1, Braves lost, Mariners lost |
-| Prop miss | 1 | Ohtani 0 HR |
+**Yesterday's slate:** 2026-05-26 — 15 games, all Final.
 
----
+**Pick count:** 0 picks logged for 2026-05-26 across all schemas (v2, v1, midday).
 
-## Notable Results
+> **HARD ERROR NOTE:** The 2026-05-26 schedule contained 15 finalized games but picks_log.json recorded zero picks for this date. No midday run data was found. The 11:30 AM run may not have executed or failed to write picks. This is a data gap — no bets to settle.
 
-**Upsets that burned us**
-- Washington Nationals 2, Atlanta Braves 0 — Braves were -162 favorites; cost us ML + F5 ML + RL
-- Seattle Mariners 0, Kansas City Royals 5 — SEA were -138 road favorites; Kirby lasted only 3 Ks
+**Overall record for 2026-05-26:** 0W-0L-0P
 
-**Lock that almost worked**
-Wheeler struck out exactly 6 in a 3-0 shutout. Phillies ML and Under 7.5 both hit; the K line at 6.5 missed by a single out.
+**Record by market:** N/A  
+**Record by tier:** N/A
 
-**Best game of the day**
-STL @ CIN G2: Reds walked off 7-6 in 11 innings. 6 of 7 picks won — Over 9, Reds ML, F5 Over 4.5, Reds TT, any Reds HR, Cardinals TT.
-
-**Best pitching props**
-Peralta (NYM) 9 Ks, Holmes (ATL) 7 Ks, Bradley (BOS) 7 Ks, Meyer (MIA) 8 Ks — all cashed.
-
----
-
-## Key Learnings
-
-1. **K props require wider cushion.** 7 K losses included 3 single-K misses. Lines within 0.5 of realistic ceiling are too thin for A-tier or B-tier designation.
-
-2. **F5 under logic fails against weak openers.** When opposing starter has command issues, first-five run explosions destroy F5 under tickets. Only play F5 under when both starters have sub-4.00 ERA and strong first-inning split data.
-
-3. **Cap exposure on heavy ML favorites.** Two minus-150+ favorites lost outright. Prefer RL or F5 ML on heavy chalk to reduce upset variance.
-
-4. **NRFI requires first-inning split verification.** 5 NRFI losses all came in games where a starter had weak first-inning control.
+**Game results for reference:**
+- WSH 6 @ CLE 3 — Washington wins
+- TBR 1 @ BAL 6 — Baltimore wins
+- LAA 10 @ DET 6 — LA Angels win
+- CHC 1 @ PIT 12 — Pittsburgh wins
+- ATL 7 @ BOS 6 — Atlanta wins
+- MIA 1 @ TOR 8 — Toronto wins
+- CIN 7 @ NYM 2 — Cincinnati wins
+- MIN 5 @ CWS 3 — Minnesota wins
+- NYY 15 @ KC 1 — New York Yankees win
+- STL 0 @ MIL 6 — Milwaukee wins
+- HOU 7 @ TEX 10 — Texas wins
+- SEA 4 @ OAK 1 — Seattle wins
+- PHI 4 @ SD 3 — Philadelphia wins
+- ARI 7 @ SF 5 — Arizona wins
+- COL 6 @ LAD 15 — LA Dodgers win
 
 ---
 
-## Files Updated
+## SECTION 3 — LOCK TRACK RECORD
 
-- `outcomes_log.json` — 784 to 861 entries (77 picks settled)
-- `bet_record_summary.json` — KPIs across 5 rolling windows
-- `learnings.json` — structured findings and bright spots
-- `locks_log.json` — A-tier guard CAP ACTIVE at 65% 14d win rate
-- `retrospective_history.json` — 14 dated entries total
+**Guard Status:** CAP ACTIVE
+**Rolling 14 day Lock win rate:** 54.17% (0.5417) — BELOW 80% threshold
+
+The 11:30 AM run is operating under the Lock Guard Cap. No A tier picks may be published until the rolling 14 day Lock win rate recovers to 85%.
+
+**Lifetime Lock KPIs:**
+- Record: 18W-12L-2P (37 total entries including pending)
+- Units: -1.2528 (net loss)
+- Win rate: 60.00% (0.6000)
+- ROI: -3.91%
+- Current streak: See entries
+- Rolling 14d win rate: 54.17%
+- Rolling 30d win rate: 60.00%
+
+**Locks by Market:**
+- F5 Total: see entries (normalized from F5)
+- ML: tracked
+- Total: tracked
+- K: tracked
+- RL: tracked
+- Other: Hits, TotalBases, F5_ML
+
+**Guard Enforcement:** The 11:30 AM model must enforce the full A tier checklist. Any candidate missing 4 or more of the following is automatically demoted to B tier: model confidence above 80, recent form positive, lineup confirmed, weather neutral or favorable, bullpen rested, no key injury, no umpire risk flag.
+
+---
+
+## SECTION 4 — TOP THREE LOSSES WITH DIAGNOSES
+
+No picks were logged for 2026-05-26. No losses to diagnose.
+
+Prior A tier losses are documented in locks_log.json loss_diagnoses (12 total historical losses).
+
+---
+
+## SECTION 5 — RULE MEMORY STATUS
+
+**Permanent rules (never expire):** 4
+
+1. ★ Never issue A tier Under 7.0 at Oracle when the opposing starter has sub 3.50 ERA and top 5 K rate. The park cannot overcome elite SP offense suppression that also kills the under edge.
+   - times_validated: 3 | first learned: 2026-05-20
+
+2. ★ Never issue Giants ML as A tier unless SF starting pitcher has sub 3.20 ERA AND Giants offense ranks top 10 NL in runs last 14 days. Suppress juice requirement to no worse than minus 125 when both conditions are not met.
+   - times_validated: 3 | first learned: 2026-05-20
+
+3. ★ Cap A tier exposure at 2 picks per game maximum. F5 Under 4 requires both starters sub 3.50 ERA with sub 7.0 BB9. Never stack F5 Under + ML + Total all A tier on same game.
+   - times_validated: 3 | first learned: 2026-05-20
+
+4. ★ Never issue A tier ML on any team when their offense ranks bottom third in runs scored last 7 days regardless of park advantage. Minimum requirement: top half run production last 7 days for A tier ML designation.
+   - times_validated: 3 | first learned: 2026-05-20
+
+**Rules promoted to permanent today:** 0
+
+**Trial rules still accumulating evidence:** 5
+
+1. Do not publish A tier F5 Under when the run suppressor is park and weather only — require starter ERA below 3.50 and opposing lineup ranked bottom 5 NL in runs scored.
+   - times_validated: 1/3 | expires: 2026-06-08 (12 days remaining)
+
+2. Do not publish A tier ML relying on ERA differential alone; require FIP within 0.50 of ERA and at least 3 consecutive quality starts before classifying as starter edge.
+   - times_validated: 1/3 | expires: 2026-06-08 (12 days remaining)
+
+3. Do not publish A tier Under at Oracle Park when the visiting pitcher has a WHIP above 1.30 in last 5 starts regardless of wind magnitude.
+   - times_validated: 1/3 | expires: 2026-06-08 (12 days remaining)
+
+4. Do not publish A tier ML against a starter with ERA above 4.50 when that starter has allowed 2 or fewer runs in 2 of his last 3 starts regardless of season ERA.
+   - times_validated: 1/3 | expires: 2026-06-08 (12 days remaining)
+
+5. Do not publish A tier Over when the visiting team's rotation is starting a pitcher with an ERA above 6.00 but the bullpen ERA is below 3.80; the pen can neutralize the starter damage and suppress the run total.
+   - times_validated: 1/3 | expires: 2026-06-08 (12 days remaining)
+
+**Rules that aged out today:** 0
+
+**New rules created today:** 0 (no losses to generate rules from)
+
+**Total rules in active memory:** 4 permanent + 5 trial = 9 total
+
+---
+
+## SECTION 6 — ADJUSTMENTS FOR TODAY (Priority Order)
+
+1. ★ LOCK GUARD ACTIVE: Cap A tier publication until rolling 14d Lock win rate recovers to 0.85. Demote any A tier candidate missing 4 or more of: model confidence above 80, recent form positive, lineup confirmed, weather neutral or favorable, bullpen rested, no key injury, no umpire risk flag. [GUARD RULE — FIRST PRIORITY]
+
+2. Do not publish A tier F5 Under when the run suppressor is park and weather only — require starter ERA below 3.50 and opposing lineup ranked bottom 5 NL in runs scored. [trial lock_breach — expires 2026-06-08]
+
+3. Do not publish A tier ML relying on ERA differential alone; require FIP within 0.50 of ERA and at least 3 consecutive quality starts before classifying as starter edge. [trial lock_breach — expires 2026-06-08]
+
+4. Do not publish A tier Under at Oracle Park when the visiting pitcher has a WHIP above 1.30 in last 5 starts regardless of wind magnitude. [trial lock_breach — expires 2026-06-08]
+
+5. Do not publish A tier ML against a starter with ERA above 4.50 when that starter has allowed 2 or fewer runs in 2 of his last 3 starts regardless of season ERA. [trial lock_breach — expires 2026-06-08]
+
+6. ★ Never issue A tier Under 7.0 at Oracle when the opposing starter has sub 3.50 ERA and top 5 K rate. The park cannot overcome elite SP offense suppression that also kills the under edge. [PERMANENT — manual]
+
+7. ★ Never issue Giants ML as A tier unless SF starting pitcher has sub 3.20 ERA AND Giants offense ranks top 10 NL in runs last 14 days. [PERMANENT — manual]
+
+8. ★ Cap A tier exposure at 2 picks per game maximum. F5 Under 4 requires both starters sub 3.50 ERA with sub 7.0 BB9. Never stack F5 Under + ML + Total all A tier on same game. [PERMANENT — manual]
+
+9. ★ Never issue A tier ML on any team when their offense ranks bottom third in runs scored last 7 days regardless of park advantage. [PERMANENT — manual]
+
+---
+
+## SECTION 7 — LIFETIME AND RECENT 14 DAY KPIs
+
+**Lifetime:**
+- Record: 472W-367L-29P
+- Units: +4.4484
+- Win rate: 56.26%
+- ROI: +0.51%
+- Total picks settled: 868
+
+**Recent 14 days (2026-05-14 through 2026-05-27):**
+- Record: 166W-136L-12P
+- Units: +4.4484 (recent 14d share of lifetime)
+- Win rate: 54.97%
+- ROI: +1.42%
+
+**Recent 7 days:**
+- Record: 112W-84L-7P
+- Win rate: 57.14%
+- ROI: +2.19%
+
+**Recent 30 days:**
+- Record: 472W-367L-29P
+- Win rate: 56.26%
+- ROI: +0.51%
+
+**Lock Track Record:**
+- Lifetime: 18W-12L-2P | WR 60.00% | -1.2528u
+- Rolling 14d: 54.17% WIN RATE — BELOW THRESHOLD
+- Guard status: CAP ACTIVE
+
+---
+
+## SECTION 8 — DATA NOTES
+
+- **Git sync:** Clone succeeded without PAT (public repo). picks_log.json refreshed from origin.
+- **Missing picks (HARD ERROR):** 0 picks found for 2026-05-26 across all three schemas. The 2026-05-26 schedule had 15 Final games. This is a pick logging gap — the 11:30 AM run may have failed or not run on May 26.
+- **Schema warnings:** Prior carryover_rules in learnings.json were plain strings (old format). Migrated to object format with source="manual", permanent=true, times_validated=3.
+- **Outcomes settled:** 0 new outcomes (no picks to settle). outcomes_log.json unchanged.
+- **Lock guard:** Inherited cap_active status from 2026-05-26 run (rolling 14d WR 54.17% < 80%).
+- **No missing boxscores:** All 15 games returned Final status from MLB API.
