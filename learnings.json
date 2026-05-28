@@ -1,6 +1,6 @@
 {
-  "asof": "2026-05-27T04:00:00Z",
-  "yesterday_date": "2026-05-26",
+  "asof": "2026-05-28T04:00:00Z",
+  "yesterday_date": "2026-05-27",
   "yesterday_record": {
     "picks": 0,
     "wins": 0,
@@ -8,7 +8,7 @@
     "pushes": 0,
     "voids": 0,
     "units": 0,
-    "totalStake": 0.0,
+    "totalStake": 0,
     "winRate": 0.0,
     "roi": 0.0
   },
@@ -17,7 +17,7 @@
   "lock_breach_priority": "normal",
   "lock_breach_rules": [],
   "lock_guard_status": "cap_active",
-  "lock_rolling_14d_winRate": 0.5417,
+  "lock_rolling_14d_winRate": 0.5217,
   "patterns_identified": [],
   "adjustments_for_today": [
     "LOCK GUARD ACTIVE: Cap A tier publication until rolling 14d Lock win rate recovers to 0.85. Demote any A tier candidate missing 4 or more of: model confidence above 80, recent form positive, lineup confirmed, weather neutral or favorable, bullpen rested, no key injury, no umpire risk flag.",
@@ -25,18 +25,12 @@
     "Do not publish A tier ML relying on ERA differential alone; require FIP within 0.50 of ERA and at least 3 consecutive quality starts before classifying as starter edge.",
     "Do not publish A tier Under at Oracle Park when the visiting pitcher has a WHIP above 1.30 in last 5 starts regardless of wind magnitude.",
     "Do not publish A tier ML against a starter with ERA above 4.50 when that starter has allowed 2 or fewer runs in 2 of his last 3 starts regardless of season ERA.",
-    "Do not publish A tier Over when the visiting team's rotation is starting a pitcher with an ERA above 6.00 but the bullpen ERA is below 3.80; the pen can neutralize the starter damage and suppress the run total.",
-    "Never issue A-tier Under 7.0 at Oracle when the opposing starter has sub 3.50 ERA and top 5 K rate. The park cannot overcome elite SP offense suppression that also kills the under edge.",
-    "Never issue Giants ML as A-tier unless SF starting pitcher has sub 3.20 ERA AND Giants offense ranks top 10 NL in runs last 14 days. Suppress juice requirement to no worse than -125 when both conditions are not met.",
-    "Cap A-tier exposure at 2 picks per game maximum. F5 Under 4 requires both starters sub 3.50 ERA with sub 7.0 BB9. Never stack F5 Under + ML + Total all A-tier on same game.",
-    "Never issue A-tier ML on any team when their offense ranks bottom third in runs scored last 7 days regardless of park advantage. Minimum requirement: top half run production last 7 days for A-tier ML designation."
+    "Do not publish A tier Over when the visiting team's rotation is starting a pitcher with an ERA above 6.00 but the bullpen ERA is below 3.80; the pen can neutralize the starter damage and suppress the run total."
   ],
   "monitoring_list": [
-    "F5 Under 4",
-    "Giants ML",
-    "Under 7 or 7.5",
-    "Padres ML",
-    "Over 9"
+    "A-tier lock guard remains cap_active (rolling 14d win rate 52.2%). No new picks settled yesterday.",
+    "May 24 picks (113) remain unsettled in picks_log \u2014 outside yesterday window, not part of this retrospective.",
+    "Carryover rules holding: 5 trial lock_breach rules (all expire 2026-06-08)."
   ],
   "carryover_rules": [
     {
