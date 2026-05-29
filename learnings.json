@@ -1,36 +1,86 @@
 {
-  "asof": "2026-05-28T04:00:00Z",
-  "yesterday_date": "2026-05-27",
+  "asof": "2026-05-29T06:21:18Z",
+  "yesterday_date": "2026-05-28",
   "yesterday_record": {
-    "picks": 0,
-    "wins": 0,
-    "losses": 0,
+    "picks": 9,
+    "wins": 5,
+    "losses": 4,
     "pushes": 0,
     "voids": 0,
-    "units": 0,
-    "totalStake": 0,
-    "winRate": 0.0,
-    "roi": 0.0
+    "units": 0.0528,
+    "totalStake": 9.0,
+    "winRate": 0.5556,
+    "roi": 0.0059
   },
-  "by_market": {},
-  "loss_categories": {},
-  "lock_breach_priority": "normal",
-  "lock_breach_rules": [],
+  "by_market": {
+    "ML": {
+      "picks": 4,
+      "wins": 3,
+      "losses": 1,
+      "pushes": 0,
+      "voids": 0,
+      "units": 1.3136,
+      "totalStake": 4.0,
+      "winRate": 0.75,
+      "roi": 0.3284
+    },
+    "K": {
+      "picks": 4,
+      "wins": 2,
+      "losses": 2,
+      "pushes": 0,
+      "voids": 0,
+      "units": -0.2608,
+      "totalStake": 4.0,
+      "winRate": 0.5,
+      "roi": -0.0652
+    },
+    "Total": {
+      "picks": 1,
+      "wins": 0,
+      "losses": 1,
+      "pushes": 0,
+      "voids": 0,
+      "units": -1.0,
+      "totalStake": 1.0,
+      "winRate": 0.0,
+      "roi": -1.0
+    }
+  },
+  "loss_categories": {
+    "STARTER_OVERRATED": 1,
+    "MODEL_ERROR": 1,
+    "VARIANCE": 2
+  },
+  "lock_breach_priority": "high",
+  "lock_breach_rules": [
+    "Do not publish A tier pitcher K over at a line of 7.0 or higher unless the pitcher's season strikeouts per start exceeds the posted line by at least 1.5; a strong but not dominant 7 strikeout start must still clear with cushion."
+  ],
   "lock_guard_status": "cap_active",
-  "lock_rolling_14d_winRate": 0.5217,
-  "patterns_identified": [],
+  "lock_rolling_14d_winRate": 0.5862,
+  "patterns_identified": [
+    {
+      "category": "STARTER_OVERRATED",
+      "frequency": 3,
+      "summary": "3 strikeout over props missed because the posted K line sat above what the start delivered.",
+      "adjustment_rule": "Require the pitcher trailing 5 start strikeout rate to exceed the posted K line before publishing a K over, and cap K over stake at half a unit when the line is above the pitcher season average."
+    }
+  ],
   "adjustments_for_today": [
     "LOCK GUARD ACTIVE: Cap A tier publication until rolling 14d Lock win rate recovers to 0.85. Demote any A tier candidate missing 4 or more of: model confidence above 80, recent form positive, lineup confirmed, weather neutral or favorable, bullpen rested, no key injury, no umpire risk flag.",
+    "Do not publish A tier pitcher K over at a line of 7.0 or higher unless the pitcher's season strikeouts per start exceeds the posted line by at least 1.5; a strong but not dominant 7 strikeout start must still clear with cushion.",
     "Do not publish A tier F5 Under when the run suppressor is park and weather only \u2014 require starter ERA below 3.50 and opposing lineup ranked bottom 5 NL in runs scored.",
     "Do not publish A tier ML relying on ERA differential alone; require FIP within 0.50 of ERA and at least 3 consecutive quality starts before classifying as starter edge.",
     "Do not publish A tier Under at Oracle Park when the visiting pitcher has a WHIP above 1.30 in last 5 starts regardless of wind magnitude.",
     "Do not publish A tier ML against a starter with ERA above 4.50 when that starter has allowed 2 or fewer runs in 2 of his last 3 starts regardless of season ERA.",
-    "Do not publish A tier Over when the visiting team's rotation is starting a pitcher with an ERA above 6.00 but the bullpen ERA is below 3.80; the pen can neutralize the starter damage and suppress the run total."
+    "Do not publish A tier Over when the visiting team's rotation is starting a pitcher with an ERA above 6.00 but the bullpen ERA is below 3.80; the pen can neutralize the starter damage and suppress the run total.",
+    "Require the pitcher trailing 5 start strikeout rate to exceed the posted K line before publishing a K over, and cap K over stake at half a unit when the line is above the pitcher season average."
   ],
   "monitoring_list": [
-    "A-tier lock guard remains cap_active (rolling 14d win rate 52.2%). No new picks settled yesterday.",
-    "May 24 picks (113) remain unsettled in picks_log \u2014 outside yesterday window, not part of this retrospective.",
-    "Carryover rules holding: 5 trial lock_breach rules (all expire 2026-06-08)."
+    "A tier Lock guard remains cap_active (rolling 14d Lock win rate 58.6%, 17 and 12). Recovery target 85%.",
+    "Strikeout over props went 3 losses across 05-27 and 05-28; K lines above pitcher season average are the common thread.",
+    "Gap settled this run: 05-27 (38 picks, 23 actionable) and 05-28 (9 picks) had not been settled by the 05-28 retrospective. 05-26 had no published picks.",
+    "Carryover memory holds 4 permanent rules and 7 trial rules."
   ],
   "carryover_rules": [
     {
@@ -113,6 +163,24 @@
       "times_validated": 1,
       "permanent": false,
       "last_validated": "2026-05-25"
+    },
+    {
+      "rule": "Do not publish A tier pitcher K over at a line of 7.0 or higher unless the pitcher's season strikeouts per start exceeds the posted line by at least 1.5; a strong but not dominant 7 strikeout start must still clear with cushion.",
+      "source": "lock_breach",
+      "added_date": "2026-05-28",
+      "expires_date": "2026-06-11",
+      "times_validated": 1,
+      "permanent": false,
+      "last_validated": "2026-05-28"
+    },
+    {
+      "rule": "Require the pitcher trailing 5 start strikeout rate to exceed the posted K line before publishing a K over, and cap K over stake at half a unit when the line is above the pitcher season average.",
+      "source": "pattern",
+      "added_date": "2026-05-28",
+      "expires_date": "2026-06-04",
+      "times_validated": 1,
+      "permanent": false,
+      "last_validated": "2026-05-28"
     }
   ]
 }
