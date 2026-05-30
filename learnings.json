@@ -1,79 +1,32 @@
 {
-  "asof": "2026-05-29T06:21:18Z",
-  "yesterday_date": "2026-05-28",
+  "asof": "2026-05-30T18:51:41Z",
+  "yesterday_date": "2026-05-29",
   "yesterday_record": {
-    "picks": 9,
-    "wins": 5,
-    "losses": 4,
+    "picks": 0,
+    "wins": 0,
+    "losses": 0,
     "pushes": 0,
     "voids": 0,
-    "units": 0.0528,
-    "totalStake": 9.0,
-    "winRate": 0.5556,
-    "roi": 0.0059
+    "units": 0,
+    "totalStake": 0,
+    "winRate": 0,
+    "roi": 0
   },
-  "by_market": {
-    "ML": {
-      "picks": 4,
-      "wins": 3,
-      "losses": 1,
-      "pushes": 0,
-      "voids": 0,
-      "units": 1.3136,
-      "totalStake": 4.0,
-      "winRate": 0.75,
-      "roi": 0.3284
-    },
-    "K": {
-      "picks": 4,
-      "wins": 2,
-      "losses": 2,
-      "pushes": 0,
-      "voids": 0,
-      "units": -0.2608,
-      "totalStake": 4.0,
-      "winRate": 0.5,
-      "roi": -0.0652
-    },
-    "Total": {
-      "picks": 1,
-      "wins": 0,
-      "losses": 1,
-      "pushes": 0,
-      "voids": 0,
-      "units": -1.0,
-      "totalStake": 1.0,
-      "winRate": 0.0,
-      "roi": -1.0
-    }
-  },
-  "loss_categories": {
-    "STARTER_OVERRATED": 1,
-    "MODEL_ERROR": 1,
-    "VARIANCE": 2
-  },
-  "lock_breach_priority": "high",
-  "lock_breach_rules": [
-    "Do not publish A tier pitcher K over at a line of 7.0 or higher unless the pitcher's season strikeouts per start exceeds the posted line by at least 1.5; a strong but not dominant 7 strikeout start must still clear with cushion."
-  ],
+  "by_market": {},
+  "loss_categories": {},
+  "lock_breach_priority": "normal",
+  "lock_breach_rules": [],
   "lock_guard_status": "cap_active",
   "lock_rolling_14d_winRate": 0.5862,
-  "patterns_identified": [
-    {
-      "category": "STARTER_OVERRATED",
-      "frequency": 3,
-      "summary": "3 strikeout over props missed because the posted K line sat above what the start delivered.",
-      "adjustment_rule": "Require the pitcher trailing 5 start strikeout rate to exceed the posted K line before publishing a K over, and cap K over stake at half a unit when the line is above the pitcher season average."
-    }
-  ],
+  "patterns_identified": [],
   "adjustments_for_today": [
     "LOCK GUARD ACTIVE: Cap A tier publication until rolling 14d Lock win rate recovers to 0.85. Demote any A tier candidate missing 4 or more of: model confidence above 80, recent form positive, lineup confirmed, weather neutral or favorable, bullpen rested, no key injury, no umpire risk flag.",
-    "Do not publish A tier pitcher K over at a line of 7.0 or higher unless the pitcher's season strikeouts per start exceeds the posted line by at least 1.5; a strong but not dominant 7 strikeout start must still clear with cushion.",
     "Do not publish A tier F5 Under when the run suppressor is park and weather only \u2014 require starter ERA below 3.50 and opposing lineup ranked bottom 5 NL in runs scored.",
     "Do not publish A tier ML relying on ERA differential alone; require FIP within 0.50 of ERA and at least 3 consecutive quality starts before classifying as starter edge.",
     "Do not publish A tier Under at Oracle Park when the visiting pitcher has a WHIP above 1.30 in last 5 starts regardless of wind magnitude.",
     "Do not publish A tier ML against a starter with ERA above 4.50 when that starter has allowed 2 or fewer runs in 2 of his last 3 starts regardless of season ERA.",
     "Do not publish A tier Over when the visiting team's rotation is starting a pitcher with an ERA above 6.00 but the bullpen ERA is below 3.80; the pen can neutralize the starter damage and suppress the run total.",
+    "Do not publish A tier pitcher K over at a line of 7.0 or higher unless the pitcher's season strikeouts per start exceeds the posted line by at least 1.5; a strong but not dominant 7 strikeout start must still clear with cushion.",
     "Require the pitcher trailing 5 start strikeout rate to exceed the posted K line before publishing a K over, and cap K over stake at half a unit when the line is above the pitcher season average."
   ],
   "monitoring_list": [
