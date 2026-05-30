@@ -2,9 +2,9 @@
 
 ## Section 2 Slate Summary
 Settled dates: ['2026-05-29']. Yesterday settled picks: 43.
-Yesterday: 17W 22L 0P voids 4, units -7.35, winRate 43.6%, ROI -18.8%.
-By market: ML 6-5, Total 5-6, F5_Total 1-0, K 1-8, NRFI 0-1, BB 0-0, F5_ML 2-0, TeamTotal 2-2
-By tier: b 10-11, c 7-11
+Yesterday: 20W 23L 0P voids 0, units -5.62, winRate 46.5%, ROI -13.1%.
+By market: ML 6-5, Total 7-7, F5_Total 1-0, K 1-8, NRFI 0-1, BB 1-0, F5_ML 2-0, TeamTotal 2-2
+By tier: b 11-12, c 9-11
 
 ## Section 3 Lock Track Record
 Lifetime Locks: 23W 13L 2P, units -82.21, winRate 63.9%, ROI -216.3%.
@@ -17,10 +17,10 @@ The 11:30 AM run will enforce the A tier cap until 14d recovers to 0.85.
 - Under 7 (Total): Outcome went against the projection. [VARIANCE] total 16 | Miami Marlins 7 New York Mets 9
 
 ## Section 5 Rule Memory
-Permanent (5): Never issue A-tier Under 7.0 at Oracle when the opposin... v3; Never issue Giants ML as A-tier unless SF starting pitc... v3; Cap A-tier exposure at 2 picks per game maximum. F5 Und... v3; Never issue A-tier ML on any team when their offense ra... v3; Require the pitcher trailing 5 start strikeout rate to ... v3
-PROMOTED TODAY: Require the pitcher trailing 5 start strikeout rate to 
-Trial (7): Do not publish A tier F5 Under when the run s... v1/3; Do not publish A tier ML relying on ERA diffe... v1/3; Do not publish A tier Under at Oracle Park wh... v1/3; Do not publish A tier ML against a starter wi... v1/3; Do not publish A tier Over when the visiting ... v1/3; Do not publish A tier pitcher K over at a lin... v1/3; Down weight setups exposed to VARIANCE until ... v2/3
-Active: 5 permanent + 7 trial.
+Permanent (6): Never issue A-tier Under 7.0 at Oracle when the opposin... v3; Never issue Giants ML as A-tier unless SF starting pitc... v3; Cap A-tier exposure at 2 picks per game maximum. F5 Und... v3; Never issue A-tier ML on any team when their offense ra... v3; Require the pitcher trailing 5 start strikeout rate to ... v4; Down weight setups exposed to VARIANCE until the patter... v3
+PROMOTED TODAY: Down weight setups exposed to VARIANCE until the patter
+Trial (6): Do not publish A tier F5 Under when the run s... v1/3; Do not publish A tier ML relying on ERA diffe... v1/3; Do not publish A tier Under at Oracle Park wh... v1/3; Do not publish A tier ML against a starter wi... v1/3; Do not publish A tier Over when the visiting ... v1/3; Do not publish A tier pitcher K over at a lin... v1/3
+Active: 6 permanent + 6 trial.
 
 ## Section 6 Adjustments For Today
 1. LOCK GUARD ACTIVE: Cap A tier publication until rolling 14d Lock win rate recovers to 0.85. Demote any A tier candidate missing 4 or more of: model confidence above 80, recent form positive, lineup confirmed, weather neutral or favorable, bullpen rested, no key injury, no umpire risk flag.
@@ -34,8 +34,8 @@ Active: 5 permanent + 7 trial.
 9. Down weight setups exposed to VARIANCE until the pattern clears.
 
 ## Section 7 Lifetime and Recent 14d
-Lifetime: 506W 407L, units +913.25, winRate 55.4%, ROI 10.7%.
-Recent14: 176W 149L, units +880.39, winRate 54.1%, ROI 11.1%.
+Lifetime: 509W 408L, units +914.98, winRate 55.5%, ROI 10.7%.
+Recent14: 179W 150L, units +882.12, winRate 54.4%, ROI 11.1%.
 
 ## Section 8 Data Notes
 TODAY 2026-05-30 YDAY 2026-05-29
@@ -45,7 +45,7 @@ picks_log 362 outcomes 1129
 settle_dates ['2026-05-29']
 date 2026-05-29: 15 games 15 final, 43 picks
 settled now 43 of 43
-results {'loss': 22, 'win': 17, 'void': 4}
+results {'loss': 23, 'win': 20}
 outcomes after upsert 1129
 wrote outcomes_log.json
 wrote bet_record_summary.json
