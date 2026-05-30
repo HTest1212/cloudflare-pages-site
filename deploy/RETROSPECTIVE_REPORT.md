@@ -1,7 +1,7 @@
 # Retrospective 2026-05-29
 
 ## Section 2 Slate Summary
-Settled dates: ['2026-05-24', '2026-05-29']. Yesterday games settled: 43 picks.
+Settled dates: ['2026-05-29']. Yesterday games settled: 43 picks.
 Record yesterday: 0W 0L 0P, units +0.00, winRate 0%.
 By market: ML 0-0, Total 0-0, F5 0-0, K 0-0, Other 0-0
 
@@ -37,13 +37,11 @@ Recent14: 159W 127L, units +887.74, winRate 55.6%, ROI 11.2%.
 TODAY 2026-05-30 YDAY 2026-05-29
 load err picks_log.json [Errno 35] Resource deadlock avoided
 picks_log loaded from /tmp/repo_retro/picks_log.json
-picks_log entries 373 | outcomes 973
-settle_dates ['2026-05-24', '2026-05-29']
-date 2026-05-24: 16 games, 15 final
-  113 picks to settle
+picks_log entries 373 | outcomes 1129
+settle_dates ['2026-05-29']
 date 2026-05-29: 15 games, 15 final
   43 picks to settle
-settled now: 3 of 156
+settled now: 0 of 43
 outcomes_log after upsert 1129
 wrote outcomes_log.json
 wrote bet_record_summary.json
