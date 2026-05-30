@@ -1,101 +1,52 @@
-# Statcast Overlay Refresh Report — 2026-05-27
+# Statcast Overlay Refresh Report
 
-Run: mlb-statcast-refresh-6am (automated scheduled task)
-Run time: 2026-05-27 06:00 ET / 15:00 UTC
-Status: SUCCESS
+**Window:** Early morning 6 AM ET scheduled run
+**Run timestamp (UTC):** 2026-05-30T10:06:24Z
+**Slate date (today):** 2026-05-30
 
----
+## Yesterday's slate (2026-05-29)
+15 games played, all Final. Box scores reviewed for appeared players. Note: Statcast per player rolling refresh was deferred this run because the workspace mount returned "Resource deadlock avoided" (known mount lock failure), so all computation ran from a fresh anonymous origin clone. Yesterday's results are already reflected in the season ERA/K9/BB9 splits pulled live from StatsAPI for every probable in today's set.
 
-## Statcast Collection Window
+## Today's slate (2026-05-30)
+- Total games: 15
+- Pitchers in overlay: 30 of 30 (target 30) — all probables confirmed via StatsAPI hydrate=probablePitcher
+- Batters in overlay: 0 (target 150) — NOT populated this run, see Notes
+- All season stats real: ERA, K9, BB9 from 2026 season pitching splits; FIP/xFIP computed from season HR/BB/HBP/K/IP (constant 3.15)
 
-Rolled window: 2026-05-12 to 2026-05-26 (15 days)
-Full-season window abandoned: results exceeded 100K word context limit per player.
-12 batter Statcast files saved to macOS host disk (inaccessible from bash sandbox).
-Overlay marks collected players as statcast_status: "collected" and remainder as "pending".
+## Matchups and probable pitchers (away at home, away vs home, venue)
+DET @ CWS | Rate Field | Framber Valdez (4.28 ERA) vs Anthony Kay (3.96 ERA)
+SD @ WSH | Nationals Park | Michael King (2.76) vs Foster Griffin (3.63)
+KC @ TEX | Globe Life Field | Seth Lugo (3.74) vs Kumar Rocker (3.96)
+TOR @ BAL | Oriole Park at Camden Yards | Trey Yesavage (2.25) vs Brandon Young (3.47)
+MIN @ PIT | PNC Park | Bailey Ober (3.92) vs Mitch Keller (3.64)
+BOS @ CLE | Progressive Field | Sonny Gray (3.27) vs Parker Messick (2.24)
+LAA @ TB | Tropicana Field | Reid Detmers (4.57) vs Drew Rasmussen (2.78)
+MIA @ NYM | Citi Field | Tyler Phillips (1.07) vs Christian Scott (3.20)
+MIL @ HOU | Daikin Park | Brandon Sproat (5.84) vs Peter Lambert (3.79)
+CHC @ STL | Busch Stadium | Ben Brown (2.01) vs Kyle Leahy (4.44)
+ATL @ CIN | Great American Ball Park | Martin Perez (2.70) vs Brady Singer (6.26)
+SF @ COL | Coors Field | Adrian Houser (5.30) vs Ryan Feltner (6.30)
+NYY @ ATH | Sutter Health Park | Ryan Weathers (3.14) vs J.T. Ginn (3.19)
+ARI @ SEA | T-Mobile Park | Ryne Nelson (4.65) vs Bryan Woo (3.82)
+PHI @ LAD | UNIQLO Field at Dodger Stadium | Jesus Luzardo (4.38) vs Roki Sasaki (4.93)
 
----
+## Lineup endpoint behavior at 6 AM ET
+get_mlb_game_lineup returned empty player arrays for all games (expected at 6 AM). Probable pitchers were NOT exposed by the lineup or boxscore endpoints, so probables were sourced from StatsAPI schedule hydrate=probablePitcher, which had all 30 announced. Zero fall backs and zero TBD needed. No pitcher name was carried over or guessed.
 
-## Yesterday's Slate (2026-05-26)
+## GitHub push status
+- Result: SUCCESS
+- Branch: main
+- Overlay commit: 3b85cee — "Auto refresh statcast 2026-05-30 06:00"
+- Report commit: this commit on top of 3b85cee
+- Only statcast_overlay.json was staged for the data commit (no git add -A). Rebase clean, no force push needed.
 
-Source: MLB Stats API via mlb-api-mcp
-Boxscore files on macOS host (inaccessible from bash sandbox).
-Player IDs extracted from roster API error payloads (MCP tool list/dict bug).
-12 teams confirmed via API; 18 teams filled from training knowledge.
+## Cloudflare Pages deploy status
+- Result: SUCCESS (auto deploy via GitHub Actions cloudflare-deploy.yml)
+- Project: mlb-betting-dashboard-v2
+- Live URL: https://mlb-betting-dashboard-v2.pages.dev
+- Verified: live statcast_overlay.json serves asof 2026-05-30T10:04:07Z, slate_date 2026-05-30, 15 games, correct probables (Framber Valdez vs Anthony Kay confirmed live)
 
----
-
-## Today's Slate (2026-05-27)
-
-Games: 15
-Pitcher slots: 30 (15 away + 15 home)
-Batter slots: 150 (5 per team, 30 teams)
-Lineup endpoint status: All 15 games returned empty arrays at 06:00 ET (expected)
-Probable pitcher source: roster_candidate_6am for all 30 slots
-
-Matchups:
-  MIA @ TOR | WSH @ CLE | STL @ MIL | SEA @ OAK | ARI @ SF
-  PHI @ SD  | TB @ BAL  | LAA @ DET | CHC @ PIT | ATL @ BOS
-  CIN @ NYM | MIN @ CWS | NYY @ KC  | HOU @ TEX | COL @ LAD
-
----
-
-## Lineup Endpoint Behavior
-
-All 15 endpoints returned players: [] at 06:00 ET.
-Expected — MLB lineups post between 09:30 and 11:00 ET.
-Fallback: rotation candidates from each team's roster used as probable starters.
-
----
-
-## Statcast Players (Collected)
-
-Vladimir Guerrero Jr. TOR — collected
-Trea Turner PHI — collected
-Corbin Carroll ARI — collected
-Travis Bazzana CLE — collected
-Randy Arozarena SEA — collected
-Brent Rooker OAK — collected
-William Contreras MIL — collected
-Fernando Tatis Jr. SD — collected
-Tarik Skubal DET — collected (pitcher)
-Paul Skenes PIT — collected (pitcher)
-Hunter Greene CIN — collected (pitcher)
-Ronald Acuna Jr. ATL — no data (possible IL / gap)
-
----
-
-## GitHub Push
-
-Method: Sparse clone (bash sandbox cannot access .git via FUSE mount)
-Commit: 02b484d — Auto refresh statcast 2026-05-27 06:00
-Branch: main | Repo: HTest1212/cloudflare-pages-site
-Result: SUCCESS (480c47f..02b484d)
-Files staged: statcast_overlay.json ONLY
-
----
-
-## Cloudflare Pages Deploy
-
-Project: mlb-betting-dashboard-v2
-Trigger: Auto-deploy from GitHub main push (Pages Git integration)
-Live URL: https://mlb-betting-dashboard-v2.pages.dev
-Verified asof: 2026-05-27T11:00:00Z — LIVE
-Games live: 15
-Status: SUCCESS
-
----
-
-## Overlay Schema Changes (vs 2026-05-26)
-
-New fields: pitchers[], batters[], yesterday_slate, statcast_collection_window,
-lineup_endpoint_status, probable_pitcher_source, source_notes
-
----
-
-## Known Issues / Next Steps
-
-1. Statcast aggregation gap: Raw pitch files on host disk cannot be read from sandbox.
-   Future fix: macOS subprocess to compute xBA, xwOBA, EV, K% and store in overlay.
-2. Ronald Acuna Jr.: No Statcast data returned. Verify ATL IL status.
-3. Pitcher ID placeholders: Some STARTER_CANDIDATES had approximate IDs. Full roster lookup will fix.
-4. Lineup re-fetch: 11:30 AM build should re-hit lineup endpoints once lineups post.
+## Notes
+- MOUNT LOCK: workspace mount /Users/Heff/Desktop/MLB Beting Dashboard Folder returned "Resource deadlock avoided" all run. Worked entirely from origin clone; push and live deploy succeeded so the canonical data is current. Working-folder local copy could not be refreshed this session and will resync from origin on the next healthy run / 11:30 build.
+- BATTER SET: 150 projected batters not populated this run. The live dashboard consumer schema is pitcher-keyed and the 11:30 AM build regenerates hitter-level detail; shipping the verified 30-pitcher overlay with real stats was prioritized over a heavy batter pull under the mount-lock + 3 minute budget. Flag for follow up if hitter props need overlay-side data before 11:30.
+- No IL or roster anomalies blocked any probable; all 30 IDs resolved with non-null season stats.
