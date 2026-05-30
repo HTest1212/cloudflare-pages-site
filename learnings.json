@@ -1,80 +1,122 @@
 {
-  "asof": "2026-05-30T18:55:32Z",
+  "asof": "2026-05-30T19:02:03Z",
   "yesterday_date": "2026-05-29",
   "yesterday_record": {
-    "picks": 0,
-    "wins": 0,
-    "losses": 0,
+    "picks": 43,
+    "wins": 7,
+    "losses": 7,
     "pushes": 0,
-    "voids": 0,
-    "units": 0,
-    "totalStake": 0,
-    "winRate": 0,
-    "roi": 0
+    "voids": 29,
+    "units": -0.6363,
+    "totalStake": 14.0,
+    "winRate": 0.5,
+    "roi": -0.0454
   },
   "by_market": {
     "ML": {
-      "picks": 0,
+      "picks": 11,
       "wins": 0,
       "losses": 0,
       "pushes": 0,
-      "voids": 0,
+      "voids": 11,
       "units": 0,
       "totalStake": 0,
       "winRate": 0,
       "roi": 0
     },
     "Total": {
-      "picks": 0,
-      "wins": 0,
-      "losses": 0,
+      "picks": 12,
+      "wins": 6,
+      "losses": 6,
       "pushes": 0,
       "voids": 0,
-      "units": 0,
-      "totalStake": 0,
-      "winRate": 0,
-      "roi": 0
+      "units": -0.5454,
+      "totalStake": 12.0,
+      "winRate": 0.5,
+      "roi": -0.0454
     },
-    "F5": {
-      "picks": 0,
-      "wins": 0,
+    "F5_Total": {
+      "picks": 1,
+      "wins": 1,
       "losses": 0,
       "pushes": 0,
       "voids": 0,
-      "units": 0,
-      "totalStake": 0,
-      "winRate": 0,
-      "roi": 0
+      "units": 0.9091,
+      "totalStake": 1.0,
+      "winRate": 1.0,
+      "roi": 0.9091
     },
     "K": {
-      "picks": 0,
+      "picks": 9,
       "wins": 0,
       "losses": 0,
       "pushes": 0,
-      "voids": 0,
+      "voids": 9,
       "units": 0,
       "totalStake": 0,
       "winRate": 0,
       "roi": 0
     },
-    "Other": {
-      "picks": 0,
+    "NRFI": {
+      "picks": 1,
+      "wins": 0,
+      "losses": 1,
+      "pushes": 0,
+      "voids": 0,
+      "units": -1.0,
+      "totalStake": 1.0,
+      "winRate": 0.0,
+      "roi": -1.0
+    },
+    "BB": {
+      "picks": 3,
       "wins": 0,
       "losses": 0,
       "pushes": 0,
-      "voids": 0,
+      "voids": 3,
+      "units": 0,
+      "totalStake": 0,
+      "winRate": 0,
+      "roi": 0
+    },
+    "F5_ML": {
+      "picks": 2,
+      "wins": 0,
+      "losses": 0,
+      "pushes": 0,
+      "voids": 2,
+      "units": 0,
+      "totalStake": 0,
+      "winRate": 0,
+      "roi": 0
+    },
+    "TeamTotal": {
+      "picks": 4,
+      "wins": 0,
+      "losses": 0,
+      "pushes": 0,
+      "voids": 4,
       "units": 0,
       "totalStake": 0,
       "winRate": 0,
       "roi": 0
     }
   },
-  "loss_categories": {},
+  "loss_categories": {
+    "VARIANCE": 7
+  },
   "lock_breach_priority": "normal",
   "lock_breach_rules": [],
   "lock_guard_status": "cap_active",
   "lock_rolling_14d_winRate": 0.5862,
-  "patterns_identified": [],
+  "patterns_identified": [
+    {
+      "category": "VARIANCE",
+      "frequency": 7,
+      "summary": "7 losses tagged VARIANCE on 2026-05-29.",
+      "adjustment_rule": "Down weight setups exposed to VARIANCE until the pattern clears."
+    }
+  ],
   "adjustments_for_today": [
     "LOCK GUARD ACTIVE: Cap A tier publication until rolling 14d Lock win rate recovers to 0.85. Demote any A tier candidate missing 4 or more of: model confidence above 80, recent form positive, lineup confirmed, weather neutral or favorable, bullpen rested, no key injury, no umpire risk flag.",
     "Do not publish A tier F5 Under when the run suppressor is park and weather only \u2014 require starter ERA below 3.50 and opposing lineup ranked bottom 5 NL in runs scored.",
@@ -83,6 +125,7 @@
     "Do not publish A tier ML against a starter with ERA above 4.50 when that starter has allowed 2 or fewer runs in 2 of his last 3 starts regardless of season ERA.",
     "Do not publish A tier Over when the visiting team's rotation is starting a pitcher with an ERA above 6.00 but the bullpen ERA is below 3.80; the pen can neutralize the starter damage and suppress the run total.",
     "Do not publish A tier pitcher K over at a line of 7.0 or higher unless the pitcher's season strikeouts per start exceeds the posted line by at least 1.5; a strong but not dominant 7 strikeout start must still clear with cushion.",
+    "Down weight setups exposed to VARIANCE until the pattern clears.",
     "Require the pitcher trailing 5 start strikeout rate to exceed the posted K line before publishing a K over, and cap K over stake at half a unit when the line is above the pitcher season average."
   ],
   "monitoring_list": [
@@ -186,10 +229,19 @@
       "rule": "Require the pitcher trailing 5 start strikeout rate to exceed the posted K line before publishing a K over, and cap K over stake at half a unit when the line is above the pitcher season average.",
       "source": "pattern",
       "added_date": "2026-05-28",
-      "expires_date": "2026-06-04",
+      "expires_date": "2026-06-05",
+      "times_validated": 2,
+      "permanent": false,
+      "last_validated": "2026-05-29"
+    },
+    {
+      "rule": "Down weight setups exposed to VARIANCE until the pattern clears.",
+      "source": "pattern",
+      "added_date": "2026-05-29",
+      "expires_date": "2026-06-05",
       "times_validated": 1,
       "permanent": false,
-      "last_validated": "2026-05-28"
+      "last_validated": "2026-05-29"
     }
   ]
 }
