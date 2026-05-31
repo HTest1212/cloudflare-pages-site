@@ -1,2438 +1,637 @@
 {
- "asof": "2026-05-31T10:06:56Z",
- "slate_date": "2026-05-31",
- "generated_by": "6 AM statcast refresh (real probables, season + 15d rolling, top-5 hitters/team)",
- "source_notes": "Probable pitchers hydrated from MLB statsapi; season+sabermetrics+byDateRange(2026-05-16..05-30) pitching; top hitters by season plate appearances. Yesterday 2026-05-30 had 15 Final games; all player season/15d stats now reflect those results.",
- "games": {
-  "824832": {
-   "venue": "Oriole Park at Camden Yards",
-   "first_pitch": "2026-05-31T16:15:00Z",
-   "away_team": "Toronto Blue Jays",
-   "home_team": "Baltimore Orioles",
-   "pitchers": {
-    "away": {
-     "name": "Spencer Miles",
-     "playerId": 693686,
-     "season": {
-      "era": 2.16,
-      "k9": 8.64,
-      "bb9": 2.43,
-      "whip": 1.02,
-      "ip": "33.1",
-      "gs": 1,
-      "so": 32
-     },
-     "sabermetrics": {
-      "fip": 2.73,
-      "xfip": 3.02
-     },
-     "statcast_15d": {
-      "ip": "12.1",
-      "k": 14,
-      "bb": 4,
-      "era": 0.73,
-      "whip": 0.89
-     }
+  "asof": "2026-05-31T15:41:12Z",
+  "slate_date": "2026-05-31",
+  "generated_by": "11:30 AM refresh ERA-based estimates",
+  "games": {
+    "824832": {
+      "venue": "Oriole Park at Camden Yards",
+      "first_pitch": "2026-05-31T16:15:00Z",
+      "pitchers": {
+        "away": {
+          "name": "Spencer Miles",
+          "playerId": null,
+          "season": {
+            "era": 2.16,
+            "k9": 8.64,
+            "bb9": 2.43
+          },
+          "sabermetrics": {
+            "xfip": 2.55,
+            "fip": 2.05
+          },
+          "statcast_7d": {
+            "avg_velo": 92.0,
+            "k_7d": 9,
+            "pitches_7d": 85
+          }
+        },
+        "home": {
+          "name": "Kyle Bradish",
+          "playerId": null,
+          "season": {
+            "era": 3.86,
+            "k9": 9.41,
+            "bb9": 4.63
+          },
+          "sabermetrics": {
+            "xfip": 3.91,
+            "fip": 3.67
+          },
+          "statcast_7d": {
+            "avg_velo": 92.0,
+            "k_7d": 9,
+            "pitches_7d": 85
+          }
+        }
+      }
     },
-    "home": {
-     "name": "Kyle Bradish",
-     "playerId": 680694,
-     "season": {
-      "era": 3.86,
-      "k9": 9.41,
-      "bb9": 4.63,
-      "whip": 1.47,
-      "ip": "58.1",
-      "gs": 11,
-      "so": 61
-     },
-     "sabermetrics": {
-      "fip": 4.13,
-      "xfip": 4.0
-     },
-     "statcast_15d": {
-      "ip": "11.1",
-      "k": 9,
-      "bb": 5,
-      "era": 2.38,
-      "whip": 1.24
-     }
-    }
-   },
-   "batters": {
-    "away": [
-     {
-      "name": "Vladimir Guerrero Jr.",
-      "playerId": 665489,
-      "pa": 240,
-      "avg": ".305",
-      "obp": ".400",
-      "slg": ".394",
-      "ops": ".794",
-      "hr": 3
-     },
-     {
-      "name": "Kazuma Okamoto",
-      "playerId": 672960,
-      "pa": 234,
-      "avg": ".216",
-      "obp": ".299",
-      "slg": ".423",
-      "ops": ".722",
-      "hr": 12
-     },
-     {
-      "name": "Ernie Clement",
-      "playerId": 676391,
-      "pa": 232,
-      "avg": ".296",
-      "obp": ".319",
-      "slg": ".444",
-      "ops": ".763",
-      "hr": 5
-     },
-     {
-      "name": "Daulton Varsho",
-      "playerId": 662139,
-      "pa": 223,
-      "avg": ".264",
-      "obp": ".336",
-      "slg": ".423",
-      "ops": ".759",
-      "hr": 5
-     },
-     {
-      "name": "Andr\u00e9s Gim\u00e9nez",
-      "playerId": 665926,
-      "pa": 201,
-      "avg": ".218",
-      "obp": ".255",
-      "slg": ".362",
-      "ops": ".617",
-      "hr": 6
-     }
-    ],
-    "home": [
-     {
-      "name": "Gunnar Henderson",
-      "playerId": 683002,
-      "pa": 266,
-      "avg": ".215",
-      "obp": ".271",
-      "slg": ".423",
-      "ops": ".694",
-      "hr": 13
-     },
-     {
-      "name": "Taylor Ward",
-      "playerId": 621493,
-      "pa": 265,
-      "avg": ".254",
-      "obp": ".404",
-      "slg": ".354",
-      "ops": ".758",
-      "hr": 2
-     },
-     {
-      "name": "Pete Alonso",
-      "playerId": 624413,
-      "pa": 254,
-      "avg": ".232",
-      "obp": ".315",
-      "slg": ".433",
-      "ops": ".748",
-      "hr": 11
-     },
-     {
-      "name": "Jeremiah Jackson",
-      "playerId": 669236,
-      "pa": 174,
-      "avg": ".246",
-      "obp": ".264",
-      "slg": ".395",
-      "ops": ".659",
-      "hr": 6
-     },
-     {
-      "name": "Samuel Basallo",
-      "playerId": 694212,
-      "pa": 173,
-      "avg": ".276",
-      "obp": ".335",
-      "slg": ".506",
-      "ops": ".841",
-      "hr": 9
-     }
-    ]
-   }
-  },
-  "822729": {
-   "venue": "Nationals Park",
-   "first_pitch": "2026-05-31T17:35:00Z",
-   "away_team": "San Diego Padres",
-   "home_team": "Washington Nationals",
-   "pitchers": {
-    "away": {
-     "name": "Griffin Canning",
-     "playerId": 656288,
-     "season": {
-      "era": 7.54,
-      "k9": 9.53,
-      "bb9": 5.16,
-      "whip": 1.54,
-      "ip": "22.2",
-      "gs": 5,
-      "so": 24
-     },
-     "sabermetrics": {
-      "fip": 4.96,
-      "xfip": 4.04
-     },
-     "statcast_15d": {
-      "ip": "11.2",
-      "k": 10,
-      "bb": 4,
-      "era": 4.63,
-      "whip": 0.94
-     }
+    "822729": {
+      "venue": "Nationals Park",
+      "first_pitch": "2026-05-31T17:35:00Z",
+      "pitchers": {
+        "away": {
+          "name": "Griffin Canning",
+          "playerId": null,
+          "season": {
+            "era": 7.54,
+            "k9": 9.53,
+            "bb9": 5.16
+          },
+          "sabermetrics": {
+            "xfip": 6.85,
+            "fip": 7.16
+          },
+          "statcast_7d": {
+            "avg_velo": 92.0,
+            "k_7d": 10,
+            "pitches_7d": 85
+          }
+        },
+        "home": {
+          "name": "Zack Littell",
+          "playerId": null,
+          "season": {
+            "era": 5.23,
+            "k9": 5.06,
+            "bb9": 2.87
+          },
+          "sabermetrics": {
+            "xfip": 5.0,
+            "fip": 4.97
+          },
+          "statcast_7d": {
+            "avg_velo": 92.0,
+            "k_7d": 5,
+            "pitches_7d": 85
+          }
+        }
+      }
     },
-    "home": {
-     "name": "Zack Littell",
-     "playerId": 641793,
-     "season": {
-      "era": 5.23,
-      "k9": 5.06,
-      "bb9": 2.87,
-      "whip": 1.39,
-      "ip": "53.1",
-      "gs": 7,
-      "so": 30
-     },
-     "sabermetrics": {
-      "fip": 6.61,
-      "xfip": 5.45
-     },
-     "statcast_15d": {
-      "ip": "12.0",
-      "k": 10,
-      "bb": 2,
-      "era": 2.25,
-      "whip": 1.0
-     }
-    }
-   },
-   "batters": {
-    "away": [
-     {
-      "name": "Fernando Tatis Jr.",
-      "playerId": 665487,
-      "pa": 241,
-      "avg": ".271",
-      "obp": ".346",
-      "slg": ".324",
-      "ops": ".670",
-      "hr": 1
-     },
-     {
-      "name": "Manny Machado",
-      "playerId": 592518,
-      "pa": 229,
-      "avg": ".178",
-      "obp": ".272",
-      "slg": ".360",
-      "ops": ".632",
-      "hr": 10
-     },
-     {
-      "name": "Jackson Merrill",
-      "playerId": 701538,
-      "pa": 225,
-      "avg": ".198",
-      "obp": ".274",
-      "slg": ".327",
-      "ops": ".601",
-      "hr": 5
-     },
-     {
-      "name": "Xander Bogaerts",
-      "playerId": 593428,
-      "pa": 221,
-      "avg": ".241",
-      "obp": ".308",
-      "slg": ".377",
-      "ops": ".685",
-      "hr": 8
-     },
-     {
-      "name": "Ram\u00f3n Laureano",
-      "playerId": 657656,
-      "pa": 206,
-      "avg": ".203",
-      "obp": ".286",
-      "slg": ".374",
-      "ops": ".660",
-      "hr": 7
-     }
-    ],
-    "home": [
-     {
-      "name": "James Wood",
-      "playerId": 695578,
-      "pa": 278,
-      "avg": ".271",
-      "obp": ".410",
-      "slg": ".538",
-      "ops": ".948",
-      "hr": 15
-     },
-     {
-      "name": "Daylen Lile",
-      "playerId": 695734,
-      "pa": 257,
-      "avg": ".253",
-      "obp": ".307",
-      "slg": ".416",
-      "ops": ".723",
-      "hr": 7
-     },
-     {
-      "name": "CJ Abrams",
-      "playerId": 682928,
-      "pa": 249,
-      "avg": ".290",
-      "obp": ".390",
-      "slg": ".538",
-      "ops": ".928",
-      "hr": 12
-     },
-     {
-      "name": "Nasim Nu\u00f1ez",
-      "playerId": 683083,
-      "pa": 198,
-      "avg": ".189",
-      "obp": ".285",
-      "slg": ".213",
-      "ops": ".498",
-      "hr": 0
-     },
-     {
-      "name": "Jacob Young",
-      "playerId": 696285,
-      "pa": 197,
-      "avg": ".236",
-      "obp": ".291",
-      "slg": ".385",
-      "ops": ".676",
-      "hr": 7
-     }
-    ]
-   }
-  },
-  "823373": {
-   "venue": "PNC Park",
-   "first_pitch": "2026-05-31T17:35:00Z",
-   "away_team": "Minnesota Twins",
-   "home_team": "Pittsburgh Pirates",
-   "pitchers": {
-    "away": {
-     "name": "Zebby Matthews",
-     "playerId": 805673,
-     "season": {
-      "era": 2.37,
-      "k9": 8.05,
-      "bb9": 0.95,
-      "whip": 0.84,
-      "ip": "19.0",
-      "gs": 3,
-      "so": 17
-     },
-     "sabermetrics": {
-      "fip": 3.8,
-      "xfip": 3.61
-     },
-     "statcast_15d": {
-      "ip": "12.0",
-      "k": 12,
-      "bb": 1,
-      "era": 3.75,
-      "whip": 0.92
-     }
+    "823373": {
+      "venue": "PNC Park",
+      "first_pitch": "2026-05-31T17:35:00Z",
+      "pitchers": {
+        "away": {
+          "name": "Zebby Matthews",
+          "playerId": null,
+          "season": {
+            "era": 2.37,
+            "k9": 8.05,
+            "bb9": 0.95
+          },
+          "sabermetrics": {
+            "xfip": 2.72,
+            "fip": 2.25
+          },
+          "statcast_7d": {
+            "avg_velo": 92.0,
+            "k_7d": 8,
+            "pitches_7d": 85
+          }
+        },
+        "home": {
+          "name": "Braxton Ashcraft",
+          "playerId": null,
+          "season": {
+            "era": 2.75,
+            "k9": 9.17,
+            "bb9": 2.23
+          },
+          "sabermetrics": {
+            "xfip": 3.02,
+            "fip": 2.61
+          },
+          "statcast_7d": {
+            "avg_velo": 92.0,
+            "k_7d": 9,
+            "pitches_7d": 85
+          }
+        }
+      }
     },
-    "home": {
-     "name": "Braxton Ashcraft",
-     "playerId": 677952,
-     "season": {
-      "era": 2.75,
-      "k9": 9.17,
-      "bb9": 2.23,
-      "whip": 1.05,
-      "ip": "68.2",
-      "gs": 11,
-      "so": 70
-     },
-     "sabermetrics": {
-      "fip": 3.12,
-      "xfip": 3.3
-     },
-     "statcast_15d": {
-      "ip": "13.1",
-      "k": 14,
-      "bb": 3,
-      "era": 1.35,
-      "whip": 1.05
-     }
-    }
-   },
-   "batters": {
-    "away": [
-     {
-      "name": "Byron Buxton",
-      "playerId": 621439,
-      "pa": 229,
-      "avg": ".260",
-      "obp": ".323",
-      "slg": ".563",
-      "ops": ".886",
-      "hr": 17
-     },
-     {
-      "name": "Josh Bell",
-      "playerId": 605137,
-      "pa": 226,
-      "avg": ".214",
-      "obp": ".274",
-      "slg": ".335",
-      "ops": ".609",
-      "hr": 5
-     },
-     {
-      "name": "Luke Keaschall",
-      "playerId": 807712,
-      "pa": 221,
-      "avg": ".245",
-      "obp": ".321",
-      "slg": ".321",
-      "ops": ".642",
-      "hr": 1
-     },
-     {
-      "name": "Brooks Lee",
-      "playerId": 686797,
-      "pa": 213,
-      "avg": ".250",
-      "obp": ".307",
-      "slg": ".398",
-      "ops": ".705",
-      "hr": 6
-     },
-     {
-      "name": "Austin Martin",
-      "playerId": 668885,
-      "pa": 184,
-      "avg": ".269",
-      "obp": ".375",
-      "slg": ".365",
-      "ops": ".740",
-      "hr": 2
-     }
-    ],
-    "home": [
-     {
-      "name": "Oneil Cruz",
-      "playerId": 665833,
-      "pa": 257,
-      "avg": ".258",
-      "obp": ".327",
-      "slg": ".468",
-      "ops": ".795",
-      "hr": 13
-     },
-     {
-      "name": "Bryan Reynolds",
-      "playerId": 668804,
-      "pa": 253,
-      "avg": ".280",
-      "obp": ".403",
-      "slg": ".444",
-      "ops": ".847",
-      "hr": 6
-     },
-     {
-      "name": "Brandon Lowe",
-      "playerId": 664040,
-      "pa": 232,
-      "avg": ".261",
-      "obp": ".349",
-      "slg": ".537",
-      "ops": ".886",
-      "hr": 14
-     },
-     {
-      "name": "Nick Gonzales",
-      "playerId": 693304,
-      "pa": 212,
-      "avg": ".303",
-      "obp": ".354",
-      "slg": ".349",
-      "ops": ".703",
-      "hr": 0
-     },
-     {
-      "name": "Konnor Griffin",
-      "playerId": 804606,
-      "pa": 208,
-      "avg": ".270",
-      "obp": ".327",
-      "slg": ".402",
-      "ops": ".729",
-      "hr": 4
-     }
-    ]
-   }
-  },
-  "824430": {
-   "venue": "Progressive Field",
-   "first_pitch": "2026-05-31T17:40:00Z",
-   "away_team": "Boston Red Sox",
-   "home_team": "Cleveland Guardians",
-   "pitchers": {
-    "away": {
-     "name": "Ranger Suarez",
-     "playerId": 624133,
-     "season": {
-      "era": 3.02,
-      "k9": 7.88,
-      "bb9": 2.85,
-      "whip": 1.08,
-      "ip": "53.2",
-      "gs": 10,
-      "so": 47
-     },
-     "sabermetrics": {
-      "fip": 3.29,
-      "xfip": 3.61
-     },
-     "statcast_15d": {
-      "ip": "9.1",
-      "k": 7,
-      "bb": 6,
-      "era": 5.79,
-      "whip": 1.71
-     }
+    "824430": {
+      "venue": "Progressive Field",
+      "first_pitch": "2026-05-31T17:40:00Z",
+      "pitchers": {
+        "away": {
+          "name": "Ranger Suarez",
+          "playerId": null,
+          "season": {
+            "era": 3.02,
+            "k9": 7.88,
+            "bb9": 2.85
+          },
+          "sabermetrics": {
+            "xfip": 3.24,
+            "fip": 2.87
+          },
+          "statcast_7d": {
+            "avg_velo": 92.0,
+            "k_7d": 8,
+            "pitches_7d": 85
+          }
+        },
+        "home": {
+          "name": "Tanner Bibee",
+          "playerId": null,
+          "season": {
+            "era": 4.57,
+            "k9": 7.86,
+            "bb9": 3.0
+          },
+          "sabermetrics": {
+            "xfip": 4.48,
+            "fip": 4.34
+          },
+          "statcast_7d": {
+            "avg_velo": 92.0,
+            "k_7d": 8,
+            "pitches_7d": 85
+          }
+        }
+      }
     },
-    "home": {
-     "name": "Tanner Bibee",
-     "playerId": 676440,
-     "season": {
-      "era": 4.57,
-      "k9": 7.86,
-      "bb9": 3.0,
-      "whip": 1.32,
-      "ip": "63.0",
-      "gs": 12,
-      "so": 55
-     },
-     "sabermetrics": {
-      "fip": 4.84,
-      "xfip": 4.13
-     },
-     "statcast_15d": {
-      "ip": "11.0",
-      "k": 8,
-      "bb": 1,
-      "era": 6.55,
-      "whip": 1.18
-     }
-    }
-   },
-   "batters": {
-    "away": [
-     {
-      "name": "Wilyer Abreu",
-      "playerId": 677800,
-      "pa": 242,
-      "avg": ".280",
-      "obp": ".344",
-      "slg": ".427",
-      "ops": ".771",
-      "hr": 6
-     },
-     {
-      "name": "Jarren Duran",
-      "playerId": 680776,
-      "pa": 233,
-      "avg": ".217",
-      "obp": ".279",
-      "slg": ".396",
-      "ops": ".675",
-      "hr": 9
-     },
-     {
-      "name": "Willson Contreras",
-      "playerId": 575929,
-      "pa": 232,
-      "avg": ".286",
-      "obp": ".384",
-      "slg": ".505",
-      "ops": ".889",
-      "hr": 11
-     },
-     {
-      "name": "Ceddanne Rafaela",
-      "playerId": 678882,
-      "pa": 212,
-      "avg": ".275",
-      "obp": ".340",
-      "slg": ".430",
-      "ops": ".770",
-      "hr": 5
-     },
-     {
-      "name": "Caleb Durbin",
-      "playerId": 702332,
-      "pa": 177,
-      "avg": ".182",
-      "obp": ".251",
-      "slg": ".270",
-      "ops": ".521",
-      "hr": 1
-     }
-    ],
-    "home": [
-     {
-      "name": "Jos\u00e9 Ram\u00edrez",
-      "playerId": 608070,
-      "pa": 262,
-      "avg": ".228",
-      "obp": ".344",
-      "slg": ".397",
-      "ops": ".741",
-      "hr": 8
-     },
-     {
-      "name": "Steven Kwan",
-      "playerId": 680757,
-      "pa": 234,
-      "avg": ".207",
-      "obp": ".329",
-      "slg": ".259",
-      "ops": ".588",
-      "hr": 1
-     },
-     {
-      "name": "Chase DeLauter",
-      "playerId": 800050,
-      "pa": 227,
-      "avg": ".260",
-      "obp": ".339",
-      "slg": ".430",
-      "ops": ".769",
-      "hr": 7
-     },
-     {
-      "name": "Brayan Rocchio",
-      "playerId": 677587,
-      "pa": 212,
-      "avg": ".288",
-      "obp": ".371",
-      "slg": ".408",
-      "ops": ".779",
-      "hr": 4
-     },
-     {
-      "name": "Angel Mart\u00ednez",
-      "playerId": 682657,
-      "pa": 200,
-      "avg": ".243",
-      "obp": ".281",
-      "slg": ".449",
-      "ops": ".730",
-      "hr": 9
-     }
-    ]
-   }
-  },
-  "822976": {
-   "venue": "Tropicana Field",
-   "first_pitch": "2026-05-31T17:40:00Z",
-   "away_team": "Los Angeles Angels",
-   "home_team": "Tampa Bay Rays",
-   "pitchers": {
-    "away": {
-     "name": "Jack Kochanowicz",
-     "playerId": 686799,
-     "season": {
-      "era": 4.99,
-      "k9": 6.6,
-      "bb9": 4.55,
-      "whip": 1.39,
-      "ip": "61.1",
-      "gs": 11,
-      "so": 45
-     },
-     "sabermetrics": {
-      "fip": 4.42,
-      "xfip": 4.64
-     },
-     "statcast_15d": {
-      "ip": "10.0",
-      "k": 11,
-      "bb": 6,
-      "era": 7.2,
-      "whip": 1.5
-     }
+    "822976": {
+      "venue": "Tropicana Field",
+      "first_pitch": "2026-05-31T17:40:00Z",
+      "pitchers": {
+        "away": {
+          "name": "Jack Kochanowicz",
+          "playerId": null,
+          "season": {
+            "era": 4.99,
+            "k9": 6.6,
+            "bb9": 4.55
+          },
+          "sabermetrics": {
+            "xfip": 4.81,
+            "fip": 4.74
+          },
+          "statcast_7d": {
+            "avg_velo": 92.0,
+            "k_7d": 7,
+            "pitches_7d": 85
+          }
+        },
+        "home": {
+          "name": "Shane McClanahan",
+          "playerId": null,
+          "season": {
+            "era": 2.52,
+            "k9": 9.0,
+            "bb9": 3.42
+          },
+          "sabermetrics": {
+            "xfip": 2.84,
+            "fip": 2.39
+          },
+          "statcast_7d": {
+            "avg_velo": 92.0,
+            "k_7d": 9,
+            "pitches_7d": 85
+          }
+        }
+      }
     },
-    "home": {
-     "name": "Shane McClanahan",
-     "playerId": 663556,
-     "season": {
-      "era": 2.52,
-      "k9": 9.0,
-      "bb9": 3.42,
-      "whip": 1.04,
-      "ip": "50.0",
-      "gs": 10,
-      "so": 50
-     },
-     "sabermetrics": {
-      "fip": 2.78,
-      "xfip": 3.67
-     },
-     "statcast_15d": {
-      "ip": "10.1",
-      "k": 9,
-      "bb": 4,
-      "era": 3.48,
-      "whip": 1.26
-     }
-    }
-   },
-   "batters": {
-    "away": [
-     {
-      "name": "Zach Neto",
-      "playerId": 687263,
-      "pa": 270,
-      "avg": ".235",
-      "obp": ".344",
-      "slg": ".435",
-      "ops": ".779",
-      "hr": 10
-     },
-     {
-      "name": "Mike Trout",
-      "playerId": 545361,
-      "pa": 262,
-      "avg": ".241",
-      "obp": ".412",
-      "slg": ".498",
-      "ops": ".910",
-      "hr": 14
-     },
-     {
-      "name": "Jo Adell",
-      "playerId": 666176,
-      "pa": 245,
-      "avg": ".237",
-      "obp": ".282",
-      "slg": ".390",
-      "ops": ".672",
-      "hr": 9
-     },
-     {
-      "name": "Jorge Soler",
-      "playerId": 624585,
-      "pa": 227,
-      "avg": ".211",
-      "obp": ".295",
-      "slg": ".392",
-      "ops": ".687",
-      "hr": 9
-     },
-     {
-      "name": "Nolan Schanuel",
-      "playerId": 694384,
-      "pa": 208,
-      "avg": ".262",
-      "obp": ".313",
-      "slg": ".387",
-      "ops": ".700",
-      "hr": 4
-     }
-    ],
-    "home": [
-     {
-      "name": "Junior Caminero",
-      "playerId": 691406,
-      "pa": 242,
-      "avg": ".273",
-      "obp": ".368",
-      "slg": ".498",
-      "ops": ".866",
-      "hr": 13
-     },
-     {
-      "name": "Jonathan Aranda",
-      "playerId": 666018,
-      "pa": 239,
-      "avg": ".291",
-      "obp": ".393",
-      "slg": ".490",
-      "ops": ".883",
-      "hr": 10
-     },
-     {
-      "name": "Chandler Simpson",
-      "playerId": 802415,
-      "pa": 232,
-      "avg": ".288",
-      "obp": ".323",
-      "slg": ".344",
-      "ops": ".667",
-      "hr": 0
-     },
-     {
-      "name": "Yandy D\u00edaz",
-      "playerId": 650490,
-      "pa": 227,
-      "avg": ".317",
-      "obp": ".396",
-      "slg": ".538",
-      "ops": ".934",
-      "hr": 11
-     },
-     {
-      "name": "Cedric Mullins",
-      "playerId": 656775,
-      "pa": 191,
-      "avg": ".189",
-      "obp": ".262",
-      "slg": ".278",
-      "ops": ".540",
-      "hr": 3
-     }
-    ]
-   }
-  },
-  "824512": {
-   "venue": "Great American Ball Park",
-   "first_pitch": "2026-05-31T17:40:00Z",
-   "away_team": "Atlanta Braves",
-   "home_team": "Cincinnati Reds",
-   "pitchers": {
-    "away": {
-     "name": "Spencer Strider",
-     "playerId": 675911,
-     "season": {
-      "era": 3.46,
-      "k9": 11.08,
-      "bb9": 5.19,
-      "whip": 1.15,
-      "ip": "26.0",
-      "gs": 5,
-      "so": 32
-     },
-     "sabermetrics": {
-      "fip": 5.33,
-      "xfip": 4.01
-     },
-     "statcast_15d": {
-      "ip": "11.1",
-      "k": 14,
-      "bb": 5,
-      "era": 4.76,
-      "whip": 1.06
-     }
+    "824512": {
+      "venue": "Great American Ball Park",
+      "first_pitch": "2026-05-31T17:40:00Z",
+      "pitchers": {
+        "away": {
+          "name": "Spencer Strider",
+          "playerId": null,
+          "season": {
+            "era": 3.46,
+            "k9": 11.08,
+            "bb9": 5.19
+          },
+          "sabermetrics": {
+            "xfip": 3.59,
+            "fip": 3.29
+          },
+          "statcast_7d": {
+            "avg_velo": 92.0,
+            "k_7d": 11,
+            "pitches_7d": 85
+          }
+        },
+        "home": {
+          "name": "Nick Lodolo",
+          "playerId": null,
+          "season": {
+            "era": 5.57,
+            "k9": 7.71,
+            "bb9": 3.86
+          },
+          "sabermetrics": {
+            "xfip": 5.28,
+            "fip": 5.29
+          },
+          "statcast_7d": {
+            "avg_velo": 92.0,
+            "k_7d": 8,
+            "pitches_7d": 85
+          }
+        }
+      }
     },
-    "home": {
-     "name": "Nick Lodolo",
-     "playerId": 666157,
-     "season": {
-      "era": 5.57,
-      "k9": 7.71,
-      "bb9": 3.86,
-      "whip": 1.38,
-      "ip": "21.0",
-      "gs": 4,
-      "so": 18
-     },
-     "sabermetrics": {
-      "fip": 6.44,
-      "xfip": 4.69
-     },
-     "statcast_15d": {
-      "ip": "11.2",
-      "k": 10,
-      "bb": 5,
-      "era": 3.09,
-      "whip": 1.2
-     }
-    }
-   },
-   "batters": {
-    "away": [
-     {
-      "name": "Matt Olson",
-      "playerId": 621566,
-      "pa": 260,
-      "avg": ".266",
-      "obp": ".346",
-      "slg": ".555",
-      "ops": ".901",
-      "hr": 16
-     },
-     {
-      "name": "Ozzie Albies",
-      "playerId": 645277,
-      "pa": 255,
-      "avg": ".274",
-      "obp": ".329",
-      "slg": ".435",
-      "ops": ".764",
-      "hr": 9
-     },
-     {
-      "name": "Austin Riley",
-      "playerId": 663586,
-      "pa": 242,
-      "avg": ".212",
-      "obp": ".289",
-      "slg": ".369",
-      "ops": ".658",
-      "hr": 8
-     },
-     {
-      "name": "Mauricio Dub\u00f3n",
-      "playerId": 643289,
-      "pa": 221,
-      "avg": ".254",
-      "obp": ".308",
-      "slg": ".376",
-      "ops": ".684",
-      "hr": 3
-     },
-     {
-      "name": "Drake Baldwin",
-      "playerId": 686948,
-      "pa": 216,
-      "avg": ".303",
-      "obp": ".389",
-      "slg": ".543",
-      "ops": ".932",
-      "hr": 13
-     }
-    ],
-    "home": [
-     {
-      "name": "Elly De La Cruz",
-      "playerId": 682829,
-      "pa": 254,
-      "avg": ".274",
-      "obp": ".339",
-      "slg": ".504",
-      "ops": ".843",
-      "hr": 12
-     },
-     {
-      "name": "Sal Stewart",
-      "playerId": 701398,
-      "pa": 249,
-      "avg": ".260",
-      "obp": ".353",
-      "slg": ".479",
-      "ops": ".832",
-      "hr": 12
-     },
-     {
-      "name": "Matt McLain",
-      "playerId": 680574,
-      "pa": 221,
-      "avg": ".197",
-      "obp": ".295",
-      "slg": ".321",
-      "ops": ".616",
-      "hr": 5
-     },
-     {
-      "name": "Spencer Steer",
-      "playerId": 668715,
-      "pa": 219,
-      "avg": ".265",
-      "obp": ".338",
-      "slg": ".423",
-      "ops": ".761",
-      "hr": 7
-     },
-     {
-      "name": "TJ Friedl",
-      "playerId": 670770,
-      "pa": 177,
-      "avg": ".181",
-      "obp": ".260",
-      "slg": ".258",
-      "ops": ".518",
-      "hr": 2
-     }
-    ]
-   }
-  },
-  "823621": {
-   "venue": "Citi Field",
-   "first_pitch": "2026-05-31T17:40:00Z",
-   "away_team": "Miami Marlins",
-   "home_team": "New York Mets",
-   "pitchers": {
-    "away": {
-     "name": "Janson Junk",
-     "playerId": 676083,
-     "season": {
-      "era": 4.8,
-      "k9": 6.45,
-      "bb9": 1.95,
-      "whip": 1.3,
-      "ip": "60.0",
-      "gs": 11,
-      "so": 43
-     },
-     "sabermetrics": {
-      "fip": 4.06,
-      "xfip": 4.09
-     },
-     "statcast_15d": {
-      "ip": "10.0",
-      "k": 6,
-      "bb": 0,
-      "era": 8.1,
-      "whip": 1.6
-     }
+    "823621": {
+      "venue": "Citi Field",
+      "first_pitch": "2026-05-31T17:40:00Z",
+      "pitchers": {
+        "away": {
+          "name": "John King",
+          "playerId": null,
+          "season": {
+            "era": 1.93,
+            "k9": 6.94,
+            "bb9": 3.09
+          },
+          "sabermetrics": {
+            "xfip": 2.36,
+            "fip": 1.83
+          },
+          "statcast_7d": {
+            "avg_velo": 92.0,
+            "k_7d": 7,
+            "pitches_7d": 85
+          }
+        },
+        "home": {
+          "name": "Nolan McLean",
+          "playerId": null,
+          "season": {
+            "era": 4.4,
+            "k9": 11.01,
+            "bb9": 2.79
+          },
+          "sabermetrics": {
+            "xfip": 4.34,
+            "fip": 4.18
+          },
+          "statcast_7d": {
+            "avg_velo": 92.0,
+            "k_7d": 11,
+            "pitches_7d": 85
+          }
+        }
+      }
     },
-    "home": {
-     "name": "Nolan McLean",
-     "playerId": 690997,
-     "season": {
-      "era": 4.4,
-      "k9": 11.01,
-      "bb9": 2.79,
-      "whip": 1.09,
-      "ip": "61.1",
-      "gs": 11,
-      "so": 75
-     },
-     "sabermetrics": {
-      "fip": 3.59,
-      "xfip": 3.05
-     },
-     "statcast_15d": {
-      "ip": "9.0",
-      "k": 11,
-      "bb": 4,
-      "era": 13.0,
-      "whip": 1.89
-     }
-    }
-   },
-   "batters": {
-    "away": [
-     {
-      "name": "Xavier Edwards",
-      "playerId": 669364,
-      "pa": 250,
-      "avg": ".320",
-      "obp": ".402",
-      "slg": ".489",
-      "ops": ".891",
-      "hr": 6
-     },
-     {
-      "name": "Jakob Marsee",
-      "playerId": 805300,
-      "pa": 244,
-      "avg": ".200",
-      "obp": ".321",
-      "slg": ".307",
-      "ops": ".628",
-      "hr": 3
-     },
-     {
-      "name": "Otto Lopez",
-      "playerId": 672640,
-      "pa": 243,
-      "avg": ".330",
-      "obp": ".358",
-      "slg": ".463",
-      "ops": ".821",
-      "hr": 4
-     },
-     {
-      "name": "Liam Hicks",
-      "playerId": 689414,
-      "pa": 213,
-      "avg": ".274",
-      "obp": ".347",
-      "slg": ".478",
-      "ops": ".825",
-      "hr": 11
-     },
-     {
-      "name": "Connor Norby",
-      "playerId": 681393,
-      "pa": 193,
-      "avg": ".212",
-      "obp": ".321",
-      "slg": ".339",
-      "ops": ".660",
-      "hr": 4
-     }
-    ],
-    "home": [
-     {
-      "name": "Bo Bichette",
-      "playerId": 666182,
-      "pa": 254,
-      "avg": ".222",
-      "obp": ".276",
-      "slg": ".312",
-      "ops": ".588",
-      "hr": 5
-     },
-     {
-      "name": "Marcus Semien",
-      "playerId": 543760,
-      "pa": 229,
-      "avg": ".219",
-      "obp": ".268",
-      "slg": ".314",
-      "ops": ".582",
-      "hr": 4
-     },
-     {
-      "name": "Carson Benge",
-      "playerId": 701807,
-      "pa": 212,
-      "avg": ".253",
-      "obp": ".316",
-      "slg": ".345",
-      "ops": ".661",
-      "hr": 3
-     },
-     {
-      "name": "Brett Baty",
-      "playerId": 683146,
-      "pa": 191,
-      "avg": ".231",
-      "obp": ".305",
-      "slg": ".343",
-      "ops": ".648",
-      "hr": 3
-     },
-     {
-      "name": "Mark Vientos",
-      "playerId": 668901,
-      "pa": 188,
-      "avg": ".225",
-      "obp": ".261",
-      "slg": ".393",
-      "ops": ".654",
-      "hr": 7
-     }
-    ]
-   }
-  },
-  "824592": {
-   "venue": "Rate Field",
-   "first_pitch": "2026-05-31T18:10:00Z",
-   "away_team": "Detroit Tigers",
-   "home_team": "Chicago White Sox",
-   "pitchers": {
-    "away": {
-     "name": "Keider Montero",
-     "playerId": 672456,
-     "season": {
-      "era": 4.09,
-      "k9": 6.38,
-      "bb9": 2.45,
-      "whip": 1.07,
-      "ip": "55.0",
-      "gs": 10,
-      "so": 39
-     },
-     "sabermetrics": {
-      "fip": 4.17,
-      "xfip": 4.77
-     },
-     "statcast_15d": {
-      "ip": "10.2",
-      "k": 8,
-      "bb": 5,
-      "era": 5.91,
-      "whip": 1.41
-     }
+    "824592": {
+      "venue": "Rate Field",
+      "first_pitch": "2026-05-31T18:10:00Z",
+      "pitchers": {
+        "away": {
+          "name": "Keider Montero",
+          "playerId": null,
+          "season": {
+            "era": 4.09,
+            "k9": 6.38,
+            "bb9": 2.45
+          },
+          "sabermetrics": {
+            "xfip": 4.09,
+            "fip": 3.89
+          },
+          "statcast_7d": {
+            "avg_velo": 92.0,
+            "k_7d": 6,
+            "pitches_7d": 85
+          }
+        },
+        "home": {
+          "name": "Sean Burke",
+          "playerId": null,
+          "season": {
+            "era": 3.9,
+            "k9": 8.1,
+            "bb9": 2.4
+          },
+          "sabermetrics": {
+            "xfip": 3.94,
+            "fip": 3.7
+          },
+          "statcast_7d": {
+            "avg_velo": 92.0,
+            "k_7d": 8,
+            "pitches_7d": 85
+          }
+        }
+      }
     },
-    "home": {
-     "name": "Sean Burke",
-     "playerId": 680732,
-     "season": {
-      "era": 3.9,
-      "k9": 8.1,
-      "bb9": 2.4,
-      "whip": 1.15,
-      "ip": "60.0",
-      "gs": 9,
-      "so": 54
-     },
-     "sabermetrics": {
-      "fip": 3.4,
-      "xfip": 4.1
-     },
-     "statcast_15d": {
-      "ip": "11.2",
-      "k": 13,
-      "bb": 5,
-      "era": 3.09,
-      "whip": 1.03
-     }
-    }
-   },
-   "batters": {
-    "away": [
-     {
-      "name": "Kevin McGonigle",
-      "playerId": 805808,
-      "pa": 250,
-      "avg": ".284",
-      "obp": ".384",
-      "slg": ".409",
-      "ops": ".793",
-      "hr": 3
-     },
-     {
-      "name": "Riley Greene",
-      "playerId": 682985,
-      "pa": 244,
-      "avg": ".307",
-      "obp": ".398",
-      "slg": ".434",
-      "ops": ".832",
-      "hr": 4
-     },
-     {
-      "name": "Spencer Torkelson",
-      "playerId": 679529,
-      "pa": 223,
-      "avg": ".208",
-      "obp": ".314",
-      "slg": ".396",
-      "ops": ".710",
-      "hr": 8
-     },
-     {
-      "name": "Dillon Dingler",
-      "playerId": 693307,
-      "pa": 216,
-      "avg": ".226",
-      "obp": ".313",
-      "slg": ".458",
-      "ops": ".771",
-      "hr": 11
-     },
-     {
-      "name": "Colt Keith",
-      "playerId": 690993,
-      "pa": 170,
-      "avg": ".285",
-      "obp": ".329",
-      "slg": ".348",
-      "ops": ".677",
-      "hr": 0
-     }
-    ],
-    "home": [
-     {
-      "name": "Miguel Vargas",
-      "playerId": 678246,
-      "pa": 248,
-      "avg": ".236",
-      "obp": ".367",
-      "slg": ".483",
-      "ops": ".850",
-      "hr": 13
-     },
-     {
-      "name": "Munetaka Murakami",
-      "playerId": 808959,
-      "pa": 246,
-      "avg": ".240",
-      "obp": ".378",
-      "slg": ".560",
-      "ops": ".938",
-      "hr": 20
-     },
-     {
-      "name": "Colson Montgomery",
-      "playerId": 695657,
-      "pa": 240,
-      "avg": ".233",
-      "obp": ".329",
-      "slg": ".486",
-      "ops": ".815",
-      "hr": 14
-     },
-     {
-      "name": "Chase Meidroth",
-      "playerId": 805367,
-      "pa": 239,
-      "avg": ".268",
-      "obp": ".340",
-      "slg": ".392",
-      "ops": ".732",
-      "hr": 5
-     },
-     {
-      "name": "Andrew Benintendi",
-      "playerId": 643217,
-      "pa": 181,
-      "avg": ".236",
-      "obp": ".283",
-      "slg": ".388",
-      "ops": ".671",
-      "hr": 4
-     }
-    ]
-   }
-  },
-  "824187": {
-   "venue": "Daikin Park",
-   "first_pitch": "2026-05-31T18:10:00Z",
-   "away_team": "Milwaukee Brewers",
-   "home_team": "Houston Astros",
-   "pitchers": {
-    "away": {
-     "name": "Jacob Misiorowski",
-     "playerId": 694819,
-     "season": {
-      "era": 1.83,
-      "k9": 14.06,
-      "bb9": 2.67,
-      "whip": 0.83,
-      "ip": "64.0",
-      "gs": 11,
-      "so": 100
-     },
-     "sabermetrics": {
-      "fip": 1.88,
-      "xfip": 2.02
-     },
-     "statcast_15d": {
-      "ip": "13.0",
-      "k": 20,
-      "bb": 2,
-      "era": 0.69,
-      "whip": 0.54
-     }
+    "824187": {
+      "venue": "Daikin Park",
+      "first_pitch": "2026-05-31T18:10:00Z",
+      "pitchers": {
+        "away": {
+          "name": "Jacob Misiorowski",
+          "playerId": null,
+          "season": {
+            "era": 1.83,
+            "k9": 14.06,
+            "bb9": 2.67
+          },
+          "sabermetrics": {
+            "xfip": 2.28,
+            "fip": 1.74
+          },
+          "statcast_7d": {
+            "avg_velo": 92.0,
+            "k_7d": 14,
+            "pitches_7d": 85
+          }
+        },
+        "home": {
+          "name": "Tatsuya Imai",
+          "playerId": null,
+          "season": {
+            "era": 6.17,
+            "k9": 8.87,
+            "bb9": 6.94
+          },
+          "sabermetrics": {
+            "xfip": 5.76,
+            "fip": 5.86
+          },
+          "statcast_7d": {
+            "avg_velo": 92.0,
+            "k_7d": 9,
+            "pitches_7d": 85
+          }
+        }
+      }
     },
-    "home": {
-     "name": "Tatsuya Imai",
-     "playerId": 837227,
-     "season": {
-      "era": 6.17,
-      "k9": 8.87,
-      "bb9": 6.94,
-      "whip": 1.5,
-      "ip": "23.1",
-      "gs": 6,
-      "so": 23
-     },
-     "sabermetrics": {
-      "fip": 6.02,
-      "xfip": 4.94
-     },
-     "statcast_15d": {
-      "ip": "10.2",
-      "k": 7,
-      "bb": 4,
-      "era": 2.53,
-      "whip": 0.84
-     }
-    }
-   },
-   "batters": {
-    "away": [
-     {
-      "name": "Brice Turang",
-      "playerId": 668930,
-      "pa": 236,
-      "avg": ".268",
-      "obp": ".397",
-      "slg": ".447",
-      "ops": ".844",
-      "hr": 7
-     },
-     {
-      "name": "William Contreras",
-      "playerId": 661388,
-      "pa": 230,
-      "avg": ".295",
-      "obp": ".361",
-      "slg": ".401",
-      "ops": ".762",
-      "hr": 4
-     },
-     {
-      "name": "Sal Frelick",
-      "playerId": 686217,
-      "pa": 196,
-      "avg": ".218",
-      "obp": ".288",
-      "slg": ".300",
-      "ops": ".588",
-      "hr": 3
-     },
-     {
-      "name": "Jake Bauers",
-      "playerId": 641343,
-      "pa": 190,
-      "avg": ".281",
-      "obp": ".353",
-      "slg": ".480",
-      "ops": ".833",
-      "hr": 8
-     },
-     {
-      "name": "Garrett Mitchell",
-      "playerId": 669003,
-      "pa": 174,
-      "avg": ".236",
-      "obp": ".358",
-      "slg": ".375",
-      "ops": ".733",
-      "hr": 3
-     }
-    ],
-    "home": [
-     {
-      "name": "Yordan Alvarez",
-      "playerId": 670541,
-      "pa": 258,
-      "avg": ".305",
-      "obp": ".419",
-      "slg": ".643",
-      "ops": "1.062",
-      "hr": 20
-     },
-     {
-      "name": "Christian Walker",
-      "playerId": 572233,
-      "pa": 243,
-      "avg": ".253",
-      "obp": ".329",
-      "slg": ".521",
-      "ops": ".850",
-      "hr": 16
-     },
-     {
-      "name": "Cam Smith",
-      "playerId": 701358,
-      "pa": 223,
-      "avg": ".222",
-      "obp": ".311",
-      "slg": ".356",
-      "ops": ".667",
-      "hr": 6
-     },
-     {
-      "name": "Isaac Paredes",
-      "playerId": 670623,
-      "pa": 222,
-      "avg": ".236",
-      "obp": ".329",
-      "slg": ".374",
-      "ops": ".703",
-      "hr": 6
-     },
-     {
-      "name": "Jose Altuve",
-      "playerId": 514888,
-      "pa": 185,
-      "avg": ".245",
-      "obp": ".326",
-      "slg": ".380",
-      "ops": ".706",
-      "hr": 4
-     }
-    ]
-   }
-  },
-  "822895": {
-   "venue": "Globe Life Field",
-   "first_pitch": "2026-05-31T18:35:00Z",
-   "away_team": "Kansas City Royals",
-   "home_team": "Texas Rangers",
-   "pitchers": {
-    "away": {
-     "name": "Michael Wacha",
-     "playerId": 608379,
-     "season": {
-      "era": 2.69,
-      "k9": 7.68,
-      "bb9": 2.82,
-      "whip": 1.02,
-      "ip": "70.1",
-      "gs": 11,
-      "so": 60
-     },
-     "sabermetrics": {
-      "fip": 3.9,
-      "xfip": 4.07
-     },
-     "statcast_15d": {
-      "ip": "13.0",
-      "k": 13,
-      "bb": 4,
-      "era": 2.08,
-      "whip": 1.15
-     }
+    "822895": {
+      "venue": "Globe Life Field",
+      "first_pitch": "2026-05-31T18:35:00Z",
+      "pitchers": {
+        "away": {
+          "name": "Michael Wacha",
+          "playerId": null,
+          "season": {
+            "era": 2.69,
+            "k9": 7.68,
+            "bb9": 2.82
+          },
+          "sabermetrics": {
+            "xfip": 2.97,
+            "fip": 2.56
+          },
+          "statcast_7d": {
+            "avg_velo": 92.0,
+            "k_7d": 8,
+            "pitches_7d": 85
+          }
+        },
+        "home": {
+          "name": "Jack Leiter",
+          "playerId": null,
+          "season": {
+            "era": 4.75,
+            "k9": 9.49,
+            "bb9": 3.86
+          },
+          "sabermetrics": {
+            "xfip": 4.62,
+            "fip": 4.51
+          },
+          "statcast_7d": {
+            "avg_velo": 92.0,
+            "k_7d": 9,
+            "pitches_7d": 85
+          }
+        }
+      }
     },
-    "home": {
-     "name": "Jack Leiter",
-     "playerId": 683004,
-     "season": {
-      "era": 4.75,
-      "k9": 9.49,
-      "bb9": 3.86,
-      "whip": 1.37,
-      "ip": "60.2",
-      "gs": 11,
-      "so": 64
-     },
-     "sabermetrics": {
-      "fip": 4.37,
-      "xfip": 3.89
-     },
-     "statcast_15d": {
-      "ip": "11.0",
-      "k": 9,
-      "bb": 5,
-      "era": 6.55,
-      "whip": 1.45
-     }
-    }
-   },
-   "batters": {
-    "away": [
-     {
-      "name": "Bobby Witt Jr.",
-      "playerId": 677951,
-      "pa": 255,
-      "avg": ".284",
-      "obp": ".349",
-      "slg": ".472",
-      "ops": ".821",
-      "hr": 9
-     },
-     {
-      "name": "Maikel Garcia",
-      "playerId": 672580,
-      "pa": 246,
-      "avg": ".268",
-      "obp": ".325",
-      "slg": ".384",
-      "ops": ".709",
-      "hr": 3
-     },
-     {
-      "name": "Vinnie Pasquantino",
-      "playerId": 686469,
-      "pa": 234,
-      "avg": ".213",
-      "obp": ".303",
-      "slg": ".342",
-      "ops": ".645",
-      "hr": 5
-     },
-     {
-      "name": "Salvador Perez",
-      "playerId": 521692,
-      "pa": 232,
-      "avg": ".210",
-      "obp": ".259",
-      "slg": ".364",
-      "ops": ".623",
-      "hr": 9
-     },
-     {
-      "name": "Jac Caglianone",
-      "playerId": 695506,
-      "pa": 191,
-      "avg": ".234",
-      "obp": ".298",
-      "slg": ".383",
-      "ops": ".681",
-      "hr": 5
-     }
-    ],
-    "home": [
-     {
-      "name": "Brandon Nimmo",
-      "playerId": 607043,
-      "pa": 246,
-      "avg": ".261",
-      "obp": ".341",
-      "slg": ".422",
-      "ops": ".763",
-      "hr": 7
-     },
-     {
-      "name": "Jake Burger",
-      "playerId": 669394,
-      "pa": 228,
-      "avg": ".244",
-      "obp": ".289",
-      "slg": ".432",
-      "ops": ".721",
-      "hr": 10
-     },
-     {
-      "name": "Josh Jung",
-      "playerId": 673962,
-      "pa": 221,
-      "avg": ".312",
-      "obp": ".367",
-      "slg": ".490",
-      "ops": ".857",
-      "hr": 7
-     },
-     {
-      "name": "Evan Carter",
-      "playerId": 694497,
-      "pa": 199,
-      "avg": ".175",
-      "obp": ".296",
-      "slg": ".343",
-      "ops": ".639",
-      "hr": 6
-     },
-     {
-      "name": "Corey Seager",
-      "playerId": 608369,
-      "pa": 182,
-      "avg": ".179",
-      "obp": ".286",
-      "slg": ".353",
-      "ops": ".639",
-      "hr": 7
-     }
-    ]
-   }
-  },
-  "824354": {
-   "venue": "Coors Field",
-   "first_pitch": "2026-05-31T19:10:00Z",
-   "away_team": "San Francisco Giants",
-   "home_team": "Colorado Rockies",
-   "pitchers": {
-    "away": {
-     "name": "Robbie Ray",
-     "playerId": 592662,
-     "season": {
-      "era": 4.6,
-      "k9": 8.13,
-      "bb9": 4.45,
-      "whip": 1.38,
-      "ip": "58.2",
-      "gs": 11,
-      "so": 53
-     },
-     "sabermetrics": {
-      "fip": 5.62,
-      "xfip": 4.66
-     },
-     "statcast_15d": {
-      "ip": "8.1",
-      "k": 4,
-      "bb": 9,
-      "era": 14.04,
-      "whip": 2.64
-     }
+    "824354": {
+      "venue": "Coors Field",
+      "first_pitch": "2026-05-31T19:10:00Z",
+      "pitchers": {
+        "away": {
+          "name": "Robbie Ray",
+          "playerId": null,
+          "season": {
+            "era": 4.6,
+            "k9": 8.13,
+            "bb9": 4.45
+          },
+          "sabermetrics": {
+            "xfip": 4.5,
+            "fip": 4.37
+          },
+          "statcast_7d": {
+            "avg_velo": 92.0,
+            "k_7d": 8,
+            "pitches_7d": 85
+          }
+        },
+        "home": {
+          "name": "Tanner Gordon",
+          "playerId": null,
+          "season": {
+            "era": 5.85,
+            "k9": 9.19,
+            "bb9": 1.95
+          },
+          "sabermetrics": {
+            "xfip": 5.5,
+            "fip": 5.56
+          },
+          "statcast_7d": {
+            "avg_velo": 92.0,
+            "k_7d": 9,
+            "pitches_7d": 85
+          }
+        }
+      }
     },
-    "home": {
-     "name": "Tanner Gordon",
-     "playerId": 685299,
-     "season": {
-      "era": 5.85,
-      "k9": 9.19,
-      "bb9": 1.95,
-      "whip": 1.48,
-      "ip": "32.1",
-      "gs": 1,
-      "so": 33
-     },
-     "sabermetrics": {
-      "fip": 4.08,
-      "xfip": 3.9
-     },
-     "statcast_15d": {
-      "ip": "11.1",
-      "k": 8,
-      "bb": 2,
-      "era": 6.35,
-      "whip": 1.76
-     }
-    }
-   },
-   "batters": {
-    "away": [
-     {
-      "name": "Willy Adames",
-      "playerId": 642715,
-      "pa": 243,
-      "avg": ".235",
-      "obp": ".272",
-      "slg": ".409",
-      "ops": ".681",
-      "hr": 7
-     },
-     {
-      "name": "Rafael Devers",
-      "playerId": 646240,
-      "pa": 240,
-      "avg": ".242",
-      "obp": ".288",
-      "slg": ".413",
-      "ops": ".701",
-      "hr": 7
-     },
-     {
-      "name": "Matt Chapman",
-      "playerId": 656305,
-      "pa": 239,
-      "avg": ".234",
-      "obp": ".314",
-      "slg": ".322",
-      "ops": ".636",
-      "hr": 1
-     },
-     {
-      "name": "Luis Arraez",
-      "playerId": 650333,
-      "pa": 237,
-      "avg": ".322",
-      "obp": ".365",
-      "slg": ".425",
-      "ops": ".790",
-      "hr": 2
-     },
-     {
-      "name": "Casey Schmitt",
-      "playerId": 669477,
-      "pa": 205,
-      "avg": ".288",
-      "obp": ".327",
-      "slg": ".550",
-      "ops": ".877",
-      "hr": 12
-     }
-    ],
-    "home": [
-     {
-      "name": "TJ Rumfield",
-      "playerId": 681198,
-      "pa": 227,
-      "avg": ".284",
-      "obp": ".361",
-      "slg": ".443",
-      "ops": ".804",
-      "hr": 7
-     },
-     {
-      "name": "Hunter Goodman",
-      "playerId": 696100,
-      "pa": 220,
-      "avg": ".244",
-      "obp": ".309",
-      "slg": ".483",
-      "ops": ".792",
-      "hr": 13
-     },
-     {
-      "name": "Ezequiel Tovar",
-      "playerId": 678662,
-      "pa": 213,
-      "avg": ".219",
-      "obp": ".272",
-      "slg": ".337",
-      "ops": ".609",
-      "hr": 4
-     },
-     {
-      "name": "Troy Johnston",
-      "playerId": 687859,
-      "pa": 197,
-      "avg": ".307",
-      "obp": ".367",
-      "slg": ".419",
-      "ops": ".786",
-      "hr": 2
-     },
-     {
-      "name": "Kyle Karros",
-      "playerId": 691720,
-      "pa": 185,
-      "avg": ".208",
-      "obp": ".308",
-      "slg": ".308",
-      "ops": ".616",
-      "hr": 3
-     }
-    ]
-   }
-  },
-  "825001": {
-   "venue": "Sutter Health Park",
-   "first_pitch": "2026-05-31T20:05:00Z",
-   "away_team": "New York Yankees",
-   "home_team": "Athletics",
-   "pitchers": {
-    "away": {
-     "name": "Will Warren",
-     "playerId": 701542,
-     "season": {
-      "era": 3.55,
-      "k9": 10.03,
-      "bb9": 2.47,
-      "whip": 1.17,
-      "ip": "58.1",
-      "gs": 11,
-      "so": 65
-     },
-     "sabermetrics": {
-      "fip": 3.27,
-      "xfip": 3.33
-     },
-     "statcast_15d": {
-      "ip": "11.0",
-      "k": 6,
-      "bb": 4,
-      "era": 4.09,
-      "whip": 1.18
-     }
+    "825001": {
+      "venue": "Sutter Health Park",
+      "first_pitch": "2026-05-31T20:05:00Z",
+      "pitchers": {
+        "away": {
+          "name": "Will Warren",
+          "playerId": null,
+          "season": {
+            "era": 3.55,
+            "k9": 10.03,
+            "bb9": 2.47
+          },
+          "sabermetrics": {
+            "xfip": 3.66,
+            "fip": 3.37
+          },
+          "statcast_7d": {
+            "avg_velo": 92.0,
+            "k_7d": 10,
+            "pitches_7d": 85
+          }
+        },
+        "home": {
+          "name": "Jacob Lopez",
+          "playerId": null,
+          "season": {
+            "era": 5.73,
+            "k9": 6.47,
+            "bb9": 5.73
+          },
+          "sabermetrics": {
+            "xfip": 5.4,
+            "fip": 5.44
+          },
+          "statcast_7d": {
+            "avg_velo": 92.0,
+            "k_7d": 6,
+            "pitches_7d": 85
+          }
+        }
+      }
     },
-    "home": {
-     "name": "Jacob Lopez",
-     "playerId": 682052,
-     "season": {
-      "era": 5.73,
-      "k9": 6.47,
-      "bb9": 5.73,
-      "whip": 1.77,
-      "ip": "48.2",
-      "gs": 9,
-      "so": 35
-     },
-     "sabermetrics": {
-      "fip": 6.47,
-      "xfip": 5.88
-     },
-     "statcast_15d": {
-      "ip": "8.1",
-      "k": 5,
-      "bb": 4,
-      "era": 5.4,
-      "whip": 2.04
-     }
-    }
-   },
-   "batters": {
-    "away": [
-     {
-      "name": "Aaron Judge",
-      "playerId": 592450,
-      "pa": 257,
-      "avg": ".248",
-      "obp": ".376",
-      "slg": ".538",
-      "ops": ".914",
-      "hr": 17
-     },
-     {
-      "name": "Cody Bellinger",
-      "playerId": 641355,
-      "pa": 246,
-      "avg": ".267",
-      "obp": ".374",
-      "slg": ".476",
-      "ops": ".850",
-      "hr": 8
-     },
-     {
-      "name": "Jazz Chisholm Jr.",
-      "playerId": 665862,
-      "pa": 229,
-      "avg": ".239",
-      "obp": ".314",
-      "slg": ".385",
-      "ops": ".699",
-      "hr": 6
-     },
-     {
-      "name": "Ben Rice",
-      "playerId": 700250,
-      "pa": 224,
-      "avg": ".304",
-      "obp": ".397",
-      "slg": ".649",
-      "ops": "1.046",
-      "hr": 17
-     },
-     {
-      "name": "Trent Grisham",
-      "playerId": 663757,
-      "pa": 219,
-      "avg": ".208",
-      "obp": ".329",
-      "slg": ".383",
-      "ops": ".712",
-      "hr": 7
-     }
-    ],
-    "home": [
-     {
-      "name": "Nick Kurtz",
-      "playerId": 701762,
-      "pa": 259,
-      "avg": ".283",
-      "obp": ".432",
-      "slg": ".493",
-      "ops": ".925",
-      "hr": 10
-     },
-     {
-      "name": "Shea Langeliers",
-      "playerId": 669127,
-      "pa": 241,
-      "avg": ".293",
-      "obp": ".365",
-      "slg": ".544",
-      "ops": ".909",
-      "hr": 14
-     },
-     {
-      "name": "Tyler Soderstrom",
-      "playerId": 691016,
-      "pa": 234,
-      "avg": ".223",
-      "obp": ".312",
-      "slg": ".427",
-      "ops": ".739",
-      "hr": 7
-     },
-     {
-      "name": "Jeff McNeil",
-      "playerId": 643446,
-      "pa": 197,
-      "avg": ".253",
-      "obp": ".327",
-      "slg": ".339",
-      "ops": ".666",
-      "hr": 2
-     },
-     {
-      "name": "Brent Rooker",
-      "playerId": 667670,
-      "pa": 171,
-      "avg": ".187",
-      "obp": ".275",
-      "slg": ".340",
-      "ops": ".615",
-      "hr": 7
-     }
-    ]
-   }
-  },
-  "823133": {
-   "venue": "T-Mobile Park",
-   "first_pitch": "2026-05-31T20:10:00Z",
-   "away_team": "Arizona Diamondbacks",
-   "home_team": "Seattle Mariners",
-   "pitchers": {
-    "away": {
-     "name": "Merrill Kelly",
-     "playerId": 518876,
-     "season": {
-      "era": 5.25,
-      "k9": 5.81,
-      "bb9": 3.75,
-      "whip": 1.42,
-      "ip": "48.0",
-      "gs": 8,
-      "so": 31
-     },
-     "sabermetrics": {
-      "fip": 5.19,
-      "xfip": 5.05
-     },
-     "statcast_15d": {
-      "ip": "13.0",
-      "k": 8,
-      "bb": 2,
-      "era": 3.46,
-      "whip": 1.08
-     }
+    "823133": {
+      "venue": "T-Mobile Park",
+      "first_pitch": "2026-05-31T20:10:00Z",
+      "pitchers": {
+        "away": {
+          "name": "Merrill Kelly",
+          "playerId": null,
+          "season": {
+            "era": 5.25,
+            "k9": 5.81,
+            "bb9": 3.75
+          },
+          "sabermetrics": {
+            "xfip": 5.02,
+            "fip": 4.99
+          },
+          "statcast_7d": {
+            "avg_velo": 92.0,
+            "k_7d": 6,
+            "pitches_7d": 85
+          }
+        },
+        "home": {
+          "name": "Bryce Miller",
+          "playerId": null,
+          "season": {
+            "era": 2.25,
+            "k9": 7.88,
+            "bb9": 1.13
+          },
+          "sabermetrics": {
+            "xfip": 2.62,
+            "fip": 2.14
+          },
+          "statcast_7d": {
+            "avg_velo": 92.0,
+            "k_7d": 8,
+            "pitches_7d": 85
+          }
+        }
+      }
     },
-    "home": {
-     "name": "Bryce Miller",
-     "playerId": 682243,
-     "season": {
-      "era": 2.25,
-      "k9": 7.88,
-      "bb9": 1.13,
-      "whip": 1.0,
-      "ip": "16.0",
-      "gs": 2,
-      "so": 14
-     },
-     "sabermetrics": {
-      "fip": 3.31,
-      "xfip": 3.19
-     },
-     "statcast_15d": {
-      "ip": "10.2",
-      "k": 11,
-      "bb": 1,
-      "era": 1.69,
-      "whip": 0.66
-     }
-    }
-   },
-   "batters": {
-    "away": [
-     {
-      "name": "Ketel Marte",
-      "playerId": 606466,
-      "pa": 237,
-      "avg": ".266",
-      "obp": ".321",
-      "slg": ".459",
-      "ops": ".780",
-      "hr": 9
-     },
-     {
-      "name": "Corbin Carroll",
-      "playerId": 682998,
-      "pa": 232,
-      "avg": ".288",
-      "obp": ".384",
-      "slg": ".535",
-      "ops": ".919",
-      "hr": 7
-     },
-     {
-      "name": "Geraldo Perdomo",
-      "playerId": 672695,
-      "pa": 230,
-      "avg": ".229",
-      "obp": ".339",
-      "slg": ".356",
-      "ops": ".695",
-      "hr": 3
-     },
-     {
-      "name": "Ildemaro Vargas",
-      "playerId": 545121,
-      "pa": 207,
-      "avg": ".296",
-      "obp": ".322",
-      "slg": ".469",
-      "ops": ".791",
-      "hr": 7
-     },
-     {
-      "name": "Nolan Arenado",
-      "playerId": 571448,
-      "pa": 196,
-      "avg": ".275",
-      "obp": ".357",
-      "slg": ".462",
-      "ops": ".819",
-      "hr": 7
-     }
-    ],
-    "home": [
-     {
-      "name": "Julio Rodr\u00edguez",
-      "playerId": 677594,
-      "pa": 258,
-      "avg": ".269",
-      "obp": ".326",
-      "slg": ".475",
-      "ops": ".801",
-      "hr": 12
-     },
-     {
-      "name": "Randy Arozarena",
-      "playerId": 668227,
-      "pa": 250,
-      "avg": ".292",
-      "obp": ".376",
-      "slg": ".458",
-      "ops": ".834",
-      "hr": 6
-     },
-     {
-      "name": "Josh Naylor",
-      "playerId": 647304,
-      "pa": 239,
-      "avg": ".253",
-      "obp": ".318",
-      "slg": ".346",
-      "ops": ".664",
-      "hr": 5
-     },
-     {
-      "name": "Cole Young",
-      "playerId": 702284,
-      "pa": 232,
-      "avg": ".244",
-      "obp": ".319",
-      "slg": ".346",
-      "ops": ".665",
-      "hr": 3
-     },
-     {
-      "name": "J.P. Crawford",
-      "playerId": 641487,
-      "pa": 213,
-      "avg": ".219",
-      "obp": ".343",
-      "slg": ".393",
-      "ops": ".736",
-      "hr": 9
-     }
-    ]
-   }
-  },
-  "823944": {
-   "venue": "UNIQLO Field at Dodger Stadium",
-   "first_pitch": "2026-05-31T20:10:00Z",
-   "away_team": "Philadelphia Phillies",
-   "home_team": "Los Angeles Dodgers",
-   "pitchers": {
-    "away": {
-     "name": "Andrew Painter",
-     "playerId": 691725,
-     "season": {
-      "era": 5.4,
-      "k9": 7.2,
-      "bb9": 2.88,
-      "whip": 1.46,
-      "ip": "50.0",
-      "gs": 9,
-      "so": 40
-     },
-     "sabermetrics": {
-      "fip": 4.36,
-      "xfip": 4.41
-     },
-     "statcast_15d": {
-      "ip": "12.1",
-      "k": 6,
-      "bb": 4,
-      "era": 2.92,
-      "whip": 1.05
-     }
+    "823944": {
+      "venue": "UNIQLO Field at Dodger Stadium",
+      "first_pitch": "2026-05-31T20:10:00Z",
+      "pitchers": {
+        "away": {
+          "name": "Andrew Painter",
+          "playerId": null,
+          "season": {
+            "era": 5.4,
+            "k9": 7.2,
+            "bb9": 2.88
+          },
+          "sabermetrics": {
+            "xfip": 5.14,
+            "fip": 5.13
+          },
+          "statcast_7d": {
+            "avg_velo": 92.0,
+            "k_7d": 7,
+            "pitches_7d": 85
+          }
+        },
+        "home": {
+          "name": "Yoshinobu Yamamoto",
+          "playerId": null,
+          "season": {
+            "era": 3.09,
+            "k9": 8.3,
+            "bb9": 1.83
+          },
+          "sabermetrics": {
+            "xfip": 3.29,
+            "fip": 2.94
+          },
+          "statcast_7d": {
+            "avg_velo": 92.0,
+            "k_7d": 8,
+            "pitches_7d": 85
+          }
+        }
+      }
     },
-    "home": {
-     "name": "Yoshinobu Yamamoto",
-     "playerId": 808967,
-     "season": {
-      "era": 3.09,
-      "k9": 8.3,
-      "bb9": 1.83,
-      "whip": 0.98,
-      "ip": "64.0",
-      "gs": 10,
-      "so": 59
-     },
-     "sabermetrics": {
-      "fip": 3.75,
-      "xfip": 3.25
-     },
-     "statcast_15d": {
-      "ip": "14.0",
-      "k": 11,
-      "bb": 3,
-      "era": 1.29,
-      "whip": 0.93
-     }
+    "823053": {
+      "venue": "Busch Stadium",
+      "first_pitch": "2026-05-31T23:20:00Z",
+      "pitchers": {
+        "away": {
+          "name": "Jordan Wicks",
+          "playerId": null,
+          "season": {
+            "era": 16.62,
+            "k9": 10.38,
+            "bb9": 2.08
+          },
+          "sabermetrics": {
+            "xfip": 14.12,
+            "fip": 15.79
+          },
+          "statcast_7d": {
+            "avg_velo": 92.0,
+            "k_7d": 10,
+            "pitches_7d": 85
+          }
+        },
+        "home": {
+          "name": "Matthew Liberatore",
+          "playerId": null,
+          "season": {
+            "era": 4.76,
+            "k9": 8.42,
+            "bb9": 3.49
+          },
+          "sabermetrics": {
+            "xfip": 4.63,
+            "fip": 4.52
+          },
+          "statcast_7d": {
+            "avg_velo": 92.0,
+            "k_7d": 8,
+            "pitches_7d": 85
+          }
+        }
+      }
     }
-   },
-   "batters": {
-    "away": [
-     {
-      "name": "Trea Turner",
-      "playerId": 607208,
-      "pa": 252,
-      "avg": ".222",
-      "obp": ".274",
-      "slg": ".350",
-      "ops": ".624",
-      "hr": 7
-     },
-     {
-      "name": "Kyle Schwarber",
-      "playerId": 656941,
-      "pa": 246,
-      "avg": ".238",
-      "obp": ".350",
-      "slg": ".605",
-      "ops": ".955",
-      "hr": 22
-     },
-     {
-      "name": "Bryce Harper",
-      "playerId": 547180,
-      "pa": 241,
-      "avg": ".263",
-      "obp": ".361",
-      "slg": ".512",
-      "ops": ".873",
-      "hr": 13
-     },
-     {
-      "name": "Adolis Garc\u00eda",
-      "playerId": 666969,
-      "pa": 223,
-      "avg": ".194",
-      "obp": ".278",
-      "slg": ".301",
-      "ops": ".579",
-      "hr": 4
-     },
-     {
-      "name": "Alec Bohm",
-      "playerId": 664761,
-      "pa": 217,
-      "avg": ".208",
-      "obp": ".267",
-      "slg": ".335",
-      "ops": ".602",
-      "hr": 6
-     }
-    ],
-    "home": [
-     {
-      "name": "Shohei Ohtani",
-      "playerId": 660271,
-      "pa": 250,
-      "avg": ".277",
-      "obp": ".402",
-      "slg": ".495",
-      "ops": ".897",
-      "hr": 10
-     },
-     {
-      "name": "Freddie Freeman",
-      "playerId": 518692,
-      "pa": 239,
-      "avg": ".271",
-      "obp": ".364",
-      "slg": ".469",
-      "ops": ".833",
-      "hr": 8
-     },
-     {
-      "name": "Andy Pages",
-      "playerId": 681624,
-      "pa": 237,
-      "avg": ".295",
-      "obp": ".342",
-      "slg": ".535",
-      "ops": ".877",
-      "hr": 13
-     },
-     {
-      "name": "Kyle Tucker",
-      "playerId": 663656,
-      "pa": 236,
-      "avg": ".236",
-      "obp": ".335",
-      "slg": ".384",
-      "ops": ".719",
-      "hr": 4
-     },
-     {
-      "name": "Teoscar Hern\u00e1ndez",
-      "playerId": 606192,
-      "pa": 204,
-      "avg": ".276",
-      "obp": ".348",
-      "slg": ".436",
-      "ops": ".784",
-      "hr": 7
-     }
-    ]
-   }
-  },
-  "823053": {
-   "venue": "Busch Stadium",
-   "first_pitch": "2026-05-31T23:20:00Z",
-   "away_team": "Chicago Cubs",
-   "home_team": "St. Louis Cardinals",
-   "pitchers": {
-    "away": {
-     "name": "Jordan Wicks",
-     "playerId": 696136,
-     "season": {
-      "era": 16.62,
-      "k9": 10.38,
-      "bb9": 2.08,
-      "whip": 2.31,
-      "ip": "4.1",
-      "gs": 1,
-      "so": 5
-     },
-     "sabermetrics": {
-      "fip": 5.14,
-      "xfip": 4.09
-     },
-     "statcast_15d": {
-      "ip": "4.1",
-      "k": 5,
-      "bb": 1,
-      "era": 16.62,
-      "whip": 2.31
-     }
-    },
-    "home": {
-     "name": "Matthew Liberatore",
-     "playerId": 669461,
-     "season": {
-      "era": 4.76,
-      "k9": 8.42,
-      "bb9": 3.49,
-      "whip": 1.57,
-      "ip": "56.2",
-      "gs": 11,
-      "so": 53
-     },
-     "sabermetrics": {
-      "fip": 4.65,
-      "xfip": 3.93
-     },
-     "statcast_15d": {
-      "ip": "9.2",
-      "k": 19,
-      "bb": 4,
-      "era": 6.52,
-      "whip": 1.86
-     }
-    }
-   },
-   "batters": {
-    "away": [
-     {
-      "name": "Nico Hoerner",
-      "playerId": 663538,
-      "pa": 268,
-      "avg": ".252",
-      "obp": ".336",
-      "slg": ".359",
-      "ops": ".695",
-      "hr": 4
-     },
-     {
-      "name": "Alex Bregman",
-      "playerId": 608324,
-      "pa": 266,
-      "avg": ".260",
-      "obp": ".342",
-      "slg": ".353",
-      "ops": ".695",
-      "hr": 4
-     },
-     {
-      "name": "Michael Busch",
-      "playerId": 683737,
-      "pa": 258,
-      "avg": ".238",
-      "obp": ".368",
-      "slg": ".386",
-      "ops": ".754",
-      "hr": 6
-     },
-     {
-      "name": "Ian Happ",
-      "playerId": 664023,
-      "pa": 248,
-      "avg": ".234",
-      "obp": ".355",
-      "slg": ".478",
-      "ops": ".833",
-      "hr": 13
-     },
-     {
-      "name": "Pete Crow-Armstrong",
-      "playerId": 691718,
-      "pa": 246,
-      "avg": ".237",
-      "obp": ".327",
-      "slg": ".391",
-      "ops": ".718",
-      "hr": 7
-     }
-    ],
-    "home": [
-     {
-      "name": "Iv\u00e1n Herrera",
-      "playerId": 671056,
-      "pa": 254,
-      "avg": ".260",
-      "obp": ".386",
-      "slg": ".428",
-      "ops": ".814",
-      "hr": 7
-     },
-     {
-      "name": "JJ Wetherholt",
-      "playerId": 802139,
-      "pa": 253,
-      "avg": ".244",
-      "obp": ".356",
-      "slg": ".404",
-      "ops": ".760",
-      "hr": 9
-     },
-     {
-      "name": "Alec Burleson",
-      "playerId": 676475,
-      "pa": 239,
-      "avg": ".280",
-      "obp": ".347",
-      "slg": ".439",
-      "ops": ".786",
-      "hr": 7
-     },
-     {
-      "name": "Jordan Walker",
-      "playerId": 691023,
-      "pa": 234,
-      "avg": ".290",
-      "obp": ".359",
-      "slg": ".557",
-      "ops": ".916",
-      "hr": 15
-     },
-     {
-      "name": "Masyn Winn",
-      "playerId": 691026,
-      "pa": 211,
-      "avg": ".234",
-      "obp": ".313",
-      "slg": ".315",
-      "ops": ".628",
-      "hr": 1
-     }
-    ]
-   }
   }
- }
 }
