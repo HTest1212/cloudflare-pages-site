@@ -1,52 +1,30 @@
 {
- "asof": "2026-06-01T01:52:33Z",
- "yesterday_date": "2026-05-30",
+ "asof": "2026-06-01T15:48:35Z",
+ "yesterday_date": "2026-05-31",
  "yesterday_record": {
-  "picks": 27,
-  "wins": 11,
-  "losses": 16,
+  "picks": 26,
+  "wins": 14,
+  "losses": 12,
   "pushes": 0,
-  "voids": 0,
-  "units": -6.9045,
-  "totalStake": 27.0,
-  "winRate": 0.4074,
-  "roi": -0.2557
+  "voids": 4,
+  "units": 0.1845,
+  "totalStake": 26.0,
+  "winRate": 0.5385,
+  "roi": 0.0071
  },
  "by_market": {
   "ML": {
-   "picks": 13,
-   "wins": 6,
+   "picks": 19,
+   "wins": 12,
    "losses": 7,
    "pushes": 0,
    "voids": 0,
-   "units": -2.3014,
-   "totalStake": 13.0,
-   "winRate": 0.4615,
-   "roi": -0.177
+   "units": 3.4421,
+   "totalStake": 19.0,
+   "winRate": 0.6316,
+   "roi": 0.1812
   },
-  "Total": {
-   "picks": 10,
-   "wins": 2,
-   "losses": 8,
-   "pushes": 0,
-   "voids": 0,
-   "units": -6.2213,
-   "totalStake": 10.0,
-   "winRate": 0.2,
-   "roi": -0.6221
-  },
-  "Team Total": {
-   "picks": 2,
-   "wins": 2,
-   "losses": 0,
-   "pushes": 0,
-   "voids": 0,
-   "units": 1.8182,
-   "totalStake": 2.0,
-   "winRate": 1.0,
-   "roi": 0.9091
-  },
-  "F5_Total": {
+  "K": {
    "picks": 1,
    "wins": 0,
    "losses": 1,
@@ -57,22 +35,33 @@
    "winRate": 0.0,
    "roi": -1.0
   },
-  "K": {
-   "picks": 1,
+  "Total": {
+   "picks": 2,
    "wins": 1,
-   "losses": 0,
+   "losses": 1,
    "pushes": 0,
    "voids": 0,
-   "units": 0.8,
-   "totalStake": 1.0,
-   "winRate": 1.0,
-   "roi": 0.8
+   "units": -0.0909,
+   "totalStake": 2.0,
+   "winRate": 0.5,
+   "roi": -0.0454
+  },
+  "F5_ML": {
+   "picks": 4,
+   "wins": 1,
+   "losses": 3,
+   "pushes": 0,
+   "voids": 0,
+   "units": -2.1667,
+   "totalStake": 4.0,
+   "winRate": 0.25,
+   "roi": -0.5417
   }
  },
  "loss_categories": {
-  "VARIANCE": 10,
+  "MODEL_ERROR": 2,
   "STARTER_REGRESSION": 3,
-  "MODEL_ERROR": 3
+  "VARIANCE": 7
  },
  "lock_breach_priority": "normal",
  "lock_breach_rules": [],
@@ -80,22 +69,16 @@
  "lock_rolling_14d_winRate": 0.5862,
  "patterns_identified": [
   {
-   "category": "VARIANCE",
-   "frequency": 10,
-   "summary": "Heavy slate of correlated unders and short favorites all broke the wrong way.",
-   "adjustment_rule": "Cap total bet exposure per slate; a cluster of correlated under and favorite plays amplifies variance on rough nights."
-  },
-  {
    "category": "STARTER_REGRESSION",
    "frequency": 3,
-   "summary": "Multiple favored starters were knocked out early and turned games into blowouts.",
+   "summary": "Multiple backed starters were hit early and games slipped away.",
    "adjustment_rule": "Demote any ML favorite whose starter lacks two consecutive quality starts in last three outings; require bullpen rest confirmation."
   },
   {
-   "category": "MODEL_ERROR",
-   "frequency": 3,
-   "summary": "Under totals were systematically too low against hot offenses.",
-   "adjustment_rule": "Tighten under totals: do not publish an under when both lineups rank top 12 in runs per game over the trailing 14 days."
+   "category": "VARIANCE",
+   "frequency": 7,
+   "summary": "Cluster of favorites and an under all broke the wrong way on a high variance slate.",
+   "adjustment_rule": "Down weight setups exposed to VARIANCE until the pattern clears."
   }
  ],
  "adjustments_for_today": [
@@ -106,16 +89,17 @@
   "Do not publish A tier ML against a starter with ERA above 4.50 when that starter has allowed 2 or fewer runs in 2 of his last 3 starts regardless of season ERA.",
   "Do not publish A tier Over when the visiting team's rotation is starting a pitcher with an ERA above 6.00 but the bullpen ERA is below 3.80; the pen can neutralize the starter damage and suppress the run total.",
   "Do not publish A tier pitcher K over at a line of 7.0 or higher unless the pitcher's season strikeouts per start exceeds the posted line by at least 1.5; a strong but not dominant 7 strikeout start must still clear with cushion.",
-  "Require the pitcher trailing 5 start strikeout rate to exceed the posted K line before publishing a K over, and cap K over stake at half a unit when the line is above the pitcher season average.",
   "Down weight setups exposed to VARIANCE until the pattern clears.",
-  "Cap total bet exposure per slate; a cluster of correlated under and favorite plays amplifies variance on rough nights.",
-  "Demote any ML favorite whose starter lacks two consecutive quality starts in last three outings; require bullpen rest confirmation.",
-  "Tighten under totals: do not publish an under when both lineups rank top 12 in runs per game over the trailing 14 days."
+  "Require the pitcher trailing 5 start strikeout rate to exceed the posted K line before publishing a K over, and cap K over stake at half a unit when the line is above the pitcher season average.",
+  "Never issue A-tier Under 7.0 at Oracle when the opposing starter has sub 3.50 ERA and top 5 K rate. The park cannot overcome elite SP offense suppression that also kills the under edge.",
+  "Never issue Giants ML as A-tier unless SF starting pitcher has sub 3.20 ERA AND Giants offense ranks top 10 NL in runs last 14 days. Suppress juice requirement to no worse than -125 when both conditions are not met.",
+  "Cap A-tier exposure at 2 picks per game maximum. F5 Under 4 requires both starters sub 3.50 ERA with sub 7.0 BB9. Never stack F5 Under + ML + Total all A-tier on same game."
  ],
  "monitoring_list": [
-  "Rolling 14d Lock win rate at 58.6% \u2014 guard cap_active.",
-  "Under totals on slates with two top 12 offenses.",
-  "Favored starters on short rest or coming off a blowup."
+  "Lock guard active: rolling 14d Lock win rate 0.5862 versus 0.85 recovery target.",
+  "Conflicting output on Milwaukee at Houston: both Astros ML and Brewers ML were published on the same game.",
+  "F5 ML went one and three yesterday; reassess first five inning favorites.",
+  "Duplicate Braves ML exposure logged on the Cincinnati game across two gamePks."
  ],
  "carryover_rules": [
   {
@@ -222,38 +206,38 @@
    "source": "pattern",
    "added_date": "2026-05-29",
    "expires_date": null,
-   "times_validated": 5,
+   "times_validated": 6,
    "permanent": true,
-   "last_validated": "2026-05-30"
+   "last_validated": "2026-05-31"
   },
   {
    "rule": "Cap total bet exposure per slate; a cluster of correlated under and favorite plays amplifies variance on rough nights.",
    "source": "pattern",
    "added_date": "2026-05-30",
-   "expires_date": "2026-06-06",
-   "times_validated": 1,
+   "expires_date": "2026-06-07",
+   "times_validated": 2,
    "permanent": false,
-   "last_validated": "2026-05-30",
+   "last_validated": "2026-05-31",
    "category": "VARIANCE"
   },
   {
    "rule": "Demote any ML favorite whose starter lacks two consecutive quality starts in last three outings; require bullpen rest confirmation.",
    "source": "pattern",
    "added_date": "2026-05-30",
-   "expires_date": "2026-06-06",
-   "times_validated": 1,
+   "expires_date": "2026-06-07",
+   "times_validated": 2,
    "permanent": false,
-   "last_validated": "2026-05-30",
+   "last_validated": "2026-05-31",
    "category": "STARTER_REGRESSION"
   },
   {
    "rule": "Tighten under totals: do not publish an under when both lineups rank top 12 in runs per game over the trailing 14 days.",
    "source": "pattern",
    "added_date": "2026-05-30",
-   "expires_date": "2026-06-06",
-   "times_validated": 1,
+   "expires_date": "2026-06-07",
+   "times_validated": 2,
    "permanent": false,
-   "last_validated": "2026-05-30",
+   "last_validated": "2026-05-31",
    "category": "MODEL_ERROR"
   }
  ]
