@@ -1,55 +1,57 @@
 # MLB Dashboard Refresh Report
 
-Window: midday (11:30 AM)
-Run timestamp: 2026-05-29 18:55 to 19:10 UTC (executed at 14:55 ET as a scheduled run; window field set to midday 11:30 AM per spec)
-Slate date: 2026-05-29
-Game count: 15 (all Preview at run time)
+Window: midday (11:30 AM)  
+Run timestamp: 2026-06-01 01:55:38 UTC  
+Slate date: 2026-05-31  
+Game count: 15
 
 ## API data quality
-- Probable pitchers confirmed via schedule API: 30 of 30 starter slots filled.
-- Pitcher season stats fetched: 29 of 30 returned full season lines. Jared Jones (PIT, gamePk 823377) returned no 2026 season stats and was treated as an unknown, capping that card at C.
-- Small sample starters (under 15 IP, grade capped at C): Giolito (SD, 10 IP), Macko (TOR, 4.1 IP), Samaniego (BOS, opener, 0 GS), Melton (DET, 5.2 IP), Crow (MIL, 10.1 IP), Rodon (NYY, 13 IP).
-- Weather fetched successfully for 14 of 14 outdoor and retractable roof parks via Open Meteo. Tropicana Field skipped (dome).
-- Notable weather: Coors 76F wind 7 mph in from center; T Mobile 51F cold suppressive; Globe Life 90F outside, roof likely closed; GABP 82F light air.
+
+Pitchers confirmed: 30 of 30 (all probable pitchers present in schedule API). TBD: 0.
+Note: the schedule people batch endpoint returned a mismatched id set, so pitcher season stats were pulled per id with individual stats calls and joined to the schedule probable names. All 30 returned valid season lines.
+Weather: 13 parks fetched from Open Meteo, 2 skipped (dome or no coordinates: Rate Field live, Tropicana dome).
 
 ## Per game summary
-- ATL at CIN, Great American Ball Park: B 80, proj 5.3 to 4.6, 6 picks. Chips: Braves ML -130 to -120, Over 9.5.
-- SD at WSH, Nationals Park: C 62, proj 4.4 to 4.0, 6 picks. Chip: Padres ML -120 to -110.
-- MIN at PIT, PNC Park: C 64, proj 4.0 to 3.6, 6 picks. Chip: Bradley K over 6.5.
-- TOR at BAL, Camden Yards: C 63, proj 5.0 to 4.6, 6 picks. Chip: Over 9.5.
-- BOS at CLE, Progressive Field: C 60, proj 4.6 to 4.2, 6 picks. Pass (opener script).
-- LAA at TB, Tropicana Field: B 80, proj 3.4 to 4.0, 6 picks. Chips: Rays ML -150 to -135, Under 7.5.
-- MIA at NYM, Citi Field: B 82, proj 3.4 to 3.8, 6 picks. Chips: Under 7, Meyer K over 6.5.
-- CHC at STL, Busch Stadium: C 66, proj 4.2 to 4.0, 6 picks. Chip: Cubs ML +100 to +115.
-- DET at CWS, Rate Field: C 61, proj 4.6 to 4.0, 6 picks. Pass (Melton sample).
-- KC at TEX, Globe Life Field: B 78, proj 3.6 to 4.4, 6 picks. Chips: Rangers ML -140 to -125, Gore K over 6.5.
-- MIL at HOU, Daikin Park: C 64, proj 4.0 to 4.2, 6 picks. Pass (Crow sample).
-- SF at COL, Coors Field: B 79, proj 5.6 to 6.0, 6 picks. Chips: Over 11.5, Giants ML -125 to -110.
-- NYY at ATH, Sutter Health Park: C 66, proj 5.4 to 4.6, 6 picks. Chip: Yankees ML -150 to -135.
-- AZ at SEA, T Mobile Park: B 80, proj 3.4 to 3.9, 6 picks. Chips: Under 7, Mariners ML -140 to -125.
-- PHI at LAD, Dodger Stadium: B 84, proj 4.2 to 3.2, 6 picks. Chips: Phillies ML -135 to -115, Under 7.5.
 
-Top card: PHI at LAD behind Zack Wheeler (1.67 ERA, 0.82 WHIP). Graded B 84, the 11:30 AM projected lineup ceiling.
+| Matchup | Grade | Proj Score | Picks | Primary Chips |
+|---|---|---|---|---|
+| DET@CWS | LIVE | 4.2-4.2 | locked | none (live) |
+| SD@WSH | C 62 | 4.0-4.0 | 6 | none |
+| KC@TEX | C 58 | 4.1-4.4 | 6 | none |
+| TOR@BAL | C 69 | 4.2-3.8 | 6 | none |
+| MIN@PIT | C 60 | 4.0-4.4 | 6 | none |
+| BOS@CLE | C 66 | 3.4-4.0 | 6 | none |
+| LAA@TB | C 69 | 3.7-4.4 | 6 | none |
+| MIA@NYM | C 69 | 3.9-3.6 | 6 | none |
+| MIL@HOU | B 80 | 4.1-5.4 | 6 | Astros ML -118 to -106, Astros F5 ML -120 to -130 |
+| CHC@STL | B 80 | 4.6-3.3 | 6 | Cubs ML -118 to -106, Cubs F5 ML -120 to -130 |
+| ATL@CIN | B 80 | 5.6-4.0 | 6 | Braves ML -118 to -106, Braves F5 ML -120 to -130 |
+| SF@COL | C 67 | 5.1-5.9 | 6 | none |
+| NYY@ATH | C 63 | 3.8-4.2 | 6 | none |
+| AZ@SEA | B 71 | 3.5-4.4 | 6 | Mariners ML -118 to -106, Mariners F5 ML -120 to -130 |
+| PHI@LAD | C 61 | 4.4-4.5 | 6 | none |
+
+Cards with primary chips: 4 (MIL@HOU, CHC@STL, ATL@CIN, AZ@SEA).  
+Total picks generated: 85. Total primary chips: 8.
 
 ## Overlays deployed
-- odds_overlay.json: 15 games (moneyline, total, runline).
-- statcast_overlay.json: 15 games, ERA based xFIP and FIP estimates, playerId null.
-- picks_log.json: 43 new chip and watch list entries appended, idempotent by id, sorted date then confidence descending. Total 373 records.
+
+odds_overlay.json: 15 games. statcast_overlay.json: 15 games (ERA based xFIP and FIP estimates). picks_log.json: 11 new primary or watch entries appended, 393 total records.
 
 ## Learnings adjustments applied
-- LOCK GUARD ACTIVE (rolling 14d Lock win rate 58.6 percent). No A tier published. Reinforced by the 11:30 AM projected lineup cap holding every card at B+ 84 or lower.
-- K over lock guard: all strikeout chips held at conservative lines (6.5 or below; Wheeler held to 6.0) so season rate clears with cushion. Rodon K kept off primary chips despite 11.77 K9 due to 7.62 BB9 and 13 IP sample.
-- F5 Under and ML differential guards honored; no A tier issued on park or ERA gap alone.
-- Sub 15 inning and no data starters capped at C: Giolito, Macko, Samaniego, Melton, Crow, Rodon, plus Jones (no data).
-- Chip cap compliance: trimmed MIA at NYM and PHI at LAD from three chips to two to satisfy the B tier two chip rule; extra angles moved to watch list.
 
-## Deploy status
-- Repo: HTest1212/cloudflare-pages-site, branch main.
-- Commit 1: 343876988f6ccc4982450750bc65f288c4c226ab (Auto refresh 1130am 2026-05-29).
-- Commit 2: e0c339bba9004d40317c7854e0c411889aedad65 (chip cap compliance, final).
-- Push: success. Cloudflare Pages auto deploy triggered. No wrangler used.
-- Render functions verified present after splice: renderClaudePicksBlock, tierFromProb, renderBestBetsBlock.
+- LOCK GUARD ACTIVE: rolling 14d Lock win rate 0.5862 is below the 0.85 threshold, so A tier publication was suppressed. Confidence capped at B (max 84). No A grade or A tier pick was published.
+- VARIANCE down weight: prior slate logged 16 VARIANCE losses, setups exposed to that pattern were down weighted.
+- Totals down weighted: prior slate totals went 2 and 8, so Under and Over were kept out of every primary chip row and routed to picks and watch list only.
+
+## Deploy
+
+GitHub commit: 110a690d3d2ae326b065cefae61034ab10c3d3fb  
+Push status: success (018e48d..110a690 main). First push was rejected by a concurrent retrospective commit, resolved by reset to FETCH_HEAD, re-splice, and re-push.  
+Cloudflare Pages auto deploy triggered on push. Wrangler not used.
 
 ## Errors and fallbacks
-- Workspace mount resource deadlock prevented bash cp and cat and the Read tool (EPERM) on the workspace folder. Read learnings.json via python open on the mount path; sourced the GitHub token from .git/config remote URL since .env was not present. Built and pushed from the /tmp clone.
-- Jared Jones returned no season stats; treated as unknown and card capped at C rather than inventing a stat line.
+
+- Workspace mount hit errno 35 resource deadlock on reads, so all repo work was done from the /tmp clone per runbook.
+- Pitcher batch people endpoint returned a scrambled id set (zero overlap with schedule ids); fell back to per pitcher season stats calls which returned correct data for all 30.
+- Render functions renderClaudePicksBlock, tierFromProb, renderBestBetsBlock verified present after splice.
