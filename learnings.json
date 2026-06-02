@@ -1,67 +1,45 @@
 {
- "asof": "2026-06-01T15:48:35Z",
- "yesterday_date": "2026-05-31",
+ "asof": "2026-06-02T04:36:42Z",
+ "yesterday_date": "2026-06-01",
  "yesterday_record": {
-  "picks": 26,
-  "wins": 14,
-  "losses": 12,
+  "picks": 10,
+  "wins": 4,
+  "losses": 5,
   "pushes": 0,
-  "voids": 4,
-  "units": 0.1845,
-  "totalStake": 26.0,
-  "winRate": 0.5385,
-  "roi": 0.0071
+  "voids": 1,
+  "units": -1.7872,
+  "totalStake": 9.0,
+  "winRate": 0.4444,
+  "roi": -0.1986
  },
  "by_market": {
-  "ML": {
-   "picks": 19,
-   "wins": 12,
-   "losses": 7,
-   "pushes": 0,
-   "voids": 0,
-   "units": 3.4421,
-   "totalStake": 19.0,
-   "winRate": 0.6316,
-   "roi": 0.1812
-  },
   "K": {
-   "picks": 1,
-   "wins": 0,
-   "losses": 1,
-   "pushes": 0,
-   "voids": 0,
-   "units": -1.0,
-   "totalStake": 1.0,
-   "winRate": 0.0,
-   "roi": -1.0
-  },
-  "Total": {
-   "picks": 2,
-   "wins": 1,
-   "losses": 1,
-   "pushes": 0,
-   "voids": 0,
-   "units": -0.0909,
-   "totalStake": 2.0,
-   "winRate": 0.5,
-   "roi": -0.0454
-  },
-  "F5_ML": {
-   "picks": 4,
-   "wins": 1,
+   "picks": 7,
+   "wins": 3,
    "losses": 3,
    "pushes": 0,
+   "voids": 1,
+   "units": -0.5279,
+   "totalStake": 6.0,
+   "winRate": 0.5,
+   "roi": -0.088
+  },
+  "ML": {
+   "picks": 3,
+   "wins": 1,
+   "losses": 2,
+   "pushes": 0,
    "voids": 0,
-   "units": -2.1667,
-   "totalStake": 4.0,
-   "winRate": 0.25,
-   "roi": -0.5417
+   "units": -1.2593,
+   "totalStake": 3.0,
+   "winRate": 0.3333,
+   "roi": -0.4198
   }
  },
  "loss_categories": {
-  "MODEL_ERROR": 2,
-  "STARTER_REGRESSION": 3,
-  "VARIANCE": 7
+  "VARIANCE": 3,
+  "MODEL_ERROR": 1,
+  "MISSED_NEWS": 1
  },
  "lock_breach_priority": "normal",
  "lock_breach_rules": [],
@@ -69,16 +47,10 @@
  "lock_rolling_14d_winRate": 0.5862,
  "patterns_identified": [
   {
-   "category": "STARTER_REGRESSION",
-   "frequency": 3,
-   "summary": "Multiple backed starters were hit early and games slipped away.",
-   "adjustment_rule": "Demote any ML favorite whose starter lacks two consecutive quality starts in last three outings; require bullpen rest confirmation."
-  },
-  {
    "category": "VARIANCE",
-   "frequency": 7,
-   "summary": "Cluster of favorites and an under all broke the wrong way on a high variance slate.",
-   "adjustment_rule": "Down weight setups exposed to VARIANCE until the pattern clears."
+   "frequency": 3,
+   "summary": "A coin flip favorite and two K Over chips on starters pulled early all broke the wrong way on a high variance night.",
+   "adjustment_rule": "Two of three K Over 6.5 losses came from starters pulled before 6 innings in lopsided games; avoid K Over chips when the starter carries blowout or short leash risk and require a projected floor of 6 innings."
   }
  ],
  "adjustments_for_today": [
@@ -97,9 +69,9 @@
  ],
  "monitoring_list": [
   "Lock guard active: rolling 14d Lock win rate 0.5862 versus 0.85 recovery target.",
-  "Conflicting output on Milwaukee at Houston: both Astros ML and Brewers ML were published on the same game.",
-  "F5 ML went one and three yesterday; reassess first five inning favorites.",
-  "Duplicate Braves ML exposure logged on the Cincinnati game across two gamePks."
+  "Starter scratch on Cincinnati: projected Burns was replaced by Lyon Richardson, the ML thesis collapsed. Add a morning confirmed starter check before publishing ML or K chips.",
+  "K Over 6.5 went 3 wins and 3 losses; three losses tied to starters who did not finish 6 innings.",
+  "No A tier picks published under Lock Guard for a second straight slate; track when guard lifts at 0.85."
  ],
  "carryover_rules": [
   {
@@ -214,10 +186,10 @@
    "rule": "Cap total bet exposure per slate; a cluster of correlated under and favorite plays amplifies variance on rough nights.",
    "source": "pattern",
    "added_date": "2026-05-30",
-   "expires_date": "2026-06-07",
-   "times_validated": 2,
-   "permanent": false,
-   "last_validated": "2026-05-31",
+   "expires_date": null,
+   "times_validated": 3,
+   "permanent": true,
+   "last_validated": "2026-06-01",
    "category": "VARIANCE"
   },
   {
@@ -234,11 +206,21 @@
    "rule": "Tighten under totals: do not publish an under when both lineups rank top 12 in runs per game over the trailing 14 days.",
    "source": "pattern",
    "added_date": "2026-05-30",
-   "expires_date": "2026-06-07",
-   "times_validated": 2,
-   "permanent": false,
-   "last_validated": "2026-05-31",
+   "expires_date": null,
+   "times_validated": 3,
+   "permanent": true,
+   "last_validated": "2026-06-01",
    "category": "MODEL_ERROR"
+  },
+  {
+   "rule": "Two of three K Over 6.5 losses came from starters pulled before 6 innings in lopsided games; avoid K Over chips when the starter carries blowout or short leash risk and require a projected floor of 6 innings.",
+   "source": "pattern",
+   "added_date": "2026-06-01",
+   "expires_date": "2026-06-08",
+   "times_validated": 1,
+   "permanent": false,
+   "last_validated": "2026-06-01",
+   "category": "VARIANCE"
   }
  ]
 }
