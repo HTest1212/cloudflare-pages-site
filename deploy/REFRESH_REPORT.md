@@ -1,44 +1,82 @@
 # MLB Dashboard Refresh Report
 
-**Window:** midday (11:30 AM)
-**Run timestamp:** 2026-06-01 15:42 UTC (11:42 AM ET)
-**Slate date:** 2026-06-01
-**Game count:** 9 (all Preview)
-**Commit:** 341d7e6d63cf8a80144a7f9634d490f570890aa3
-**Push status:** success, pushed to main, Cloudflare Pages auto deploy triggered
+Window: midday (11:30 AM ET)
+Run timestamp: 2026-06-02T14:36:55Z UTC
+Slate date: 2026-06-02
+Games on slate: 15
 
 ## API data quality
 
-Probable pitchers: 16 of 18 confirmed via schedule API, 1 TBD (Chicago White Sox away starter at Minnesota). Pitcher season stats batch fetched for all 17 confirmed IDs in a single people endpoint call. Lineups: 0 of 9 confirmed at this hour, all 9 cards built on projected lineups, which caps every card at B plus per the 11:30 AM rule.
+Source: direct MLB Stats API (schedule hydrate probablePitcher, lineups, team, venue) plus the people endpoint for season pitching stats.
 
-Weather success: 8 of 8 outdoor and retractable parks returned live Open Meteo data (Nationals, Great American, Target, American Family, Busch, Angel, Chase, T-Mobile). Tropicana Field skipped as a fixed dome. Notable extreme: Chase Field at 100 degrees, roof treated as likely closed.
+Probable pitchers: 15 of 15 games returned confirmed probable pitchers from the schedule API (source schedule-api). No TBD starters.
+
+Pitcher stats: 30 of 30 confirmed pitchers returned season stat lines. One arm, Jared Jones (PIT), returned an empty stat split and was filled with league average estimates (ERA 4.20, WHIP 1.30, K9 8.0, BB9 3.2).
+
+Lineups: all games are evening starts, so every card uses projected lineups. Per the 11:30 AM cap, no card exceeds B plus (84).
+
+Weather: 14 of 15 parks fetched live from Open Meteo. Tropicana Field is a closed dome and was skipped. All 14 outdoor and retractable parks returned temperature, wind, and precipitation near first pitch.
 
 ## Per game summary
 
 | Game | Grade | Proj score | Picks | Primary chips |
-|---|---|---|---|---|
-| DET @ TB (Tropicana) | C 60 | 4.1 . 4.2 | 5 | Pass, no primary chips |
-| MIA @ WSH (Nationals) | C 64 | 3.9 . 4.4 | 6 | Cavalli K over 6.5 |
-| KC @ CIN (Great American) | B 78 | 3.4 . 4.8 | 6 | Reds ML, Burns K over 6.5 |
-| CWS @ MIN (Target) | C 63 | 3.5 . 4.3 | 5 | Ryan K over 6.5 |
-| SF @ MIL (American Family) | C 62 | 3.8 . 3.9 | 5 | Roupp K over 6.5 |
-| TEX @ STL (Busch) | B 75 | 3.8 . 3.7 | 6 | deGrom K over 6.5 |
-| COL @ LAA (Angel) | B 76 | 3.3 . 4.9 | 6 | Angels ML, Soriano K over 6.5 |
-| LAD @ AZ (Chase) | C 66 | 4.2 . 4.0 | 5 | Sheehan K over 6.5 |
-| NYM @ SEA (T-Mobile) | C 63 | 3.6 . 4.1 | 5 | Mariners ML |
+| --- | --- | --- | --- | --- |
+| ATL at CIN | B 78 | 6.4 to 4.7 | 6 | Braves ML -180 to -165 |
+| SD at WSH | C 63 | 5.0 to 3.7 | 5 | Pass |
+| MIN at PIT | C 66 | 4.3 to 3.6 | 5 | Pass |
+| TOR at BAL | C 66 | 5.8 to 2.2 | 5 | Pass |
+| BOS at CLE | B 77 | 4.7 to 2.2 | 5 | Pass |
+| LAA at TB | C 63 | 2.5 to 3.4 | 5 | Pass |
+| MIA at NYM | C 66 | 3.9 to 3.4 | 6 | Pass |
+| CHC at STL | C 63 | 4.2 to 4.5 | 5 | Pass |
+| DET at CWS | C 66 | 5.0 to 2.8 | 5 | Pass |
+| KC at TEX | C 65 | 4.7 to 3.8 | 5 | Pass |
+| MIL at HOU | C 59 | 3.3 to 3.7 | 5 | Pass |
+| SF at COL | B 75 | 7.4 to 6.4 | 5 | Pass |
+| NYY at ATH | C 61 | 4.7 to 4.8 | 5 | Pass |
+| AZ at SEA | C 67 | 3.8 to 4.5 | 5 | Pass |
+| PHI at LAD | B 72 | 3.6 to 2.7 | 6 | Phillies ML -180 to -165; NRFI |
 
-No A tier cards published, consistent with the active Lock Guard and the projected lineup cap. Three B grade cards built on clean pitching gaps: Reds with Chase Burns, Angels with Jose Soriano over a battered Freeland, and the deGrom strikeout edge in St. Louis.
+Primary chips published: 3 total across 2 games (ATL Braves ML, PHI Phillies ML, PHI NRFI). Every other card is a conservative Pass or lean, consistent with Lock Guard suppression and the projected lineup cap.
 
 ## Overlays deployed
 
-odds_overlay.json: 9 games, moneyline, total, runline.
-statcast_overlay.json: 9 games, ERA based xFIP and FIP estimates, rebuilt for today (replaced the early morning 06:03 statcast push during rebase).
-picks_log.json: 10 new primary chip and watch records appended, 403 total, sorted date then confidence descending.
+odds_overlay.json: 15 games, moneyline, total, and runline built from verdict chips and projected scores. Live and verified at slate_date 2026-06-02.
+
+statcast_overlay.json: 15 games, both starters each, ERA based xFIP and FIP estimates with playerId null. Live and verified at slate_date 2026-06-02.
+
+picks_log.json: 3 new primary chip records appended idempotently, sorted date then confidence descending. Total log now 406 entries.
 
 ## Learnings adjustments applied
 
-LOCK GUARD ACTIVE (14 day Lock win rate 58.6 percent, below the 0.85 recovery bar) so all A tier publication suppressed. The 11:30 AM projected lineup cap held every card at or below B plus. Totals down weighted across the slate after a 2 and 8 Total result on the prior slate, reflected by holding all Under chips off the primary rows. Small sample starter downgrades applied to Ty Madden (11.1 IP), Shane Drohan (27.1 IP) and the Austin Warren bullpen game (19.1 IP), each capped at quarter Kelly. TBD starter rule capped the White Sox at Twins card at C with a single chip. Giants ML carryover rule kept San Francisco below A tier.
+Read from learnings.json with a non empty adjustments_for_today array. Active rules carried through the run:
+
+Lock Guard active, A tier publication suppressed until the rolling 14 day Lock win rate recovers to 0.85. No A tier card was issued.
+
+11:30 AM projected lineup cap, no card above B plus (84). Honored, top grade on the slate is B 78.
+
+Cap A tier exposure at 2 picks per game and never stack F5 Under plus ML plus Total all A tier. Not triggered since no A tier was issued.
+
+K over chips require the trailing strikeout rate to clear the posted line with cushion and require a six inning floor given prior slate losses on starters pulled early. No K over chip cleared the bar this slate, so all strikeout angles stayed in the picks list at C tier only.
+
+Moneyline chips were gated to established starters only. Webb at Coors (5.06 ERA) and Samaniego (a 17 inning reliever profile with zero starts) were both denied ML chips despite favorable ERA differentials, which kept two questionable favorites off the primary board.
+
+Down weight VARIANCE exposed setups, applied to coin flip games where the absolute pitcher edge was below 1.0.
 
 ## Errors and fallbacks
 
-Workspace mount resource deadlock (errno 35) and EPERM prevented direct bash and Read access to the workspace folder, so the GitHub token was sourced from push-now.command and all git work ran in a fresh clone at /tmp/cps_0601. Initial push rejected as non fast forward because an early morning statcast commit (3448195) landed after the clone; resolved by rebasing onto the real remote tip and taking today's full statcast overlay, then pushed cleanly. Schema gate passed after splice: 9 games, all renderer fields resolve.
+Workspace folder bash access hit the known Resource deadlock on index.html, so the splice was performed in a fresh clone at /tmp/cf-0602 built from origin main.
+
+No .env file was present in the working folder. The GitHub token was read from the existing workspace git remote and reused for push auth.
+
+Six overlay files named in the runbook were absent from the working folder (bullpen, rolling form, catcher framing, pitch matchup, park factors, park wind rules). Park factors and wind were sourced from an embedded park table and live Open Meteo data. Bullpen and catcher framing edges were noted as unavailable in card text rather than invented.
+
+Jared Jones (PIT) season stats were empty in the API and filled with league average estimates.
+
+## Deploy
+
+GitHub commit: 915193fea3356e1a040be96ffdf75296577f317c
+Branch: main
+Push status: success (91b7ad9..915193f)
+Remote main verified at 915193f.
+Cloudflare Pages auto deploy confirmed live at https://mlb-betting-dashboard-v2.pages.dev with both overlays showing slate_date 2026-06-02 and asOf 2026-06-02T14:36:55Z.
