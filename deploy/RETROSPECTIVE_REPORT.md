@@ -1,10 +1,16 @@
+# Post Run Correction — 2026-06-02
+
+A 4 AM verification pass re pulled all nine final box scores. Every bet result, the 4 and 5 record, the minus 1.79 units, and the Lock Guard state were confirmed correct. One stale display value was fixed: game 824027 was recorded at an intermediate Colorado 8 Los Angeles Angels 6 and is now corrected to the true final Colorado 9 Los Angeles Angels 8 in outcomes_log. The Angels moneyline loss and Soriano strikeout win are unchanged. No KPI, Lock, or carryover state was recomputed since the original run already settled them accurately, which avoids double counting the carryover rule validations.
+
+---
+
 # Daily Retrospective — 2026-06-01
 
 Settled 2026-06-02 04:37 UTC. No Lock breach. Lock Guard remains active for a second straight slate.
 
 ## Section 2 — Slate Summary
 
-Slate date 2026-06-01, 9 games on the board, all final. Ten picks settled, all from the midday schema (label and price form). Game 824027 was still in progress at the prior check and finalized as Colorado 8, Los Angeles Angels 6.
+Slate date 2026-06-01, 9 games on the board, all final. Ten picks settled, all from the midday schema (label and price form). Game 824027 was still in progress at the prior check and finalized as Colorado 9, Los Angeles Angels 8.
 
 Overall record 4 wins, 5 losses, 0 pushes, 1 void. Units minus 1.79 on a 9 unit non void book. Win rate 0.444, ROI minus 0.199.
 
