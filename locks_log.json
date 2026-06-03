@@ -1,9 +1,9 @@
 {
- "asof": "2026-06-02T04:35:26Z",
+ "asof": "2026-06-03T08:10:43Z",
  "guard_status": "cap_active",
  "guard_threshold_14d": 0.8,
  "lifetime_summary": {
-  "picks": 39,
+  "picks": 38,
   "wins": 23,
   "losses": 13,
   "pushes": 2,
@@ -22,21 +22,13 @@
   "rolling_30d_winRate": 0.6389
  },
  "by_market": {
-  "F5": {
-   "picks": 2,
-   "wins": 1,
-   "losses": 1,
-   "winRate": 0.5,
-   "units": -0.1304,
-   "roi": -0.0652
-  },
-  "F5_ML": {
-   "picks": 3,
+  "Total": {
+   "picks": 4,
    "wins": 2,
-   "losses": 0,
-   "winRate": 1.0,
-   "units": 1.4973,
-   "roi": 0.4991
+   "losses": 1,
+   "winRate": 0.6667,
+   "units": 0.8182,
+   "roi": 0.2046
   },
   "F5_Total": {
    "picks": 1,
@@ -46,13 +38,13 @@
    "units": 0.9091,
    "roi": 0.9091
   },
-  "Hits": {
-   "picks": 2,
-   "wins": 1,
+  "RL": {
+   "picks": 3,
+   "wins": 3,
    "losses": 0,
    "winRate": 1.0,
-   "units": 0.5,
-   "roi": 0.5
+   "units": 3.1303,
+   "roi": 1.0434
   },
   "K": {
    "picks": 11,
@@ -62,6 +54,14 @@
    "units": 1.6548,
    "roi": 0.1504
   },
+  "F5": {
+   "picks": 2,
+   "wins": 1,
+   "losses": 1,
+   "winRate": 0.5,
+   "units": -0.1304,
+   "roi": -0.0652
+  },
   "ML": {
    "picks": 9,
    "wins": 4,
@@ -69,6 +69,14 @@
    "winRate": 0.4444,
    "units": -2.7498,
    "roi": -0.3055
+  },
+  "Under": {
+   "picks": 2,
+   "wins": 1,
+   "losses": 1,
+   "winRate": 0.5,
+   "units": -0.0909,
+   "roi": -0.0454
   },
   "Over": {
    "picks": 1,
@@ -78,21 +86,21 @@
    "units": -1.0,
    "roi": -1.0
   },
-  "RL": {
+  "F5_ML": {
    "picks": 3,
-   "wins": 3,
+   "wins": 2,
    "losses": 0,
    "winRate": 1.0,
-   "units": 3.1303,
-   "roi": 1.0434
+   "units": 1.4973,
+   "roi": 0.4991
   },
-  "Total": {
-   "picks": 4,
-   "wins": 2,
-   "losses": 1,
-   "winRate": 0.6667,
-   "units": 0.8182,
-   "roi": 0.2046
+  "Hits": {
+   "picks": 1,
+   "wins": 1,
+   "losses": 0,
+   "winRate": 1.0,
+   "units": 0.5,
+   "roi": 0.5
   },
   "TotalBases": {
    "picks": 1,
@@ -101,14 +109,6 @@
    "winRate": 1.0,
    "units": 0.9091,
    "roi": 0.9091
-  },
-  "Under": {
-   "picks": 2,
-   "wins": 1,
-   "losses": 1,
-   "winRate": 0.5,
-   "units": -0.0909,
-   "roi": -0.0454
   }
  },
  "loss_diagnoses": [
@@ -118,11 +118,11 @@
    "pick": "Ohtani K over 7.5",
    "market": "K",
    "confidence": 87,
-   "signals_at_lock": "A tier inputs as logged at publication.",
+   "signals_at_lock": "A tier signals: model confidence and matchup edge at publication.",
    "actual_outcome": "Ohtani 7 K",
    "category": "VARIANCE",
    "diagnosis": "Ohtani struck out 7 over 6 strong innings but the 7.5 line left zero cushion and he missed by one.",
-   "rule_generated": "Reinforce A tier guardrails on K; require full confirmation before publishing."
+   "rule_generated": "Re-examine A tier K criteria; require corroborating signal before publishing this market as a Lock."
   },
   {
    "id": "2026-05-25-823219-F5_Under_4",
@@ -130,11 +130,11 @@
    "pick": null,
    "market": "F5",
    "confidence": 90,
-   "signals_at_lock": "A tier inputs as logged at publication.",
-   "actual_outcome": "None",
-   "category": null,
-   "diagnosis": "Lock loss recorded; see outcome diagnosis.",
-   "rule_generated": "Reinforce A tier guardrails on F5; require full confirmation before publishing."
+   "signals_at_lock": "A tier signals: model confidence and matchup edge at publication.",
+   "actual_outcome": "see box score",
+   "category": "VARIANCE",
+   "diagnosis": "Lock lost; see outcome diagnosis.",
+   "rule_generated": "Re-examine A tier F5 criteria; require corroborating signal before publishing this market as a Lock."
   },
   {
    "id": "2026-05-25-823219-Giants_ML",
@@ -142,11 +142,11 @@
    "pick": null,
    "market": "ML",
    "confidence": 90,
-   "signals_at_lock": "A tier inputs as logged at publication.",
-   "actual_outcome": "None",
-   "category": null,
-   "diagnosis": "Lock loss recorded; see outcome diagnosis.",
-   "rule_generated": "Reinforce A tier guardrails on ML; require full confirmation before publishing."
+   "signals_at_lock": "A tier signals: model confidence and matchup edge at publication.",
+   "actual_outcome": "see box score",
+   "category": "VARIANCE",
+   "diagnosis": "Lock lost; see outcome diagnosis.",
+   "rule_generated": "Re-examine A tier ML criteria; require corroborating signal before publishing this market as a Lock."
   },
   {
    "id": "2026-05-25-823219-Under_7_or_7.5",
@@ -154,11 +154,11 @@
    "pick": null,
    "market": "Under",
    "confidence": 90,
-   "signals_at_lock": "A tier inputs as logged at publication.",
-   "actual_outcome": "None",
-   "category": null,
-   "diagnosis": "Lock loss recorded; see outcome diagnosis.",
-   "rule_generated": "Reinforce A tier guardrails on Under; require full confirmation before publishing."
+   "signals_at_lock": "A tier signals: model confidence and matchup edge at publication.",
+   "actual_outcome": "see box score",
+   "category": "VARIANCE",
+   "diagnosis": "Lock lost; see outcome diagnosis.",
+   "rule_generated": "Re-examine A tier Under criteria; require corroborating signal before publishing this market as a Lock."
   },
   {
    "id": "2026-05-25-823296-Padres_ML",
@@ -166,11 +166,11 @@
    "pick": null,
    "market": "ML",
    "confidence": 88,
-   "signals_at_lock": "A tier inputs as logged at publication.",
-   "actual_outcome": "None",
-   "category": null,
-   "diagnosis": "Lock loss recorded; see outcome diagnosis.",
-   "rule_generated": "Reinforce A tier guardrails on ML; require full confirmation before publishing."
+   "signals_at_lock": "A tier signals: model confidence and matchup edge at publication.",
+   "actual_outcome": "see box score",
+   "category": "VARIANCE",
+   "diagnosis": "Lock lost; see outcome diagnosis.",
+   "rule_generated": "Re-examine A tier ML criteria; require corroborating signal before publishing this market as a Lock."
   },
   {
    "id": "2026-05-25-823948-Over_9",
@@ -178,11 +178,11 @@
    "pick": null,
    "market": "Over",
    "confidence": 86,
-   "signals_at_lock": "A tier inputs as logged at publication.",
-   "actual_outcome": "None",
-   "category": null,
-   "diagnosis": "Lock loss recorded; see outcome diagnosis.",
-   "rule_generated": "Reinforce A tier guardrails on Over; require full confirmation before publishing."
+   "signals_at_lock": "A tier signals: model confidence and matchup edge at publication.",
+   "actual_outcome": "see box score",
+   "category": "VARIANCE",
+   "diagnosis": "Lock lost; see outcome diagnosis.",
+   "rule_generated": "Re-examine A tier Over criteria; require corroborating signal before publishing this market as a Lock."
   },
   {
    "id": "2026-05-23-823222-Total-Under_7",
@@ -190,11 +190,11 @@
    "pick": "Under 7",
    "market": "Total",
    "confidence": 80,
-   "signals_at_lock": "A tier inputs as logged at publication.",
+   "signals_at_lock": "A tier signals: model confidence and matchup edge at publication.",
    "actual_outcome": "Chicago White Sox 3 @ San Francisco Giants 10",
    "category": "blowout",
    "diagnosis": "Game total 13 smashed over 7.0.",
-   "rule_generated": "Reinforce A tier guardrails on Total; require full confirmation before publishing."
+   "rule_generated": "Re-examine A tier Total criteria; require corroborating signal before publishing this market as a Lock."
   },
   {
    "id": "2026-05-23-823458-K-Wheeler_K_",
@@ -202,11 +202,11 @@
    "pick": "Wheeler K Over 6.5",
    "market": "K",
    "confidence": 87,
-   "signals_at_lock": "A tier inputs as logged at publication.",
+   "signals_at_lock": "A tier signals: model confidence and matchup edge at publication.",
    "actual_outcome": "Cleveland Guardians 0 @ Philadelphia Phillies 3",
    "category": "k_prop_miss",
    "diagnosis": "Wheeler struck out only 6 \u2014 needed 7+ (short by 0.5).",
-   "rule_generated": "Reinforce A tier guardrails on K; require full confirmation before publishing."
+   "rule_generated": "Re-examine A tier K criteria; require corroborating signal before publishing this market as a Lock."
   },
   {
    "id": "2026-05-21-824031-K-1",
@@ -214,11 +214,11 @@
    "pick": "Soriano K Over 7.5",
    "market": "K",
    "confidence": 87,
-   "signals_at_lock": "A tier inputs as logged at publication.",
+   "signals_at_lock": "A tier signals: model confidence and matchup edge at publication.",
    "actual_outcome": "Athletics 3, Angels 2",
    "category": "MODEL_ERROR",
    "diagnosis": "Soriano 7K in 6.2IP. Model projected 8K from 10.1 K9 but efficiency and extras removal kept him under line.",
-   "rule_generated": "Reinforce A tier guardrails on K; require full confirmation before publishing."
+   "rule_generated": "Re-examine A tier K criteria; require corroborating signal before publishing this market as a Lock."
   },
   {
    "id": "2026-05-21-824031-ML-0",
@@ -226,11 +226,11 @@
    "pick": "Angels ML -155 to -170",
    "market": "ML",
    "confidence": 87,
-   "signals_at_lock": "A tier inputs as logged at publication.",
+   "signals_at_lock": "A tier signals: model confidence and matchup edge at publication.",
    "actual_outcome": "Athletics 3, Angels 2",
    "category": "VARIANCE",
    "diagnosis": "OAK 3 LAA 2 (F10). Severino 10K 7IP 0ER dominated. LAA ML loss in extras.",
-   "rule_generated": "Reinforce A tier guardrails on ML; require full confirmation before publishing."
+   "rule_generated": "Re-examine A tier ML criteria; require corroborating signal before publishing this market as a Lock."
   },
   {
    "id": "2026-05-21-824031-ML-primary",
@@ -238,11 +238,11 @@
    "pick": "Angels ML -155 to -170",
    "market": "ML",
    "confidence": 87,
-   "signals_at_lock": "A tier inputs as logged at publication.",
+   "signals_at_lock": "A tier signals: model confidence and matchup edge at publication.",
    "actual_outcome": "Athletics 3, Angels 2",
    "category": "VARIANCE",
    "diagnosis": "OAK 3 LAA 2 (F10); Angels ML loss. Severino dominant (10K 7IP) neutralised Soriano edge; OAK walk off in extras.",
-   "rule_generated": "Reinforce A tier guardrails on ML; require full confirmation before publishing."
+   "rule_generated": "Re-examine A tier ML criteria; require corroborating signal before publishing this market as a Lock."
   },
   {
    "id": "2026-05-21-824031-Total-primary",
@@ -250,11 +250,11 @@
    "pick": "Soriano K Over 7.5",
    "market": "K",
    "confidence": 87,
-   "signals_at_lock": "A tier inputs as logged at publication.",
+   "signals_at_lock": "A tier signals: model confidence and matchup edge at publication.",
    "actual_outcome": "Athletics 3, Angels 2",
    "category": "MODEL_ERROR",
    "diagnosis": "Soriano 7K in 6.2IP; one short. Efficient outing limited deep count opportunities; game went extras pulling him early.",
-   "rule_generated": "Reinforce A tier guardrails on K; require full confirmation before publishing."
+   "rule_generated": "Re-examine A tier K criteria; require corroborating signal before publishing this market as a Lock."
   },
   {
    "id": "20260511-824844-ML-0",
@@ -262,11 +262,14 @@
    "pick": "Yankees ML 165 to 145",
    "market": "ML",
    "confidence": 84,
-   "signals_at_lock": "A tier inputs as logged at publication.",
-   "actual_outcome": "{'away': 2, 'home': 3}",
+   "signals_at_lock": "A tier signals: model confidence and matchup edge at publication.",
+   "actual_outcome": {
+    "away": 2,
+    "home": 3
+   },
    "category": "VARIANCE",
    "diagnosis": "Final NYY 2 - BAL 3; NYY ML loss.",
-   "rule_generated": "Reinforce A tier guardrails on ML; require full confirmation before publishing."
+   "rule_generated": "Re-examine A tier ML criteria; require corroborating signal before publishing this market as a Lock."
   }
  ],
  "entries": [
@@ -365,6 +368,54 @@
    "finalScore": "Ohtani 7 K",
    "diagnosis": "Ohtani struck out 7 over 6 strong innings but the 7.5 line left zero cushion and he missed by one.",
    "category": "VARIANCE"
+  },
+  {
+   "id": "a3ecc433-6335-4c44-b1e0-85d924c12c57",
+   "date": "2026-05-27",
+   "gamePk": 824270,
+   "market": "watchlist",
+   "pick": "DET ML if Mize first inning is sharp and wind does not shift",
+   "line": null,
+   "confidence": 78,
+   "tier": "a",
+   "result": "pending",
+   "actualLine": null,
+   "profit": 0,
+   "finalScore": null,
+   "diagnosis": "",
+   "category": ""
+  },
+  {
+   "id": "0aca6aa5-e805-41f8-a783-9815534b31aa",
+   "date": "2026-05-27",
+   "gamePk": 823295,
+   "market": "watchlist",
+   "pick": "PHI ML at -165 to -175 noted; upset buffer rule pushes primary to RL",
+   "line": null,
+   "confidence": 77,
+   "tier": "a",
+   "result": "pending",
+   "actualLine": null,
+   "profit": 0,
+   "finalScore": null,
+   "diagnosis": "",
+   "category": ""
+  },
+  {
+   "id": "e8b00d50-2909-42fa-9615-433b1ca6c421",
+   "date": "2026-05-27",
+   "gamePk": 823947,
+   "market": "watchlist",
+   "pick": "LAD ML at -420 plus; not actionable at juice above -200 per bankroll management",
+   "line": null,
+   "confidence": 77,
+   "tier": "a",
+   "result": "pending",
+   "actualLine": null,
+   "profit": 0,
+   "finalScore": null,
+   "diagnosis": "",
+   "category": ""
   },
   {
    "id": "2026-05-25-823219-F5_Under_4",

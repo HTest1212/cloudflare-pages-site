@@ -1,45 +1,66 @@
 {
- "asof": "2026-06-02T04:36:42Z",
- "yesterday_date": "2026-06-01",
+ "asof": "2026-06-03T08:10:43Z",
+ "yesterday_date": "2026-06-02",
  "yesterday_record": {
-  "picks": 10,
-  "wins": 4,
-  "losses": 5,
+  "picks": 29,
+  "wins": 14,
+  "losses": 15,
   "pushes": 0,
-  "voids": 1,
-  "units": -1.7872,
-  "totalStake": 9.0,
-  "winRate": 0.4444,
-  "roi": -0.1986
+  "voids": 26,
+  "units": -2.4561,
+  "totalStake": 29.0,
+  "winRate": 0.4828,
+  "roi": -0.0847
  },
  "by_market": {
-  "K": {
-   "picks": 7,
-   "wins": 3,
-   "losses": 3,
-   "pushes": 0,
-   "voids": 1,
-   "units": -0.5279,
-   "totalStake": 6.0,
-   "winRate": 0.5,
-   "roi": -0.088
-  },
   "ML": {
-   "picks": 3,
-   "wins": 1,
+   "picks": 12,
+   "wins": 4,
+   "losses": 8,
+   "pushes": 0,
+   "voids": 12,
+   "units": -4.4394,
+   "totalStake": 12.0,
+   "winRate": 0.3333,
+   "roi": -0.37
+  },
+  "Total": {
+   "picks": 9,
+   "wins": 5,
+   "losses": 4,
+   "pushes": 0,
+   "voids": 11,
+   "units": 0.6321,
+   "totalStake": 9.0,
+   "winRate": 0.5556,
+   "roi": 0.0702
+  },
+  "K": {
+   "picks": 6,
+   "wins": 4,
    "losses": 2,
    "pushes": 0,
    "voids": 0,
-   "units": -1.2593,
-   "totalStake": 3.0,
-   "winRate": 0.3333,
-   "roi": -0.4198
+   "units": 1.4421,
+   "totalStake": 6.0,
+   "winRate": 0.6667,
+   "roi": 0.2403
+  },
+  "Team Total": {
+   "picks": 2,
+   "wins": 1,
+   "losses": 1,
+   "pushes": 0,
+   "voids": 0,
+   "units": -0.0909,
+   "totalStake": 2.0,
+   "winRate": 0.5,
+   "roi": -0.0454
   }
  },
  "loss_categories": {
-  "VARIANCE": 3,
-  "MODEL_ERROR": 1,
-  "MISSED_NEWS": 1
+  "VARIANCE": 13,
+  "STARTER_OVERRATED": 2
  },
  "lock_breach_priority": "normal",
  "lock_breach_rules": [],
@@ -48,9 +69,9 @@
  "patterns_identified": [
   {
    "category": "VARIANCE",
-   "frequency": 3,
-   "summary": "A coin flip favorite and two K Over chips on starters pulled early all broke the wrong way on a high variance night.",
-   "adjustment_rule": "Two of three K Over 6.5 losses came from starters pulled before 6 innings in lopsided games; avoid K Over chips when the starter carries blowout or short leash risk and require a projected floor of 6 innings."
+   "frequency": 13,
+   "summary": "13 losses tagged VARIANCE on the 2026-06-02 slate.",
+   "adjustment_rule": "Down weight setups exposed to VARIANCE until the pattern clears."
   }
  ],
  "adjustments_for_today": [
@@ -63,15 +84,13 @@
   "Do not publish A tier pitcher K over at a line of 7.0 or higher unless the pitcher's season strikeouts per start exceeds the posted line by at least 1.5; a strong but not dominant 7 strikeout start must still clear with cushion.",
   "Down weight setups exposed to VARIANCE until the pattern clears.",
   "Require the pitcher trailing 5 start strikeout rate to exceed the posted K line before publishing a K over, and cap K over stake at half a unit when the line is above the pitcher season average.",
-  "Never issue A-tier Under 7.0 at Oracle when the opposing starter has sub 3.50 ERA and top 5 K rate. The park cannot overcome elite SP offense suppression that also kills the under edge.",
-  "Never issue Giants ML as A-tier unless SF starting pitcher has sub 3.20 ERA AND Giants offense ranks top 10 NL in runs last 14 days. Suppress juice requirement to no worse than -125 when both conditions are not met.",
-  "Cap A-tier exposure at 2 picks per game maximum. F5 Under 4 requires both starters sub 3.50 ERA with sub 7.0 BB9. Never stack F5 Under + ML + Total all A-tier on same game."
+  "Cap total bet exposure per slate; a cluster of correlated under and favorite plays amplifies variance on rough nights.",
+  "Tighten under totals: do not publish an under when both lineups rank top 12 in runs per game over the trailing 14 days.",
+  "Demote any ML favorite whose starter lacks two consecutive quality starts in last three outings; require bullpen rest confirmation."
  ],
  "monitoring_list": [
-  "Lock guard active: rolling 14d Lock win rate 0.5862 versus 0.85 recovery target.",
-  "Starter scratch on Cincinnati: projected Burns was replaced by Lyon Richardson, the ML thesis collapsed. Add a morning confirmed starter check before publishing ML or K chips.",
-  "K Over 6.5 went 3 wins and 3 losses; three losses tied to starters who did not finish 6 innings.",
-  "No A tier picks published under Lock Guard for a second straight slate; track when guard lifts at 0.85."
+  "K Over props: both 2026-06-02 K losses came from starters pulled before 6 innings; keep enforcing the six inning floor.",
+  "25 of 55 logged 2026-06-02 picks were stale 2026-05-29 duplicates; verify the 11:30 AM generator is not re-emitting prior slates."
  ],
  "carryover_rules": [
   {
@@ -169,27 +188,27 @@
    "source": "pattern",
    "added_date": "2026-05-28",
    "expires_date": null,
-   "times_validated": 5,
+   "times_validated": 6,
    "permanent": true,
-   "last_validated": "2026-05-30"
+   "last_validated": "2026-06-02"
   },
   {
    "rule": "Down weight setups exposed to VARIANCE until the pattern clears.",
    "source": "pattern",
    "added_date": "2026-05-29",
    "expires_date": null,
-   "times_validated": 6,
+   "times_validated": 7,
    "permanent": true,
-   "last_validated": "2026-05-31"
+   "last_validated": "2026-06-02"
   },
   {
    "rule": "Cap total bet exposure per slate; a cluster of correlated under and favorite plays amplifies variance on rough nights.",
    "source": "pattern",
    "added_date": "2026-05-30",
    "expires_date": null,
-   "times_validated": 3,
+   "times_validated": 4,
    "permanent": true,
-   "last_validated": "2026-06-01",
+   "last_validated": "2026-06-02",
    "category": "VARIANCE"
   },
   {
@@ -216,10 +235,10 @@
    "rule": "Two of three K Over 6.5 losses came from starters pulled before 6 innings in lopsided games; avoid K Over chips when the starter carries blowout or short leash risk and require a projected floor of 6 innings.",
    "source": "pattern",
    "added_date": "2026-06-01",
-   "expires_date": "2026-06-08",
-   "times_validated": 1,
+   "expires_date": "2026-06-09",
+   "times_validated": 2,
    "permanent": false,
-   "last_validated": "2026-06-01",
+   "last_validated": "2026-06-02",
    "category": "VARIANCE"
   }
  ]
