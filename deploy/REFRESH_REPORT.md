@@ -1,82 +1,50 @@
 # MLB Dashboard Refresh Report
 
 Window: midday (11:30 AM ET)
-Run timestamp: 2026-06-02T14:36:55Z UTC
-Slate date: 2026-06-02
-Games on slate: 15
+Run timestamp: 2026-06-04T15:46:41Z UTC
+Slate date: 2026-06-04
+Game count: 9
 
 ## API data quality
+Schedule pulled from MLB Stats API with a date guard. A CDN cache intermittently served a stale 2026-05-30 slate for the hydrated query, so a verify and retry loop locked the correct 2026-06-04 response before any card was built.
 
-Source: direct MLB Stats API (schedule hydrate probablePitcher, lineups, team, venue) plus the people endpoint for season pitching stats.
+Starters confirmed: 16 of 17 probable pitchers confirmed from schedule-api. One TBD (Toronto away starter at Atlanta), capped at C with a single chip per rule.
 
-Probable pitchers: 15 of 15 games returned confirmed probable pitchers from the schedule API (source schedule-api). No TBD starters.
+Pitcher stats: batch fetched in one people call for all 17 confirmed pitcher ids.
 
-Pitcher stats: 30 of 30 confirmed pitchers returned season stat lines. One arm, Jared Jones (PIT), returned an empty stat split and was filled with league average estimates (ERA 4.20, WHIP 1.30, K9 8.0, BB9 3.2).
-
-Lineups: all games are evening starts, so every card uses projected lineups. Per the 11:30 AM cap, no card exceeds B plus (84).
-
-Weather: 14 of 15 parks fetched live from Open Meteo. Tropicana Field is a closed dome and was skipped. All 14 outdoor and retractable parks returned temperature, wind, and precipitation near first pitch.
+Weather: 9 of 9 parks fetched from Open Meteo. Retractable roofs at American Family Field, Daikin Park, and Chase Field projected closed given heat and rain, treated as neutral.
 
 ## Per game summary
+| Game | Grade | Proj score | Picks | Primary chip |
+|---|---|---|---|---|
+| SD @ PHI (Citizens Bank) | B 81 | SD 2.9 . PHI 5.3 | 6 | Phillies ML -160 to -175 |
+| BAL @ BOS (Fenway) | B 76 | BAL 5.0 . BOS 5.4 | 5 | Over 9.5 |
+| CLE @ NYY (Yankee Stadium) | B 77 | CLE 3.6 . NYY 5.3 | 5 | Yankees ML -150 to -165 |
+| SF @ MIL (American Family) | C 63 | SF 4.1 . MIL 4.4 | 5 | none (pass) |
+| TOR @ ATL (Truist) | C 66 | TOR 3.4 . ATL 4.6 | 5 | Sale K over 6.5 |
+| KC @ MIN (Target Field) | C 65 | KC 4.4 . MIN 4.3 | 5 | Royals F5 ML +105 to +120 |
+| ATH @ CHC (Wrigley) | C 64 | ATH 4.2 . CHC 4.4 | 5 | none (Over in picks) |
+| PIT @ HOU (Daikin Park) | C 65 | PIT 3.5 . HOU 5.1 | 5 | Astros ML -160 to -180 |
+| LAD @ AZ (Chase Field) | B 71 | LAD 4.8 . AZ 3.7 | 5 | Dodgers ML -150 to -170 |
 
-| Game | Grade | Proj score | Picks | Primary chips |
-| --- | --- | --- | --- | --- |
-| ATL at CIN | B 78 | 6.4 to 4.7 | 6 | Braves ML -180 to -165 |
-| SD at WSH | C 63 | 5.0 to 3.7 | 5 | Pass |
-| MIN at PIT | C 66 | 4.3 to 3.6 | 5 | Pass |
-| TOR at BAL | C 66 | 5.8 to 2.2 | 5 | Pass |
-| BOS at CLE | B 77 | 4.7 to 2.2 | 5 | Pass |
-| LAA at TB | C 63 | 2.5 to 3.4 | 5 | Pass |
-| MIA at NYM | C 66 | 3.9 to 3.4 | 6 | Pass |
-| CHC at STL | C 63 | 4.2 to 4.5 | 5 | Pass |
-| DET at CWS | C 66 | 5.0 to 2.8 | 5 | Pass |
-| KC at TEX | C 65 | 4.7 to 3.8 | 5 | Pass |
-| MIL at HOU | C 59 | 3.3 to 3.7 | 5 | Pass |
-| SF at COL | B 75 | 7.4 to 6.4 | 5 | Pass |
-| NYY at ATH | C 61 | 4.7 to 4.8 | 5 | Pass |
-| AZ at SEA | C 67 | 3.8 to 4.5 | 5 | Pass |
-| PHI at LAD | B 72 | 3.6 to 2.7 | 6 | Phillies ML -180 to -165; NRFI |
-
-Primary chips published: 3 total across 2 games (ATL Braves ML, PHI Phillies ML, PHI NRFI). Every other card is a conservative Pass or lean, consistent with Lock Guard suppression and the projected lineup cap.
+Seven primary chips published, all single chips. No A tier cards (Lock Guard active).
 
 ## Overlays deployed
-
-odds_overlay.json: 15 games, moneyline, total, and runline built from verdict chips and projected scores. Live and verified at slate_date 2026-06-02.
-
-statcast_overlay.json: 15 games, both starters each, ERA based xFIP and FIP estimates with playerId null. Live and verified at slate_date 2026-06-02.
-
-picks_log.json: 3 new primary chip records appended idempotently, sorted date then confidence descending. Total log now 406 entries.
+odds_overlay.json: 9 games (moneyline, total, runline).
+statcast_overlay.json: 9 games, ERA based xFIP and FIP estimates.
+picks_log.json: 7 new pending records appended, total 491, sorted date then confidence descending.
 
 ## Learnings adjustments applied
-
-Read from learnings.json with a non empty adjustments_for_today array. Active rules carried through the run:
-
-Lock Guard active, A tier publication suppressed until the rolling 14 day Lock win rate recovers to 0.85. No A tier card was issued.
-
-11:30 AM projected lineup cap, no card above B plus (84). Honored, top grade on the slate is B 78.
-
-Cap A tier exposure at 2 picks per game and never stack F5 Under plus ML plus Total all A tier. Not triggered since no A tier was issued.
-
-K over chips require the trailing strikeout rate to clear the posted line with cushion and require a six inning floor given prior slate losses on starters pulled early. No K over chip cleared the bar this slate, so all strikeout angles stayed in the picks list at C tier only.
-
-Moneyline chips were gated to established starters only. Webb at Coors (5.06 ERA) and Samaniego (a 17 inning reliever profile with zero starts) were both denied ML chips despite favorable ERA differentials, which kept two questionable favorites off the primary board.
-
-Down weight VARIANCE exposed setups, applied to coin flip games where the absolute pitcher edge was below 1.0.
-
-## Errors and fallbacks
-
-Workspace folder bash access hit the known Resource deadlock on index.html, so the splice was performed in a fresh clone at /tmp/cf-0602 built from origin main.
-
-No .env file was present in the working folder. The GitHub token was read from the existing workspace git remote and reused for push auth.
-
-Six overlay files named in the runbook were absent from the working folder (bullpen, rolling form, catcher framing, pitch matchup, park factors, park wind rules). Park factors and wind were sourced from an embedded park table and live Open Meteo data. Bullpen and catcher framing edges were noted as unavailable in card text rather than invented.
-
-Jared Jones (PIT) season stats were empty in the API and filled with league average estimates.
+12 adjustments active in learnings.json, Lock Guard ACTIVE after a rough prior day (14 and 15, minus 2.46 units). Applied across cards: no A tier publication, ace edges (Wheeler, Sale) capped at B or C, sub 15 inning starters (Giolito, Crow, Jones) downgraded and stake capped, TBD starter capped at C, slate exposure cap held every game to a single chip, K over plays restricted to lines the season rate clears.
 
 ## Deploy
+Commit: d650daa0a3a7df8b821a1bb86a59a5142d19c410 (analysis), plus this report commit
+Message: Auto refresh 1130am 2026-06-04
+Push: success to main
+Cloudflare Pages auto-deploy verified live, slateDate 2026-06-04, generatedAt 2026-06-04T15:46:41Z, 9 games on the live page.
 
-GitHub commit: 915193fea3356e1a040be96ffdf75296577f317c
-Branch: main
-Push status: success (91b7ad9..915193f)
-Remote main verified at 915193f.
-Cloudflare Pages auto deploy confirmed live at https://mlb-betting-dashboard-v2.pages.dev with both overlays showing slate_date 2026-06-02 and asOf 2026-06-02T14:36:55Z.
+## Errors and fallbacks
+1. Stale slate: hydrated schedule query intermittently returned the 2026-05-30 slate from CDN cache. Mitigated with a date guarded verify and retry loop. Only a verified 2026-06-04 response was used.
+2. curl URL globbing: the people endpoint hydrate string contains brackets which curl treated as glob ranges, producing an empty file. Fixed with curl -g.
+3. Disk and mount: the /sessions filesystem was full at 0 bytes free, which surfaced as a Resource deadlock on workspace writes. All temp work ran under /tmp and the repo was cloned fresh from origin and spliced there per runbook. The local workspace copies and report could not be written to the mount, so the report is committed to the repo deploy folder instead.
+4. Missing overlays: bullpen_availability, rolling_form, catcher_framing, pitch_matchup, park_factors, park_wind_rules, and umpire_factors overlay files were not present on disk. Cards used live API pitcher data, fetched weather, and reasoned park and wind context.
