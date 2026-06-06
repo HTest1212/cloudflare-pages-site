@@ -1,8 +1,8 @@
 {
- "asof": "2026-06-06T10:06:14Z",
+ "asof": "2026-06-06T10:15:09Z",
  "slate_date": "2026-06-06",
  "generated_by": "mlb-statcast-refresh-6am",
- "source_notes": "Probable pitchers unavailable at 0600 ET: schedule endpoint returns no hydrated probables, get_mlb_game_lineup returns empty player arrays, and get_mlb_boxscore preview contains no probablePitcher field. Pitchers left TBD rather than carrying yesterday's game-1 starters forward (today is game 2 of each series; a starter cannot pitch on zero days rest, which would fail SP validation). Venue and first_pitch are authoritative from get_mlb_schedule. The 11:30 build should repopulate pitchers once probables/lineups post.",
+ "source_notes": "Probables from MLB Stats API live feed bound per authoritative gamePk (guards against stale-slate dupes). Season ERA/K9/BB9 and sabermetrics FIP/xFIP from statsapi people stats (2026). statcast_7d and statcast_15d are real rolling windows: avg_velo is mean release_speed across all pitch types (runs below fastball only), k counts strikeout events, over 2026-05-30..06-05 (7d) and 2026-05-22..06-05 (15d). Two home starters (TOR gamePk 822808, COL gamePk 824351) were not yet announced and are TBD.",
  "games": {
   "824269": {
    "venue": "Comerica Park",
@@ -11,41 +11,49 @@
    "home": "DET",
    "pitchers": {
     "away": {
-     "name": "TBD",
-     "playerId": null,
-     "status": "probable_unavailable_at_0600",
+     "name": "Bryce Miller",
+     "playerId": 682243,
      "season": {
-      "era": null,
-      "k9": null,
-      "bb9": null
+      "era": 1.71,
+      "k9": 8.57,
+      "bb9": 1.29
      },
      "sabermetrics": {
-      "xfip": null,
-      "fip": null
+      "fip": 2.87,
+      "xfip": 3.07
      },
      "statcast_7d": {
-      "avg_velo": null,
-      "k_7d": null,
-      "pitches_7d": null
+      "avg_velo": 91.9,
+      "k_7d": 6,
+      "pitches_7d": 71
+     },
+     "statcast_15d": {
+      "avg_velo": 90.7,
+      "k_15d": 10,
+      "pitches_15d": 154
      }
     },
     "home": {
-     "name": "TBD",
-     "playerId": null,
-     "status": "probable_unavailable_at_0600",
+     "name": "Keider Montero",
+     "playerId": 672456,
      "season": {
-      "era": null,
-      "k9": null,
-      "bb9": null
+      "era": 3.69,
+      "k9": 6.34,
+      "bb9": 2.21
      },
      "sabermetrics": {
-      "xfip": null,
-      "fip": null
+      "fip": 3.97,
+      "xfip": 4.71
      },
      "statcast_7d": {
-      "avg_velo": null,
-      "k_7d": null,
-      "pitches_7d": null
+      "avg_velo": 90.1,
+      "k_7d": 4,
+      "pitches_7d": 65
+     },
+     "statcast_15d": {
+      "avg_velo": 90.3,
+      "k_15d": 11,
+      "pitches_15d": 154
      }
     }
    }
@@ -57,41 +65,49 @@
    "home": "MIN",
    "pitchers": {
     "away": {
-     "name": "TBD",
-     "playerId": null,
-     "status": "probable_unavailable_at_0600",
+     "name": "Luinder Avila",
+     "playerId": 679883,
      "season": {
-      "era": null,
-      "k9": null,
-      "bb9": null
+      "era": 4.44,
+      "k9": 8.62,
+      "bb9": 5.52
      },
      "sabermetrics": {
-      "xfip": null,
-      "fip": null
+      "fip": 4.01,
+      "xfip": 4.6
      },
      "statcast_7d": {
-      "avg_velo": null,
-      "k_7d": null,
-      "pitches_7d": null
+      "avg_velo": 91.7,
+      "k_7d": 5,
+      "pitches_7d": 86
+     },
+     "statcast_15d": {
+      "avg_velo": 91.5,
+      "k_15d": 6,
+      "pitches_15d": 153
      }
     },
     "home": {
-     "name": "TBD",
-     "playerId": null,
-     "status": "probable_unavailable_at_0600",
+     "name": "Joe Ryan",
+     "playerId": 657746,
      "season": {
-      "era": null,
-      "k9": null,
-      "bb9": null
+      "era": 3.2,
+      "k9": 10.14,
+      "bb9": 1.8
      },
      "sabermetrics": {
-      "xfip": null,
-      "fip": null
+      "fip": 2.78,
+      "xfip": 3.41
      },
      "statcast_7d": {
-      "avg_velo": null,
-      "k_7d": null,
-      "pitches_7d": null
+      "avg_velo": 89.7,
+      "k_7d": 9,
+      "pitches_7d": 98
+     },
+     "statcast_15d": {
+      "avg_velo": 88.6,
+      "k_15d": 18,
+      "pitches_15d": 196
      }
     }
    }
@@ -103,41 +119,49 @@
    "home": "STL",
    "pitchers": {
     "away": {
-     "name": "TBD",
-     "playerId": null,
-     "status": "probable_unavailable_at_0600",
+     "name": "Nick Lodolo",
+     "playerId": 666157,
      "season": {
-      "era": null,
-      "k9": null,
-      "bb9": null
+      "era": 5.2,
+      "k9": 7.28,
+      "bb9": 4.3
      },
      "sabermetrics": {
-      "xfip": null,
-      "fip": null
+      "fip": 6.75,
+      "xfip": 5.12
      },
      "statcast_7d": {
-      "avg_velo": null,
-      "k_7d": null,
-      "pitches_7d": null
+      "avg_velo": 90.2,
+      "k_7d": 4,
+      "pitches_7d": 100
+     },
+     "statcast_15d": {
+      "avg_velo": 90.0,
+      "k_15d": 11,
+      "pitches_15d": 198
      }
     },
     "home": {
-     "name": "TBD",
-     "playerId": null,
-     "status": "probable_unavailable_at_0600",
+     "name": "Matthew Liberatore",
+     "playerId": 669461,
      "season": {
-      "era": null,
-      "k9": null,
-      "bb9": null
+      "era": 4.35,
+      "k9": 8.27,
+      "bb9": 3.34
      },
      "sabermetrics": {
-      "xfip": null,
-      "fip": null
+      "fip": 4.48,
+      "xfip": 3.98
      },
      "statcast_7d": {
-      "avg_velo": null,
-      "k_7d": null,
-      "pitches_7d": null
+      "avg_velo": 89.0,
+      "k_7d": 4,
+      "pitches_7d": 85
+     },
+     "statcast_15d": {
+      "avg_velo": 89.2,
+      "k_15d": 14,
+      "pitches_15d": 186
      }
     }
    }
@@ -149,41 +173,49 @@
    "home": "CHC",
    "pitchers": {
     "away": {
-     "name": "TBD",
-     "playerId": null,
-     "status": "probable_unavailable_at_0600",
+     "name": "Landen Roupp",
+     "playerId": 694738,
      "season": {
-      "era": null,
-      "k9": null,
-      "bb9": null
+      "era": 4.22,
+      "k9": 10.12,
+      "bb9": 3.8
      },
      "sabermetrics": {
-      "xfip": null,
-      "fip": null
+      "fip": 2.82,
+      "xfip": 3.28
      },
      "statcast_7d": {
-      "avg_velo": null,
-      "k_7d": null,
-      "pitches_7d": null
+      "avg_velo": 87.4,
+      "k_7d": 4,
+      "pitches_7d": 96
+     },
+     "statcast_15d": {
+      "avg_velo": 87.4,
+      "k_15d": 11,
+      "pitches_15d": 189
      }
     },
     "home": {
-     "name": "TBD",
-     "playerId": null,
-     "status": "probable_unavailable_at_0600",
+     "name": "Ben Brown",
+     "playerId": 676962,
      "season": {
-      "era": null,
-      "k9": null,
-      "bb9": null
+      "era": 1.92,
+      "k9": 9.32,
+      "bb9": 2.64
      },
      "sabermetrics": {
-      "xfip": null,
-      "fip": null
+      "fip": 2.23,
+      "xfip": 3.03
      },
      "statcast_7d": {
-      "avg_velo": null,
-      "k_7d": null,
-      "pitches_7d": null
+      "avg_velo": 92.9,
+      "k_7d": 6,
+      "pitches_7d": 82
+     },
+     "statcast_15d": {
+      "avg_velo": 92.6,
+      "k_15d": 13,
+      "pitches_15d": 165
      }
     }
    }
@@ -195,28 +227,32 @@
    "home": "TOR",
    "pitchers": {
     "away": {
-     "name": "TBD",
-     "playerId": null,
-     "status": "probable_unavailable_at_0600",
+     "name": "Kyle Bradish",
+     "playerId": 680694,
      "season": {
-      "era": null,
-      "k9": null,
-      "bb9": null
+      "era": 3.44,
+      "k9": 8.99,
+      "bb9": 4.56
      },
      "sabermetrics": {
-      "xfip": null,
-      "fip": null
+      "fip": 4.07,
+      "xfip": 4.1
      },
      "statcast_7d": {
-      "avg_velo": null,
-      "k_7d": null,
-      "pitches_7d": null
+      "avg_velo": 89.6,
+      "k_7d": 4,
+      "pitches_7d": 94
+     },
+     "statcast_15d": {
+      "avg_velo": 89.9,
+      "k_15d": 7,
+      "pitches_15d": 186
      }
     },
     "home": {
      "name": "TBD",
      "playerId": null,
-     "status": "probable_unavailable_at_0600",
+     "status": "not_yet_announced",
      "season": {
       "era": null,
       "k9": null,
@@ -230,6 +266,11 @@
       "avg_velo": null,
       "k_7d": null,
       "pitches_7d": null
+     },
+     "statcast_15d": {
+      "avg_velo": null,
+      "k_15d": null,
+      "pitches_15d": null
      }
     }
    }
@@ -241,41 +282,49 @@
    "home": "PHI",
    "pitchers": {
     "away": {
-     "name": "TBD",
-     "playerId": null,
-     "status": "probable_unavailable_at_0600",
+     "name": "Brandon Eisert",
+     "playerId": 685126,
      "season": {
-      "era": null,
-      "k9": null,
-      "bb9": null
+      "era": 3.55,
+      "k9": 9.59,
+      "bb9": 3.69
      },
      "sabermetrics": {
-      "xfip": null,
-      "fip": null
+      "fip": 3.62,
+      "xfip": 3.97
      },
      "statcast_7d": {
-      "avg_velo": null,
-      "k_7d": null,
-      "pitches_7d": null
+      "avg_velo": 86.5,
+      "k_7d": 4,
+      "pitches_7d": 33
+     },
+     "statcast_15d": {
+      "avg_velo": 87.1,
+      "k_15d": 10,
+      "pitches_15d": 122
      }
     },
     "home": {
-     "name": "TBD",
-     "playerId": null,
-     "status": "probable_unavailable_at_0600",
+     "name": "Andrew Painter",
+     "playerId": 691725,
      "season": {
-      "era": null,
-      "k9": null,
-      "bb9": null
+      "era": 5.74,
+      "k9": 7.29,
+      "bb9": 2.88
      },
      "sabermetrics": {
-      "xfip": null,
-      "fip": null
+      "fip": 4.75,
+      "xfip": 4.54
      },
      "statcast_7d": {
-      "avg_velo": null,
-      "k_7d": null,
-      "pitches_7d": null
+      "avg_velo": 90.1,
+      "k_7d": 3,
+      "pitches_7d": 80
+     },
+     "statcast_15d": {
+      "avg_velo": 89.9,
+      "k_15d": 6,
+      "pitches_15d": 162
      }
     }
    }
@@ -287,41 +336,49 @@
    "home": "ARI",
    "pitchers": {
     "away": {
-     "name": "TBD",
-     "playerId": null,
-     "status": "probable_unavailable_at_0600",
+     "name": "Zack Littell",
+     "playerId": 641793,
      "season": {
-      "era": null,
-      "k9": null,
-      "bb9": null
+      "era": 5.01,
+      "k9": 5.33,
+      "bb9": 2.89
      },
      "sabermetrics": {
-      "xfip": null,
-      "fip": null
+      "fip": 6.23,
+      "xfip": 5.34
      },
      "statcast_7d": {
-      "avg_velo": null,
-      "k_7d": null,
-      "pitches_7d": null
+      "avg_velo": 87.4,
+      "k_7d": 5,
+      "pitches_7d": 84
+     },
+     "statcast_15d": {
+      "avg_velo": 88.4,
+      "k_15d": 12,
+      "pitches_15d": 190
      }
     },
     "home": {
-     "name": "TBD",
-     "playerId": null,
-     "status": "probable_unavailable_at_0600",
+     "name": "Eduardo Rodriguez",
+     "playerId": 593958,
      "season": {
-      "era": null,
-      "k9": null,
-      "bb9": null
+      "era": 2.24,
+      "k9": 6.49,
+      "bb9": 3.25
      },
      "sabermetrics": {
-      "xfip": null,
-      "fip": null
+      "fip": 3.64,
+      "xfip": 4.27
      },
      "statcast_7d": {
-      "avg_velo": null,
-      "k_7d": null,
-      "pitches_7d": null
+      "avg_velo": 90.5,
+      "k_7d": 3,
+      "pitches_7d": 96
+     },
+     "statcast_15d": {
+      "avg_velo": 88.7,
+      "k_15d": 9,
+      "pitches_15d": 190
      }
     }
    }
@@ -333,41 +390,49 @@
    "home": "HOU",
    "pitchers": {
     "away": {
-     "name": "TBD",
-     "playerId": null,
-     "status": "probable_unavailable_at_0600",
+     "name": "Kade Morris",
+     "playerId": 695034,
      "season": {
       "era": null,
       "k9": null,
       "bb9": null
      },
      "sabermetrics": {
-      "xfip": null,
-      "fip": null
+      "fip": null,
+      "xfip": null
      },
      "statcast_7d": {
       "avg_velo": null,
       "k_7d": null,
       "pitches_7d": null
+     },
+     "statcast_15d": {
+      "avg_velo": null,
+      "k_15d": null,
+      "pitches_15d": null
      }
     },
     "home": {
-     "name": "TBD",
-     "playerId": null,
-     "status": "probable_unavailable_at_0600",
+     "name": "Tatsuya Imai",
+     "playerId": 837227,
      "season": {
-      "era": null,
-      "k9": null,
-      "bb9": null
+      "era": 5.52,
+      "k9": 8.66,
+      "bb9": 6.19
      },
      "sabermetrics": {
-      "xfip": null,
-      "fip": null
+      "fip": 5.76,
+      "xfip": 4.67
      },
      "statcast_7d": {
-      "avg_velo": null,
-      "k_7d": null,
-      "pitches_7d": null
+      "avg_velo": 91.0,
+      "k_7d": 5,
+      "pitches_7d": 110
+     },
+     "statcast_15d": {
+      "avg_velo": 90.7,
+      "k_15d": 7,
+      "pitches_15d": 207
      }
     }
    }
@@ -379,41 +444,49 @@
    "home": "ATL",
    "pitchers": {
     "away": {
-     "name": "TBD",
-     "playerId": null,
-     "status": "probable_unavailable_at_0600",
+     "name": "Braxton Ashcraft",
+     "playerId": 677952,
      "season": {
-      "era": null,
-      "k9": null,
-      "bb9": null
+      "era": 2.77,
+      "k9": 9.82,
+      "bb9": 2.06
      },
      "sabermetrics": {
-      "xfip": null,
-      "fip": null
+      "fip": 3.04,
+      "xfip": 3.14
      },
      "statcast_7d": {
-      "avg_velo": null,
-      "k_7d": null,
-      "pitches_7d": null
+      "avg_velo": 92.8,
+      "k_7d": 11,
+      "pitches_7d": 80
+     },
+     "statcast_15d": {
+      "avg_velo": 93.0,
+      "k_15d": 16,
+      "pitches_15d": 175
      }
     },
     "home": {
-     "name": "TBD",
-     "playerId": null,
-     "status": "probable_unavailable_at_0600",
+     "name": "Spencer Strider",
+     "playerId": 675911,
      "season": {
-      "era": null,
-      "k9": null,
-      "bb9": null
+      "era": 3.77,
+      "k9": 11.61,
+      "bb9": 4.94
      },
      "sabermetrics": {
-      "xfip": null,
-      "fip": null
+      "fip": 4.68,
+      "xfip": 3.83
      },
      "statcast_7d": {
-      "avg_velo": null,
-      "k_7d": null,
-      "pitches_7d": null
+      "avg_velo": 90.1,
+      "k_7d": 8,
+      "pitches_7d": 90
+     },
+     "statcast_15d": {
+      "avg_velo": 88.9,
+      "k_15d": 13,
+      "pitches_15d": 177
      }
     }
    }
@@ -425,41 +498,49 @@
    "home": "MIA",
    "pitchers": {
     "away": {
-     "name": "TBD",
-     "playerId": null,
-     "status": "probable_unavailable_at_0600",
+     "name": "Shane McClanahan",
+     "playerId": 663556,
      "season": {
-      "era": null,
-      "k9": null,
-      "bb9": null
+      "era": 2.45,
+      "k9": 8.67,
+      "bb9": 3.11
      },
      "sabermetrics": {
-      "xfip": null,
-      "fip": null
+      "fip": 2.75,
+      "xfip": 3.76
      },
      "statcast_7d": {
-      "avg_velo": null,
-      "k_7d": null,
-      "pitches_7d": null
+      "avg_velo": 89.3,
+      "k_7d": 3,
+      "pitches_7d": 70
+     },
+     "statcast_15d": {
+      "avg_velo": 89.8,
+      "k_15d": 6,
+      "pitches_15d": 154
      }
     },
     "home": {
-     "name": "TBD",
-     "playerId": null,
-     "status": "probable_unavailable_at_0600",
+     "name": "Lake Bachar",
+     "playerId": 669199,
      "season": {
-      "era": null,
-      "k9": null,
-      "bb9": null
+      "era": 3.45,
+      "k9": 10.13,
+      "bb9": 3.18
      },
      "sabermetrics": {
-      "xfip": null,
-      "fip": null
+      "fip": 4.19,
+      "xfip": 3.89
      },
      "statcast_7d": {
-      "avg_velo": null,
-      "k_7d": null,
-      "pitches_7d": null
+      "avg_velo": 89.2,
+      "k_7d": 5,
+      "pitches_7d": 86
+     },
+     "statcast_15d": {
+      "avg_velo": 89.5,
+      "k_15d": 8,
+      "pitches_15d": 106
      }
     }
    }
@@ -471,41 +552,49 @@
    "home": "TEX",
    "pitchers": {
     "away": {
-     "name": "TBD",
-     "playerId": null,
-     "status": "probable_unavailable_at_0600",
+     "name": "Tanner Bibee",
+     "playerId": 676440,
      "season": {
-      "era": null,
-      "k9": null,
-      "bb9": null
+      "era": 4.57,
+      "k9": 7.83,
+      "bb9": 2.87
      },
      "sabermetrics": {
-      "xfip": null,
-      "fip": null
+      "fip": 4.81,
+      "xfip": 4.1
      },
      "statcast_7d": {
-      "avg_velo": null,
-      "k_7d": null,
-      "pitches_7d": null
+      "avg_velo": 88.5,
+      "k_7d": 5,
+      "pitches_7d": 90
+     },
+     "statcast_15d": {
+      "avg_velo": 88.5,
+      "k_15d": 8,
+      "pitches_15d": 151
      }
     },
     "home": {
-     "name": "TBD",
-     "playerId": null,
-     "status": "probable_unavailable_at_0600",
+     "name": "Jack Leiter",
+     "playerId": 683004,
      "season": {
-      "era": null,
-      "k9": null,
-      "bb9": null
+      "era": 4.34,
+      "k9": 10.08,
+      "bb9": 3.81
      },
      "sabermetrics": {
-      "xfip": null,
-      "fip": null
+      "fip": 4.08,
+      "xfip": 3.78
      },
      "statcast_7d": {
-      "avg_velo": null,
-      "k_7d": null,
-      "pitches_7d": null
+      "avg_velo": 93.0,
+      "k_7d": 10,
+      "pitches_7d": 101
+     },
+     "statcast_15d": {
+      "avg_velo": 92.3,
+      "k_15d": 14,
+      "pitches_15d": 196
      }
     }
    }
@@ -517,41 +606,49 @@
    "home": "NYY",
    "pitchers": {
     "away": {
-     "name": "TBD",
-     "playerId": null,
-     "status": "probable_unavailable_at_0600",
+     "name": "Ranger Suarez",
+     "playerId": 624133,
      "season": {
-      "era": null,
-      "k9": null,
-      "bb9": null
+      "era": 3.38,
+      "k9": 8.81,
+      "bb9": 2.94
      },
      "sabermetrics": {
-      "xfip": null,
-      "fip": null
+      "fip": 3.13,
+      "xfip": 3.51
      },
      "statcast_7d": {
-      "avg_velo": null,
-      "k_7d": null,
-      "pitches_7d": null
+      "avg_velo": 85.3,
+      "k_7d": 10,
+      "pitches_7d": 93
+     },
+     "statcast_15d": {
+      "avg_velo": 86.2,
+      "k_15d": 14,
+      "pitches_15d": 184
      }
     },
     "home": {
-     "name": "TBD",
-     "playerId": null,
-     "status": "probable_unavailable_at_0600",
+     "name": "Will Warren",
+     "playerId": 701542,
      "season": {
-      "era": null,
-      "k9": null,
-      "bb9": null
+      "era": 3.22,
+      "k9": 9.83,
+      "bb9": 2.67
      },
      "sabermetrics": {
-      "xfip": null,
-      "fip": null
+      "fip": 3.27,
+      "xfip": 3.53
      },
      "statcast_7d": {
-      "avg_velo": null,
-      "k_7d": null,
-      "pitches_7d": null
+      "avg_velo": 90.7,
+      "k_7d": 5,
+      "pitches_7d": 83
+     },
+     "statcast_15d": {
+      "avg_velo": 90.6,
+      "k_15d": 8,
+      "pitches_15d": 168
      }
     }
    }
@@ -563,28 +660,32 @@
    "home": "COL",
    "pitchers": {
     "away": {
-     "name": "TBD",
-     "playerId": null,
-     "status": "probable_unavailable_at_0600",
+     "name": "Jacob Misiorowski",
+     "playerId": 694819,
      "season": {
-      "era": null,
-      "k9": null,
-      "bb9": null
+      "era": 1.65,
+      "k9": 13.69,
+      "bb9": 2.41
      },
      "sabermetrics": {
-      "xfip": null,
-      "fip": null
+      "fip": 1.85,
+      "xfip": 2.04
      },
      "statcast_7d": {
-      "avg_velo": null,
-      "k_7d": null,
-      "pitches_7d": null
+      "avg_velo": 97.8,
+      "k_7d": 8,
+      "pitches_7d": 88
+     },
+     "statcast_15d": {
+      "avg_velo": 98.4,
+      "k_15d": 20,
+      "pitches_15d": 184
      }
     },
     "home": {
      "name": "TBD",
      "playerId": null,
-     "status": "probable_unavailable_at_0600",
+     "status": "not_yet_announced",
      "season": {
       "era": null,
       "k9": null,
@@ -598,6 +699,11 @@
       "avg_velo": null,
       "k_7d": null,
       "pitches_7d": null
+     },
+     "statcast_15d": {
+      "avg_velo": null,
+      "k_15d": null,
+      "pitches_15d": null
      }
     }
    }
@@ -609,41 +715,49 @@
    "home": "LAD",
    "pitchers": {
     "away": {
-     "name": "TBD",
-     "playerId": null,
-     "status": "probable_unavailable_at_0600",
+     "name": "Jack Kochanowicz",
+     "playerId": 686799,
      "season": {
-      "era": null,
-      "k9": null,
-      "bb9": null
+      "era": 5.23,
+      "k9": 6.55,
+      "bb9": 4.98
      },
      "sabermetrics": {
-      "xfip": null,
-      "fip": null
+      "fip": 4.77,
+      "xfip": 4.85
      },
      "statcast_7d": {
-      "avg_velo": null,
-      "k_7d": null,
-      "pitches_7d": null
+      "avg_velo": 94.0,
+      "k_7d": 1,
+      "pitches_7d": 68
+     },
+     "statcast_15d": {
+      "avg_velo": 93.2,
+      "k_15d": 5,
+      "pitches_15d": 134
      }
     },
     "home": {
-     "name": "TBD",
-     "playerId": null,
-     "status": "probable_unavailable_at_0600",
+     "name": "Yoshinobu Yamamoto",
+     "playerId": 808967,
      "season": {
-      "era": null,
-      "k9": null,
-      "bb9": null
+      "era": 2.86,
+      "k9": 8.99,
+      "bb9": 1.95
      },
      "sabermetrics": {
-      "xfip": null,
-      "fip": null
+      "fip": 3.58,
+      "xfip": 3.21
      },
      "statcast_7d": {
-      "avg_velo": null,
-      "k_7d": null,
-      "pitches_7d": null
+      "avg_velo": 91.9,
+      "k_7d": 10,
+      "pitches_7d": 104
+     },
+     "statcast_15d": {
+      "avg_velo": 91.0,
+      "k_15d": 13,
+      "pitches_15d": 196
      }
     }
    }
@@ -655,41 +769,49 @@
    "home": "SD",
    "pitchers": {
     "away": {
-     "name": "TBD",
-     "playerId": null,
-     "status": "probable_unavailable_at_0600",
+     "name": "Nolan McLean",
+     "playerId": 690997,
      "season": {
-      "era": null,
-      "k9": null,
-      "bb9": null
+      "era": 4.21,
+      "k9": 10.48,
+      "bb9": 3.27
      },
      "sabermetrics": {
-      "xfip": null,
-      "fip": null
+      "fip": 3.8,
+      "xfip": 3.44
      },
      "statcast_7d": {
-      "avg_velo": null,
-      "k_7d": null,
-      "pitches_7d": null
+      "avg_velo": 90.3,
+      "k_7d": 2,
+      "pitches_7d": 94
+     },
+     "statcast_15d": {
+      "avg_velo": 90.4,
+      "k_15d": 8,
+      "pitches_15d": 172
      }
     },
     "home": {
-     "name": "TBD",
-     "playerId": null,
-     "status": "probable_unavailable_at_0600",
+     "name": "Griffin Canning",
+     "playerId": 656288,
      "season": {
-      "era": null,
-      "k9": null,
-      "bb9": null
+      "era": 7.16,
+      "k9": 8.93,
+      "bb9": 4.96
      },
      "sabermetrics": {
-      "xfip": null,
-      "fip": null
+      "fip": 5.6,
+      "xfip": 4.28
      },
      "statcast_7d": {
-      "avg_velo": null,
-      "k_7d": null,
-      "pitches_7d": null
+      "avg_velo": 90.2,
+      "k_7d": 3,
+      "pitches_7d": 77
+     },
+     "statcast_15d": {
+      "avg_velo": 90.4,
+      "k_15d": 8,
+      "pitches_15d": 174
      }
     }
    }
