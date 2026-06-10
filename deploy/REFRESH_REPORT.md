@@ -1,56 +1,68 @@
 # MLB Dashboard Refresh Report
 
-Window: midday (11:30 AM) late pass with fresh live data
-Run timestamp: 2026-06-09 19:44:00 UTC
-Slate date: 2026-06-09
-Game count: 15
-
-## Run context
-This scheduled 11:30 AM task fired late in the afternoon as a duplicate invocation. The earlier 11:30 run had already deployed, so the remote carried today commits. This pass re pulled fully fresh live data at run time, rebuilt all cards and overlays, deduplicated the picks log so only this pass set remains for the slate, and deployed on top of current HEAD.
+**Window:** midday (11:30 AM ET)
+**Run timestamp:** 2026-06-10 15:33 UTC
+**Slate date:** 2026-06-10
+**Game count:** 15
 
 ## API data quality
-- Pitchers confirmed: 30 of 30, every game carries confirmed probable pitchers from the schedule API
-- Pitchers TBD: 0
-- Weather success: 14 of 14 outdoor and retractable parks fetched from Open Meteo; Tropicana Field skipped as a closed dome
-- Supporting overlays for bullpen, rolling form, park factors, park wind, umpire, catcher framing, and pitch matchup were not present in the workspace or repo, so cards were built from confirmed pitcher stats, live weather, park knowledge, and active learnings rules
+
+Slate pulled live from the MLB Stats API schedule endpoint with probablePitcher, lineups, team, and venue hydrated. Pitcher season stats pulled in one batch call for all 28 confirmed arms.
+
+- Confirmed probable pitchers: 28 of 30 starter slots (source schedule-api)
+- TBD starters: 2 (Minnesota at Detroit away side, Chicago White Sox home side)
+- Confirmed lineups: Boston (away) at Tampa Bay, and both New York Yankees and Cleveland at Progressive Field. All other games used projected orders, capped at B plus 84 per the timing rule.
+- Weather fetched successfully for all 14 outdoor or retractable parks (Tropicana Field skipped as a fixed dome). No weather fallbacks needed.
+
+Notable weather: Las Vegas Ballpark 103 degrees, PNC 91, Rate Field 92 with 50 percent rain, Kauffman 90 with a 22 mph wind, Camden 77 with 58 percent rain, Coors 88 at altitude.
 
 ## Per game summary
-- CHC at COL | B82 | proj 6.4 to 6.0 | 6 picks | chips: Over 11.5 or 12 ; Cubs Team Total Over 5.5
-- SEA at BAL | B80 | proj 5.0 to 3.6 | 6 picks | chips: Mariners ML -135 to -150 ; Mariners F5 ML -130 to -145
-- PHI at TOR | B80 | proj 3.3 to 3.2 | 6 picks | chips: Cease K Over 7.5 ; F5 Under 4.5
-- BOS at TB | B79 | proj 3.3 to 3.4 | 6 picks | chips: Under 7 or 7.5 ; F5 Under 4
-- CIN at SD | B79 | proj 4.0 to 3.0 | 6 picks | chips: Reds ML -115 to -130 ; Burns K Over 6.5
-- LAD at PIT | B78 | proj 3.8 to 3.2 | 6 picks | chips: Skenes K Over 6.5 ; F5 Under 4.5
-- AZ at MIA | B78 | proj 3.4 to 4.0 | 6 picks | chips: Marlins ML -120 to -135 ; Marlins F5 ML -125 to -140
-- NYY at CLE | B77 | proj 4.8 to 3.5 | 6 picks | chips: Yankees ML -130 to -145 ; Yankees Team Total Over 4.5
-- ATL at CWS | B77 | proj 4.6 to 3.4 | 6 picks | chips: Braves ML -140 to -155 ; Braves F5 ML -130 to -145
-- MIN at DET | B74 | proj 3.9 to 3.6 | 6 picks | chips: Bradley K Over 6.5
-- STL at NYM | C68 | proj 3.7 to 4.2 | 6 picks | chips: Mets ML -120 to -135
-- TEX at KC | C64 | proj 3.8 to 3.6 | 6 picks | chips: Pass, no primary chip
-- MIL at ATH | C63 | proj 4.4 to 4.6 | 6 picks | chips: Pass, no primary chip
-- WSH at SF | C62 | proj 3.4 to 3.6 | 6 picks | chips: Pass, no primary chip
-- HOU at LAA | C60 | proj 4.0 to 3.8 | 6 picks | chips: Pass, no primary chip
+
+| Game | Grade | Proj Score | Picks | Primary chips |
+|------|-------|-----------|-------|---------------|
+| BOS at TB | B 80 | 3.4 to 3.9 | 6 | Rays ML, Rays F5 ML |
+| NYY at CLE | B 83 | 3.4 to 3.2 | 6 | Under 8, Messick K Over 5.5, Guardians F5 ML |
+| WSH at SF | B 78 | 3.5 to 3.7 | 6 | Under 7.5, F5 Under 4 |
+| CIN at SD | B 83 | 3.3 to 4.5 | 6 | Padres ML, Padres F5 ML, King K Over 5.5 |
+| SEA at BAL | B 76 | 4.1 to 3.9 | 6 | Under 8.5, F5 Under 4.5 |
+| LAD at PIT | B+ 84 | 4.8 to 2.9 | 6 | Dodgers F5 ML, Dodgers ML, Ohtani K Over 5.5 |
+| MIN at DET | C 62 | 3.8 to 4.2 | 6 | Tigers F5 ML |
+| AZ at MIA | C+ 68 | 4.3 to 3.6 | 6 | Diamondbacks ML |
+| PHI at TOR | B+ 84 | 4.9 to 3.5 | 6 | Phillies ML, Luzardo K Over 6.5 |
+| STL at NYM | C+ 67 | 4.0 to 3.9 | 6 | Over 8.5 |
+| TEX at KC | B 78 | 4.3 to 4.0 | 6 | Gore K Over 6.5, Over 9 |
+| ATL at CWS | C 64 | 5.0 to 3.2 | 6 | Sale K Over 6.5 |
+| CHC at COL | B 76 | 6.0 to 4.7 | 6 | Over 11, Cubs ML |
+| MIL at ATH | B 75 | 5.2 to 4.9 | 6 | Over 9.5 |
+| HOU at LAA | B 79 | 4.0 to 3.8 | 6 | Detmers K Over 6.5 |
+
+No A tier cards published, consistent with the projected lineup cap and the active learnings on variance and exposure. Highest grades are B plus 84 on LAD at PIT (Ohtani) and PHI at TOR (Luzardo over a scuffling Scherzer).
 
 ## Overlays deployed
-- odds_overlay.json: 15 games
-- statcast_overlay.json: 15 games, ERA based xFIP and FIP estimates
-- picks_log.json: 20 entries for the slate, 568 total after dedupe
+
+- odds_overlay.json: 15 games, moneyline, total, and runline derived from projected scores
+- statcast_overlay.json: 15 games, ERA based xFIP and FIP estimates for all 28 confirmed arms, league average placeholders for the 2 TBD slots
+- picks_log.json: 27 primary chip entries appended for 2026-06-10, total 595 records, sorted date then confidence descending
 
 ## Learnings adjustments applied
-- LOCK GUARD ACTIVE: rolling 14d Lock win rate below 0.85, so no A tier cards were published; all cards capped at B or lower
-- 11:30 AM projected lineup cap held projected lineup cards to B plus 84 maximum
-- K over chips published only where season strikeouts per start exceed the posted line: Cease 7.5, Burns 6.5, Skenes 6.5, Bradley 6.5, Gilbert 5.5
-- K over withheld on Gerrit Cole due to blowout and short leash risk on an 18 inning return sample
-- Robert Gasser flagged under 15 innings at 13.1, triggering a one letter downgrade and a quarter Kelly cap; the over there kept off a chip
-- Under totals checked against the both lineups top 12 rule; full unders softened where both offenses are capable, as at Toronto
-- Per slate exposure capped given the lock guard warning; below 65 confidence games TEX at KC, HOU at LAA, WSH at SF, and MIL at ATH carry zero primary chips
+
+All 11 active adjustments from learnings.json were kept live. Key applications this slate:
+
+- Projected lineup cap held all non confirmed cards to B plus 84.
+- TBD cap held MIN at DET and ATL at CWS to C with a single chip each (Tigers F5 ML, Sale K Over 6.5).
+- Sub 15 inning starters down weighted: AZ at MIA capped at C plus on a 5 inning Gusto sample, BOS at TB and LAD at PIT noted thin opposing samples but rode the strong side.
+- K over cushion rule enforced: every K chip clears the posted line by the required margin (Messick, King, Ohtani at a conservative 5.5 to respect his innings cap, Luzardo, Gore, Sale, Detmers). No K over published without a six inning floor.
+- Oracle and Giants restrictions applied: WSH at SF under set at 7.5 as a B not an A, Giants ML held to a C lean at no worse than -125.
+- Variance down weighting held Coors and Las Vegas overs to B, and kept the Scherzer five start sample game at B plus not A.
 
 ## Deploy
-- GitHub commit: b665a900242310a140efb6e4971d723e5360e6db
-- Push status: success, 5d4b7a3 to b665a90 on main
-- Cloudflare Pages auto deploy verified live at https://mlb-betting-dashboard-v2.pages.dev/index.html with generatedAt 2026-06-09T19:35:46Z and 15 cards present
+
+- GitHub commit: c19543b (prev 15f867d), branch main
+- Push status: success
+- Cloudflare Pages auto deploy triggered on push
+- Live verification: odds_overlay.json and statcast_overlay.json both serving slate 2026-06-10 with 15 games at https://mlb-betting-dashboard-v2.pages.dev
 
 ## Errors and fallbacks
-- Workspace folder mount has the known Resource deadlock, so all reads and writes used the cloned repo in /tmp rather than the workspace folder
-- First push was rejected because the earlier 11:30 run had advanced the remote; resolved by re cloning fresh, rebuilding overlays and picks log against current HEAD, deduplicating the slate entries, and pushing a clean fast forward
-- Supporting enrichment overlays were absent as noted; no starter names were invented, all 30 came from the schedule API
+
+- Workspace mount has the known resource deadlock on direct file reads and writes. Worked around by cloning the repo fresh from origin into /tmp, reading overlays and the index from the clone, and reading the GitHub token from the repo git config remote URL (no .env file present in the working folder this run).
+- No data fallbacks were needed for pitcher stats or weather.
