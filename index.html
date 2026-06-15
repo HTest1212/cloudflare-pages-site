@@ -12751,7 +12751,7 @@ document.addEventListener('click', function(e) {
     setInterval(applyAll, 30000);
   }
 })();
-// ===== Bullpen filter + matchup + weak-pen highlight (patch 2026-06-14b) =====
+// ===== Bullpen filter + matchup + weak-pen highlight (patch 2026-06-14c) =====
 // Hook-based: renderBullpen() calls window.__bullpenAfterRender() after each paint.
 // No MutationObserver — earlier version watched document.body and infinite-looped
 // because applying the filter mutates the DOM, which re-fired the observer.
@@ -12787,13 +12787,16 @@ document.addEventListener('click', function(e) {
   function getGrid() { return document.getElementById('bullpenGrid'); }
 
   function uniqueMatchups() {
-    // Build from STATE.games — list stays correct even if some
-    // teams haven't returned bullpen data yet.
+    // Build from STATE.games — list stays correct even if some teams
+    // haven't returned bullpen data yet. STATE is declared `const` at
+    // module scope so it isn't on window; access it lexically.
     var out = [];
-    if (!window.STATE || !STATE.games) return out;
-    STATE.games.forEach(function(g, i){
-      var a = g.teams && g.teams.away && g.teams.away.team;
-      var h = g.teams && g.teams.home && g.teams.home.team;
+    var games = null;
+    try { games = STATE && STATE.games; } catch (e) { games = null; }
+    if (!games || !games.length) return out;
+    games.forEach(function(g, i){
+      var a = g && g.teams && g.teams.away && g.teams.away.team;
+      var h = g && g.teams && g.teams.home && g.teams.home.team;
       if (!a || !h) return;
       var time = '';
       if (g.gameDate) {
