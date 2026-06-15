@@ -13168,7 +13168,7 @@ document.addEventListener('click', function(e) {
   }
 })();
 
-// ===== V3 Lab — standalone model (patch 2026-06-15d) =====
+// ===== V3 Lab — standalone model (patch 2026-06-15e) =====
 // Fully additive. Reads STATE lexically and writes ONLY to V3-prefixed DOM
 // (#v3analysisGrid, #v3betsGrid, etc.). The existing Top Bets pipeline is
 // untouched. Bucket A factors compute now; bucket B factors graceful no-op
@@ -14276,8 +14276,17 @@ document.addEventListener('click', function(e) {
     var tb = document.getElementById('v3betsToolbar');
     if (tb) {
       var withOdds = picks.filter(function(p){return p.marketAmerican != null;}).length;
-      tb.innerHTML = picks.length + ' V3 picks (cash ≥ 65%) · ' + withOdds + ' have odds · sorted by Score · cash/tier auto-upgrades as lineups post (90+ LOCK · 78–89 STRONG · 65–77 LEAN) · last compute ' +
-        (V3.lastCompute ? new Date(V3.lastCompute).toLocaleTimeString() : '—');
+      var betsLen = 0, gamesLen = 0;
+      try { betsLen  = (STATE && STATE.betsTable && STATE.betsTable.length) || 0; } catch (e) {}
+      try { gamesLen = (STATE && STATE.games && STATE.games.length) || 0; } catch (e) {}
+      var allLen = (V3.allPicks || []).length;
+      tb.innerHTML = picks.length + ' V3 picks (cash ≥ 65%) · ' + withOdds + ' have odds · sorted by Score · ' +
+        'cash/tier auto-upgrades as lineups post (90+ LOCK · 78–89 STRONG · 65–77 LEAN) · ' +
+        'last compute ' + (V3.lastCompute ? new Date(V3.lastCompute).toLocaleTimeString() : '—') +
+        ' · <a href="#" id="v3BetsRecompute" style="color:#60a5fa;text-decoration:none;">Recompute</a>' +
+        '<div style="margin-top:4px;font-size:11px;opacity:.7;">[debug] STATE.games=' + gamesLen + ' · STATE.betsTable=' + betsLen + ' · mirrored=' + allLen + ' · floor-passing=' + picks.length + '</div>';
+      var btn = document.getElementById('v3BetsRecompute');
+      if (btn) btn.addEventListener('click', function(ev){ ev.preventDefault(); computeAndRender(); });
     }
   }
 
@@ -14302,20 +14311,40 @@ document.addEventListener('click', function(e) {
     setTimeout(maybeRecompute, 60);
   });
 
-  // Poll for STATE.games then do first compute
-  var tries = 0;
-  var t = setInterval(function(){
-    tries++;
-    var ok = false;
-    try { ok = !!(STATE && STATE.games && STATE.games.length); } catch (e) { ok = false; }
-    if (ok) { clearInterval(t); computeAndRender(); }
-    else if (tries > 60) clearInterval(t);
-  }, 1000);
-
-  loadAllOverlays().then(function(){
-    if (V3.games.length || (function(){ try { return STATE && STATE.games && STATE.games.length; } catch(e){ return false; } })()) {
+  // Keep polling while either dependency is missing OR STATE.betsTable
+  // changes size. The earlier single-shot poll race-condition'd: V3 fired
+  // once when STATE.games was ready but before STATE.betsTable was built,
+  // and never recomputed without a tab click.
+  var pollTries = 0;
+  var lastBetsLen = -1;
+  var pollT = setInterval(function(){
+    pollTries++;
+    var gamesLen = 0, betsLen = 0;
+    try { gamesLen = (STATE && STATE.games && STATE.games.length) || 0; } catch (e) {}
+    try { betsLen  = (STATE && STATE.betsTable && STATE.betsTable.length) || 0; } catch (e) {}
+    if (gamesLen > 0 && betsLen !== lastBetsLen) {
+      lastBetsLen = betsLen;
       computeAndRender();
     }
+    // Stop after 5 minutes — data should have settled by then. Tab-click
+    // recompute and the active-tab interval still keep things fresh.
+    if (pollTries > 300) clearInterval(pollT);
+  }, 1000);
+
+  // Keep V3 fresh while either V3 tab is active — recompute every 15s.
+  // Cheap and ensures lineups/odds/scratches flow through to V3 without
+  // requiring a tab click.
+  setInterval(function(){
+    var active = document.querySelector('#tab-v3analysis.active, #tab-v3bets.active');
+    if (active) {
+      try { computeAndRender(); } catch (e) {}
+    }
+  }, 15000);
+
+  loadAllOverlays().then(function(){
+    var gamesReady = false;
+    try { gamesReady = !!(STATE && STATE.games && STATE.games.length); } catch (e) {}
+    if (gamesReady) computeAndRender();
   });
 })();
 </script>
