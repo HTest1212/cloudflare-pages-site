@@ -12987,7 +12987,7 @@ document.addEventListener('click', function(e) {
   }
 })();
 
-// ===== V3 Lab — standalone model (patch 2026-06-15c) =====
+// ===== V3 Lab — standalone model (patch 2026-06-15d) =====
 // Fully additive. Reads STATE lexically and writes ONLY to V3-prefixed DOM
 // (#v3analysisGrid, #v3betsGrid, etc.). The existing Top Bets pipeline is
 // untouched. Bucket A factors compute now; bucket B factors graceful no-op
@@ -13722,20 +13722,162 @@ document.addEventListener('click', function(e) {
     return picks;
   }
 
+  // -------------------- MIRROR CURRENT MODEL PICKS --------------------
+  // V3 Top Bets is populated by walking STATE.betsTable (the current model
+  // output) and creating a V3 row for each. V3 keeps the same cat/type/pick
+  // identity, uses the current cashProb as the baseline, then applies V3
+  // factor deltas for the picked side. Result: V3 has same volume as the
+  // current Top Bets, with distinct cash%/tier/notes once V3's factors
+  // (especially bucket B) start moving.
+  function mirrorCurrentPicks(games) {
+    var rows = safeState('betsTable');
+    if (!Array.isArray(rows) || !rows.length) return [];
+    var gameByLabel = {};
+    games.forEach(function(g){
+      if (!g || !g.teams) return;
+      gameByLabel[gameLabel(g)] = g;
+    });
+    var out = [];
+    rows.forEach(function(r){
+      if (!r || !r.pick) return;
+      var g = gameByLabel[r.game] || null;
+      var awayName = g && g.teams ? (g.teams.away.team.name || '') : '';
+      var homeName = g && g.teams ? (g.teams.home.team.name || '') : '';
+      var pickStr = String(r.pick || '');
+      // Pick side / direction
+      var sideKey = null;
+      if (awayName && pickStr.indexOf(awayName) >= 0) sideKey = 'away';
+      else if (homeName && pickStr.indexOf(homeName) >= 0) sideKey = 'home';
+      var typeStr = String(r.type || '').toLowerCase();
+      var isOver = /\bover\b/i.test(r.type || '') || /\bO[0-9]/i.test(pickStr);
+      var isUnder = /\bunder\b/i.test(r.type || '') || /\bU[0-9]/i.test(pickStr);
+      // V3 factor delta — sum the picked side's factor deltas. For OVERS we
+      // use ENV deltas (weather + park + umpire + tto). For UNDERS we invert.
+      var v3Delta = 0;
+      var driverList = [];
+      if (g) {
+        if (sideKey && (typeStr.indexOf('moneyline') >= 0 || typeStr === 'ml' || typeStr.indexOf('run line') >= 0 || typeStr === 'rl')) {
+          // Side-coded factors (ML / RL share this treatment, RL gets dampened)
+          var scale = (typeStr.indexOf('run line') >= 0 || typeStr === 'rl') ? 0.6 : 1.0;
+          FACTORS.forEach(function(f){
+            try {
+              var m = f.fn(g);
+              var d = (sideKey === 'away' ? m.away : m.home) || 0;
+              if (d) {
+                v3Delta += d * scale;
+                driverList.push({ name: f.name, d: d * scale });
+              }
+            } catch (e) {}
+          });
+        } else if (isOver || isUnder) {
+          // Environment-coded delta (run environment): hot/humid/short SPs/weak D push OVER
+          var w = (safeState('weather') || {})[g.gamePk] || (safeState('weather') || {})[String(g.gamePk)];
+          var envDelta = 0;
+          if (w) {
+            if (w.tempF >= 85) { envDelta += 0.015; driverList.push({name:'hot', d:0.015}); }
+            else if (w.tempF <= 55) { envDelta -= 0.012; driverList.push({name:'cold', d:-0.012}); }
+            if (w.humidity != null && w.humidity >= 70) { envDelta += 0.004; }
+          }
+          try {
+            var umpRaw = ((V3.overlays.umpire && V3.overlays.umpire.games) || safeState('umpireFactors') || {});
+            var ue = umpRaw[g.gamePk] || umpRaw[String(g.gamePk)];
+            if (ue && ue.run_env_delta != null) {
+              envDelta += Number(ue.run_env_delta) * 0.5;
+              driverList.push({name:'ump run env', d:Number(ue.run_env_delta)*0.5});
+            }
+          } catch (e) {}
+          // Both SP short IP boosts over
+          try {
+            var ttoM = (FACTORS.filter(function(f){return f.key==='tto';})[0] || {}).fn(g);
+            if (ttoM && (ttoM.away||0) < 0 && (ttoM.home||0) < 0) {
+              envDelta += 0.012;
+              driverList.push({name:'both SP short', d:0.012});
+            }
+          } catch (e) {}
+          v3Delta = isOver ? envDelta : -envDelta;
+        }
+      }
+
+      // Read current cashProb (already 0-1 from current model)
+      var baseCash = (typeof r.cashProb === 'number') ? r.cashProb : null;
+      if (baseCash == null) return;
+      if (baseCash > 1.5) baseCash = baseCash / 100; // safety
+      var v3Cash = Math.max(0.05, Math.min(0.95, baseCash + v3Delta));
+
+      // Tier from cash floor (90+ LOCK · 78-89 STRONG · 65-77 LEAN)
+      var tier;
+      if (v3Cash >= 0.90) tier = 'LOCK';
+      else if (v3Cash >= 0.78) tier = 'STRONG';
+      else if (v3Cash >= 0.65) tier = 'LEAN';
+      else tier = 'PASS';
+
+      // Preserve lineup * / ⚠ suffixes from the current model's adjusted tier
+      // (the current model already applied them via adjustTierForLineup).
+      var curTierClean = String(r.tier || '').replace(/[A-Z]+/i, function(m){return m.toUpperCase();});
+      var curSuffix = (String(r.tier || '').match(/[*⚠↑↓]+$/) || [''])[0];
+      if (curSuffix) tier = tier + curSuffix;
+
+      // Build notes — written explanation including drivers and what V3
+      // changed vs current
+      driverList.sort(function(a,b){ return Math.abs(b.d) - Math.abs(a.d); });
+      var topDrivers = driverList.slice(0, 2).map(function(x){
+        return x.name + ' ' + signed(x.d*100, 1) + 'pp';
+      }).join(', ');
+      var deltaStr = signed(v3Delta * 100, 1);
+      var noteParts = [
+        'V3 cash ' + Math.round(v3Cash*100) + '% (current ' + Math.round(baseCash*100) + '% · V3 Δ ' + deltaStr + 'pp)'
+      ];
+      if (topDrivers) noteParts.push('drivers: ' + topDrivers);
+      else noteParts.push('no V3 factor edge vs current');
+      // Carry lineup reason from current model's note ("LU: ...")
+      var luMatch = String(r.note || '').match(/LU:\s*([^·]+)$/);
+      if (luMatch) noteParts.push('LU: ' + luMatch[1].trim());
+
+      out.push({
+        cat: r.cat || '?',
+        type: r.type || '',
+        pick: r.pick,
+        game: r.game,
+        gamePk: g && g.gamePk,
+        gameDate: g && g.gameDate,
+        market: 'MIRROR',
+        side: sideKey || (isOver ? 'over' : (isUnder ? 'under' : '?')),
+        v3Prob: v3Cash,
+        marketAmerican: null,
+        fairAmerican: null,
+        ev: null,
+        kelly: null,
+        edgePP: v3Delta * 100,
+        baseTier: tier.replace(/[*⚠↑↓]+$/, ''),
+        tier: tier,
+        cashProb: v3Cash,
+        baseScore: Math.max(0, (v3Cash - 0.50) * 100),
+        score: Math.max(0, (v3Cash - 0.50) * 100),
+        luBadge: r.lineupStatus && r.lineupStatus.badge,
+        luBadgeClass: r.lineupStatus && r.lineupStatus.badgeClass,
+        luOverall: r.lineupStatus && r.lineupStatus.overall,
+        luReason: '',
+        scratchedTopHitters: [],
+        notes: noteParts.join(' · '),
+        team: null,
+        current: { pick: r.pick, tier: r.tier, cashProb: r.cashProb, score: r.score, type: r.type },
+        oddsMissing: true,
+        isOver: !!isOver
+      });
+    });
+    return out;
+  }
+
   function computeAll() {
     var games = safeState('games');
     if (!Array.isArray(games)) { V3.games = []; V3.picks = []; return; }
     var outGames = [];
-    var outPicks = [];
     games.forEach(function(g){
       var entry = computeGame(g);
       if (!entry) return;
-      // Build the multi-market flat picks list for this game (unfiltered)
-      var picks = buildAllPicksForGame(g, entry);
-      // Copy adjusted ML pick data back onto entry.away / entry.home so the
-      // V3 Analysis card has full tier/cash/score/notes (even if the pick is
-      // below the Top Bets cash floor).
-      picks.forEach(function(p){
+      // Populate entry.away/.home with adjusted ML pick data (for V3 Analysis cards)
+      var directPicks = buildAllPicksForGame(g, entry);
+      directPicks.forEach(function(p){
         if (p.market !== 'ML') return;
         var s = entry[p.side]; if (!s) return;
         s.tier = p.tier;
@@ -13746,14 +13888,18 @@ document.addEventListener('click', function(e) {
         s.luReason = p.luReason;
       });
       outGames.push(entry);
-      outPicks = outPicks.concat(picks);
     });
-    // Cash floor on the flat picks list only — keep games visible in Analysis
-    // even when no pick meets the floor.
-    var floorPicks = outPicks.filter(function(p){ return p.cashProb >= 0.65; });
+
+    // V3 Top Bets is sourced from mirroring the current model's picks so we
+    // match its volume across markets (ML, RL, Total, F5 ML, F5 Total, F5
+    // Team Total, K props, ER, BB, etc.). Each mirror has V3 factor deltas
+    // applied for the picked side / direction.
+    var mirrored = mirrorCurrentPicks(games);
+    // Cash floor
+    var floorPicks = mirrored.filter(function(p){ return p.cashProb >= 0.65; });
     V3.games = outGames;
     V3.picks = floorPicks;
-    V3.allPicks = outPicks; // unfiltered, available if needed for debugging
+    V3.allPicks = mirrored;
     V3.lastCompute = Date.now();
   }
 
