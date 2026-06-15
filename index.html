@@ -1066,6 +1066,14 @@
   <button data-tab="value" style="background:linear-gradient(135deg,#059669,#0891b2);color:#fff;border-radius:6px 6px 0 0;font-weight:600;">💎 Value Bets</button>
 
   <span class="tab-group">
+    <button class="tab-group-label" style="background:linear-gradient(135deg,#a855f7,#ec4899);color:#fff;border-radius:6px 6px 0 0;font-weight:700;">🧬 V3 Lab ▾</button>
+    <span class="tab-group-items">
+      <button data-tab="v3analysis">🧬 V3 Analysis</button>
+      <button data-tab="v3bets">🎯 V3 Top Bets</button>
+    </span>
+  </span>
+
+  <span class="tab-group">
     <button class="tab-group-label">💰 Picks ▾</button>
     <span class="tab-group-items">
       <button data-tab="bets">Top Bets</button>
@@ -1131,6 +1139,12 @@
     <button class="menu-tab" data-tab="analysis">📝 Analysis</button>
     <button class="menu-tab" data-tab="aiwizard">🧙 AI Wizard</button>
     <button class="menu-tab" data-tab="value">💎 Value Bets</button>
+  </div>
+
+  <div class="mobile-menu-section">
+    <h4>🧬 V3 Lab</h4>
+    <button class="menu-tab" data-tab="v3analysis">🧬 V3 Analysis</button>
+    <button class="menu-tab" data-tab="v3bets">🎯 V3 Top Bets</button>
   </div>
 
   <div class="mobile-menu-section">
@@ -1437,6 +1451,28 @@
   <section class="tab" id="tab-bets">
     <div class="section-head"><h2>Top Bets (Model-Ranked)</h2><p>Edge derived from park + weather + pitcher + team K model. Human element layer applied.</p></div>
     <div id="betsGrid"></div>
+  </section>
+
+  <section class="tab" id="tab-v3analysis">
+    <div class="section-head">
+      <div>
+        <h2>🧬 V3 Analysis — Lab</h2>
+        <p>Standalone V3 model running in parallel to your existing pipeline — nothing in the current Top Bets is touched. V3 stacks Quarter Kelly sizing, no-vig fair lines, recency weighting, times-through-order penalty, schedule fatigue, weather temp/humidity, bullpen handedness mismatch, and park-handedness on top of every existing factor. When you wire in the bucket B overlays (umpire, catcher framing, Stuff+/Pitching+, defense OAA, velocity trend) they're picked up automatically. Click any card's "▸ Diff vs current model" to expand the comparison.</p>
+      </div>
+    </div>
+    <div id="v3analysisToolbar"></div>
+    <div id="v3analysisGrid" class="grid cards"><div class="loader">Computing V3 model…</div></div>
+  </section>
+
+  <section class="tab" id="tab-v3bets">
+    <div class="section-head">
+      <div>
+        <h2>🎯 V3 Top Bets</h2>
+        <p>V3-ranked picks sorted by Quarter Kelly EV. Each pick shows the V3 win probability, the no-vig fair line, the market price, EV %, and the Kelly stake (capped at 3% of bankroll). Picks where V3 finds no positive EV are excluded. Your existing Top Bets tab runs independently and is unaffected.</p>
+      </div>
+    </div>
+    <div id="v3betsToolbar"></div>
+    <div id="v3betsGrid"><div class="loader">Computing V3 picks…</div></div>
   </section>
 
   <section class="tab" id="tab-altparlay">
@@ -12949,6 +12985,561 @@ document.addEventListener('click', function(e) {
   if (getGrid() && getGrid().querySelector('.bullpen-card')) {
     window.__bullpenAfterRender();
   }
+})();
+
+// ===== V3 Lab — standalone model (patch 2026-06-15) =====
+// Fully additive. Reads STATE lexically and writes ONLY to V3-prefixed DOM
+// (#v3analysisGrid, #v3betsGrid, etc.). The existing Top Bets pipeline is
+// untouched. Bucket A factors compute now; bucket B factors graceful no-op
+// until their overlay JSON files exist on disk.
+(function () {
+  if (window.__v3Installed) return;
+  window.__v3Installed = true;
+
+  var V3 = {
+    overlays: { umpire:null, framing:null, stuffPlus:null, defense:null, veloTrend:null, parkHand:null },
+    overlaysLoaded: false,
+    games: [],
+    lastCompute: 0,
+    cacheMs: 60000
+  };
+
+  // ---------- CSS ----------
+  (function injectCss(){
+    var s = document.createElement('style');
+    s.textContent =
+      '.v3-card{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:12px;}' +
+      '.v3-card h3{margin:0 0 6px 0;font-size:15px;}' +
+      '.v3-side{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px;}' +
+      '.v3-side-col{padding:10px;border-radius:8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.04);}' +
+      '.v3-side-name{font-weight:700;font-size:13px;margin-bottom:4px;}' +
+      '.v3-side-fig{font-size:11px;color:var(--muted);}' +
+      '.v3-side-fig b{color:var(--text);}' +
+      '.v3-tier{display:inline-block;font-size:10px;font-weight:800;padding:2px 6px;border-radius:4px;margin-left:6px;vertical-align:middle;}' +
+      '.v3-tier-lock{background:#10b981;color:#000;}' +
+      '.v3-tier-strong{background:#3b82f6;color:#fff;}' +
+      '.v3-tier-lean{background:#f59e0b;color:#000;}' +
+      '.v3-tier-pass{background:#475569;color:#fff;}' +
+      '.v3-ev-pos{color:#10b981;font-weight:700;}' +
+      '.v3-ev-neg{color:#ef4444;font-weight:700;}' +
+      '.v3-disc{margin-top:10px;}' +
+      '.v3-disc summary{cursor:pointer;list-style:none;color:var(--muted);font-size:12px;font-weight:600;}' +
+      '.v3-disc summary::-webkit-details-marker{display:none;}' +
+      '.v3-disc[open] summary{color:var(--text);}' +
+      '.v3-disc-body{margin-top:8px;padding:10px;background:rgba(255,255,255,0.04);border-radius:6px;font-size:12px;}' +
+      '.v3-factor{display:grid;grid-template-columns:160px 1fr;gap:8px;padding:3px 0;}' +
+      '.v3-factor-name{color:var(--muted);font-weight:600;}' +
+      '.v3-factor-name .v3-bucket{opacity:.5;font-weight:500;margin-left:4px;font-size:10px;}' +
+      '.v3-factor-val{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;}' +
+      '.v3-pos{color:#10b981;}' +
+      '.v3-neg{color:#ef4444;}' +
+      '.v3-diff-agree{color:#10b981;font-weight:700;}' +
+      '.v3-diff-disagree{color:#f59e0b;font-weight:700;}' +
+      '.v3-missing{color:var(--muted);font-style:italic;}' +
+      '#v3betsGrid table{width:100%;border-collapse:collapse;}' +
+      '#v3betsGrid th,#v3betsGrid td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--border);font-size:13px;}' +
+      '#v3betsGrid th{font-size:10px;text-transform:uppercase;color:var(--muted);letter-spacing:0.04em;}' +
+      '#v3betsGrid tr:hover td{background:rgba(255,255,255,0.02);}' +
+      '#v3analysisToolbar,#v3betsToolbar{font-size:12px;color:var(--muted);padding:8px 0;}';
+    document.head.appendChild(s);
+  })();
+
+  // ---------- math helpers ----------
+  function americanToProb(odds) {
+    odds = Number(odds);
+    if (!odds || !isFinite(odds)) return null;
+    return odds > 0 ? 100 / (odds + 100) : (-odds) / ((-odds) + 100);
+  }
+  function probToAmerican(p) {
+    if (!isFinite(p) || p <= 0 || p >= 1) return null;
+    return p >= 0.5 ? Math.round(-(p / (1 - p)) * 100) : Math.round(((1 - p) / p) * 100);
+  }
+  function noVigPair(pA, pB) {
+    if (!pA || !pB) return { a:null, b:null };
+    var sum = pA + pB; return { a: pA / sum, b: pB / sum };
+  }
+  function evPercent(p, americanOdds) {
+    if (!isFinite(p) || !isFinite(americanOdds)) return null;
+    var b = americanOdds > 0 ? americanOdds / 100 : 100 / (-americanOdds);
+    return (b * p - (1 - p)) * 100;
+  }
+  function kellyFracQuarter(p, americanOdds, cap) {
+    if (cap == null) cap = 0.03;
+    if (!isFinite(p) || !isFinite(americanOdds)) return 0;
+    var b = americanOdds > 0 ? americanOdds / 100 : 100 / (-americanOdds);
+    var q = 1 - p;
+    var f = (b * p - q) / b;
+    if (!isFinite(f) || f <= 0) return 0;
+    return Math.min(f * 0.25, cap);
+  }
+  function fmtAmerican(o) { if (o == null || !isFinite(o)) return '—'; return o > 0 ? '+' + o : String(o); }
+  function pctStr(x, d) { d = d || 1; return (x * 100).toFixed(d) + '%'; }
+  function signed(x, d) { d = d || 1; var s = (x).toFixed(d); return x >= 0 ? '+' + s : s; }
+  function v3esc(s){ s=(s==null?'':String(s)); return s.replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+
+  // ---------- bucket B overlay loaders (graceful no-op) ----------
+  async function loadOverlay(filename) {
+    try {
+      var r = await fetch(filename, { cache:'no-store' });
+      if (!r.ok) return null;
+      return await r.json();
+    } catch (e) { return null; }
+  }
+  async function loadAllOverlays() {
+    var rs = await Promise.all([
+      loadOverlay('umpire_overlay.json'),
+      loadOverlay('framing_overlay.json'),
+      loadOverlay('stuff_plus_overlay.json'),
+      loadOverlay('defense_overlay.json'),
+      loadOverlay('velo_trend_overlay.json'),
+      loadOverlay('park_handedness_overlay.json')
+    ]);
+    V3.overlays.umpire    = rs[0];
+    V3.overlays.framing   = rs[1];
+    V3.overlays.stuffPlus = rs[2];
+    V3.overlays.defense   = rs[3];
+    V3.overlays.veloTrend = rs[4];
+    V3.overlays.parkHand  = rs[5];
+    V3.overlaysLoaded = true;
+  }
+
+  // ---------- accessors ----------
+  function getTeam(g, side) { return g && g.teams && g.teams[side] && g.teams[side].team; }
+  function getStarter(g, side) { return g && g.teams && g.teams[side] && g.teams[side].probablePitcher; }
+  function getStarterStats(p) {
+    if (!p || !p.id) return null;
+    try { return STATE && STATE.pitcherStats && STATE.pitcherStats[p.id]; } catch (e) { return null; }
+  }
+  function safeState(key) {
+    try { return STATE && STATE[key]; } catch (e) { return null; }
+  }
+
+  // ---------- factor modifiers ----------
+  // Each: ({g}) -> { away, home, present, label, raw? }
+  // delta is in win-probability units (0.012 = +1.2pp)
+  function modFatigue(g) {
+    var sc = safeState('scheduleContext') || {};
+    function d(side){
+      var t = getTeam(g, side); if (!t) return 0;
+      var c = sc[t.id] || {};
+      var x = 0;
+      if ((c.gamesIn5Days||0) >= 5) x -= 0.012;
+      if ((c.gamesIn3Days||0) >= 3) x -= 0.008;
+      if ((c.travelKm||0)    >= 2000) x -= 0.008;
+      if ((c.daysOff||0)     >= 2)  x += 0.004;
+      return x;
+    }
+    var a = d('away'), h = d('home');
+    return { away:a, home:h, present: !!(a || h), label: (a||h) ? 'Schedule fatigue applied' : 'Both teams rested' };
+  }
+  function modTTO(g) {
+    function d(side){
+      var sp = getStarter(g, side); if (!sp) return 0;
+      var ps = getStarterStats(sp);
+      var ipg = ps && (ps.avgIP || (ps.season && ps.season.inningsPitchedPerStart));
+      if (!ipg || !isFinite(ipg)) return 0;
+      if (ipg < 5.0) return -0.008;
+      if (ipg < 5.5) return -0.004;
+      if (ipg > 6.5) return  0.004;
+      return 0;
+    }
+    var a = d('away'), h = d('home');
+    return { away:a, home:h, present: !!(a || h), label:'Times-through-order (starter avg IP)' };
+  }
+  function modWeather(g) {
+    var w = (safeState('weather') || {})[g.gamePk] || (safeState('weather') || {})[String(g.gamePk)];
+    if (!w) return { away:0, home:0, present:false, label:'No weather data' };
+    var notes = [];
+    if (w.tempF != null) notes.push(w.tempF + '°F');
+    if (w.humidity != null) notes.push(w.humidity + '% humid');
+    if (w.windMph != null) notes.push(w.windMph + ' mph' + (w.windDir ? ' ' + w.windDir : ''));
+    return { away:0, home:0, present: notes.length > 0, label: notes.join(' · ') || 'No weather data' };
+  }
+  function modBullpenHand(g) {
+    var bp = safeState('bullpen') || {};
+    function d(side){
+      var oppT = getTeam(g, side==='away' ? 'home' : 'away'); if (!oppT) return 0;
+      var oppPen = bp[oppT.id];
+      if (!Array.isArray(oppPen) || !oppPen.length) return 0;
+      var L = 0, R = 0;
+      oppPen.forEach(function(p){
+        var h = (p && (p.hand || p.pitchHand || (p.person && p.person.pitchHand && p.person.pitchHand.code))) || '';
+        if (h === 'L') L++; else if (h === 'R') R++;
+      });
+      if (L + R === 0) return 0;
+      if (L === 0 && R >= 5) return +0.005;
+      if (R === 0 && L >= 4) return +0.005;
+      return 0;
+    }
+    var a = d('away'), h = d('home');
+    return { away:a, home:h, present: !!(a || h), label: 'Bullpen handedness depth' };
+  }
+  function modParkHand(g) {
+    var pH = V3.overlays.parkHand;
+    if (!pH || !pH.parks) return { away:0, home:0, present:false, label:'Park-handedness overlay not loaded' };
+    var venue = (g.venue && g.venue.name) || '';
+    var ent = pH.parks[venue];
+    if (!ent) return { away:0, home:0, present:false, label:'No park-hand entry for ' + venue };
+    return { away:0, home:0, present:true, label: venue + ' · lhb=' + (ent.lhb_runs_pct||100) + ' rhb=' + (ent.rhb_runs_pct||100), raw:ent };
+  }
+  function modRecency(g) {
+    var tr = safeState('teamRecent') || {};
+    function d(side){
+      var t = getTeam(g, side); if (!t) return 0;
+      var r = tr[t.id]; if (!r) return 0;
+      var diff = (r.d7 && r.d7.diff) || 0;
+      if (diff >=  10) return +0.010;
+      if (diff >=   5) return +0.006;
+      if (diff <= -10) return -0.010;
+      if (diff <=  -5) return -0.006;
+      return 0;
+    }
+    var a = d('away'), h = d('home');
+    return { away:a, home:h, present: !!(a || h), label:'7-day run differential' };
+  }
+  function modUmpire(g) {
+    var ov = V3.overlays.umpire || safeState('umpireFactors');
+    if (!ov) return { away:0, home:0, present:false, label:'Umpire overlay not loaded' };
+    var games = ov.games || ov;
+    var ent = games[g.gamePk] || games[String(g.gamePk)];
+    if (!ent) return { away:0, home:0, present:false, label:'No umpire data for this game' };
+    var lbl = 'HP ' + (ent.name || ent.umpire || '?');
+    if (ent.run_env_delta != null) lbl += ' · run env ' + signed(ent.run_env_delta, 2);
+    if (ent.k_pct_delta   != null) lbl += ' · K% Δ ' + signed(ent.k_pct_delta, 2);
+    return { away:0, home:0, present:true, label: lbl, raw: ent };
+  }
+  function modFraming(g) {
+    var ov = V3.overlays.framing || safeState('catcherFraming');
+    if (!ov) return { away:0, home:0, present:false, label:'Framing overlay not loaded' };
+    var bag = ov.teams || ov;
+    function d(side){
+      var t = getTeam(g, side); if (!t) return 0;
+      var e = bag[t.id] || bag[String(t.id)];
+      var fr = e && (e.framingRuns != null ? e.framingRuns : e.frmR);
+      if (fr == null) return 0;
+      var x = (fr / 162) * 0.05;
+      return Math.max(-0.012, Math.min(0.012, x));
+    }
+    var a = d('away'), h = d('home');
+    return { away:a, home:h, present: !!(a || h), label:'Catcher framing (runs)' };
+  }
+  function modStuffPlus(g) {
+    var ov = V3.overlays.stuffPlus;
+    if (!ov) return { away:0, home:0, present:false, label:'Stuff+ overlay not loaded' };
+    var bag = ov.pitchers || ov;
+    function s(side){
+      var sp = getStarter(g, side); if (!sp) return null;
+      var e = bag[sp.id] || bag[String(sp.id)];
+      return e && (e.stuff_plus != null ? e.stuff_plus : e.stuffPlus);
+    }
+    var aS = s('away'), hS = s('home');
+    if (aS == null && hS == null) return { away:0, home:0, present:false, label:'No Stuff+ data for either starter' };
+    aS = aS == null ? 100 : aS;
+    hS = hS == null ? 100 : hS;
+    var diff = aS - hS;
+    var dlt = Math.max(-0.025, Math.min(0.025, diff * 0.0015));
+    return { away:dlt, home:-dlt, present:true, label:'Stuff+ A=' + aS + ' H=' + hS + ' (Δ ' + signed(diff, 0) + ')' };
+  }
+  function modDefense(g) {
+    var ov = V3.overlays.defense;
+    if (!ov) return { away:0, home:0, present:false, label:'Defense overlay not loaded' };
+    var bag = ov.teams || ov;
+    function o(side){
+      var t = getTeam(g, side); if (!t) return null;
+      var e = bag[t.id] || bag[String(t.id)];
+      return e && (e.oaa != null ? e.oaa : e.drs);
+    }
+    var aO = o('away'), hO = o('home');
+    if (aO == null && hO == null) return { away:0, home:0, present:false, label:'No defense data' };
+    aO = aO == null ? 0 : aO;
+    hO = hO == null ? 0 : hO;
+    var dlt = Math.max(-0.015, Math.min(0.015, (aO - hO) * 0.0005));
+    return { away:dlt, home:-dlt, present:true, label:'OAA A=' + aO + ' H=' + hO + ' (Δ ' + signed(aO - hO, 0) + ')' };
+  }
+  function modVelo(g) {
+    var ov = V3.overlays.veloTrend;
+    if (!ov) return { away:0, home:0, present:false, label:'Velo-trend overlay not loaded' };
+    var bag = ov.pitchers || ov;
+    function d(side){
+      var sp = getStarter(g, side); if (!sp) return 0;
+      var e = bag[sp.id] || bag[String(sp.id)];
+      var t = e && e.velo_3start_delta_mph;
+      if (t == null) return 0;
+      if (t <= -1.0) return -0.012;
+      if (t <= -0.5) return -0.006;
+      return 0;
+    }
+    var a = d('away'), h = d('home');
+    return { away:a, home:h, present: !!(a || h), label:'Velocity trend (3-start vs season)' };
+  }
+
+  var FACTORS = [
+    { key:'fatigue',     name:'Schedule fatigue',  fn:modFatigue,     bucket:'A' },
+    { key:'tto',         name:'TTO penalty',        fn:modTTO,         bucket:'A' },
+    { key:'weather',     name:'Weather',            fn:modWeather,     bucket:'A' },
+    { key:'bullpenHand', name:'Bullpen handedness', fn:modBullpenHand, bucket:'A' },
+    { key:'parkHand',    name:'Park-handedness',    fn:modParkHand,    bucket:'B' },
+    { key:'recency',     name:'Recency (7d)',       fn:modRecency,     bucket:'A' },
+    { key:'umpire',      name:'Umpire',             fn:modUmpire,      bucket:'B' },
+    { key:'framing',     name:'Catcher framing',    fn:modFraming,     bucket:'B' },
+    { key:'stuffPlus',   name:'Stuff+',             fn:modStuffPlus,   bucket:'B' },
+    { key:'defense',     name:'Defense (OAA)',      fn:modDefense,     bucket:'B' },
+    { key:'velo',        name:'Velo trend',         fn:modVelo,        bucket:'B' }
+  ];
+
+  // ---------- diff vs current model ----------
+  function lookupCurrentPick(g) {
+    var rows = safeState('betsTable');
+    if (!Array.isArray(rows)) return null;
+    var awayName = (g.teams.away.team && (g.teams.away.team.name || g.teams.away.team.teamName)) || '';
+    var homeName = (g.teams.home.team && (g.teams.home.team.name || g.teams.home.team.teamName)) || '';
+    for (var i = 0; i < rows.length; i++) {
+      var r = rows[i]; if (!r) continue;
+      var gm = String(r.game || '');
+      var ty = String(r.type || '').toLowerCase();
+      var isML = ty === 'ml' || ty === 'moneyline' || ty.indexOf('moneyline') >= 0;
+      if (!isML) continue;
+      if (gm.indexOf(awayName) >= 0 || gm.indexOf(homeName) >= 0) {
+        return { pick:r.pick, tier:r.tier, cashProb:r.cashProb, score:r.score, type:r.type };
+      }
+    }
+    return null;
+  }
+
+  // ---------- per-game compute ----------
+  function computeGame(g) {
+    if (!g || !g.teams || !g.teams.away || !g.teams.home) return null;
+    var awayT = g.teams.away.team || {};
+    var homeT = g.teams.home.team || {};
+
+    var oddsBag = (safeState('odds') && STATE.odds.games) || {};
+    var oEnt = oddsBag[g.gamePk] || oddsBag[String(g.gamePk)];
+    var ml = oEnt && oEnt.moneyline;
+    if (!ml || ml.away == null || ml.home == null) return null;
+
+    var pAr = americanToProb(ml.away);
+    var pHr = americanToProb(ml.home);
+    var nv = noVigPair(pAr, pHr);
+    if (nv.a == null) return null;
+    var pAm = nv.a, pHm = nv.b;
+
+    var mods = {};
+    var sumA = 0, sumH = 0;
+    FACTORS.forEach(function(f){
+      var m = f.fn(g); mods[f.key] = m;
+      sumA += (m.away || 0); sumH += (m.home || 0);
+    });
+
+    var rA = Math.max(0.01, Math.min(0.99, pAm + sumA));
+    var rH = Math.max(0.01, Math.min(0.99, pHm + sumH));
+    var norm = rA + rH;
+    var pAv = rA / norm;
+    var pHv = 1 - pAv;
+
+    function sideOut(side, pV3, pMkt, mktAm) {
+      var fair = probToAmerican(pV3);
+      var ev = evPercent(pV3, mktAm);
+      var kelly = kellyFracQuarter(pV3, mktAm);
+      var edgePP = (pV3 - pMkt) * 100;
+      var tier = 'PASS';
+      if (kelly >= 0.020 && ev >= 4)      tier = 'LOCK';
+      else if (kelly >= 0.012 && ev >= 2) tier = 'STRONG';
+      else if (kelly >= 0.005 && ev >= 1) tier = 'LEAN';
+      return {
+        side: side,
+        team: side === 'away' ? awayT : homeT,
+        marketAmerican: mktAm,
+        marketProb: pMkt,
+        v3Prob: pV3,
+        fairAmerican: fair,
+        ev: ev,
+        edgePP: edgePP,
+        kelly: kelly,
+        tier: tier
+      };
+    }
+
+    return {
+      gamePk: g.gamePk,
+      gameDate: g.gameDate,
+      away: sideOut('away', pAv, pAm, ml.away),
+      home: sideOut('home', pHv, pHm, ml.home),
+      mods: mods,
+      current: lookupCurrentPick(g)
+    };
+  }
+
+  function computeAll() {
+    var games = safeState('games');
+    if (!Array.isArray(games)) { V3.games = []; return; }
+    var out = [];
+    games.forEach(function(g){ var r = computeGame(g); if (r) out.push(r); });
+    V3.games = out;
+    V3.lastCompute = Date.now();
+  }
+
+  // ---------- render ----------
+  function tierClass(t) { return 'v3-tier v3-tier-' + (t || 'pass').toLowerCase(); }
+
+  function renderFactorRows(mods) {
+    return FACTORS.map(function(f){
+      var m = mods[f.key]; if (!m) return '';
+      var val;
+      if (m.present && (m.away || m.home)) {
+        var ac = m.away > 0 ? 'v3-pos' : (m.away < 0 ? 'v3-neg' : '');
+        var hc = m.home > 0 ? 'v3-pos' : (m.home < 0 ? 'v3-neg' : '');
+        val = '<span class="'+ac+'">A '+signed(m.away*100,1)+'pp</span> · <span class="'+hc+'">H '+signed(m.home*100,1)+'pp</span>';
+      } else if (m.present) {
+        val = '<span style="color:var(--muted)">measured · no ML edge</span>';
+      } else {
+        val = '<span class="v3-missing">' + v3esc(m.label) + '</span>';
+      }
+      return '<div class="v3-factor">' +
+        '<div class="v3-factor-name">' + v3esc(f.name) + '<span class="v3-bucket">['+f.bucket+']</span></div>' +
+        '<div class="v3-factor-val">' + val + (m.present && m.label ? ' <span style="color:var(--muted);margin-left:6px;">'+v3esc(m.label)+'</span>' : '') + '</div>' +
+        '</div>';
+    }).join('');
+  }
+
+  function renderDiffVsCurrent(e) {
+    var cur = e.current;
+    var v3Side = e.away.v3Prob >= e.home.v3Prob ? e.away : e.home;
+    var v3PickName = v3Side.team.name || '';
+    if (!cur) {
+      return '<div class="v3-factor"><div class="v3-factor-name">Current model</div><div class="v3-factor-val v3-missing">No ML pick from current model for this game</div></div>' +
+        '<div class="v3-factor"><div class="v3-factor-name">V3 pick</div><div class="v3-factor-val"><b>'+v3esc(v3PickName)+'</b> @ '+pctStr(v3Side.v3Prob)+' · <span class="'+tierClass(v3Side.tier)+'">'+v3Side.tier+'</span></div></div>';
+    }
+    var curPickStr = String(cur.pick || '');
+    var agree = curPickStr && (curPickStr.indexOf(v3PickName) >= 0 || v3PickName.indexOf(curPickStr.split(' ')[0]) >= 0);
+    var diff = agree
+      ? '<span class="v3-diff-agree">✓ Agrees with current</span>'
+      : '<span class="v3-diff-disagree">⚠ V3 disagrees — picks ' + v3esc(v3PickName) + '</span>';
+    return '<div class="v3-factor"><div class="v3-factor-name">Current model</div>' +
+      '<div class="v3-factor-val">' + diff +
+      ' · pick <b>'+v3esc(curPickStr||'?')+'</b> · tier <b>'+v3esc(cur.tier||'?')+'</b>' +
+      (cur.cashProb != null ? ' · cash <b>'+Number(cur.cashProb).toFixed(1)+'%</b>' : '') +
+      '</div></div>' +
+      '<div class="v3-factor"><div class="v3-factor-name">V3 pick</div>' +
+      '<div class="v3-factor-val"><b>'+v3esc(v3PickName)+'</b> @ '+pctStr(v3Side.v3Prob)+' · EV '+signed(v3Side.ev,1)+'% · stake '+(v3Side.kelly*100).toFixed(2)+'% · <span class="'+tierClass(v3Side.tier)+'">'+v3Side.tier+'</span></div></div>';
+  }
+
+  function renderAnalysisCard(e) {
+    var time = e.gameDate ? new Date(e.gameDate).toLocaleTimeString([], {hour:'numeric',minute:'2-digit'}) : '';
+    function block(s){
+      return '<div class="v3-side-col">' +
+        '<div class="v3-side-name">' + v3esc(s.team.name || '') + '<span class="'+tierClass(s.tier)+'">'+s.tier+'</span></div>' +
+        '<div class="v3-side-fig">market <b>'+fmtAmerican(s.marketAmerican)+'</b> ('+pctStr(s.marketProb)+')</div>' +
+        '<div class="v3-side-fig">V3 fair <b>'+fmtAmerican(s.fairAmerican)+'</b> · prob <b>'+pctStr(s.v3Prob)+'</b></div>' +
+        '<div class="v3-side-fig">edge <b>'+signed(s.edgePP,1)+'pp</b> · EV <span class="'+(s.ev>=0?'v3-ev-pos':'v3-ev-neg')+'">'+signed(s.ev,1)+'%</span></div>' +
+        '<div class="v3-side-fig">Kelly stake <b>'+(s.kelly*100).toFixed(2)+'%</b> bankroll</div>' +
+        '</div>';
+    }
+    return '<div class="v3-card">' +
+      '<h3>' + v3esc(e.away.team.name || '') + ' @ ' + v3esc(e.home.team.name || '') +
+        (time ? ' <span style="color:var(--muted);font-weight:500;font-size:12px;margin-left:6px;">'+v3esc(time)+'</span>' : '') +
+      '</h3>' +
+      '<div class="v3-side">' + block(e.away) + block(e.home) + '</div>' +
+      '<details class="v3-disc"><summary>▸ Factors &amp; diff vs current model</summary>' +
+        '<div class="v3-disc-body">' +
+          renderFactorRows(e.mods) +
+          '<div style="margin-top:8px;border-top:1px dashed rgba(255,255,255,.1);padding-top:8px;"></div>' +
+          renderDiffVsCurrent(e) +
+        '</div>' +
+      '</details>' +
+    '</div>';
+  }
+
+  function renderAnalysis() {
+    var grid = document.getElementById('v3analysisGrid');
+    if (!grid) return;
+    if (!V3.games.length) {
+      grid.innerHTML = '<div class="loader">No V3 games yet — waiting for STATE.games + STATE.odds. (Odds overlay must be loaded.)</div>';
+    } else {
+      grid.innerHTML = V3.games.slice().sort(function(a,b){
+        return String(a.gameDate||'').localeCompare(String(b.gameDate||''));
+      }).map(renderAnalysisCard).join('');
+    }
+    var tb = document.getElementById('v3analysisToolbar');
+    if (tb) {
+      var loaded = ['umpire','framing','stuffPlus','defense','veloTrend','parkHand'].filter(function(k){ return !!V3.overlays[k]; }).length;
+      tb.innerHTML = V3.games.length + ' games · ' + loaded + '/6 bucket-B overlays loaded · last compute ' +
+        (V3.lastCompute ? new Date(V3.lastCompute).toLocaleTimeString() : '—') +
+        ' · <a href="#" id="v3RecomputeLink" style="color:#60a5fa;text-decoration:none;">Recompute</a>';
+      var lnk = document.getElementById('v3RecomputeLink');
+      if (lnk) lnk.addEventListener('click', function(ev){ ev.preventDefault(); computeAndRender(); });
+    }
+  }
+
+  function renderBets() {
+    var grid = document.getElementById('v3betsGrid');
+    if (!grid) return;
+    var picks = [];
+    V3.games.forEach(function(e){
+      [e.away, e.home].forEach(function(s){
+        if (s.kelly > 0) picks.push({ entry:e, side:s });
+      });
+    });
+    picks.sort(function(a, b){ return b.side.ev - a.side.ev; });
+    if (!picks.length) {
+      grid.innerHTML = '<div class="loader">No V3 +EV picks right now. Will recompute when odds or data refresh.</div>';
+    } else {
+      var rows = picks.map(function(p, i){
+        var time = p.entry.gameDate ? new Date(p.entry.gameDate).toLocaleTimeString([], {hour:'numeric',minute:'2-digit'}) : '';
+        return '<tr>' +
+          '<td>'+(i+1)+'</td>' +
+          '<td>'+v3esc(time)+'</td>' +
+          '<td>'+v3esc(p.entry.away.team.name||'')+' @ '+v3esc(p.entry.home.team.name||'')+'</td>' +
+          '<td><b>'+v3esc(p.side.team.name||'')+'</b> ML</td>' +
+          '<td>'+fmtAmerican(p.side.marketAmerican)+'</td>' +
+          '<td>'+fmtAmerican(p.side.fairAmerican)+'</td>' +
+          '<td>'+pctStr(p.side.v3Prob)+'</td>' +
+          '<td class="'+(p.side.ev>=0?'v3-ev-pos':'v3-ev-neg')+'">'+signed(p.side.ev,1)+'%</td>' +
+          '<td>'+(p.side.kelly*100).toFixed(2)+'%</td>' +
+          '<td><span class="'+tierClass(p.side.tier)+'">'+p.side.tier+'</span></td>' +
+          '</tr>';
+      }).join('');
+      grid.innerHTML = '<table>' +
+        '<thead><tr><th>#</th><th>Time</th><th>Game</th><th>Pick</th><th>Market</th><th>Fair</th><th>V3 %</th><th>EV</th><th>Stake</th><th>Tier</th></tr></thead>' +
+        '<tbody>'+rows+'</tbody></table>';
+    }
+    var tb = document.getElementById('v3betsToolbar');
+    if (tb) tb.innerHTML = picks.length + ' positive-EV picks · sorted by EV · ¼-Kelly stake (capped 3% bankroll) · last compute ' +
+      (V3.lastCompute ? new Date(V3.lastCompute).toLocaleTimeString() : '—');
+  }
+
+  function computeAndRender() {
+    computeAll();
+    renderAnalysis();
+    renderBets();
+  }
+
+  function maybeRecompute() {
+    if (Date.now() - V3.lastCompute > V3.cacheMs) computeAndRender();
+    else { renderAnalysis(); renderBets(); }
+  }
+
+  // ---------- tab activation hook + init ----------
+  document.addEventListener('click', function(e){
+    var btn = e.target && e.target.closest && e.target.closest('[data-tab="v3analysis"], [data-tab="v3bets"]');
+    if (!btn) return;
+    setTimeout(maybeRecompute, 60);
+  });
+
+  // Poll for STATE.games then do first compute
+  var tries = 0;
+  var t = setInterval(function(){
+    tries++;
+    var ok = false;
+    try { ok = !!(STATE && STATE.games && STATE.games.length); } catch (e) { ok = false; }
+    if (ok) { clearInterval(t); computeAndRender(); }
+    else if (tries > 60) clearInterval(t);
+  }, 1000);
+
+  loadAllOverlays().then(function(){
+    if (V3.games.length || (function(){ try { return STATE && STATE.games && STATE.games.length; } catch(e){ return false; } })()) {
+      computeAndRender();
+    }
+  });
 })();
 </script>
 <!-- ===== end v2 Algorithm Overlay ===== -->
