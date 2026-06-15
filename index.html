@@ -10098,16 +10098,26 @@ function renderBullpen() {
   } catch(e) {}
   const el = document.getElementById("bullpenGrid");
   const teams = {};
-  STATE.games.forEach(function(g){
+  STATE.games.forEach(function(g, gi){
     ["away","home"].forEach(function(s){
       const t = g.teams[s].team;
       if (!t) return;
       const u = STATE.bullpen[t.id];
-      if (u) teams[t.id] = { team:t, usage:u, opp: g.teams[s==="away"?"home":"away"].team };
+      if (u) teams[t.id] = {
+        team: t,
+        usage: u,
+        opp: g.teams[s==="away"?"home":"away"].team,
+        matchupKey: "g"+gi,
+        side: s
+      };
     });
   });
   const keys = Object.keys(teams);
   if (!keys.length) { el.innerHTML = '<div class="loader">Fetching bullpen pitch counts…</div>'; return; }
+  // Alphabetical sort by team name
+  keys.sort(function(a, b){
+    return (teams[a].team.name || '').localeCompare(teams[b].team.name || '');
+  });
   el.innerHTML = keys.map(function(k){
     const info = teams[k];
     const u = info.usage;
@@ -10119,17 +10129,63 @@ function renderBullpen() {
       const icon = p.avail==="red"?"🔴":p.avail==="yellow"?"🟡":"🟢";
       return '<div class="row" style="font-size:12px;"><span class="k">'+icon+' '+esc(p.name)+'</span><span class="v '+cls+'">'+esc(p.status)+'</span></div>';
     }
+
+    // Weak-bullpen tier: combines overlay penalty (closer/setup/high-leverage out)
+    // with pitch-count-driven red availability from STATE.bullpen
+    const pen = (typeof bullpenPenaltyFor === 'function')
+      ? bullpenPenaltyFor(info.team.name)
+      : { penalty: 0, list: [] };
+    const highLevRoles = { closer:1, setup:1, high_leverage:1 };
+    const highLevOut = (pen.list || []).filter(function(r){
+      return highLevRoles[(r.role||'').toLowerCase()] && (r.status||'out').toLowerCase() === 'out';
+    });
+    const highLevLimited = (pen.list || []).filter(function(r){
+      return highLevRoles[(r.role||'').toLowerCase()] && (r.status||'').toLowerCase() !== 'out';
+    });
+    let weakTier = 'ok';
+    if (highLevOut.length >= 2 || pen.penalty >= 0.10 || red.length >= 3) weakTier = 'critical';
+    else if (highLevOut.length >= 1 || pen.penalty >= 0.05 || red.length >= 2 || highLevLimited.length >= 2) weakTier = 'weak';
+
     const isYankees = /Yankees/.test(info.team.name);
-    const border = isYankees ? 'border:2px solid #c4ced4;' : '';
-    return '<div class="card" style="'+border+'">'+
+    const yankeesBorder = isYankees ? 'border:2px solid #c4ced4;' : '';
+    const weakAccent = weakTier === 'critical'
+      ? 'box-shadow: inset 5px 0 0 var(--bad);'
+      : weakTier === 'weak'
+        ? 'box-shadow: inset 5px 0 0 var(--warn);'
+        : '';
+
+    let weakBadge = '';
+    if (weakTier === 'critical') {
+      const reasons = [];
+      if (highLevOut.length) reasons.push(highLevOut.map(function(r){return r.role;}).join('+')+' OUT');
+      if (red.length >= 3) reasons.push(red.length+' red');
+      weakBadge = '<span style="display:inline-block;background:var(--bad);color:#fff;font-size:10px;font-weight:800;padding:2px 6px;border-radius:4px;margin-left:6px;vertical-align:middle;" title="'+esc(reasons.join(' · '))+'">🔥 WEAK PEN</span>';
+    } else if (weakTier === 'weak') {
+      weakBadge = '<span style="display:inline-block;background:var(--warn);color:#000;font-size:10px;font-weight:800;padding:2px 6px;border-radius:4px;margin-left:6px;vertical-align:middle;">⚠ THIN</span>';
+    }
+
+    const attrs =
+      ' data-team-id="'+esc(String(info.team.id))+'"'+
+      ' data-team-name="'+esc(info.team.name)+'"'+
+      ' data-opp-id="'+esc(String(info.opp.id||''))+'"'+
+      ' data-opp-name="'+esc(info.opp.name||'')+'"'+
+      ' data-matchup="'+esc(info.matchupKey)+'"'+
+      ' data-side="'+esc(info.side)+'"'+
+      ' data-weak="'+weakTier+'"';
+
+    return '<div class="card bullpen-card"'+attrs+' style="'+yankeesBorder+weakAccent+'">'+
       (isYankees?'<div style="font-size:10px;font-weight:700;color:#c4ced4;margin-bottom:4px;">⭐ YANKEES</div>':'')+
-      '<h3>'+esc(info.team.name)+'</h3>'+
+      '<h3>'+esc(info.team.name)+weakBadge+'</h3>'+
       '<div class="small">vs '+esc(info.opp.name)+'</div>'+
       (red.length?'<div class="small" style="margin-top:8px;color:var(--bad);font-weight:700;">UNAVAILABLE ('+red.length+')</div>'+red.map(rowP).join(""):'')+
       (yellow.length?'<div class="small" style="margin-top:8px;color:var(--warn);font-weight:700;">Limited ('+yellow.length+')</div>'+yellow.map(rowP).join(""):'')+
       (green.length?'<div class="small" style="margin-top:8px;color:var(--good);font-weight:700;">Fresh ('+green.length+')</div>'+green.slice(0,8).map(rowP).join(""):'')+
       '</div>';
   }).join("");
+
+  // Notify the filter/matchup overlay that a fresh render happened.
+  // (See bullpen filter bar patch at the bottom of this file.)
+  try { if (typeof window.__bullpenAfterRender === 'function') window.__bullpenAfterRender(); } catch(e) {}
 }
 
 /* =========== RECENT TEAM RECORD (3d/7d) =========== */
@@ -12665,6 +12721,157 @@ document.addEventListener('click', function(e) {
     watchTabSwitches();
     // Re-apply periodically so picks reflect any in-page refresh.
     setInterval(applyAll, 30000);
+  }
+})();
+// ===== Bullpen filter + matchup + weak-pen highlight (patch 2026-06-14) =====
+// Hook-based: renderBullpen() calls window.__bullpenAfterRender() after each paint.
+// No MutationObserver — earlier version watched document.body and infinite-looped
+// because applying the filter mutates the DOM, which re-fired the observer.
+(function () {
+  if (window.__bullpenFilterInstalled) return;
+  window.__bullpenFilterInstalled = true;
+
+  var FILTER = { team: '', matchup: '', weakOnly: false };
+
+  function getGrid() { return document.getElementById('bullpenGrid'); }
+
+  function uniqueMatchups() {
+    // Build from STATE.games so the list stays correct even if some
+    // teams haven't returned bullpen data yet.
+    var out = [];
+    var seen = {};
+    if (!window.STATE || !STATE.games) return out;
+    STATE.games.forEach(function(g, i){
+      var a = g.teams && g.teams.away && g.teams.away.team;
+      var h = g.teams && g.teams.home && g.teams.home.team;
+      if (!a || !h) return;
+      var key = 'g' + i;
+      if (seen[key]) return;
+      seen[key] = true;
+      out.push({ key: key, label: (a.name || a.teamName) + ' @ ' + (h.name || h.teamName) });
+    });
+    out.sort(function(x, y){ return x.label.localeCompare(y.label); });
+    return out;
+  }
+
+  function uniqueTeams() {
+    var grid = getGrid();
+    if (!grid) return [];
+    var names = [];
+    var seen = {};
+    grid.querySelectorAll('.bullpen-card').forEach(function(c){
+      var n = c.getAttribute('data-team-name');
+      if (n && !seen[n]) { seen[n] = true; names.push(n); }
+    });
+    names.sort();
+    return names;
+  }
+
+  function buildBar() {
+    var grid = getGrid();
+    if (!grid) return;
+    var existing = document.getElementById('bullpenFilterBar');
+    if (existing) existing.remove();
+
+    var teams = uniqueTeams();
+    var matchups = uniqueMatchups();
+
+    var bar = document.createElement('div');
+    bar.id = 'bullpenFilterBar';
+    bar.style.cssText = 'display:flex;gap:10px;flex-wrap:wrap;align-items:center;padding:10px 0;margin-bottom:8px;';
+    bar.innerHTML =
+      '<label style="font-size:12px;color:var(--muted);font-weight:600;">Team:</label>' +
+      '<select id="bpTeamSel" style="background:var(--panel);color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 10px;font-size:12px;min-width:170px;">' +
+        '<option value="">All teams</option>' +
+        teams.map(function(n){ return '<option value="' + n + '">' + n + '</option>'; }).join('') +
+      '</select>' +
+      '<label style="font-size:12px;color:var(--muted);font-weight:600;">Matchup (side-by-side):</label>' +
+      '<select id="bpMatchupSel" style="background:var(--panel);color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 10px;font-size:12px;min-width:230px;">' +
+        '<option value="">— none —</option>' +
+        matchups.map(function(m){ return '<option value="' + m.key + '">' + m.label + '</option>'; }).join('') +
+      '</select>' +
+      '<label style="font-size:12px;color:var(--muted);font-weight:600;display:inline-flex;align-items:center;gap:6px;cursor:pointer;">' +
+        '<input type="checkbox" id="bpWeakOnly" style="margin:0;"> Weak pens only' +
+      '</label>' +
+      '<button id="bpClear" style="background:rgba(255,255,255,0.05);color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 12px;font-size:12px;cursor:pointer;">Clear</button>' +
+      '<span style="margin-left:auto;font-size:11px;color:var(--muted);">A–Z · 🔥 = closer/setup out · ⚠ = thin</span>';
+
+    grid.parentNode.insertBefore(bar, grid);
+
+    var teamSel = document.getElementById('bpTeamSel');
+    var matchSel = document.getElementById('bpMatchupSel');
+    var weakChk = document.getElementById('bpWeakOnly');
+    teamSel.value = FILTER.team;
+    matchSel.value = FILTER.matchup;
+    weakChk.checked = !!FILTER.weakOnly;
+
+    teamSel.addEventListener('change', function(e){
+      FILTER.team = e.target.value;
+      // Choosing a team clears matchup mode so the user isn't fighting two filters.
+      if (FILTER.team) { FILTER.matchup = ''; matchSel.value = ''; }
+      apply();
+    });
+    matchSel.addEventListener('change', function(e){
+      FILTER.matchup = e.target.value;
+      if (FILTER.matchup) { FILTER.team = ''; teamSel.value = ''; }
+      apply();
+    });
+    weakChk.addEventListener('change', function(e){
+      FILTER.weakOnly = !!e.target.checked;
+      apply();
+    });
+    document.getElementById('bpClear').addEventListener('click', function(){
+      FILTER.team = ''; FILTER.matchup = ''; FILTER.weakOnly = false;
+      teamSel.value = ''; matchSel.value = ''; weakChk.checked = false;
+      apply();
+    });
+  }
+
+  function apply() {
+    var grid = getGrid();
+    if (!grid) return;
+    var cards = grid.querySelectorAll('.bullpen-card');
+
+    // Matchup mode: show the two cards for that game in a 2-column layout.
+    if (FILTER.matchup) {
+      grid.style.gridTemplateColumns = '1fr 1fr';
+      var matchedCards = [];
+      cards.forEach(function(c){
+        var show = c.getAttribute('data-matchup') === FILTER.matchup;
+        c.style.display = show ? '' : 'none';
+        if (show) matchedCards.push(c);
+      });
+      // Order: away first, home second
+      matchedCards.sort(function(a, b){
+        return (a.getAttribute('data-side') === 'away') ? -1 : 1;
+      });
+      matchedCards.forEach(function(c){ grid.appendChild(c); });
+      return;
+    }
+
+    // Normal mode: clear any matchup grid override.
+    grid.style.gridTemplateColumns = '';
+
+    cards.forEach(function(c){
+      var teamName = c.getAttribute('data-team-name') || '';
+      var weak = c.getAttribute('data-weak') || 'ok';
+      var show = true;
+      if (FILTER.team && teamName !== FILTER.team) show = false;
+      if (FILTER.weakOnly && weak === 'ok') show = false;
+      c.style.display = show ? '' : 'none';
+    });
+  }
+
+  // Called by renderBullpen() after every paint.
+  window.__bullpenAfterRender = function () {
+    buildBar();
+    apply();
+  };
+
+  // First paint may have already happened by the time this patch loads;
+  // run once if the grid is populated.
+  if (getGrid() && getGrid().querySelector('.bullpen-card')) {
+    window.__bullpenAfterRender();
   }
 })();
 </script>
