@@ -12987,7 +12987,7 @@ document.addEventListener('click', function(e) {
   }
 })();
 
-// ===== V3 Lab — standalone model (patch 2026-06-15b) =====
+// ===== V3 Lab — standalone model (patch 2026-06-15c) =====
 // Fully additive. Reads STATE lexically and writes ONLY to V3-prefixed DOM
 // (#v3analysisGrid, #v3betsGrid, etc.). The existing Top Bets pipeline is
 // untouched. Bucket A factors compute now; bucket B factors graceful no-op
@@ -13045,7 +13045,11 @@ document.addEventListener('click', function(e) {
       '.v3-lu-badge.lu-projected{background:rgba(245,158,11,0.15);color:#f59e0b;border-color:rgba(245,158,11,0.4);}' +
       '.v3-lu-badge.lu-posted{background:rgba(59,130,246,0.15);color:#60a5fa;border-color:rgba(59,130,246,0.4);}' +
       '.v3-lu-badge.lu-partial{background:rgba(234,88,12,0.15);color:#fb923c;border-color:rgba(234,88,12,0.4);}' +
-      '.v3-lu-badge.lu-confirmed{background:rgba(16,185,129,0.15);color:#10b981;border-color:rgba(16,185,129,0.4);}';
+      '.v3-lu-badge.lu-confirmed{background:rgba(16,185,129,0.15);color:#10b981;border-color:rgba(16,185,129,0.4);}' +
+      '.v3-pill{background:rgba(255,255,255,0.06);color:var(--text);border:1px solid var(--border);border-radius:14px;padding:5px 11px;font-size:12px;cursor:pointer;font-weight:600;display:inline-flex;align-items:center;gap:6px;}' +
+      '.v3-pill:hover{background:rgba(255,255,255,0.10);}' +
+      '.v3-pill.v3-pill-active{background:linear-gradient(135deg,#a855f7,#ec4899);color:#fff;border-color:transparent;}' +
+      '.v3-pill-count{background:rgba(0,0,0,0.25);color:inherit;padding:1px 6px;border-radius:8px;font-size:10px;}';
     document.head.appendChild(s);
   })();
 
@@ -13312,6 +13316,32 @@ document.addEventListener('click', function(e) {
   }
 
   // ---------- per-game compute ----------
+  // Lookup the current model's ML cashProb for a game so V3 has a baseline
+  // probability EVEN BEFORE odds arrive. Returns { away, home } in 0-1 units
+  // or null if not found.
+  function lookupCurrentBaselineProb(g) {
+    var rows = safeState('betsTable');
+    if (!Array.isArray(rows)) return null;
+    var awayName = (g.teams.away.team && (g.teams.away.team.name || g.teams.away.team.teamName)) || '';
+    var homeName = (g.teams.home.team && (g.teams.home.team.name || g.teams.home.team.teamName)) || '';
+    var awayP = null, homeP = null;
+    for (var i = 0; i < rows.length; i++) {
+      var r = rows[i]; if (!r) continue;
+      var gm = String(r.game || '');
+      var ty = String(r.type || '').toLowerCase();
+      if (ty !== 'ml' && ty !== 'moneyline' && ty.indexOf('moneyline') < 0) continue;
+      if (gm.indexOf(awayName) < 0 && gm.indexOf(homeName) < 0) continue;
+      var p = (typeof r.cashProb === 'number') ? r.cashProb : null;
+      if (p == null) continue;
+      if (p > 1.5) p = p / 100;  // already a percentage
+      var pickStr = String(r.pick || '');
+      if (pickStr.indexOf(awayName) >= 0) { awayP = p; homeP = 1 - p; break; }
+      if (pickStr.indexOf(homeName) >= 0) { homeP = p; awayP = 1 - p; break; }
+    }
+    if (awayP == null || homeP == null) return null;
+    return { away: awayP, home: homeP };
+  }
+
   function computeGame(g) {
     if (!g || !g.teams || !g.teams.away || !g.teams.home) return null;
     var awayT = g.teams.away.team || {};
@@ -13322,35 +13352,35 @@ document.addEventListener('click', function(e) {
     var ml = oEnt && oEnt.moneyline;
     var oddsMissing = !ml || ml.away == null || ml.home == null;
 
-    // If odds missing, return a shell entry so the game still appears in V3
-    // Analysis with a clear "awaiting odds" message — rather than silently
-    // disappearing from the grid.
-    if (oddsMissing) {
-      var statusM = null;
-      try { if (typeof lineupStatusFor === 'function') statusM = lineupStatusFor(g); } catch (e) {}
-      return {
-        gamePk: g.gamePk,
-        gameDate: g.gameDate,
-        away: { team: awayT, side:'away', noOdds:true, tier:'PASS', luBadge: statusM && statusM.badge, luBadgeClass: statusM && statusM.badgeClass, luOverall: statusM && statusM.overall, cashProb: null, score: 0, kelly: 0, ev: null, edgePP: null, v3Prob: null, marketProb: null, marketAmerican: null, fairAmerican: null, notes: 'Awaiting market lines — V3 can\'t evaluate without odds' },
-        home: { team: homeT, side:'home', noOdds:true, tier:'PASS', luBadge: statusM && statusM.badge, luBadgeClass: statusM && statusM.badgeClass, luOverall: statusM && statusM.overall, cashProb: null, score: 0, kelly: 0, ev: null, edgePP: null, v3Prob: null, marketProb: null, marketAmerican: null, fairAmerican: null, notes: 'Awaiting market lines — V3 can\'t evaluate without odds' },
-        mods: {},
-        current: lookupCurrentPick(g),
-        oddsMissing: true
-      };
-    }
-
-    var pAr = americanToProb(ml.away);
-    var pHr = americanToProb(ml.home);
-    var nv = noVigPair(pAr, pHr);
-    if (nv.a == null) return null;
-    var pAm = nv.a, pHm = nv.b;
-
+    // Build factor mods (used by every market builder downstream)
     var mods = {};
     var sumA = 0, sumH = 0;
     FACTORS.forEach(function(f){
       var m = f.fn(g); mods[f.key] = m;
       sumA += (m.away || 0); sumH += (m.home || 0);
     });
+
+    // ---------- baseline probability ----------
+    // Priority: market no-vig → current model cashProb → 50/50 neutral.
+    // This lets V3 produce rankings BEFORE odds release.
+    var pAm, pHm, marketAmerAway, marketAmerHome, baselineSource;
+    if (!oddsMissing) {
+      var pAr = americanToProb(ml.away);
+      var pHr = americanToProb(ml.home);
+      var nv = noVigPair(pAr, pHr);
+      if (nv.a != null) {
+        pAm = nv.a; pHm = nv.b;
+        marketAmerAway = ml.away; marketAmerHome = ml.home;
+        baselineSource = 'market-no-vig';
+      }
+    }
+    if (pAm == null) {
+      var cur = lookupCurrentBaselineProb(g);
+      if (cur) { pAm = cur.away; pHm = cur.home; baselineSource = 'current-model'; }
+    }
+    if (pAm == null) {
+      pAm = 0.5; pHm = 0.5; baselineSource = 'neutral-50/50';
+    }
 
     var rA = Math.max(0.01, Math.min(0.99, pAm + sumA));
     var rH = Math.max(0.01, Math.min(0.99, pHm + sumH));
@@ -13360,30 +13390,37 @@ document.addEventListener('click', function(e) {
 
     function sideOut(side, pV3, pMkt, mktAm) {
       var fair = probToAmerican(pV3);
-      var ev = evPercent(pV3, mktAm);
-      var kelly = kellyFracQuarter(pV3, mktAm);
+      var hasOdds = (mktAm != null && isFinite(mktAm));
+      var ev = hasOdds ? evPercent(pV3, mktAm) : null;
+      var kelly = hasOdds ? kellyFracQuarter(pV3, mktAm) : null;
       var edgePP = (pV3 - pMkt) * 100;
+      // Tier from cash floor (current-model rules): 90+=LOCK, 78-89=STRONG,
+      // 65-77=LEAN, else PASS. Lineup engine downstream may add */⚠ suffix.
       var tier = 'PASS';
-      if (kelly >= 0.020 && ev >= 4)      tier = 'LOCK';
-      else if (kelly >= 0.012 && ev >= 2) tier = 'STRONG';
-      else if (kelly >= 0.005 && ev >= 1) tier = 'LEAN';
-      // Base score mirrors current model: 10 × edge in pp, gated by lineup adjuster later
-      var baseScore = Math.max(0, edgePP * 10);
+      if (pV3 >= 0.90)      tier = 'LOCK';
+      else if (pV3 >= 0.78) tier = 'STRONG';
+      else if (pV3 >= 0.65) tier = 'LEAN';
+      // Score: 10 × edge in pp when we have a market, otherwise rank by cash %
+      // (scaled to comparable units so pre-odds vs post-odds picks intermix).
+      var baseScore = hasOdds
+        ? Math.max(0, Math.abs(edgePP) * 10)
+        : Math.max(0, (pV3 - 0.50) * 100);
       return {
         side: side,
         team: side === 'away' ? awayT : homeT,
-        marketAmerican: mktAm,
+        marketAmerican: mktAm != null ? mktAm : null,
         marketProb: pMkt,
         v3Prob: pV3,
         fairAmerican: fair,
         ev: ev,
         edgePP: edgePP,
         kelly: kelly,
+        hasOdds: hasOdds,
         baseTier: tier,
         tier: tier,
         baseScore: baseScore,
         score: baseScore,
-        cashProb: pV3,          // start equal; lineup adjuster may shift
+        cashProb: pV3,
         luBadge: null,
         luBadgeClass: null,
         luOverall: 'unknown',
@@ -13397,95 +13434,326 @@ document.addEventListener('click', function(e) {
     var entry = {
       gamePk: g.gamePk,
       gameDate: g.gameDate,
-      away: sideOut('away', pAv, pAm, ml.away),
-      home: sideOut('home', pHv, pHm, ml.home),
+      away: sideOut('away', pAv, pAm, oddsMissing ? null : ml.away),
+      home: sideOut('home', pHv, pHm, oddsMissing ? null : ml.home),
       mods: mods,
-      current: lookupCurrentPick(g)
+      current: lookupCurrentPick(g),
+      oddsMissing: oddsMissing,
+      baselineSource: baselineSource,
+      oddsEntry: oEnt || null
     };
 
-    // -------------------- LINEUP ENGINE INTEGRATION --------------------
-    // Reuses the same functions that drive the current Top Bets table:
-    //   lineupStatusFor(g)    → PROJECTED / POSTED / PARTIAL / CONFIRMED + luPen
-    //   detectKeyScratches(g) → top 3 hitters (by 14d OPS) missing from posted lineup
-    //   adjustTierForLineup() → applies tier suffix, cashDelta, scoreDelta, and writes the reason
-    var status = null, scratches = { away:0, home:0, awayNames:[], homeNames:[] };
-    try { if (typeof lineupStatusFor === 'function') status = lineupStatusFor(g); } catch (e) {}
-    try { if (typeof detectKeyScratches === 'function') scratches = detectKeyScratches(g) || scratches; } catch (e) {}
-
+    // Surface lineup badge info on the per-side entry for V3 Analysis (which
+    // is keyed by game, not by market). The actual tier/cash/score adjustment
+    // for each PICK happens inside the market builders downstream.
+    var statusOnly = null;
+    try { if (typeof lineupStatusFor === 'function') statusOnly = lineupStatusFor(g); } catch (e) {}
     ['away','home'].forEach(function(side){
       var s = entry[side];
-      if (status) {
-        s.luBadge = status.badge;
-        s.luBadgeClass = status.badgeClass;
-        s.luOverall = status.overall;
-        s.luPen = status.luPen;
+      if (statusOnly) {
+        s.luBadge = statusOnly.badge;
+        s.luBadgeClass = statusOnly.badgeClass;
+        s.luOverall = statusOnly.overall;
+        s.luPen = statusOnly.luPen;
       }
-      // Build a synthetic "bet" object so adjustTierForLineup applies the
-      // offensive-over treatment that a moneyline pick deserves.
-      var fakeBet = { type: 'Moneyline', pick: (s.team && s.team.name || '') + ' ML' };
-      var adj = { tier: s.tier, cashDelta: 0, scoreDelta: 0, reason: '' };
-      if (status && typeof adjustTierForLineup === 'function') {
-        try { adj = adjustTierForLineup(s.tier, status, scratches, fakeBet) || adj; } catch (e) {}
-      }
-      // Map MY-side scratches (the side WE'RE picking) — those are the painful ones.
-      var mySideScratchNames = (side === 'away' ? scratches.awayNames : scratches.homeNames) || [];
-      s.scratchedTopHitters = mySideScratchNames.slice(0);
-      s.tier = adj.tier || s.tier;
-      s.cashProb = Math.max(0.05, Math.min(0.95, s.v3Prob + (adj.cashDelta || 0)));
-      s.score = Math.max(0, s.baseScore + (adj.scoreDelta || 0));
-      s.luReason = adj.reason || (status ? status.label : '');
-      s.notes = buildNotes(s, entry, status);
     });
+    entry.luStatus = statusOnly;
 
     return entry;
   }
 
   // -------------- Notes builder --------------
-  // Produces the per-pick rationale that appears in the V3 Top Bets table.
-  // Re-runs every compute so it reflects current lineup status automatically.
-  function buildNotes(picked, entry, status) {
+  // Multi-market aware. Produces the rationale string per pick. Re-runs every
+  // compute so notes evolve as lineups post and odds load.
+  function buildNotes(picked, entry, status, market, oddsMissing, luReason) {
     var parts = [];
-    parts.push('V3 ' + signed(picked.edgePP, 1) + 'pp · EV ' + signed(picked.ev, 1) + '%');
-
-    // Top driver factors for this side (largest absolute delta)
-    var drivers = FACTORS.map(function(f){
-      var m = entry.mods[f.key];
-      if (!m || !m.present) return null;
-      var d = picked.side === 'away' ? m.away : m.home;
-      if (!d) return null;
-      return { name: f.name, d: d };
-    }).filter(Boolean).sort(function(a,b){ return Math.abs(b.d) - Math.abs(a.d); });
-
-    if (drivers.length) {
-      parts.push('drivers: ' + drivers.slice(0,2).map(function(x){
-        return x.name + ' ' + signed(x.d*100,1) + 'pp';
-      }).join(', '));
+    var pre = '';
+    if (market === 'TOT_O' || market === 'TOT_U') {
+      pre = 'V3 ' + (market === 'TOT_O' ? 'OVER' : 'UNDER') + ' prob ' + pctStr(picked.v3Prob, 1);
+    } else if (market === 'RL') {
+      pre = 'V3 RL cover prob ' + pctStr(picked.v3Prob, 1);
     } else {
-      // No directional factor moved V3 off market — note that explicitly.
-      parts.push('no factor drivers — pure market value');
+      pre = 'V3 ML ' + (picked.edgePP != null ? signed(picked.edgePP, 1) + 'pp · ' : '') + 'cash ' + pctStr(picked.v3Prob, 1);
+    }
+    if (!oddsMissing && picked.ev != null) {
+      pre += ' · EV ' + signed(picked.ev, 1) + '%';
+    } else {
+      pre += ' · awaiting odds for EV/Kelly';
+    }
+    parts.push(pre);
+
+    // Top driver factors (only relevant for ML / RL where we have side-coded
+    // factor deltas). Total drivers are surfaced inside the Total builder.
+    if (market === 'ML' || market === 'RL') {
+      var drivers = FACTORS.map(function(f){
+        var m = entry.mods[f.key];
+        if (!m || !m.present) return null;
+        var d = picked.side === 'away' ? m.away : (picked.side === 'home' ? m.home : 0);
+        if (!d) return null;
+        return { name: f.name, d: d };
+      }).filter(Boolean).sort(function(a,b){ return Math.abs(b.d) - Math.abs(a.d); });
+      if (drivers.length) {
+        parts.push('drivers: ' + drivers.slice(0,2).map(function(x){
+          return x.name + ' ' + signed(x.d*100,1) + 'pp';
+        }).join(', '));
+      }
     }
 
-    // Bucket B overlay status — if NONE are loaded, surface it so user knows
-    var bLoaded = ['umpire','framing','stuffPlus','defense','veloTrend','parkHand']
-      .filter(function(k){ return !!V3.overlays[k]; }).length;
-    if (bLoaded === 0) parts.push('bucket B overlays not loaded (model partial)');
+    // Lineup reason (already incorporates scratches when posted)
+    if (luReason) parts.push('LU: ' + luReason);
+    else if (status) parts.push('LU: ' + status.overall);
 
-    // Lineup status / reason. picked.luReason is whatever adjustTierForLineup wrote,
-    // which already incorporates scratches.
-    if (picked.luReason) {
-      parts.push('LU: ' + picked.luReason);
-    } else if (status) {
-      parts.push('LU: ' + status.overall);
+    // Baseline source (so the user knows when V3 is using current-model
+    // baseline vs market no-vig)
+    if (oddsMissing && entry.baselineSource && entry.baselineSource !== 'market-no-vig') {
+      parts.push('baseline: ' + entry.baselineSource);
     }
+
     return parts.join(' · ');
+  }
+
+  // -------------------- MULTI-MARKET BUILDERS --------------------
+  // Each builder reads the per-game entry (already has factors + lineup
+  // status) and emits 0..N pick objects. RL and Total are only built when
+  // their respective odds are present; ML always builds (with current-model
+  // fallback baseline so V3 can rank pre-odds).
+  function gameLabel(g) {
+    return (g.teams.away.team.name||'') + ' @ ' + (g.teams.home.team.name||'');
+  }
+
+  function buildLineupAdjustedPick(g, entry, market, cat, type, pickStr, side, sideObj, oddsMissingFlag, oddsAm, status, scratches, isOver) {
+    // Re-tier per the 78/90 cash-floor convention
+    function tierFromCash(p){
+      if (p >= 0.90) return 'LOCK';
+      if (p >= 0.78) return 'STRONG';
+      if (p >= 0.65) return 'LEAN';
+      return 'PASS';
+    }
+    var baseTier = tierFromCash(sideObj.v3Prob);
+    var fakeBet = { type: type, pick: pickStr };
+    var adj = { tier: baseTier, cashDelta: 0, scoreDelta: 0, reason: '' };
+    if (status && typeof adjustTierForLineup === 'function') {
+      try { adj = adjustTierForLineup(baseTier, status, scratches, fakeBet) || adj; } catch (e) {}
+    }
+    var finalCash = Math.max(0.05, Math.min(0.95, sideObj.v3Prob + (adj.cashDelta || 0)));
+    var finalScore = Math.max(0, sideObj.baseScore + (adj.scoreDelta || 0));
+    var mySideScratches = side === 'away'
+      ? (scratches.awayNames || [])
+      : side === 'home' ? (scratches.homeNames || []) : [];
+    var notes = buildNotes(sideObj, entry, status, market, oddsMissingFlag, adj.reason);
+    return {
+      cat: cat,
+      type: type,
+      pick: pickStr,
+      game: gameLabel(g),
+      gamePk: g.gamePk,
+      gameDate: g.gameDate,
+      market: market,
+      side: side,
+      v3Prob: sideObj.v3Prob,
+      marketAmerican: oddsAm != null ? oddsAm : null,
+      fairAmerican: sideObj.fairAmerican,
+      ev: sideObj.ev,
+      kelly: sideObj.kelly,
+      edgePP: sideObj.edgePP,
+      baseTier: baseTier,
+      tier: adj.tier || baseTier,
+      cashProb: finalCash,
+      baseScore: sideObj.baseScore,
+      score: finalScore,
+      luBadge: status && status.badge,
+      luBadgeClass: status && status.badgeClass,
+      luOverall: status && status.overall,
+      luReason: adj.reason || (status ? status.label : ''),
+      scratchedTopHitters: mySideScratches.slice(0),
+      notes: notes,
+      team: sideObj.team || null,
+      current: entry.current,
+      oddsMissing: oddsMissingFlag,
+      isOver: !!isOver
+    };
+  }
+
+  function buildMLPicks(g, entry, status, scratches) {
+    var label = gameLabel(g);
+    var picks = [];
+    ['away','home'].forEach(function(side){
+      var s = entry[side];
+      var pickStr = (s.team && s.team.name || '') + ' ML';
+      picks.push(buildLineupAdjustedPick(
+        g, entry, 'ML', '💰 ML', 'Moneyline', pickStr, side, s,
+        entry.oddsMissing, s.marketAmerican, status, scratches, null
+      ));
+    });
+    return picks;
+  }
+
+  function buildRLPicks(g, entry, status, scratches) {
+    // Need runline odds. If missing, skip.
+    var rl = entry.oddsEntry && entry.oddsEntry.runline;
+    if (!rl || rl.away == null || rl.home == null) return [];
+
+    var pAr = americanToProb(rl.away);
+    var pHr = americanToProb(rl.home);
+    var nv = noVigPair(pAr, pHr);
+    if (nv.a == null) return [];
+
+    // V3 RL probability: start from market no-vig, apply ~60% of ML's factor
+    // adjustment (run-line edge is dampened vs ML edge — a team that's 5pp
+    // better at ML is typically ~3pp better at covering -1.5).
+    var mlSumA = 0, mlSumH = 0;
+    FACTORS.forEach(function(f){
+      var m = entry.mods[f.key] || {};
+      mlSumA += (m.away || 0); mlSumH += (m.home || 0);
+    });
+    var rlSumA = mlSumA * 0.6, rlSumH = mlSumH * 0.6;
+    var rA = Math.max(0.02, Math.min(0.98, nv.a + rlSumA));
+    var rH = Math.max(0.02, Math.min(0.98, nv.b + rlSumH));
+    var nrm = rA + rH;
+    var pA = rA / nrm, pH = 1 - pA;
+
+    function sideOut(side, p, mktAm) {
+      var hasOdds = mktAm != null;
+      return {
+        team: side === 'away' ? entry.away.team : entry.home.team,
+        v3Prob: p,
+        fairAmerican: probToAmerican(p),
+        ev: hasOdds ? evPercent(p, mktAm) : null,
+        kelly: hasOdds ? kellyFracQuarter(p, mktAm) : null,
+        marketAmerican: mktAm,
+        edgePP: (p - (side==='away'?nv.a:nv.b)) * 100,
+        baseScore: Math.max(0, Math.abs((p - (side==='away'?nv.a:nv.b)) * 100) * 10)
+      };
+    }
+    var picks = [];
+    [['away', rl.away, '-1.5'], ['home', rl.home, '-1.5']].forEach(function(arr){
+      // RL pick is the side -1.5 (favorite side) — typical RL bet
+      var side = arr[0], am = arr[1];
+      var p = side==='away' ? pA : pH;
+      var s = sideOut(side, p, am);
+      var teamName = s.team && s.team.name || '';
+      var pickStr = teamName + ' -1.5';
+      picks.push(buildLineupAdjustedPick(
+        g, entry, 'RL', '💰 RL', 'Run Line', pickStr, side, s,
+        false, am, status, scratches, null
+      ));
+    });
+    return picks;
+  }
+
+  function buildTotalPicks(g, entry, status, scratches) {
+    var tot = entry.oddsEntry && entry.oddsEntry.total;
+    if (!tot || tot.line == null || tot.over == null || tot.under == null) return [];
+
+    var pO = americanToProb(tot.over);
+    var pU = americanToProb(tot.under);
+    var nv = noVigPair(pO, pU);
+    if (nv.a == null) return [];
+
+    // V3 over/under prob: market no-vig + environment deltas
+    var overDelta = 0;
+    var notes = [];
+
+    var w = entry.mods.weather && entry.mods.weather;
+    var weatherRaw = (safeState('weather') || {})[g.gamePk] || (safeState('weather') || {})[String(g.gamePk)];
+    if (weatherRaw) {
+      if (weatherRaw.tempF >= 85) { overDelta += 0.020; notes.push('hot'); }
+      else if (weatherRaw.tempF <= 55) { overDelta -= 0.015; notes.push('cold'); }
+      if (weatherRaw.humidity != null && weatherRaw.humidity >= 70) { overDelta += 0.005; }
+    }
+    var ump = entry.mods.umpire && entry.mods.umpire.raw;
+    if (ump && ump.run_env_delta != null) {
+      overDelta += Number(ump.run_env_delta) * 0.5;
+      notes.push('ump run env ' + signed(ump.run_env_delta,2));
+    }
+    var park = entry.mods.parkHand && entry.mods.parkHand.raw;
+    if (park && park.runs_pct != null) {
+      overDelta += ((park.runs_pct - 100) * 0.0012);
+    }
+    // Both starters short IP → bullpens get exposed → over
+    var ttoA = entry.mods.tto && entry.mods.tto.away;
+    var ttoH = entry.mods.tto && entry.mods.tto.home;
+    if ((ttoA||0) < 0 && (ttoH||0) < 0) { overDelta += 0.012; notes.push('both SP short'); }
+    // Both defenses weak → over
+    var defA = entry.mods.defense && entry.mods.defense.away;
+    var defH = entry.mods.defense && entry.mods.defense.home;
+    if ((defA||0) > 0 && (defH||0) > 0) { overDelta += 0.008; }
+
+    var pOv = Math.max(0.05, Math.min(0.95, nv.a + overDelta));
+    var pUn = Math.max(0.05, Math.min(0.95, nv.b - overDelta));
+    var norm = pOv + pUn; pOv = pOv / norm; pUn = 1 - pOv;
+
+    function sideOut(isOver, p, mktAm, mktNoVig) {
+      var hasOdds = mktAm != null;
+      return {
+        team: { name: (isOver ? 'OVER ' : 'UNDER ') + tot.line },
+        v3Prob: p,
+        fairAmerican: probToAmerican(p),
+        ev: hasOdds ? evPercent(p, mktAm) : null,
+        kelly: hasOdds ? kellyFracQuarter(p, mktAm) : null,
+        marketAmerican: mktAm,
+        edgePP: (p - mktNoVig) * 100,
+        baseScore: Math.max(0, Math.abs((p - mktNoVig) * 100) * 10)
+      };
+    }
+
+    var picks = [];
+    var over = sideOut(true, pOv, tot.over, nv.a);
+    var under = sideOut(false, pUn, tot.under, nv.b);
+    picks.push(buildLineupAdjustedPick(
+      g, entry, 'TOT_O', '📊 Total', 'Total OVER', 'OVER ' + tot.line, 'over', over,
+      false, tot.over, status, scratches, true
+    ));
+    picks.push(buildLineupAdjustedPick(
+      g, entry, 'TOT_U', '📊 Total', 'Total UNDER', 'UNDER ' + tot.line, 'under', under,
+      false, tot.under, status, scratches, false
+    ));
+    return picks;
+  }
+
+  function buildAllPicksForGame(g, entry) {
+    var status = null, scratches = { away:0, home:0, awayNames:[], homeNames:[] };
+    try { if (typeof lineupStatusFor === 'function') status = lineupStatusFor(g); } catch (e) {}
+    try { if (typeof detectKeyScratches === 'function') scratches = detectKeyScratches(g) || scratches; } catch (e) {}
+    var picks = [];
+    picks = picks.concat(buildMLPicks(g, entry, status, scratches));
+    picks = picks.concat(buildRLPicks(g, entry, status, scratches));
+    picks = picks.concat(buildTotalPicks(g, entry, status, scratches));
+    return picks;
   }
 
   function computeAll() {
     var games = safeState('games');
-    if (!Array.isArray(games)) { V3.games = []; return; }
-    var out = [];
-    games.forEach(function(g){ var r = computeGame(g); if (r) out.push(r); });
-    V3.games = out;
+    if (!Array.isArray(games)) { V3.games = []; V3.picks = []; return; }
+    var outGames = [];
+    var outPicks = [];
+    games.forEach(function(g){
+      var entry = computeGame(g);
+      if (!entry) return;
+      // Build the multi-market flat picks list for this game (unfiltered)
+      var picks = buildAllPicksForGame(g, entry);
+      // Copy adjusted ML pick data back onto entry.away / entry.home so the
+      // V3 Analysis card has full tier/cash/score/notes (even if the pick is
+      // below the Top Bets cash floor).
+      picks.forEach(function(p){
+        if (p.market !== 'ML') return;
+        var s = entry[p.side]; if (!s) return;
+        s.tier = p.tier;
+        s.cashProb = p.cashProb;
+        s.score = p.score;
+        s.scratchedTopHitters = p.scratchedTopHitters || [];
+        s.notes = p.notes;
+        s.luReason = p.luReason;
+      });
+      outGames.push(entry);
+      outPicks = outPicks.concat(picks);
+    });
+    // Cash floor on the flat picks list only — keep games visible in Analysis
+    // even when no pick meets the floor.
+    var floorPicks = outPicks.filter(function(p){ return p.cashProb >= 0.65; });
+    V3.games = outGames;
+    V3.picks = floorPicks;
+    V3.allPicks = outPicks; // unfiltered, available if needed for debugging
     V3.lastCompute = Date.now();
   }
 
@@ -13544,26 +13812,24 @@ document.addEventListener('click', function(e) {
     var time = e.gameDate ? new Date(e.gameDate).toLocaleTimeString([], {hour:'numeric',minute:'2-digit'}) : '';
     var hdrLu = luBadgeHtml(e.away) || luBadgeHtml(e.home);
 
-    if (e.oddsMissing) {
-      return '<div class="v3-card" style="opacity:.85;">' +
-        '<h3>' + v3esc(e.away.team.name || '') + ' @ ' + v3esc(e.home.team.name || '') +
-          (time ? ' <span style="color:var(--muted);font-weight:500;font-size:12px;margin-left:6px;">'+v3esc(time)+'</span>' : '') +
-          (hdrLu ? ' ' + hdrLu : '') +
-        '</h3>' +
-        '<div class="v3-side-fig" style="margin-top:6px;color:var(--warn);font-style:italic;">Awaiting market lines — V3 can\'t evaluate this game without odds.</div>' +
-      '</div>';
-    }
-
     function block(s){
+      var hasOdds = (s.marketAmerican != null);
       var scratchHtml = (s.scratchedTopHitters && s.scratchedTopHitters.length)
         ? '<div class="v3-side-fig" style="color:var(--warn);">⚠ key scratch: '+v3esc(s.scratchedTopHitters.slice(0,2).join(', '))+'</div>'
         : '';
+      var marketLine = hasOdds
+        ? '<div class="v3-side-fig">market <b>'+fmtAmerican(s.marketAmerican)+'</b> ('+pctStr(s.marketProb)+')</div>'
+        : '<div class="v3-side-fig" style="color:var(--warn);">market line not yet posted</div>';
+      var edgeLine = hasOdds
+        ? '<div class="v3-side-fig">edge <b>'+signed(s.edgePP,1)+'pp</b> · EV <span class="'+(s.ev>=0?'v3-ev-pos':'v3-ev-neg')+'">'+signed(s.ev,1)+'%</span></div>'
+        : '<div class="v3-side-fig">EV/Kelly populate once odds load</div>';
+      var kellyStr = (s.kelly != null && hasOdds) ? (s.kelly*100).toFixed(2)+'%' : '—';
       return '<div class="v3-side-col">' +
-        '<div class="v3-side-name">' + v3esc(s.team.name || '') + '<span class="'+tierClass(s.tier)+'">'+v3esc(s.tier)+'</span></div>' +
-        '<div class="v3-side-fig">market <b>'+fmtAmerican(s.marketAmerican)+'</b> ('+pctStr(s.marketProb)+')</div>' +
-        '<div class="v3-side-fig">V3 fair <b>'+fmtAmerican(s.fairAmerican)+'</b> · prob <b>'+pctStr(s.v3Prob)+'</b></div>' +
-        '<div class="v3-side-fig">edge <b>'+signed(s.edgePP,1)+'pp</b> · EV <span class="'+(s.ev>=0?'v3-ev-pos':'v3-ev-neg')+'">'+signed(s.ev,1)+'%</span></div>' +
-        '<div class="v3-side-fig">cash <b>'+pctStr(s.cashProb,1)+'</b> · score <b>'+(s.score||0).toFixed(1)+'</b> · Kelly <b>'+(s.kelly*100).toFixed(2)+'%</b></div>' +
+        '<div class="v3-side-name">' + v3esc(s.team.name || '') + '<span class="'+tierClass(s.tier)+'">'+v3esc(s.tier||'PASS')+'</span></div>' +
+        marketLine +
+        '<div class="v3-side-fig">V3 fair <b>'+fmtAmerican(s.fairAmerican)+'</b> · prob <b>'+pctStr(s.v3Prob||0)+'</b></div>' +
+        edgeLine +
+        '<div class="v3-side-fig">cash <b>'+pctStr(s.cashProb||0,1)+'</b> · score <b>'+(s.score||0).toFixed(1)+'</b> · Kelly <b>'+kellyStr+'</b></div>' +
         scratchHtml +
         '</div>';
     }
@@ -13605,52 +13871,87 @@ document.addEventListener('click', function(e) {
     }
   }
 
+  // Persistent V3 filter state across recomputes
+  if (!V3.filter) V3.filter = { cat: '' };
+
   function renderBets() {
     var grid = document.getElementById('v3betsGrid');
     if (!grid) return;
-    var picks = [];
-    V3.games.forEach(function(e){
-      if (e.oddsMissing) return;
-      [e.away, e.home].forEach(function(s){
-        if (s.kelly > 0) picks.push({ entry:e, side:s });
-      });
-    });
-    // Sort by V3 score (mirrors current Top Bets) then EV as tiebreak
+    var picks = (V3.picks || []).slice();
+    // Sort by Score, EV tiebreak (Score works pre-odds too — derived from cash%)
     picks.sort(function(a, b){
-      var sd = (b.side.score||0) - (a.side.score||0);
+      var sd = (b.score||0) - (a.score||0);
       if (sd) return sd;
-      return (b.side.ev||0) - (a.side.ev||0);
+      return (b.ev||0) - (a.ev||0);
     });
-    if (!picks.length) {
-      grid.innerHTML = '<div class="loader">No V3 +EV picks right now. Will recompute when odds or lineups update.</div>';
+
+    // Build category pills (counts per category)
+    var counts = {};
+    picks.forEach(function(p){ counts[p.cat] = (counts[p.cat]||0) + 1; });
+    var allCats = Object.keys(counts).sort();
+    function pill(label, value, count, active) {
+      return '<button class="v3-pill ' + (active ? 'v3-pill-active' : '') + '" data-v3cat="' + v3esc(value) + '">' +
+        v3esc(label) + ' <span class="v3-pill-count">' + count + '</span></button>';
+    }
+    var pillHtml = pill('All', '', picks.length, !V3.filter.cat);
+    allCats.forEach(function(c){
+      pillHtml += pill(c, c, counts[c], V3.filter.cat === c);
+    });
+
+    // Apply filter
+    var filtered = V3.filter.cat ? picks.filter(function(p){ return p.cat === V3.filter.cat; }) : picks;
+
+    if (!filtered.length) {
+      grid.innerHTML = '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;">' + pillHtml + '</div>' +
+        '<div class="loader">' + (picks.length ? 'No picks in this category.' : 'No V3 picks meeting the 65% cash floor yet. Will populate as lineups post and odds load.') + '</div>';
     } else {
-      var rows = picks.map(function(p, i){
-        var s = p.side, e = p.entry;
-        var time = e.gameDate ? new Date(e.gameDate).toLocaleTimeString([], {hour:'numeric',minute:'2-digit'}) : '';
-        var cashPct = (s.cashProb != null) ? (s.cashProb*100).toFixed(0)+'%' : '—';
-        var scoreStr = (s.score != null) ? Number(s.score).toFixed(1) : '—';
+      var rows = filtered.map(function(p, i){
+        var time = p.gameDate ? new Date(p.gameDate).toLocaleTimeString([], {hour:'numeric',minute:'2-digit'}) : '';
+        var cashPct = (p.cashProb != null) ? (p.cashProb*100).toFixed(0)+'%' : '—';
+        var scoreStr = (p.score != null) ? Number(p.score).toFixed(1) : '—';
+        var kellyStr = (p.kelly != null) ? (p.kelly*100).toFixed(2)+'%' : '<span style="color:var(--muted);">awaiting odds</span>';
+        var marketStr = p.marketAmerican != null ? fmtAmerican(p.marketAmerican) : '—';
         return '<tr>' +
           '<td>'+(i+1)+'</td>' +
-          '<td>'+v3esc(time)+'</td>' +
-          '<td>'+v3esc(e.away.team.name||'')+' @ '+v3esc(e.home.team.name||'')+'</td>' +
-          '<td><b>'+v3esc(s.team.name||'')+'</b> ML</td>' +
-          '<td><span class="'+tierClass(s.tier)+'">'+v3esc(s.tier)+'</span></td>' +
-          '<td>'+luBadgeHtml(s)+'</td>' +
+          '<td style="font-size:11px;color:var(--muted);">'+v3esc(p.cat||'')+'</td>' +
+          '<td style="font-size:11px;color:var(--muted);">'+v3esc(p.type||'')+'</td>' +
+          '<td><b>'+v3esc(p.pick||'')+'</b></td>' +
+          '<td style="font-size:11px;">'+v3esc(p.game||'')+'<div style="color:var(--muted);font-size:10px;">'+v3esc(time)+'</div></td>' +
+          '<td><span class="'+tierClass(p.tier)+'">'+v3esc(p.tier)+'</span></td>' +
+          '<td>'+luBadgeHtml(p)+'</td>' +
           '<td class="v3-ev-pos" style="font-weight:700;">'+v3esc(cashPct)+'</td>' +
           '<td style="font-weight:700;">'+v3esc(scoreStr)+'</td>' +
-          '<td style="color:var(--muted);font-size:11px;max-width:380px;white-space:normal;line-height:1.4;">'+v3esc(s.notes||'')+'</td>' +
+          '<td style="font-size:11px;">'+marketStr+'</td>' +
+          '<td style="font-size:11px;">'+kellyStr+'</td>' +
+          '<td style="color:var(--muted);font-size:11px;max-width:380px;white-space:normal;line-height:1.4;">'+v3esc(p.notes||'')+'</td>' +
           '</tr>';
       }).join('');
-      grid.innerHTML = '<table>' +
-        '<thead><tr>' +
-          '<th>#</th><th>Time</th><th>Game</th><th>Pick</th>' +
-          '<th>Tier</th><th>Lineup</th><th>Cash %</th><th>Score</th><th>Notes</th>' +
-        '</tr></thead>' +
-        '<tbody>'+rows+'</tbody></table>';
+      grid.innerHTML =
+        '<div id="v3catPills" style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;">' + pillHtml + '</div>' +
+        '<table>' +
+          '<thead><tr>' +
+            '<th>#</th><th>Category</th><th>Type</th><th>Pick</th><th>Game</th>' +
+            '<th>Tier</th><th>Lineup</th><th>Cash %</th><th>Score</th>' +
+            '<th>Market</th><th>Kelly</th><th>Notes</th>' +
+          '</tr></thead>' +
+          '<tbody>'+rows+'</tbody></table>';
+      // Wire pills (per-render — innerHTML wipes listeners)
+      var pillsBox = document.getElementById('v3catPills');
+      if (pillsBox) {
+        pillsBox.querySelectorAll('button[data-v3cat]').forEach(function(btn){
+          btn.addEventListener('click', function(){
+            V3.filter.cat = btn.getAttribute('data-v3cat');
+            renderBets();
+          });
+        });
+      }
     }
     var tb = document.getElementById('v3betsToolbar');
-    if (tb) tb.innerHTML = picks.length + ' V3 picks · sorted by Score · cash/score/tier adjust live as lineups post · ¼-Kelly stake (capped 3% bankroll) · last compute ' +
-      (V3.lastCompute ? new Date(V3.lastCompute).toLocaleTimeString() : '—');
+    if (tb) {
+      var withOdds = picks.filter(function(p){return p.marketAmerican != null;}).length;
+      tb.innerHTML = picks.length + ' V3 picks (cash ≥ 65%) · ' + withOdds + ' have odds · sorted by Score · cash/tier auto-upgrades as lineups post (90+ LOCK · 78–89 STRONG · 65–77 LEAN) · last compute ' +
+        (V3.lastCompute ? new Date(V3.lastCompute).toLocaleTimeString() : '—');
+    }
   }
 
   function computeAndRender() {
