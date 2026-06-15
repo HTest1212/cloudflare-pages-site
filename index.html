@@ -12987,7 +12987,7 @@ document.addEventListener('click', function(e) {
   }
 })();
 
-// ===== V3 Lab — standalone model (patch 2026-06-15) =====
+// ===== V3 Lab — standalone model (patch 2026-06-15b) =====
 // Fully additive. Reads STATE lexically and writes ONLY to V3-prefixed DOM
 // (#v3analysisGrid, #v3betsGrid, etc.). The existing Top Bets pipeline is
 // untouched. Bucket A factors compute now; bucket B factors graceful no-op
@@ -13040,7 +13040,12 @@ document.addEventListener('click', function(e) {
       '#v3betsGrid th,#v3betsGrid td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--border);font-size:13px;}' +
       '#v3betsGrid th{font-size:10px;text-transform:uppercase;color:var(--muted);letter-spacing:0.04em;}' +
       '#v3betsGrid tr:hover td{background:rgba(255,255,255,0.02);}' +
-      '#v3analysisToolbar,#v3betsToolbar{font-size:12px;color:var(--muted);padding:8px 0;}';
+      '#v3analysisToolbar,#v3betsToolbar{font-size:12px;color:var(--muted);padding:8px 0;}' +
+      '.v3-lu-badge{display:inline-block;font-size:10px;font-weight:800;padding:3px 7px;border-radius:12px;margin-left:6px;vertical-align:middle;border:1px solid transparent;}' +
+      '.v3-lu-badge.lu-projected{background:rgba(245,158,11,0.15);color:#f59e0b;border-color:rgba(245,158,11,0.4);}' +
+      '.v3-lu-badge.lu-posted{background:rgba(59,130,246,0.15);color:#60a5fa;border-color:rgba(59,130,246,0.4);}' +
+      '.v3-lu-badge.lu-partial{background:rgba(234,88,12,0.15);color:#fb923c;border-color:rgba(234,88,12,0.4);}' +
+      '.v3-lu-badge.lu-confirmed{background:rgba(16,185,129,0.15);color:#10b981;border-color:rgba(16,185,129,0.4);}';
     document.head.appendChild(s);
   })();
 
@@ -13315,7 +13320,24 @@ document.addEventListener('click', function(e) {
     var oddsBag = (safeState('odds') && STATE.odds.games) || {};
     var oEnt = oddsBag[g.gamePk] || oddsBag[String(g.gamePk)];
     var ml = oEnt && oEnt.moneyline;
-    if (!ml || ml.away == null || ml.home == null) return null;
+    var oddsMissing = !ml || ml.away == null || ml.home == null;
+
+    // If odds missing, return a shell entry so the game still appears in V3
+    // Analysis with a clear "awaiting odds" message — rather than silently
+    // disappearing from the grid.
+    if (oddsMissing) {
+      var statusM = null;
+      try { if (typeof lineupStatusFor === 'function') statusM = lineupStatusFor(g); } catch (e) {}
+      return {
+        gamePk: g.gamePk,
+        gameDate: g.gameDate,
+        away: { team: awayT, side:'away', noOdds:true, tier:'PASS', luBadge: statusM && statusM.badge, luBadgeClass: statusM && statusM.badgeClass, luOverall: statusM && statusM.overall, cashProb: null, score: 0, kelly: 0, ev: null, edgePP: null, v3Prob: null, marketProb: null, marketAmerican: null, fairAmerican: null, notes: 'Awaiting market lines — V3 can\'t evaluate without odds' },
+        home: { team: homeT, side:'home', noOdds:true, tier:'PASS', luBadge: statusM && statusM.badge, luBadgeClass: statusM && statusM.badgeClass, luOverall: statusM && statusM.overall, cashProb: null, score: 0, kelly: 0, ev: null, edgePP: null, v3Prob: null, marketProb: null, marketAmerican: null, fairAmerican: null, notes: 'Awaiting market lines — V3 can\'t evaluate without odds' },
+        mods: {},
+        current: lookupCurrentPick(g),
+        oddsMissing: true
+      };
+    }
 
     var pAr = americanToProb(ml.away);
     var pHr = americanToProb(ml.home);
@@ -13345,6 +13367,8 @@ document.addEventListener('click', function(e) {
       if (kelly >= 0.020 && ev >= 4)      tier = 'LOCK';
       else if (kelly >= 0.012 && ev >= 2) tier = 'STRONG';
       else if (kelly >= 0.005 && ev >= 1) tier = 'LEAN';
+      // Base score mirrors current model: 10 × edge in pp, gated by lineup adjuster later
+      var baseScore = Math.max(0, edgePP * 10);
       return {
         side: side,
         team: side === 'away' ? awayT : homeT,
@@ -13355,11 +13379,22 @@ document.addEventListener('click', function(e) {
         ev: ev,
         edgePP: edgePP,
         kelly: kelly,
-        tier: tier
+        baseTier: tier,
+        tier: tier,
+        baseScore: baseScore,
+        score: baseScore,
+        cashProb: pV3,          // start equal; lineup adjuster may shift
+        luBadge: null,
+        luBadgeClass: null,
+        luOverall: 'unknown',
+        luPen: 1.0,
+        luReason: '',
+        scratchedTopHitters: [],
+        notes: ''
       };
     }
 
-    return {
+    var entry = {
       gamePk: g.gamePk,
       gameDate: g.gameDate,
       away: sideOut('away', pAv, pAm, ml.away),
@@ -13367,6 +13402,82 @@ document.addEventListener('click', function(e) {
       mods: mods,
       current: lookupCurrentPick(g)
     };
+
+    // -------------------- LINEUP ENGINE INTEGRATION --------------------
+    // Reuses the same functions that drive the current Top Bets table:
+    //   lineupStatusFor(g)    → PROJECTED / POSTED / PARTIAL / CONFIRMED + luPen
+    //   detectKeyScratches(g) → top 3 hitters (by 14d OPS) missing from posted lineup
+    //   adjustTierForLineup() → applies tier suffix, cashDelta, scoreDelta, and writes the reason
+    var status = null, scratches = { away:0, home:0, awayNames:[], homeNames:[] };
+    try { if (typeof lineupStatusFor === 'function') status = lineupStatusFor(g); } catch (e) {}
+    try { if (typeof detectKeyScratches === 'function') scratches = detectKeyScratches(g) || scratches; } catch (e) {}
+
+    ['away','home'].forEach(function(side){
+      var s = entry[side];
+      if (status) {
+        s.luBadge = status.badge;
+        s.luBadgeClass = status.badgeClass;
+        s.luOverall = status.overall;
+        s.luPen = status.luPen;
+      }
+      // Build a synthetic "bet" object so adjustTierForLineup applies the
+      // offensive-over treatment that a moneyline pick deserves.
+      var fakeBet = { type: 'Moneyline', pick: (s.team && s.team.name || '') + ' ML' };
+      var adj = { tier: s.tier, cashDelta: 0, scoreDelta: 0, reason: '' };
+      if (status && typeof adjustTierForLineup === 'function') {
+        try { adj = adjustTierForLineup(s.tier, status, scratches, fakeBet) || adj; } catch (e) {}
+      }
+      // Map MY-side scratches (the side WE'RE picking) — those are the painful ones.
+      var mySideScratchNames = (side === 'away' ? scratches.awayNames : scratches.homeNames) || [];
+      s.scratchedTopHitters = mySideScratchNames.slice(0);
+      s.tier = adj.tier || s.tier;
+      s.cashProb = Math.max(0.05, Math.min(0.95, s.v3Prob + (adj.cashDelta || 0)));
+      s.score = Math.max(0, s.baseScore + (adj.scoreDelta || 0));
+      s.luReason = adj.reason || (status ? status.label : '');
+      s.notes = buildNotes(s, entry, status);
+    });
+
+    return entry;
+  }
+
+  // -------------- Notes builder --------------
+  // Produces the per-pick rationale that appears in the V3 Top Bets table.
+  // Re-runs every compute so it reflects current lineup status automatically.
+  function buildNotes(picked, entry, status) {
+    var parts = [];
+    parts.push('V3 ' + signed(picked.edgePP, 1) + 'pp · EV ' + signed(picked.ev, 1) + '%');
+
+    // Top driver factors for this side (largest absolute delta)
+    var drivers = FACTORS.map(function(f){
+      var m = entry.mods[f.key];
+      if (!m || !m.present) return null;
+      var d = picked.side === 'away' ? m.away : m.home;
+      if (!d) return null;
+      return { name: f.name, d: d };
+    }).filter(Boolean).sort(function(a,b){ return Math.abs(b.d) - Math.abs(a.d); });
+
+    if (drivers.length) {
+      parts.push('drivers: ' + drivers.slice(0,2).map(function(x){
+        return x.name + ' ' + signed(x.d*100,1) + 'pp';
+      }).join(', '));
+    } else {
+      // No directional factor moved V3 off market — note that explicitly.
+      parts.push('no factor drivers — pure market value');
+    }
+
+    // Bucket B overlay status — if NONE are loaded, surface it so user knows
+    var bLoaded = ['umpire','framing','stuffPlus','defense','veloTrend','parkHand']
+      .filter(function(k){ return !!V3.overlays[k]; }).length;
+    if (bLoaded === 0) parts.push('bucket B overlays not loaded (model partial)');
+
+    // Lineup status / reason. picked.luReason is whatever adjustTierForLineup wrote,
+    // which already incorporates scratches.
+    if (picked.luReason) {
+      parts.push('LU: ' + picked.luReason);
+    } else if (status) {
+      parts.push('LU: ' + status.overall);
+    }
+    return parts.join(' · ');
   }
 
   function computeAll() {
@@ -13423,20 +13534,44 @@ document.addEventListener('click', function(e) {
       '<div class="v3-factor-val"><b>'+v3esc(v3PickName)+'</b> @ '+pctStr(v3Side.v3Prob)+' · EV '+signed(v3Side.ev,1)+'% · stake '+(v3Side.kelly*100).toFixed(2)+'% · <span class="'+tierClass(v3Side.tier)+'">'+v3Side.tier+'</span></div></div>';
   }
 
+  function luBadgeHtml(s) {
+    if (!s || !s.luBadge) return '';
+    var cls = s.luBadgeClass || 'lu-projected';
+    return '<span class="v3-lu-badge ' + v3esc(cls) + '" title="' + v3esc(s.luOverall || '') + '">' + v3esc(s.luBadge) + '</span>';
+  }
+
   function renderAnalysisCard(e) {
     var time = e.gameDate ? new Date(e.gameDate).toLocaleTimeString([], {hour:'numeric',minute:'2-digit'}) : '';
+    var hdrLu = luBadgeHtml(e.away) || luBadgeHtml(e.home);
+
+    if (e.oddsMissing) {
+      return '<div class="v3-card" style="opacity:.85;">' +
+        '<h3>' + v3esc(e.away.team.name || '') + ' @ ' + v3esc(e.home.team.name || '') +
+          (time ? ' <span style="color:var(--muted);font-weight:500;font-size:12px;margin-left:6px;">'+v3esc(time)+'</span>' : '') +
+          (hdrLu ? ' ' + hdrLu : '') +
+        '</h3>' +
+        '<div class="v3-side-fig" style="margin-top:6px;color:var(--warn);font-style:italic;">Awaiting market lines — V3 can\'t evaluate this game without odds.</div>' +
+      '</div>';
+    }
+
     function block(s){
+      var scratchHtml = (s.scratchedTopHitters && s.scratchedTopHitters.length)
+        ? '<div class="v3-side-fig" style="color:var(--warn);">⚠ key scratch: '+v3esc(s.scratchedTopHitters.slice(0,2).join(', '))+'</div>'
+        : '';
       return '<div class="v3-side-col">' +
-        '<div class="v3-side-name">' + v3esc(s.team.name || '') + '<span class="'+tierClass(s.tier)+'">'+s.tier+'</span></div>' +
+        '<div class="v3-side-name">' + v3esc(s.team.name || '') + '<span class="'+tierClass(s.tier)+'">'+v3esc(s.tier)+'</span></div>' +
         '<div class="v3-side-fig">market <b>'+fmtAmerican(s.marketAmerican)+'</b> ('+pctStr(s.marketProb)+')</div>' +
         '<div class="v3-side-fig">V3 fair <b>'+fmtAmerican(s.fairAmerican)+'</b> · prob <b>'+pctStr(s.v3Prob)+'</b></div>' +
         '<div class="v3-side-fig">edge <b>'+signed(s.edgePP,1)+'pp</b> · EV <span class="'+(s.ev>=0?'v3-ev-pos':'v3-ev-neg')+'">'+signed(s.ev,1)+'%</span></div>' +
-        '<div class="v3-side-fig">Kelly stake <b>'+(s.kelly*100).toFixed(2)+'%</b> bankroll</div>' +
+        '<div class="v3-side-fig">cash <b>'+pctStr(s.cashProb,1)+'</b> · score <b>'+(s.score||0).toFixed(1)+'</b> · Kelly <b>'+(s.kelly*100).toFixed(2)+'%</b></div>' +
+        scratchHtml +
         '</div>';
     }
+
     return '<div class="v3-card">' +
       '<h3>' + v3esc(e.away.team.name || '') + ' @ ' + v3esc(e.home.team.name || '') +
         (time ? ' <span style="color:var(--muted);font-weight:500;font-size:12px;margin-left:6px;">'+v3esc(time)+'</span>' : '') +
+        (hdrLu ? ' ' + hdrLu : '') +
       '</h3>' +
       '<div class="v3-side">' + block(e.away) + block(e.home) + '</div>' +
       '<details class="v3-disc"><summary>▸ Factors &amp; diff vs current model</summary>' +
@@ -13475,35 +13610,46 @@ document.addEventListener('click', function(e) {
     if (!grid) return;
     var picks = [];
     V3.games.forEach(function(e){
+      if (e.oddsMissing) return;
       [e.away, e.home].forEach(function(s){
         if (s.kelly > 0) picks.push({ entry:e, side:s });
       });
     });
-    picks.sort(function(a, b){ return b.side.ev - a.side.ev; });
+    // Sort by V3 score (mirrors current Top Bets) then EV as tiebreak
+    picks.sort(function(a, b){
+      var sd = (b.side.score||0) - (a.side.score||0);
+      if (sd) return sd;
+      return (b.side.ev||0) - (a.side.ev||0);
+    });
     if (!picks.length) {
-      grid.innerHTML = '<div class="loader">No V3 +EV picks right now. Will recompute when odds or data refresh.</div>';
+      grid.innerHTML = '<div class="loader">No V3 +EV picks right now. Will recompute when odds or lineups update.</div>';
     } else {
       var rows = picks.map(function(p, i){
-        var time = p.entry.gameDate ? new Date(p.entry.gameDate).toLocaleTimeString([], {hour:'numeric',minute:'2-digit'}) : '';
+        var s = p.side, e = p.entry;
+        var time = e.gameDate ? new Date(e.gameDate).toLocaleTimeString([], {hour:'numeric',minute:'2-digit'}) : '';
+        var cashPct = (s.cashProb != null) ? (s.cashProb*100).toFixed(0)+'%' : '—';
+        var scoreStr = (s.score != null) ? Number(s.score).toFixed(1) : '—';
         return '<tr>' +
           '<td>'+(i+1)+'</td>' +
           '<td>'+v3esc(time)+'</td>' +
-          '<td>'+v3esc(p.entry.away.team.name||'')+' @ '+v3esc(p.entry.home.team.name||'')+'</td>' +
-          '<td><b>'+v3esc(p.side.team.name||'')+'</b> ML</td>' +
-          '<td>'+fmtAmerican(p.side.marketAmerican)+'</td>' +
-          '<td>'+fmtAmerican(p.side.fairAmerican)+'</td>' +
-          '<td>'+pctStr(p.side.v3Prob)+'</td>' +
-          '<td class="'+(p.side.ev>=0?'v3-ev-pos':'v3-ev-neg')+'">'+signed(p.side.ev,1)+'%</td>' +
-          '<td>'+(p.side.kelly*100).toFixed(2)+'%</td>' +
-          '<td><span class="'+tierClass(p.side.tier)+'">'+p.side.tier+'</span></td>' +
+          '<td>'+v3esc(e.away.team.name||'')+' @ '+v3esc(e.home.team.name||'')+'</td>' +
+          '<td><b>'+v3esc(s.team.name||'')+'</b> ML</td>' +
+          '<td><span class="'+tierClass(s.tier)+'">'+v3esc(s.tier)+'</span></td>' +
+          '<td>'+luBadgeHtml(s)+'</td>' +
+          '<td class="v3-ev-pos" style="font-weight:700;">'+v3esc(cashPct)+'</td>' +
+          '<td style="font-weight:700;">'+v3esc(scoreStr)+'</td>' +
+          '<td style="color:var(--muted);font-size:11px;max-width:380px;white-space:normal;line-height:1.4;">'+v3esc(s.notes||'')+'</td>' +
           '</tr>';
       }).join('');
       grid.innerHTML = '<table>' +
-        '<thead><tr><th>#</th><th>Time</th><th>Game</th><th>Pick</th><th>Market</th><th>Fair</th><th>V3 %</th><th>EV</th><th>Stake</th><th>Tier</th></tr></thead>' +
+        '<thead><tr>' +
+          '<th>#</th><th>Time</th><th>Game</th><th>Pick</th>' +
+          '<th>Tier</th><th>Lineup</th><th>Cash %</th><th>Score</th><th>Notes</th>' +
+        '</tr></thead>' +
         '<tbody>'+rows+'</tbody></table>';
     }
     var tb = document.getElementById('v3betsToolbar');
-    if (tb) tb.innerHTML = picks.length + ' positive-EV picks · sorted by EV · ¼-Kelly stake (capped 3% bankroll) · last compute ' +
+    if (tb) tb.innerHTML = picks.length + ' V3 picks · sorted by Score · cash/score/tier adjust live as lineups post · ¼-Kelly stake (capped 3% bankroll) · last compute ' +
       (V3.lastCompute ? new Date(V3.lastCompute).toLocaleTimeString() : '—');
   }
 
@@ -13514,8 +13660,11 @@ document.addEventListener('click', function(e) {
   }
 
   function maybeRecompute() {
-    if (Date.now() - V3.lastCompute > V3.cacheMs) computeAndRender();
-    else { renderAnalysis(); renderBets(); }
+    // Always recompute on tab activation — V3 is cheap and STATE may have
+    // changed (lineups posted, odds refresh, key scratch detected) since
+    // the last compute. Caching here masked stale results when odds loaded
+    // after the first compute.
+    computeAndRender();
   }
 
   // ---------- tab activation hook + init ----------
