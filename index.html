@@ -10097,30 +10097,41 @@ function renderBullpen() {
     }
   } catch(e) {}
   const el = document.getElementById("bullpenGrid");
-  const teams = {};
+
+  // Build one entry per team per game. Always emit a card for both sides
+  // so the matchup picker always shows a clean pair, even if bullpen data
+  // for one team hasn't arrived yet (shows a "loading" placeholder instead).
+  const entries = [];
   STATE.games.forEach(function(g, gi){
+    if (!g || !g.teams) return;
+    const gameTime = g.gameDate
+      ? new Date(g.gameDate).toLocaleTimeString([], { hour:"numeric", minute:"2-digit" })
+      : '';
     ["away","home"].forEach(function(s){
-      const t = g.teams[s].team;
+      const t = g.teams[s] && g.teams[s].team;
       if (!t) return;
-      const u = STATE.bullpen[t.id];
-      if (u) teams[t.id] = {
+      const opp = g.teams[s==="away"?"home":"away"].team;
+      entries.push({
         team: t,
-        usage: u,
-        opp: g.teams[s==="away"?"home":"away"].team,
+        usage: STATE.bullpen[t.id] || null,
+        opp: opp,
         matchupKey: "g"+gi,
-        side: s
-      };
+        side: s,
+        gameTime: gameTime
+      });
     });
   });
-  const keys = Object.keys(teams);
-  if (!keys.length) { el.innerHTML = '<div class="loader">Fetching bullpen pitch counts…</div>'; return; }
-  // Alphabetical sort by team name
-  keys.sort(function(a, b){
-    return (teams[a].team.name || '').localeCompare(teams[b].team.name || '');
+
+  if (!entries.length) { el.innerHTML = '<div class="loader">Loading today\'s schedule…</div>'; return; }
+
+  // Alphabetical sort by team name (matchup mode re-orders to away/home in the patch).
+  entries.sort(function(a, b){
+    return (a.team.name || '').localeCompare(b.team.name || '');
   });
-  el.innerHTML = keys.map(function(k){
-    const info = teams[k];
-    const u = info.usage;
+
+  el.innerHTML = entries.map(function(info){
+    const u = info.usage || [];
+    const hasData = !!info.usage;
     const red = u.filter(function(p){return p.avail==="red";});
     const yellow = u.filter(function(p){return p.avail==="yellow";});
     const green = u.filter(function(p){return p.avail==="green";});
@@ -10143,8 +10154,10 @@ function renderBullpen() {
       return highLevRoles[(r.role||'').toLowerCase()] && (r.status||'').toLowerCase() !== 'out';
     });
     let weakTier = 'ok';
-    if (highLevOut.length >= 2 || pen.penalty >= 0.10 || red.length >= 3) weakTier = 'critical';
-    else if (highLevOut.length >= 1 || pen.penalty >= 0.05 || red.length >= 2 || highLevLimited.length >= 2) weakTier = 'weak';
+    if (hasData) {
+      if (highLevOut.length >= 2 || pen.penalty >= 0.10 || red.length >= 3) weakTier = 'critical';
+      else if (highLevOut.length >= 1 || pen.penalty >= 0.05 || red.length >= 2 || highLevLimited.length >= 2) weakTier = 'weak';
+    }
 
     const isYankees = /Yankees/.test(info.team.name);
     const yankeesBorder = isYankees ? 'border:2px solid #c4ced4;' : '';
@@ -10164,22 +10177,37 @@ function renderBullpen() {
       weakBadge = '<span style="display:inline-block;background:var(--warn);color:#000;font-size:10px;font-weight:800;padding:2px 6px;border-radius:4px;margin-left:6px;vertical-align:middle;">⚠ THIN</span>';
     }
 
+    // Side pill (AWAY / HOME) — hidden by default; matchup mode reveals via CSS class.
+    const sidePill = '<span class="bp-side-pill" style="display:none;font-size:10px;font-weight:800;padding:2px 6px;border-radius:4px;margin-left:6px;vertical-align:middle;background:'+
+      (info.side==='away'?'#2d5b8e;color:#fff;':'#1f6b4a;color:#fff;')+
+      '">'+(info.side==='away'?'AWAY':'HOME')+'</span>';
+
+    const timeLine = info.gameTime
+      ? '<div class="small" style="color:var(--muted);font-weight:600;margin-top:2px;">🕒 First pitch: '+esc(info.gameTime)+'</div>'
+      : '';
+
     const attrs =
       ' data-team-id="'+esc(String(info.team.id))+'"'+
       ' data-team-name="'+esc(info.team.name)+'"'+
-      ' data-opp-id="'+esc(String(info.opp.id||''))+'"'+
-      ' data-opp-name="'+esc(info.opp.name||'')+'"'+
+      ' data-opp-id="'+esc(String(info.opp && info.opp.id || ''))+'"'+
+      ' data-opp-name="'+esc(info.opp && info.opp.name || '')+'"'+
       ' data-matchup="'+esc(info.matchupKey)+'"'+
       ' data-side="'+esc(info.side)+'"'+
-      ' data-weak="'+weakTier+'"';
+      ' data-weak="'+weakTier+'"'+
+      ' data-has-data="'+(hasData?'1':'0')+'"';
+
+    const body = hasData
+      ? (red.length?'<div class="small" style="margin-top:8px;color:var(--bad);font-weight:700;">UNAVAILABLE ('+red.length+')</div>'+red.map(rowP).join(""):'')+
+        (yellow.length?'<div class="small" style="margin-top:8px;color:var(--warn);font-weight:700;">Limited ('+yellow.length+')</div>'+yellow.map(rowP).join(""):'')+
+        (green.length?'<div class="small" style="margin-top:8px;color:var(--good);font-weight:700;">Fresh ('+green.length+')</div>'+green.slice(0,8).map(rowP).join(""):'')
+      : '<div class="small" style="margin-top:10px;color:var(--muted);font-style:italic;">Bullpen pitch counts loading…</div>';
 
     return '<div class="card bullpen-card"'+attrs+' style="'+yankeesBorder+weakAccent+'">'+
       (isYankees?'<div style="font-size:10px;font-weight:700;color:#c4ced4;margin-bottom:4px;">⭐ YANKEES</div>':'')+
-      '<h3>'+esc(info.team.name)+weakBadge+'</h3>'+
-      '<div class="small">vs '+esc(info.opp.name)+'</div>'+
-      (red.length?'<div class="small" style="margin-top:8px;color:var(--bad);font-weight:700;">UNAVAILABLE ('+red.length+')</div>'+red.map(rowP).join(""):'')+
-      (yellow.length?'<div class="small" style="margin-top:8px;color:var(--warn);font-weight:700;">Limited ('+yellow.length+')</div>'+yellow.map(rowP).join(""):'')+
-      (green.length?'<div class="small" style="margin-top:8px;color:var(--good);font-weight:700;">Fresh ('+green.length+')</div>'+green.slice(0,8).map(rowP).join(""):'')+
+      '<h3>'+esc(info.team.name)+weakBadge+sidePill+'</h3>'+
+      '<div class="small">vs '+esc((info.opp && info.opp.name) || '—')+'</div>'+
+      timeLine+
+      body+
       '</div>';
   }).join("");
 
@@ -12723,7 +12751,7 @@ document.addEventListener('click', function(e) {
     setInterval(applyAll, 30000);
   }
 })();
-// ===== Bullpen filter + matchup + weak-pen highlight (patch 2026-06-14) =====
+// ===== Bullpen filter + matchup + weak-pen highlight (patch 2026-06-14b) =====
 // Hook-based: renderBullpen() calls window.__bullpenAfterRender() after each paint.
 // No MutationObserver — earlier version watched document.body and infinite-looped
 // because applying the filter mutates the DOM, which re-fired the observer.
@@ -12731,24 +12759,48 @@ document.addEventListener('click', function(e) {
   if (window.__bullpenFilterInstalled) return;
   window.__bullpenFilterInstalled = true;
 
+  // CSS — uses !important so it beats whatever .grid.cards declares.
+  var style = document.createElement('style');
+  style.textContent =
+    '#bullpenGrid.bullpen-matchup-mode {' +
+      'grid-template-columns: 1fr 1fr !important;' +
+      'gap: 16px !important;' +
+      'max-width: 1100px;' +
+      'margin: 0 auto;' +
+    '}' +
+    '#bullpenGrid.bullpen-matchup-mode .bp-side-pill { display: inline-block !important; }' +
+    '#bullpenMatchupHeader {' +
+      'display:flex;align-items:center;justify-content:center;gap:16px;' +
+      'padding:14px 18px;margin:6px 0 12px;border-radius:10px;' +
+      'background:linear-gradient(90deg,rgba(45,91,142,.18),rgba(31,107,74,.18));' +
+      'border:1px solid var(--border);font-weight:700;' +
+    '}' +
+    '#bullpenMatchupHeader .mh-side { font-size:11px;font-weight:800;padding:2px 8px;border-radius:4px;color:#fff; }' +
+    '#bullpenMatchupHeader .mh-away { background:#2d5b8e; }' +
+    '#bullpenMatchupHeader .mh-home { background:#1f6b4a; }' +
+    '#bullpenMatchupHeader .mh-vs { color:var(--muted);font-size:13px;font-weight:600; }' +
+    '#bullpenMatchupHeader .mh-time { color:var(--muted);font-size:12px;font-weight:600;margin-left:auto; }';
+  document.head.appendChild(style);
+
   var FILTER = { team: '', matchup: '', weakOnly: false };
 
   function getGrid() { return document.getElementById('bullpenGrid'); }
 
   function uniqueMatchups() {
-    // Build from STATE.games so the list stays correct even if some
+    // Build from STATE.games — list stays correct even if some
     // teams haven't returned bullpen data yet.
     var out = [];
-    var seen = {};
     if (!window.STATE || !STATE.games) return out;
     STATE.games.forEach(function(g, i){
       var a = g.teams && g.teams.away && g.teams.away.team;
       var h = g.teams && g.teams.home && g.teams.home.team;
       if (!a || !h) return;
-      var key = 'g' + i;
-      if (seen[key]) return;
-      seen[key] = true;
-      out.push({ key: key, label: (a.name || a.teamName) + ' @ ' + (h.name || h.teamName) });
+      var time = '';
+      if (g.gameDate) {
+        try { time = new Date(g.gameDate).toLocaleTimeString([], {hour:"numeric", minute:"2-digit"}); } catch(e){}
+      }
+      var label = (a.name || a.teamName) + ' vs ' + (h.name || h.teamName) + (time ? ' (' + time + ')' : '');
+      out.push({ key: 'g' + i, label: label, away: a, home: h, time: time });
     });
     out.sort(function(x, y){ return x.label.localeCompare(y.label); });
     return out;
@@ -12772,6 +12824,8 @@ document.addEventListener('click', function(e) {
     if (!grid) return;
     var existing = document.getElementById('bullpenFilterBar');
     if (existing) existing.remove();
+    var existingHeader = document.getElementById('bullpenMatchupHeader');
+    if (existingHeader) existingHeader.remove();
 
     var teams = uniqueTeams();
     var matchups = uniqueMatchups();
@@ -12786,8 +12840,8 @@ document.addEventListener('click', function(e) {
         teams.map(function(n){ return '<option value="' + n + '">' + n + '</option>'; }).join('') +
       '</select>' +
       '<label style="font-size:12px;color:var(--muted);font-weight:600;">Matchup (side-by-side):</label>' +
-      '<select id="bpMatchupSel" style="background:var(--panel);color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 10px;font-size:12px;min-width:230px;">' +
-        '<option value="">— none —</option>' +
+      '<select id="bpMatchupSel" style="background:var(--panel);color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 10px;font-size:12px;min-width:270px;">' +
+        '<option value="">— pick a game —</option>' +
         matchups.map(function(m){ return '<option value="' + m.key + '">' + m.label + '</option>'; }).join('') +
       '</select>' +
       '<label style="font-size:12px;color:var(--muted);font-weight:600;display:inline-flex;align-items:center;gap:6px;cursor:pointer;">' +
@@ -12807,7 +12861,6 @@ document.addEventListener('click', function(e) {
 
     teamSel.addEventListener('change', function(e){
       FILTER.team = e.target.value;
-      // Choosing a team clears matchup mode so the user isn't fighting two filters.
       if (FILTER.team) { FILTER.matchup = ''; matchSel.value = ''; }
       apply();
     });
@@ -12827,30 +12880,53 @@ document.addEventListener('click', function(e) {
     });
   }
 
+  function renderMatchupHeader(matchupKey) {
+    var grid = getGrid();
+    if (!grid) return;
+    var existing = document.getElementById('bullpenMatchupHeader');
+    if (existing) existing.remove();
+    if (!matchupKey) return;
+
+    var matchups = uniqueMatchups();
+    var m = matchups.filter(function(x){ return x.key === matchupKey; })[0];
+    if (!m) return;
+
+    var header = document.createElement('div');
+    header.id = 'bullpenMatchupHeader';
+    header.innerHTML =
+      '<span class="mh-side mh-away">AWAY</span>' +
+      '<span>' + (m.away.name || m.away.teamName) + '</span>' +
+      '<span class="mh-vs">vs</span>' +
+      '<span>' + (m.home.name || m.home.teamName) + '</span>' +
+      '<span class="mh-side mh-home">HOME</span>' +
+      (m.time ? '<span class="mh-time">🕒 First pitch ' + m.time + '</span>' : '');
+    grid.parentNode.insertBefore(header, grid);
+  }
+
   function apply() {
     var grid = getGrid();
     if (!grid) return;
     var cards = grid.querySelectorAll('.bullpen-card');
 
-    // Matchup mode: show the two cards for that game in a 2-column layout.
     if (FILTER.matchup) {
-      grid.style.gridTemplateColumns = '1fr 1fr';
-      var matchedCards = [];
+      grid.classList.add('bullpen-matchup-mode');
+      var matched = [];
       cards.forEach(function(c){
         var show = c.getAttribute('data-matchup') === FILTER.matchup;
         c.style.display = show ? '' : 'none';
-        if (show) matchedCards.push(c);
+        if (show) matched.push(c);
       });
       // Order: away first, home second
-      matchedCards.sort(function(a, b){
+      matched.sort(function(a, b){
         return (a.getAttribute('data-side') === 'away') ? -1 : 1;
       });
-      matchedCards.forEach(function(c){ grid.appendChild(c); });
+      matched.forEach(function(c){ grid.appendChild(c); });
+      renderMatchupHeader(FILTER.matchup);
       return;
     }
 
-    // Normal mode: clear any matchup grid override.
-    grid.style.gridTemplateColumns = '';
+    grid.classList.remove('bullpen-matchup-mode');
+    renderMatchupHeader('');
 
     cards.forEach(function(c){
       var teamName = c.getAttribute('data-team-name') || '';
@@ -12862,14 +12938,11 @@ document.addEventListener('click', function(e) {
     });
   }
 
-  // Called by renderBullpen() after every paint.
   window.__bullpenAfterRender = function () {
     buildBar();
     apply();
   };
 
-  // First paint may have already happened by the time this patch loads;
-  // run once if the grid is populated.
   if (getGrid() && getGrid().querySelector('.bullpen-card')) {
     window.__bullpenAfterRender();
   }
