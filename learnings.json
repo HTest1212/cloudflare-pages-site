@@ -1,85 +1,24 @@
 {
-  "asof": "2026-06-15T04:38:12Z",
-  "yesterday_date": "2026-06-14",
+  "asof": "2026-06-18T20:38:54Z",
+  "yesterday_date": "2026-06-17",
   "yesterday_record": {
-    "picks": 23,
-    "wins": 12,
-    "losses": 11,
+    "picks": 0,
+    "wins": 0,
+    "losses": 0,
     "pushes": 0,
-    "voids": 18,
-    "units": -0.6328,
-    "totalStake": 23.0,
-    "winRate": 0.5217,
-    "roi": -0.0275
+    "voids": 0,
+    "units": 0,
+    "totalStake": 0.0,
+    "winRate": 0,
+    "roi": 0
   },
-  "by_market": {
-    "Total": {
-      "picks": 5,
-      "wins": 3,
-      "losses": 2,
-      "pushes": 0,
-      "voids": 1,
-      "units": 0.7706,
-      "totalStake": 5.0,
-      "winRate": 0.6,
-      "roi": 0.1541
-    },
-    "K": {
-      "picks": 6,
-      "wins": 3,
-      "losses": 3,
-      "pushes": 0,
-      "voids": 0,
-      "units": -0.4608,
-      "totalStake": 6.0,
-      "winRate": 0.5,
-      "roi": -0.0768
-    },
-    "ML": {
-      "picks": 11,
-      "wins": 5,
-      "losses": 6,
-      "pushes": 0,
-      "voids": 1,
-      "units": -1.6569,
-      "totalStake": 11.0,
-      "winRate": 0.4545,
-      "roi": -0.1506
-    },
-    "F5_ML": {
-      "picks": 1,
-      "wins": 1,
-      "losses": 0,
-      "pushes": 0,
-      "voids": 0,
-      "units": 0.7143,
-      "totalStake": 1.0,
-      "winRate": 1.0,
-      "roi": 0.7143
-    }
-  },
-  "loss_categories": {
-    "STARTER_REGRESSION": 4,
-    "VARIANCE": 7
-  },
+  "by_market": {},
+  "loss_categories": {},
   "lock_breach_priority": "normal",
   "lock_breach_rules": [],
   "lock_guard_status": "cap_active",
   "lock_rolling_14d_winRate": 0.3333,
-  "patterns_identified": [
-    {
-      "category": "STARTER_REGRESSION",
-      "frequency": 4,
-      "summary": "4 losses yesterday shared category STARTER_REGRESSION.",
-      "adjustment_rule": "Down weight setups exposed to STARTER_REGRESSION; require an extra confirming signal before grading above C."
-    },
-    {
-      "category": "VARIANCE",
-      "frequency": 7,
-      "summary": "7 losses yesterday shared category VARIANCE.",
-      "adjustment_rule": "Down weight setups exposed to VARIANCE; require an extra confirming signal before grading above C."
-    }
-  ],
+  "patterns_identified": [],
   "adjustments_for_today": [
     "LOCK GUARD ACTIVE: Cap A tier publication until rolling 14d Lock win rate recovers to 0.85. Demote any A tier candidate missing 4 or more of: model confidence above 80, recent form positive, lineup confirmed, weather neutral or favorable, bullpen rested, no key injury, no umpire risk flag.",
     "Do not Lock a K over at 6.5 or higher unless the starter cleared six innings in three of his last four starts; pull A tier on any short leash or pitch count risk.",
@@ -95,9 +34,9 @@
     "Down weight setups exposed to VARIANCE; require an extra confirming signal before grading above C."
   ],
   "monitoring_list": [
-    "Lock guard cap_active: rolling 14d Lock win rate at 33 percent, below the 80 percent floor.",
-    "B tier K overs: four of yesterday's losses were starters pulled early or underperforming the line.",
-    "Road ML favorites with shaky starters: Mariners and Astros favorites both lost outright."
+    "DATA GAP: 30 picks dated 2026-06-15 remain unsettled in picks_log (outcomes_log ends 2026-06-14). No A tier locks among them. Needs a targeted manual settle to keep lifetime track record complete.",
+    "DATA GAP: No picks were logged for 2026-06-16 or 2026-06-17 despite full 15 game slates. The midday 11:30 AM pick generation run appears to have stopped producing or committing picks after 2026-06-15.",
+    "Lock guard remains cap_active: rolling 14d Lock win rate 0.3333 driven by the 4 Lock losses on 2026-06-10. These age out of the 14d window after 2026-06-24."
   ],
   "carryover_rules": [
     {
