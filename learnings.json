@@ -1,214 +1,297 @@
 {
-  "asof": "2026-06-18T20:38:54Z",
-  "yesterday_date": "2026-06-17",
-  "yesterday_record": {
-    "picks": 0,
-    "wins": 0,
-    "losses": 0,
-    "pushes": 0,
-    "voids": 0,
-    "units": 0,
-    "totalStake": 0.0,
-    "winRate": 0,
-    "roi": 0
+ "asof": "2026-06-19T04:45:32Z",
+ "yesterday_date": "2026-06-18",
+ "yesterday_record": {
+  "picks": 17,
+  "wins": 10,
+  "losses": 6,
+  "pushes": 1,
+  "voids": 0,
+  "units": 3.3504,
+  "totalStake": 17.0,
+  "winRate": 0.625,
+  "roi": 0.1971
+ },
+ "by_market": {
+  "F5_ML": {
+   "picks": 2,
+   "wins": 1,
+   "losses": 0,
+   "pushes": 1,
+   "voids": 0,
+   "units": 0.9091,
+   "totalStake": 2.0,
+   "winRate": 1.0,
+   "roi": 0.4546
   },
-  "by_market": {},
-  "loss_categories": {},
-  "lock_breach_priority": "normal",
-  "lock_breach_rules": [],
-  "lock_guard_status": "cap_active",
-  "lock_rolling_14d_winRate": 0.3333,
-  "patterns_identified": [],
-  "adjustments_for_today": [
-    "LOCK GUARD ACTIVE: Cap A tier publication until rolling 14d Lock win rate recovers to 0.85. Demote any A tier candidate missing 4 or more of: model confidence above 80, recent form positive, lineup confirmed, weather neutral or favorable, bullpen rested, no key injury, no umpire risk flag.",
-    "Do not Lock a K over at 6.5 or higher unless the starter cleared six innings in three of his last four starts; pull A tier on any short leash or pitch count risk.",
-    "Do not Lock a road ML favorite whose starter projects under seven innings unless a rested high leverage reliever is confirmed; bottom third bullpens cap these at B.",
-    "Never Lock a Coors Over above 11 on wind blowing out alone; require both starters at a 5.00 or worse ERA and confirmed heavy bullpen usage before A tier.",
-    "Do not Lock a road ML favorite at Coors on opponent starter ERA alone; altitude variance caps these at B until the offense shows two straight road games of five plus runs.",
-    "Down weight setups exposed to VARIANCE until the pattern clears.",
-    "Require the pitcher trailing 5 start strikeout rate to exceed the posted K line before publishing a K over, and cap K over stake at half a unit when the line is above the pitcher season average.",
-    "Cap total bet exposure per slate; a cluster of correlated under and favorite plays amplifies variance on rough nights.",
-    "Two of three K Over 6.5 losses came from starters pulled before 6 innings in lopsided games; avoid K Over chips when the starter carries blowout or short leash risk and require a projected floor of 6 innings.",
-    "Demote any ML favorite whose starter lacks two consecutive quality starts in last three outings; require bullpen rest confirmation.",
-    "Tighten under totals: do not publish an under when both lineups rank top 12 in runs per game over the trailing 14 days.",
-    "Down weight setups exposed to VARIANCE; require an extra confirming signal before grading above C."
-  ],
-  "monitoring_list": [
-    "DATA GAP: 30 picks dated 2026-06-15 remain unsettled in picks_log (outcomes_log ends 2026-06-14). No A tier locks among them. Needs a targeted manual settle to keep lifetime track record complete.",
-    "DATA GAP: No picks were logged for 2026-06-16 or 2026-06-17 despite full 15 game slates. The midday 11:30 AM pick generation run appears to have stopped producing or committing picks after 2026-06-15.",
-    "Lock guard remains cap_active: rolling 14d Lock win rate 0.3333 driven by the 4 Lock losses on 2026-06-10. These age out of the 14d window after 2026-06-24."
-  ],
-  "carryover_rules": [
-    {
-      "rule": "Never issue A-tier Under 7.0 at Oracle when the opposing starter has sub 3.50 ERA and top 5 K rate. The park cannot overcome elite SP offense suppression that also kills the under edge.",
-      "source": "manual",
-      "added_date": "2026-05-20",
-      "expires_date": null,
-      "times_validated": 3,
-      "permanent": true,
-      "last_validated": "2026-05-25"
-    },
-    {
-      "rule": "Never issue Giants ML as A-tier unless SF starting pitcher has sub 3.20 ERA AND Giants offense ranks top 10 NL in runs last 14 days. Suppress juice requirement to no worse than -125 when both conditions are not met.",
-      "source": "manual",
-      "added_date": "2026-05-20",
-      "expires_date": null,
-      "times_validated": 3,
-      "permanent": true,
-      "last_validated": "2026-05-25"
-    },
-    {
-      "rule": "Cap A-tier exposure at 2 picks per game maximum. F5 Under 4 requires both starters sub 3.50 ERA with sub 7.0 BB9. Never stack F5 Under + ML + Total all A-tier on same game.",
-      "source": "manual",
-      "added_date": "2026-05-20",
-      "expires_date": null,
-      "times_validated": 3,
-      "permanent": true,
-      "last_validated": "2026-05-25"
-    },
-    {
-      "rule": "Never issue A-tier ML on any team when their offense ranks bottom third in runs scored last 7 days regardless of park advantage. Minimum requirement: top half run production last 7 days for A-tier ML designation.",
-      "source": "manual",
-      "added_date": "2026-05-20",
-      "expires_date": null,
-      "times_validated": 3,
-      "permanent": true,
-      "last_validated": "2026-05-25"
-    },
-    {
-      "rule": "Require the pitcher trailing 5 start strikeout rate to exceed the posted K line before publishing a K over, and cap K over stake at half a unit when the line is above the pitcher season average.",
-      "source": "pattern",
-      "added_date": "2026-05-28",
-      "expires_date": null,
-      "times_validated": 10,
-      "permanent": true,
-      "last_validated": "2026-06-14"
-    },
-    {
-      "rule": "Down weight setups exposed to VARIANCE until the pattern clears.",
-      "source": "pattern",
-      "added_date": "2026-05-29",
-      "expires_date": null,
-      "times_validated": 13,
-      "permanent": true,
-      "last_validated": "2026-06-14"
-    },
-    {
-      "rule": "Cap total bet exposure per slate; a cluster of correlated under and favorite plays amplifies variance on rough nights.",
-      "source": "pattern",
-      "added_date": "2026-05-30",
-      "expires_date": null,
-      "times_validated": 10,
-      "permanent": true,
-      "last_validated": "2026-06-14"
-    },
-    {
-      "rule": "Demote any ML favorite whose starter lacks two consecutive quality starts in last three outings; require bullpen rest confirmation.",
-      "source": "pattern",
-      "added_date": "2026-05-30",
-      "expires_date": null,
-      "times_validated": 7,
-      "permanent": true,
-      "last_validated": "2026-06-14"
-    },
-    {
-      "rule": "Tighten under totals: do not publish an under when both lineups rank top 12 in runs per game over the trailing 14 days.",
-      "source": "pattern",
-      "added_date": "2026-05-30",
-      "expires_date": null,
-      "times_validated": 6,
-      "permanent": true,
-      "last_validated": "2026-06-14"
-    },
-    {
-      "rule": "Two of three K Over 6.5 losses came from starters pulled before 6 innings in lopsided games; avoid K Over chips when the starter carries blowout or short leash risk and require a projected floor of 6 innings.",
-      "source": "pattern",
-      "added_date": "2026-06-01",
-      "expires_date": null,
-      "times_validated": 8,
-      "permanent": true,
-      "last_validated": "2026-06-14"
-    },
-    {
-      "rule": "Do not Lock a road ML favorite whose starter projects under seven innings unless a rested high leverage reliever is confirmed; bottom third bullpens cap these at B.",
-      "source": "lock_breach",
-      "added_date": "2026-06-10",
-      "expires_date": null,
-      "times_validated": 3,
-      "permanent": true,
-      "last_validated": "2026-06-14"
-    },
-    {
-      "rule": "Never Lock a Coors Over above 11 on wind blowing out alone; require both starters at a 5.00 or worse ERA and confirmed heavy bullpen usage before A tier.",
-      "source": "lock_breach",
-      "added_date": "2026-06-10",
-      "expires_date": "2026-06-28",
-      "times_validated": 2,
-      "permanent": false,
-      "last_validated": "2026-06-14"
-    },
-    {
-      "rule": "Do not Lock a road ML favorite at Coors on opponent starter ERA alone; altitude variance caps these at B until the offense shows two straight road games of five plus runs.",
-      "source": "lock_breach",
-      "added_date": "2026-06-10",
-      "expires_date": "2026-06-28",
-      "times_validated": 2,
-      "permanent": false,
-      "last_validated": "2026-06-14"
-    },
-    {
-      "rule": "Do not Lock a K over at 6.5 or higher unless the starter cleared six innings in three of his last four starts; pull A tier on any short leash or pitch count risk.",
-      "source": "lock_breach",
-      "added_date": "2026-06-10",
-      "expires_date": null,
-      "times_validated": 4,
-      "permanent": true,
-      "last_validated": "2026-06-14"
-    },
-    {
-      "rule": "Down weight setups exposed to VARIANCE; require an extra confirming signal before grading above C.",
-      "source": "pattern",
-      "added_date": "2026-06-10",
-      "expires_date": null,
-      "times_validated": 5,
-      "permanent": true,
-      "last_validated": "2026-06-14"
-    },
-    {
-      "rule": "Down weight setups exposed to STARTER_REGRESSION; require an extra confirming signal before grading above C.",
-      "source": "pattern",
-      "added_date": "2026-06-10",
-      "expires_date": null,
-      "times_validated": 4,
-      "permanent": true,
-      "last_validated": "2026-06-14"
-    },
-    {
-      "rule": "Down weight setups exposed to BAD_PARK_READ; require an extra confirming signal before grading above C.",
-      "source": "pattern",
-      "added_date": "2026-06-10",
-      "expires_date": "2026-06-17",
-      "times_validated": 1,
-      "permanent": false,
-      "last_validated": "2026-06-10"
-    },
-    {
-      "rule": "A sub 1.10 WHIP label alone is not protection; verify the starter's last three starts for runs allowed and innings before publishing any ML, total, or K over built on that starter.",
-      "source": "pattern",
-      "added_date": "2026-06-11",
-      "expires_date": null,
-      "times_validated": 3,
-      "permanent": true,
-      "last_validated": "2026-06-14"
-    },
-    {
-      "rule": "K Over props require the starter to average at least 5.2 innings across his last three starts; exclude any K Over line of 6.5 or higher when the team is a heavy favorite likely to pull the starter early.",
-      "source": "pattern",
-      "added_date": "2026-06-13",
-      "expires_date": "2026-06-21",
-      "times_validated": 2,
-      "permanent": false,
-      "last_validated": "2026-06-14"
-    }
-  ]
+  "K": {
+   "picks": 1,
+   "wins": 1,
+   "losses": 0,
+   "pushes": 0,
+   "voids": 0,
+   "units": 0.8333,
+   "totalStake": 1.0,
+   "winRate": 1.0,
+   "roi": 0.8333
+  },
+  "ML": {
+   "picks": 9,
+   "wins": 4,
+   "losses": 5,
+   "pushes": 0,
+   "voids": 0,
+   "units": -1.3193,
+   "totalStake": 9.0,
+   "winRate": 0.4444,
+   "roi": -0.1466
+  },
+  "RL": {
+   "picks": 1,
+   "wins": 0,
+   "losses": 1,
+   "pushes": 0,
+   "voids": 0,
+   "units": -1.0,
+   "totalStake": 1.0,
+   "winRate": 0.0,
+   "roi": -1.0
+  },
+  "Total": {
+   "picks": 3,
+   "wins": 3,
+   "losses": 0,
+   "pushes": 0,
+   "voids": 0,
+   "units": 2.7273,
+   "totalStake": 3.0,
+   "winRate": 1.0,
+   "roi": 0.9091
+  },
+  "YRFI": {
+   "picks": 1,
+   "wins": 1,
+   "losses": 0,
+   "pushes": 0,
+   "voids": 0,
+   "units": 1.2,
+   "totalStake": 1.0,
+   "winRate": 1.0,
+   "roi": 1.2
+  }
+ },
+ "loss_categories": {
+  "MODEL_ERROR": 3,
+  "VARIANCE": 3
+ },
+ "lock_breach_priority": "normal",
+ "lock_breach_rules": [],
+ "lock_guard_status": "cap_active",
+ "lock_rolling_14d_winRate": 0.3333,
+ "patterns_identified": [
+  {
+   "category": "MODEL_ERROR",
+   "frequency": 3,
+   "summary": "All three MODEL_ERROR losses were correlated Yankees positions on one game where the offense scored a single run.",
+   "adjustment_rule": "Do not publish three correlated positions such as moneyline, a duplicate moneyline and the run line on the same heavy favorite; cap single game exposure at two positions so one cold offensive game cannot compound into a three unit MODEL_ERROR loss."
+  },
+  {
+   "category": "VARIANCE",
+   "frequency": 3,
+   "summary": "Three one run or close game losses (Phillies lean, Red Sox plus money, Brewers lefty duel) landed on the wrong side.",
+   "adjustment_rule": "Down weight setups exposed to VARIANCE until the pattern clears."
+  }
+ ],
+ "adjustments_for_today": [
+  "LOCK GUARD ACTIVE: Cap A tier publication until rolling 14d Lock win rate recovers to 0.85. Demote any A tier candidate missing 4 or more of: model confidence above 80, recent form positive, lineup confirmed, weather neutral or favorable, bullpen rested, no key injury, no umpire risk flag.",
+  "Do not Lock a K over at 6.5 or higher unless the starter cleared six innings in three of his last four starts; pull A tier on any short leash or pitch count risk.",
+  "Do not Lock a road ML favorite whose starter projects under seven innings unless a rested high leverage reliever is confirmed; bottom third bullpens cap these at B.",
+  "Never Lock a Coors Over above 11 on wind blowing out alone; require both starters at a 5.00 or worse ERA and confirmed heavy bullpen usage before A tier.",
+  "Do not Lock a road ML favorite at Coors on opponent starter ERA alone; altitude variance caps these at B until the offense shows two straight road games of five plus runs.",
+  "Down weight setups exposed to VARIANCE until the pattern clears.",
+  "Cap total bet exposure per slate; a cluster of correlated under and favorite plays amplifies variance on rough nights.",
+  "Require the pitcher trailing 5 start strikeout rate to exceed the posted K line before publishing a K over, and cap K over stake at half a unit when the line is above the pitcher season average.",
+  "Two of three K Over 6.5 losses came from starters pulled before 6 innings in lopsided games; avoid K Over chips when the starter carries blowout or short leash risk and require a projected floor of 6 innings.",
+  "Demote any ML favorite whose starter lacks two consecutive quality starts in last three outings; require bullpen rest confirmation.",
+  "Tighten under totals: do not publish an under when both lineups rank top 12 in runs per game over the trailing 14 days.",
+  "Down weight setups exposed to VARIANCE; require an extra confirming signal before grading above C."
+ ],
+ "monitoring_list": [
+  "DATA GAP: picks dated 2026-06-15, 2026-06-16 and 2026-06-17 remain unsettled or unlogged; outcomes_log resumes at 2026-06-18. Lifetime track record skips those days.",
+  "Lock guard cap_active: rolling 14d Lock win rate 0.3333. The 4 Lock losses from 2026-06-10 age out of the 14d window after 2026-06-24.",
+  "No A tier picks were published on 2026-06-18; the cap held the full slate to B and C."
+ ],
+ "carryover_rules": [
+  {
+   "rule": "Never issue A-tier Under 7.0 at Oracle when the opposing starter has sub 3.50 ERA and top 5 K rate. The park cannot overcome elite SP offense suppression that also kills the under edge.",
+   "source": "manual",
+   "added_date": "2026-05-20",
+   "expires_date": null,
+   "times_validated": 3,
+   "permanent": true,
+   "last_validated": "2026-05-25"
+  },
+  {
+   "rule": "Never issue Giants ML as A-tier unless SF starting pitcher has sub 3.20 ERA AND Giants offense ranks top 10 NL in runs last 14 days. Suppress juice requirement to no worse than -125 when both conditions are not met.",
+   "source": "manual",
+   "added_date": "2026-05-20",
+   "expires_date": null,
+   "times_validated": 3,
+   "permanent": true,
+   "last_validated": "2026-05-25"
+  },
+  {
+   "rule": "Cap A-tier exposure at 2 picks per game maximum. F5 Under 4 requires both starters sub 3.50 ERA with sub 7.0 BB9. Never stack F5 Under + ML + Total all A-tier on same game.",
+   "source": "manual",
+   "added_date": "2026-05-20",
+   "expires_date": null,
+   "times_validated": 3,
+   "permanent": true,
+   "last_validated": "2026-05-25"
+  },
+  {
+   "rule": "Never issue A-tier ML on any team when their offense ranks bottom third in runs scored last 7 days regardless of park advantage. Minimum requirement: top half run production last 7 days for A-tier ML designation.",
+   "source": "manual",
+   "added_date": "2026-05-20",
+   "expires_date": null,
+   "times_validated": 3,
+   "permanent": true,
+   "last_validated": "2026-05-25"
+  },
+  {
+   "rule": "Require the pitcher trailing 5 start strikeout rate to exceed the posted K line before publishing a K over, and cap K over stake at half a unit when the line is above the pitcher season average.",
+   "source": "pattern",
+   "added_date": "2026-05-28",
+   "expires_date": null,
+   "times_validated": 10,
+   "permanent": true,
+   "last_validated": "2026-06-14"
+  },
+  {
+   "rule": "Down weight setups exposed to VARIANCE until the pattern clears.",
+   "source": "pattern",
+   "added_date": "2026-05-29",
+   "expires_date": null,
+   "times_validated": 14,
+   "permanent": true,
+   "last_validated": "2026-06-18"
+  },
+  {
+   "rule": "Cap total bet exposure per slate; a cluster of correlated under and favorite plays amplifies variance on rough nights.",
+   "source": "pattern",
+   "added_date": "2026-05-30",
+   "expires_date": null,
+   "times_validated": 11,
+   "permanent": true,
+   "last_validated": "2026-06-18"
+  },
+  {
+   "rule": "Demote any ML favorite whose starter lacks two consecutive quality starts in last three outings; require bullpen rest confirmation.",
+   "source": "pattern",
+   "added_date": "2026-05-30",
+   "expires_date": null,
+   "times_validated": 7,
+   "permanent": true,
+   "last_validated": "2026-06-14"
+  },
+  {
+   "rule": "Tighten under totals: do not publish an under when both lineups rank top 12 in runs per game over the trailing 14 days.",
+   "source": "pattern",
+   "added_date": "2026-05-30",
+   "expires_date": null,
+   "times_validated": 6,
+   "permanent": true,
+   "last_validated": "2026-06-14"
+  },
+  {
+   "rule": "Two of three K Over 6.5 losses came from starters pulled before 6 innings in lopsided games; avoid K Over chips when the starter carries blowout or short leash risk and require a projected floor of 6 innings.",
+   "source": "pattern",
+   "added_date": "2026-06-01",
+   "expires_date": null,
+   "times_validated": 8,
+   "permanent": true,
+   "last_validated": "2026-06-14"
+  },
+  {
+   "rule": "Do not Lock a road ML favorite whose starter projects under seven innings unless a rested high leverage reliever is confirmed; bottom third bullpens cap these at B.",
+   "source": "lock_breach",
+   "added_date": "2026-06-10",
+   "expires_date": null,
+   "times_validated": 3,
+   "permanent": true,
+   "last_validated": "2026-06-14"
+  },
+  {
+   "rule": "Never Lock a Coors Over above 11 on wind blowing out alone; require both starters at a 5.00 or worse ERA and confirmed heavy bullpen usage before A tier.",
+   "source": "lock_breach",
+   "added_date": "2026-06-10",
+   "expires_date": "2026-06-28",
+   "times_validated": 2,
+   "permanent": false,
+   "last_validated": "2026-06-14"
+  },
+  {
+   "rule": "Do not Lock a road ML favorite at Coors on opponent starter ERA alone; altitude variance caps these at B until the offense shows two straight road games of five plus runs.",
+   "source": "lock_breach",
+   "added_date": "2026-06-10",
+   "expires_date": "2026-06-28",
+   "times_validated": 2,
+   "permanent": false,
+   "last_validated": "2026-06-14"
+  },
+  {
+   "rule": "Do not Lock a K over at 6.5 or higher unless the starter cleared six innings in three of his last four starts; pull A tier on any short leash or pitch count risk.",
+   "source": "lock_breach",
+   "added_date": "2026-06-10",
+   "expires_date": null,
+   "times_validated": 4,
+   "permanent": true,
+   "last_validated": "2026-06-14"
+  },
+  {
+   "rule": "Down weight setups exposed to VARIANCE; require an extra confirming signal before grading above C.",
+   "source": "pattern",
+   "added_date": "2026-06-10",
+   "expires_date": null,
+   "times_validated": 6,
+   "permanent": true,
+   "last_validated": "2026-06-18"
+  },
+  {
+   "rule": "Down weight setups exposed to STARTER_REGRESSION; require an extra confirming signal before grading above C.",
+   "source": "pattern",
+   "added_date": "2026-06-10",
+   "expires_date": null,
+   "times_validated": 4,
+   "permanent": true,
+   "last_validated": "2026-06-14"
+  },
+  {
+   "rule": "A sub 1.10 WHIP label alone is not protection; verify the starter's last three starts for runs allowed and innings before publishing any ML, total, or K over built on that starter.",
+   "source": "pattern",
+   "added_date": "2026-06-11",
+   "expires_date": null,
+   "times_validated": 3,
+   "permanent": true,
+   "last_validated": "2026-06-14"
+  },
+  {
+   "rule": "K Over props require the starter to average at least 5.2 innings across his last three starts; exclude any K Over line of 6.5 or higher when the team is a heavy favorite likely to pull the starter early.",
+   "source": "pattern",
+   "added_date": "2026-06-13",
+   "expires_date": "2026-06-21",
+   "times_validated": 2,
+   "permanent": false,
+   "last_validated": "2026-06-14"
+  },
+  {
+   "rule": "Do not publish three correlated positions such as moneyline, a duplicate moneyline and the run line on the same heavy favorite; cap single game exposure at two positions so one cold offensive game cannot compound into a three unit MODEL_ERROR loss.",
+   "source": "pattern",
+   "added_date": "2026-06-18",
+   "expires_date": "2026-06-25",
+   "times_validated": 1,
+   "permanent": false,
+   "last_validated": "2026-06-18"
+  }
+ ]
 }
