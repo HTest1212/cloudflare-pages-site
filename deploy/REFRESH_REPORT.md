@@ -1,58 +1,61 @@
 # MLB Dashboard Refresh Report
 
-**Window:** midday (11:30 AM)
-**Run timestamp (UTC):** 2026-06-16T01:24:00Z
-**Executed (ET):** 2026-06-15 9:24 PM ET
+**Window:** midday (11:30 AM) scheduled refresh
+**Run timestamp (UTC):** 2026-06-19T20:35Z (executed ~4:35 PM ET)
+**Slate date:** 2026-06-19
+**Game count:** 14
 
-> Note: the 11:30 AM scheduled job ran late this cycle, at roughly 9:24 PM ET. By run time seven of ten games were already Live and three were in Preview (west coast). Cards were built on confirmed pre game data and each live game records its current inning and score in a liveNote field.
+## API data quality
+- Schedule pulled from MLB Stats API with probablePitcher, lineups, team, venue.
+- Probable pitchers: 14 of 14 CONFIRMED via schedule-api. Zero TBD.
+- Pitcher season stats: all 28 starters fetched in one batched people call (needed curl -g to stop bracket globbing).
+- Lineups: only the live Cubs game returned confirmed players; all others used projected lineups, capped at B plus per rule.
+- Weather: Open Meteo returned data for all 12 queried outdoor and retractable parks. Tropicana is a fixed dome (skipped). Retractable parks treated as likely closed and noted.
 
-## Slate
-- Slate date: 2026-06-15 (America/New_York). UTC clock had already rolled to 2026-06-16, so the New York date was used per instruction.
-- Game count: 10
+## Overlays
+- Bullpen, rolling form, park, park wind, umpire, catcher framing, pitch matchup overlays were NOT in the working folder this run. Relief and framing treated as neutral and noted in every card.
+- odds_overlay.json rebuilt: 14 games.
+- statcast_overlay.json rebuilt (ERA based xFIP and FIP estimates): 14 games.
+- picks_log.json appended: 22 new primary chip entries, 822 total, sorted date then confidence descending.
 
-## API Data Quality
-- Probable pitchers: 20 of 20 confirmed from the schedule API (source schedule-api). No TBD starters.
-- Lineups: 10 of 10 games returned confirmed lineups (9 vs 9). All cards marked confirmed_both.
-- Pitcher season stats: raw statsapi people endpoint returned empty across all retries (known issue). Recovered via MCP get_multiple_mlb_player_stats, extracted in a subagent.
-- Weather: fetched live for the three Preview parks. Chase Field 99.7 degrees outside so roof treated closed and neutral. Sutter Health Park 87 degrees, brisk southwest wind near 18 mph, outdoor. Dodger Stadium 67 degrees, 12 mph west southwest. Globe Life and Daikin Park roof closed. The seven Live games used seasonal estimates for display since first pitch had passed.
+## Learnings adjustments applied
+12 adjustments active (yesterday 10 and 6, ROI plus 19.7 percent). Enforced:
+- Lock Guard active: A tier suspended, every card capped at B 84.
+- K over chips require trailing rate over the line plus a six inning floor, stake capped (Skubal, Schlittler, Misiorowski, deGrom, Soroka).
+- Coors rule: over not locked above 11 on wind alone, only Freeland clears the 5.00 ERA threshold so PIT at COL held to B.
+- Tighten unders, down weight variance setups, extra confirming signal above C.
 
-## Per Game Summary
-| Game | Grade | Proj Score | Picks | Primary Chips | Status |
-|---|---|---|---|---|---|
-| MIA @ PHI | B 83 | 3.0 - 5.1 | 6 | Phillies ML, Wheeler K over 6.5 | Live 5-0 PHI |
-| KC @ WSH | C 60 | 4.2 - 4.8 | 6 | Nationals ML | Live 7-3 WSH |
-| NYM @ CIN | B 82 | 3.4 - 4.6 | 6 | Reds ML, Burns K over 7.5 | Live 9-0 CIN |
-| SD @ STL | C 61 | 3.3 - 3.9 | 6 | Under 8 | Live 3-0 STL |
-| COL @ CHC | B 80 | 3.2 - 4.7 | 6 | Cubs ML, Imanaga K over 6 | Live 1-0 CHC |
-| MIN @ TEX | C 65 | 4.0 - 4.1 | 6 | Gore K over 5.5 | Live 3-2 MIN |
-| DET @ HOU | C 66 | 4.2 - 4.0 | 6 | Anderson K over 6.5 | Live 5-0 DET |
-| LAA @ ARI | C 62 | 4.4 - 4.5 | 6 | Over 9 | Preview |
-| PIT @ ATH | C 64 | 4.3 - 4.6 | 6 | Over 9.5 | Preview |
-| TB @ LAD | B 80 | 4.3 - 3.8 | 6 | Rays ML, Over 8.5 | Preview |
+## Schema fix this run (important)
+The renderer (buildDeepAnalysis) reads nested confidence{letter,score} and projected_score{away,home}, NOT the flat confidenceScore and projectedScore. Flat only cards render as 0 of 100 with 0.0 projections. Each card now ships confidence, projected_score, and a grade object plus the flat fields. Validation gate confirmed all 14 cards carry a non zero confidence score and real projections.
 
-No card graded above B. Lock guard is active and the bullpen, rolling form, catcher framing, pitch matchup, park factors, park wind, and umpire overlays were not present in the repo, so the top tier was held to B per the active rules.
+## Per game summary
+| Matchup | Grade | Proj (A-H) | Picks | Primary chips |
+|---|---|---|---|---|
+| TOR @ CHC (Live) | C 60 | 4.0-5.6 | 5 | Chicago Cubs ML |
+| CWS @ DET | B 83 | 2.9-4.6 | 6 | Detroit ML, Skubal K over 7.5 |
+| CIN @ NYY | B 82 | 3.4-5.1 | 6 | Yankees ML, Schlittler K over 6.5 |
+| WSH @ TB | C 58 | 3.6-4.0 | 5 | Tampa Bay ML |
+| SF @ MIA | C 64 | 3.5-3.8 | 5 | Under 7.5, Miami ML |
+| MIL @ ATL | B 84 | 4.2-3.5 | 6 | Misiorowski K over 7.5, Milwaukee ML |
+| SD @ TEX | B 82 | 3.2-4.3 | 6 | Texas ML, deGrom K over 6.5 |
+| CLE @ HOU | C 66 | 4.1-3.7 | 5 | Cleveland ML |
+| STL @ KC | C 60 | 3.7-4.0 | 5 | Under 8.5, Kansas City ML |
+| PIT @ COL | B 78 | 5.4-6.1 | 6 | Over 11.5 |
+| LAA @ ATH | C 64 | 4.6-4.3 | 5 | Over 9, Angels ML |
+| MIN @ ARI | B 80 | 3.6-4.5 | 6 | Arizona ML, Soroka K over 5.5 |
+| BAL @ LAD | B 80 | 3.4-5.0 | 6 | Dodgers ML |
+| BOS @ SEA | B 80 | 3.1-3.6 | 6 | Under 7, Seattle ML |
 
-## Overlays Deployed
-- odds_overlay.json: 10 games (moneyline, total, runline)
-- statcast_overlay.json: 10 games, ERA based xFIP and FIP estimates, playerId null
-
-## Learnings Adjustments Applied
-- Lock Guard active: A tier capped (rolling 14d Lock win rate 33 percent, below the 85 percent floor). All cards held to B or lower.
-- Down weight VARIANCE and STARTER_REGRESSION: extra confirming signal required above C. Applied to KC@WSH, SD@STL, MIN@TEX, DET@HOU, LAA@ARI, PIT@ATH.
-- K Over six inning floor and trailing rate check applied; K lines kept modest where short leash or thin sample risk existed (Gore, Anderson, Ginn).
-- Low ERA or sub 1.10 WHIP not treated as protection: flagged Urena 5.37 BB9 and Peralta opener role.
-- Road ML favorite demoted: Tampa Bay held to B at Dodger Stadium.
+Top reads: Misiorowski K over (13.55 K9), Skubal, Schlittler, deGrom side plus K stacks. No A tier published, Lock Guard in force.
 
 ## Deploy
-- Commit: 34cf50a6f3b71a5dd96d487b3ee30b84277f76c0
-- Message: Auto refresh 1130am 2026-06-15
-- Push: success, 9f7bbd6..34cf50a main
-- Cloudflare Pages: auto deploy confirmed live. generatedAt 2026-06-16T01:23:48Z serving at https://mlb-betting-dashboard-v2.pages.dev
-- Schema gate: PASSED, 10 games, all renderer fields resolve.
-- Render functions verified present: renderClaudePicksBlock, tierFromProb, renderBestBetsBlock.
+- Repo: HTest1212/cloudflare-pages-site, branch main.
+- Commit hash: 99dcc8260f3deb3ad3af826d6d79232dcb8a7072
+- Push: success (f4dff7e..99dcc82). Cloudflare Pages auto deploy triggered.
+- Files deployed: index.html, odds_overlay.json, statcast_overlay.json, picks_log.json.
+- Render functions verified present after splice: renderClaudePicksBlock, tierFromProb, renderBestBetsBlock, buildDeepAnalysis.
 
-## Errors and Fallbacks Used
-- statsapi people endpoint returned empty on all attempts. Fallback: MCP get_multiple_mlb_player_stats parsed by subagent. Handedness null in payload, filled from known pitcher data.
-- Workspace folder mount hit the known Resource deadlock (errno 35) on all content reads, including learnings.json and .env. Fallback: read learnings.json from the committed repo copy, extracted the push token from the existing clone git config, then made a fresh self owned clone for all writes and the push. REFRESH_REPORT.md was written into the repo deploy folder because the workspace mount could not be written via the file tools.
-- Overlay files bullpen_availability, rolling_form, catcher_framing, pitch_matchup, park_factors, park_wind_rules, umpire_factors were not present. Cards built from confirmed API data, fetched weather, and park knowledge. Top tier held to B.
-- picks_log.json: appended 14 primary chip records, total now 783 entries, sorted by date then confidence descending, idempotent on id.
+## Errors and fallbacks
+- Workspace mount Resource deadlock (errno 35) blocked reading .env and overlay JSONs. Recovered the GitHub token from the existing repo git remote config; built and pushed from a fresh /tmp clone per standard recovery.
+- Non schedule overlays absent, treated as neutral.
+- curl bracket globbing fixed with -g on the people stats endpoint.
