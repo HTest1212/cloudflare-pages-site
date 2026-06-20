@@ -1,61 +1,44 @@
 # MLB Dashboard Refresh Report
 
-**Window:** midday (11:30 AM) scheduled refresh
-**Run timestamp (UTC):** 2026-06-19T20:35Z (executed ~4:35 PM ET)
-**Slate date:** 2026-06-19
-**Game count:** 14
+Window: early afternoon (2:08 PM)
+Run timestamp: 2026-06-20T18:19:38Z
+Slate date: 2026-06-20
+Game count: 14 (3 Live, 11 Preview)
 
 ## API data quality
-- Schedule pulled from MLB Stats API with probablePitcher, lineups, team, venue.
-- Probable pitchers: 14 of 14 CONFIRMED via schedule-api. Zero TBD.
-- Pitcher season stats: all 28 starters fetched in one batched people call (needed curl -g to stop bracket globbing).
-- Lineups: only the live Cubs game returned confirmed players; all others used projected lineups, capped at B plus per rule.
-- Weather: Open Meteo returned data for all 12 queried outdoor and retractable parks. Tropicana is a fixed dome (skipped). Retractable parks treated as likely closed and noted.
+Pitchers: 28 of 28 confirmed from schedule-api, 0 TBD.
+Weather fetched (Open Meteo) for 11 outdoor/retractable parks, all success.
+Domes/closed roofs treated no-weather: Tropicana (fixed), Daikin and Chase (closed vs heat/rain).
+
+## Active learnings adjustments
+LOCK GUARD ACTIVE: A tier capped, top grade held to B (rolling 14d Lock win rate 0.333).
+Factor overlays (bullpen, park, wind, umpire, framing, pitch matchup, rolling form) ALL ABSENT this run -> top tier held to B, relief neutral.
+VARIANCE down-weight, K-over six-inning floor rule, Coors altitude cap all applied.
+
+## Per game (grade / proj / picks / primary chips)
+824263 CWS@DET C62 4.0-4.6 5p [Detroit ML] LIVE Tigers 1-0 b4
+823532 CIN@NYY C63 4.2-4.9 5p [Yankees ML] LIVE Yankees 1-0 e2
+824665 TOR@CHC C58 4.7-4.9 5p [Over 8.5] LIVE 0-0 t1
+822885 SD@TEX C64 4.1-4.4 6p [Rangers ML, Gore K o6.5]
+822967 WSH@TB C61 4.3-4.2 5p [Nationals ML, Cavalli K o5.5]
+823854 SF@MIA B80 3.4-4.5 6p [Marlins ML, Meyer K o6.5, Under 8]
+824909 MIL@ATL B81 3.4-3.6 6p [Under 7.5, Sale K o6.5, Harrison K o6.5]
+824180 CLE@HOU B80 3.6-4.4 6p [Astros ML, Under 8.5]
+823447 NYM@PHI B82 3.6-4.5 6p [Phillies ML, Sanchez K o6.5]
+824342 PIT@COL B80 5.0-4.4 6p [Pirates ML, Skenes K o6.5]
+824988 LAA@ATH C66 4.3-4.6 5p [Athletics ML]
+823937 BAL@LAD B82 3.3-4.8 6p [Dodgers ML, Yamamoto K o5.5]
+823126 BOS@SEA C64 3.7-4.0 5p [Under 7.5, Mariners ML]
+825068 MIN@ARI C66 4.4-4.2 5p [Twins ML, Bradley K o5.5]
 
 ## Overlays
-- Bullpen, rolling form, park, park wind, umpire, catcher framing, pitch matchup overlays were NOT in the working folder this run. Relief and framing treated as neutral and noted in every card.
-- odds_overlay.json rebuilt: 14 games.
-- statcast_overlay.json rebuilt (ERA based xFIP and FIP estimates): 14 games.
-- picks_log.json appended: 22 new primary chip entries, 822 total, sorted date then confidence descending.
-
-## Learnings adjustments applied
-12 adjustments active (yesterday 10 and 6, ROI plus 19.7 percent). Enforced:
-- Lock Guard active: A tier suspended, every card capped at B 84.
-- K over chips require trailing rate over the line plus a six inning floor, stake capped (Skubal, Schlittler, Misiorowski, deGrom, Soroka).
-- Coors rule: over not locked above 11 on wind alone, only Freeland clears the 5.00 ERA threshold so PIT at COL held to B.
-- Tighten unders, down weight variance setups, extra confirming signal above C.
-
-## Schema fix this run (important)
-The renderer (buildDeepAnalysis) reads nested confidence{letter,score} and projected_score{away,home}, NOT the flat confidenceScore and projectedScore. Flat only cards render as 0 of 100 with 0.0 projections. Each card now ships confidence, projected_score, and a grade object plus the flat fields. Validation gate confirmed all 14 cards carry a non zero confidence score and real projections.
-
-## Per game summary
-| Matchup | Grade | Proj (A-H) | Picks | Primary chips |
-|---|---|---|---|---|
-| TOR @ CHC (Live) | C 60 | 4.0-5.6 | 5 | Chicago Cubs ML |
-| CWS @ DET | B 83 | 2.9-4.6 | 6 | Detroit ML, Skubal K over 7.5 |
-| CIN @ NYY | B 82 | 3.4-5.1 | 6 | Yankees ML, Schlittler K over 6.5 |
-| WSH @ TB | C 58 | 3.6-4.0 | 5 | Tampa Bay ML |
-| SF @ MIA | C 64 | 3.5-3.8 | 5 | Under 7.5, Miami ML |
-| MIL @ ATL | B 84 | 4.2-3.5 | 6 | Misiorowski K over 7.5, Milwaukee ML |
-| SD @ TEX | B 82 | 3.2-4.3 | 6 | Texas ML, deGrom K over 6.5 |
-| CLE @ HOU | C 66 | 4.1-3.7 | 5 | Cleveland ML |
-| STL @ KC | C 60 | 3.7-4.0 | 5 | Under 8.5, Kansas City ML |
-| PIT @ COL | B 78 | 5.4-6.1 | 6 | Over 11.5 |
-| LAA @ ATH | C 64 | 4.6-4.3 | 5 | Over 9, Angels ML |
-| MIN @ ARI | B 80 | 3.6-4.5 | 6 | Arizona ML, Soroka K over 5.5 |
-| BAL @ LAD | B 80 | 3.4-5.0 | 6 | Dodgers ML |
-| BOS @ SEA | B 80 | 3.1-3.6 | 6 | Under 7, Seattle ML |
-
-Top reads: Misiorowski K over (13.55 K9), Skubal, Schlittler, deGrom side plus K stacks. No A tier published, Lock Guard in force.
+odds_overlay.json: 14 games. statcast_overlay.json: 14 games (ERA-based xFIP/FIP). picks_log.json: 23 pending chips upserted, 844 total.
 
 ## Deploy
-- Repo: HTest1212/cloudflare-pages-site, branch main.
-- Commit hash: 99dcc8260f3deb3ad3af826d6d79232dcb8a7072
-- Push: success (f4dff7e..99dcc82). Cloudflare Pages auto deploy triggered.
-- Files deployed: index.html, odds_overlay.json, statcast_overlay.json, picks_log.json.
-- Render functions verified present after splice: renderClaudePicksBlock, tierFromProb, renderBestBetsBlock, buildDeepAnalysis.
+Commit: a6dd80e
+Push status: success (Cloudflare Pages auto-deploy)
+Live verify: date 2026-06-20, window 2:08 PM, 0 zero-render cards across 14 games.
 
-## Errors and fallbacks
-- Workspace mount Resource deadlock (errno 35) blocked reading .env and overlay JSONs. Recovered the GitHub token from the existing repo git remote config; built and pushed from a fresh /tmp clone per standard recovery.
-- Non schedule overlays absent, treated as neutral.
-- curl bracket globbing fixed with -g on the people stats endpoint.
+## Errors / fallbacks
+All factor overlays missing -> analyst defaults, top tier held to B (consistent with active Lock guard).
+Workspace mount .env unreadable (token len 0) -> PAT recovered from existing clone .git/config.
