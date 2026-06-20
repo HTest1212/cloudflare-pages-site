@@ -9124,7 +9124,7 @@ function renderBets() {
   const bets = [];
 
   // ── 1. MONEYLINE — pull LOCKs, STRONGs, and upgraded tiers from 9-factor model ──
-  STATE.games.forEach(function(g){
+  STATE.games.forEach(function(g){ try {
     const awayTeam = g.teams.away.team;
     const homeTeam = g.teams.home.team;
     const label = awayTeam.name+" @ "+homeTeam.name;
@@ -9936,7 +9936,7 @@ function renderBets() {
         }
       });
     });
-  });
+  } catch(_e) { if (typeof console!=='undefined') console.warn('renderBets per-game iter failed', g && g.gamePk, _e); }});
 
   // ── SCORE & SORT: higher score = stronger play ──
   bets.forEach(function(b){
