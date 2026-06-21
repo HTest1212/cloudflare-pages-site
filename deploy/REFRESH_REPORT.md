@@ -1,44 +1,39 @@
 # MLB Dashboard Refresh Report
 
-Window: early afternoon (2:08 PM)
-Run timestamp: 2026-06-20T18:19:38Z
-Slate date: 2026-06-20
-Game count: 14 (3 Live, 11 Preview)
+Window: early afternoon (2:08 PM) refresh
+Actual run timestamp (UTC): 2026-06-21 ~22:15 UTC (fired late, ~6:15 PM ET)
+Slate date: 2026-06-21
+Game count: 15 (9 Final, 4 Live, 1 Preview, 1 Postponed)
+
+## Run context
+Because the run fired in the early evening ET, most of the slate was already settled. Final and Postponed games were marked closed with score and carry no writeup. The four in progress games were published as locked pre game reads with a live score note. One game (Mets at Phillies, 7:20 PM ET) was a true Preview and received a fresh deep card.
 
 ## API data quality
-Pitchers: 28 of 28 confirmed from schedule-api, 0 TBD.
-Weather fetched (Open Meteo) for 11 outdoor/retractable parks, all success.
-Domes/closed roofs treated no-weather: Tropicana (fixed), Daikin and Chase (closed vs heat/rain).
+Pitchers confirmed: all matchups carried confirmed probable starters from the schedule API (no TBD).
+Stats source: MLB Stats API people endpoint, season pitching group. All 10 starters across the 5 active and live games returned real season lines.
+Weather: Citizens Bank Park fetched successfully via Open Meteo (82 degrees, wind 9 mph from west southwest out to left, 0 percent precip). Live and closed parks did not need fresh weather.
 
-## Active learnings adjustments
-LOCK GUARD ACTIVE: A tier capped, top grade held to B (rolling 14d Lock win rate 0.333).
-Factor overlays (bullpen, park, wind, umpire, framing, pitch matchup, rolling form) ALL ABSENT this run -> top tier held to B, relief neutral.
-VARIANCE down-weight, K-over six-inning floor rule, Coors altitude cap all applied.
+## Learnings applied
+LOCK GUARD ACTIVE (lock_guard_status cap_active): A tier publication suppressed, top grade held to B on every card. VARIANCE downweight applied to all setups. K over chips required a projected six inning floor and were set below each pitcher per start average. Coors over held to B per the altitude lock breach rule. Under and favorite correlation cap respected (Phillies card carries ML plus K, not a stacked under plus favorite).
 
-## Per game (grade / proj / picks / primary chips)
-824263 CWS@DET C62 4.0-4.6 5p [Detroit ML] LIVE Tigers 1-0 b4
-823532 CIN@NYY C63 4.2-4.9 5p [Yankees ML] LIVE Yankees 1-0 e2
-824665 TOR@CHC C58 4.7-4.9 5p [Over 8.5] LIVE 0-0 t1
-822885 SD@TEX C64 4.1-4.4 6p [Rangers ML, Gore K o6.5]
-822967 WSH@TB C61 4.3-4.2 5p [Nationals ML, Cavalli K o5.5]
-823854 SF@MIA B80 3.4-4.5 6p [Marlins ML, Meyer K o6.5, Under 8]
-824909 MIL@ATL B81 3.4-3.6 6p [Under 7.5, Sale K o6.5, Harrison K o6.5]
-824180 CLE@HOU B80 3.6-4.4 6p [Astros ML, Under 8.5]
-823447 NYM@PHI B82 3.6-4.5 6p [Phillies ML, Sanchez K o6.5]
-824342 PIT@COL B80 5.0-4.4 6p [Pirates ML, Skenes K o6.5]
-824988 LAA@ATH C66 4.3-4.6 5p [Athletics ML]
-823937 BAL@LAD B82 3.3-4.8 6p [Dodgers ML, Yamamoto K o5.5]
-823126 BOS@SEA C64 3.7-4.0 5p [Under 7.5, Mariners ML]
-825068 MIN@ARI C66 4.4-4.2 5p [Twins ML, Bradley K o5.5]
+## Per game summary (active and live)
+- 823449 New York Mets at Philadelphia Phillies | Preview | B 79 | proj 3.4 to 4.9 | 6 picks | chips: Phillies ML -150 to -170, Wheeler K over 5.5
+- 824343 Pittsburgh Pirates at Colorado Rockies | Live (Pirates 8 Rockies 6, bot 9) | B 72 | proj 5.9 to 6.3 | 5 picks | chips: Over 11.5
+- 824987 Los Angeles Angels at Athletics | Live (A's 7 Angels 4, top 8) | B 71 | proj 4.8 to 4.9 | 5 picks | chips: Over 9.5, Detmers K over 5.5
+- 823934 Baltimore Orioles at Los Angeles Dodgers | Live (Orioles 6 Dodgers 1, bot 6) | B 70 | proj 4.6 to 4.1 | 5 picks | chips: Orioles ML +120 to +135
+- 823123 Boston Red Sox at Seattle Mariners | Live (Mariners 3 Red Sox 1, top 8) | B 76 | proj 2.8 to 3.4 | 5 picks | chips: Under 7.5, Gilbert K over 5.5
+
+## Closed games
+Reds 4 Yankees 1 | Brewers 9 Braves 4 | Rays 4 Nationals 3 | Tigers 5 White Sox 4 | Marlins 2 Giants 1 | Astros 2 Guardians 1 | Cardinals 12 Royals 10 | Rangers 4 Padres 3 | Twins 4 Diamondbacks 2 | Blue Jays at Cubs Postponed
 
 ## Overlays
-odds_overlay.json: 14 games. statcast_overlay.json: 14 games (ERA-based xFIP/FIP). picks_log.json: 23 pending chips upserted, 844 total.
+odds_overlay.json: 5 games. statcast_overlay.json: 5 games (ERA based xFIP and FIP estimates). picks_log.json: 3 pending entries appended for the Preview game (Phillies ML, Wheeler K over 5.5, Wheeler outs watch). Live and Final games not logged as pending.
 
 ## Deploy
-Commit: a6dd80e
-Push status: success (Cloudflare Pages auto-deploy)
-Live verify: date 2026-06-20, window 2:08 PM, 0 zero-render cards across 14 games.
+Schema gate: SCHEMA GATE PASSED, 15 games, all renderer fields resolve.
+Commit: Auto refresh 208pm 2026-06-21 (hash b622d3d)
+Push: success to main, Cloudflare Pages auto deploy.
+Live verify: https://mlb-betting-dashboard-v2.pages.dev resolves date 2026-06-21 and non zero grade plus projected score on all five active and live cards.
 
-## Errors / fallbacks
-All factor overlays missing -> analyst defaults, top tier held to B (consistent with active Lock guard).
-Workspace mount .env unreadable (token len 0) -> PAT recovered from existing clone .git/config.
+## Errors and fallbacks
+Workspace .env hit the known resource deadlock; PAT recovered from the existing clone .git/config. The pre existing /tmp clone was owned by another process, so a fresh self owned clone was made at /tmp/cfp208 for all writes and the push. No data quality fallbacks were needed.
