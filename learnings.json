@@ -66,6 +66,7 @@
   "adjustments_for_today": [
     "LOCK GUARD ACTIVE: Cap A tier publication until rolling 14d Lock win rate recovers to 0.85. Demote any A tier candidate missing 4 or more of: model confidence above 80, recent form positive, lineup confirmed, weather neutral or favorable, bullpen rested, no key injury, no umpire risk flag.",
     "Apply recent form as a two way confidence modifier from rolling_form_overlay.json. When backing a team add up to 6 confidence points if its form tier is hot or warm and subtract up to 8 if its tier is cool or cold. Never grade a cold team moneyline above C. Record alone is not form: a team with a strong season record but a cold form tier is a cold team. Do not call an offense hot off one big game; when the overlay marks a team consistency penalized require a second confirming signal before backing it.",
+    "Consult splits_overlay.json for the platoon matchup. Grade each lineup by its split versus today's starter hand, not by overall stats. Credit a team in a favorable platoon spot and fade one in an unfavorable spot by up to 4 confidence points using the lineup platoon edge. A weak overall bat who crushes the hand he faces is a plus and a strong bat in a bad platoon spot is a minus. Apply a sample guard: regress or ignore any hitter split under 40 plate appearances versus that hand.",
     "Do not Lock a K over at 6.5 or higher unless the starter cleared six innings in three of his last four starts; pull A tier on any short leash or pitch count risk.",
     "Do not Lock a road ML favorite whose starter projects under seven innings unless a rested high leverage reliever is confirmed; bottom third bullpens cap these at B.",
     "Do not Lock a road ML favorite at Coors on opponent starter ERA alone; altitude variance caps these at B until the offense shows two straight road games of five plus runs.",
@@ -74,8 +75,7 @@
     "Cap total bet exposure per slate; a cluster of correlated under and favorite plays amplifies variance on rough nights.",
     "Require the pitcher trailing 5 start strikeout rate to exceed the posted K line before publishing a K over, and cap K over stake at half a unit when the line is above the pitcher season average.",
     "Two of three K Over 6.5 losses came from starters pulled before 6 innings in lopsided games; avoid K Over chips when the starter carries blowout or short leash risk and require a projected floor of 6 innings.",
-    "Down weight setups exposed to VARIANCE; require an extra confirming signal before grading above C.",
-    "Demote any ML favorite whose starter lacks two consecutive quality starts in last three outings; require bullpen rest confirmation."
+    "Down weight setups exposed to VARIANCE; require an extra confirming signal before grading above C."
   ],
   "monitoring_list": [
     "K Over 6.5 props on starters with short leash or blowout risk (Bradley and Cavalli pulled early yesterday).",
@@ -84,6 +84,15 @@
     "Lock guard remains cap active until rolling 14d Lock win rate recovers to 0.85."
   ],
   "carryover_rules": [
+    {
+      "rule": "Consult splits_overlay.json for the platoon matchup. Grade each lineup by its split versus today's starter hand, not by overall stats. Credit a team in a favorable platoon spot and fade one in an unfavorable spot by up to 4 confidence points using the lineup platoon edge. A weak overall bat who crushes the hand he faces is a plus and a strong bat in a bad platoon spot is a minus. Apply a sample guard: regress or ignore any hitter split under 40 plate appearances versus that hand.",
+      "source": "manual",
+      "added_date": "2026-06-21",
+      "expires_date": null,
+      "times_validated": 1,
+      "permanent": true,
+      "last_validated": "2026-06-21"
+    },
     {
       "rule": "Apply recent form as a two way confidence modifier from rolling_form_overlay.json. When backing a team add up to 6 confidence points if its form tier is hot or warm and subtract up to 8 if its tier is cool or cold. Never grade a cold team moneyline above C. Record alone is not form: a team with a strong season record but a cold form tier is a cold team. Do not call an offense hot off one big game; when the overlay marks a team consistency penalized require a second confirming signal before backing it.",
       "source": "manual",
