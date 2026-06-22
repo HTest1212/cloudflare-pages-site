@@ -1,5 +1,5 @@
 {
-  "asof": "2026-06-21T22:11:27Z",
+  "asof": "2026-06-22T08:00:00Z",
   "guard_status": "cap_active",
   "guard_threshold_14d": 0.8,
   "lifetime_summary": {
@@ -8,20 +8,28 @@
     "losses": 17,
     "pushes": 2,
     "voids": 1,
-    "winRate": 0.5952,
     "units": 3.0865,
     "totalStake": 539.0,
+    "winRate": 0.5952,
     "roi": 0.0057,
     "current_streak": {
-      "type": "win",
+      "type": "loss",
       "length": 1
     },
     "longest_win_streak": 8,
     "longest_loss_streak": 6,
     "rolling_14d_winRate": 0.3333,
-    "rolling_30d_winRate": 0.5556
+    "rolling_30d_winRate": 0.5455
   },
   "by_market": {
+    "F5": {
+      "picks": 2,
+      "wins": 1,
+      "losses": 1,
+      "winRate": 0.5,
+      "units": -0.1304,
+      "roi": -0.0652
+    },
     "F5_ML": {
       "picks": 3,
       "wins": 2,
@@ -30,21 +38,13 @@
       "units": 1.4973,
       "roi": 0.4991
     },
-    "TotalBases": {
-      "picks": 1,
-      "wins": 1,
+    "F5_Total": {
+      "picks": 2,
+      "wins": 2,
       "losses": 0,
       "winRate": 1.0,
-      "units": 0.9091,
-      "roi": 0.9091
-    },
-    "ML": {
-      "picks": 11,
-      "wins": 4,
-      "losses": 7,
-      "winRate": 0.3636,
-      "units": -4.7498,
-      "roi": -0.0432
+      "units": 1.7787,
+      "roi": 0.8893
     },
     "Hits": {
       "picks": 2,
@@ -62,6 +62,22 @@
       "units": 1.424,
       "roi": 0.0067
     },
+    "ML": {
+      "picks": 11,
+      "wins": 4,
+      "losses": 7,
+      "winRate": 0.3636,
+      "units": -4.7498,
+      "roi": -0.0432
+    },
+    "Over": {
+      "picks": 1,
+      "wins": 0,
+      "losses": 1,
+      "winRate": 0.0,
+      "units": -1.0,
+      "roi": -1.0
+    },
     "RL": {
       "picks": 3,
       "wins": 3,
@@ -78,13 +94,13 @@
       "units": -0.1818,
       "roi": -0.0009
     },
-    "F5": {
-      "picks": 2,
+    "TotalBases": {
+      "picks": 1,
       "wins": 1,
-      "losses": 1,
-      "winRate": 0.5,
-      "units": -0.1304,
-      "roi": -0.0652
+      "losses": 0,
+      "winRate": 1.0,
+      "units": 0.9091,
+      "roi": 0.9091
     },
     "Under": {
       "picks": 2,
@@ -93,22 +109,6 @@
       "winRate": 0.5,
       "units": -0.0909,
       "roi": -0.0454
-    },
-    "Over": {
-      "picks": 1,
-      "wins": 0,
-      "losses": 1,
-      "winRate": 0.0,
-      "units": -1.0,
-      "roi": -1.0
-    },
-    "F5_Total": {
-      "picks": 2,
-      "wins": 2,
-      "losses": 0,
-      "winRate": 1.0,
-      "units": 1.7787,
-      "roi": 0.8893
     }
   },
   "loss_diagnoses": [
@@ -118,11 +118,11 @@
       "pick": "Dodgers ML -150 to -170",
       "market": "ML",
       "confidence": 84,
-      "signals_at_lock": "A tier signals at publication.",
-      "actual_outcome": "Los Angeles Dodgers 8 - Pittsburgh Pirates 9",
+      "signals_at_lock": "A tier signals as logged at publication.",
+      "actual_outcome": "Dodgers ML lost; Ohtani left after 6.2 with the lead but the Los Angeles bullpen surrendered Pittsburgh runs in the seventh and eighth to flip a one run game.",
       "category": "BULLPEN_FATIGUE",
       "diagnosis": "Dodgers ML lost; Ohtani left after 6.2 with the lead but the Los Angeles bullpen surrendered Pittsburgh runs in the seventh and eighth to flip a one run game.",
-      "rule_generated": "Review A tier criteria for this market."
+      "rule_generated": "Recheck A tier criteria for this market before publishing."
     },
     {
       "id": "2026-06-10-824348-Total-0",
@@ -130,11 +130,11 @@
       "pick": "Over 11.5",
       "market": "Total",
       "confidence": 83,
-      "signals_at_lock": "A tier signals at publication.",
-      "actual_outcome": "Total 5",
+      "signals_at_lock": "A tier signals as logged at publication.",
+      "actual_outcome": "Coors Over lost; only 5 combined runs scored as both starters held despite the altitude, heat, and wind out thesis.",
       "category": "BAD_PARK_READ",
       "diagnosis": "Coors Over lost; only 5 combined runs scored as both starters held despite the altitude, heat, and wind out thesis.",
-      "rule_generated": "Review A tier criteria for this market."
+      "rule_generated": "Recheck A tier criteria for this market before publishing."
     },
     {
       "id": "2026-06-10-824348-ML-1",
@@ -142,11 +142,11 @@
       "pick": "Cubs ML -125 to -140",
       "market": "ML",
       "confidence": 83,
-      "signals_at_lock": "A tier signals at publication.",
-      "actual_outcome": "Chicago Cubs 2 - Colorado Rockies 3",
+      "signals_at_lock": "A tier signals as logged at publication.",
+      "actual_outcome": "Cubs ML lost 2 to 3 at Coors; Chicago bats never solved the altitude despite the Lorenzen edge and the model overweighted the opposing starter ERA.",
       "category": "VARIANCE",
       "diagnosis": "Cubs ML lost 2 to 3 at Coors; Chicago bats never solved the altitude despite the Lorenzen edge and the model overweighted the opposing starter ERA.",
-      "rule_generated": "Review A tier criteria for this market."
+      "rule_generated": "Recheck A tier criteria for this market before publishing."
     },
     {
       "id": "2026-06-10-824590-K-0",
@@ -154,11 +154,11 @@
       "pick": "Sale K Over 6.5",
       "market": "K",
       "confidence": 80,
-      "signals_at_lock": "A tier signals at publication.",
-      "actual_outcome": "Sale 6 K (5.2 IP)",
+      "signals_at_lock": "A tier signals as logged at publication.",
+      "actual_outcome": "Sale K Over 6.5 lost; pulled after 5.2 innings with 6 strikeouts, one short, with the six inning floor not met.",
       "category": "STARTER_REGRESSION",
       "diagnosis": "Sale K Over 6.5 lost; pulled after 5.2 innings with 6 strikeouts, one short, with the six inning floor not met.",
-      "rule_generated": "Review A tier criteria for this market."
+      "rule_generated": "Recheck A tier criteria for this market before publishing."
     },
     {
       "id": "38090ae1-895b-42f2-bd2f-81303714985c",
@@ -166,71 +166,71 @@
       "pick": "Ohtani K over 7.5",
       "market": "K",
       "confidence": 87,
-      "signals_at_lock": "A tier signals at publication.",
-      "actual_outcome": 7,
+      "signals_at_lock": "A tier signals as logged at publication.",
+      "actual_outcome": "Ohtani struck out 7 over 6 strong innings but the 7.5 line left zero cushion and he missed by one.",
       "category": "VARIANCE",
       "diagnosis": "Ohtani struck out 7 over 6 strong innings but the 7.5 line left zero cushion and he missed by one.",
-      "rule_generated": "Review A tier criteria for this market."
+      "rule_generated": "Recheck A tier criteria for this market before publishing."
     },
     {
       "id": "2026-05-25-823219-F5_Under_4",
       "date": "2026-05-25",
-      "pick": "",
+      "pick": null,
       "market": "F5",
       "confidence": 90,
-      "signals_at_lock": "A tier signals at publication.",
+      "signals_at_lock": "A tier signals as logged at publication.",
       "actual_outcome": "",
       "category": null,
       "diagnosis": "",
-      "rule_generated": "Review A tier criteria for this market."
+      "rule_generated": "Recheck A tier criteria for this market before publishing."
     },
     {
       "id": "2026-05-25-823219-Giants_ML",
       "date": "2026-05-25",
-      "pick": "",
+      "pick": null,
       "market": "ML",
       "confidence": 90,
-      "signals_at_lock": "A tier signals at publication.",
+      "signals_at_lock": "A tier signals as logged at publication.",
       "actual_outcome": "",
       "category": null,
       "diagnosis": "",
-      "rule_generated": "Review A tier criteria for this market."
+      "rule_generated": "Recheck A tier criteria for this market before publishing."
     },
     {
       "id": "2026-05-25-823219-Under_7_or_7.5",
       "date": "2026-05-25",
-      "pick": "",
+      "pick": null,
       "market": "Under",
       "confidence": 90,
-      "signals_at_lock": "A tier signals at publication.",
+      "signals_at_lock": "A tier signals as logged at publication.",
       "actual_outcome": "",
       "category": null,
       "diagnosis": "",
-      "rule_generated": "Review A tier criteria for this market."
+      "rule_generated": "Recheck A tier criteria for this market before publishing."
     },
     {
       "id": "2026-05-25-823296-Padres_ML",
       "date": "2026-05-25",
-      "pick": "",
+      "pick": null,
       "market": "ML",
       "confidence": 88,
-      "signals_at_lock": "A tier signals at publication.",
+      "signals_at_lock": "A tier signals as logged at publication.",
       "actual_outcome": "",
       "category": null,
       "diagnosis": "",
-      "rule_generated": "Review A tier criteria for this market."
+      "rule_generated": "Recheck A tier criteria for this market before publishing."
     },
     {
       "id": "2026-05-25-823948-Over_9",
       "date": "2026-05-25",
-      "pick": "",
+      "pick": null,
       "market": "Over",
       "confidence": 86,
-      "signals_at_lock": "A tier signals at publication.",
+      "signals_at_lock": "A tier signals as logged at publication.",
       "actual_outcome": "",
       "category": null,
       "diagnosis": "",
-      "rule_generated": "Review A tier criteria for this market."
+      "rule_generated": "Recheck A tier criteria for this market before publishing."
     },
     {
       "id": "2026-05-23-823222-Total-Under_7",
@@ -238,11 +238,11 @@
       "pick": "Under 7",
       "market": "Total",
       "confidence": 80,
-      "signals_at_lock": "A tier signals at publication.",
-      "actual_outcome": "Total=13",
+      "signals_at_lock": "A tier signals as logged at publication.",
+      "actual_outcome": "Game total 13 smashed over 7.0.",
       "category": "blowout",
       "diagnosis": "Game total 13 smashed over 7.0.",
-      "rule_generated": "Review A tier criteria for this market."
+      "rule_generated": "Recheck A tier criteria for this market before publishing."
     },
     {
       "id": "2026-05-23-823458-K-Wheeler_K_",
@@ -250,11 +250,11 @@
       "pick": "Wheeler K Over 6.5",
       "market": "K",
       "confidence": 87,
-      "signals_at_lock": "A tier signals at publication.",
-      "actual_outcome": "Wheeler K=6",
+      "signals_at_lock": "A tier signals as logged at publication.",
+      "actual_outcome": "Wheeler struck out only 6 \u2014 needed 7+ (short by 0.5).",
       "category": "k_prop_miss",
       "diagnosis": "Wheeler struck out only 6 \u2014 needed 7+ (short by 0.5).",
-      "rule_generated": "Review A tier criteria for this market."
+      "rule_generated": "Recheck A tier criteria for this market before publishing."
     },
     {
       "id": "2026-05-21-824031-K-1",
@@ -262,11 +262,11 @@
       "pick": "Soriano K Over 7.5",
       "market": "K",
       "confidence": 87,
-      "signals_at_lock": "A tier signals at publication.",
-      "actual_outcome": "7.5",
+      "signals_at_lock": "A tier signals as logged at publication.",
+      "actual_outcome": "Soriano 7K in 6.2IP. Model projected 8K from 10.1 K9 but efficiency and extras removal kept him under line.",
       "category": "MODEL_ERROR",
       "diagnosis": "Soriano 7K in 6.2IP. Model projected 8K from 10.1 K9 but efficiency and extras removal kept him under line.",
-      "rule_generated": "Review A tier criteria for this market."
+      "rule_generated": "Recheck A tier criteria for this market before publishing."
     },
     {
       "id": "2026-05-21-824031-ML-0",
@@ -274,11 +274,11 @@
       "pick": "Angels ML -155 to -170",
       "market": "ML",
       "confidence": 87,
-      "signals_at_lock": "A tier signals at publication.",
-      "actual_outcome": "-162",
+      "signals_at_lock": "A tier signals as logged at publication.",
+      "actual_outcome": "OAK 3 LAA 2 (F10). Severino 10K 7IP 0ER dominated. LAA ML loss in extras.",
       "category": "VARIANCE",
       "diagnosis": "OAK 3 LAA 2 (F10). Severino 10K 7IP 0ER dominated. LAA ML loss in extras.",
-      "rule_generated": "Review A tier criteria for this market."
+      "rule_generated": "Recheck A tier criteria for this market before publishing."
     },
     {
       "id": "2026-05-21-824031-ML-primary",
@@ -286,11 +286,11 @@
       "pick": "Angels ML -155 to -170",
       "market": "ML",
       "confidence": 87,
-      "signals_at_lock": "A tier signals at publication.",
-      "actual_outcome": "LAA -155 to -170",
+      "signals_at_lock": "A tier signals as logged at publication.",
+      "actual_outcome": "OAK 3 LAA 2 (F10); Angels ML loss. Severino dominant (10K 7IP) neutralised Soriano edge; OAK walk off in extras.",
       "category": "VARIANCE",
       "diagnosis": "OAK 3 LAA 2 (F10); Angels ML loss. Severino dominant (10K 7IP) neutralised Soriano edge; OAK walk off in extras.",
-      "rule_generated": "Review A tier criteria for this market."
+      "rule_generated": "Recheck A tier criteria for this market before publishing."
     },
     {
       "id": "2026-05-21-824031-Total-primary",
@@ -298,11 +298,11 @@
       "pick": "Soriano K Over 7.5",
       "market": "K",
       "confidence": 87,
-      "signals_at_lock": "A tier signals at publication.",
-      "actual_outcome": "7.5",
+      "signals_at_lock": "A tier signals as logged at publication.",
+      "actual_outcome": "Soriano 7K in 6.2IP; one short. Efficient outing limited deep count opportunities; game went extras pulling him early.",
       "category": "MODEL_ERROR",
       "diagnosis": "Soriano 7K in 6.2IP; one short. Efficient outing limited deep count opportunities; game went extras pulling him early.",
-      "rule_generated": "Review A tier criteria for this market."
+      "rule_generated": "Recheck A tier criteria for this market before publishing."
     },
     {
       "id": "20260511-824844-ML-0",
@@ -310,11 +310,11 @@
       "pick": "Yankees ML 165 to 145",
       "market": "ML",
       "confidence": 84,
-      "signals_at_lock": "A tier signals at publication.",
-      "actual_outcome": null,
+      "signals_at_lock": "A tier signals as logged at publication.",
+      "actual_outcome": "Final NYY 2 - BAL 3; NYY ML loss.",
       "category": "VARIANCE",
       "diagnosis": "Final NYY 2 - BAL 3; NYY ML loss.",
-      "rule_generated": "Review A tier criteria for this market."
+      "rule_generated": "Recheck A tier criteria for this market before publishing."
     }
   ],
   "entries": [
@@ -521,10 +521,10 @@
       "tier": "a",
       "result": "pending",
       "actualLine": null,
-      "profit": 0.0,
+      "profit": 0,
       "finalScore": null,
-      "diagnosis": "Pending settlement.",
-      "category": "PENDING"
+      "diagnosis": "",
+      "category": ""
     },
     {
       "id": "0aca6aa5-e805-41f8-a783-9815534b31aa",
@@ -537,10 +537,10 @@
       "tier": "a",
       "result": "pending",
       "actualLine": null,
-      "profit": 0.0,
+      "profit": 0,
       "finalScore": null,
-      "diagnosis": "Pending settlement.",
-      "category": "PENDING"
+      "diagnosis": "",
+      "category": ""
     },
     {
       "id": "e8b00d50-2909-42fa-9615-433b1ca6c421",
@@ -553,10 +553,10 @@
       "tier": "a",
       "result": "pending",
       "actualLine": null,
-      "profit": 0.0,
+      "profit": 0,
       "finalScore": null,
-      "diagnosis": "Pending settlement.",
-      "category": "PENDING"
+      "diagnosis": "",
+      "category": ""
     },
     {
       "id": "2026-05-25-823219-F5_Under_4",
