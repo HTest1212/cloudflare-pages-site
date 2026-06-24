@@ -1,48 +1,47 @@
 # MLB Dashboard Refresh Report
 
-**Window:** early afternoon (2:08 PM)
-**Run timestamp (UTC):** 2026-06-23T18:15Z
-**Slate date:** 2026-06-23
-**Game count:** 15
-**Commit:** 7d4877529b553f86b473fe5d375bfad72e11c964
-**Push status:** success, remote HEAD matches, Cloudflare Pages auto deploy verified live
-**Live URL:** https://mlb-betting-dashboard-v2.pages.dev
+Window: early afternoon (2:08 PM)
+Run timestamp UTC: 2026-06-24T18:14:00Z
+Slate date: 2026-06-24  Game count: 16
+Commit: 6d18e69  Push status: success (remote HEAD matches local)
+Live verify: window and 16 grades and projected scores all resolve non zero
 
 ## API data quality
-- Pitchers confirmed: 28 of 30 starters via schedule-api. Shane Bieber (TOR) returned no 2026 season line (treated as tiny sample, league average placeholder). San Diego home starter posted TBD (league average placeholder).
-- Weather: 14 of 14 outdoor or retractable parks fetched from Open Meteo successfully. Tropicana Field skipped as a fixed dome. Rogers Centre and loanDepot park flagged as retractable, likely closed.
+Pitchers: 32 probables confirmed via schedule-api. Two returned no season stats and used a league average fallback: Mitch Bratt (STL debut) and JP Sears (SD). Both capped conviction on their cards.
+Weather: 13 outdoor or retractable parks fetched successfully from Open Meteo. Domes skipped: Tropicana Field. Two Live games used prior weather context.
+Lineups: confirmed both for TEX@MIA, CHC@NYM g1, CLE@CWS, BOS@COL; home confirmed for BAL@LAA; all other Preview games projected and capped at B.
 
-## Per game grade, projected score, picks, primary chips
-- 822799 HOU @ TOR | C 63 | 3.8-4.1 | 6 picks | Toronto ML
-- 823365 SEA @ PIT | B 73 | 3.5-3.7 | 6 picks | Under 7.5, Kirby K over 5.5
-- 822963 KC @ TB | C 66 | 4.4-4.0 | 6 picks | McClanahan K over 5.5, Tampa Bay ML
-- 823849 TEX @ MIA | B 72 | 3.4-4.0 | 6 picks | Miami ML, Under 8
-- 824262 NYY @ DET | B 73 | 3.6-3.9 | 6 picks | Detroit ML, Mize K over 5.5
-- 822718 PHI @ WAS | B 78 | 5.0-3.9 | 6 picks | Philadelphia ML, Luzardo K over 5.5
-- 823614 CHC @ NYM | B 74 | 5.2-3.9 | 6 picks | Chicago Cubs ML, Over 9.0
-- 824501 MIL @ CIN | B 74 | 4.9-4.7 | 6 picks | Over 9.5, YRFI
-- 823690 LAD @ MIN | C 64 | 3.6-4.0 | 6 picks | Minnesota ML (rain risk 77 percent)
-- 824584 CLE @ CWS | B 76 | 3.3-3.5 | 6 picks | Under 7.5, Messick K over 5.5
-- 823043 ARI @ STL | B 76 | 4.3-3.6 | 6 picks | Arizona ML, Rodriguez K over 5.5
-- 824340 BOS @ COL | B 74 | 6.0-5.5 | 6 picks | Over 11.5, Boston ML
-- 824017 BAL @ LAA | B 74 | 4.8-3.9 | 6 picks | Baltimore ML, Baz K over 5.5
-- 823286 ATL @ SD | C 62 | 3.4-4.0 | 6 picks | San Diego ML (SD starter TBD)
-- 823210 ATH @ SF | C 66 | 3.6-3.8 | 6 picks | Under 7.5, Ray K over 5.5
+## Active learnings adjustments applied
+- LOCK GUARD ACTIVE: A tier publication suspended until rolling 14d Lock win rate recovers to 0.85, slate capped at B
+- Recent form two way modifier from rolling_form_overlay; cold teams never graded ML above C
+- Projected lineup cards capped at B plus 84, TBD or debut starter capped at C with one chip
+- K over chips require a six inning floor and trailing form clearing the line; short leash arms blocked
+- Coors over not Locked on wind alone, altitude variance caps at B
+- Under blocked when both lineups rank top 12 in trailing runs per game
+- Factor overlays for park, umpire, and framing absent so top tier held to B
 
-## Overlay game counts
-- rolling_form_overlay: 30 teams loaded, applied as two way form modifier
-- bullpen_availability_overlay: 30 teams loaded, health and closer status applied
-- odds_overlay.json rebuilt: 15 games
-- statcast_overlay.json rebuilt: 15 games (ERA based xFIP and FIP estimates)
-- picks_log.json: 27 primary chips upserted, 905 total entries
+## Per game summary
+- TEX @ MIA (823850) Live: B 76, proj 3.4 to 3.6, picks 6. Chips: Under 8 or 8.5 | deGrom K over 6.5
+- CHC @ NYM (823613) Live: B 74, proj 3.8 to 3.6, picks 6. Chips: Under 8 | NRFI
+- CHC @ NYM (823611) Preview: C 66, proj 4.4 to 3.9, picks 6. Chips: Cubs F5 ML +105 to +120
+- CLE @ CWS (824583) Preview: B 77, proj 3.5 to 3.7, picks 6. Chips: Under 8 or 8.5 | NRFI
+- BOS @ COL (824341) Preview: B 75, proj 5.6 to 6.1, picks 6. Chips: Over 11 or 11.5 | Boston Red Sox ML +100 to +115
+- BAL @ LAA (824018) Preview: B 74, proj 3.6 to 4.8, picks 6. Chips: Los Angeles Angels ML -120 to -135 | Soriano K over 5.5
+- SEA @ PIT (823367) Preview: B 78, proj 2.9 to 3.2, picks 6. Chips: Under 7 or 7.5 | NRFI
+- KC @ TB (822965) Preview: B 76, proj 5.1 to 3.5, picks 6. Chips: Kansas City Royals ML -115 to +105 | Royals over 4.5 team runs
+- NYY @ DET (824259) Preview: B 78, proj 3.4 to 3.7, picks 6. Chips: Under 8 | Skubal K over 6.5 | Detroit Tigers ML -110 to +110
+- PHI @ WSH (822719) Preview: B 79, proj 5.7 to 4.6, picks 6. Chips: Over 9 or 9.5 | Philadelphia Phillies ML -130 to -145
+- HOU @ TOR (822798) Preview: B 74, proj 4.1 to 5.0, picks 6. Chips: Toronto Blue Jays ML -125 to -140 | Blue Jays over 4.5 team runs
+- MIL @ CIN (824500) Preview: C 65, proj 4.5 to 4.0, picks 6. Chips: Milwaukee Brewers ML -105 to +110
+- LAD @ MIN (823691) Preview: B 76, proj 3.4 to 3.6, picks 6. Chips: Under 8 | Joe Ryan K over 6.5
+- ARI @ STL (823041) Preview: C 60, proj 4.4 to 4.2, picks 6. Chips: Arizona over 4.5 team runs
+- ATL @ SD (823284) Preview: B 72, proj 3.1 to 3.9, picks 6. Chips: Under 8 | San Diego Padres ML -120 to -135
+- ATH @ SF (823208) Preview: B 75, proj 3.3 to 3.4, picks 6. Chips: Under 8 or 7.5 | NRFI
 
-## Missing overlays (gap noted)
-park_factors, park_wind_rules, umpire_factors, catcher_framing, pitch_matchup absent. Top tier held to B across the slate per the missing overlay rule.
+## Overlay counts
+odds_overlay.json: 16 games. statcast_overlay.json: 16 games. picks_log.json: 41 new pending entries for Preview games, total 976.
+Factor overlays absent (park_factors, park_wind_rules, umpire_factors, catcher_framing, pitch_matchup); analyst defaults used and top tier held to B.
 
-## Learnings adjustments applied
-LOCK GUARD ACTIVE (A tier suspended), two way form modifier (cold teams capped at C ML: SEA, TEX, STL, LAD, ATL), K over six inning floor (all K chips anchored at 5.5), VARIANCE down weight, ML favorite quality start demotion, tiny sample downgrade (Bieber, Rojas, Sullivan, Johnson, TBD SD), Coors over altitude cap, Oracle under and Giants ML caps.
-
-## Errors and fallbacks
-- Workspace mount .env unreadable (Resource deadlock errno 35). Recovered PAT from existing /tmp clone .git/config and built from a fresh self owned /tmp/cfps clone.
-- Live fetch returned 0 bytes on first two attempts during Pages propagation; succeeded on retry. Final verification confirmed all 15 cards render non zero grade and projected score.
-- No A tier published (LOCK GUARD). Highest grade B 78 (PHI @ WAS).
+## Notes and fallbacks
+Lock guard cap_active (rolling 14d Lock win rate 0.3333), so no A tier published; slate ceiling B 84.
+Bratt and Sears stat fallback noted above. .env unreadable due to mount deadlock; PAT recovered from clone .git/config.
