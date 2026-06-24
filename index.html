@@ -3288,13 +3288,14 @@ function projectTotal(g) {
   const pf = parkForGame(g);
   let total = 8.8;
   if (pf) total *= pf.r;
-  const awayP = STATE.pitcherStats[g.teams.away.probablePitcher && g.teams.away.probablePitcher.id];
-  const homeP = STATE.pitcherStats[g.teams.home.probablePitcher && g.teams.home.probablePitcher.id];
-  [awayP, homeP].forEach(function(p){
-    if (p && p.season && p.season.era != null) {
-      total += (Number(p.season.era) - 4.0) * 0.25;
-    }
-  });
+  // Use park adjusted, recent form blended ERA so we don't over project against
+  // a Coors starter on the road or under project against a hot recent stretch.
+  const awaySpId = g.teams.away.probablePitcher && g.teams.away.probablePitcher.id;
+  const homeSpId = g.teams.home.probablePitcher && g.teams.home.probablePitcher.id;
+  const awayEffEra = pitcherEffEra(awaySpId, g.teams.away.team.id);
+  const homeEffEra = pitcherEffEra(homeSpId, g.teams.home.team.id);
+  total += (awayEffEra - 4.0) * 0.25;
+  total += (homeEffEra - 4.0) * 0.25;
   const w = STATE.weather[g.gamePk];
   if (pf && w && !pf.roof) {
     const proj = projectWind(w.windDeg, w.windMph, pf.orient);
@@ -9818,6 +9819,54 @@ function applyLineupAdjustments(){
   STATE.betsTable.sort(function(a,b){ return (b.score||0) - (a.score||0); });
 }
 
+
+// ===== TEAM CATEGORY ANALYSIS + PITCHER PARK ADJUSTMENT (added 2026-06-20) =====
+// Adds blind spots the previous model missed: pitcher recent form (d14 ERA weighted
+// 0.40 vs season 0.60), park adjustment for the pitcher's home venue (Coors deflation
+// for road starts mostly), and a multi category team strength score that uses
+// OPS vs hand, season runs per game, and team strikeout rate together so a low RPG
+// high K offense (Red Sox style) never gets multiplied into a Lock against an
+// inflated season ERA starter from Coors.
+function pitcherEffEra(spId, pitcherTeamId) {
+  const ps = STATE.pitcherStats[spId];
+  const pl = STATE.pitcherLogs[spId];
+  const seasonEra = Number(ps && ps.season && ps.season.era) || 4.50;
+  let effEra = seasonEra;
+  if (pl && pl.d14 && pl.d14.era != null && pl.d14.ip >= 8) {
+    effEra = Number(pl.d14.era) * 0.40 + seasonEra * 0.60;
+  }
+  const tid = Number(pitcherTeamId);
+  if (tid === 115) effEra *= 0.87;        // COL Rockies (Coors deflation for road)
+  else if (tid === 135) effEra *= 1.06;   // SD Padres (Petco re-inflation)
+  else if (tid === 137) effEra *= 1.06;   // SF Giants (Oracle re-inflation)
+  else if (tid === 136) effEra *= 1.04;   // SEA Mariners (T-Mobile re-inflation)
+  return Math.max(2.20, Math.min(8.50, effEra));
+}
+
+function teamOffenseMultiplier(teamId, oppSpHand) {
+  const ts = STATE.teamStats[teamId];
+  if (!ts) return 1.0;
+  const handSplit = oppSpHand === "L" ? ts.vsL : (oppSpHand === "R" ? ts.vsR : null);
+  const split = handSplit || ts.season;
+  if (!split) return 1.0;
+  const ops = Number(split.ops) || 0.720;
+  const seasonStats = ts.season || split;
+  const runs = Number(seasonStats.runs) || 0;
+  const games = Number(seasonStats.gamesPlayed) || 1;
+  const rpg = (games > 0) ? (runs / games) : 4.30;
+  const k = Number(split.strikeOuts) || 0;
+  const ab = Number(split.atBats) || 1;
+  const kRate = (ab > 0) ? (k / ab) : 0.225;
+  const opsMult = ops / 0.720;
+  const rpgMult = Math.max(0.65, Math.min(1.40, rpg / 4.30));
+  const kPenalty = Math.max(0.85, Math.min(1.10, 1 - (kRate - 0.225) * 0.60));
+  let mult = opsMult * 0.35 + rpgMult * 0.40 + kPenalty * 0.25;
+  if (rpg < 3.85) mult = Math.min(mult, 1.05);
+  if (ops < 0.690) mult = Math.min(mult, 1.05);
+  if (rpg > 5.10) mult = Math.max(mult, 1.10);
+  return Math.max(0.65, Math.min(1.40, mult));
+}
+
 function renderBets() {
   const bets = [];
 
@@ -10032,7 +10081,9 @@ function renderBets() {
       const oppSide = side === 'away' ? 'home' : 'away';
       const oppSP = g.teams[oppSide].probablePitcher;
       const oppPS = STATE.pitcherStats[oppSP && oppSP.id];
-      const oppEra = Number(oppPS && oppPS.season && oppPS.season.era) || 4.50;
+      const oppHand = (oppPS && oppPS.hand) || getPitcherHand(g.teams[side]) || "R";
+      const oppEraEff = pitcherEffEra(oppSP && oppSP.id, g.teams[oppSide].team.id);
+      const sideTeamMult = teamOffenseMultiplier(g.teams[side].team.id, oppHand);
       // Side F5 OPS: use top 5 OPS (since F5 is mostly top of order).
       let sideTopOps = 0.720;
       if (lu.length >= 5) {
@@ -10044,22 +10095,26 @@ function renderBets() {
         });
         if (n) sideTopOps = s / n;
       }
-      // Base F5 side projection: half the game F5 projection, then scale by OPS vs ERA.
-      const f5SideProj = (f5proj / 2) * (sideTopOps / 0.720) * (oppEra / 4.50);
+      // Side multiplier: 60% team composite (OPS+RPG+K), 40% top 5 lineup OPS when posted.
+      const sideMult = (lu.length >= 5)
+        ? (sideTeamMult * 0.60 + (sideTopOps / 0.720) * 0.40)
+        : sideTeamMult;
+      // Park and recent form adjusted ERA replaces raw season ERA.
+      const f5SideProj = (f5proj / 2) * sideMult * (oppEraEff / 4.50);
       const f5TtNick = (typeof teamNicknameFromName === 'function') ? teamNicknameFromName(g.teams[side].team.name) : g.teams[side].team.name;
       if (f5SideProj >= 1.20) {
         bets.push({ cat:"📊 F5 Team", type:"F5 Team Total OVER", pick:f5TtNick+" F5 O1.5 Runs", game:label,
           tier: f5SideProj >= 2.30 ? "STRONG" : "LEAN",
           score: (f5SideProj - 1.50) * 6,
           cashProb: poissonCashProb(f5SideProj, 1.5, 'over'),
-          note:"F5 side proj "+fmt(f5SideProj,2)+" R · Poisson λ="+fmt(f5SideProj,2)+" · top 5 OPS "+fmt(sideTopOps,3)+" vs "+fmt(oppEra,2)+" ERA"
+          note:"F5 side proj "+fmt(f5SideProj,2)+" R · top5 OPS "+fmt(sideTopOps,3)+" · team mult "+fmt(sideTeamMult,2)+" · oppERA "+fmt(oppEraEff,2)+" (park+form adj)"
         });
       } else if (f5SideProj <= 1.15) {
         bets.push({ cat:"📊 F5 Team", type:"F5 Team Total UNDER", pick:f5TtNick+" F5 U1.5 Runs", game:label,
           tier: f5SideProj <= 0.85 ? "STRONG" : "LEAN",
           score: (1.50 - f5SideProj) * 6,
           cashProb: poissonCashProb(f5SideProj, 1.5, 'under'),
-          note:"F5 side proj "+fmt(f5SideProj,2)+" R · Poisson λ="+fmt(f5SideProj,2)+" · top 5 OPS "+fmt(sideTopOps,3)+" vs "+fmt(oppEra,2)+" ERA"
+          note:"F5 side proj "+fmt(f5SideProj,2)+" R · top5 OPS "+fmt(sideTopOps,3)+" · team mult "+fmt(sideTeamMult,2)+" · oppERA "+fmt(oppEraEff,2)+" (park+form adj)"
         });
       }
     });
