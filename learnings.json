@@ -1,55 +1,67 @@
 {
- "asof": "2026-06-28T08:05:00Z",
- "yesterday_date": "2026-06-26",
+ "asof": "2026-06-29T08:10:23Z",
+ "yesterday_date": "2026-06-28",
  "yesterday_record": {
-  "picks": 27,
-  "wins": 16,
-  "losses": 9,
-  "pushes": 2,
+  "picks": 45,
+  "wins": 25,
+  "losses": 20,
+  "pushes": 0,
   "voids": 0,
-  "units": 4.9056,
-  "totalStake": 27.0,
-  "winRate": 0.64,
-  "roi": 0.1817
+  "units": 2.4415,
+  "totalStake": 45.0,
+  "winRate": 0.5556,
+  "roi": 0.0543
  },
  "by_market": {
-  "K": {
-   "picks": 2,
-   "wins": 2,
-   "losses": 0,
+  "Total": {
+   "picks": 14,
+   "wins": 5,
+   "losses": 9,
    "pushes": 0,
    "voids": 0,
-   "units": 1.7787,
-   "totalStake": 2.0,
-   "winRate": 1.0,
-   "roi": 0.8893
+   "units": -4.4545,
+   "totalStake": 14.0,
+   "winRate": 0.3571,
+   "roi": -0.3182
+  },
+  "K": {
+   "picks": 6,
+   "wins": 4,
+   "losses": 2,
+   "pushes": 0,
+   "voids": 0,
+   "units": 1.5211,
+   "totalStake": 6.0,
+   "winRate": 0.6667,
+   "roi": 0.2535
   },
   "ML": {
-   "picks": 16,
-   "wins": 10,
-   "losses": 6,
+   "picks": 21,
+   "wins": 14,
+   "losses": 7,
    "pushes": 0,
    "voids": 0,
-   "units": 2.4905,
-   "totalStake": 16.0,
-   "winRate": 0.625,
-   "roi": 0.1557
+   "units": 5.5567,
+   "totalStake": 21.0,
+   "winRate": 0.6667,
+   "roi": 0.2646
   },
-  "Total": {
-   "picks": 9,
-   "wins": 4,
-   "losses": 3,
-   "pushes": 2,
+  "TeamTotal": {
+   "picks": 4,
+   "wins": 2,
+   "losses": 2,
+   "pushes": 0,
    "voids": 0,
-   "units": 0.6364,
-   "totalStake": 9.0,
-   "winRate": 0.5714,
-   "roi": 0.0707
+   "units": -0.1818,
+   "totalStake": 4.0,
+   "winRate": 0.5,
+   "roi": -0.0454
   }
  },
  "loss_categories": {
-  "VARIANCE": 8,
-  "STARTER_REGRESSION": 1
+  "VARIANCE": 16,
+  "STARTER_REGRESSION": 2,
+  "WEATHER": 2
  },
  "lock_breach_priority": "normal",
  "lock_breach_rules": [],
@@ -58,29 +70,29 @@
  "patterns_identified": [
   {
    "category": "VARIANCE",
-   "frequency": 8,
-   "summary": "8 losses tagged VARIANCE on the 2026-06-26 slate of C tier ML and totals.",
-   "adjustment_rule": "Tighten exposure on bets prone to VARIANCE; require a second confirming signal before publishing."
+   "frequency": 16,
+   "summary": "16 losses tagged VARIANCE on the 2026-06-28 slate.",
+   "adjustment_rule": "Down weight setups exposed to VARIANCE until the pattern clears."
   }
  ],
  "adjustments_for_today": [
+  "Do not Lock a road ML favorite at Coors on opponent starter ERA alone; altitude variance caps these at B until the offense shows two straight road games of five plus runs.",
   "Do not Lock a K over at 6.5 or higher unless the starter cleared six innings in three of his last four starts; pull A tier on any short leash or pitch count risk.",
   "Do not Lock a road ML favorite whose starter projects under seven innings unless a rested high leverage reliever is confirmed; bottom third bullpens cap these at B.",
-  "Do not Lock a road ML favorite at Coors on opponent starter ERA alone; altitude variance caps these at B until the offense shows two straight road games of five plus runs.",
   "Never Lock a Coors Over above 11 on wind blowing out alone; require both starters at a 5.00 or worse ERA and confirmed heavy bullpen usage before A tier.",
   "Down weight setups exposed to VARIANCE until the pattern clears.",
   "Cap total bet exposure per slate; a cluster of correlated under and favorite plays amplifies variance on rough nights.",
-  "Require the pitcher trailing 5 start strikeout rate to exceed the posted K line before publishing a K over, and cap K over stake at half a unit when the line is above the pitcher season average.",
   "Down weight setups exposed to VARIANCE; require an extra confirming signal before grading above C.",
+  "Require the pitcher trailing 5 start strikeout rate to exceed the posted K line before publishing a K over, and cap K over stake at half a unit when the line is above the pitcher season average.",
   "Two of three K Over 6.5 losses came from starters pulled before 6 innings in lopsided games; avoid K Over chips when the starter carries blowout or short leash risk and require a projected floor of 6 innings.",
-  "Demote any ML favorite whose starter lacks two consecutive quality starts in last three outings; require bullpen rest confirmation.",
   "Down weight setups exposed to STARTER_REGRESSION; require an extra confirming signal before grading above C.",
+  "Demote any ML favorite whose starter lacks two consecutive quality starts in last three outings; require bullpen rest confirmation.",
   "Tighten under totals: do not publish an under when both lineups rank top 12 in runs per game over the trailing 14 days."
  ],
  "monitoring_list": [
-  "Jun 27 slate had 15 finalized games but zero logged picks; confirm the midday pick generator ran.",
-  "No A tier Locks published since 2026-06-10; rolling 14d Lock sample is empty (guard healthy by default).",
-  "VARIANCE remains the dominant loss tag on C tier ML and total clusters."
+  "Lock guard healthy; rolling 14d Lock sample still empty (no A tier published since 2026-06-10).",
+  "VARIANCE remains the dominant loss tag across C tier ML and total clusters.",
+  "Total Under and Over plays split 5 and 9 on 2026-06-28; revisit total model calibration on day games."
  ],
  "carryover_rules": [
   {
@@ -178,18 +190,18 @@
    "source": "pattern",
    "added_date": "2026-05-29",
    "expires_date": null,
-   "times_validated": 18,
+   "times_validated": 19,
    "permanent": true,
-   "last_validated": "2026-06-26"
+   "last_validated": "2026-06-28"
   },
   {
    "rule": "Cap total bet exposure per slate; a cluster of correlated under and favorite plays amplifies variance on rough nights.",
    "source": "pattern",
    "added_date": "2026-05-30",
    "expires_date": null,
-   "times_validated": 12,
+   "times_validated": 13,
    "permanent": true,
-   "last_validated": "2026-06-26"
+   "last_validated": "2026-06-28"
   },
   {
    "rule": "Demote any ML favorite whose starter lacks two consecutive quality starts in last three outings; require bullpen rest confirmation.",
@@ -231,19 +243,19 @@
    "rule": "Never Lock a Coors Over above 11 on wind blowing out alone; require both starters at a 5.00 or worse ERA and confirmed heavy bullpen usage before A tier.",
    "source": "lock_breach",
    "added_date": "2026-06-10",
-   "expires_date": "2026-06-28",
-   "times_validated": 2,
-   "permanent": false,
-   "last_validated": "2026-06-14"
+   "expires_date": null,
+   "times_validated": 3,
+   "permanent": true,
+   "last_validated": "2026-06-28"
   },
   {
    "rule": "Do not Lock a road ML favorite at Coors on opponent starter ERA alone; altitude variance caps these at B until the offense shows two straight road games of five plus runs.",
    "source": "lock_breach",
    "added_date": "2026-06-10",
    "expires_date": null,
-   "times_validated": 3,
+   "times_validated": 4,
    "permanent": true,
-   "last_validated": "2026-06-20"
+   "last_validated": "2026-06-28"
   },
   {
    "rule": "Do not Lock a K over at 6.5 or higher unless the starter cleared six innings in three of his last four starts; pull A tier on any short leash or pitch count risk.",
@@ -259,18 +271,18 @@
    "source": "pattern",
    "added_date": "2026-06-10",
    "expires_date": null,
-   "times_validated": 10,
+   "times_validated": 11,
    "permanent": true,
-   "last_validated": "2026-06-26"
+   "last_validated": "2026-06-28"
   },
   {
    "rule": "Down weight setups exposed to STARTER_REGRESSION; require an extra confirming signal before grading above C.",
    "source": "pattern",
    "added_date": "2026-06-10",
    "expires_date": null,
-   "times_validated": 7,
+   "times_validated": 8,
    "permanent": true,
-   "last_validated": "2026-06-26"
+   "last_validated": "2026-06-28"
   },
   {
    "rule": "A sub 1.10 WHIP label alone is not protection; verify the starter's last three starts for runs allowed and innings before publishing any ML, total, or K over built on that starter.",
@@ -303,20 +315,20 @@
    "rule": "Tighten exposure on bets prone to VARIANCE; require a second confirming signal before publishing.",
    "source": "pattern",
    "added_date": "2026-06-25",
-   "expires_date": "2026-07-03",
-   "times_validated": 2,
-   "permanent": false,
-   "last_validated": "2026-06-26",
+   "expires_date": null,
+   "times_validated": 3,
+   "permanent": true,
+   "last_validated": "2026-06-28",
    "pattern_category": "VARIANCE"
   },
   {
    "rule": "Tighten exposure on bets prone to STARTER_REGRESSION; require a second confirming signal before publishing.",
    "source": "pattern",
    "added_date": "2026-06-25",
-   "expires_date": "2026-07-03",
-   "times_validated": 2,
-   "permanent": false,
-   "last_validated": "2026-06-26",
+   "expires_date": null,
+   "times_validated": 3,
+   "permanent": true,
+   "last_validated": "2026-06-28",
    "pattern_category": "STARTER_REGRESSION"
   }
  ]
