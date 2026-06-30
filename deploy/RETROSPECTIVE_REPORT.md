@@ -1,104 +1,90 @@
-# MLB Daily Retrospective 2026-06-28
+# MLB Daily Retrospective — 2026-06-29
 
-Generated 2026-06-29T08:11:25Z | Settled on 2026-06-29
+Generated 2026-06-30 (America/New_York). Settlement window: 2026-06-29 slate, 13 games, all Final.
 
-No Lock breach. Zero A tier picks were live on the 2026-06-28 slate, so no Lock loss occurred.
+## SECTION 1 — LOCK BREACH BANNER
 
-## SECTION 2 - SLATE SUMMARY
+No Lock breach. Zero A tier picks were live on the 2026-06-29 slate, so no Lock could break. Rolling 14d Lock win rate remains an empty sample. Guard status: healthy.
 
-Slate date 2026-06-28: 15 games, all Final. Logged picks settled: 45, all B and C tier with no A tier Locks.
-Overall record: 25W 20L 0P, units +2.44, win rate 55.6%, ROI 5.4%.
+## SECTION 2 — SLATE SUMMARY
 
-Schema mix: all picks carried explicit ids in the descriptive and v2 slug formats; no id free midday rows on this slate.
+Slate date 2026-06-29, 13 games, all reached Final.
 
-Record by market:
+HARD ERROR: zero picks were logged for 2026-06-29. The picks_log pulled from origin contains no entries dated 2026-06-29 and no entries referencing any of yesterday's 13 gamePks. The most recent committed picks are dated 2026-06-28. This means the 11:30 AM publish or commit step did not land picks for the 2026-06-29 slate. Nothing was settled for yesterday as a result.
 
-- K: 4W 2L, units +1.52, win rate 66.7%
-- ML: 14W 7L, units +5.56, win rate 66.7%
-- TeamTotal: 2W 2L, units -0.18, win rate 50.0%
-- Total: 5W 9L, units -4.45, win rate 35.7%
+Pick count by schema: v2 = 0, v1 = 0, midday = 0. Overall settled record for 2026-06-29: 0 wins, 0 losses, 0 pushes, 0 voids.
 
-Record by tier:
+Record by market: none (no picks). Record by tier: none (no picks).
 
-- B: 18W 9L, units +7.08, win rate 66.7%
-- C: 7W 11L, units -4.64, win rate 38.9%
+Final scores for reference (away at home): White Sox 8 at Orioles 2, Pirates 11 at Phillies 7, Tigers 7 at Yankees 3, Mets 1 at Blue Jays 2, Nationals 3 at Red Sox 6, Rangers 6 at Guardians 3, Reds 3 at Brewers 5, Padres 2 at Cubs 3, Twins 5 at Astros 4, Marlins 10 at Rockies 7, Dodgers 9 at Athletics 4, Angels 2 at Mariners 6, Giants 4 at Diamondbacks 5.
 
-## SECTION 3 - LOCK TRACK RECORD
+## SECTION 3 — LOCK TRACK RECORD
 
-Lifetime Locks: 25W 17L 2P 1V, units +3.09, win rate 59.5%, ROI 0.6%.
-Current streak: 1 win. Longest win streak 8, longest loss streak 6.
-Rolling 14d Lock win rate: 0.0%. Rolling 30d: 33.3%.
-Guard status: healthy.
+Lifetime Lock record: 25 wins, 17 losses, 2 pushes, 1 void across 45 settled A tier picks. Win rate 0.5952. Units plus 3.09 on a flat 1u model. ROI 0.0701. Current streak: 1 loss. Longest win streak 8, longest loss streak 6. Rolling 14d Lock win rate: empty sample (no A tier published since 2026-06-10, which now sits outside the 14d window). Rolling 30d Lock win rate: 0.3333 on 6 settled Locks.
 
-Lock by market:
+Lock by market (settled): ML 4 and 7 (win rate 0.3636, minus 4.75u), K 8 and 5 (0.6154, plus 1.42u), Total 3 and 4 (0.4286, minus 1.27u), RL 3 and 0 (1.000, plus 3.13u), F5_ML 2 and 0 (1.000, plus 1.50u), F5_Total 2 and 0 (1.000, plus 1.78u), F5 1 and 1 (0.500), Hits 1 and 0 (1.000), TotalBases 1 and 0 (1.000). The A tier ML book is the lone negative market and the clear drag on Lock ROI.
 
-- F5: 1W 1L, units -0.13, win rate 50.0%
-- F5_ML: 2W 0L, units +1.50, win rate 100.0%
-- F5_Total: 2W 0L, units +1.78, win rate 100.0%
-- Hits: 1W 0L, units +0.50, win rate 100.0%
-- K: 8W 5L, units +1.42, win rate 61.5%
-- ML: 4W 7L, units -4.75, win rate 36.4%
-- Over: 0W 1L, units -1.00, win rate 0.0%
-- RL: 3W 0L, units +3.13, win rate 100.0%
-- Total: 2W 2L, units -0.18, win rate 50.0%
-- TotalBases: 1W 0L, units +0.91, win rate 100.0%
-- Under: 1W 1L, units -0.09, win rate 50.0%
+Guard status: healthy. Because fewer than three Locks have settled inside the trailing 14 days, the guard defaults to healthy and the 11:30 AM run faces no A tier cap today. The standing permanent Lock rules below still apply as hard filters.
 
-No A tier Locks have been published since 2026-06-10, so the rolling 14d Lock sample is empty and the guard defaults to healthy on insufficient sample. The 11:30 AM run is not capped today. If A tier candidates appear, the standard Lock screen and the permanent breach rules below still apply.
+## SECTION 4 — TOP THREE LOSSES WITH DIAGNOSES
 
-## SECTION 4 - TOP THREE LOSSES
+No losses occurred on 2026-06-29 because no picks were live. The three most recent Lock losses on record, all from 2026-06-10, are retained for context:
 
-**Williams K Over 6.5** (K) | Seattle Mariners 5 - Cleveland Guardians 6 | STARTER_REGRESSION
-Missed. Two efficient right handers meet the two coldest bats on the slate, a clean recipe for a low scoring game. Actual: Seattle Mariners 5 - Cleveland Guardians 6, K=6
+1. Dodgers ML minus 150 to minus 170 — BULLPEN_FATIGUE. Ohtani left after 6.2 with the lead but the Los Angeles bullpen surrendered Pittsburgh runs in the seventh and eighth to flip the game.
+2. Coors Over 11.5 — BAD_PARK_READ. Only 5 combined runs scored as both starters held despite the altitude, heat, and wind out thesis.
+3. Cubs ML minus 125 to minus 140 — VARIANCE. Lost 2 to 3 at Coors as Chicago bats never solved the altitude and the model overweighted the opposing starter edge.
 
-**Williams K Over 6.5** (K) | Seattle Mariners 5 - Cleveland Guardians 6 | STARTER_REGRESSION
-Missed. Two efficient right handers meet the two coldest bats on the slate, a clean recipe for a low scoring game. Actual: Seattle Mariners 5 - Cleveland Guardians 6, K=6
+## SECTION 5 — RULE MEMORY STATUS
 
-**Over 9.5 or 10** (Total) | Colorado Rockies 2 - Minnesota Twins 3 | WEATHER
-Missed. An 18 mph wind and two hot lineups against shaky starters argue for runs at Target Field. Actual: Colorado Rockies 2 - Minnesota Twins 3, total 5
+Permanent rules (never expire): 26 active, all at times_validated 3 or higher. Highlights include the Coors road ML cap (times_validated 4, last validated 2026-06-28), the K over six innings clearance rule (times_validated 4, last validated 2026-06-14), the VARIANCE down weight pattern (times_validated 19, last validated 2026-06-28), and the correlated exposure cap (times_validated 13, last validated 2026-06-28).
 
-## SECTION 5 - RULE MEMORY STATUS
+Rules promoted to permanent today: none.
 
-Total rules in active memory: 26 permanent plus 0 trial, 26 total.
-
-Rules promoted to permanent today (reached three validations):
-
-- Never Lock a Coors Over above 11 on wind blowing out alone; require both starters at a 5.00 or worse ERA and confirmed heavy bullpen usage before A tier.
-- Tighten exposure on bets prone to VARIANCE; require a second confirming signal before publishing.
-- Tighten exposure on bets prone to STARTER_REGRESSION; require a second confirming signal before publishing.
+Trial rules still accumulating evidence: none. Every rule in memory has already reached permanent status.
 
 Rules that aged out today: none.
 
-New rules created today: none. The dominant VARIANCE pattern maps to an existing permanent rule, so no duplicate entry was added.
+New rules created today: none. No losses were available to validate a rule or seed a new one.
 
-All 26 carryover rules are now permanent; the trial pool is empty after today's three promotions.
+Total rules in active memory: 26 permanent plus 0 trial.
 
-## SECTION 6 - ADJUSTMENTS FOR TODAY
+## SECTION 6 — ADJUSTMENTS FOR TODAY
 
-Priority order: Lock guard, permanent breach, new breach, trial breach, permanent pattern, new pattern, trial pattern. Star marks permanent rules.
+Priority order. All entries are permanent rules (marked with a star). No Lock guard cap is active.
 
-- (*) Do not Lock a road ML favorite at Coors on opponent starter ERA alone; altitude variance caps these at B until the offense shows two straight road games of five plus runs.
-- (*) Do not Lock a K over at 6.5 or higher unless the starter cleared six innings in three of his last four starts; pull A tier on any short leash or pitch count risk.
-- (*) Do not Lock a road ML favorite whose starter projects under seven innings unless a rested high leverage reliever is confirmed; bottom third bullpens cap these at B.
-- (*) Never Lock a Coors Over above 11 on wind blowing out alone; require both starters at a 5.00 or worse ERA and confirmed heavy bullpen usage before A tier.
-- (*) Down weight setups exposed to VARIANCE until the pattern clears.
-- (*) Cap total bet exposure per slate; a cluster of correlated under and favorite plays amplifies variance on rough nights.
-- (*) Down weight setups exposed to VARIANCE; require an extra confirming signal before grading above C.
-- (*) Require the pitcher trailing 5 start strikeout rate to exceed the posted K line before publishing a K over, and cap K over stake at half a unit when the line is above the pitcher season average.
-- (*) Two of three K Over 6.5 losses came from starters pulled before 6 innings in lopsided games; avoid K Over chips when the starter carries blowout or short leash risk and require a projected floor of 6 innings.
-- (*) Down weight setups exposed to STARTER_REGRESSION; require an extra confirming signal before grading above C.
-- (*) Demote any ML favorite whose starter lacks two consecutive quality starts in last three outings; require bullpen rest confirmation.
-- (*) Tighten under totals: do not publish an under when both lineups rank top 12 in runs per game over the trailing 14 days.
+1. * Do not Lock a road ML favorite at Coors on opponent starter ERA alone; altitude variance caps these at B until the offense shows top tier road form.
+2. * Do not Lock a K over at 6.5 or higher unless the starter cleared six innings in three of his last four starts; pull A tier on any short leash arm.
+3. * Do not Lock a road ML favorite whose starter projects under seven innings unless a rested high leverage reliever is confirmed.
+4. * Never Lock a Coors Over above 11 on wind blowing out alone; require both starters at a 5.00 or worse ERA and confirmed heavy bullpen usage.
+5. * Down weight setups exposed to VARIANCE until the pattern clears.
+6. * Cap total bet exposure per slate; a cluster of correlated under and favorite plays amplifies variance on rough nights.
+7. * Down weight setups exposed to VARIANCE; require an extra confirming signal before grading above C.
+8. * Require the pitcher trailing 5 start strikeout rate to exceed the posted K line before publishing a K over, and cap K over stake.
+9. * Two of three K Over 6.5 losses came from starters pulled before 6 innings in lopsided games; avoid K Over chips when the starter carries a short leash.
+10. * Down weight setups exposed to STARTER_REGRESSION; require an extra confirming signal before grading above C.
+11. * Demote any ML favorite whose starter lacks two consecutive quality starts in last three outings; require bullpen rest confirmation.
+12. * Tighten under totals: do not publish an under when both lineups rank top 12 in runs per game over the trailing 14 days.
 
-## SECTION 7 - LIFETIME AND RECENT 14 DAY KPIs
+## SECTION 7 — LIFETIME AND RECENT 14 DAY KPIs
 
-Lifetime (all settled): 852W 681L 43P 161V across 1576 graded picks, units +51.44, win rate 55.6%, ROI 0.6%.
-Recent 14 days: 167W 133L 7P across 307 graded picks, units +11.06, win rate 55.7%, ROI 3.6%.
+All figures on a flat 1u model. The stake field on 77 historical outcomes from 2026-05-23 was contaminated at 100 instead of 1.0, so totalStake is computed as the non void settled count per the schema default; profit values were already on the correct 1u scale and were left untouched.
 
-## SECTION 8 - DATA NOTES
+Lifetime: 852 wins, 681 losses, 43 pushes, 161 voids across 1737 settled picks. Win rate 0.5558. Units plus 51.44. ROI 0.0326.
 
-- Git sync: origin is a public repo; pulled a fresh full clone of picks_log.json (workspace mount was lock blocked for direct reads, EDEADLK, so the clone was the source of truth).
-- Settlement source: 15 boxscores via the MLB API; three starter strikeout lines (Sale 10, Williams 6, Gray 9) pulled through a subagent boxscore read.
-- 2026-06-27 had 15 finalized games but zero logged picks (midday generator did not run), confirmed by the prior retrospective; there was nothing to settle for that date, so the one day gap in outcomes is benign.
-- All KPI win rates and ROI are stored as decimals; sanity assertions (winRate <= 1.0, abs(roi) < 2.0) passed for every group.
-- Workspace mount was write blocked, so all output files were built in the clone and deployed via git push; the live dashboard reads from GitHub.
+Recent 30 days: 318 wins, 245 losses, 14 pushes, 84 voids. Win rate 0.5648. Units plus 24.40. ROI 0.0423.
+
+Recent 14 days: 167 wins, 133 losses, 7 pushes, 6 voids. Win rate 0.5567. Units plus 11.06. ROI 0.0360.
+
+Recent 7 days: 98 wins, 77 losses, 6 pushes, 6 voids. Win rate 0.5600. Units plus 8.36. ROI 0.0462.
+
+## SECTION 8 — DATA NOTES
+
+Git sync: sparse clone from origin succeeded. picks_log.json was copied into the working folder. Local outcomes_log.json could not be read because the workspace mount returned Resource deadlock avoided, the known mount lock condition. The origin outcomes_log was used as the authoritative base, deduplicated by id from 1847 to 1831 entries.
+
+Schema parse: picks_log carries all three schemas; none matched yesterday's date or gamePks, confirming the empty slate is a publish gap and not a parse failure.
+
+Box scores: not pulled because there were no picks to settle. All 13 games were confirmed Final from the schedule feed.
+
+Stake field contamination handled as described in Section 7. winRate and roi are stored as decimals. Validation gate passed with zero errors before push.
+
+Action item carried into the monitoring list: investigate why no picks were committed for the 2026-06-29 slate.
