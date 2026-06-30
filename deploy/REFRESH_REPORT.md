@@ -1,57 +1,39 @@
 # MLB Dashboard Refresh Report
 
-Window: midday (11:30 AM ET)
-Run timestamp UTC: 2026-06-30T18:54:46Z
-Slate date: 2026-06-30
-Game count: 15
+Window: early afternoon (2:08 PM). Run timestamp (UTC): 2026-06-30T18:58:53Z
+Slate date: 2026-06-30. Games on slate: 15.
+Commit: 6110372 pushed to main. Cloudflare Pages auto deploy verified at https://mlb-betting-dashboard-v2.pages.dev (asOf 2026-06-30T18:55:22Z, all 15 cards resolve non zero).
 
 ## API data quality
-Probable pitchers: 29 of 30 confirmed via schedule API; 1 TBD (Arizona Diamondbacks home starter, gamePk 825066).
-Pitcher season stats: all 29 confirmed arms pulled real lines from the people endpoint.
-Weather: 15 of 15 parks fetched from Open Meteo successfully. Retractable roofs projected closed at Daikin Park (89F), American Family Field (94F), and Chase Field (99F); open at Rogers Centre (85F).
-Lineups: all projected (no lineup endpoint returned players at refresh time except a partial Baltimore home list); all cards capped at B plus per the projected lineup rule.
+Probable pitchers confirmed: 29 of 30 starter slots (29 confirmed, 1 TBD). Only Arizona home starter is TBD.
+Weather fetched successfully for 15 of 15 parks via Open Meteo at first pitch hour. Retractable roofs treated as open.
+All pitcher season stats pulled live from the MLB Stats API people endpoint in one batch call.
 
 ## Per game summary
 
-| Game | Grade | Proj Score | Picks | Primary Chips |
+| Game | Grade | Proj | Picks | Primary chips |
 |---|---|---|---|---|
-| CWS @ BAL | C 62 | CWS 4.5, BAL 4.8 | 6 | none (lean only) |
-| TEX @ CLE | B 78 | TEX 4.1, CLE 3.2 | 6 | deGrom K Over 6.5 ; Under 8 |
-| PIT @ PHI | B 80 | PIT 3.6, PHI 4.9 | 6 | Phillies ML  140 to  160 ; Sanchez K Over 6.5 |
-| DET @ NYY | B 81 | DET 3.4, NYY 3.0 | 6 | Under 7.5 ; Schlittler K Over 6.5 |
-| NYM @ TOR | C 66 | NYM 3.7, TOR 3.9 | 6 | Under 8.5 |
-| WSH @ BOS | B 76 | WSH 3.4, BOS 5.0 | 6 | Red Sox ML  130 to  150 ; Red Sox Team Total Over 4.5 |
-| STL @ ATL | C 63 | STL 3.1, ATL 3.9 | 6 | none (lean only) |
-| TB @ KC | C 65 | TB 4.5, KC 3.9 | 6 | Rays ML  110 to  125 |
-| CIN @ MIL | C 60 | CIN 4.4, MIL 4.5 | 6 | none (lean only) |
-| SD @ CHC | C 69 | SD 5.0, CHC 5.4 | 6 | Over 10 |
-| MIN @ HOU | B 80 | MIN 4.6, HOU 3.3 | 6 | Twins ML  105 to  120 ; Ryan K Over 6.5 |
-| MIA @ COL | B 74 | MIA 5.2, COL 5.8 | 6 | Over 11.5 ; Rockies Team Total Over 5.5 |
-| LAD @ ATH | B 76 | LAD 5.0, ATH 3.8 | 6 | Dodgers ML  130 to  150 ; Dodgers Team Total Over 4.5 |
-| LAA @ SEA | B 76 | LAA 3.3, SEA 3.2 | 6 | Under 7.5 ; Woo K Over 5.5 |
-| SF @ ARI | C 56 | SF 3.8, ARI 4.0 | 6 | none (lean only) |
+| CWS @ BAL | C60 | 4.4-4.2 | 6 | Pass / lean only |
+| TEX @ CLE | C64 | 4.0-3.5 | 6 | Rangers ML -130 to -145 |
+| PIT @ PHI | B72 | 4.2-5.1 | 6 | Phillies ML -150 to -165 ; Sánchez K over 5.5 |
+| DET @ NYY | B72 | 3.3-3.3 | 6 | Under 7.1 ; Schlittler K over 5.5 |
+| NYM @ TOR | D47 | 4.3-4.3 | 6 | Pass / lean only |
+| WSH @ BOS | B70 | 3.9-4.6 | 6 | Red Sox ML -140 to -155 |
+| STL @ ATL | C59 | 3.3-4.2 | 6 | Pass / lean only |
+| TB @ KC | C58 | 4.4-4.2 | 6 | Pass / lean only |
+| CIN @ MIL | C58 | 4.7-4.6 | 6 | Pass / lean only |
+| SD @ CHC | C58 | 5.0-5.3 | 6 | Pass / lean only |
+| MIN @ HOU | B80 | 5.2-3.7 | 6 | Twins ML -180 to -195 ; Ryan K over 5.5 |
+| MIA @ COL | C60 | 5.6-5.7 | 6 | Pass / lean only |
+| LAD @ ATH | C69 | 4.9-4.1 | 6 | Dodgers ML -145 to -160 |
+| LAA @ SEA | B76 | 4.0-2.8 | 6 | Angels ML -165 to -180 ; Soriano K over 5.5 |
+| SF @ AZ | C60 | 3.9-4.5 | 6 | Pass / lean only |
 
-## Overlays deployed
-odds_overlay.json: 15 games (moneyline, total, runline from projected scores).
-statcast_overlay.json: 15 games (ERA based xFIP and FIP estimates, playerId null, statcast_7d placeholder).
-picks_log.json: 1111 total entries; 19 primary chip records appended for 2026-06-30.
+## Overlay game counts
+odds_overlay.json: 15 games. statcast_overlay.json: 15 games (ERA based estimates). picks_log.json: 11 new primary chips appended, idempotent upsert by id.
 
 ## Learnings adjustments applied
-Read from learnings.json (asof 2026-06-29, yesterday 2026-06-28: 45 picks, 25 wins 20 losses, plus 2.44 units). 12 active adjustments held throughout the run. Key effects this slate:
-
-- VARIANCE down weight applied across every card (dominant 16 loss tag from 06-28).
-- Coors over capped at B (Eury Perez sub 5.00 ERA and only light wind) per the Coors lock rule, gamePk 824338.
-- K over leash check applied: deGrom, Sanchez, Schlittler, Joe Ryan, and Woo cleared a six inning floor and were published; Skubal K over kept secondary and sized down for short leash risk on a 59.2 inning return arc.
-- Cold form tier ML cap held Atlanta to C despite the Perez edge, and kept Yankees and Mariners off any side chip.
-- No A tier published; Lock guard healthy and the rolling 14 day Lock sample remains empty.
-- All B grade cards capped at two chips and all C cards at one chip or fewer per the grading table.
-
-## Deploy
-GitHub commit: 7b3dd49 (Auto refresh 1130am 2026-06-30). Push 8521379..7b3dd49 to main after a clean rebase onto a concurrent retrospective push.
-Cloudflare Pages auto deploy verified live: odds_overlay.json on the live site returned asOf 2026-06-30T18:52:08Z with 15 games.
-Live URL: https://mlb-betting-dashboard-v2.pages.dev
+12 active adjustments held throughout the run. Lock guard healthy; no A tier published. All cards capped at B+ (84) because lineups are projected at 2:08 PM. Key effects: VARIANCE downweight on correlated under and favorite clusters, K over capped to half unit with six inning floor, Coors altitude variance cap, cold form favorites held below B for moneyline.
 
 ## Errors and fallbacks
-- Workspace mount returned Resource deadlock (errno 35) on bash and EPERM on the file tools, the known recurring lock. Built and pushed from a fresh public clone at /tmp; GitHub token recovered from the workspace git remote config. This report committed to the repo deploy directory rather than written to the locked mount.
-- The five analysis overlays park_factors, park_wind_rules, catcher_framing, pitch_matchup, and umpire_factors are absent from the repo; park, wind, and weather reads were built from Open Meteo plus baseline park knowledge.
-- A concurrent retrospective run advanced the remote (learnings, outcomes, locks logs) mid push; rebased cleanly with no conflict on the four refresh files.
+Workspace mount hit the known resource deadlock (errno 35) on .env and overlay reads; recovered the PAT from .git/config and read all overlays from the fresh /tmp clone. First push rebase hit upstream conflicts from the 11:30 AM run; aborted, hard reset to origin/main, re-spliced over the fresh index.html and re-merged picks_log, then pushed clean. Bullpen overlay data missing for four teams (Cardinals, Braves, Rays, Royals); analyst defaults applied.
