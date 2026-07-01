@@ -3449,77 +3449,1486 @@ function buildGameNarrative(g) {
 /* =========== CLAUDE DAILY ANALYSIS (pre built afternoon refresh) =========== */
 /* =========== CLAUDE DAILY ANALYSIS (pre built afternoon refresh) =========== */
 const CLAUDE_DAILY_ANALYSIS = {
- "date": "2026-06-30",
- "asOf": "2026-06-30T18:55:22Z",
- "window": "early afternoon (2:08 PM)",
- "generated_by": "2:08 PM refresh",
+ "date": "2026-07-01",
+ "window": "midday (11:30 AM)",
+ "generatedAt": "2026-07-01T15:42:34Z",
+ "asof": "2026-07-01T15:42:34Z",
  "games": {
-  "824819": {
-   "gamePk": 824819,
+  "824818": {
+   "gamePk": 824818,
    "away": "Chicago White Sox",
    "home": "Baltimore Orioles",
    "awayAbbr": "CWS",
    "homeAbbr": "BAL",
    "venue": "Oriole Park at Camden Yards",
-   "firstPitch": "2026-06-30T22:35:00Z",
-   "firstPitchDisplay": "6:35 PM ET",
-   "window": "early afternoon (2:08 PM)",
+   "firstPitch": "2026-07-01T16:35:00Z",
+   "firstPitchDisplay": "12:35 PM ET",
+   "window": "midday (11:30 AM)",
    "awayPitcher": {
-    "name": "Erick Fedde",
-    "hand": "R",
-    "id": 607200,
-    "era": "4.34",
-    "whip": "1.42",
-    "k9": "6.03",
-    "bb9": "3.62",
-    "ip": "74.2",
+    "name": "Noah Schultz",
+    "hand": "L",
+    "id": 702273,
+    "era": "5.82",
+    "whip": "1.34",
+    "k9": "7.68",
+    "bb9": "5.12",
+    "ip": "38.2",
     "gs": 8,
     "w": 2,
-    "l": 6,
-    "k": 50,
+    "l": 4,
+    "k": 33,
     "tiny": false,
     "source": "schedule-api"
    },
    "homePitcher": {
-    "name": "Trey Gibson",
+    "name": "Dean Kremer",
     "hand": "R",
-    "id": 694346,
-    "era": "5.64",
-    "whip": "1.65",
-    "k9": "7.42",
-    "bb9": "5.64",
-    "ip": "30.1",
+    "id": 665152,
+    "era": "4.09",
+    "whip": "0.91",
+    "k9": "13.09",
+    "bb9": "1.64",
+    "ip": "11.0",
+    "gs": 2,
+    "w": 0,
+    "l": 1,
+    "k": 16,
+    "tiny": true,
+    "source": "schedule-api"
+   },
+   "lineupStatus": "confirmed",
+   "weather": {
+    "roof": "open",
+    "tempF": 95,
+    "wind": "4 mph WSW",
+    "precip": 0,
+    "note": "Weather from Open Meteo at first pitch hour."
+   },
+   "status": "Preview",
+   "confidenceLetter": "B-",
+   "confidenceScore": 72,
+   "grade": {
+    "letter": "B-",
+    "score": 72
+   },
+   "confidence": {
+    "letter": "B-",
+    "score": 72
+   },
+   "callout": "Two shaky arms in a hot hitter park at Camden set up a live over lean.",
+   "contextChips": [
+    "Camden hitter park",
+    "95 degrees first pitch",
+    "Schultz 5.12 BB9 wild"
+   ],
+   "projectedScore": {
+    "away": 5.0,
+    "home": 5.2
+   },
+   "projected_score": {
+    "away": 5.0,
+    "home": 5.2
+   },
+   "paragraphs": [
+    {
+     "title": "PITCHING MATCHUP",
+     "text": "Chicago sends Noah Schultz, a left hander running a 5.82 ERA with a bloated 5.12 walks per nine over 38.2 innings, and command that loose invites traffic every frame. Baltimore counters with Dean Kremer, back from the injured list on just 11 innings across two starts, so his 4.09 ERA rests on a tiny sample the model does not trust. Neither arm profiles as a stopper and both project to leak base runners."
+    },
+    {
+     "title": "OFFENSE VS HANDEDNESS",
+     "text": "The White Sox sit warm on rolling form at 4.32 runs per game over the trailing 15, while Baltimore reads cool at 3.65 but owns real thump against left handed pitching at Camden. Schultz walking the ballpark plays straight into a patient Orioles lineup, and the White Sox get a wild rookie profile to attack. Both bats have paths to cross the plate here."
+    },
+    {
+     "title": "PARK AND WEATHER",
+     "text": "Camden Yards plays as a clear hitter park and the environment is loud today. First pitch sits near 95 degrees with a light 4 mph breeze, and hot dense summer air at this park carries fly balls to the pull side. Heat plus two command challenged starters frames a run heavy script."
+    },
+    {
+     "title": "STRIKEOUT PROJECTION",
+     "text": "Neither starter offers a clean strikeout play. Schultz misses bats at times but the walks cap his innings, and Kremer on a short leash from a two start sample carries real pull risk before six innings. No pitcher strikeout chip clears the floor rule today."
+    },
+    {
+     "title": "BULLPEN EDGE",
+     "text": "Both bullpens read available, with Grant Taylor rested for Chicago and Yennier Cano fine for Baltimore, so neither side owns a decisive late inning edge. The over lean is a starter and weather story, not a bullpen story."
+    }
+   ],
+   "picks": [
+    {
+     "market": "Total",
+     "label": "Over 9 or 9.5",
+     "price": -110,
+     "tier": "A",
+     "note": "Two command challenged starters in a hot Camden hitter park point up."
+    },
+    {
+     "market": "F5",
+     "label": "Team Total Over 2.5 CWS",
+     "price": -115,
+     "tier": "B",
+     "note": "White Sox attack Kremer thin sample and Schultz backs a live first five."
+    },
+    {
+     "market": "Team Total",
+     "label": "Orioles Team Total Over 4.5",
+     "price": -105,
+     "tier": "B",
+     "note": "Baltimore thump versus a wild left hander at home in heat."
+    },
+    {
+     "market": "YRFI",
+     "label": "YRFI",
+     "price": 120,
+     "tier": "B",
+     "note": "Both starters walk hitters early and Camden rewards contact in the first."
+    },
+    {
+     "market": "K",
+     "label": "Schultz Under 4.5 K",
+     "price": -120,
+     "tier": "C",
+     "note": "Walks cap Schultz innings so his strikeout ceiling is low."
+    },
+    {
+     "market": "ML",
+     "label": "White Sox ML",
+     "price": 130,
+     "tier": "C",
+     "note": "Warm form and a thin Kremer sample make the road dog live."
+    }
+   ],
+   "verdict": {
+    "prose": "Two shaky arms in a hot hitter park at Camden set up a live over lean; the tickets are Over 9 or 9.5.",
+    "text": "Two shaky arms in a hot hitter park at Camden set up a live over lean; the tickets are Over 9 or 9.5.",
+    "chips": [
+     "Over 9 or 9.5"
+    ],
+    "projAway": 5.0,
+    "projHome": 5.2,
+    "longshot": []
+   },
+   "appliedAdjustments": [
+    "Down weighted Kremer to a C cap on the two start sample per tiny sample rule",
+    "Applied STARTER_REGRESSION downweight on Schultz command"
+   ]
+  },
+  "824419": {
+   "gamePk": 824419,
+   "away": "Texas Rangers",
+   "home": "Cleveland Guardians",
+   "awayAbbr": "TEX",
+   "homeAbbr": "CLE",
+   "venue": "Progressive Field",
+   "firstPitch": "2026-07-01T17:10:00Z",
+   "firstPitchDisplay": "1:10 PM ET",
+   "window": "midday (11:30 AM)",
+   "awayPitcher": {
+    "name": "MacKenzie Gore",
+    "hand": "L",
+    "id": 669022,
+    "era": "4.05",
+    "whip": "1.25",
+    "k9": "9.59",
+    "bb9": "3.76",
+    "ip": "91.0",
+    "gs": 17,
+    "w": 5,
+    "l": 6,
+    "k": 97,
+    "tiny": false,
+    "source": "schedule-api"
+   },
+   "homePitcher": {
+    "name": "Joey Cantillo",
+    "hand": "L",
+    "id": 676282,
+    "era": "3.87",
+    "whip": "1.35",
+    "k9": "8.90",
+    "bb9": "4.08",
+    "ip": "86.0",
+    "gs": 17,
+    "w": 6,
+    "l": 3,
+    "k": 85,
+    "tiny": false,
+    "source": "schedule-api"
+   },
+   "lineupStatus": "confirmed",
+   "weather": {
+    "roof": "open",
+    "tempF": 90,
+    "wind": "13 mph WNW",
+    "precip": 0,
+    "note": "Weather from Open Meteo at first pitch hour."
+   },
+   "status": "Preview",
+   "confidenceLetter": "B",
+   "confidenceScore": 74,
+   "grade": {
+    "letter": "B",
+    "score": 74
+   },
+   "confidence": {
+    "letter": "B",
+    "score": 74
+   },
+   "callout": "MacKenzie Gore misses bats at a high rate and Texas arrives hot into Cleveland.",
+   "contextChips": [
+    "Progressive slight pitcher park",
+    "90 degrees, 13 mph wind",
+    "Gore 9.59 K9"
+   ],
+   "projectedScore": {
+    "away": 4.3,
+    "home": 3.9
+   },
+   "projected_score": {
+    "away": 4.3,
+    "home": 3.9
+   },
+   "paragraphs": [
+    {
+     "title": "PITCHING MATCHUP",
+     "text": "Texas hands the ball to MacKenzie Gore, a left hander with a 4.05 ERA and an elite 9.59 strikeouts per nine across 91 innings and 17 starts, a true workhorse who consistently works into the sixth. Cleveland answers with Joey Cantillo, also a lefty, at a 3.87 ERA and 8.90 per nine but a shakier 4.08 walks per nine over 86 innings. Gore holds the cleaner swing and miss profile."
+    },
+    {
+     "title": "OFFENSE VS HANDEDNESS",
+     "text": "Texas rates hot on rolling form at 4.56 runs per game with a healthy .756 OPS over the trailing 15, the sharpest offense on the field. Cleveland sits cool at 3.36 runs per game and has struggled to string together innings. Two left handed starters means both lineups lean on their right handed bats, and Texas has the deeper recent line."
+    },
+    {
+     "title": "PARK AND WEATHER",
+     "text": "Progressive Field plays slightly pitcher friendly. First pitch is near 90 degrees with a 13 mph wind, warm enough to help carry but not a launching pad. The environment reads close to neutral and supports a moderate total in the mid 8 range."
+    },
+    {
+     "title": "STRIKEOUT PROJECTION",
+     "text": "Gore is the strikeout play of the matchup. His 9.59 per nine and steady six inning volume clear the floor rule, and against a Cleveland lineup that whiffs against left handed velocity his over 6.5 sits on solid ground. His trailing five start strikeout rate exceeds the posted line, so the chip is published at a capped stake."
+    },
+    {
+     "title": "BULLPEN EDGE",
+     "text": "Cleveland reads rested with Tim Herrin available, while Texas is mixed with closer Tyler Alexander flagged limited. That thins the Rangers late inning margin, so the moneyline is kept modest and the run line is avoided rather than pressed."
+    }
+   ],
+   "picks": [
+    {
+     "market": "K",
+     "label": "Gore K over 6.5",
+     "price": -120,
+     "tier": "A",
+     "note": "Elite 9.59 K9 and steady six inning volume against a whiff prone lineup."
+    },
+    {
+     "market": "ML",
+     "label": "Rangers ML",
+     "price": 110,
+     "tier": "B",
+     "note": "Hot Texas offense and the better starter, capped by a limited closer."
+    },
+    {
+     "market": "Alt K",
+     "label": "Gore K over 7.5",
+     "price": 130,
+     "tier": "B",
+     "note": "Upside strikeout number if Gore reaches seven innings on his pitch count."
+    },
+    {
+     "market": "F5 ML",
+     "label": "Rangers F5 ML",
+     "price": 115,
+     "tier": "B",
+     "note": "Gore versus Cantillo tilts the first five toward Texas."
+    },
+    {
+     "market": "Total",
+     "label": "Under 8.5",
+     "price": -105,
+     "tier": "C",
+     "note": "Two lefties with strikeout stuff cap the run environment in a pitcher park."
+    },
+    {
+     "market": "Hits",
+     "label": "Seager over 0.5 hits",
+     "price": -160,
+     "tier": "C",
+     "note": "Texas top of order profiles well versus Cantillo command lapses."
+    }
+   ],
+   "verdict": {
+    "prose": "MacKenzie Gore misses bats at a high rate and Texas arrives hot into Cleveland; the tickets are Gore K over 6.5, Rangers ML +105 to +120.",
+    "text": "MacKenzie Gore misses bats at a high rate and Texas arrives hot into Cleveland; the tickets are Gore K over 6.5, Rangers ML +105 to +120.",
+    "chips": [
+     "Gore K over 6.5",
+     "Rangers ML +105 to +120"
+    ],
+    "projAway": 4.3,
+    "projHome": 3.9,
+    "longshot": []
+   },
+   "appliedAdjustments": [
+    "Confirmed Gore trailing five start K rate exceeds the line and floor before publishing the K over",
+    "Capped K over stake at half a unit per K guardrail"
+   ]
+  },
+  "824740": {
+   "gamePk": 824740,
+   "away": "Washington Nationals",
+   "home": "Boston Red Sox",
+   "awayAbbr": "WSH",
+   "homeAbbr": "BOS",
+   "venue": "Fenway Park",
+   "firstPitch": "2026-07-01T17:35:00Z",
+   "firstPitchDisplay": "1:35 PM ET",
+   "window": "midday (11:30 AM)",
+   "awayPitcher": {
+    "name": "Brad Lord",
+    "hand": "R",
+    "id": 695418,
+    "era": "3.31",
+    "whip": "1.14",
+    "k9": "8.45",
+    "bb9": "2.98",
+    "ip": "54.1",
+    "gs": 0,
+    "w": 5,
+    "l": 1,
+    "k": 51,
+    "tiny": false,
+    "source": "schedule-api"
+   },
+   "homePitcher": {
+    "name": "Payton Tolle",
+    "hand": "L",
+    "id": 801139,
+    "era": "2.78",
+    "whip": "1.02",
+    "k9": "8.71",
+    "bb9": "2.52",
+    "ip": "71.1",
+    "gs": 12,
+    "w": 4,
+    "l": 5,
+    "k": 69,
+    "tiny": false,
+    "source": "schedule-api"
+   },
+   "lineupStatus": "confirmed",
+   "weather": {
+    "roof": "open",
+    "tempF": 94,
+    "wind": "9 mph W",
+    "precip": 1,
+    "note": "Weather from Open Meteo at first pitch hour."
+   },
+   "status": "Preview",
+   "confidenceLetter": "B",
+   "confidenceScore": 75,
+   "grade": {
+    "letter": "B",
+    "score": 75
+   },
+   "confidence": {
+    "letter": "B",
+    "score": 75
+   },
+   "callout": "Boston rides a hot bat streak at Fenway against a Washington bullpen day.",
+   "contextChips": [
+    "Fenway hitter park",
+    "94 degrees first pitch",
+    "Lord opener, 0 starts"
+   ],
+   "projectedScore": {
+    "away": 3.8,
+    "home": 5.1
+   },
+   "projected_score": {
+    "away": 3.8,
+    "home": 5.1
+   },
+   "paragraphs": [
+    {
+     "title": "PITCHING MATCHUP",
+     "text": "Washington lists Brad Lord at a 3.31 ERA over 54.1 innings, but with zero starts on the year he profiles as an opener or bulk arm, which turns this into a bullpen day for the Nationals and adds variance. Boston counters with Payton Tolle, a young left hander at a sharp 2.78 ERA and 1.02 WHIP over 71.1 innings who has settled into a reliable rotation piece. Boston owns the length and stability edge."
+    },
+    {
+     "title": "OFFENSE VS HANDEDNESS",
+     "text": "Boston is the hottest offense on the board at 4.94 runs per game and a .756 OPS over the trailing 15, and Fenway amplifies their right handed pull power. Washington reads cold at 3.86 runs per game and now must navigate a full staff of relievers on the road. The Red Sox bats hold a decisive recent form edge."
+    },
+    {
+     "title": "PARK AND WEATHER",
+     "text": "Fenway plays as a hitter park with the Monster in left, and the day is hot at 94 degrees with a 9 mph breeze. Warm air and a short porch favor the home bats, and the run environment leans up. That lifts Boston team totals more than it lifts the full game total."
+    },
+    {
+     "title": "STRIKEOUT PROJECTION",
+     "text": "Tolle carries a useful strikeout profile but not an elite one, and against a Washington lineup that makes contact his over sits closer to a coin flip. No starter strikeout chip is published. The Washington opener script further muddies any pitcher prop."
+    },
+    {
+     "title": "BULLPEN EDGE",
+     "text": "This is the swing factor. Boston closer Aroldis Chapman is flagged out, so the Red Sox late inning margin is thinner than usual even with a lead. Washington already faces a full bullpen day. The edge is Boston building an early cushion off the opener rather than a clean late inning close."
+    }
+   ],
+   "picks": [
+    {
+     "market": "ML",
+     "label": "Red Sox ML",
+     "price": -135,
+     "tier": "A",
+     "note": "Hottest offense on the board versus a Washington bullpen day at Fenway."
+    },
+    {
+     "market": "F5 ML",
+     "label": "Red Sox F5 ML",
+     "price": -130,
+     "tier": "B",
+     "note": "Tolle stability versus an opener tilts the first five to Boston."
+    },
+    {
+     "market": "Team Total",
+     "label": "Red Sox Team Total Over 4.5",
+     "price": -115,
+     "tier": "B",
+     "note": "Boston bats and Fenway heat point to a big home number."
+    },
+    {
+     "market": "Total",
+     "label": "Over 9",
+     "price": -105,
+     "tier": "B",
+     "note": "Washington opener day plus Fenway heat lifts the run environment."
+    },
+    {
+     "market": "Hits",
+     "label": "Duran over 1.5 total bases",
+     "price": 115,
+     "tier": "C",
+     "note": "Boston left handed thump plays into the Fenway short porch."
+    },
+    {
+     "market": "RL",
+     "label": "Red Sox RL -1.5",
+     "price": 145,
+     "tier": "C",
+     "note": "If Boston jumps the opener early the run line comes into range."
+    }
+   ],
+   "verdict": {
+    "prose": "Boston rides a hot bat streak at Fenway against a Washington bullpen day; the tickets are Red Sox ML -130 to -145.",
+    "text": "Boston rides a hot bat streak at Fenway against a Washington bullpen day; the tickets are Red Sox ML -130 to -145.",
+    "chips": [
+     "Red Sox ML -130 to -145"
+    ],
+    "projAway": 3.8,
+    "projHome": 5.1,
+    "longshot": []
+   },
+   "appliedAdjustments": [
+    "Flagged Boston closer out and kept the play to ML and first five rather than a late run line",
+    "Down weighted Washington on the opener variance script"
+   ]
+  },
+  "823530": {
+   "gamePk": 823530,
+   "away": "Detroit Tigers",
+   "home": "New York Yankees",
+   "awayAbbr": "DET",
+   "homeAbbr": "NYY",
+   "venue": "Yankee Stadium",
+   "firstPitch": "2026-07-01T17:35:00Z",
+   "firstPitchDisplay": "1:35 PM ET",
+   "window": "midday (11:30 AM)",
+   "awayPitcher": {
+    "name": "Troy Melton",
+    "hand": "R",
+    "id": 675512,
+    "era": "2.39",
+    "whip": "0.85",
+    "k9": "5.97",
+    "bb9": "2.15",
+    "ip": "37.2",
     "gs": 6,
-    "w": 1,
-    "l": 2,
+    "w": 4,
+    "l": 1,
     "k": 25,
+    "tiny": false,
+    "source": "schedule-api"
+   },
+   "homePitcher": {
+    "name": "Will Warren",
+    "hand": "R",
+    "id": 701542,
+    "era": "3.75",
+    "whip": "1.36",
+    "k9": "9.00",
+    "bb9": "3.11",
+    "ip": "84.0",
+    "gs": 16,
+    "w": 7,
+    "l": 3,
+    "k": 84,
+    "tiny": false,
+    "source": "schedule-api"
+   },
+   "lineupStatus": "confirmed",
+   "weather": {
+    "roof": "open",
+    "tempF": 96,
+    "wind": "8 mph WSW",
+    "precip": 0,
+    "note": "Weather from Open Meteo at first pitch hour."
+   },
+   "status": "Preview",
+   "confidenceLetter": "C+",
+   "confidenceScore": 69,
+   "grade": {
+    "letter": "C+",
+    "score": 69
+   },
+   "confidence": {
+    "letter": "C+",
+    "score": 69
+   },
+   "callout": "The Yankees offense is ice cold and Detroit arrives with the warmer bats.",
+   "contextChips": [
+    "Yankee Stadium hitter park",
+    "96 degrees first pitch",
+    "Yankees form 6.1, coldest bats"
+   ],
+   "projectedScore": {
+    "away": 4.6,
+    "home": 3.6
+   },
+   "projected_score": {
+    "away": 4.6,
+    "home": 3.6
+   },
+   "paragraphs": [
+    {
+     "title": "PITCHING MATCHUP",
+     "text": "Detroit lists Troy Melton at a shiny 2.39 ERA and 0.85 WHIP, but on 37.2 innings across six starts that mark rests on a small sample the model discounts. New York counters with Will Warren at a 3.75 ERA and a solid 9.00 strikeouts per nine over 84 innings. Warren is the more proven arm, but Melton has the hotter surface line."
+    },
+    {
+     "title": "OFFENSE VS HANDEDNESS",
+     "text": "The story is the Yankees bats, which sit dead last in rolling form at a 6.1 form score and just 2.6 runs per game over the trailing 15, a genuine cold snap. Detroit reads warm at 4.71 runs per game and has been the steadier lineup. Even in a hitter park, a frozen New York offense is hard to back at a price."
+    },
+    {
+     "title": "PARK AND WEATHER",
+     "text": "Yankee Stadium plays as a hitter park with the short right field porch, and the day is hot at 96 degrees with an 8 mph breeze. The environment supports offense, which cuts against a cold home lineup and slightly helps the visiting Tigers bats find the seats."
+    },
+    {
+     "title": "STRIKEOUT PROJECTION",
+     "text": "Warren owns the cleaner strikeout profile at 9.00 per nine and could push toward seven, but the Detroit lineup is contact oriented and the number is not a clear edge. Melton on a six start sample carries pull risk before the strikeout floor, so no starter strikeout chip clears the guardrail."
+    },
+    {
+     "title": "BULLPEN EDGE",
+     "text": "New York closer David Bednar is flagged out, thinning the Yankees late inning margin in a spot where their offense already cannot support leads. Detroit is rested. That combination nudges the lean toward the visiting Tigers on the moneyline rather than any Yankees side."
+    }
+   ],
+   "picks": [
+    {
+     "market": "ML",
+     "label": "Tigers ML",
+     "price": 105,
+     "tier": "B",
+     "note": "Yankees are the coldest offense in baseball and Bednar is down late."
+    },
+    {
+     "market": "F5 ML",
+     "label": "Tigers F5 ML",
+     "price": 120,
+     "tier": "C",
+     "note": "Detroit warmer bats versus a frozen New York lineup in the first five."
+    },
+    {
+     "market": "Total",
+     "label": "Under 8.5",
+     "price": -105,
+     "tier": "C",
+     "note": "A cold Yankees offense caps the total despite the hitter park and heat."
+    },
+    {
+     "market": "K",
+     "label": "Warren over 5.5 K",
+     "price": -120,
+     "tier": "C",
+     "note": "Warren 9.00 K9 has a modest edge but Detroit makes contact."
+    },
+    {
+     "market": "Team Total",
+     "label": "Yankees Team Total Under 3.5",
+     "price": -115,
+     "tier": "C",
+     "note": "New York bats at 2.6 runs per game struggle to reach four."
+    },
+    {
+     "market": "Hits",
+     "label": "Riley Greene over 0.5 hits",
+     "price": -165,
+     "tier": "C",
+     "note": "Detroit steady bats profile well against Warren."
+    }
+   ],
+   "verdict": {
+    "prose": "The Yankees offense is ice cold and Detroit arrives with the warmer bats; the tickets are Tigers ML +100 to +115.",
+    "text": "The Yankees offense is ice cold and Detroit arrives with the warmer bats; the tickets are Tigers ML +100 to +115.",
+    "chips": [
+     "Tigers ML +100 to +115"
+    ],
+    "projAway": 4.6,
+    "projHome": 3.6,
+    "longshot": []
+   },
+   "appliedAdjustments": [
+    "Capped grade at C on the Melton six start sample per tiny sample rule",
+    "Flagged Yankees closer out and leaned the road side"
+   ]
+  },
+  "824660": {
+   "gamePk": 824660,
+   "away": "San Diego Padres",
+   "home": "Chicago Cubs",
+   "awayAbbr": "SD",
+   "homeAbbr": "CHC",
+   "venue": "Wrigley Field",
+   "firstPitch": "2026-07-01T18:20:00Z",
+   "firstPitchDisplay": "2:20 PM ET",
+   "window": "midday (11:30 AM)",
+   "awayPitcher": {
+    "name": "Walker Buehler",
+    "hand": "R",
+    "id": 621111,
+    "era": "3.81",
+    "whip": "1.31",
+    "k9": "8.08",
+    "bb9": "3.00",
+    "ip": "78.0",
+    "gs": 16,
+    "w": 5,
+    "l": 3,
+    "k": 70,
+    "tiny": false,
+    "source": "schedule-api"
+   },
+   "homePitcher": {
+    "name": "Colin Rea",
+    "hand": "R",
+    "id": 607067,
+    "era": "4.80",
+    "whip": "1.41",
+    "k9": "6.72",
+    "bb9": "3.31",
+    "ip": "84.1",
+    "gs": 13,
+    "w": 5,
+    "l": 5,
+    "k": 63,
+    "tiny": false,
+    "source": "schedule-api"
+   },
+   "lineupStatus": "confirmed",
+   "weather": {
+    "roof": "open",
+    "tempF": 96,
+    "wind": "13 mph SW",
+    "precip": 0,
+    "note": "Weather from Open Meteo at first pitch hour."
+   },
+   "status": "Preview",
+   "confidenceLetter": "B+",
+   "confidenceScore": 80,
+   "grade": {
+    "letter": "B+",
+    "score": 80
+   },
+   "confidence": {
+    "letter": "B+",
+    "score": 80
+   },
+   "callout": "Wind blowing out at Wrigley meets the hottest offense in the game in the Cubs.",
+   "contextChips": [
+    "Wrigley wind 13 mph blowing out",
+    "96 degrees first pitch",
+    "Cubs 5.97 R/G, hot"
+   ],
+   "projectedScore": {
+    "away": 5.6,
+    "home": 4.2
+   },
+   "projected_score": {
+    "away": 5.6,
+    "home": 4.2
+   },
+   "paragraphs": [
+    {
+     "title": "PITCHING MATCHUP",
+     "text": "San Diego sends Walker Buehler at a 3.81 ERA and 8.08 strikeouts per nine over 78 innings, a capable arm but one who has given up hard contact this year. Chicago counters with Colin Rea at a 4.80 ERA and a modest 6.72 per nine across 84.1 innings, a contact profile that is vulnerable in a bandbox on a windy day. The edge in raw stuff is San Diego, but the environment does Rea no favors and puts Buehler at risk too."
+    },
+    {
+     "title": "OFFENSE VS HANDEDNESS",
+     "text": "Chicago is scorching, leading the slate at a 5.97 runs per game clip and an 84.4 form score over the trailing 15. San Diego reads neutral at 4.04 runs per game. Both starters are right handed, and the Cubs deep lineup has the firepower to punish mistakes, especially with the wind at their backs."
+    },
+    {
+     "title": "PARK AND WEATHER",
+     "text": "This is the key. Wrigley Field is wind dependent, and today the breeze runs 13 mph out toward the outfield with first pitch near 96 degrees. Hot air and a wind blowing out turn Wrigley into a launching pad, and fly balls that die on calm days leave the yard. The environment strongly favors offense and lifts the total."
+    },
+    {
+     "title": "STRIKEOUT PROJECTION",
+     "text": "Neither starter is a strikeout play here. Rea sits at 6.72 per nine and Buehler at 8.08, but the wind and heat push both toward contact and shorter outings. No starter strikeout chip is published, since the environment caps both innings and whiff totals."
+    },
+    {
+     "title": "BULLPEN EDGE",
+     "text": "Both bullpens read available, so this stays a park, weather, and offense story rather than a late inning edge. The Cubs firepower and the wind carry the lean."
+    }
+   ],
+   "picks": [
+    {
+     "market": "ML",
+     "label": "Cubs ML",
+     "price": -130,
+     "tier": "A",
+     "note": "Hottest offense in the game with the wind blowing out at Wrigley."
+    },
+    {
+     "market": "Total",
+     "label": "Over 9 or 9.5",
+     "price": -110,
+     "tier": "A",
+     "note": "Wind out plus 96 degrees plus a contact starter in Rea points way up."
+    },
+    {
+     "market": "Team Total",
+     "label": "Cubs Team Total Over 5.5",
+     "price": -115,
+     "tier": "B",
+     "note": "Chicago 5.97 R/G form in a launching pad points to a big home number."
+    },
+    {
+     "market": "F5 ML",
+     "label": "Cubs F5 ML",
+     "price": -120,
+     "tier": "B",
+     "note": "Cubs bats versus Rea tilt the first five to the home side."
+    },
+    {
+     "market": "YRFI",
+     "label": "YRFI",
+     "price": 115,
+     "tier": "B",
+     "note": "Wind out and hot bats raise first inning scoring odds."
+    },
+    {
+     "market": "RL",
+     "label": "Cubs RL -1.5",
+     "price": 125,
+     "tier": "C",
+     "note": "If the Cubs offense erupts the run line comes into play."
+    }
+   ],
+   "verdict": {
+    "prose": "Wind blowing out at Wrigley meets the hottest offense in the game in the Cubs; the tickets are Cubs ML -125 to -140, Over 9 or 9.5.",
+    "text": "Wind blowing out at Wrigley meets the hottest offense in the game in the Cubs; the tickets are Cubs ML -125 to -140, Over 9 or 9.5.",
+    "chips": [
+     "Cubs ML -125 to -140",
+     "Over 9 or 9.5"
+    ],
+    "projAway": 5.6,
+    "projHome": 4.2,
+    "longshot": []
+   },
+   "appliedAdjustments": [
+    "Confirmed wind vector blowing out before publishing the over per park weather rule",
+    "Held grade at the projected lineup B plus cap of 84"
+   ]
+  },
+  "822791": {
+   "gamePk": 822791,
+   "away": "New York Mets",
+   "home": "Toronto Blue Jays",
+   "awayAbbr": "NYM",
+   "homeAbbr": "TOR",
+   "venue": "Rogers Centre",
+   "firstPitch": "2026-07-01T19:07:00Z",
+   "firstPitchDisplay": "3:07 PM ET",
+   "window": "midday (11:30 AM)",
+   "awayPitcher": {
+    "name": "Freddy Peralta",
+    "hand": "R",
+    "id": 642547,
+    "era": "4.53",
+    "whip": "1.37",
+    "k9": "8.67",
+    "bb9": "3.45",
+    "ip": "91.1",
+    "gs": 17,
+    "w": 5,
+    "l": 6,
+    "k": 88,
+    "tiny": false,
+    "source": "schedule-api"
+   },
+   "homePitcher": {
+    "name": "Braydon Fisher",
+    "hand": "R",
+    "id": 680755,
+    "era": "3.48",
+    "whip": "1.14",
+    "k9": "8.59",
+    "bb9": "4.09",
+    "ip": "44.0",
+    "gs": 5,
+    "w": 3,
+    "l": 3,
+    "k": 42,
+    "tiny": false,
+    "source": "schedule-api"
+   },
+   "lineupStatus": "projected",
+   "weather": {
+    "roof": "closed",
+    "tempF": 92,
+    "wind": "9 mph SSW",
+    "precip": 4,
+    "note": "Weather from Open Meteo at first pitch hour."
+   },
+   "status": "Preview",
+   "confidenceLetter": "C+",
+   "confidenceScore": 66,
+   "grade": {
+    "letter": "C+",
+    "score": 66
+   },
+   "confidence": {
+    "letter": "C+",
+    "score": 66
+   },
+   "callout": "Two cold offenses under the Rogers Centre roof point to a quiet, low run game.",
+   "contextChips": [
+    "Rogers Centre roof, neutral",
+    "both offenses cold",
+    "Fisher small sample"
+   ],
+   "projectedScore": {
+    "away": 3.9,
+    "home": 3.8
+   },
+   "projected_score": {
+    "away": 3.9,
+    "home": 3.8
+   },
+   "paragraphs": [
+    {
+     "title": "PITCHING MATCHUP",
+     "text": "New York lists Freddy Peralta at a 4.53 ERA and a strong 8.67 strikeouts per nine over 91.1 innings, a bat missing arm who can carry a low run script. Toronto answers with Braydon Fisher at a 3.48 ERA and 8.59 per nine, though on 44 innings across five starts his line rests on a smaller sample. Both starters can miss bats and keep the early innings clean."
+    },
+    {
+     "title": "OFFENSE VS HANDEDNESS",
+     "text": "Both lineups are struggling. New York reads cold at 3.23 runs per game and Toronto sits cold as well at 3.49 over the trailing 15. Neither offense ranks in the top tier over the last two weeks, which means the tighten unders rule does not block a low total here. Two quiet bats against two arms with strikeout stuff sets up a pitcher leaning script."
+    },
+    {
+     "title": "PARK AND WEATHER",
+     "text": "Rogers Centre plays close to neutral with the roof likely closed against the summer heat, removing weather as a factor. With a controlled environment and two cold offenses, the run projection sits below the league average and supports the first five under."
+    },
+    {
+     "title": "STRIKEOUT PROJECTION",
+     "text": "Peralta is the more established strikeout arm at 8.67 per nine, but his walk rate can shorten innings and Fisher small sample introduces pull risk. Neither strikeout over clears the floor rule cleanly, so the play stays on the team total rather than a pitcher prop."
+    },
+    {
+     "title": "BULLPEN EDGE",
+     "text": "Both bullpens read mixed with no decisive rested edge, and Toronto has several high leverage arms flagged limited. The lean stays on the low first five total rather than a side, given the bullpen uncertainty on both ends."
+    }
+   ],
+   "picks": [
+    {
+     "market": "F5",
+     "label": "F5 Under 4.5",
+     "price": -110,
+     "tier": "B",
+     "note": "Two cold offenses and two strikeout arms under a controlled roof."
+    },
+    {
+     "market": "Total",
+     "label": "Under 8",
+     "price": -105,
+     "tier": "B",
+     "note": "Neither lineup is hitting and the roof removes weather upside."
+    },
+    {
+     "market": "F5 ML",
+     "label": "Mets F5 ML",
+     "price": -115,
+     "tier": "C",
+     "note": "Peralta is the steadier arm to start against a thin Fisher sample."
+    },
+    {
+     "market": "K",
+     "label": "Peralta over 5.5 K",
+     "price": -120,
+     "tier": "C",
+     "note": "Peralta 8.67 K9 versus a cold Toronto lineup that whiffs."
+    },
+    {
+     "market": "NRFI",
+     "label": "NRFI",
+     "price": -125,
+     "tier": "C",
+     "note": "Two strikeout starters and cold bats favor a clean first inning."
+    },
+    {
+     "market": "Team Total",
+     "label": "Blue Jays Team Total Under 3.5",
+     "price": -110,
+     "tier": "C",
+     "note": "Toronto at 3.49 R/G struggles to reach four versus Peralta."
+    }
+   ],
+   "verdict": {
+    "prose": "Two cold offenses under the Rogers Centre roof point to a quiet, low run game; the tickets are F5 Under 4.5.",
+    "text": "Two cold offenses under the Rogers Centre roof point to a quiet, low run game; the tickets are F5 Under 4.5.",
+    "chips": [
+     "F5 Under 4.5"
+    ],
+    "projAway": 3.9,
+    "projHome": 3.8,
+    "longshot": []
+   },
+   "appliedAdjustments": [
+    "Confirmed neither lineup ranks top 12 in trailing runs before publishing the under per tighten unders rule",
+    "Down weighted Fisher on the small sample"
+   ]
+  },
+  "823446": {
+   "gamePk": 823446,
+   "away": "Pittsburgh Pirates",
+   "home": "Philadelphia Phillies",
+   "awayAbbr": "PIT",
+   "homeAbbr": "PHI",
+   "venue": "Citizens Bank Park",
+   "firstPitch": "2026-07-01T22:40:00Z",
+   "firstPitchDisplay": "6:40 PM ET",
+   "window": "midday (11:30 AM)",
+   "awayPitcher": {
+    "name": "Paul Skenes",
+    "hand": "R",
+    "id": 694973,
+    "era": "3.10",
+    "whip": "0.97",
+    "k9": "11.03",
+    "bb9": "1.94",
+    "ip": "93.0",
+    "gs": 17,
+    "w": 6,
+    "l": 7,
+    "k": 114,
+    "tiny": false,
+    "source": "schedule-api"
+   },
+   "homePitcher": {
+    "name": "Zack Wheeler",
+    "hand": "R",
+    "id": 554430,
+    "era": "2.03",
+    "whip": "0.86",
+    "k9": "8.84",
+    "bb9": "2.27",
+    "ip": "75.1",
+    "gs": 12,
+    "w": 8,
+    "l": 1,
+    "k": 74,
     "tiny": false,
     "source": "schedule-api"
    },
    "lineupStatus": "projected",
    "weather": {
     "roof": "open",
-    "tempF": 93,
-    "wind": "8 mph SSW",
-    "precip": 1,
+    "tempF": 99,
+    "wind": "6 mph SSW",
+    "precip": 2,
     "note": "Weather from Open Meteo at first pitch hour."
    },
    "status": "Preview",
-   "confidenceLetter": "C",
-   "confidenceScore": 60,
+   "confidenceLetter": "B+",
+   "confidenceScore": 82,
    "grade": {
-    "letter": "C",
-    "score": 60
+    "letter": "B+",
+    "score": 82
    },
    "confidence": {
-    "letter": "C",
-    "score": 60
+    "letter": "B+",
+    "score": 82
    },
-   "callout": "Pitching shapes a 8.6 run projection with the White Sox carrying the slim edge in a live bat spot.",
+   "callout": "Two aces in Skenes and Wheeler headline a strikeout heavy pitchers duel in Philly.",
    "contextChips": [
-    "Gibson 7.42 K9",
-    "neutral park",
-    "93 degrees first pitch"
+    "Citizens Bank hitter park",
+    "99 degrees first pitch",
+    "two elite strikeout arms"
+   ],
+   "projectedScore": {
+    "away": 3.7,
+    "home": 3.9
+   },
+   "projected_score": {
+    "away": 3.7,
+    "home": 3.9
+   },
+   "paragraphs": [
+    {
+     "title": "PITCHING MATCHUP",
+     "text": "This is the marquee matchup of the slate. Pittsburgh sends Paul Skenes at a 3.10 ERA with an overpowering 11.03 strikeouts per nine and a 0.97 WHIP over 93 innings, one of the best arms in the sport. Philadelphia counters with Zack Wheeler at a sparkling 2.03 ERA, 8.84 per nine, and a 0.86 WHIP across 75.1 innings. Both are frontline aces who work deep and miss bats in bulk."
+    },
+    {
+     "title": "OFFENSE VS HANDEDNESS",
+     "text": "Both offenses have been hot recently, with Pittsburgh at 6.48 runs per game and Philadelphia at 5.87 over the trailing 15, both ranking near the top of the league. Because both lineups rank top 12 over the last two weeks, the tighten unders rule blocks a full game under, so the edge shifts to the strikeout props where the aces hold the advantage regardless of run environment."
+    },
+    {
+     "title": "PARK AND WEATHER",
+     "text": "Citizens Bank Park is a hitter park, and the day is scorching at 99 degrees with a light 6 mph breeze. Hot dense air and a short porch keep run scoring live even against elite arms, which is exactly why a full game under is avoided. The heat does not dampen strikeouts, so the pitcher props remain the cleaner path."
+    },
+    {
+     "title": "STRIKEOUT PROJECTION",
+     "text": "Both aces are premium strikeout plays. Skenes at 11.03 per nine and Wheeler at 8.84 both clear the floor rule with 17 and 12 starts of six plus inning volume, and both trailing five start rates exceed the posted 6.5. These are the two chips of the card, published independently because each stands on its own arm rather than a shared thesis."
+    },
+    {
+     "title": "BULLPEN EDGE",
+     "text": "Both bullpens read rested and available, so there is no decisive late inning edge. In a game with two aces, the value sits in the strikeout markets rather than a side or a total."
+    }
+   ],
+   "picks": [
+    {
+     "market": "K",
+     "label": "Wheeler K over 6.5",
+     "price": -125,
+     "tier": "A",
+     "note": "2.03 ERA ace at 8.84 K9 who works deep against a whiff prone lineup."
+    },
+    {
+     "market": "K",
+     "label": "Skenes K over 6.5",
+     "price": -120,
+     "tier": "A",
+     "note": "11.03 K9 and elite swing and miss clears the floor with room to spare."
+    },
+    {
+     "market": "Alt K",
+     "label": "Skenes K over 7.5",
+     "price": 115,
+     "tier": "B",
+     "note": "Skenes upside number given his strikeout rate and six inning floor."
+    },
+    {
+     "market": "F5",
+     "label": "F5 Under 4.5",
+     "price": -105,
+     "tier": "B",
+     "note": "Two aces keep the first five quiet even in a hitter park."
+    },
+    {
+     "market": "Alt K",
+     "label": "Wheeler K over 7.5",
+     "price": 135,
+     "tier": "B",
+     "note": "Wheeler ceiling if he reaches seven innings on his pitch count."
+    },
+    {
+     "market": "NRFI",
+     "label": "NRFI",
+     "price": -135,
+     "tier": "C",
+     "note": "Two elite arms sharply favor a clean first inning."
+    }
+   ],
+   "verdict": {
+    "prose": "Two aces in Skenes and Wheeler headline a strikeout heavy pitchers duel in Philly; the tickets are Wheeler K over 6.5, Skenes K over 6.5.",
+    "text": "Two aces in Skenes and Wheeler headline a strikeout heavy pitchers duel in Philly; the tickets are Wheeler K over 6.5, Skenes K over 6.5.",
+    "chips": [
+     "Wheeler K over 6.5",
+     "Skenes K over 6.5"
+    ],
+    "projAway": 3.7,
+    "projHome": 3.9,
+    "longshot": []
+   },
+   "appliedAdjustments": [
+    "Blocked the full game under per tighten unders rule since both lineups rank top 12 in trailing runs",
+    "Confirmed both aces trailing five start K rates exceed the line and clear the six inning floor"
+   ]
+  },
+  "824905": {
+   "gamePk": 824905,
+   "away": "St. Louis Cardinals",
+   "home": "Atlanta Braves",
+   "awayAbbr": "STL",
+   "homeAbbr": "ATL",
+   "venue": "Truist Park",
+   "firstPitch": "2026-07-01T23:15:00Z",
+   "firstPitchDisplay": "7:15 PM ET",
+   "window": "midday (11:30 AM)",
+   "awayPitcher": {
+    "name": "Michael McGreevy",
+    "hand": "R",
+    "id": 700241,
+    "era": "3.12",
+    "whip": "1.14",
+    "k9": "5.74",
+    "bb9": "2.12",
+    "ip": "89.1",
+    "gs": 16,
+    "w": 3,
+    "l": 6,
+    "k": 57,
+    "tiny": false,
+    "source": "schedule-api"
+   },
+   "homePitcher": {
+    "name": "Reynaldo L\u00f3pez",
+    "hand": "R",
+    "id": 625643,
+    "era": "3.47",
+    "whip": "1.37",
+    "k9": "7.71",
+    "bb9": "4.05",
+    "ip": "46.2",
+    "gs": 6,
+    "w": 3,
+    "l": 1,
+    "k": 40,
+    "tiny": false,
+    "source": "schedule-api"
+   },
+   "lineupStatus": "projected",
+   "weather": {
+    "roof": "open",
+    "tempF": 97,
+    "wind": "7 mph E",
+    "precip": 14,
+    "note": "Weather from Open Meteo at first pitch hour."
+   },
+   "status": "Preview",
+   "confidenceLetter": "B",
+   "confidenceScore": 74,
+   "grade": {
+    "letter": "B",
+    "score": 74
+   },
+   "confidence": {
+    "letter": "B",
+    "score": 74
+   },
+   "callout": "Two of the coldest offenses in baseball meet at Truist in a low run setup.",
+   "contextChips": [
+    "Truist neutral park",
+    "both offenses ice cold",
+    "97 degrees, low wind"
+   ],
+   "projectedScore": {
+    "away": 3.4,
+    "home": 3.5
+   },
+   "projected_score": {
+    "away": 3.4,
+    "home": 3.5
+   },
+   "paragraphs": [
+    {
+     "title": "PITCHING MATCHUP",
+     "text": "St. Louis lists Michael McGreevy at a 3.12 ERA and 1.14 WHIP over 89.1 innings, a control arm with a low 5.74 strikeouts per nine who works to contact and keeps the ball down. Atlanta counters with Reynaldo L\u00f3pez at a 3.47 ERA, back on 46.2 innings across six starts, effective when healthy but on a smaller workload. Both starters profile to keep runs off the board."
+    },
+    {
+     "title": "OFFENSE VS HANDEDNESS",
+     "text": "This is a matchup of two frozen lineups. St. Louis reads ice cold at a 19.8 form score and 2.7 runs per game, and Atlanta is worse at a 17.7 form score and just 2.42 runs per game over the trailing 15. Neither offense is anywhere near the top 12 in trailing runs, so the tighten unders rule clears the way for a low total. Two struggling bats against two steady arms is the definition of an under spot."
+    },
+    {
+     "title": "PARK AND WEATHER",
+     "text": "Truist Park plays close to neutral, and while the day is hot at 97 degrees with a light 7 mph breeze, the weather cannot manufacture offense that these two lineups do not have. There is a small rain risk at 14 percent. The environment tilts up slightly but the bats tilt the total firmly down."
+    },
+    {
+     "title": "STRIKEOUT PROJECTION",
+     "text": "McGreevy is a contact pitcher at 5.74 per nine and offers no strikeout edge, while L\u00f3pez can miss bats but on a limited workload the innings ceiling is uncertain. No starter strikeout chip is published. The value is entirely in the low run total."
+    },
+    {
+     "title": "BULLPEN EDGE",
+     "text": "Bullpen data is thin for both clubs today, so no late inning edge is claimed. The play rests on the two cold offenses and two ground leaning starters rather than a relief matchup."
+    }
+   ],
+   "picks": [
+    {
+     "market": "Total",
+     "label": "Under 8",
+     "price": -105,
+     "tier": "A",
+     "note": "Two of the coldest offenses in baseball against two steady starters."
+    },
+    {
+     "market": "F5",
+     "label": "F5 Under 4.5",
+     "price": -110,
+     "tier": "A",
+     "note": "McGreevy and L\u00f3pez both keep early innings quiet versus frozen bats."
+    },
+    {
+     "market": "Team Total",
+     "label": "Braves Team Total Under 3.5",
+     "price": -115,
+     "tier": "B",
+     "note": "Atlanta at 2.42 R/G is the weakest offense on the board."
+    },
+    {
+     "market": "Team Total",
+     "label": "Cardinals Team Total Under 3.5",
+     "price": -110,
+     "tier": "B",
+     "note": "St. Louis at 2.7 R/G cannot support a big number versus L\u00f3pez."
+    },
+    {
+     "market": "NRFI",
+     "label": "NRFI",
+     "price": -130,
+     "tier": "C",
+     "note": "Two contact managing starters and two cold lineups favor a clean first."
+    },
+    {
+     "market": "ML",
+     "label": "Braves ML",
+     "price": -120,
+     "tier": "C",
+     "note": "At home with L\u00f3pez, Atlanta is a slight side in a low run game."
+    }
+   ],
+   "verdict": {
+    "prose": "Two of the coldest offenses in baseball meet at Truist in a low run setup; the tickets are Under 8, F5 Under 4.5.",
+    "text": "Two of the coldest offenses in baseball meet at Truist in a low run setup; the tickets are Under 8, F5 Under 4.5.",
+    "chips": [
+     "Under 8",
+     "F5 Under 4.5"
+    ],
+    "projAway": 3.4,
+    "projHome": 3.5,
+    "longshot": []
+   },
+   "appliedAdjustments": [
+    "Confirmed both lineups rank well outside top 12 in trailing runs, clearing the under per tighten unders rule",
+    "Down weighted L\u00f3pez innings ceiling on the six start workload"
+   ]
+  },
+  "824094": {
+   "gamePk": 824094,
+   "away": "Tampa Bay Rays",
+   "home": "Kansas City Royals",
+   "awayAbbr": "TB",
+   "homeAbbr": "KC",
+   "venue": "Kauffman Stadium",
+   "firstPitch": "2026-07-01T23:40:00Z",
+   "firstPitchDisplay": "7:40 PM ET",
+   "window": "midday (11:30 AM)",
+   "awayPitcher": {
+    "name": "Shane McClanahan",
+    "hand": "L",
+    "id": 663556,
+    "era": "3.30",
+    "whip": "1.22",
+    "k9": "8.92",
+    "bb9": "3.42",
+    "ip": "73.2",
+    "gs": 15,
+    "w": 6,
+    "l": 5,
+    "k": 73,
+    "tiny": false,
+    "source": "schedule-api"
+   },
+   "homePitcher": {
+    "name": "Seth Lugo",
+    "hand": "R",
+    "id": 607625,
+    "era": "4.18",
+    "whip": "1.37",
+    "k9": "6.87",
+    "bb9": "2.99",
+    "ip": "90.1",
+    "gs": 16,
+    "w": 3,
+    "l": 5,
+    "k": 69,
+    "tiny": false,
+    "source": "schedule-api"
+   },
+   "lineupStatus": "projected",
+   "weather": {
+    "roof": "open",
+    "tempF": 95,
+    "wind": "16 mph SSW",
+    "precip": 0,
+    "note": "Weather from Open Meteo at first pitch hour."
+   },
+   "status": "Preview",
+   "confidenceLetter": "B-",
+   "confidenceScore": 73,
+   "grade": {
+    "letter": "B-",
+    "score": 73
+   },
+   "confidence": {
+    "letter": "B-",
+    "score": 73
+   },
+   "callout": "Shane McClanahan brings swing and miss stuff to a spacious Kauffman outfield.",
+   "contextChips": [
+    "Kauffman pitcher park",
+    "95 degrees, 16 mph wind",
+    "McClanahan 8.92 K9"
+   ],
+   "projectedScore": {
+    "away": 4.3,
+    "home": 3.8
+   },
+   "projected_score": {
+    "away": 4.3,
+    "home": 3.8
+   },
+   "paragraphs": [
+    {
+     "title": "PITCHING MATCHUP",
+     "text": "Tampa Bay sends Shane McClanahan, a left hander with a 3.30 ERA and 8.92 strikeouts per nine over 73.2 innings, a genuine bat misser who works into the sixth. Kansas City counters with Seth Lugo at a 4.18 ERA and a modest 6.87 per nine across 90.1 innings, a durable but more contact oriented arm. McClanahan holds the clear swing and miss edge."
+    },
+    {
+     "title": "OFFENSE VS HANDEDNESS",
+     "text": "Tampa Bay rates hot on rolling form at a 69.9 form score and 4.5 runs per game over the trailing 15, while Kansas City reads cool at a 39.5 score and 4.28 runs per game. The Rays bats have been the steadier group, and against Lugo contact profile they have paths to scratch across runs. Kansas City faces a tougher task against McClanahan strikeout stuff."
+    },
+    {
+     "title": "PARK AND WEATHER",
+     "text": "Kauffman Stadium is a pitcher park with a big outfield that turns would be homers into long outs, and today a stiff 16 mph wind adds to the suppression even at 95 degrees. The spacious dimensions and wind favor pitching and cap the total, which supports both the strikeout play and a lower run script."
+    },
+    {
+     "title": "STRIKEOUT PROJECTION",
+     "text": "McClanahan is the strikeout play. His 8.92 per nine and six inning volume clear the floor rule, and a big Kauffman outfield lets him challenge hitters without fearing the long ball. His trailing five start rate exceeds the posted 6.5, so the over is published at a capped stake."
+    },
+    {
+     "title": "BULLPEN EDGE",
+     "text": "Bullpen data is limited for Kansas City today, so no decisive late edge is claimed. The lean rests on McClanahan strikeout stuff and the Rays warmer bats in a run suppressing park."
+    }
+   ],
+   "picks": [
+    {
+     "market": "K",
+     "label": "McClanahan K over 6.5",
+     "price": -115,
+     "tier": "A",
+     "note": "8.92 K9 and six inning volume in a spacious park that lets him attack."
+    },
+    {
+     "market": "ML",
+     "label": "Rays ML",
+     "price": 105,
+     "tier": "B",
+     "note": "Warmer Tampa bats and the better starter make the road side live."
+    },
+    {
+     "market": "Alt K",
+     "label": "McClanahan K over 7.5",
+     "price": 125,
+     "tier": "B",
+     "note": "Upside strikeout number given the big Kauffman outfield."
+    },
+    {
+     "market": "Total",
+     "label": "Under 8.5",
+     "price": -110,
+     "tier": "B",
+     "note": "Pitcher park plus a 16 mph wind caps the run environment."
+    },
+    {
+     "market": "F5 ML",
+     "label": "Rays F5 ML",
+     "price": 115,
+     "tier": "C",
+     "note": "McClanahan versus Lugo tilts the first five to Tampa Bay."
+    },
+    {
+     "market": "Team Total",
+     "label": "Royals Team Total Under 3.5",
+     "price": -115,
+     "tier": "C",
+     "note": "Kansas City faces strikeout stuff in a run suppressing park."
+    }
+   ],
+   "verdict": {
+    "prose": "Shane McClanahan brings swing and miss stuff to a spacious Kauffman outfield; the tickets are McClanahan K over 6.5, Rays ML +100 to +115.",
+    "text": "Shane McClanahan brings swing and miss stuff to a spacious Kauffman outfield; the tickets are McClanahan K over 6.5, Rays ML +100 to +115.",
+    "chips": [
+     "McClanahan K over 6.5",
+     "Rays ML +100 to +115"
+    ],
+    "projAway": 4.3,
+    "projHome": 3.8,
+    "longshot": []
+   },
+   "appliedAdjustments": [
+    "Confirmed McClanahan trailing five start K rate exceeds the line and floor before publishing",
+    "Capped K over stake at half a unit per K guardrail"
+   ]
+  },
+  "824174": {
+   "gamePk": 824174,
+   "away": "Minnesota Twins",
+   "home": "Houston Astros",
+   "awayAbbr": "MIN",
+   "homeAbbr": "HOU",
+   "venue": "Daikin Park",
+   "firstPitch": "2026-07-02T00:10:00Z",
+   "firstPitchDisplay": "8:10 PM ET",
+   "window": "midday (11:30 AM)",
+   "awayPitcher": {
+    "name": "Taj Bradley",
+    "hand": "R",
+    "id": 671737,
+    "era": "3.98",
+    "whip": "1.28",
+    "k9": "9.79",
+    "bb9": "3.76",
+    "ip": "83.2",
+    "gs": 15,
+    "w": 6,
+    "l": 3,
+    "k": 91,
+    "tiny": false,
+    "source": "schedule-api"
+   },
+   "homePitcher": {
+    "name": "Tatsuya Imai",
+    "hand": "R",
+    "id": 837227,
+    "era": "5.36",
+    "whip": "1.32",
+    "k9": "11.11",
+    "bb9": "4.79",
+    "ip": "47.0",
+    "gs": 11,
+    "w": 5,
+    "l": 3,
+    "k": 58,
+    "tiny": false,
+    "source": "schedule-api"
+   },
+   "lineupStatus": "projected",
+   "weather": {
+    "roof": "closed",
+    "tempF": 89,
+    "wind": "9 mph SE",
+    "precip": 4,
+    "note": "Weather from Open Meteo at first pitch hour."
+   },
+   "status": "Preview",
+   "confidenceLetter": "C+",
+   "confidenceScore": 67,
+   "grade": {
+    "letter": "C+",
+    "score": 67
+   },
+   "confidence": {
+    "letter": "C+",
+    "score": 67
+   },
+   "callout": "A wild rookie in Imai and a bat missing Bradley set up a walk and strikeout heavy night.",
+   "contextChips": [
+    "Daikin Park roof",
+    "Imai 4.79 BB9 wild",
+    "two high K9 arms"
    ],
    "projectedScore": {
     "away": 4.4,
@@ -3532,120 +4941,279 @@ const CLAUDE_DAILY_ANALYSIS = {
    "paragraphs": [
     {
      "title": "PITCHING MATCHUP",
-     "text": "Chicago White Sox send Erick Fedde at a 4.34 ERA with 6.03 strikeouts per nine and a 1.42 WHIP across 74.2 innings, while Baltimore Orioles counter with Trey Gibson at a 5.64 ERA, 7.42 per nine and a 1.65 WHIP over 30.1 frames. Fedde owns the cleaner profile and shapes the run prevention edge for the White Sox."
+     "text": "Minnesota sends Taj Bradley at a 3.98 ERA and an elite 9.79 strikeouts per nine over 83.2 innings, a bat missing right hander who racks up whiffs. Houston counters with Tatsuya Imai, a rookie right hander with a high 11.11 per nine but a wild 4.79 walks per nine across 47 innings, a high strikeout and high walk profile the model treats with caution on the smaller sample. Both arms miss bats, but Imai command adds variance."
     },
     {
      "title": "OFFENSE VS HANDEDNESS",
-     "text": "Chicago White Sox carry a warm form tier at 3.47 runs per game over the trailing 15 against R handed starters, and Baltimore Orioles sit neutral at 3.75 runs per game versus R handed arms. The Orioles bats hold the better recent line, but neither lineup is confirmed yet so the projection leans on rolling form."
+     "text": "Houston reads neutral on rolling form at 4.04 runs per game, while Minnesota sits cool at 4.43 over the trailing 15. Both lineups face strikeout stuff, but Imai walk rate offers Minnesota free base runners to work with. Neither offense is hot enough to force a high total, and the walks could inflate pitch counts more than runs."
     },
     {
      "title": "PARK AND WEATHER",
-     "text": "Oriole Park at Camden Yards plays at a 101 run factor. First pitch sits near 93 degrees with wind 8 mph from the SSW. The environment reads close to neutral and frames a 8.6 run projection."
+     "text": "Daikin Park plays close to neutral with the roof likely closed against the Houston heat, removing weather as a factor. The controlled environment keeps the run projection near the middle, with the walk heavy Imai start the main swing on total pitches rather than total runs."
     },
     {
      "title": "STRIKEOUT PROJECTION",
-     "text": "Fedde profiles for roughly 3.8 strikeouts and Gibson for about 4.6 on a standard outing. Neither starter offers a strikeout line worth chasing at the posted numbers."
+     "text": "Bradley is the cleaner strikeout play at 9.79 per nine with steady six inning volume, and his over 6.5 clears the floor rule. Imai carries a huge whiff rate but the walks and the smaller sample cap his innings and add pull risk, so his strikeout prop is left off despite the raw rate. Bradley is the published lean at a capped stake."
     },
     {
      "title": "BULLPEN EDGE",
-     "text": "Baltimore Orioles bullpen reads mixed and Chicago White Sox bullpen reads rested. The tired pen is the late game swing factor and nudges the total and late lead read."
+     "text": "Houston bullpen is mixed with Bryan King and Steven Okert flagged limited, thinning the late inning depth, while Minnesota reads rested. That nudges any close late script slightly toward the Twins, though the card stays on the Bradley strikeout play."
     }
    ],
    "picks": [
     {
-     "market": "ML",
-     "label": "White Sox ML -115 to -130",
+     "market": "K",
+     "label": "Bradley K over 6.5",
      "price": -115,
-     "tier": "D",
-     "note": "Fedde carries the run prevention edge at a 4.34 ERA over a warm bat."
+     "tier": "B",
+     "note": "9.79 K9 and six inning volume against a Houston lineup that whiffs."
     },
     {
-     "market": "RL",
-     "label": "White Sox RL 1.5 -131",
-     "price": -131,
-     "tier": "D",
-     "note": "Projected margin near 0.2 run favors the White Sox on the spread only in a clean game."
+     "market": "Alt K",
+     "label": "Imai over 5.5 K",
+     "price": -120,
+     "tier": "C",
+     "note": "Rookie 11.11 K9 misses bats even if the walks shorten his outing."
+    },
+    {
+     "market": "BB",
+     "label": "Imai over 2.5 walks",
+     "price": -115,
+     "tier": "C",
+     "note": "A 4.79 BB9 profile points to free passes against a patient Minnesota lineup."
     },
     {
      "market": "Total",
-     "label": "Under 9.1",
-     "price": -110,
-     "tier": "D",
-     "note": "Lean under is thin with both lineups capable; small edge only."
+     "label": "Over 8.5",
+     "price": -105,
+     "tier": "C",
+     "note": "Walks and two high strikeout arms can push traffic and runs up."
     },
     {
      "market": "F5 ML",
-     "label": "White Sox F5 ML -110 to -125",
+     "label": "Twins F5 ML",
+     "price": 115,
+     "tier": "C",
+     "note": "Imai command risk gives Minnesota an early edge to work walks."
+    },
+    {
+     "market": "Team Total",
+     "label": "Twins Team Total Over 3.5",
      "price": -110,
-     "tier": "D",
-     "note": "Fedde gives the White Sox the better first five innings."
-    },
-    {
-     "market": "Team Total",
-     "label": "White Sox Team Total Over 3.9",
-     "price": -115,
-     "tier": "D",
-     "note": "The White Sox offense should clear its projected run total in a plus spot."
-    },
-    {
-     "market": "Team Total",
-     "label": "Orioles Team Total Under 4.7",
-     "price": -115,
-     "tier": "D",
-     "note": "Orioles faces Fedde in a contained run spot."
+     "tier": "C",
+     "note": "Minnesota can cross runs by working the Imai walk rate."
     }
    ],
    "verdict": {
-    "prose": "Slight White Sox lean with no chip clearing the price; monitor lineups before posting a position.",
-    "text": "Slight White Sox lean with no chip clearing the price; monitor lineups before posting a position.",
-    "chips": [],
+    "prose": "A wild rookie in Imai and a bat missing Bradley set up a walk and strikeout heavy night; the tickets are Bradley K over 6.5.",
+    "text": "A wild rookie in Imai and a bat missing Bradley set up a walk and strikeout heavy night; the tickets are Bradley K over 6.5.",
+    "chips": [
+     "Bradley K over 6.5"
+    ],
     "projAway": 4.4,
     "projHome": 4.2,
     "longshot": []
    },
    "appliedAdjustments": [
-    "Standard model; no special rule triggered beyond VARIANCE downweight."
+    "Capped grade at C plus and left Imai strikeout prop off on the smaller sample and walk risk",
+    "Applied VARIANCE downweight on the Imai command profile"
    ]
   },
-  "824418": {
-   "gamePk": 824418,
-   "away": "Texas Rangers",
-   "home": "Cleveland Guardians",
-   "awayAbbr": "TEX",
-   "homeAbbr": "CLE",
-   "venue": "Progressive Field",
-   "firstPitch": "2026-06-30T22:40:00Z",
-   "firstPitchDisplay": "6:40 PM ET",
-   "window": "early afternoon (2:08 PM)",
+  "823767": {
+   "gamePk": 823767,
+   "away": "Cincinnati Reds",
+   "home": "Milwaukee Brewers",
+   "awayAbbr": "CIN",
+   "homeAbbr": "MIL",
+   "venue": "American Family Field",
+   "firstPitch": "2026-07-02T00:10:00Z",
+   "firstPitchDisplay": "8:10 PM ET",
+   "window": "midday (11:30 AM)",
    "awayPitcher": {
-    "name": "Jacob deGrom",
-    "hand": "R",
-    "id": 594798,
-    "era": "3.55",
-    "whip": "1.03",
-    "k9": "10.76",
-    "bb9": "2.03",
-    "ip": "88.2",
-    "gs": 16,
-    "w": 6,
-    "l": 5,
-    "k": 106,
+    "name": "Andrew Abbott",
+    "hand": "L",
+    "id": 671096,
+    "era": "3.90",
+    "whip": "1.41",
+    "k9": "7.00",
+    "bb9": "4.00",
+    "ip": "90.0",
+    "gs": 17,
+    "w": 5,
+    "l": 4,
+    "k": 70,
     "tiny": false,
     "source": "schedule-api"
    },
    "homePitcher": {
-    "name": "Tanner Bibee",
+    "name": "Shane Drohan",
+    "hand": "L",
+    "id": 675660,
+    "era": "3.12",
+    "whip": "1.23",
+    "k9": "9.00",
+    "bb9": "2.94",
+    "ip": "52.0",
+    "gs": 6,
+    "w": 3,
+    "l": 2,
+    "k": 52,
+    "tiny": false,
+    "source": "schedule-api"
+   },
+   "lineupStatus": "projected",
+   "weather": {
+    "roof": "closed",
+    "tempF": 92,
+    "wind": "15 mph SSW",
+    "precip": 1,
+    "note": "Weather from Open Meteo at first pitch hour."
+   },
+   "status": "Preview",
+   "confidenceLetter": "C+",
+   "confidenceScore": 65,
+   "grade": {
+    "letter": "C+",
+    "score": 65
+   },
+   "confidence": {
+    "letter": "C+",
+    "score": 65
+   },
+   "callout": "Two left handers meet in a Milwaukee HR park with modest offenses on both sides.",
+   "contextChips": [
+    "American Family roof HR park",
+    "92 degrees, 15 mph wind",
+    "two left handed starters"
+   ],
+   "projectedScore": {
+    "away": 4.2,
+    "home": 3.9
+   },
+   "projected_score": {
+    "away": 4.2,
+    "home": 3.9
+   },
+   "paragraphs": [
+    {
+     "title": "PITCHING MATCHUP",
+     "text": "Cincinnati sends Andrew Abbott, a left hander at a 3.90 ERA and 7.00 strikeouts per nine over 90 innings, a steady mid rotation arm with a 4.00 walks per nine that can run up counts. Milwaukee counters with Shane Drohan, also a lefty, at a 3.12 ERA and 9.00 per nine but on a smaller 52 inning sample. Both starters throw from the left side, which shapes the lineup matchups."
+    },
+    {
+     "title": "OFFENSE VS HANDEDNESS",
+     "text": "Cincinnati reads neutral on rolling form at 4.13 runs per game and Milwaukee sits neutral as well at 3.76 over the trailing 15. Two left handed starters push both managers toward their right handed bats. Neither offense is hot, so the run projection sits near the league average with no strong lean to either side."
+    },
+    {
+     "title": "PARK AND WEATHER",
+     "text": "American Family Field is a home run park, and even with the roof likely closed the short dimensions keep the long ball in play. If the roof is open the 15 mph wind becomes a factor. At a controlled 92 degrees the environment is mildly hitter friendly, which caps how low the total can go and keeps the play on the first five rather than a full game under."
+    },
+    {
+     "title": "STRIKEOUT PROJECTION",
+     "text": "Drohan carries the higher rate at 9.00 per nine but on a smaller sample, while Abbott sits at 7.00 with walk risk. Neither strikeout over clears the floor rule cleanly given the innings uncertainty, so no pitcher prop is published. The lean stays on the low first five."
+    },
+    {
+     "title": "BULLPEN EDGE",
+     "text": "Both bullpens read mixed with no decisive rested edge, so no late inning play is made. The first five under rests on two capable starters and two lukewarm offenses before the HR park can tilt late innings up."
+    }
+   ],
+   "picks": [
+    {
+     "market": "F5",
+     "label": "F5 Under 4.5",
+     "price": -110,
+     "tier": "B",
+     "note": "Two left handers and two neutral offenses keep the first five quiet."
+    },
+    {
+     "market": "F5 ML",
+     "label": "Reds F5 ML",
+     "price": -115,
+     "tier": "C",
+     "note": "Abbott is the more established arm to start against Drohan sample."
+    },
+    {
+     "market": "Total",
+     "label": "Under 9",
+     "price": -105,
+     "tier": "C",
+     "note": "Two capable starters cap the total despite the HR park."
+    },
+    {
+     "market": "K",
+     "label": "Drohan over 4.5 K",
+     "price": -120,
+     "tier": "C",
+     "note": "Drohan 9.00 K9 has a modest edge in the early innings."
+    },
+    {
+     "market": "Team Total",
+     "label": "Brewers Team Total Under 4.5",
+     "price": -110,
+     "tier": "C",
+     "note": "Milwaukee at 3.76 R/G is unlikely to run up a big number."
+    },
+    {
+     "market": "NRFI",
+     "label": "NRFI",
+     "price": -115,
+     "tier": "C",
+     "note": "Two starters with strikeout stuff favor a clean first inning."
+    }
+   ],
+   "verdict": {
+    "prose": "Two left handers meet in a Milwaukee HR park with modest offenses on both sides; the tickets are F5 Under 4.5.",
+    "text": "Two left handers meet in a Milwaukee HR park with modest offenses on both sides; the tickets are F5 Under 4.5.",
+    "chips": [
+     "F5 Under 4.5"
+    ],
+    "projAway": 4.2,
+    "projHome": 3.9,
+    "longshot": []
+   },
+   "appliedAdjustments": [
+    "Held the play at the first five rather than a full game under given the HR park",
+    "Down weighted Drohan on the smaller sample"
+   ]
+  },
+  "824337": {
+   "gamePk": 824337,
+   "away": "Miami Marlins",
+   "home": "Colorado Rockies",
+   "awayAbbr": "MIA",
+   "homeAbbr": "COL",
+   "venue": "Coors Field",
+   "firstPitch": "2026-07-02T00:40:00Z",
+   "firstPitchDisplay": "8:40 PM ET",
+   "window": "midday (11:30 AM)",
+   "awayPitcher": {
+    "name": "Max Meyer",
     "hand": "R",
-    "id": 676440,
-    "era": "3.78",
-    "whip": "1.14",
-    "k9": "7.65",
-    "bb9": "2.74",
-    "ip": "95.1",
+    "id": 676974,
+    "era": "2.60",
+    "whip": "1.11",
+    "k9": "9.93",
+    "bb9": "3.34",
+    "ip": "97.0",
     "gs": 17,
-    "w": 2,
-    "l": 8,
-    "k": 81,
+    "w": 9,
+    "l": 0,
+    "k": 107,
+    "tiny": false,
+    "source": "schedule-api"
+   },
+   "homePitcher": {
+    "name": "Kyle Freeland",
+    "hand": "L",
+    "id": 607536,
+    "era": "7.50",
+    "whip": "1.61",
+    "k9": "7.63",
+    "bb9": "2.13",
+    "ip": "72.0",
+    "gs": 14,
+    "w": 1,
+    "l": 7,
+    "k": 61,
     "tiny": false,
     "source": "schedule-api"
    },
@@ -3653,1872 +5221,8 @@ const CLAUDE_DAILY_ANALYSIS = {
    "weather": {
     "roof": "open",
     "tempF": 92,
-    "wind": "9 mph WNW",
-    "precip": 1,
-    "note": "Weather from Open Meteo at first pitch hour."
-   },
-   "status": "Preview",
-   "confidenceLetter": "C",
-   "confidenceScore": 64,
-   "grade": {
-    "letter": "C",
-    "score": 64
-   },
-   "confidence": {
-    "letter": "C",
-    "score": 64
-   },
-   "callout": "Pitching shapes a 7.5 run projection with the Rangers carrying the slim edge in a live bat spot.",
-   "contextChips": [
-    "deGrom 10.76 K9",
-    "neutral park",
-    "92 degrees first pitch"
-   ],
-   "projectedScore": {
-    "away": 4.0,
-    "home": 3.5
-   },
-   "projected_score": {
-    "away": 4.0,
-    "home": 3.5
-   },
-   "paragraphs": [
-    {
-     "title": "PITCHING MATCHUP",
-     "text": "Texas Rangers send Jacob deGrom at a 3.55 ERA with 10.76 strikeouts per nine and a 1.03 WHIP across 88.2 innings, while Cleveland Guardians counter with Tanner Bibee at a 3.78 ERA, 7.65 per nine and a 1.14 WHIP over 95.1 frames. deGrom owns the cleaner profile and shapes the run prevention edge for the Rangers."
-    },
-    {
-     "title": "OFFENSE VS HANDEDNESS",
-     "text": "Texas Rangers carry a warm form tier at 4.6 runs per game over the trailing 15 against R handed starters, and Cleveland Guardians sit cool at 2.95 runs per game versus R handed arms. The Rangers bats hold the better recent line, but neither lineup is confirmed yet so the projection leans on rolling form."
-    },
-    {
-     "title": "PARK AND WEATHER",
-     "text": "Progressive Field plays at a 97 run factor. First pitch sits near 92 degrees with wind 9 mph from the WNW. The environment tilts slightly toward run suppression and frames a 7.5 run projection."
-    },
-    {
-     "title": "STRIKEOUT PROJECTION",
-     "text": "deGrom profiles for roughly 6.7 strikeouts and Bibee for about 4.8 on a standard outing. deGrom is the cleanest strikeout angle if he reaches six innings, otherwise short leash risk caps the K market."
-    },
-    {
-     "title": "BULLPEN EDGE",
-     "text": "Cleveland Guardians bullpen reads rested and Texas Rangers bullpen reads mixed. The tired pen is the late game swing factor and nudges the total and late lead read."
-    }
-   ],
-   "picks": [
-    {
-     "market": "ML",
-     "label": "Rangers ML -130 to -145",
-     "price": -130,
-     "tier": "C",
-     "note": "deGrom carries the run prevention edge at a 3.55 ERA over a warm bat."
-    },
-    {
-     "market": "RL",
-     "label": "Rangers RL 1.5 -125",
-     "price": -125,
-     "tier": "D",
-     "note": "Projected margin near 0.5 run favors the Rangers on the spread only in a clean game."
-    },
-    {
-     "market": "Total",
-     "label": "Under 8.0",
-     "price": -110,
-     "tier": "C",
-     "note": "Both starters limit damage; deGrom and Bibee keep this in the 7 range."
-    },
-    {
-     "market": "F5 ML",
-     "label": "Rangers F5 ML -125 to -140",
-     "price": -125,
-     "tier": "D",
-     "note": "deGrom gives the Rangers the better first five innings."
-    },
-    {
-     "market": "K",
-     "label": "deGrom K over 5.5",
-     "price": -120,
-     "tier": "C",
-     "note": "deGrom misses bats at 10.76 per nine and projects past 5.5 if he reaches six innings."
-    },
-    {
-     "market": "Team Total",
-     "label": "Guardians Team Total Under 4.0",
-     "price": -115,
-     "tier": "D",
-     "note": "Guardians faces deGrom in a contained run spot."
-    }
-   ],
-   "verdict": {
-    "prose": "Lean the Rangers; the tickets are Rangers ML -130 to -145.",
-    "text": "Lean the Rangers; the tickets are Rangers ML -130 to -145.",
-    "chips": [
-     "Rangers ML -130 to -145"
-    ],
-    "projAway": 4.0,
-    "projHome": 3.5,
-    "longshot": [
-     "deGrom K over 5.5 is live if he clears six innings."
-    ]
-   },
-   "appliedAdjustments": [
-    "Down weight correlated under and favorite cluster (VARIANCE).",
-    "K over capped to half unit and requires six inning floor (K Over rule)."
-   ]
-  },
-  "823445": {
-   "gamePk": 823445,
-   "away": "Pittsburgh Pirates",
-   "home": "Philadelphia Phillies",
-   "awayAbbr": "PIT",
-   "homeAbbr": "PHI",
-   "venue": "Citizens Bank Park",
-   "firstPitch": "2026-06-30T22:40:00Z",
-   "firstPitchDisplay": "6:40 PM ET",
-   "window": "early afternoon (2:08 PM)",
-   "awayPitcher": {
-    "name": "Bubba Chandler",
-    "hand": "R",
-    "id": 696149,
-    "era": "4.42",
-    "whip": "1.39",
-    "k9": "8.28",
-    "bb9": "5.22",
-    "ip": "79.1",
-    "gs": 15,
-    "w": 3,
-    "l": 7,
-    "k": 73,
-    "tiny": false,
-    "source": "schedule-api"
-   },
-   "homePitcher": {
-    "name": "Cristopher Sánchez",
-    "hand": "L",
-    "id": 650911,
-    "era": "2.13",
-    "whip": "1.11",
-    "k9": "10.39",
-    "bb9": "1.72",
-    "ip": "110.0",
-    "gs": 17,
-    "w": 9,
-    "l": 3,
-    "k": 127,
-    "tiny": false,
-    "source": "schedule-api"
-   },
-   "lineupStatus": "projected",
-   "weather": {
-    "roof": "open",
-    "tempF": 91,
-    "wind": "10 mph SSW",
-    "precip": 1,
-    "note": "Weather from Open Meteo at first pitch hour."
-   },
-   "status": "Preview",
-   "confidenceLetter": "B",
-   "confidenceScore": 72,
-   "grade": {
-    "letter": "B",
-    "score": 72
-   },
-   "confidence": {
-    "letter": "B",
-    "score": 72
-   },
-   "callout": "Pitching shapes a 9.3 run projection with the Phillies carrying the slim edge in a live bat spot.",
-   "contextChips": [
-    "Sánchez 10.39 K9",
-    "neutral park",
-    "91 degrees first pitch"
-   ],
-   "projectedScore": {
-    "away": 4.2,
-    "home": 5.1
-   },
-   "projected_score": {
-    "away": 4.2,
-    "home": 5.1
-   },
-   "paragraphs": [
-    {
-     "title": "PITCHING MATCHUP",
-     "text": "Pittsburgh Pirates send Bubba Chandler at a 4.42 ERA with 8.28 strikeouts per nine and a 1.39 WHIP across 79.1 innings, while Philadelphia Phillies counter with Cristopher Sánchez at a 2.13 ERA, 10.39 per nine and a 1.11 WHIP over 110.0 frames. Sánchez owns the cleaner profile and shapes the run prevention edge for the Phillies."
-    },
-    {
-     "title": "OFFENSE VS HANDEDNESS",
-     "text": "Pittsburgh Pirates carry a warm form tier at 5.68 runs per game over the trailing 15 against L handed starters, and Philadelphia Phillies sit warm at 5.6 runs per game versus R handed arms. The Pirates bats hold the better recent line, but neither lineup is confirmed yet so the projection leans on rolling form."
-    },
-    {
-     "title": "PARK AND WEATHER",
-     "text": "Citizens Bank Park plays at a 103 run factor. First pitch sits near 91 degrees with wind 10 mph from the SSW. The environment reads close to neutral and frames a 9.3 run projection."
-    },
-    {
-     "title": "STRIKEOUT PROJECTION",
-     "text": "Chandler profiles for roughly 5.2 strikeouts and Sánchez for about 6.5 on a standard outing. Sánchez is the cleanest strikeout angle if he reaches six innings, otherwise short leash risk caps the K market."
-    },
-    {
-     "title": "BULLPEN EDGE",
-     "text": "Philadelphia Phillies bullpen reads rested and Pittsburgh Pirates bullpen reads rested."
-    }
-   ],
-   "picks": [
-    {
-     "market": "ML",
-     "label": "Phillies ML -150 to -165",
-     "price": -150,
-     "tier": "B",
-     "note": "Sánchez carries the run prevention edge at a 2.13 ERA over a warm bat."
-    },
-    {
-     "market": "RL",
-     "label": "Phillies RL 1.5 -117",
-     "price": -117,
-     "tier": "D",
-     "note": "Projected margin near 0.9 run favors the Phillies on the spread only in a clean game."
-    },
-    {
-     "market": "Total",
-     "label": "Under 9.8",
-     "price": -110,
-     "tier": "D",
-     "note": "Lean under is thin with both lineups capable; small edge only."
-    },
-    {
-     "market": "F5 ML",
-     "label": "Phillies F5 ML -145 to -160",
-     "price": -145,
-     "tier": "C",
-     "note": "Sánchez gives the Phillies the better first five innings."
-    },
-    {
-     "market": "K",
-     "label": "Sánchez K over 5.5",
-     "price": -120,
-     "tier": "C",
-     "note": "Sánchez misses bats at 10.39 per nine and projects past 5.5 if he reaches six innings."
-    },
-    {
-     "market": "Team Total",
-     "label": "Pirates Team Total Under 4.7",
-     "price": -115,
-     "tier": "D",
-     "note": "Pirates faces Sánchez in a contained run spot."
-    }
-   ],
-   "verdict": {
-    "prose": "Back the Phillies; the tickets are Phillies ML -150 to -165, Sánchez K over 5.5.",
-    "text": "Back the Phillies; the tickets are Phillies ML -150 to -165, Sánchez K over 5.5.",
-    "chips": [
-     "Phillies ML -150 to -165",
-     "Sánchez K over 5.5"
-    ],
-    "projAway": 4.2,
-    "projHome": 5.1,
-    "longshot": []
-   },
-   "appliedAdjustments": [
-    "K over capped to half unit and requires six inning floor (K Over rule).",
-    "Suppressed under: both lineups top 12 in trailing runs per game."
-   ]
-  },
-  "823528": {
-   "gamePk": 823528,
-   "away": "Detroit Tigers",
-   "home": "New York Yankees",
-   "awayAbbr": "DET",
-   "homeAbbr": "NYY",
-   "venue": "Yankee Stadium",
-   "firstPitch": "2026-06-30T23:05:00Z",
-   "firstPitchDisplay": "7:05 PM ET",
-   "window": "early afternoon (2:08 PM)",
-   "awayPitcher": {
-    "name": "Tarik Skubal",
-    "hand": "L",
-    "id": 669373,
-    "era": "3.32",
-    "whip": "0.99",
-    "k9": "9.96",
-    "bb9": "1.21",
-    "ip": "59.2",
-    "gs": 10,
-    "w": 3,
-    "l": 4,
-    "k": 66,
-    "tiny": false,
-    "source": "schedule-api"
-   },
-   "homePitcher": {
-    "name": "Cam Schlittler",
-    "hand": "R",
-    "id": 693645,
-    "era": "1.62",
-    "whip": "0.92",
-    "k9": "10.62",
-    "bb9": "1.80",
-    "ip": "100.0",
-    "gs": 17,
-    "w": 8,
-    "l": 4,
-    "k": 118,
-    "tiny": false,
-    "source": "schedule-api"
-   },
-   "lineupStatus": "projected",
-   "weather": {
-    "roof": "open",
-    "tempF": 85,
     "wind": "10 mph SSE",
-    "precip": 2,
-    "note": "Weather from Open Meteo at first pitch hour."
-   },
-   "status": "Preview",
-   "confidenceLetter": "B",
-   "confidenceScore": 72,
-   "grade": {
-    "letter": "B",
-    "score": 72
-   },
-   "confidence": {
-    "letter": "B",
-    "score": 72
-   },
-   "callout": "Pitching shapes a 6.6 run projection with the Yankees carrying the slim edge in a live bat spot.",
-   "contextChips": [
-    "Schlittler 10.62 K9",
-    "hitter park",
-    "85 degrees first pitch"
-   ],
-   "projectedScore": {
-    "away": 3.3,
-    "home": 3.3
-   },
-   "projected_score": {
-    "away": 3.3,
-    "home": 3.3
-   },
-   "paragraphs": [
-    {
-     "title": "PITCHING MATCHUP",
-     "text": "Detroit Tigers send Tarik Skubal at a 3.32 ERA with 9.96 strikeouts per nine and a 0.99 WHIP across 59.2 innings, while New York Yankees counter with Cam Schlittler at a 1.62 ERA, 10.62 per nine and a 0.92 WHIP over 100.0 frames. Schlittler owns the cleaner profile and shapes the run prevention edge for the Yankees."
-    },
-    {
-     "title": "OFFENSE VS HANDEDNESS",
-     "text": "Detroit Tigers carry a neutral form tier at 3.75 runs per game over the trailing 15 against R handed starters, and New York Yankees sit cold at 2.38 runs per game versus L handed arms. The Tigers bats hold the better recent line, but neither lineup is confirmed yet so the projection leans on rolling form."
-    },
-    {
-     "title": "PARK AND WEATHER",
-     "text": "Yankee Stadium plays at a 104 run factor. First pitch sits near 85 degrees with wind 10 mph from the SSE. The environment pushes the total up and frames a 6.6 run projection."
-    },
-    {
-     "title": "STRIKEOUT PROJECTION",
-     "text": "Skubal profiles for roughly 6.2 strikeouts and Schlittler for about 6.6 on a standard outing. Schlittler is the cleanest strikeout angle if he reaches six innings, otherwise short leash risk caps the K market."
-    },
-    {
-     "title": "BULLPEN EDGE",
-     "text": "New York Yankees bullpen reads mixed and Detroit Tigers bullpen reads rested. The tired pen is the late game swing factor and nudges the total and late lead read."
-    }
-   ],
-   "picks": [
-    {
-     "market": "ML",
-     "label": "Yankees ML -105 to -120",
-     "price": -105,
-     "tier": "D",
-     "note": "Schlittler carries the run prevention edge at a 1.62 ERA over a cold bat."
-    },
-    {
-     "market": "RL",
-     "label": "Yankees RL 1.5 -135",
-     "price": -135,
-     "tier": "D",
-     "note": "Projected margin near 0.0 run favors the Yankees on the spread only in a clean game."
-    },
-    {
-     "market": "Total",
-     "label": "Under 7.1",
-     "price": -110,
-     "tier": "B",
-     "note": "Both starters limit damage; Skubal and Schlittler keep this in the 6 range."
-    },
-    {
-     "market": "F5",
-     "label": "F5 Under 4.0",
-     "price": -115,
-     "tier": "C",
-     "note": "Front five belongs to the rotation arms before the bullpens open up."
-    },
-    {
-     "market": "K",
-     "label": "Schlittler K over 5.5",
-     "price": -120,
-     "tier": "C",
-     "note": "Schlittler misses bats at 10.62 per nine and projects past 5.5 if he reaches six innings."
-    },
-    {
-     "market": "NRFI",
-     "label": "NRFI",
-     "price": -118,
-     "tier": "D",
-     "note": "Strong starters favor a quiet first frame."
-    }
-   ],
-   "verdict": {
-    "prose": "The tickets are Under 7.1, Schlittler K over 5.5 in a contained pitching spot.",
-    "text": "The tickets are Under 7.1, Schlittler K over 5.5 in a contained pitching spot.",
-    "chips": [
-     "Under 7.1",
-     "Schlittler K over 5.5"
-    ],
-    "projAway": 3.3,
-    "projHome": 3.3,
-    "longshot": [
-     "NRFI is in play with both starters sharp early."
-    ]
-   },
-   "appliedAdjustments": [
-    "K over capped to half unit and requires six inning floor (K Over rule).",
-    "Cold form favorite capped below B for moneyline."
-   ]
-  },
-  "822793": {
-   "gamePk": 822793,
-   "away": "New York Mets",
-   "home": "Toronto Blue Jays",
-   "awayAbbr": "NYM",
-   "homeAbbr": "TOR",
-   "venue": "Rogers Centre",
-   "firstPitch": "2026-06-30T23:07:00Z",
-   "firstPitchDisplay": "7:07 PM ET",
-   "window": "early afternoon (2:08 PM)",
-   "awayPitcher": {
-    "name": "Nolan McLean",
-    "hand": "R",
-    "id": 690997,
-    "era": "4.03",
-    "whip": "1.12",
-    "k9": "10.68",
-    "bb9": "3.43",
-    "ip": "89.1",
-    "gs": 16,
-    "w": 4,
-    "l": 5,
-    "k": 106,
-    "tiny": false,
-    "source": "schedule-api"
-   },
-   "homePitcher": {
-    "name": "Kevin Gausman",
-    "hand": "R",
-    "id": 592332,
-    "era": "4.36",
-    "whip": "1.19",
-    "k9": "8.81",
-    "bb9": "2.08",
-    "ip": "95.0",
-    "gs": 17,
-    "w": 4,
-    "l": 6,
-    "k": 93,
-    "tiny": false,
-    "source": "schedule-api"
-   },
-   "lineupStatus": "projected",
-   "weather": {
-    "roof": "retractable",
-    "tempF": 85,
-    "wind": "12 mph SSW",
-    "precip": 1,
-    "note": "Weather from Open Meteo at first pitch hour."
-   },
-   "status": "Preview",
-   "confidenceLetter": "D",
-   "confidenceScore": 47,
-   "grade": {
-    "letter": "D",
-    "score": 47
-   },
-   "confidence": {
-    "letter": "D",
-    "score": 47
-   },
-   "callout": "Coin flip projection inside 0.0 runs leaves no priced edge worth a primary play.",
-   "contextChips": [
-    "McLean 10.68 K9",
-    "neutral park",
-    "85 degrees first pitch"
-   ],
-   "projectedScore": {
-    "away": 4.3,
-    "home": 4.3
-   },
-   "projected_score": {
-    "away": 4.3,
-    "home": 4.3
-   },
-   "paragraphs": [
-    {
-     "title": "PITCHING MATCHUP",
-     "text": "New York Mets send Nolan McLean at a 4.03 ERA with 10.68 strikeouts per nine and a 1.12 WHIP across 89.1 innings, while Toronto Blue Jays counter with Kevin Gausman at a 4.36 ERA, 8.81 per nine and a 1.19 WHIP over 95.0 frames. Gausman owns the cleaner profile and shapes the run prevention edge for the Blue Jays."
-    },
-    {
-     "title": "OFFENSE VS HANDEDNESS",
-     "text": "New York Mets carry a cold form tier at 3.94 runs per game over the trailing 15 against R handed starters, and Toronto Blue Jays sit cold at 3.98 runs per game versus R handed arms. The Blue Jays bats hold the better recent line, but neither lineup is confirmed yet so the projection leans on rolling form."
-    },
-    {
-     "title": "PARK AND WEATHER",
-     "text": "Rogers Centre plays at a 102 run factor. First pitch sits near 85 degrees under a retractable roof treated as open unless closed at gametime. The environment reads close to neutral and frames a 8.6 run projection."
-    },
-    {
-     "title": "STRIKEOUT PROJECTION",
-     "text": "McLean profiles for roughly 6.6 strikeouts and Gausman for about 5.5 on a standard outing. McLean carries the better whiff rate but blowout and pitch count risk keep the K market off the primary row."
-    },
-    {
-     "title": "BULLPEN EDGE",
-     "text": "Toronto Blue Jays bullpen reads mixed and New York Mets bullpen reads mixed. The tired pen is the late game swing factor and nudges the total and late lead read."
-    }
-   ],
-   "picks": [
-    {
-     "market": "ML",
-     "label": "Blue Jays ML -105 to -120",
-     "price": -105,
-     "tier": "D",
-     "note": "Gausman carries the run prevention edge at a 4.36 ERA over a cold bat."
-    },
-    {
-     "market": "RL",
-     "label": "Blue Jays RL 1.5 -135",
-     "price": -135,
-     "tier": "D",
-     "note": "Projected margin near 0.0 run favors the Blue Jays on the spread only in a clean game."
-    },
-    {
-     "market": "Total",
-     "label": "Under 9.1",
-     "price": -110,
-     "tier": "D",
-     "note": "Lean under is thin with both lineups capable; small edge only."
-    },
-    {
-     "market": "F5 ML",
-     "label": "Blue Jays F5 ML -100 to -115",
-     "price": -100,
-     "tier": "D",
-     "note": "Gausman gives the Blue Jays the better first five innings."
-    },
-    {
-     "market": "K",
-     "label": "McLean K over 5.5",
-     "price": -120,
-     "tier": "C",
-     "note": "McLean carries swing and miss at 10.68 per nine into a strikeout prone matchup."
-    },
-    {
-     "market": "Team Total",
-     "label": "Mets Team Total Under 4.8",
-     "price": -115,
-     "tier": "D",
-     "note": "Mets faces Gausman in a contained run spot."
-    }
-   ],
-   "verdict": {
-    "prose": "Pass. Mets and Blue Jays project within 0.0 runs with no priced edge worth a primary chip today.",
-    "text": "Pass. Mets and Blue Jays project within 0.0 runs with no priced edge worth a primary chip today.",
-    "chips": [],
-    "projAway": 4.3,
-    "projHome": 4.3,
-    "longshot": []
-   },
-   "appliedAdjustments": [
-    "K over capped to half unit and requires six inning floor (K Over rule).",
-    "Cold form favorite capped below B for moneyline."
-   ]
-  },
-  "824742": {
-   "gamePk": 824742,
-   "away": "Washington Nationals",
-   "home": "Boston Red Sox",
-   "awayAbbr": "WSH",
-   "homeAbbr": "BOS",
-   "venue": "Fenway Park",
-   "firstPitch": "2026-06-30T23:10:00Z",
-   "firstPitchDisplay": "7:10 PM ET",
-   "window": "early afternoon (2:08 PM)",
-   "awayPitcher": {
-    "name": "Cade Cavalli",
-    "hand": "R",
-    "id": 676917,
-    "era": "4.00",
-    "whip": "1.43",
-    "k9": "9.61",
-    "bb9": "3.13",
-    "ip": "83.1",
-    "gs": 17,
-    "w": 4,
-    "l": 4,
-    "k": 89,
-    "tiny": false,
-    "source": "schedule-api"
-   },
-   "homePitcher": {
-    "name": "Connelly Early",
-    "hand": "L",
-    "id": 813349,
-    "era": "3.59",
-    "whip": "1.25",
-    "k9": "9.03",
-    "bb9": "3.29",
-    "ip": "87.2",
-    "gs": 16,
-    "w": 7,
-    "l": 5,
-    "k": 88,
-    "tiny": false,
-    "source": "schedule-api"
-   },
-   "lineupStatus": "projected",
-   "weather": {
-    "roof": "open",
-    "tempF": 82,
-    "wind": "12 mph SSW",
-    "precip": 14,
-    "note": "Weather from Open Meteo at first pitch hour."
-   },
-   "status": "Preview",
-   "confidenceLetter": "B",
-   "confidenceScore": 70,
-   "grade": {
-    "letter": "B",
-    "score": 70
-   },
-   "confidence": {
-    "letter": "B",
-    "score": 70
-   },
-   "callout": "Pitching shapes a 8.5 run projection with the Red Sox carrying the slim edge in a live bat spot.",
-   "contextChips": [
-    "Cavalli 9.61 K9",
-    "hitter park",
-    "82 degrees first pitch",
-    "12 mph SSW"
-   ],
-   "projectedScore": {
-    "away": 3.9,
-    "home": 4.6
-   },
-   "projected_score": {
-    "away": 3.9,
-    "home": 4.6
-   },
-   "paragraphs": [
-    {
-     "title": "PITCHING MATCHUP",
-     "text": "Washington Nationals send Cade Cavalli at a 4.00 ERA with 9.61 strikeouts per nine and a 1.43 WHIP across 83.1 innings, while Boston Red Sox counter with Connelly Early at a 3.59 ERA, 9.03 per nine and a 1.25 WHIP over 87.2 frames. Early owns the cleaner profile and shapes the run prevention edge for the Red Sox."
-    },
-    {
-     "title": "OFFENSE VS HANDEDNESS",
-     "text": "Washington Nationals carry a cold form tier at 3.42 runs per game over the trailing 15 against L handed starters, and Boston Red Sox sit hot at 4.57 runs per game versus R handed arms. The Red Sox bats hold the better recent line, but neither lineup is confirmed yet so the projection leans on rolling form."
-    },
-    {
-     "title": "PARK AND WEATHER",
-     "text": "Fenway Park plays at a 106 run factor. First pitch sits near 82 degrees with wind 12 mph from the SSW. The environment pushes the total up and frames a 8.5 run projection."
-    },
-    {
-     "title": "STRIKEOUT PROJECTION",
-     "text": "Cavalli profiles for roughly 6.0 strikeouts and Early for about 5.6 on a standard outing. Neither starter offers a strikeout line worth chasing at the posted numbers."
-    },
-    {
-     "title": "BULLPEN EDGE",
-     "text": "Boston Red Sox bullpen reads mixed and Washington Nationals bullpen reads rested. The tired pen is the late game swing factor and nudges the total and late lead read."
-    }
-   ],
-   "picks": [
-    {
-     "market": "ML",
-     "label": "Red Sox ML -140 to -155",
-     "price": -140,
-     "tier": "B",
-     "note": "Early carries the run prevention edge at a 3.59 ERA over a hot bat."
-    },
-    {
-     "market": "RL",
-     "label": "Red Sox RL 1.5 -121",
-     "price": -121,
-     "tier": "D",
-     "note": "Projected margin near 0.7 run favors the Red Sox on the spread only in a clean game."
-    },
-    {
-     "market": "Total",
-     "label": "Under 9.0",
-     "price": -110,
-     "tier": "D",
-     "note": "Lean under is thin with both lineups capable; small edge only."
-    },
-    {
-     "market": "F5 ML",
-     "label": "Red Sox F5 ML -135 to -150",
-     "price": -135,
-     "tier": "C",
-     "note": "Early gives the Red Sox the better first five innings."
-    },
-    {
-     "market": "Team Total",
-     "label": "Red Sox Team Total Over 4.1",
-     "price": -115,
-     "tier": "D",
-     "note": "The Red Sox offense should clear its projected run total in a plus spot."
-    },
-    {
-     "market": "Team Total",
-     "label": "Nationals Team Total Under 4.4",
-     "price": -115,
-     "tier": "D",
-     "note": "Nationals faces Early in a contained run spot."
-    }
-   ],
-   "verdict": {
-    "prose": "Back the Red Sox; the tickets are Red Sox ML -140 to -155.",
-    "text": "Back the Red Sox; the tickets are Red Sox ML -140 to -155.",
-    "chips": [
-     "Red Sox ML -140 to -155"
-    ],
-    "projAway": 3.9,
-    "projHome": 4.6,
-    "longshot": []
-   },
-   "appliedAdjustments": [
-    "Standard model; no special rule triggered beyond VARIANCE downweight."
-   ]
-  },
-  "824907": {
-   "gamePk": 824907,
-   "away": "St. Louis Cardinals",
-   "home": "Atlanta Braves",
-   "awayAbbr": "STL",
-   "homeAbbr": "ATL",
-   "venue": "Truist Park",
-   "firstPitch": "2026-06-30T23:15:00Z",
-   "firstPitchDisplay": "7:15 PM ET",
-   "window": "early afternoon (2:08 PM)",
-   "awayPitcher": {
-    "name": "Matthew Liberatore",
-    "hand": "L",
-    "id": 669461,
-    "era": "5.56",
-    "whip": "1.58",
-    "k9": "8.11",
-    "bb9": "3.36",
-    "ip": "77.2",
-    "gs": 16,
-    "w": 3,
-    "l": 5,
-    "k": 70,
-    "tiny": false,
-    "source": "schedule-api"
-   },
-   "homePitcher": {
-    "name": "Martín Pérez",
-    "hand": "L",
-    "id": 527048,
-    "era": "3.00",
-    "whip": "1.13",
-    "k9": "7.50",
-    "bb9": "3.38",
-    "ip": "72.0",
-    "gs": 12,
-    "w": 6,
-    "l": 4,
-    "k": 60,
-    "tiny": false,
-    "source": "schedule-api"
-   },
-   "lineupStatus": "projected",
-   "weather": {
-    "roof": "open",
-    "tempF": 96,
-    "wind": "5 mph ENE",
-    "precip": 5,
-    "note": "Weather from Open Meteo at first pitch hour."
-   },
-   "status": "Preview",
-   "confidenceLetter": "C",
-   "confidenceScore": 59,
-   "grade": {
-    "letter": "C",
-    "score": 59
-   },
-   "confidence": {
-    "letter": "C",
-    "score": 59
-   },
-   "callout": "Pitching shapes a 7.5 run projection with the Braves carrying the slim edge in a cold bat spot.",
-   "contextChips": [
-    "Liberatore 8.11 K9",
-    "neutral park",
-    "96 degrees first pitch"
-   ],
-   "projectedScore": {
-    "away": 3.3,
-    "home": 4.2
-   },
-   "projected_score": {
-    "away": 3.3,
-    "home": 4.2
-   },
-   "paragraphs": [
-    {
-     "title": "PITCHING MATCHUP",
-     "text": "St. Louis Cardinals send Matthew Liberatore at a 5.56 ERA with 8.11 strikeouts per nine and a 1.58 WHIP across 77.2 innings, while Atlanta Braves counter with Martín Pérez at a 3.00 ERA, 7.50 per nine and a 1.13 WHIP over 72.0 frames. Pérez owns the cleaner profile and shapes the run prevention edge for the Braves."
-    },
-    {
-     "title": "OFFENSE VS HANDEDNESS",
-     "text": "St. Louis Cardinals carry a cold form tier at 2.91 runs per game over the trailing 15 against L handed starters, and Atlanta Braves sit cold at 2.62 runs per game versus L handed arms. The Cardinals bats hold the better recent line, but neither lineup is confirmed yet so the projection leans on rolling form."
-    },
-    {
-     "title": "PARK AND WEATHER",
-     "text": "Truist Park plays at a 101 run factor. First pitch sits near 96 degrees with wind 5 mph from the ENE. The environment reads close to neutral and frames a 7.5 run projection."
-    },
-    {
-     "title": "STRIKEOUT PROJECTION",
-     "text": "Liberatore profiles for roughly 5.0 strikeouts and Pérez for about 4.7 on a standard outing. Neither starter offers a strikeout line worth chasing at the posted numbers."
-    },
-    {
-     "title": "BULLPEN EDGE",
-     "text": "Atlanta Braves bullpen reads mixed and St. Louis Cardinals bullpen reads mixed. The tired pen is the late game swing factor and nudges the total and late lead read."
-    }
-   ],
-   "picks": [
-    {
-     "market": "ML",
-     "label": "Braves ML -150 to -165",
-     "price": -150,
-     "tier": "D",
-     "note": "Pérez carries the run prevention edge at a 3.00 ERA over a cold bat."
-    },
-    {
-     "market": "RL",
-     "label": "Braves RL 1.5 -117",
-     "price": -117,
-     "tier": "D",
-     "note": "Projected margin near 0.9 run favors the Braves on the spread only in a clean game."
-    },
-    {
-     "market": "Total",
-     "label": "Under 8.0",
-     "price": -110,
-     "tier": "D",
-     "note": "Lean under is thin with both lineups capable; small edge only."
-    },
-    {
-     "market": "F5 ML",
-     "label": "Braves F5 ML -145 to -160",
-     "price": -145,
-     "tier": "D",
-     "note": "Pérez gives the Braves the better first five innings."
-    },
-    {
-     "market": "Team Total",
-     "label": "Braves Team Total Over 3.7",
-     "price": -115,
-     "tier": "D",
-     "note": "The Braves offense should clear its projected run total in a plus spot."
-    },
-    {
-     "market": "Team Total",
-     "label": "Cardinals Team Total Under 3.8",
-     "price": -115,
-     "tier": "D",
-     "note": "Cardinals faces Pérez in a contained run spot."
-    }
-   ],
-   "verdict": {
-    "prose": "Slight Braves lean with no chip clearing the price; monitor lineups before posting a position.",
-    "text": "Slight Braves lean with no chip clearing the price; monitor lineups before posting a position.",
-    "chips": [],
-    "projAway": 3.3,
-    "projHome": 4.2,
-    "longshot": []
-   },
-   "appliedAdjustments": [
-    "Cold form favorite capped below B for moneyline."
-   ]
-  },
-  "824096": {
-   "gamePk": 824096,
-   "away": "Tampa Bay Rays",
-   "home": "Kansas City Royals",
-   "awayAbbr": "TB",
-   "homeAbbr": "KC",
-   "venue": "Kauffman Stadium",
-   "firstPitch": "2026-06-30T23:40:00Z",
-   "firstPitchDisplay": "7:40 PM ET",
-   "window": "early afternoon (2:08 PM)",
-   "awayPitcher": {
-    "name": "Griffin Jax",
-    "hand": "R",
-    "id": 643377,
-    "era": "3.33",
-    "whip": "1.31",
-    "k9": "8.83",
-    "bb9": "3.33",
-    "ip": "54.0",
-    "gs": 11,
-    "w": 3,
-    "l": 5,
-    "k": 53,
-    "tiny": false,
-    "source": "schedule-api"
-   },
-   "homePitcher": {
-    "name": "Noah Cameron",
-    "hand": "L",
-    "id": 702070,
-    "era": "4.50",
-    "whip": "1.33",
-    "k9": "8.44",
-    "bb9": "2.48",
-    "ip": "80.0",
-    "gs": 15,
-    "w": 4,
-    "l": 5,
-    "k": 75,
-    "tiny": false,
-    "source": "schedule-api"
-   },
-   "lineupStatus": "projected",
-   "weather": {
-    "roof": "open",
-    "tempF": 94,
-    "wind": "17 mph S",
-    "precip": 0,
-    "note": "Weather from Open Meteo at first pitch hour."
-   },
-   "status": "Preview",
-   "confidenceLetter": "C",
-   "confidenceScore": 58,
-   "grade": {
-    "letter": "C",
-    "score": 58
-   },
-   "confidence": {
-    "letter": "C",
-    "score": 58
-   },
-   "callout": "Pitching shapes a 8.6 run projection with the Rays carrying the slim edge in a live bat spot.",
-   "contextChips": [
-    "Jax 8.83 K9",
-    "neutral park",
-    "94 degrees first pitch",
-    "17 mph S"
-   ],
-   "projectedScore": {
-    "away": 4.4,
-    "home": 4.2
-   },
-   "projected_score": {
-    "away": 4.4,
-    "home": 4.2
-   },
-   "paragraphs": [
-    {
-     "title": "PITCHING MATCHUP",
-     "text": "Tampa Bay Rays send Griffin Jax at a 3.33 ERA with 8.83 strikeouts per nine and a 1.31 WHIP across 54.0 innings, while Kansas City Royals counter with Noah Cameron at a 4.50 ERA, 8.44 per nine and a 1.33 WHIP over 80.0 frames. Jax owns the cleaner profile and shapes the run prevention edge for the Rays."
-    },
-    {
-     "title": "OFFENSE VS HANDEDNESS",
-     "text": "Tampa Bay Rays carry a hot form tier at 4.41 runs per game over the trailing 15 against L handed starters, and Kansas City Royals sit cold at 4.42 runs per game versus R handed arms. The Royals bats hold the better recent line, but neither lineup is confirmed yet so the projection leans on rolling form."
-    },
-    {
-     "title": "PARK AND WEATHER",
-     "text": "Kauffman Stadium plays at a 99 run factor. First pitch sits near 94 degrees with wind 17 mph from the S. The environment reads close to neutral and frames a 8.6 run projection."
-    },
-    {
-     "title": "STRIKEOUT PROJECTION",
-     "text": "Jax profiles for roughly 5.5 strikeouts and Cameron for about 5.3 on a standard outing. Neither starter offers a strikeout line worth chasing at the posted numbers."
-    },
-    {
-     "title": "BULLPEN EDGE",
-     "text": "Kansas City Royals bullpen reads mixed and Tampa Bay Rays bullpen reads mixed. The tired pen is the late game swing factor and nudges the total and late lead read."
-    }
-   ],
-   "picks": [
-    {
-     "market": "ML",
-     "label": "Rays ML -115 to -130",
-     "price": -115,
-     "tier": "D",
-     "note": "Jax carries the run prevention edge at a 3.33 ERA over a hot bat."
-    },
-    {
-     "market": "RL",
-     "label": "Rays RL 1.5 -131",
-     "price": -131,
-     "tier": "D",
-     "note": "Projected margin near 0.2 run favors the Rays on the spread only in a clean game."
-    },
-    {
-     "market": "Total",
-     "label": "Under 9.1",
-     "price": -110,
-     "tier": "D",
-     "note": "Lean under is thin with both lineups capable; small edge only."
-    },
-    {
-     "market": "F5 ML",
-     "label": "Rays F5 ML -110 to -125",
-     "price": -110,
-     "tier": "D",
-     "note": "Jax gives the Rays the better first five innings."
-    },
-    {
-     "market": "Team Total",
-     "label": "Rays Team Total Over 3.9",
-     "price": -115,
-     "tier": "D",
-     "note": "The Rays offense should clear its projected run total in a plus spot."
-    },
-    {
-     "market": "Team Total",
-     "label": "Royals Team Total Under 4.7",
-     "price": -115,
-     "tier": "D",
-     "note": "Royals faces Jax in a contained run spot."
-    }
-   ],
-   "verdict": {
-    "prose": "Slight Rays lean with no chip clearing the price; monitor lineups before posting a position.",
-    "text": "Slight Rays lean with no chip clearing the price; monitor lineups before posting a position.",
-    "chips": [],
-    "projAway": 4.4,
-    "projHome": 4.2,
-    "longshot": []
-   },
-   "appliedAdjustments": [
-    "Standard model; no special rule triggered beyond VARIANCE downweight."
-   ]
-  },
-  "823768": {
-   "gamePk": 823768,
-   "away": "Cincinnati Reds",
-   "home": "Milwaukee Brewers",
-   "awayAbbr": "CIN",
-   "homeAbbr": "MIL",
-   "venue": "American Family Field",
-   "firstPitch": "2026-06-30T23:40:00Z",
-   "firstPitchDisplay": "7:40 PM ET",
-   "window": "early afternoon (2:08 PM)",
-   "awayPitcher": {
-    "name": "Rhett Lowder",
-    "hand": "R",
-    "id": 695076,
-    "era": "4.81",
-    "whip": "1.47",
-    "k9": "7.45",
-    "bb9": "4.50",
-    "ip": "58.0",
-    "gs": 12,
-    "w": 3,
-    "l": 5,
-    "k": 48,
-    "tiny": false,
-    "source": "schedule-api"
-   },
-   "homePitcher": {
-    "name": "Brandon Sproat",
-    "hand": "R",
-    "id": 687075,
-    "era": "5.43",
-    "whip": "1.35",
-    "k9": "9.43",
-    "bb9": "4.13",
-    "ip": "69.2",
-    "gs": 13,
-    "w": 2,
-    "l": 4,
-    "k": 73,
-    "tiny": false,
-    "source": "schedule-api"
-   },
-   "lineupStatus": "projected",
-   "weather": {
-    "roof": "retractable",
-    "tempF": 93,
-    "wind": "16 mph SW",
-    "precip": 1,
-    "note": "Weather from Open Meteo at first pitch hour."
-   },
-   "status": "Preview",
-   "confidenceLetter": "C",
-   "confidenceScore": 58,
-   "grade": {
-    "letter": "C",
-    "score": 58
-   },
-   "confidence": {
-    "letter": "C",
-    "score": 58
-   },
-   "callout": "Pitching shapes a 9.3 run projection with the Reds carrying the slim edge in a live bat spot.",
-   "contextChips": [
-    "Sproat 9.43 K9",
-    "neutral park",
-    "93 degrees first pitch"
-   ],
-   "projectedScore": {
-    "away": 4.7,
-    "home": 4.6
-   },
-   "projected_score": {
-    "away": 4.7,
-    "home": 4.6
-   },
-   "paragraphs": [
-    {
-     "title": "PITCHING MATCHUP",
-     "text": "Cincinnati Reds send Rhett Lowder at a 4.81 ERA with 7.45 strikeouts per nine and a 1.47 WHIP across 58.0 innings, while Milwaukee Brewers counter with Brandon Sproat at a 5.43 ERA, 9.43 per nine and a 1.35 WHIP over 69.2 frames. Lowder owns the cleaner profile and shapes the run prevention edge for the Reds."
-    },
-    {
-     "title": "OFFENSE VS HANDEDNESS",
-     "text": "Cincinnati Reds carry a warm form tier at 4.16 runs per game over the trailing 15 against R handed starters, and Milwaukee Brewers sit neutral at 4.09 runs per game versus R handed arms. The Reds bats hold the better recent line, but neither lineup is confirmed yet so the projection leans on rolling form."
-    },
-    {
-     "title": "PARK AND WEATHER",
-     "text": "American Family Field plays at a 101 run factor. First pitch sits near 93 degrees under a retractable roof treated as open unless closed at gametime. The environment reads close to neutral and frames a 9.3 run projection."
-    },
-    {
-     "title": "STRIKEOUT PROJECTION",
-     "text": "Lowder profiles for roughly 4.6 strikeouts and Sproat for about 5.9 on a standard outing. Neither starter offers a strikeout line worth chasing at the posted numbers."
-    },
-    {
-     "title": "BULLPEN EDGE",
-     "text": "Milwaukee Brewers bullpen reads mixed and Cincinnati Reds bullpen reads mixed. The tired pen is the late game swing factor and nudges the total and late lead read."
-    }
-   ],
-   "picks": [
-    {
-     "market": "ML",
-     "label": "Reds ML -110 to -125",
-     "price": -110,
-     "tier": "D",
-     "note": "Lowder carries the run prevention edge at a 4.81 ERA over a warm bat."
-    },
-    {
-     "market": "RL",
-     "label": "Reds RL 1.5 -133",
-     "price": -133,
-     "tier": "D",
-     "note": "Projected margin near 0.1 run favors the Reds on the spread only in a clean game."
-    },
-    {
-     "market": "Total",
-     "label": "Under 9.8",
-     "price": -110,
-     "tier": "D",
-     "note": "Lean under is thin with both lineups capable; small edge only."
-    },
-    {
-     "market": "F5 ML",
-     "label": "Reds F5 ML -105 to -120",
-     "price": -105,
-     "tier": "D",
-     "note": "Lowder gives the Reds the better first five innings."
-    },
-    {
-     "market": "Team Total",
-     "label": "Reds Team Total Over 4.2",
-     "price": -115,
-     "tier": "D",
-     "note": "The Reds offense should clear its projected run total in a plus spot."
-    },
-    {
-     "market": "Team Total",
-     "label": "Brewers Team Total Under 5.1",
-     "price": -115,
-     "tier": "D",
-     "note": "Brewers faces Lowder in a contained run spot."
-    }
-   ],
-   "verdict": {
-    "prose": "Slight Reds lean with no chip clearing the price; monitor lineups before posting a position.",
-    "text": "Slight Reds lean with no chip clearing the price; monitor lineups before posting a position.",
-    "chips": [],
-    "projAway": 4.7,
-    "projHome": 4.6,
-    "longshot": []
-   },
-   "appliedAdjustments": [
-    "Standard model; no special rule triggered beyond VARIANCE downweight."
-   ]
-  },
-  "824661": {
-   "gamePk": 824661,
-   "away": "San Diego Padres",
-   "home": "Chicago Cubs",
-   "awayAbbr": "SD",
-   "homeAbbr": "CHC",
-   "venue": "Wrigley Field",
-   "firstPitch": "2026-07-01T00:05:00Z",
-   "firstPitchDisplay": "8:05 PM ET",
-   "window": "early afternoon (2:08 PM)",
-   "awayPitcher": {
-    "name": "JP Sears",
-    "hand": "L",
-    "id": 676664,
-    "era": "3.18",
-    "whip": "1.24",
-    "k9": "7.94",
-    "bb9": "3.18",
-    "ip": "5.2",
-    "gs": 1,
-    "w": 1,
-    "l": 0,
-    "k": 5,
-    "tiny": true,
-    "source": "schedule-api"
-   },
-   "homePitcher": {
-    "name": "Matthew Boyd",
-    "hand": "L",
-    "id": 571510,
-    "era": "5.02",
-    "whip": "1.36",
-    "k9": "10.99",
-    "bb9": "3.14",
-    "ip": "28.2",
-    "gs": 6,
-    "w": 2,
-    "l": 1,
-    "k": 35,
-    "tiny": false,
-    "source": "schedule-api"
-   },
-   "lineupStatus": "projected",
-   "weather": {
-    "roof": "open",
-    "tempF": 90,
-    "wind": "14 mph SW",
-    "precip": 0,
-    "note": "Weather from Open Meteo at first pitch hour."
-   },
-   "status": "Preview",
-   "confidenceLetter": "C",
-   "confidenceScore": 58,
-   "grade": {
-    "letter": "C",
-    "score": 58
-   },
-   "confidence": {
-    "letter": "C",
-    "score": 58
-   },
-   "callout": "Pitching shapes a 10.3 run projection with the Cubs carrying the slim edge in a live bat spot.",
-   "contextChips": [
-    "Boyd 10.99 K9",
-    "hitter park",
-    "90 degrees first pitch",
-    "14 mph SW"
-   ],
-   "projectedScore": {
-    "away": 5.0,
-    "home": 5.3
-   },
-   "projected_score": {
-    "away": 5.0,
-    "home": 5.3
-   },
-   "paragraphs": [
-    {
-     "title": "PITCHING MATCHUP",
-     "text": "San Diego Padres send JP Sears at a 3.18 ERA with 7.94 strikeouts per nine and a 1.24 WHIP across 5.2 innings, while Chicago Cubs counter with Matthew Boyd at a 5.02 ERA, 10.99 per nine and a 1.36 WHIP over 28.2 frames. Boyd owns the cleaner profile and shapes the run prevention edge for the Cubs."
-    },
-    {
-     "title": "OFFENSE VS HANDEDNESS",
-     "text": "San Diego Padres carry a hot form tier at 4.81 runs per game over the trailing 15 against L handed starters, and Chicago Cubs sit hot at 6.76 runs per game versus L handed arms. The Cubs bats hold the better recent line, but neither lineup is confirmed yet so the projection leans on rolling form."
-    },
-    {
-     "title": "PARK AND WEATHER",
-     "text": "Wrigley Field plays at a 105 run factor. First pitch sits near 90 degrees with wind 14 mph from the SW. The environment pushes the total up and frames a 10.3 run projection."
-    },
-    {
-     "title": "STRIKEOUT PROJECTION",
-     "text": "Sears profiles for roughly 4.9 strikeouts and Boyd for about 6.8 on a standard outing. Neither starter offers a strikeout line worth chasing at the posted numbers."
-    },
-    {
-     "title": "BULLPEN EDGE",
-     "text": "Chicago Cubs bullpen reads mixed and San Diego Padres bullpen reads rested. The tired pen is the late game swing factor and nudges the total and late lead read."
-    }
-   ],
-   "picks": [
-    {
-     "market": "ML",
-     "label": "Cubs ML -120 to -135",
-     "price": -120,
-     "tier": "D",
-     "note": "Boyd carries the run prevention edge at a 5.02 ERA over a hot bat."
-    },
-    {
-     "market": "RL",
-     "label": "Cubs RL 1.5 -129",
-     "price": -129,
-     "tier": "D",
-     "note": "Projected margin near 0.3 run favors the Cubs on the spread only in a clean game."
-    },
-    {
-     "market": "Total",
-     "label": "Over 9.8",
-     "price": -110,
-     "tier": "C",
-     "note": "Run scoring environment and the pitching profiles point over 9.8."
-    },
-    {
-     "market": "F5 ML",
-     "label": "Cubs F5 ML -115 to -130",
-     "price": -115,
-     "tier": "D",
-     "note": "Boyd gives the Cubs the better first five innings."
-    },
-    {
-     "market": "Team Total",
-     "label": "Cubs Team Total Over 4.8",
-     "price": -115,
-     "tier": "D",
-     "note": "The Cubs offense should clear its projected run total in a plus spot."
-    },
-    {
-     "market": "Team Total",
-     "label": "Padres Team Total Under 5.5",
-     "price": -115,
-     "tier": "D",
-     "note": "Padres faces Boyd in a contained run spot."
-    }
-   ],
-   "verdict": {
-    "prose": "Slight Cubs lean with no chip clearing the price; monitor lineups before posting a position.",
-    "text": "Slight Cubs lean with no chip clearing the price; monitor lineups before posting a position.",
-    "chips": [],
-    "projAway": 5.0,
-    "projHome": 5.3,
-    "longshot": []
-   },
-   "appliedAdjustments": [
-    "Suppressed under: both lineups top 12 in trailing runs per game."
-   ]
-  },
-  "824175": {
-   "gamePk": 824175,
-   "away": "Minnesota Twins",
-   "home": "Houston Astros",
-   "awayAbbr": "MIN",
-   "homeAbbr": "HOU",
-   "venue": "Daikin Park",
-   "firstPitch": "2026-07-01T00:10:00Z",
-   "firstPitchDisplay": "8:10 PM ET",
-   "window": "early afternoon (2:08 PM)",
-   "awayPitcher": {
-    "name": "Joe Ryan",
-    "hand": "R",
-    "id": 657746,
-    "era": "3.18",
-    "whip": "1.03",
-    "k9": "10.41",
-    "bb9": "1.83",
-    "ip": "93.1",
-    "gs": 17,
-    "w": 5,
-    "l": 4,
-    "k": 108,
-    "tiny": false,
-    "source": "schedule-api"
-   },
-   "homePitcher": {
-    "name": "Mike Burrows",
-    "hand": "R",
-    "id": 681347,
-    "era": "5.48",
-    "whip": "1.50",
-    "k9": "7.28",
-    "bb9": "3.27",
-    "ip": "85.1",
-    "gs": 15,
-    "w": 3,
-    "l": 8,
-    "k": 69,
-    "tiny": false,
-    "source": "schedule-api"
-   },
-   "lineupStatus": "projected",
-   "weather": {
-    "roof": "retractable",
-    "tempF": 89,
-    "wind": "9 mph SE",
-    "precip": 1,
-    "note": "Weather from Open Meteo at first pitch hour."
-   },
-   "status": "Preview",
-   "confidenceLetter": "B",
-   "confidenceScore": 80,
-   "grade": {
-    "letter": "B",
-    "score": 80
-   },
-   "confidence": {
-    "letter": "B",
-    "score": 80
-   },
-   "callout": "Pitching shapes a 8.9 run projection with the Twins carrying the slim edge in a live bat spot.",
-   "contextChips": [
-    "Ryan 10.41 K9",
-    "neutral park",
-    "89 degrees first pitch"
-   ],
-   "projectedScore": {
-    "away": 5.2,
-    "home": 3.7
-   },
-   "projected_score": {
-    "away": 5.2,
-    "home": 3.7
-   },
-   "paragraphs": [
-    {
-     "title": "PITCHING MATCHUP",
-     "text": "Minnesota Twins send Joe Ryan at a 3.18 ERA with 10.41 strikeouts per nine and a 1.03 WHIP across 93.1 innings, while Houston Astros counter with Mike Burrows at a 5.48 ERA, 7.28 per nine and a 1.50 WHIP over 85.1 frames. Ryan owns the cleaner profile and shapes the run prevention edge for the Twins."
-    },
-    {
-     "title": "OFFENSE VS HANDEDNESS",
-     "text": "Minnesota Twins carry a neutral form tier at 5.64 runs per game over the trailing 15 against R handed starters, and Houston Astros sit warm at 3.74 runs per game versus R handed arms. The Twins bats hold the better recent line, but neither lineup is confirmed yet so the projection leans on rolling form."
-    },
-    {
-     "title": "PARK AND WEATHER",
-     "text": "Daikin Park plays at a 98 run factor. First pitch sits near 89 degrees under a retractable roof treated as open unless closed at gametime. The environment reads close to neutral and frames a 8.9 run projection."
-    },
-    {
-     "title": "STRIKEOUT PROJECTION",
-     "text": "Ryan profiles for roughly 6.5 strikeouts and Burrows for about 4.5 on a standard outing. Ryan is the cleanest strikeout angle if he reaches six innings, otherwise short leash risk caps the K market."
-    },
-    {
-     "title": "BULLPEN EDGE",
-     "text": "Houston Astros bullpen reads mixed and Minnesota Twins bullpen reads rested. The tired pen is the late game swing factor and nudges the total and late lead read."
-    }
-   ],
-   "picks": [
-    {
-     "market": "ML",
-     "label": "Twins ML -180 to -195",
-     "price": -180,
-     "tier": "B",
-     "note": "Ryan carries the run prevention edge at a 3.18 ERA over a neutral bat."
-    },
-    {
-     "market": "RL",
-     "label": "Twins RL 1.5 -105",
-     "price": -105,
-     "tier": "C",
-     "note": "Projected margin near 1.5 run favors the Twins on the spread only in a clean game."
-    },
-    {
-     "market": "Total",
-     "label": "Under 9.4",
-     "price": -110,
-     "tier": "D",
-     "note": "Lean under is thin with both lineups capable; small edge only."
-    },
-    {
-     "market": "F5 ML",
-     "label": "Twins F5 ML -175 to -190",
-     "price": -175,
-     "tier": "C",
-     "note": "Ryan gives the Twins the better first five innings."
-    },
-    {
-     "market": "K",
-     "label": "Ryan K over 5.5",
-     "price": -120,
-     "tier": "C",
-     "note": "Ryan misses bats at 10.41 per nine and projects past 5.5 if he reaches six innings."
-    },
-    {
-     "market": "Team Total",
-     "label": "Astros Team Total Under 4.2",
-     "price": -115,
-     "tier": "D",
-     "note": "Astros faces Ryan in a contained run spot."
-    }
-   ],
-   "verdict": {
-    "prose": "Back the Twins; the tickets are Twins ML -180 to -195, Ryan K over 5.5.",
-    "text": "Back the Twins; the tickets are Twins ML -180 to -195, Ryan K over 5.5.",
-    "chips": [
-     "Twins ML -180 to -195",
-     "Ryan K over 5.5"
-    ],
-    "projAway": 5.2,
-    "projHome": 3.7,
-    "longshot": []
-   },
-   "appliedAdjustments": [
-    "K over capped to half unit and requires six inning floor (K Over rule)."
-   ]
-  },
-  "824338": {
-   "gamePk": 824338,
-   "away": "Miami Marlins",
-   "home": "Colorado Rockies",
-   "awayAbbr": "MIA",
-   "homeAbbr": "COL",
-   "venue": "Coors Field",
-   "firstPitch": "2026-07-01T00:40:00Z",
-   "firstPitchDisplay": "8:40 PM ET",
-   "window": "early afternoon (2:08 PM)",
-   "awayPitcher": {
-    "name": "Eury Pérez",
-    "hand": "R",
-    "id": 691587,
-    "era": "4.41",
-    "whip": "1.22",
-    "k9": "9.76",
-    "bb9": "3.74",
-    "ip": "67.1",
-    "gs": 13,
-    "w": 3,
-    "l": 6,
-    "k": 73,
-    "tiny": false,
-    "source": "schedule-api"
-   },
-   "homePitcher": {
-    "name": "Tanner Gordon",
-    "hand": "R",
-    "id": 685299,
-    "era": "6.37",
-    "whip": "1.56",
-    "k9": "8.92",
-    "bb9": "2.04",
-    "ip": "35.1",
-    "gs": 2,
-    "w": 0,
-    "l": 1,
-    "k": 35,
-    "tiny": false,
-    "source": "schedule-api"
-   },
-   "lineupStatus": "projected",
-   "weather": {
-    "roof": "open",
-    "tempF": 82,
-    "wind": "16 mph NNE",
-    "precip": 7,
-    "note": "Weather from Open Meteo at first pitch hour."
-   },
-   "status": "Preview",
-   "confidenceLetter": "C",
-   "confidenceScore": 60,
-   "grade": {
-    "letter": "C",
-    "score": 60
-   },
-   "confidence": {
-    "letter": "C",
-    "score": 60
-   },
-   "callout": "Pitching shapes a 11.3 run projection with the Rockies carrying the slim edge in a live bat spot.",
-   "contextChips": [
-    "Pérez 9.76 K9",
-    "Coors altitude",
-    "82 degrees first pitch",
-    "16 mph NNE"
-   ],
-   "projectedScore": {
-    "away": 5.6,
-    "home": 5.7
-   },
-   "projected_score": {
-    "away": 5.6,
-    "home": 5.7
-   },
-   "paragraphs": [
-    {
-     "title": "PITCHING MATCHUP",
-     "text": "Miami Marlins send Eury Pérez at a 4.41 ERA with 9.76 strikeouts per nine and a 1.22 WHIP across 67.1 innings, while Colorado Rockies counter with Tanner Gordon at a 6.37 ERA, 8.92 per nine and a 1.56 WHIP over 35.1 frames. Gordon owns the cleaner profile and shapes the run prevention edge for the Rockies."
-    },
-    {
-     "title": "OFFENSE VS HANDEDNESS",
-     "text": "Miami Marlins carry a hot form tier at 4.32 runs per game over the trailing 15 against R handed starters, and Colorado Rockies sit hot at 5.46 runs per game versus R handed arms. The Rockies bats hold the better recent line, but neither lineup is confirmed yet so the projection leans on rolling form."
-    },
-    {
-     "title": "PARK AND WEATHER",
-     "text": "Coors Field plays at a 115 run factor under altitude that inflates everything. First pitch sits near 82 degrees with wind 16 mph from the NNE. The environment pushes the total up and frames a 11.3 run projection."
-    },
-    {
-     "title": "STRIKEOUT PROJECTION",
-     "text": "Pérez profiles for roughly 6.1 strikeouts and Gordon for about 5.6 on a standard outing. Neither starter offers a strikeout line worth chasing at the posted numbers."
-    },
-    {
-     "title": "BULLPEN EDGE",
-     "text": "Colorado Rockies bullpen reads rested and Miami Marlins bullpen reads mixed. The tired pen is the late game swing factor and nudges the total and late lead read."
-    }
-   ],
-   "picks": [
-    {
-     "market": "ML",
-     "label": "Rockies ML -110 to -125",
-     "price": -110,
-     "tier": "D",
-     "note": "Gordon carries the run prevention edge at a 6.37 ERA over a hot bat."
-    },
-    {
-     "market": "RL",
-     "label": "Rockies RL 1.5 -133",
-     "price": -133,
-     "tier": "D",
-     "note": "Projected margin near 0.1 run favors the Rockies on the spread only in a clean game."
-    },
-    {
-     "market": "Total",
-     "label": "Over 10.8",
-     "price": -110,
-     "tier": "C",
-     "note": "Run scoring environment and the pitching profiles point over 10.8."
-    },
-    {
-     "market": "F5 ML",
-     "label": "Rockies F5 ML -105 to -120",
-     "price": -105,
-     "tier": "D",
-     "note": "Gordon gives the Rockies the better first five innings."
-    },
-    {
-     "market": "Team Total",
-     "label": "Rockies Team Total Over 5.2",
-     "price": -115,
-     "tier": "D",
-     "note": "The Rockies offense should clear its projected run total in a plus spot."
-    },
-    {
-     "market": "Team Total",
-     "label": "Marlins Team Total Under 6.1",
-     "price": -115,
-     "tier": "D",
-     "note": "Marlins faces Gordon in a contained run spot."
-    }
-   ],
-   "verdict": {
-    "prose": "Slight Rockies lean with no chip clearing the price; monitor lineups before posting a position.",
-    "text": "Slight Rockies lean with no chip clearing the price; monitor lineups before posting a position.",
-    "chips": [],
-    "projAway": 5.6,
-    "projHome": 5.7,
-    "longshot": []
-   },
-   "appliedAdjustments": [
-    "Coors altitude variance caps grade and blocks A tier over on wind alone."
-   ]
-  },
-  "824984": {
-   "gamePk": 824984,
-   "away": "Los Angeles Dodgers",
-   "home": "Athletics",
-   "awayAbbr": "LAD",
-   "homeAbbr": "ATH",
-   "venue": "Sutter Health Park",
-   "firstPitch": "2026-07-01T01:40:00Z",
-   "firstPitchDisplay": "9:40 PM ET",
-   "window": "early afternoon (2:08 PM)",
-   "awayPitcher": {
-    "name": "Justin Wrobleski",
-    "hand": "L",
-    "id": 680736,
-    "era": "2.71",
-    "whip": "1.01",
-    "k9": "5.53",
-    "bb9": "1.88",
-    "ip": "86.1",
-    "gs": 13,
-    "w": 9,
-    "l": 2,
-    "k": 53,
-    "tiny": false,
-    "source": "schedule-api"
-   },
-   "homePitcher": {
-    "name": "Jeffrey Springs",
-    "hand": "L",
-    "id": 605488,
-    "era": "5.52",
-    "whip": "1.33",
-    "k9": "7.98",
-    "bb9": "2.97",
-    "ip": "88.0",
-    "gs": 17,
-    "w": 3,
-    "l": 7,
-    "k": 78,
-    "tiny": false,
-    "source": "schedule-api"
-   },
-   "lineupStatus": "projected",
-   "weather": {
-    "roof": "open",
-    "tempF": 84,
-    "wind": "12 mph SW",
-    "precip": 0,
-    "note": "Weather from Open Meteo at first pitch hour."
-   },
-   "status": "Preview",
-   "confidenceLetter": "C",
-   "confidenceScore": 69,
-   "grade": {
-    "letter": "C",
-    "score": 69
-   },
-   "confidence": {
-    "letter": "C",
-    "score": 69
-   },
-   "callout": "Pitching shapes a 9.0 run projection with the Dodgers carrying the slim edge in a live bat spot.",
-   "contextChips": [
-    "Springs 7.98 K9",
-    "hitter park",
-    "84 degrees first pitch",
-    "12 mph SW"
-   ],
-   "projectedScore": {
-    "away": 4.9,
-    "home": 4.1
-   },
-   "projected_score": {
-    "away": 4.9,
-    "home": 4.1
-   },
-   "paragraphs": [
-    {
-     "title": "PITCHING MATCHUP",
-     "text": "Los Angeles Dodgers send Justin Wrobleski at a 2.71 ERA with 5.53 strikeouts per nine and a 1.01 WHIP across 86.1 innings, while Athletics counter with Jeffrey Springs at a 5.52 ERA, 7.98 per nine and a 1.33 WHIP over 88.0 frames. Wrobleski owns the cleaner profile and shapes the run prevention edge for the Dodgers."
-    },
-    {
-     "title": "OFFENSE VS HANDEDNESS",
-     "text": "Los Angeles Dodgers carry a neutral form tier at 4.57 runs per game over the trailing 15 against L handed starters, and Athletics sit cool at 4.66 runs per game versus L handed arms. The Athletics bats hold the better recent line, but neither lineup is confirmed yet so the projection leans on rolling form."
-    },
-    {
-     "title": "PARK AND WEATHER",
-     "text": "Sutter Health Park plays at a 104 run factor. First pitch sits near 84 degrees with wind 12 mph from the SW. The environment pushes the total up and frames a 9.0 run projection."
-    },
-    {
-     "title": "STRIKEOUT PROJECTION",
-     "text": "Wrobleski profiles for roughly 3.4 strikeouts and Springs for about 5.0 on a standard outing. Neither starter offers a strikeout line worth chasing at the posted numbers."
-    },
-    {
-     "title": "BULLPEN EDGE",
-     "text": "Athletics bullpen reads rested and Los Angeles Dodgers bullpen reads rested."
-    }
-   ],
-   "picks": [
-    {
-     "market": "ML",
-     "label": "Dodgers ML -145 to -160",
-     "price": -145,
-     "tier": "C",
-     "note": "Wrobleski carries the run prevention edge at a 2.71 ERA over a neutral bat."
-    },
-    {
-     "market": "RL",
-     "label": "Dodgers RL 1.5 -119",
-     "price": -119,
-     "tier": "D",
-     "note": "Projected margin near 0.8 run favors the Dodgers on the spread only in a clean game."
-    },
-    {
-     "market": "Total",
-     "label": "Under 9.5",
-     "price": -110,
-     "tier": "D",
-     "note": "Lean under is thin with both lineups capable; small edge only."
-    },
-    {
-     "market": "F5 ML",
-     "label": "Dodgers F5 ML -140 to -155",
-     "price": -140,
-     "tier": "C",
-     "note": "Wrobleski gives the Dodgers the better first five innings."
-    },
-    {
-     "market": "Team Total",
-     "label": "Dodgers Team Total Over 4.4",
-     "price": -115,
-     "tier": "D",
-     "note": "The Dodgers offense should clear its projected run total in a plus spot."
-    },
-    {
-     "market": "Team Total",
-     "label": "Athletics Team Total Under 4.6",
-     "price": -115,
-     "tier": "D",
-     "note": "Athletics faces Wrobleski in a contained run spot."
-    }
-   ],
-   "verdict": {
-    "prose": "Lean the Dodgers; the tickets are Dodgers ML -145 to -160.",
-    "text": "Lean the Dodgers; the tickets are Dodgers ML -145 to -160.",
-    "chips": [
-     "Dodgers ML -145 to -160"
-    ],
-    "projAway": 4.9,
-    "projHome": 4.1,
-    "longshot": []
-   },
-   "appliedAdjustments": [
-    "Standard model; no special rule triggered beyond VARIANCE downweight."
-   ]
-  },
-  "823122": {
-   "gamePk": 823122,
-   "away": "Los Angeles Angels",
-   "home": "Seattle Mariners",
-   "awayAbbr": "LAA",
-   "homeAbbr": "SEA",
-   "venue": "T-Mobile Park",
-   "firstPitch": "2026-07-01T01:40:00Z",
-   "firstPitchDisplay": "9:40 PM ET",
-   "window": "early afternoon (2:08 PM)",
-   "awayPitcher": {
-    "name": "José Soriano",
-    "hand": "R",
-    "id": 667755,
-    "era": "3.32",
-    "whip": "1.32",
-    "k9": "9.66",
-    "bb9": "4.55",
-    "ip": "95.0",
-    "gs": 17,
-    "w": 8,
-    "l": 4,
-    "k": 102,
-    "tiny": false,
-    "source": "schedule-api"
-   },
-   "homePitcher": {
-    "name": "Bryan Woo",
-    "hand": "R",
-    "id": 693433,
-    "era": "4.26",
-    "whip": "1.04",
-    "k9": "8.90",
-    "bb9": "1.74",
-    "ip": "93.0",
-    "gs": 16,
-    "w": 6,
-    "l": 6,
-    "k": 92,
-    "tiny": false,
-    "source": "schedule-api"
-   },
-   "lineupStatus": "projected",
-   "weather": {
-    "roof": "retractable",
-    "tempF": 64,
-    "wind": "7 mph SW",
-    "precip": 0,
+    "precip": 3,
     "note": "Weather from Open Meteo at first pitch hour."
    },
    "status": "Preview",
@@ -5532,149 +5236,149 @@ const CLAUDE_DAILY_ANALYSIS = {
     "letter": "B",
     "score": 76
    },
-   "callout": "Pitching shapes a 6.8 run projection with the Angels carrying the slim edge in a live bat spot.",
+   "callout": "Max Meyer faces a battered Kyle Freeland in the thin air and heat of Coors.",
    "contextChips": [
-    "Soriano 9.66 K9",
-    "pitcher park",
-    "64 degrees first pitch"
+    "Coors extreme hitter park",
+    "92 degrees, 10 mph wind",
+    "Freeland 7.50 ERA"
    ],
    "projectedScore": {
-    "away": 4.0,
-    "home": 2.8
+    "away": 5.8,
+    "home": 5.5
    },
    "projected_score": {
-    "away": 4.0,
-    "home": 2.8
+    "away": 5.8,
+    "home": 5.5
    },
    "paragraphs": [
     {
      "title": "PITCHING MATCHUP",
-     "text": "Los Angeles Angels send José Soriano at a 3.32 ERA with 9.66 strikeouts per nine and a 1.32 WHIP across 95.0 innings, while Seattle Mariners counter with Bryan Woo at a 4.26 ERA, 8.90 per nine and a 1.04 WHIP over 93.0 frames. Soriano owns the cleaner profile and shapes the run prevention edge for the Angels."
+     "text": "Miami sends Max Meyer, a right hander with a stellar 2.60 ERA, 9.93 strikeouts per nine, and a 9 and 0 record over 97 innings, the best arm on the field by a wide margin. Colorado counters with Kyle Freeland, a left hander laboring through a 7.50 ERA and 1.61 WHIP over 72 innings, one of the most hittable starters in the league. The pitching edge belongs firmly to Miami, even accounting for Coors."
     },
     {
      "title": "OFFENSE VS HANDEDNESS",
-     "text": "Los Angeles Angels carry a neutral form tier at 4.8 runs per game over the trailing 15 against R handed starters, and Seattle Mariners sit cold at 2.2 runs per game versus R handed arms. The Angels bats hold the better recent line, but neither lineup is confirmed yet so the projection leans on rolling form."
+     "text": "Miami rates hot on rolling form at a 69.3 form score and 4.09 runs per game, and gets a huge boost stepping into Coors against a struggling left hander. Colorado sits neutral at 5.34 runs per game, inflated as always by the altitude. The Marlins bats have real paths against Freeland, and the Rockies always score at home, which shapes both the side and the total."
     },
     {
      "title": "PARK AND WEATHER",
-     "text": "T-Mobile Park plays at a 91 run factor. First pitch sits near 64 degrees under a retractable roof treated as open unless closed at gametime. The environment tilts slightly toward run suppression and frames a 6.8 run projection."
+     "text": "Coors Field is the most extreme hitter park in baseball, and today adds 92 degree heat with a 10 mph breeze to the thin mile high air. Balls carry, gaps widen, and pitchers labor. Per the Coors guardrail the over is capped rather than locked, published at 11 or 11.5 on the strength of a battered home starter rather than wind alone, and the moneyline stays a B side rather than a lock."
     },
     {
      "title": "STRIKEOUT PROJECTION",
-     "text": "Soriano profiles for roughly 6.0 strikeouts and Woo for about 5.5 on a standard outing. Soriano is the cleanest strikeout angle if he reaches six innings, otherwise short leash risk caps the K market."
+     "text": "Meyer owns an elite 9.93 per nine, but Coors is where strikeout props go to die as pitchers pitch to contact and pace themselves in the altitude. His raw rate is tempting, but the environment caps the innings and whiff totals, so no strikeout chip is published despite the sparkling number."
     },
     {
      "title": "BULLPEN EDGE",
-     "text": "Seattle Mariners bullpen reads rested and Los Angeles Angels bullpen reads rested."
+     "text": "Colorado is rested with Victor Vodnik available and Miami reads mixed with closer Pete Fairbanks fine, so no decisive late edge is claimed. The play rests on the massive starter mismatch and the Coors environment rather than a relief matchup."
     }
    ],
    "picks": [
     {
      "market": "ML",
-     "label": "Angels ML -165 to -180",
-     "price": -165,
+     "label": "Marlins ML",
+     "price": 110,
      "tier": "B",
-     "note": "Soriano carries the run prevention edge at a 3.32 ERA over a neutral bat."
-    },
-    {
-     "market": "RL",
-     "label": "Angels RL 1.5 -111",
-     "price": -111,
-     "tier": "C",
-     "note": "Projected margin near 1.2 run favors the Angels on the spread only in a clean game."
+     "note": "Max Meyer at 2.60 ERA versus a 7.50 ERA Freeland, capped by the Coors variance."
     },
     {
      "market": "Total",
-     "label": "Under 7.3",
+     "label": "Over 11 or 11.5",
      "price": -110,
-     "tier": "C",
-     "note": "Both starters limit damage; Soriano and Woo keep this in the 6 range."
+     "tier": "A",
+     "note": "Coors heat and thin air against a battered home starter points up."
     },
     {
      "market": "F5 ML",
-     "label": "Angels F5 ML -160 to -175",
-     "price": -160,
-     "tier": "C",
-     "note": "Soriano gives the Angels the better first five innings."
-    },
-    {
-     "market": "K",
-     "label": "Soriano K over 5.5",
-     "price": -120,
-     "tier": "C",
-     "note": "Soriano misses bats at 9.66 per nine and projects past 5.5 if he reaches six innings."
+     "label": "Marlins F5 ML",
+     "price": 100,
+     "tier": "B",
+     "note": "Meyer edge over Freeland tilts the first five to Miami."
     },
     {
      "market": "Team Total",
-     "label": "Mariners Team Total Under 3.3",
-     "price": -115,
-     "tier": "D",
-     "note": "Mariners faces Soriano in a contained run spot."
+     "label": "Marlins Team Total Over 5.5",
+     "price": -110,
+     "tier": "B",
+     "note": "Miami bats feast on Freeland in the thin Coors air."
+    },
+    {
+     "market": "Team Total",
+     "label": "Rockies Team Total Over 5.5",
+     "price": -105,
+     "tier": "C",
+     "note": "Colorado always scores at home even against a strong arm."
+    },
+    {
+     "market": "RL",
+     "label": "Marlins RL +1.5",
+     "price": -160,
+     "tier": "C",
+     "note": "Meyer edge keeps Miami within a run and a half at altitude."
     }
    ],
    "verdict": {
-    "prose": "Back the Angels; the tickets are Angels ML -165 to -180, Soriano K over 5.5.",
-    "text": "Back the Angels; the tickets are Angels ML -165 to -180, Soriano K over 5.5.",
+    "prose": "Max Meyer faces a battered Kyle Freeland in the thin air and heat of Coors; the tickets are Marlins ML +105 to +120, Over 11 or 11.5.",
+    "text": "Max Meyer faces a battered Kyle Freeland in the thin air and heat of Coors; the tickets are Marlins ML +105 to +120, Over 11 or 11.5.",
     "chips": [
-     "Angels ML -165 to -180",
-     "Soriano K over 5.5"
+     "Marlins ML +105 to +120",
+     "Over 11 or 11.5"
     ],
-    "projAway": 4.0,
-    "projHome": 2.8,
+    "projAway": 5.8,
+    "projHome": 5.5,
     "longshot": []
    },
    "appliedAdjustments": [
-    "Down weight correlated under and favorite cluster (VARIANCE).",
-    "K over capped to half unit and requires six inning floor (K Over rule)."
+    "Applied Coors guardrail: capped the over at 11 to 11.5 and did not lock on wind alone",
+    "Applied Coors road favorite rule: held Marlins ML at a B side rather than a lock on ERA alone"
    ]
   },
-  "825066": {
-   "gamePk": 825066,
-   "away": "San Francisco Giants",
-   "home": "Arizona Diamondbacks",
-   "awayAbbr": "SF",
-   "homeAbbr": "AZ",
-   "venue": "Chase Field",
-   "firstPitch": "2026-07-01T01:40:00Z",
+  "824985": {
+   "gamePk": 824985,
+   "away": "Los Angeles Dodgers",
+   "home": "Athletics",
+   "awayAbbr": "LAD",
+   "homeAbbr": "ATH",
+   "venue": "Sutter Health Park",
+   "firstPitch": "2026-07-02T01:40:00Z",
    "firstPitchDisplay": "9:40 PM ET",
-   "window": "early afternoon (2:08 PM)",
+   "window": "midday (11:30 AM)",
    "awayPitcher": {
-    "name": "Landen Roupp",
-    "hand": "R",
-    "id": 694738,
-    "era": "4.07",
-    "whip": "1.29",
-    "k9": "9.90",
-    "bb9": "3.54",
-    "ip": "86.1",
-    "gs": 16,
-    "w": 5,
-    "l": 7,
-    "k": 95,
-    "tiny": false,
-    "source": "schedule-api"
-   },
-   "homePitcher": {
     "name": "TBD",
     "hand": "R",
+    "id": null,
     "era": "4.20",
     "whip": "1.30",
-    "k9": "8.0",
-    "bb9": "3.2",
+    "k9": "8.00",
+    "bb9": "3.20",
     "ip": "0.0",
     "gs": 0,
     "w": 0,
     "l": 0,
     "k": 0,
     "tiny": true,
-    "source": "TBD",
-    "id": null
+    "source": "TBD"
+   },
+   "homePitcher": {
+    "name": "J.T. Ginn",
+    "hand": "R",
+    "id": 669372,
+    "era": "3.15",
+    "whip": "1.22",
+    "k9": "7.92",
+    "bb9": "3.65",
+    "ip": "88.2",
+    "gs": 15,
+    "w": 6,
+    "l": 4,
+    "k": 78,
+    "tiny": false,
+    "source": "schedule-api"
    },
    "lineupStatus": "projected",
    "weather": {
-    "roof": "retractable",
-    "tempF": 98,
-    "wind": "12 mph WSW",
+    "roof": "open",
+    "tempF": 85,
+    "wind": "10 mph SW",
     "precip": 0,
     "note": "Weather from Open Meteo at first pitch hour."
    },
@@ -5689,96 +5393,255 @@ const CLAUDE_DAILY_ANALYSIS = {
     "letter": "C",
     "score": 60
    },
-   "callout": "Pitching shapes a 8.4 run projection with the Diamondbacks carrying the slim edge in a live bat spot.",
+   "callout": "A Dodgers TBD starter caps the read, but Los Angeles carries the deeper lineup.",
    "contextChips": [
-    "Roupp 9.90 K9",
-    "neutral park",
-    "98 degrees first pitch"
+    "Sutter Health hitter park",
+    "TBD Dodgers starter",
+    "85 degrees first pitch"
    ],
    "projectedScore": {
-    "away": 3.9,
-    "home": 4.5
+    "away": 5.0,
+    "home": 4.3
    },
    "projected_score": {
-    "away": 3.9,
-    "home": 4.5
+    "away": 5.0,
+    "home": 4.3
    },
    "paragraphs": [
     {
      "title": "PITCHING MATCHUP",
-     "text": "San Francisco Giants send Landen Roupp at a 4.07 ERA with 9.90 strikeouts per nine and a 1.29 WHIP across 86.1 innings, while Arizona Diamondbacks counter with TBD at a 4.20 ERA, 8.0 per nine and a 1.30 WHIP over 0.0 frames. With home starter unconfirmed the read holds to a capped lean."
+     "text": "Los Angeles has not named a starter, so the away arm is TBD and the pitching read is incomplete, which caps this card at C. The Athletics counter with J.T. Ginn at a solid 3.15 ERA and 7.92 strikeouts per nine over 88.2 innings, a reliable ground leaning right hander. Without a confirmed Dodgers starter, the model leans on the offense and bullpen rather than the rotation matchup."
     },
     {
      "title": "OFFENSE VS HANDEDNESS",
-     "text": "San Francisco Giants carry a warm form tier at 3.5 runs per game over the trailing 15 against R handed starters, and Arizona Diamondbacks sit cool at 4.21 runs per game versus R handed arms. The Diamondbacks bats hold the better recent line, but neither lineup is confirmed yet so the projection leans on rolling form."
+     "text": "Los Angeles reads neutral on form but carries real thump at 5.53 runs per game over the trailing 15, one of the deeper lineups on the slate. The Athletics sit cold at a 36.8 form score and 4.13 runs per game. Even with an unknown starter, the Dodgers bats hold a clear edge against Ginn, which is why the lean is a modest moneyline rather than a total."
     },
     {
      "title": "PARK AND WEATHER",
-     "text": "Chase Field plays at a 103 run factor. First pitch sits near 98 degrees under a retractable roof treated as open unless closed at gametime. The environment reads close to neutral and frames a 8.4 run projection."
+     "text": "Sutter Health Park in Sacramento is a hitter friendly minor league yard, and at a warm 85 degrees with a 10 mph breeze the environment supports offense. That helps the Dodgers deeper lineup more than it helps the cold Athletics bats, and it keeps the total live even without a confirmed away starter."
     },
     {
      "title": "STRIKEOUT PROJECTION",
-     "text": "Roupp profiles for roughly 6.2 strikeouts and TBD for about 5.0 on a standard outing. Neither starter offers a strikeout line worth chasing at the posted numbers."
+     "text": "With the Dodgers starter unnamed, no away strikeout prop can be built. Ginn at 7.92 per nine is capable but not elite, and against a strong Los Angeles lineup his over is not a clear edge. No starter strikeout chip is published on this card."
     },
     {
      "title": "BULLPEN EDGE",
-     "text": "Arizona Diamondbacks bullpen reads rested and San Francisco Giants bullpen reads mixed. The tired pen is the late game swing factor and nudges the total and late lead read."
+     "text": "Both bullpens read rested, with Tanner Scott available for Los Angeles and Hogan Harris for the Athletics, so no decisive late edge is claimed. The lean rests on the Dodgers lineup depth in a hitter park, held to one chip given the TBD starter cap."
     }
    ],
    "picks": [
     {
      "market": "ML",
-     "label": "Diamondbacks ML -135 to -150",
-     "price": -135,
+     "label": "Dodgers ML",
+     "price": -120,
      "tier": "C",
-     "note": "TBD carries the run prevention edge at a 4.20 ERA over a cool bat."
+     "note": "Deeper Los Angeles lineup in a hitter park, capped by the TBD starter."
     },
     {
-     "market": "RL",
-     "label": "Diamondbacks RL 1.5 -123",
-     "price": -123,
-     "tier": "D",
-     "note": "Projected margin near 0.6 run favors the Diamondbacks on the spread only in a clean game."
+     "market": "Team Total",
+     "label": "Dodgers Team Total Over 4.5",
+     "price": -110,
+     "tier": "C",
+     "note": "Los Angeles bats at 5.53 R/G profile up versus Ginn in a small yard."
     },
     {
      "market": "Total",
-     "label": "Under 8.9",
-     "price": -110,
-     "tier": "D",
-     "note": "Lean under is thin with both lineups capable; small edge only."
+     "label": "Over 9",
+     "price": -105,
+     "tier": "C",
+     "note": "Hitter park and a strong Dodgers offense lift the run environment."
     },
     {
      "market": "F5 ML",
-     "label": "Diamondbacks F5 ML -130 to -145",
-     "price": -130,
-     "tier": "D",
-     "note": "TBD gives the Diamondbacks the better first five innings."
+     "label": "Dodgers F5 ML",
+     "price": -110,
+     "tier": "C",
+     "note": "Los Angeles lineup edge tilts the first five even with a TBD arm."
+    },
+    {
+     "market": "Hits",
+     "label": "Betts over 0.5 hits",
+     "price": -170,
+     "tier": "C",
+     "note": "Dodgers top of order profiles well against a contact starter."
     },
     {
      "market": "Team Total",
-     "label": "Diamondbacks Team Total Over 4.0",
-     "price": -115,
-     "tier": "D",
-     "note": "The Diamondbacks offense should clear its projected run total in a plus spot."
-    },
-    {
-     "market": "Team Total",
-     "label": "Giants Team Total Under 4.4",
-     "price": -115,
-     "tier": "D",
-     "note": "Giants faces TBD in a contained run spot."
+     "label": "Athletics Team Total Under 4.5",
+     "price": -110,
+     "tier": "C",
+     "note": "A cold Athletics offense struggles even in a friendly park."
     }
    ],
    "verdict": {
-    "prose": "Slight Diamondbacks lean with no chip clearing the price; monitor lineups before posting a position.",
-    "text": "Slight Diamondbacks lean with no chip clearing the price; monitor lineups before posting a position.",
-    "chips": [],
-    "projAway": 3.9,
-    "projHome": 4.5,
+    "prose": "A Dodgers TBD starter caps the read, but Los Angeles carries the deeper lineup; the tickets are Dodgers ML -115 to -130.",
+    "text": "A Dodgers TBD starter caps the read, but Los Angeles carries the deeper lineup; the tickets are Dodgers ML -115 to -130.",
+    "chips": [
+     "Dodgers ML -115 to -130"
+    ],
+    "projAway": 5.0,
+    "projHome": 4.3,
     "longshot": []
    },
    "appliedAdjustments": [
-    "TBD starter caps grade at C with at most one chip."
+    "Capped grade at C with a single chip per TBD starter rule",
+    "Never carried over a prior Dodgers starter and left the away arm as TBD"
+   ]
+  },
+  "825064": {
+   "gamePk": 825064,
+   "away": "San Francisco Giants",
+   "home": "Arizona Diamondbacks",
+   "awayAbbr": "SF",
+   "homeAbbr": "AZ",
+   "venue": "Chase Field",
+   "firstPitch": "2026-07-02T01:40:00Z",
+   "firstPitchDisplay": "9:40 PM ET",
+   "window": "midday (11:30 AM)",
+   "awayPitcher": {
+    "name": "Trevor McDonald",
+    "hand": "R",
+    "id": 686790,
+    "era": "4.94",
+    "whip": "1.35",
+    "k9": "7.94",
+    "bb9": "3.35",
+    "ip": "51.0",
+    "gs": 10,
+    "w": 2,
+    "l": 6,
+    "k": 45,
+    "tiny": false,
+    "source": "schedule-api"
+   },
+   "homePitcher": {
+    "name": "Zac Gallen",
+    "hand": "R",
+    "id": 668678,
+    "era": "6.15",
+    "whip": "1.58",
+    "k9": "5.42",
+    "bb9": "2.81",
+    "ip": "86.1",
+    "gs": 17,
+    "w": 3,
+    "l": 7,
+    "k": 52,
+    "tiny": false,
+    "source": "schedule-api"
+   },
+   "lineupStatus": "projected",
+   "weather": {
+    "roof": "closed",
+    "tempF": 100,
+    "wind": "12 mph W",
+    "precip": 0,
+    "note": "Weather from Open Meteo at first pitch hour."
+   },
+   "status": "Preview",
+   "confidenceLetter": "C+",
+   "confidenceScore": 66,
+   "grade": {
+    "letter": "C+",
+    "score": 66
+   },
+   "confidence": {
+    "letter": "C+",
+    "score": 66
+   },
+   "callout": "A struggling Zac Gallen meets a weak Giants offense under the Chase roof.",
+   "contextChips": [
+    "Chase Field roof",
+    "100 degrees outside",
+    "Gallen 6.15 ERA"
+   ],
+   "projectedScore": {
+    "away": 4.3,
+    "home": 4.4
+   },
+   "projected_score": {
+    "away": 4.3,
+    "home": 4.4
+   },
+   "paragraphs": [
+    {
+     "title": "PITCHING MATCHUP",
+     "text": "San Francisco sends Trevor McDonald, a rookie right hander at a 4.94 ERA over 51 innings across 10 starts, a shakier profile the model treats with caution. Arizona counters with Zac Gallen, who despite the pedigree is laboring through a 6.15 ERA, 1.58 WHIP, and a low 5.42 strikeouts per nine over 86.1 innings, a clear step down from his prior form. Both starters have been hittable, which shapes a live run environment."
+    },
+    {
+     "title": "OFFENSE VS HANDEDNESS",
+     "text": "San Francisco reads neutral on form but has been weak at just 3.04 runs per game over the trailing 15, one of the quieter offenses on the board. Arizona sits cool at 3.64 runs per game. Neither lineup is hot, but both starters have struggled, so the total leans up more than either side. The weak Giants bats keep this off a clear side play."
+    },
+    {
+     "title": "PARK AND WEATHER",
+     "text": "Chase Field is close to neutral with the roof almost certainly closed against a 100 degree Phoenix day, so weather is removed and the dimensions take over. With two hittable starters in a fair hitting environment, the run projection sits slightly above the total, which supports the over rather than a side."
+    },
+    {
+     "title": "STRIKEOUT PROJECTION",
+     "text": "Neither starter is a strikeout play. Gallen has slipped to 5.42 per nine and McDonald on a rookie sample carries pull risk before the floor. No starter strikeout chip is published, and the value stays on the run total in a matchup of two vulnerable arms."
+    },
+    {
+     "title": "BULLPEN EDGE",
+     "text": "Arizona is rested with Paul Sewald available and San Francisco reads mixed, so no decisive late edge is claimed. The lean rests on two struggling starters lifting the total rather than a relief matchup or a side."
+    }
+   ],
+   "picks": [
+    {
+     "market": "Total",
+     "label": "Over 8.5",
+     "price": -110,
+     "tier": "B",
+     "note": "Two hittable starters in Gallen and a rookie in a fair hitting park."
+    },
+    {
+     "market": "Team Total",
+     "label": "Diamondbacks Team Total Over 4.5",
+     "price": -110,
+     "tier": "C",
+     "note": "Arizona bats at home should reach McDonald rookie mistakes."
+    },
+    {
+     "market": "ER",
+     "label": "Gallen over 2.5 earned runs",
+     "price": -115,
+     "tier": "C",
+     "note": "A 6.15 ERA and 1.58 WHIP point to continued traffic and runs."
+    },
+    {
+     "market": "ML",
+     "label": "Diamondbacks ML",
+     "price": -125,
+     "tier": "C",
+     "note": "At home with the offense edge despite Gallen struggles."
+    },
+    {
+     "market": "F5",
+     "label": "F5 Over 4.5",
+     "price": -105,
+     "tier": "C",
+     "note": "Both starters have leaked early runs this year."
+    },
+    {
+     "market": "Team Total",
+     "label": "Giants Team Total Under 4.5",
+     "price": -115,
+     "tier": "C",
+     "note": "San Francisco at 3.04 R/G is hard to trust for a big number."
+    }
+   ],
+   "verdict": {
+    "prose": "A struggling Zac Gallen meets a weak Giants offense under the Chase roof; the tickets are Over 8.5.",
+    "text": "A struggling Zac Gallen meets a weak Giants offense under the Chase roof; the tickets are Over 8.5.",
+    "chips": [
+     "Over 8.5"
+    ],
+    "projAway": 4.3,
+    "projHome": 4.4,
+    "longshot": []
+   },
+   "appliedAdjustments": [
+    "Down weighted McDonald on the rookie sample and kept the play on the total",
+    "Left both strikeout props off given Gallen slipped rate and rookie pull risk"
    ]
   }
  }
