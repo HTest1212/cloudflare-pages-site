@@ -1,39 +1,43 @@
 # MLB Dashboard Refresh Report
 
-Window: early afternoon (2:08 PM). Run timestamp (UTC): 2026-06-30T18:58:53Z
-Slate date: 2026-06-30. Games on slate: 15.
-Commit: 6110372 pushed to main. Cloudflare Pages auto deploy verified at https://mlb-betting-dashboard-v2.pages.dev (asOf 2026-06-30T18:55:22Z, all 15 cards resolve non zero).
+Window: early afternoon (2:08 PM)
+Run timestamp (UTC): 2026-07-01T18:55Z
+Slate date: 2026-07-01
+Game count: 14 (5 Live, 9 Preview)
 
 ## API data quality
-Probable pitchers confirmed: 29 of 30 starter slots (29 confirmed, 1 TBD). Only Arizona home starter is TBD.
-Weather fetched successfully for 15 of 15 parks via Open Meteo at first pitch hour. Retractable roofs treated as open.
-All pitcher season stats pulled live from the MLB Stats API people endpoint in one batch call.
+Schedule and probable pitchers pulled from MLB Stats API (schedule hydrate). Pitcher season stats batch fetched in one people endpoint call for 27 confirmed starters.
+Pitchers confirmed: 27 of 28 starter slots. TBD: 1 (Los Angeles Dodgers at Athletics, away starter not posted, league average applied, grade capped at C).
+Weather (Open Meteo) success per outdoor park: Citizens Bank 98.6F wind 5 out to left; Truist 92.6F wind 7; Kauffman 94.2F wind 16; Coors 91.2F wind 12; Sutter Health 84.5F wind 11. Retractable roofs (Rogers Centre, Daikin, American Family, Chase) treated as controlled or closed.
 
-## Per game summary
+## Per game (grade, projected score, picks, primary chips)
+822791 NYM at TOR  B- 71  3.6-3.7  6 picks  Under 8.5, Peralta K over 5.5
+823446 PIT at PHI  B 82   3.9-4.2  6 picks  NRFI, Skenes K over 7.5
+824905 STL at ATL  B- 73  3.4-3.6  6 picks  Under 8, F5 Under 4.5
+824094 TB at KC    B- 73  4.6-4.0  6 picks  Rays ML, McClanahan K over 5.5
+824174 MIN at HOU  C+ 67  4.4-4.6  6 picks  Bradley K over 5.5, Imai K over 5.5
+823767 CIN at MIL  C 62   4.0-4.0  6 picks  Under 8.5
+824337 MIA at COL  B- 72  5.2-4.6  6 picks  Marlins ML, Meyer K over 5.5
+824985 LAD at ATH  C 60   5.4-4.6  6 picks  Over 9.5 (TBD cap)
+825064 SF at ARI   C 61   4.4-4.6  6 picks  Over 8.5
+824818 CWS at BAL  Live B- 72  Top 8 BAL 5-1 (morning verdict locked)
+824419 TEX at CLE  Live B 74   Top 6 CLE 5-1 (morning verdict locked)
+824740 WSH at BOS  Live B 75   Mid 4 WSH 7-0 (morning verdict locked)
+823530 DET at NYY  Live C+ 69  Top 6 DET 1-0 (morning verdict locked)
+824660 SD at CHC   Live B+ 80  End 2 CHC 4-0 (morning verdict locked)
 
-| Game | Grade | Proj | Picks | Primary chips |
-|---|---|---|---|---|
-| CWS @ BAL | C60 | 4.4-4.2 | 6 | Pass / lean only |
-| TEX @ CLE | C64 | 4.0-3.5 | 6 | Rangers ML -130 to -145 |
-| PIT @ PHI | B72 | 4.2-5.1 | 6 | Phillies ML -150 to -165 ; Sánchez K over 5.5 |
-| DET @ NYY | B72 | 3.3-3.3 | 6 | Under 7.1 ; Schlittler K over 5.5 |
-| NYM @ TOR | D47 | 4.3-4.3 | 6 | Pass / lean only |
-| WSH @ BOS | B70 | 3.9-4.6 | 6 | Red Sox ML -140 to -155 |
-| STL @ ATL | C59 | 3.3-4.2 | 6 | Pass / lean only |
-| TB @ KC | C58 | 4.4-4.2 | 6 | Pass / lean only |
-| CIN @ MIL | C58 | 4.7-4.6 | 6 | Pass / lean only |
-| SD @ CHC | C58 | 5.0-5.3 | 6 | Pass / lean only |
-| MIN @ HOU | B80 | 5.2-3.7 | 6 | Twins ML -180 to -195 ; Ryan K over 5.5 |
-| MIA @ COL | C60 | 5.6-5.7 | 6 | Pass / lean only |
-| LAD @ ATH | C69 | 4.9-4.1 | 6 | Dodgers ML -145 to -160 |
-| LAA @ SEA | B76 | 4.0-2.8 | 6 | Angels ML -165 to -180 ; Soriano K over 5.5 |
-| SF @ AZ | C60 | 3.9-4.5 | 6 | Pass / lean only |
+No new A tier published. Lock guard healthy, honored.
 
 ## Overlay game counts
-odds_overlay.json: 15 games. statcast_overlay.json: 15 games (ERA based estimates). picks_log.json: 11 new primary chips appended, idempotent upsert by id.
+odds_overlay.json: 14 games. statcast_overlay.json: 14 games (ERA based xFIP/FIP estimates). picks_log.json: 15 new pending entries appended (Preview primary chips), 1157 total, sorted date desc then confidence desc.
+Read overlays: rolling_form (fresh), bullpen_availability (dated Jun 21, used directionally), splits/bvp/hitter_advanced consulted as carryover rules.
 
 ## Learnings adjustments applied
-12 active adjustments held throughout the run. Lock guard healthy; no A tier published. All cards capped at B+ (84) because lineups are projected at 2:08 PM. Key effects: VARIANCE downweight on correlated under and favorite clusters, K over capped to half unit with six inning floor, Coors altitude variance cap, cold form favorites held below B for moneyline.
+Loaded 12 adjustments_for_today. Applied across cards: VARIANCE downweight on every card; under totals tightened where both lineups top 12 L14 (PIT/PHI full game under suppressed, played NRFI and F5 instead); Coors road ML and Coors Over capped at B/C (MIA at COL); K over lines held at 5.5 for short workload starters and floor check; cold team ML never graded above C (Athletics, Giants not backed as favorites); Giants ML A tier suppressed.
+
+## Deploy
+Commit: 0441f92 "Auto refresh 208pm 2026-07-01". Push status: success. Remote HEAD 0441f926 confirmed.
+Cloudflare Pages auto deploy verified: live URL returns HTTP 200, date 2026-07-01, window "early afternoon (2:08 PM)", all 14 cards resolve non zero grade and projected score.
 
 ## Errors and fallbacks
-Workspace mount hit the known resource deadlock (errno 35) on .env and overlay reads; recovered the PAT from .git/config and read all overlays from the fresh /tmp clone. First push rebase hit upstream conflicts from the 11:30 AM run; aborted, hard reset to origin/main, re-spliced over the fresh index.html and re-merged picks_log, then pushed clean. Bullpen overlay data missing for four teams (Cardinals, Braves, Rays, Royals); analyst defaults applied.
+Workspace mount deadlock (errno 35) blocked reading .env and learnings.json from the working folder; recovered PAT from the fresh clone .git/config and read learnings from the clone. Bullpen overlay is 10 days stale; used directionally only. Statcast velocity feed not queried this run (ERA based estimates used per spec).
